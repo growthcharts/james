@@ -20,10 +20,10 @@
 #' \code{\link[groeidiagrammen]{draw_plot}}
 #' @examples
 #' fn <- file.path(path.package("james"), "testdata", "client3.json")
-#' g <- draw_bds_chart(txt = fn)
+#' g <- draw_chart_bds(txt = fn)
 #' @keywords server
 #' @export
-draw_bds_chart <- function(txt = NULL, chartcode = NULL,
+draw_chart_bds <- function(txt = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
   ind <- convert_bds_ind(txt)

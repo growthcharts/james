@@ -2,7 +2,7 @@
 
 export(chart)
 export(convert_bds_ind)
-export(draw_bds_chart)
+export(draw_chart_bds)
 importClassesFrom(minihealth,bse)
 importClassesFrom(minihealth,individual)
 importClassesFrom(minihealth,xyz)
