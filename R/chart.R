@@ -20,7 +20,7 @@
 chart <- function(location = NULL, chartcode = NULL,
                   curve_interpolation = TRUE, ...) {
 
-  # get the object stored by bds_to_individual
+  # get the object stored by convert_bds_ind
   rda <- paste0(location, "R/.val/rda")
   con <- curl(rda)
   load(file = con)

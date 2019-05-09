@@ -26,7 +26,7 @@
 draw_bds_chart <- function(txt = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
-  ind <- bds_to_individual(txt)
+  ind <- convert_bds_ind(txt)
 
   if (is.null(chartcode))
     chartcode <- select_chart(ind)$chartcode

@@ -15,10 +15,10 @@
 #'          \code{\link[jsonlite]{fromJSON}}
 #' @examples
 #' fn <- file.path(path.package("james"), "testdata", "client3.json")
-#' p <- bds_to_individual(fn)
+#' p <- convert_bds_ind(fn)
 #' @keywords server
 #' @export
-bds_to_individual <- function(txt = NULL, ...) {
+convert_bds_ind <- function(txt = NULL, ...) {
 
   d <- fromJSON(txt, ...)
   b <- d$ClientGegevens$Elementen
