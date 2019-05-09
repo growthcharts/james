@@ -1,23 +1,16 @@
 #' Convert bds-format data to individual and return growth chart
 #'
-#' This function takes data from a json source and saves as a an object
-#' of class \linkS4class{individual}. The function then draws the
+#' The function \code{draw_chart_bds()} convert bds data into an object
+#' of class \linkS4class{individual}, and then draws the
 #' individual data on the requested growth chart.
-#' @param txt       A JSON string, URL or file
-#' @param chartcode The code of the requested growth chart. If not
-#' specified, the server will automatically plot child height for
-#' the most recent age period.
-#' @inheritParams groeidiagrammen::draw_plot
-#' @param \dots Additional parameter passed down to
-#'   \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and
+#' @param txt   A JSON string, URL or file
+#' @param \dots For \code{draw_chart_bds}, additional parameter passed
+#'   down to \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and
 #'   \code{new("bse",... )}. Useful parameters are \code{models =
 #'   "bsmodel"} for setting the broken stick model, or \code{call =
 #'   as.call(...)} for setting proper reference standards.
-#' @return -specify-
-#' @author Stef van Buuren 2019
-#' @seealso \linkS4class{individual},
-#' \code{\link[groeidiagrammen]{select_chart}}
-#' \code{\link[groeidiagrammen]{draw_plot}}
+#' @inheritParams groeidiagrammen::draw_plot
+#' @rdname draw_chart
 #' @examples
 #' fn <- file.path(path.package("james"), "testdata", "client3.json")
 #' g <- draw_chart_bds(txt = fn)

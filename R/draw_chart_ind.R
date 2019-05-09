@@ -1,15 +1,14 @@
 #' Draw growth chart with individual data
 #'
-#' This function expect an input key to an object of class
-#' \linkS4class{individual}, and calculates the individual data on the
-#' requested growth chart.
+#' The function \code{draw_chart_ind()} expect an input location from
+#' a previous call, and plots the individual data on the requested
+#' growth chart.
 #' @param location A url that points to the server location where the
-#' parsed data are stored.
+#' data from a previous request to \code{convert_bds_ind()} are stored.
 #' @param chartcode The code of the requested growth chart. If not
 #' specified, the server will automatically plot child height for
 #' the most recent age period.
-#' @param \dots Not used
-#' @inheritParams groeidiagrammen::draw_plot
+#' @rdname draw_chart
 #' @return tbd
 #' @author Stef van Buuren 2019
 #' @seealso \linkS4class{individual},
@@ -17,8 +16,8 @@
 #' \code{\link[groeidiagrammen]{draw_plot}}
 #' @keywords server
 #' @export
-chart <- function(location = NULL, chartcode = NULL,
-                  curve_interpolation = TRUE, ...) {
+draw_chart_ind <- function(location = NULL, chartcode = NULL,
+                           curve_interpolation = TRUE, ...) {
 
   # get the object stored by convert_bds_ind
   rda <- paste0(location, "R/.val/rda")
