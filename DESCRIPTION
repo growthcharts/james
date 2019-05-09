@@ -1,0 +1,24 @@
+Package: james
+Type: Package
+Title: Joint Anthropometric Measurement and Evaluation Server (JAMES)
+Version: 0.1.0
+Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
+    role = c("aut", "cre"))
+Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
+Description: This package contains the server-side functions for the 
+    API of the TNO Joint Anthropometric Measurement and Evaluation 
+    Server (JAMES). JAMES deploys advanced analytic functionality 
+    to analyze, monitor and predict individual child growth and 
+    devevelopment.
+License: AGPL
+Encoding: UTF-8
+LazyData: true
+Imports: jsonlite,
+         methods,
+         minihealth,
+         lubridate,
+         curl,
+         groeidiagrammen (>= 0.6.1)
+Remotes: stefvanbuuren/minihealth,
+  stefvanbuuren/groeidiagrammen
+RoxygenNote: 6.1.1
