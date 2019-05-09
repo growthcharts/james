@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Anthropometric Measurement and Evaluation Server (JAMES)
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -18,7 +18,8 @@ Imports: jsonlite,
          minihealth,
          lubridate,
          curl,
-         groeidiagrammen (>= 0.6.1)
+         groeidiagrammen (>= 0.6.1),
+         chartbox
 Remotes: stefvanbuuren/minihealth,
   stefvanbuuren/groeidiagrammen
 RoxygenNote: 6.1.1
