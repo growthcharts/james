@@ -1,10 +1,11 @@
 #' @importClassesFrom minihealth individual xyz bse
-#' @importFrom        methods    new
+#' @importFrom        minihealth get_range
+#' @importFrom        methods    new slot
 #' @importFrom        jsonlite   fromJSON
 #' @importFrom        lubridate  ymd dmy
 #' @importFrom        curl       curl
-#' @importFrom        groeidiagrammen select_chart draw_plot
-#' @importFrom        chartbox   list_charts
+#' @importFrom        groeidiagrammen draw_plot
+#' @importFrom        chartbox   list_charts create_chartcode
 NULL
 
 globalVariables(".val")
