@@ -119,6 +119,7 @@ function update() {
   }
 
   // call james::select_chart
+/*
   var req = ocpu.rpc("select_chart", {
     chartgrp: chartgrp,
     agegrp: agegrp,
@@ -132,4 +133,5 @@ function update() {
   });
 
   alert("output: " + output);
+*/
 }
