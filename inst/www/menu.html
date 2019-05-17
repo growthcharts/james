@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/opencpu-0.5.js"></script>
+<script type="text/javascript" src="functions.js"></script>
+<link href="main.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<h2>Groeidiagrammen</h2>
+
+Kaartserie<br>
+<select id="chartgrp">
+  <option value="nl2010" selected>Nederland 2010</option>
+  <option value="preterm">Prematuren</option>
+  <option value="who">WHO standaard</option>
+</select>
+<br><br>
+
+<form action="" name="agegrp">
+  Leeftijd<br>
+  <input type="radio" name="agegrp" value="0-15m" checked="checked"> 0-15 maanden<br>
+  <input type="radio" id="agegrp_0-4y" name="agegrp" value="0-4y"> 0-4 jaar<br>
+  <div id="agegrp_1-21y"><input type="radio" name="agegrp" value="1-21y"> 1-21 jaar<br></div>
+  <br><br>
+</form>
+
+<form action="" name="msr">
+  Maat<br>
+  <div id="msr_hgt"><input type="radio" name="msr" value="hgt" checked="checked"> Lengte<br></div>
+  <div id="msr_wgt"><input type="radio" name="msr" value="wgt"> Gewicht - Leeftijd<br></div>
+  <div id="msr_wfh"><input type="radio" name="msr" value="wfh"> Gewicht - Lengte<br></div>
+  <div id="msr_hdc"><input type="radio" name="msr" value="hdc"> Hoofdomtrek<br></div>
+  <div id="msr_bmi"><input type="radio" name="msr" value="bmi"> BMI<br></div>
+  <div id="msr_front"><input type="radio" name="msr" value="front"> - A -<br></div>
+  <div id="msr_back"><input type="radio" name="msr" value="back"> - B -<br></div>
+  <br><br>
+</form>
+
+<div>Zwangerschapsduur<br>
+<select id="week">
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+  <option value="32">32</option>
+  <option value="33">33</option>
+  <option value="34">34</option>
+  <option value="35">35</option>
+  <option value="36" selected>36</option>
+</select>
+<br><br>
+</div>
+
+<form action="" id="etnicity">
+  Etniciteit<br>
+  <input type="radio" name="etnicity" value="nl" checked="checked"> Nederlands<br>
+  <input type="radio" name="etnicity" value="tu"> Turks<br>
+  <input type="radio" name="etnicity" value="ma"> Marokkaans<br>
+  <input type="radio" name="etnicity" value="hs"> Hindostaans<br>
+  <br><br>
+</form>
+
+<form action="" id="sex">
+  Geslacht<br>
+  <input type="radio" name="sex" value="nl" checked="checked"> Jongen<br>
+  <input type="radio" name="sex" value="tu"> Meisje<br>
+  <br><br>
+</form>
+
+<input type="checkbox" name="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
+
+<script>
+// set triggers
+var chartgrp = document.getElementById('chartgrp');
+chartgrp.addEventListener('change', update, false);
+
+var radios = document.forms["agegrp"].elements["agegrp"];
+for(var i = 0, max = radios.length; i < max; i++) {
+  radios[i].onclick = function() {
+      update();
+  }
+}
+
+var radios = document.forms["msr"].elements["msr"];
+for(var i = 0, max = radios.length; i < max; i++) {
+  radios[i].onclick = function() {
+      update();
+  }
+}
+
+var week = document.getElementById('week');
+week.addEventListener('change', update, false);
+
+var radios = document.forms["etnicity"].elements["etnicity"];
+  for(var i = 0, max = radios.length; i < max; i++) {
+    radios[i].onclick = function() {
+      update();
+  }
+}
+
+var radios = document.forms["sex"].elements["sex"];
+  for(var i = 0, max = radios.length; i < max; i++) {
+    radios[i].onclick = function() {
+      update();
+  }
+}
+
+// initialize
+update();
+alert("Hello!");
+
+</script>
+
+</body>
+</html>
