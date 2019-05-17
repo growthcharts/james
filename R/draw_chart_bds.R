@@ -22,7 +22,7 @@ draw_chart_bds <- function(txt = NULL, chartcode = NULL,
   ind <- convert_bds_ind(txt)
 
   if (is.null(chartcode))
-    chartcode <- select_chart(ind)$chartcode
+    chartcode <- select_chart(ind)
 
   draw_plot(ind, chartcode, curve_interpolation, quiet = TRUE)
 }

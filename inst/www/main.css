@@ -1,16 +1,3 @@
-
-img.hero.main{
-    width: 500px;
-    height: 500px;
-}
-
 .hide {
     display:none
-}
-
-#output{
-  height: 20px;
-  width: 70px;
-  border: 1px solid gray;
-  padding: 2px;
 }
