@@ -58,9 +58,7 @@ select_chart <- function(ind      = NULL,
     chartgrp = chartgrp, sex = sex, agegrp = agegrp, side = side,
     week = ga, etn = etn, language = language, version = "")
 
-  return(list(chartgrp  = chartgrp,
-              chartcode = chartcode,
-              ga = ga))
+  return(chartcode)
 }
 
 select_chartgrp <- function(ind) {
