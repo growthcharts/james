@@ -128,7 +128,7 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
-    document.getElementById('output').innerHTML = output.chartcode;
+    document.getElementById('code').innerHTML = output.chartcode;
   });
   //if R returns an error, alert the error message
   req.fail(function() {
