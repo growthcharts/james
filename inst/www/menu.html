@@ -40,7 +40,7 @@ Kaartserie<br>
 </form>
 
 <div id="weekmenu">Zwangerschapsduur<br>
-<select id="week">
+<select id="ga">
   <option value="25">25</option>
   <option value="26">26</option>
   <option value="27">27</option>
@@ -94,8 +94,8 @@ for(var i = 0, max = radios.length; i < max; i++) {
   }
 }
 
-var week = document.getElementById('week');
-week.addEventListener('change', update, false);
+var ga = document.getElementById('ga');
+ga.addEventListener('change', update, false);
 
 var radios = document.forms["etnicity"].elements["etnicity"];
   for(var i = 0, max = radios.length; i < max; i++) {

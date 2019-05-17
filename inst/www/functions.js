@@ -7,8 +7,8 @@ function update() {
   var chartgrp = c.options[c.selectedIndex].value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
   var population = document.querySelector('input[name="etnicity"]:checked').value;
-  var g = document.getElementById('week');
-  var week = g.options[g.selectedIndex].value;
+  var g = document.getElementById('ga');
+  var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
 
@@ -125,7 +125,7 @@ function update() {
     agegrp: agegrp,
     sex: sex,
     etn: population,
-    ga: week,
+    ga: ga,
     side: msr
   });
   req.fail(function() {
