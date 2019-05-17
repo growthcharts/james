@@ -14,17 +14,17 @@ function update() {
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
-    document.getElementById('week').style.display = 'none';
+    document.getElementById('weekmenu').style.display = 'none';
     document.getElementById('etnicity').style.display = 'block';
   }
   if (chartgrp == 'preterm') {
     document.getElementById('agegrp_1-21y').style.display = 'none';
-    document.getElementById('week').style.display = 'block';
+    document.getElementById('weekmenu').style.display = 'block';
     document.getElementById('etnicity').style.display = 'none';
   }
   if (chartgrp == 'who') {
     document.getElementById('agegrp_1-21y').style.display = 'none';
-    document.getElementById('week').style.display = 'none';
+    document.getElementById('weekmenu').style.display = 'none';
     document.getElementById('etnicity').style.display = 'none';
   }
   if (agegrp == '0-15m' & chartgrp == 'nl2010') {
