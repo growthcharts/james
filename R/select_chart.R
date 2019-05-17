@@ -21,7 +21,8 @@
 #'   \code{'both'}
 #' @param language Language: \code{'dutch'} or \code{'english'} (not
 #'   used)
-#' @return A string with the chartcode
+#' @return A list with elements \code{chartgrp}, \code{chartcode}
+#' and \code{ga}
 #' @seealso \code{\link[chartbox]{create_chartcode}},
 #'   \code{\link[minihealth]{individualAN-class}}
 #' @examples
@@ -58,7 +59,9 @@ select_chart <- function(ind      = NULL,
     chartgrp = chartgrp, sex = sex, agegrp = agegrp, side = side,
     week = ga, etn = etn, language = language, version = "")
 
-  return(chartcode)
+  return(list(chartgrp  = chartgrp,
+              chartcode = chartcode,
+              ga = ga))
 }
 
 select_chartgrp <- function(ind) {

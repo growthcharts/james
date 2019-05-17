@@ -33,7 +33,8 @@ provides the 0-4 chart with weight for age (design E).}
 used)}
 }
 \value{
-A string with the chartcode
+A list with elements \code{chartgrp}, \code{chartcode}
+and \code{ga}
 }
 \description{
 This function controls the behavior for selecting a specific growth

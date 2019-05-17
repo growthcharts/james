@@ -28,7 +28,7 @@ draw_chart_ind <- function(location = NULL, chartcode = NULL,
   rm(".val")
 
   if (is.null(chartcode))
-    chartcode <- select_chart(ind)
+    chartcode <- select_chart(ind)$chartcode
 
   draw_plot(ind, chartcode, curve_interpolation, quiet = TRUE)
 }
