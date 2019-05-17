@@ -128,7 +128,7 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
-          $("#output").text(output.message);
+          $("#output").text(output.chartcode);
         });
   //if R returns an error, alert the error message
   req.fail(function() {
