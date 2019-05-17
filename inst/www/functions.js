@@ -122,10 +122,12 @@ function update() {
 
   var req = ocpu.rpc("select_chart", {
     chartgrp: chartgrp
-  });
+  }, function(output){
+          $("#output").text(output.message);
+        });
+  //if R returns an error, alert the error message
   req.fail(function() {
-    alert("R returned error: " + req.responseText);
+    alert("R server error: " + req.responseText);
   });
 
-  alert("output: " + output);
 }

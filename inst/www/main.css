@@ -7,3 +7,11 @@ img.hero.main{
 .hide {
     display:none
 }
+
+
+#output{
+  height: 20px;
+  width: 50px;
+  border: 1px solid gray;
+  padding: 2px;
+}
