@@ -128,8 +128,8 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
-          $("#output").text(output.chartcode);
-        });
+    document.getElementById('output').innerHTML = output.chartcode;
+  });
   //if R returns an error, alert the error message
   req.fail(function() {
     alert("R server error: " + req.responseText);
