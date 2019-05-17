@@ -119,19 +119,13 @@ function update() {
   }
 
   // call james::select_chart
-/*
+
   var req = ocpu.rpc("select_chart", {
-    chartgrp: chartgrp,
-    agegrp: agegrp,
-    sex: sex,
-    etn: population,
-    ga: ga,
-    side: msr
+    chartgrp: chartgrp
   });
   req.fail(function() {
     alert("R returned error: " + req.responseText);
   });
 
   alert("output: " + output);
-*/
 }
