@@ -121,8 +121,13 @@ function update() {
   // call james::select_chart
 
   var req = ocpu.rpc("select_chart", {
-    chartgrp: chartgrp
-  }, function(output){
+    chartgrp : chartgrp,
+    agegrp   : agegrp,
+    sex      : sex,
+    etn      : population,
+    ga       : ga,
+    side     : msr
+  }, function(output) {
           $("#output").text(output.message);
         });
   //if R returns an error, alert the error message
