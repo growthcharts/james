@@ -23,5 +23,4 @@ Imports: jsonlite,
 Remotes: stefvanbuuren/minihealth,
   stefvanbuuren/groeidiagrammen
 RoxygenNote: 6.1.1
-URL: https://github.com/stefvanbuuren/james
 BugReports: https://github.com/stefvanbuuren/james/issues
