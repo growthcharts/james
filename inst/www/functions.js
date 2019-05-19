@@ -11,7 +11,7 @@ function update() {
   var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
-  var cm  = document.querySelector('input[name="interpolation"]:checked').value;
+  var cm  = document.getElementById("interpolation").checked;
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
