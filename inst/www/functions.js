@@ -4,7 +4,6 @@
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
-  window.chartcode = "";
   var c = document.getElementById('chartgrp');
   var chartgrp = c.options[c.selectedIndex].value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
@@ -13,6 +12,7 @@ function update() {
   var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
+  var chartcode = "";
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
@@ -121,7 +121,6 @@ function update() {
   }
 
   // call james::select_chart
-  window.chartcode = "";
   var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
@@ -131,27 +130,26 @@ function update() {
     side     : msr
   }, function(output) {
     // overwrite on success
-    window.chartcode = output.chartcode;
-    document.getElementById('code').innerHTML = window.chartcode;
+    chartcode = output.chartcode;
+    document.getElementById('code').innerHTML = chartcode;
+
+    // trigger chart drawing
+    var cm = document.getElementById("interpolation").checked;
+    var rq2 = $("#plotdiv").rplot("draw_plot", {
+      ind : null,
+      chartcode : chartcode,
+      curve_interpolation : cm,
+      quiet : false
+    });
+
+    rq2.fail(function(){
+      alert("Server error: " + rq2.responseText);
+    });
   });
-  // if R returns an error, alert the error message
+
   rq1.fail(function() {
     alert("R server error: " + rq1.responseText);
   });
 
-  //create the plot area on the plotdiv element
-  var cm = document.getElementById("interpolation").checked;
-  alert(" chartcode: " + window.chartcode + "\n" +
-  " cm: " + cm);
-  var rq2 = $("#plotdiv").rplot("draw_plot", {
-    ind : null,
-    chartcode : window.chartcode,
-    curve_interpolation : cm,
-    quiet : false
-  });
 
-  //if R returns an error, alert the error message
-  rq2.fail(function(){
-    alert("Server error: " + rq2.responseText);
-  });
 }
