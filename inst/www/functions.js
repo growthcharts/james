@@ -150,6 +150,4 @@ function update() {
   rq1.fail(function() {
     alert("R server error: " + rq1.responseText);
   });
-
-
 }
