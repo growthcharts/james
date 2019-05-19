@@ -3,6 +3,7 @@
 export(convert_bds_ind)
 export(draw_chart_bds)
 export(draw_chart_ind)
+export(draw_plot)
 export(hello)
 export(list_charts)
 export(randomplot)
