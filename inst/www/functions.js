@@ -119,7 +119,7 @@ function update() {
   }
 
   // call james::select_chart
-
+  var chartcode = "";
   var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
@@ -128,7 +128,8 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
-    document.getElementById('code').innerHTML = output.chartcode;
+    chartcode = output.chartcode;
+    document.getElementById('code').innerHTML = chartcode;
   });
   //if R returns an error, alert the error message
   rq1.fail(function() {
@@ -136,14 +137,12 @@ function update() {
   });
 
   //create the plot area on the plotdiv element
-  var chartcode = document.getElementById('code').innerHTML;
-  // var cm = document.getElementById("interpolation").checked;
-  var cm = "-placeholder-";
+  var cm = document.getElementById("interpolation").checked;
   alert("Chartcode: " + chartcode + "    cm: " + cm);
 
   var rq2 = $("#plotdiv").rplot("draw_plot", {
     ind : null,
-    chartcode : output.chartcode,
+    chartcode : chartcode,
     curve_interpolation : cm,
     quiet : false
   });
