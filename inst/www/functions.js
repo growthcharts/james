@@ -121,6 +121,7 @@ function update() {
   }
 
   // call james::select_chart
+  chartcode = "";
   var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
@@ -129,10 +130,11 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
+    // overwrite on success
     chartcode = output.chartcode;
     document.getElementById('code').innerHTML = chartcode;
   });
-  //if R returns an error, alert the error message
+  // if R returns an error, alert the error message
   rq1.fail(function() {
     alert("R server error: " + rq1.responseText);
   });
