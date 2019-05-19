@@ -138,9 +138,7 @@ function update() {
   //create the plot area on the plotdiv element
   var chartcode = output.chartcode;
   var cm = document.getElementById("interpolation").checked;
-
-
-  alert("Chartcode: " + chartcode, "    cm: " + cm);
+  alert("Chartcode: " + chartcode + "    cm: " + cm);
 
   var rq2 = $("#plotdiv").rplot("draw_plot", {
     ind : null,
