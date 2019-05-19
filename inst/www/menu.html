@@ -5,6 +5,14 @@
 <script type="text/javascript" src="js/opencpu-0.5.js"></script>
 <script type="text/javascript" src="functions.js"></script>
 <link href="main.css" rel="stylesheet" />
+    <style>
+      #plotdiv {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        border: solid gray 1px;
+      }
+    </style>
 </head>
 
 <body>
@@ -76,6 +84,8 @@ Kaartserie<br>
 </form>
 
 <input type="checkbox" name="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
+
+<div id="plotdiv"></div>
 
 <script>
 // set triggers

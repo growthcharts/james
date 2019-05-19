@@ -11,6 +11,7 @@ function update() {
   var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
+  var cm  = document.querySelector('input[name="interpolation"]:checked').value;
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
@@ -120,7 +121,7 @@ function update() {
 
   // call james::select_chart
 
-  var req = ocpu.rpc("select_chart", {
+  var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
     sex      : sex,
@@ -131,8 +132,19 @@ function update() {
     document.getElementById('code').innerHTML = output.chartcode;
   });
   //if R returns an error, alert the error message
-  req.fail(function() {
-    alert("R server error: " + req.responseText);
+  rq1.fail(function() {
+    alert("R server error: " + rq1.responseText);
   });
 
+  //create the plot area on the plotdiv element
+  var rq2 = $("#plotdiv").rplot("draw_plot", {
+    ind : null,
+    chartcode : output.chartcode,
+    curve_interpolation : cm
+  });
+
+  //if R returns an error, alert the error message
+  rq2.fail(function(){
+    alert("Server error: " + rq2.responseText);
+  });
 }
