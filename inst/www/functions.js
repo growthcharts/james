@@ -139,6 +139,7 @@ function update() {
   var chartcode = output.chartcode;
   var cm = document.getElementById("interpolation").checked;
 
+
   alert("Chartcode: " + chartcode, "    cm: " + cm);
 
   var rq2 = $("#plotdiv").rplot("draw_plot", {
