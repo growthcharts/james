@@ -119,7 +119,7 @@ function update() {
   }
 
   // call james::select_chart
-  var chartcode = "";
+  var chartcode = "-old-";
   var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
@@ -128,7 +128,7 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
-    chartcode = output.chartcode;
+    let chartcode = output.chartcode;
     document.getElementById('code').innerHTML = chartcode;
   });
   //if R returns an error, alert the error message
