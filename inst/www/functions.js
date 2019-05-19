@@ -140,7 +140,8 @@ function update() {
   var rq2 = $("#plotdiv").rplot("draw_plot", {
     ind : null,
     chartcode : output.chartcode,
-    curve_interpolation : cm
+    curve_interpolation : cm,
+    quiet : false
   });
 
   //if R returns an error, alert the error message
