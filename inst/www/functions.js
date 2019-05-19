@@ -3,8 +3,8 @@
 // Author: Stef van Buuren, 2019
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
-var chartcode = "-old-";
 function update() {
+  window.chartcode = "";
   var c = document.getElementById('chartgrp');
   var chartgrp = c.options[c.selectedIndex].value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
@@ -121,7 +121,7 @@ function update() {
   }
 
   // call james::select_chart
-  chartcode = "";
+  window.chartcode = "";
   var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
@@ -131,8 +131,8 @@ function update() {
     side     : msr
   }, function(output) {
     // overwrite on success
-    chartcode = output.chartcode;
-    document.getElementById('code').innerHTML = chartcode;
+    window.chartcode = output.chartcode;
+    document.getElementById('code').innerHTML = window.chartcode;
   });
   // if R returns an error, alert the error message
   rq1.fail(function() {
@@ -141,11 +141,11 @@ function update() {
 
   //create the plot area on the plotdiv element
   var cm = document.getElementById("interpolation").checked;
-  alert("Chartcode: " + chartcode + "    cm: " + cm);
+  alert("Chartcode: " + window.chartcode + "    cm: " + cm);
 
   var rq2 = $("#plotdiv").rplot("draw_plot", {
     ind : null,
-    chartcode : chartcode,
+    chartcode : window.chartcode,
     curve_interpolation : cm,
     quiet : false
   });
