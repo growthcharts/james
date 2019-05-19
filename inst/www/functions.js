@@ -2,6 +2,7 @@
 // Helpers for the JAMES system
 // Author: Stef van Buuren, 2019
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
+
 var chartcode = "-old-";
 function update() {
   var c = document.getElementById('chartgrp');
