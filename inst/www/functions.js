@@ -136,7 +136,7 @@ function update() {
   });
 
   //create the plot area on the plotdiv element
-  var chartcode = output.chartcode;
+  var chartcode = document.getElementById('code').value;
   // var cm = document.getElementById("interpolation").checked;
   var cm = "-placeholder-";
   alert("Chartcode: " + chartcode + "    cm: " + cm);
