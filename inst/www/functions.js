@@ -137,6 +137,9 @@ function update() {
   });
 
   //create the plot area on the plotdiv element
+  var chartcode = output.chartcode;
+  alert("Chartcode: ", chartcode);
+
   var rq2 = $("#plotdiv").rplot("draw_plot", {
     ind : null,
     chartcode : output.chartcode,
