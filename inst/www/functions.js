@@ -11,7 +11,6 @@ function update() {
   var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
-  var cm  = document.querySelector('input[name="interpolation"]:checked').value;
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
@@ -138,7 +137,9 @@ function update() {
 
   //create the plot area on the plotdiv element
   var chartcode = output.chartcode;
-  alert("Chartcode: ", chartcode);
+  var cm = document.getElementById("interpolation").checked;
+
+  alert("Chartcode: " + chartcode, "    cm: " + cm);
 
   var rq2 = $("#plotdiv").rplot("draw_plot", {
     ind : null,
