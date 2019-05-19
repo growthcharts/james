@@ -2,6 +2,7 @@
 // Helpers for the JAMES system
 // Author: Stef van Buuren, 2019
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
+var chartcode = "-old-";
 function update() {
   var c = document.getElementById('chartgrp');
   var chartgrp = c.options[c.selectedIndex].value;
@@ -119,7 +120,6 @@ function update() {
   }
 
   // call james::select_chart
-  var chartcode = "-old-";
   var rq1 = ocpu.rpc("select_chart", {
     chartgrp : chartgrp,
     agegrp   : agegrp,
@@ -128,7 +128,7 @@ function update() {
     ga       : ga,
     side     : msr
   }, function(output) {
-    let chartcode = output.chartcode;
+    chartcode = output.chartcode;
     document.getElementById('code').innerHTML = chartcode;
   });
   //if R returns an error, alert the error message
