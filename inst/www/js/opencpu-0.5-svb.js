@@ -46,7 +46,7 @@ if(!window.jQuery) {
       var new_url = document.createElement('a');
       new_url.href = this.getLoc() + "files/" + path;
       new_url.username = r_path.username;
-      new_url.password = r_path.password
+      new_url.password = r_path.password;
       return new_url.href;
     };
 
@@ -263,7 +263,7 @@ if(!window.jQuery) {
 
   $.fn.graphic = function(session, n){
     initplot(this).setlocation(session.getLoc(), n || "last");
-  }
+  };
 
   function initplot(targetdiv){
     if(targetdiv.data("ocpuplot")){
@@ -312,6 +312,7 @@ if(!window.jQuery) {
         if(!Location) return;
         svgwidth = plotdiv.width();
         svgheight = plotdiv.height();
+        alert("svgwidth: " + svgwidth + "   svgheight: " + svgheigt);
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
 
@@ -324,7 +325,7 @@ if(!window.jQuery) {
           png.hide();
           plotdiv.css("background-image", "");
         } else {
-          pdf.attr("href", Location + "graphics/" + n + "/pdf?width=11.69&height=8.27&paper=a4r").show();
+          pdf.attr("href", Location + "graphics/" + n + "/pdf?width=8.27&height=11.69&paper=a4").show();
           svg.attr("href", Location + "graphics/" + n + "/svg?width=7&height=7").show();
           png.attr("href", Location + "graphics/" + n + "/png?width=800&height=600").show();
           // updatepng();
