@@ -275,6 +275,8 @@ if(!window.jQuery) {
       var n = "last";
       var pngwidth;
       var pngheight;
+      var svgwidth;
+      var svgheight;
 
       var plotdiv = $('<div />').attr({
         style: "width: 100%; height:100%; min-width: 100px; min-height: 100px; position:relative; background-repeat:no-repeat; background-size: 100% 100%;"
@@ -323,19 +325,22 @@ if(!window.jQuery) {
           plotdiv.css("background-image", "");
         } else {
           pdf.attr("href", Location + "graphics/" + n + "/pdf?width=11.69&height=8.27&paper=a4r").show();
-          svg.attr("href", Location + "graphics/" + n + "/svg?width=11&height=6").show();
+          svg.attr("href", Location + "graphics/" + n + "/svg?width=7&height=7").show();
           png.attr("href", Location + "graphics/" + n + "/png?width=800&height=600").show();
-          updatepng();
+          // updatepng();
+          updatesvg()
         }
       }
 
       // function to update the png image
       var onresize = debounce(function(e) {
-        if(pngwidth == plotdiv.width() && pngheight == plotdiv.height()){
+      //  if(pngwidth == plotdiv.width() && pngheight == plotdiv.height()){
+        if(svgwidth == plotdiv.width() && svgheight == plotdiv.height()){
           return;
         }
         if(plotdiv.is(":visible")){
-          updatepng();
+          // updatepng();
+          updatesvg();
         }
       }, 500);
 
