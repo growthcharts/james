@@ -286,6 +286,7 @@ if(!window.jQuery) {
         style : "position: absolute; top: 20px; left: 20px; z-index:1000; font-family: monospace;"
       }).text("loading...").appendTo(plotdiv).hide();
 
+/*
       var pdf = $('<a />').attr({
         target: "_blank",
         style: "position: absolute; top: 10px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
@@ -300,14 +301,15 @@ if(!window.jQuery) {
         target: "_blank",
         style: "position: absolute; top: 50px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
       }).text("png").appendTo(plotdiv);
-
+ */
+/*
       function updatepng(){
         if(!Location) return;
         pngwidth = plotdiv.width();
         pngheight = plotdiv.height();
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/png?width=" + pngwidth + "&height=" + pngheight + ")");
       }
-
+ */
       function updatesvg(){
         if(!Location) return;
         svgwidth = plotdiv.width()/96;
@@ -315,6 +317,7 @@ if(!window.jQuery) {
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
 
+/*
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
@@ -331,11 +334,11 @@ if(!window.jQuery) {
           updatesvg();
         }
       }
-
+*/
       // function to update the png image
       var onresize = debounce(function(e) {
       //  if(pngwidth == plotdiv.width() && pngheight == plotdiv.height()){
-        if(svgwidth == plotdiv.width() && svgheight == plotdiv.height()){
+        if(svgwidth == plotdiv.width()/96 && svgheight == plotdiv.height()/96){
           return;
         }
         if(plotdiv.is(":visible")){
