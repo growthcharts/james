@@ -286,7 +286,7 @@ if(!window.jQuery) {
         style : "position: absolute; top: 20px; left: 20px; z-index:1000; font-family: monospace;"
       }).text("loading...").appendTo(plotdiv).hide();
 
-/*
+
       var pdf = $('<a />').attr({
         target: "_blank",
         style: "position: absolute; top: 10px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
@@ -301,7 +301,7 @@ if(!window.jQuery) {
         target: "_blank",
         style: "position: absolute; top: 50px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
       }).text("png").appendTo(plotdiv);
- */
+
 /*
       function updatepng(){
         if(!Location) return;
@@ -326,9 +326,9 @@ if(!window.jQuery) {
           png.hide();
           plotdiv.css("background-image", "");
         } else {
-          pdf.attr("href", Location + "graphics/" + n + "/pdf?width=8.27&height=11.69&paper=a4").show();
-          svg.attr("href", Location + "graphics/" + n + "/svg?width=7&height=7").show();
-          png.attr("href", Location + "graphics/" + n + "/png?width=800&height=600").show();
+          // pdf.attr("href", Location + "graphics/" + n + "/pdf?width=8.27&height=11.69&paper=a4").show();
+          // svg.attr("href", Location + "graphics/" + n + "/svg?width=7&height=7").show();
+          // png.attr("href", Location + "graphics/" + n + "/png?width=800&height=600").show();
           // updatepng();
           updatesvg();
         }
