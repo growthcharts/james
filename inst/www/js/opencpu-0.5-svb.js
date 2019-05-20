@@ -287,6 +287,7 @@ if(!window.jQuery) {
       }).text("loading...").appendTo(plotdiv).hide();
 
 
+/*
       var pdf = $('<a />').attr({
         target: "_blank",
         style: "position: absolute; top: 10px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
@@ -301,7 +302,7 @@ if(!window.jQuery) {
         target: "_blank",
         style: "position: absolute; top: 50px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
       }).text("png").appendTo(plotdiv);
-
+*/
 /*
       function updatepng(){
         if(!Location) return;
@@ -321,9 +322,9 @@ if(!window.jQuery) {
         n = newn || n;
         Location = newloc;
         if(!Location){
-          pdf.hide();
-          svg.hide();
-          png.hide();
+//          pdf.hide();
+//          svg.hide();
+//          png.hide();
           plotdiv.css("background-image", "");
         } else {
           // pdf.attr("href", Location + "graphics/" + n + "/pdf?width=8.27&height=11.69&paper=a4").show();
