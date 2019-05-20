@@ -328,7 +328,7 @@ if(!window.jQuery) {
           svg.attr("href", Location + "graphics/" + n + "/svg?width=7&height=7").show();
           png.attr("href", Location + "graphics/" + n + "/png?width=800&height=600").show();
           // updatepng();
-          updatesvg()
+          updatesvg();
         }
       }
 
