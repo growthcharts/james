@@ -247,7 +247,7 @@ if(!window.jQuery) {
     var myplot = initplot(targetdiv);
 
     //reset state
-    myplot.setlocation();
+    // myplot.setlocation();
     // myplot.spinner.show();
 
     // call the function
