@@ -317,7 +317,6 @@ if(!window.jQuery) {
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
 
-/*
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
@@ -334,7 +333,7 @@ if(!window.jQuery) {
           updatesvg();
         }
       }
-*/
+
       // function to update the png image
       var onresize = debounce(function(e) {
       //  if(pngwidth == plotdiv.width() && pngheight == plotdiv.height()){
