@@ -310,8 +310,8 @@ if(!window.jQuery) {
 
       function updatesvg(){
         if(!Location) return;
-        svgwidth = plotdiv.width();
-        svgheight = plotdiv.height();
+        svgwidth = plotdiv.width() / 96;
+        svgheight = plotdiv.height() / 96;
         alert("svgwidth: " + svgwidth + "   svgheight: " + svgheight);
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
