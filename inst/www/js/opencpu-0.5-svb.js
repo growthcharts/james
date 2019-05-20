@@ -306,6 +306,13 @@ if(!window.jQuery) {
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/png?width=" + pngwidth + "&height=" + pngheight + ")");
       }
 
+      function updatesvg(){
+        if(!Location) return;
+        svgwidth = plotdiv.width();
+        svgheight = plotdiv.height();
+        plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
+      }
+
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
