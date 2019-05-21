@@ -11,7 +11,7 @@
   <link href="main.css" rel="stylesheet" />
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1500px}
+    .row.content {height: 800px}
 
     /* Set gray background color and 100% height */
     .sidenav {
@@ -37,9 +37,10 @@
 
     #plotdiv {
       position: relative;
-      width: 672px;
-      height: 672px;
+      width: 700px;
+      height: 700px;
       border: solid gray 1px;
+      padding: 15px;
     }
   </style>
 </head>
@@ -56,9 +57,9 @@
           <option value="who">WHO standaard</option>
         </select>
         <br><br>
-        
+
         <p id="code"></p>
-        
+
         <form action="" name="agegrp">
           Leeftijd<br>
           <input type="radio" name="agegrp" value="0-15m" checked="checked"> 0-15 maanden<br>
@@ -66,7 +67,7 @@
           <div id="agegrp_1-21y"><input type="radio" name="agegrp" value="1-21y"> 1-21 jaar<br></div>
           <br><br>
         </form>
-        
+
         <form action="" name="msr">
           Maat<br>
           <div id="msr_hgt"><input type="radio" name="msr" value="hgt" checked="checked"> Lengte<br></div>
@@ -78,7 +79,7 @@
           <div id="msr_back"><input type="radio" name="msr" value="back"> - B -<br></div>
           <br><br>
         </form>
-        
+
         <div id="weekmenu">Zwangerschapsduur<br>
         <select id="ga">
           <option value="25">25</option>
@@ -96,7 +97,7 @@
         </select>
         <br><br>
         </div>
-        
+
         <form action="" id="etnicity">
           Etniciteit<br>
           <input type="radio" name="etnicity" value="nl" checked="checked"> Nederlands<br>
@@ -105,15 +106,15 @@
           <input type="radio" name="etnicity" value="hs"> Hindostaans<br>
           <br><br>
         </form>
-        
+
         <form action="" id="sex">
           Geslacht<br>
           <input type="radio" name="sex" value="male" checked="checked"> Jongen<br>
           <input type="radio" name="sex" value="female"> Meisje<br>
           <br><br>
         </form>
-        
-        <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>        
+
+        <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
       </div>
       <div class="col-sm-9">
           <div id="plotdiv"></div>
