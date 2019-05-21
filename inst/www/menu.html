@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="js/opencpu-0.5-svb.js"></script>
-<script type="text/javascript" src="functions.js"></script>
-<link href="main.css" rel="stylesheet" />
-    <style>
-      #plotdiv {
-        position: relative;
-        width: 672px;
-        height: 672px;
-        border: solid gray 1px;
-      }
-    </style>
-</head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="js/bootstrap.min.css">
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/opencpu-0.5-svb.js"></script>
+  <script type="text/javascript" src="functions.js"></script>
+  <link href="main.css" rel="stylesheet" />
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
 
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+
+    #plotdiv {
+      position: relative;
+      width: 672px;
+      height: 672px;
+      border: solid gray 1px;
+    }
+  </style>
+</head>
 <body>
 
 <h2>Groeidiagrammen</h2>
