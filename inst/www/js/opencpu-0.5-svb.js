@@ -315,6 +315,8 @@ if(!window.jQuery) {
         if(!Location) return;
         svgwidth = plotdiv.width()/96;
         svgheight = plotdiv.height()/96;
+        svgwidth = 7;
+        svgheight = 7;
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
 
