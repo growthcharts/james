@@ -327,8 +327,8 @@ if(!window.jQuery) {
           svgwidth = 8.27;
           svgheight = 11.69;
         } else {
-          document.getElementById("plotdiv").style.width = "initial";
-          document.getElementById("plotdiv").style.height = "initial";
+          document.getElementById("plotdiv").style.width = "785px";
+          document.getElementById("plotdiv").style.height = "785px";
           svgwidth = 7;
           svgheight = 7;
         }
