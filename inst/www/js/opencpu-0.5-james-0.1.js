@@ -1,6 +1,8 @@
 /**
+ * File: opencpu-0.5-james-x.y.js
  * Javascript client library for OpenCPU
  * Version 0.5.0
+ * -- Adapted for JAMES by Stef van Buuren --- May 2019
  * Depends: jQuery
  * Requires HTML5 FormData support for file uploads
  * http://github.com/jeroenooms/opencpu.js
@@ -273,10 +275,10 @@ if(!window.jQuery) {
       //local variables
       var Location;
       var n = "last";
-      var pngwidth;
-      var pngheight;
-      var svgwidth;
-      var svgheight;
+      // var pngwidth;
+      // var pngheight;
+      // var svgwidth;
+      // var svgheight;
 
       var plotdiv = $('<div />').attr({
         style: "width: 100%; height:100%; min-width: 100px; min-height: 100px; position:relative; background-repeat:no-repeat; background-size: 100% 100%;"
@@ -313,10 +315,19 @@ if(!window.jQuery) {
  */
       function updatesvg(){
         if(!Location) return;
-        svgwidth = plotdiv.width()/96;
-        svgheight = plotdiv.height()/96;
-        svgwidth = 7;
-        svgheight = 7;
+        // svgwidth = plotdiv.width()/96;
+        // svgheight = plotdiv.height()/96;
+        var chartcode = document.getElementById('code').innerHTML;
+        var side = chartcode.substr(4,4);
+        var pat = /[ABC]/;
+        var res = side.test(pat);
+        if (res) {
+          svgwidth = 8.27;
+          svgheight = 11.69;
+        } else {
+          svgwidth = 7;
+          svgheight = 7;
+        }
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
 
