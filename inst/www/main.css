@@ -20,6 +20,10 @@ footer {
   padding: 15px;
 }
 
+h4 {
+  color: #649EC9;
+}
+
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
   .sidenav {
@@ -44,7 +48,7 @@ body > .main-header .logo {
 
 /* logo field set to TNO blue */
 .skin-blue .main-header .logo {
-    background-color: #619DCB;
+    background-color: #649EC9
 }
 
 /* main header color set to TNO lightblue */
