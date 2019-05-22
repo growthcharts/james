@@ -27,8 +27,7 @@ footer {
   position: relative;
   width: 800px;
   height: 800px;
-  padding: 10px;
-  border: solid gray 1px;
+  background-color: #F7F7F7;
 }
 
 body > .main-header .logo {
@@ -60,11 +59,4 @@ body > .main-header .logo {
 /* Slider min and max in sidebar. */
 .sidebar .irs-min, .sidebar .irs-max {
   color: #313faa;
-}
-
-/* body background color set to grey97 */
-.content-wrapper {
-    min-height: 100%;
-    background-color: #f7f7f7;
-    z-index: 800
 }
