@@ -322,15 +322,19 @@ if(!window.jQuery) {
         var pat = /[ABC]/;
         var res = pat.test(side);
         if (res) {
+          document.getElementById("plotdiv").width = "927";
+          document.getElementById("plotdiv").height = "1311";
           svgwidth = 8.27;
           svgheight = 11.69;
         } else {
+          document.getElementById("plotdiv").width = "785";
+          document.getElementById("plotdiv").height = "785";
           svgwidth = 7;
           svgheight = 7;
         }
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
-/* */
+
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
