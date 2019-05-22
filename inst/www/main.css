@@ -1,3 +1,70 @@
-.hide {
-    display:none
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 800px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height: auto;}
+}
+
+#plotdiv {
+  position: relative;
+  width: 800px;
+  height: 800px;
+  padding: 10px;
+  border: solid gray 1px;
+}
+
+body > .main-header .logo {
+  font-family: "helvetica", Times, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* logo field set to TNO blue */
+.skin-blue .main-header .logo {
+    background-color: #619DCB;
+}
+
+/* main header color set to TNO lightblue */
+.skin-blue .main-header .navbar {
+    background-color: #72A7D1;
+}
+
+/* side bar color set to TNO lightblue */
+.skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+    background: #f3f3f3;
+}
+
+/* side bar text set to black */
+.sidebar {
+  color: #000000;
+}
+
+/* Slider min and max in sidebar. */
+.sidebar .irs-min, .sidebar .irs-max {
+  color: #313faa;
+}
+
+/* body background color set to grey97 */
+.content-wrapper {
+    min-height: 100%;
+    background-color: #f7f7f7;
+    z-index: 800
 }
