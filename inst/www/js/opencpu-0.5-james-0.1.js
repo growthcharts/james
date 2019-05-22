@@ -330,7 +330,7 @@ if(!window.jQuery) {
         }
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
       }
-
+/* */
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
