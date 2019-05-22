@@ -3,7 +3,7 @@
 
 /* Set gray background color and 100% height */
 .sidenav {
-  background-color: #F3F3F3;
+  background-color: #D8D8D8;
   height: 100%;
 }
 
@@ -20,8 +20,12 @@ footer {
   padding: 15px;
 }
 
-h4 {
-  color: #649EC9;
+/* TNO blue */
+.color-primary{color:#649EC9}
+
+h3 {
+  color:#649EC9;
+  font-family: ITCFranklinGothicStd-Hvy;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
