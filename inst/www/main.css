@@ -39,6 +39,7 @@ h3 {
 
 #plotdiv {
   position: relative;
+  top: 15px;
   width: 800px;
   height: 800px;
   background-color: #F7F7F7;
