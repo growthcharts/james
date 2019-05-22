@@ -1,5 +1,5 @@
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.rowcontent {height: 800px}
+.row.content {height: 800px}
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -20,7 +20,7 @@ footer {
     height: auto;
     padding: 15px;
   }
-  .rowcontent {height: auto;}
+  .row.content {height: auto;}
 }
 
 #plotdiv {
