@@ -13,7 +13,7 @@
 <body>
   <div class="container-fluid">
     <div class="row content">
-      <div class="col-sm-3 sidenav">
+      <div class="col-sm-3 sidenav" id="navcontainer">
         <br><h3>GROEIDIAGRAMMEN</h3>
 
         <br><strong>Kaartserie</strong><br>
@@ -82,7 +82,7 @@
 
         <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
       </div>
-      <div class="col-sm-9 graph">
+      <div class="col-sm-9 graph" id="plotcontainer">
           <div id="plotdiv"></div>
       </div>
     </div>
