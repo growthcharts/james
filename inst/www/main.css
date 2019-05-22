@@ -43,5 +43,7 @@ h3 {
   width: 785px;
   height: 785px;
   background-color: #F7F7F7;
+  border-style: dotted;
+  border-width: 1px;
 }
 
