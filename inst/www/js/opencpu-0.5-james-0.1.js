@@ -322,13 +322,13 @@ if(!window.jQuery) {
         var pat = /[ABC]/;
         var res = pat.test(side);
         if (res) {
-          document.getElementById("plotdiv").style.width = "927";
-          document.getElementById("plotdiv").style.height = "1311";
+          document.getElementById("plotdiv").style.width = "927px";
+          document.getElementById("plotdiv").style.height = "1311px";
           svgwidth = 8.27;
           svgheight = 11.69;
         } else {
-          document.getElementById("plotdiv").style.width = "785";
-          document.getElementById("plotdiv").style.height = "785";
+          document.getElementById("plotdiv").style.width = "initial";
+          document.getElementById("plotdiv").style.height = "initial";
           svgwidth = 7;
           svgheight = 7;
         }
