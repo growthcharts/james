@@ -1,32 +1,94 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="js/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/opencpu-0.5-james-0.1.js"></script>
+  <script type="text/javascript" src="functions.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-3 sidenav">
+        <br><h3>GROEIDIAGRAMMEN</h3>
 
-    <title>OpenCPU App Demo</title>
+        <br><strong>Kaartserie</strong><br>
+        <select id="chartgrp">
+          <option value="nl2010" selected>Nederland 2010</option>
+          <option value="preterm">Prematuren</option>
+          <option value="who">WHO standaard</option>
+        </select>
+        <br><br>
 
-  </head>
+        <p id="code" font-family="Courier New"></p>
 
-  <body>
-    <h1>OpenCPU App Demo</h1>
+        <form action="" name="agegrp">
+          <strong>Leeftijd</strong><br>
+          <input type="radio" name="agegrp" value="0-15m" checked="checked"> 0-15 maanden<br>
+          <input type="radio" id="agegrp_0-4y" name="agegrp" value="0-4y"> 0-4 jaar<br>
+          <div id="agegrp_1-21y"><input type="radio" name="agegrp" value="1-21y"> 1-21 jaar<br></div>
+          <br>
+        </form>
 
-    <p>
-      The sole purpose of this OpenCPU app is to demonstrate how to use the <a href="http://github.com/jeroenooms/opencpu.js"><tt>opencpu.js</tt></a> library to call R from Javascript using OpenCPU.
-    </p>
+        <form action="" name="msr">
+          <strong>Maat</strong><br>
+          <div id="msr_hgt"><input type="radio" name="msr" value="hgt" checked="checked"> Lengte<br></div>
+          <div id="msr_wgt"><input type="radio" name="msr" value="wgt"> Gewicht - Leeftijd<br></div>
+          <div id="msr_wfh"><input type="radio" name="msr" value="wfh"> Gewicht - Lengte<br></div>
+          <div id="msr_hdc"><input type="radio" name="msr" value="hdc"> Hoofdomtrek<br></div>
+          <div id="msr_bmi"><input type="radio" name="msr" value="bmi"> BMI<br></div>
+          <div id="msr_front"><input type="radio" name="msr" value="front"> - A -<br></div>
+          <div id="msr_back"><input type="radio" name="msr" value="back"> - B -<br></div>
+          <br>
+        </form>
 
-    <h2>Introduction</h2>
+        <div id="weekmenu"><strong>Zwangerschapsduur</strong><br>
+        <select id="ga">
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36" selected>36</option>
+        </select>
+        <br><br>
+        </div>
 
-    <p>The opencpu.js library depends on jQuery and provides some convenient wrappers around $.ajax to call the OpenCPU API.
-    A copy of jquery and opencpu.js must be included with your OpenCPU app.</p>
+        <form action="" id="etnicity">
+          <strong>Etniciteit</strong><br>
+          <input type="radio" name="etnicity" value="nl" checked="checked"> Nederlands<br>
+          <input type="radio" name="etnicity" value="tu"> Turks<br>
+          <input type="radio" name="etnicity" value="ma"> Marokkaans<br>
+          <input type="radio" name="etnicity" value="hs"> Hindostaans<br>
+          <br>
+        </form>
 
-    <h2>Topics</h2>
+        <form action="" id="sex">
+          <strong>Geslacht</strong><br>
+          <input type="radio" name="sex" value="male" checked="checked"> Jongen<br>
+          <input type="radio" name="sex" value="female"> Meisje<br>
+          <br>
+        </form>
 
-    <p>Each topic consists of a minimal HTML page demonstrating basic functionality. Look at the source code of the HTML page to learn what is happening.</p>
+        <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
+      </div>
+      <div class="col-sm-9 graph">
+          <div id="plotdiv"></div>
+      </div>
+    </div>
+  </div>
 
-    <ol>
-      <li><a href="hello.html">Calling a function</a></li>
-      <li><a href="plot.html">Making a plot</a></li>
-      <li><a href="menu.html">Show growth charts</a></li>
-    </ol>
+<script type="text/javascript" src="james.js"></script>
 
-  </body>
+</body>
 </html>
