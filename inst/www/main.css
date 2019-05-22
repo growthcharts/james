@@ -3,7 +3,13 @@
 
 /* Set gray background color and 100% height */
 .sidenav {
-  background-color: #f1f1f1;
+  background-color: #F3F3F3;
+  height: 100%;
+}
+
+/* Set gray background color and 100% height */
+.graph {
+  background-color: #F7F7F7;
   height: 100%;
 }
 
