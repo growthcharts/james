@@ -321,7 +321,7 @@ if(!window.jQuery) {
         var side = chartcode.substr(4,4);
         var pat = /[ABC]/;
         var res = pat.test(side);
-        alert("chartcode: " + chartcode + "    res: " + res);
+        alert("side: " + side + "    res: " + res);
         if (res) {
           document.getElementById("plotdiv").style.width = "927px";
           document.getElementById("plotdiv").style.height = "1311px";
