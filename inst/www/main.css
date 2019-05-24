@@ -1,5 +1,9 @@
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 800px}
+.row.content {
+  height: 800px;
+  display: flex;
+  flex-wrap: wrap;
+}
 
 /* columns must have equal heights */
 .col-container {
