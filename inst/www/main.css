@@ -1,20 +1,6 @@
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {
   height: 800px;
-  display: table;
-  width: 100%;
-}
-
-.col {
-  display: table-cell;
-  padding: 16px;
-}
-
-@media only screen and (max-width: 600px) {
-  .col {
-    display: block;
-    width: 100%;
-  }
 }
 
 /* Set gray background color and 100% height */
