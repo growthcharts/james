@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +11,14 @@
   <script type="text/javascript" src="js/opencpu-0.5-james-0.1.js"></script>
   <script type="text/javascript" src="functions.js"></script>
 </head>
+
 <body>
+
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-3 sidenav" id="navcontainer">
-        <br><h3>GROEIDIAGRAMMEN</h3>
+        <br>
+        <h3>GROEIDIAGRAMMEN</h3>
 
         <br>
         <div class="form-group">
@@ -50,21 +54,21 @@
         </form>
 
         <div id="weekmenu"><strong>Zwangerschapsduur</strong><br>
-        <select id="ga">
-          <option value="25">25</option>
-          <option value="26">26</option>
-          <option value="27">27</option>
-          <option value="28">28</option>
-          <option value="29">29</option>
-          <option value="30">30</option>
-          <option value="31">31</option>
-          <option value="32">32</option>
-          <option value="33">33</option>
-          <option value="34">34</option>
-          <option value="35">35</option>
-          <option value="36" selected>36</option>
-        </select>
-        <br><br>
+          <select id="ga">
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36" selected>36</option>
+          </select>
+          <br><br>
         </div>
 
         <form action="" id="etnicity">
@@ -86,23 +90,21 @@
         <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
-          <div id="plotdiv"></div>
+        <div id="plotdiv"></div>
       </div>
     </div>
+      <div class="row footerrow">
+        <div class="col-sm-3" id="leftfootercontainer">
+          <div id="footer"><p>© TNO 2019</p></div>
+        </div>
+        <div class="col-sm-9" id="rightfootercontainer">
+          <div id="footer"><p>JAMES: Joint Anthropometric Measurement and Evaluation Service</p></div>
+        </div>
+      </div>
   </div>
 
-
-<footer>
-  <p class="pull-left">© TNO 2019</p>
-  <div class="pull-right">
-    <ul class="list-inline">
-      <li><a href="#">Information</a></li>
-      <li><a href="#">JAMES: Joint Anthropometric Analysis and Evaluation Service</a></li>
-    </ul>
-  </div>
-</footer>
-
-<script type="text/javascript" src="james.js"></script>
+  <script type="text/javascript" src="james.js"></script>
 
 </body>
+
 </html>
