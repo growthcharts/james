@@ -324,6 +324,7 @@ if(!window.jQuery) {
         if (res) {
           // document.getElementById("navcontainer").style.height = "1326px";
           // document.getElementById("plotcontainer").style.height = "1326px";
+          document.getElementById("mainrow").style.height = "1326px";
           document.getElementById("plotdiv").style.width = "927px";
           document.getElementById("plotdiv").style.height = "1311px";
           svgwidth = 8.27;
@@ -331,6 +332,7 @@ if(!window.jQuery) {
         } else {
           // document.getElementById("navcontainer").style.height = "800px";
           // document.getElementById("plotcontainer").style.height = "800px";
+          document.getElementById("mainrow").style.height = "800px";
           document.getElementById("plotdiv").style.width = "785px";
           document.getElementById("plotdiv").style.height = "785px";
           svgwidth = 7;
