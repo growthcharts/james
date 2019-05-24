@@ -322,6 +322,8 @@ if(!window.jQuery) {
         var pat = /[ABC]/;
         var res = pat.test(side);
         if (res) {
+          document.getElementById("leftfooter").style.visibility = "hidden";
+          document.getElementById("rightfooter").style.visibility = "hidden";
           document.getElementById("navcontainer").style.height = "1326px";
           document.getElementById("plotcontainer").style.height = "1326px";
           document.getElementById("plotdiv").style.width = "927px";
@@ -329,6 +331,8 @@ if(!window.jQuery) {
           svgwidth = 8.27;
           svgheight = 11.69;
         } else {
+          document.getElementById("leftfooter").style.visibility = "visible";
+          document.getElementById("rightfooter").style.visibility = "visible";
           document.getElementById("navcontainer").style.height = "800px";
           document.getElementById("plotcontainer").style.height = "800px";
           document.getElementById("plotdiv").style.width = "785px";
