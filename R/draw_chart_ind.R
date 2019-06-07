@@ -19,13 +19,15 @@
 draw_chart_ind <- function(location = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
-  # get the object stored by convert_bds_ind
-  rda <- paste0(location, "R/.val/rda")
-  con <- curl(rda)
-  load(file = con)
-  ind <- .val
-  close(con)
-  rm(".val")
+  # assign object stored by convert_bds_ind to ind
+  if (is.null(location)) ind <- NULL
+  if (!is.null(location)) {
+    con <- curl(paste0(location, "R/.val/rda"))
+    load(file = con)
+    ind <- .val
+    close(con)
+    rm(".val")
+  }
 
   if (is.null(chartcode))
     chartcode <- select_chart(ind)$chartcode

@@ -136,8 +136,7 @@ function update() {
 
     // trigger chart drawing
     var cm = document.getElementById("interpolation").checked;
-    var rq2 = $("#plotdiv").rplot("draw_plot", {
-      ind : null,
+    var rq2 = $("#plotdiv").rplot("draw_chart_ind", {
       chartcode : chartcode,
       curve_interpolation : cm,
       quiet : false
