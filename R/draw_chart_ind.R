@@ -21,7 +21,7 @@ draw_chart_ind <- function(location = NULL, chartcode = NULL,
 
   # assign object stored by convert_bds_ind to ind
   if (is.null(location)) ind <- NULL
-  if (!is.null(location)) {
+  else {
     con <- curl(paste0(location, "R/.val/rda"))
     load(file = con)
     ind <- .val
