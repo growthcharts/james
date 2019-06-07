@@ -1,4 +1,7 @@
 // james.js
+const urlParams = new URLSearchParams(window.location.search);
+const url_data = urlParams.get('url_data');
+
 var chartgrp = document.getElementById('chartgrp');
 chartgrp.addEventListener('change', update, false);
 
