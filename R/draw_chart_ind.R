@@ -20,7 +20,6 @@ draw_chart_ind <- function(location = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
   # assign object stored by convert_bds_ind to ind
-  browser()
   if (is.null(location)) ind <- NULL
   else {
     con <- curl(paste0(location, "R/.val/rda"))
