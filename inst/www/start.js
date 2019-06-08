@@ -1,4 +1,4 @@
-// james.js
+// start.js
 const urlParams = new URLSearchParams(window.location.search);
 const url_data = urlParams.get('url_data');
 

@@ -1,5 +1,5 @@
-// functions.js
-// Helpers for the JAMES system
+// update.js
+// Update the JAMES system
 // Author: Stef van Buuren, 2019
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
