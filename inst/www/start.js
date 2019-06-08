@@ -36,5 +36,8 @@ var radios = document.forms.sex.elements.sex;
   };
 }
 
-// initialize
+// initialize chart controls if there are child data
+if (url_data) set_chart_controls();
+
+// update chart from current chart controls
 update();

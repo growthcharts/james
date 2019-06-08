@@ -152,3 +152,11 @@ function update() {
     alert("R server error: " + rq1.responseText);
   });
 }
+
+function set_chart_controls() {
+  // function executes at initialization, if there are child data
+  // load individual data R: url_data --> location
+  // calculate chartcode R: select_chart()
+  // decompose chartcode R: parse_chartcode(), return parsed list
+  // set chart controls JS
+}
