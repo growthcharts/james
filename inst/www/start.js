@@ -1,6 +1,8 @@
 // start.js
 const urlParams = new URLSearchParams(window.location.search);
-const url_data = urlParams.get('url_data');
+const user_bds = urlParams.get('bds');
+const user_ind = urlParams.get('ind');
+const user_chartcode = urlParams.get('chartcode');
 
 var chartgrp = document.getElementById('chartgrp');
 chartgrp.addEventListener('change', update, false);
@@ -37,7 +39,7 @@ var radios = document.forms.sex.elements.sex;
 }
 
 // initialize chart controls if there are child data
-if (url_data) set_chart_controls();
+if (user_ind || user_chartcode) initialize_chart_controls();
 
 // update chart from current chart controls
 update();

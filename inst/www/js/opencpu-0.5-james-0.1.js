@@ -317,7 +317,7 @@ if(!window.jQuery) {
         if(!Location) return;
         // svgwidth = plotdiv.width()/96;
         // svgheight = plotdiv.height()/96;
-        var chartcode = document.getElementById('code').innerHTML;
+        var chartcode = document.getElementById('chartcode').innerHTML;
         var side = chartcode.substring(3,4);
         var pat = /[ABC]/;
         var res = pat.test(side);

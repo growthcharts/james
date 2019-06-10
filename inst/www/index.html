@@ -31,26 +31,25 @@
         </div>
         <br><br>
 
-        <p id="code" font-family="Courier New"></p>
-        <p id="childname" font-family="Courier New">childname here</p>
+        <p id="chartcode" font-family="Courier New"></p>
 
         <form action="" name="agegrp">
           <strong>Leeftijd</strong><br>
-          <input type="radio" name="agegrp" value="0-15m" checked="checked"> 0-15 maanden<br>
-          <input type="radio" id="agegrp_0-4y" name="agegrp" value="0-4y"> 0-4 jaar<br>
-          <div id="agegrp_1-21y"><input type="radio" name="agegrp" value="1-21y"> 1-21 jaar<br></div>
+          <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 maanden<br>
+          <input type="radio" id="0-4y" value="0-4y" name="agegrp"> 0-4 jaar<br>
+          <div id="agegrp_1-21y"><input type="radio" id="1-21y" value="1-21y" name="agegrp"> 1-21 jaar<br></div>
           <br>
         </form>
 
         <form action="" name="msr">
           <strong>Maat</strong><br>
-          <div id="msr_hgt"><input type="radio" name="msr" value="hgt" checked="checked"> Lengte<br></div>
-          <div id="msr_wgt"><input type="radio" name="msr" value="wgt"> Gewicht - Leeftijd<br></div>
-          <div id="msr_wfh"><input type="radio" name="msr" value="wfh"> Gewicht - Lengte<br></div>
-          <div id="msr_hdc"><input type="radio" name="msr" value="hdc"> Hoofdomtrek<br></div>
-          <div id="msr_bmi"><input type="radio" name="msr" value="bmi"> BMI<br></div>
-          <div id="msr_front"><input type="radio" name="msr" value="front"> - A -<br></div>
-          <div id="msr_back"><input type="radio" name="msr" value="back"> - B -<br></div>
+          <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Lengte<br></div>
+          <div id="msr_wgt"><input type="radio" name="msr" id="wgt" value="wgt"> Gewicht - Leeftijd<br></div>
+          <div id="msr_wfh"><input type="radio" name="msr" id="wfh" value="wfh"> Gewicht - Lengte<br></div>
+          <div id="msr_hdc"><input type="radio" name="msr" id="hdc" value="hdc"> Hoofdomtrek<br></div>
+          <div id="msr_bmi"><input type="radio" name="msr" id="bmi" value="bmi"> BMI<br></div>
+          <div id="msr_front"><input type="radio" name="msr" id="front" value="front"> - A -<br></div>
+          <div id="msr_back"><input type="radio" name="msr" id="back" value="back"> - B -<br></div>
           <br>
         </form>
 
@@ -74,17 +73,17 @@
 
         <form action="" id="etnicity">
           <strong>Etniciteit</strong><br>
-          <input type="radio" name="etnicity" value="nl" checked="checked"> Nederlands<br>
-          <input type="radio" name="etnicity" value="tu"> Turks<br>
-          <input type="radio" name="etnicity" value="ma"> Marokkaans<br>
-          <input type="radio" name="etnicity" value="hs"> Hindostaans<br>
+          <input type="radio" name="etnicity" id="nl" value="nl" checked="checked"> Nederlands<br>
+          <input type="radio" name="etnicity" id="tu" value="tu"> Turks<br>
+          <input type="radio" name="etnicity" id="ma" value="ma"> Marokkaans<br>
+          <input type="radio" name="etnicity" id="hs" value="hs"> Hindostaans<br>
           <br>
         </form>
 
         <form action="" id="sex">
           <strong>Geslacht</strong><br>
-          <input type="radio" name="sex" value="male" checked="checked"> Jongen<br>
-          <input type="radio" name="sex" value="female"> Meisje<br>
+          <input type="radio" name="sex" id="male" value="male" checked="checked"> Jongen<br>
+          <input type="radio" name="sex" id="female" value="female"> Meisje<br>
           <br>
         </form>
 
@@ -105,7 +104,5 @@
   </div>
 
   <script type="text/javascript" src="start.js"></script>
-
 </body>
-
 </html>

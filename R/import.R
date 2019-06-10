@@ -5,7 +5,7 @@
 #' @importFrom        lubridate  ymd dmy
 #' @importFrom        curl       curl
 #' @importFrom        groeidiagrammen draw_plot
-#' @importFrom        chartbox   list_charts create_chartcode
+#' @importFrom        chartbox   list_charts create_chartcode parse_chartcode
 NULL
 
 globalVariables(".val")
