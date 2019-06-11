@@ -154,15 +154,17 @@ function update() {
 
 function initialize_chart_controls() {
   // function executes at initialization, if there are child data
+  // or if a chartcode is requested
+  // actions:
   // load individual data R: user_ind --> location
   // calculate chartcode R: select_chart()
   // decompose chartcode R: parse_chartcode(), return parsed list
-  var pop = "";
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
     location: user_ind,
     chartcode : user_chartcode
   }, function(output) {
     // set chartgrp menu value
+    alert("output.population: " + output.population);
     switch(output.population) {
       case "NL":
       case "TU":
