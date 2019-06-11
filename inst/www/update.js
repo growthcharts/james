@@ -243,4 +243,5 @@ function initialize_chart_controls() {
       case female:
         document.getElementById("sex").value = output.sex;
     }
-})}
+});
+}
