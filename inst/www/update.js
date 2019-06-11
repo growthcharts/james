@@ -183,7 +183,7 @@ function initialize_chart_controls() {
         document.getElementById("chartgrp").value = "who";
         break;
       default:
-        document.getElementById("chartgrp").value = "";
+        document.getElementById("chartgrp").value = "who";
     }
 
     // set chartcode UI
