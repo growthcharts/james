@@ -183,6 +183,7 @@ function initialize_chart_controls() {
         document.getElementById("chartgrp").value = "";
     }
     // set chartcode UI
+    alert("output.chartcode: " + output.chartcode);
     document.getElementById('chartcode').innerHTML = output.chartcode;
 
     // set agegrp UI
@@ -199,6 +200,7 @@ function initialize_chart_controls() {
     }
 
     // set msr UI
+    alert("output.side: " + output.side);
     switch(output.side) {
       case hgt:
       case wgt:
