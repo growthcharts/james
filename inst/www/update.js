@@ -166,17 +166,17 @@ function initialize_chart_controls() {
     // set chartgrp menu value
     alert("output.population: " + output.population);
     switch(output.population) {
-      case "NL":
-      case "TU":
-      case "MA":
-      case "HS":
+      case NL:
+      case TU:
+      case MA:
+      case HS:
         document.getElementById("chartgrp").value = "nl2010";
         break;
-      case "PT":
+      case PT:
         document.getElementById("chartgrp").value = "preterm";
         break;
-      case "WHOblue":
-      case "WHOpink":
+      case WHOblue:
+      case WHOpink:
         document.getElementById("chartgrp").value = "who";
         break;
       default:
