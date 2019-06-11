@@ -4,6 +4,8 @@ const user_bds = urlParams.get('bds');
 const user_ind = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 
+if (user_chartcode) alert("chartcode: " + user_chartcode);
+
 var chartgrp = document.getElementById('chartgrp');
 chartgrp.addEventListener('change', update, false);
 
