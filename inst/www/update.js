@@ -12,7 +12,9 @@ function update() {
   var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
-  var chartcode = "";
+  alert("chartgrp: " + chartgrp);
+  alert("sex: " + sex);
+
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
