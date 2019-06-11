@@ -187,29 +187,29 @@ function initialize_chart_controls() {
 
     // set agegrp UI
     switch(output.design) {
-      case "A": document.forms.agegrp["0-15m"].checked=true;
+      case A: document.forms.agegrp["0-15m"].checked=true;
       break;
-      case "B":
-      case "E": document.forms.agegrp["0-4y"].checked=true;
+      case B:
+      case E: document.forms.agegrp["0-4y"].checked=true;
       break;
-      case "C": document.forms.agegrp["1-21y"].checked=true;
+      case C: document.forms.agegrp["1-21y"].checked=true;
       break;
-      case "D": document.forms.agegrp["0-21y"].checked=true;
+      case D: document.forms.agegrp["0-21y"].checked=true;
       break;
     }
 
     // set msr UI
     switch(output.side) {
-      case "hgt":
-      case "wgt":
-      case "hdc":
-      case "bmi":
-      case "wfh":
-      case "front":
-      case "back":
+      case hgt:
+      case wgt:
+      case hdc:
+      case bmi:
+      case wfh:
+      case front:
+      case back:
         document.forms.msr[output.side].checked=true;
         break;
-      case "-hdc":
+      case -hdc:
         document.forms.msr.back.checked=true;
     }
 
@@ -220,17 +220,17 @@ function initialize_chart_controls() {
 
     // set etnicity
     switch(output.population) {
-      case "NL":
-      case "TU":
-      case "MA":
-      case "HS":
+      case NL:
+      case TU:
+      case MA:
+      case HS:
         document.getElementById("etnicity").value = output.population.toLowerCase();
     }
 
     //set sex UI element
     switch(output.sex) {
-      case "male":
-      case "female":
+      case male:
+      case female:
         document.getElementById("sex").value = output.sex;
     }
 })}
