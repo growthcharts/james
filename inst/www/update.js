@@ -159,9 +159,12 @@ function initialize_chart_controls() {
   // load individual data R: user_ind --> location
   // calculate chartcode R: select_chart()
   // decompose chartcode R: parse_chartcode(), return parsed list
+  if (user_ind) alert("user_ind: " + user_ind);
+  if (user_chartcode) alert("chartcode: " + user_chartcode);
+
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
     location: user_ind,
-    chartcode : user_chartcode
+    chartcode: user_chartcode
   }, function(output) {
     // set chartgrp menu value
     alert("output.population: " + output.population);
@@ -182,6 +185,7 @@ function initialize_chart_controls() {
       default:
         document.getElementById("chartgrp").value = "";
     }
+
     // set chartcode UI
     alert("output.chartcode: " + output.chartcode);
     document.getElementById('chartcode').innerHTML = output.chartcode;

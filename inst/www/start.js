@@ -39,9 +39,6 @@ var radios = document.forms.sex.elements.sex;
 }
 
 // initialize chart controls if there are child data
-if (user_ind) alert("user_ind: " + user_ind);
-if (user_chartcode) alert("chartcode: " + user_chartcode);
-
 if (user_ind || user_chartcode) initialize_chart_controls();
 
 // update chart from current chart controls
