@@ -221,8 +221,9 @@ function initialize_chart_controls() {
     // set weekmenu UI
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
+    alert("week: " + week + "  weeknum: " + weeknum);
     if (week && weeknum >= 25 && weeknum <= 36)
-      document.getElementById("weekmenu").value = week;
+      document.getElementById("ga").value = week;
 
     // set etnicity
     var pop = String(output.population);
