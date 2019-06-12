@@ -236,12 +236,8 @@ function initialize_chart_controls() {
     }
 
     //set sex UI element
-    var sex = String(output.sex);
-    switch(sex) {
-      case "male":
-      case "female":
-        document.getElementById("sex").value = sex;
-    }
+    document.getElementById("sex").value = String(output.sex);
+
     update();
 });
 }
