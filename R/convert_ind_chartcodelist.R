@@ -26,8 +26,9 @@ convert_ind_chartcodelist <- function(location = NULL,
     rm(".val")
   }
 
-  # if (is.null(chartcode))
-  chartcode <- select_chart(ind)$chartcode
+  if (is.null(chartcode))
+    chartcode <- select_chart(ind)$chartcode
+
   chartcodelist <- parse_chartcode(chartcode)
   chartcodelist$chartcode <- chartcode
   chartcodelist
