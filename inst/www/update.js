@@ -159,8 +159,8 @@ function initialize_chart_controls() {
   // load individual data R: user_ind --> location
   // calculate chartcode R: select_chart()
   // decompose chartcode R: parse_chartcode(), return parsed list
-  if (user_ind) alert("user_ind: " + user_ind);
-  if (user_chartcode) alert("chartcode: " + user_chartcode);
+  // if (user_ind) alert("user_ind: " + user_ind);
+  // if (user_chartcode) alert("chartcode: " + user_chartcode);
 
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
     location: user_ind,
@@ -186,16 +186,12 @@ function initialize_chart_controls() {
         text = "";
     }
     document.getElementById("chartgrp").value = text;
-    var newchartgrp = document.getElementById('chartgrp').value;
-    alert("text: " + text + "    new chartgrp: " + newchartgrp);
 
     // set chartcode UI
-    if (output.chartcode) alert("output.chartcode: " + output.chartcode);
-    document.getElementById('chartcode').innerHTML = output.chartcode;
+    document.getElementById('chartcode').innerHTML = String(output.chartcode);
 
     // set agegrp UI
-    alert("output.design: " + output.design);
-    switch(output.design) {
+    switch(String(output.design)) {
       case "A": document.forms.agegrp["0-15m"].checked=true;
       break;
       case "B":
@@ -208,8 +204,7 @@ function initialize_chart_controls() {
     }
 
     // set msr UI
-    alert("output.side: " + output.side);
-    switch(output.side) {
+    switch(String(output.side)) {
       case "hgt":
       case "wgt":
       case "hdc":
@@ -217,32 +212,34 @@ function initialize_chart_controls() {
       case "wfh":
       case "front":
       case "back":
-        document.forms.msr[output.side].checked=true;
+        document.forms.msr[String(output.side)].checked=true;
         break;
       case "-hdc":
         document.forms.msr.back.checked=true;
     }
 
     // set weekmenu UI
-    var weeknum = Math.trunc(Number(output.week));
-    if (output.week && weeknum >= 25 && weeknum <= 36)
-    document.getElementById("weekmenu").value = output.week;
+    var week = String(output.week);
+    var weeknum = Math.trunc(Number(week));
+    if (week && weeknum >= 25 && weeknum <= 36)
+    document.getElementById("weekmenu").value = week;
 
     // set etnicity
-    switch(output.population) {
+    var pop = String(output.population);
+    switch(pop) {
       case "NL":
       case "TU":
       case "MA":
       case "HS":
-        document.getElementById("etnicity").value = output.population.toLowerCase();
+        document.getElementById("etnicity").value = pop.toLowerCase();
     }
 
     //set sex UI element
-    alert("output.sex: " + output.sex);
-    switch(output.sex) {
+    var sex = String(output.sex);
+    switch(sex) {
       case "male":
       case "female":
-        document.getElementById("sex").value = output.sex;
+        document.getElementById("sex").value = sex;
     }
     update();
 });
