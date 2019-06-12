@@ -153,86 +153,69 @@ function update() {
 
 function initialize_chart_controls() {
   // function executes at initialization, if there are child data
-  // or if a chartcode is requested
-  // actions:
-  // load individual data R: user_ind --> location
-  // calculate chartcode R: select_chart()
-  // decompose chartcode R: parse_chartcode(), return parsed list
-  // if (user_ind) alert("user_ind: " + user_ind);
-  // if (user_chartcode) alert("chartcode: " + user_chartcode);
+  // convert_ind_chartcodelist: load individual data (R),
+  // calculate chartcode (R) and decompose chartcode (R)
 
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
     location: user_ind,
     chartcode: user_chartcode
   }, function(output) {
-    // set chartgrp menu value
-    var text;
-    switch(String(output.population)) {
-      case "NL":
-      case "TU":
-      case "MA":
-      case "HS":
-        text = "nl2010";
+
+    // set chartgrp UI element
+    var grp;
+    var pop = String(output.population).toLowerCase();
+    switch(pop) {
+      case "nl":
+      case "tu":
+      case "ma":
+      case "hs":
+        grp = "nl2010";
         break;
-      case "PT":
-        text = "preterm";
+      case "pt":
+        grp = "preterm";
         break;
-      case "WHOblue":
-      case "WHOpink":
-        text = "who";
+      case "whoblue":
+      case "whopink":
+        grp = "who";
         break;
       default:
-        text = "";
+        grp = "";
     }
-    document.getElementById("chartgrp").value = text;
+    document.getElementById("chartgrp").value = grp;
 
     // set chartcode UI
-    alert("chartcode: " + output.chartcode);
     document.getElementById('chartcode').innerHTML = String(output.chartcode);
 
     // set agegrp UI
     switch(String(output.design)) {
-      case "A": document.forms.agegrp["0-15m"].checked=true;
-      break;
-      case "B":
-      case "E": document.forms.agegrp["0-4y"].checked=true;
-      break;
-      case "C": document.forms.agegrp["1-21y"].checked=true;
-      break;
-      case "D": document.forms.agegrp["0-21y"].checked=true;
-      break;
+      case "A": grp = "0-15m"; break;
+      case "B": case "E": grp = "0-4y"; break;
+      case "C": grp = "1-21y"; break;
+      case "D": grp = "0-21y"; break;
+      default: grp = "";
     }
+    document.forms.agegrp[grp].checked=true;
 
     // set msr UI
-    switch(String(output.side)) {
-      case "hgt":
-      case "wgt":
-      case "hdc":
-      case "bmi":
-      case "wfh":
-      case "front":
-      case "back":
-        document.forms.msr[String(output.side)].checked=true;
-        break;
-      case "-hdc":
-        document.forms.msr.back.checked=true;
-    }
+    var side = String(output.side);
+    if (side === "-hdc") side = "back";
+    document.forms.msr[side].checked=true;
 
     // set weekmenu UI
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
-    alert("week: " + week + "  weeknum: " + weeknum);
     if (week && weeknum >= 25 && weeknum <= 36)
       document.getElementById("ga").value = week;
 
     // set etnicity
-    var pop = String(output.population);
     switch(pop) {
-      case "NL":
-      case "TU":
-      case "MA":
-      case "HS":
-        document.getElementById("etnicity").value = pop.toLowerCase();
+      case "nl":
+      case "tu":
+      case "ma":
+      case "hs":
+        document.forms.etnicity[pop].checked=true;
+        break;
+      default:
     }
 
     //set sex UI element
