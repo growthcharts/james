@@ -167,13 +167,8 @@ function initialize_chart_controls() {
     chartcode: user_chartcode
   }, function(output) {
     // set chartgrp menu value
-    var oldchartgrp = document.getElementById('chartgrp').value;
-    // var chartgrp = c.options[c.selectedIndex].value;
-    alert("old chartgrp: " + oldchartgrp);
-    var pop = String(output.population);
     var text;
-    alert("population: " + output.population + "  " + pop);
-    switch(pop) {
+    switch(String(output.population)) {
       case "NL":
       case "TU":
       case "MA":
@@ -192,7 +187,6 @@ function initialize_chart_controls() {
     }
     document.getElementById("chartgrp").value = text;
     var newchartgrp = document.getElementById('chartgrp').value;
-    // var chartgrp = c.options[c.selectedIndex].value;
     alert("text: " + text + "    new chartgrp: " + newchartgrp);
 
     // set chartcode UI
