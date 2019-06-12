@@ -171,27 +171,29 @@ function initialize_chart_controls() {
     // var chartgrp = c.options[c.selectedIndex].value;
     alert("old chartgrp: " + oldchartgrp);
     var pop = output.population;
+    var text;
     alert("population: " + output.population + "  " + pop);
     switch(pop) {
-      case "NL" :
-      case "TU" :
-      case "MA" :
-      case "HS" :
-        document.getElementById("chartgrp").value = "nl2010";
+      case "NL":
+      case "TU":
+      case "MA":
+      case "HS":
+        text = "nl2010";
         break;
-      case "PT" :
-        document.getElementById("chartgrp").value = "preterm";
+      case "PT":
+        text = "preterm";
         break;
-      case "WHOblue" :
-      case "WHOpink" :
-        document.getElementById("chartgrp").value = "who";
+      case "WHOblue":
+      case "WHOpink":
+        text = "who";
         break;
       default:
-        document.getElementById("chartgrp").value = "who";
+        text = "";
     }
+    document.getElementById("chartgrp").value = text;
     var newchartgrp = document.getElementById('chartgrp').value;
     // var chartgrp = c.options[c.selectedIndex].value;
-    alert("new chartgrp: " + newchartgrp);
+    alert("text: " + text + "    new chartgrp: " + newchartgrp);
 
     // set chartcode UI
     if (output.chartcode) alert("output.chartcode: " + output.chartcode);
