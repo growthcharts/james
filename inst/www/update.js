@@ -169,8 +169,9 @@ function initialize_chart_controls() {
     chartcode: user_chartcode
   }, function(output) {
     // set chartgrp menu value
-    alert("output.population: " + output.population);
-    switch(output.population) {
+    var pop = output.population;
+    alert("population: " + output.population + "  " + pop);
+    switch(pop) {
       case "NL":
       case "TU":
       case "MA":
@@ -239,8 +240,8 @@ function initialize_chart_controls() {
     //set sex UI element
     alert("output.sex: " + output.sex);
     switch(output.sex) {
-      case male:
-      case female:
+      case "male":
+      case "female":
         document.getElementById("sex").value = output.sex;
     }
     update();
