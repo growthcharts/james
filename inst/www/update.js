@@ -236,7 +236,7 @@ function initialize_chart_controls() {
     }
 
     //set sex UI element
-    document.getElementById("sex").value = String(output.sex);
+    document.forms.sex[String(output.sex)].checked=true;
 
     update();
 });
