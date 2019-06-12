@@ -170,7 +170,7 @@ function initialize_chart_controls() {
     var oldchartgrp = document.getElementById('chartgrp').value;
     // var chartgrp = c.options[c.selectedIndex].value;
     alert("old chartgrp: " + oldchartgrp);
-    var pop = output.population;
+    var pop = String(output.population);
     var text;
     alert("population: " + output.population + "  " + pop);
     switch(pop) {
