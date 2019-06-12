@@ -40,6 +40,4 @@ var radios = document.forms.sex.elements.sex;
 
 // initialize chart controls if there are child data
 if (user_ind || user_chartcode) initialize_chart_controls();
-
-// update chart from current chart controls
-update();
+else update();
