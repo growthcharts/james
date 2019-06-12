@@ -31,8 +31,6 @@
         <br>
         </div>
 
-        <p id="chartcode"></p>
-
         <form action="" name="agegrp">
           <strong>Leeftijd</strong><br>
           <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 maanden<br>
@@ -88,6 +86,8 @@
         </form>
 
         <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
+
+        <p id="chartcode"></p>
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotdiv"></div>
