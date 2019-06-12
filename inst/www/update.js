@@ -13,8 +13,6 @@ function update() {
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
   alert("chartgrp: " + chartgrp);
-  alert("sex: " + sex);
-
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
@@ -169,25 +167,31 @@ function initialize_chart_controls() {
     chartcode: user_chartcode
   }, function(output) {
     // set chartgrp menu value
+    var oldchartgrp = document.getElementById('chartgrp').value;
+    // var chartgrp = c.options[c.selectedIndex].value;
+    alert("old chartgrp: " + oldchartgrp);
     var pop = output.population;
     alert("population: " + output.population + "  " + pop);
     switch(pop) {
-      case NL:
-      case TU:
-      case MA:
-      case HS:
+      case "NL":
+      case "TU":
+      case "MA":
+      case "HS":
         document.getElementById("chartgrp").value = "nl2010";
         break;
-      case PT:
+      case "PT":
         document.getElementById("chartgrp").value = "preterm";
         break;
-      case WHOblue:
-      case WHOpink:
+      case "WHOblue":
+      case "WHOpink":
         document.getElementById("chartgrp").value = "who";
         break;
       default:
-        document.getElementById("chartgrp").value = "";
+        document.getElementById("chartgrp").value = "who";
     }
+    var newchartgrp = document.getElementById('chartgrp').value;
+    // var chartgrp = c.options[c.selectedIndex].value;
+    alert("new chartgrp: " + newchartgrp);
 
     // set chartcode UI
     if (output.chartcode) alert("output.chartcode: " + output.chartcode);
