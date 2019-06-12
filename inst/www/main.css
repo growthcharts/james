@@ -57,7 +57,11 @@ h3 {
 
 #chartcode {
   font-family: "Courier New", Courier, monospace;
-  font-size: 24px;
+  font-size: 18px;
   background-color: #C7C7C7;
   font-weight: bold;
+  position: relative;
+  bottom: 15px;
+  text-align: center;
 }
+
