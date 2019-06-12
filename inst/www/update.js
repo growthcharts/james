@@ -12,7 +12,6 @@ function update() {
   var ga = g.options[g.selectedIndex].value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
-  alert("chartgrp: " + chartgrp);
 
   if (chartgrp == 'nl2010') {
     document.getElementById('agegrp_1-21y').style.display = 'block';
@@ -130,8 +129,8 @@ function update() {
     side     : msr
   }, function(output) {
     // overwrite on success
-    chartcode = output.chartcode;
-    document.getElementById('chartcode').innerHTML = chartcode;
+    var chartcode = output.chartcode;
+    document.getElementById('chartcode').innerHTML = String(chartcode);
 
     // trigger chart drawing
     var cm = document.getElementById("interpolation").checked;
@@ -188,6 +187,7 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp").value = text;
 
     // set chartcode UI
+    alert("chartcode: " + output.chartcode);
     document.getElementById('chartcode').innerHTML = String(output.chartcode);
 
     // set agegrp UI
@@ -222,7 +222,7 @@ function initialize_chart_controls() {
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
     if (week && weeknum >= 25 && weeknum <= 36)
-    document.getElementById("weekmenu").value = week;
+      document.getElementById("weekmenu").value = week;
 
     // set etnicity
     var pop = String(output.population);
