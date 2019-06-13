@@ -131,9 +131,6 @@ function update() {
       side     : msr,
       curve_interpolation : cm,
       quiet : false
-    }, function(output) {
-       chartcode = String(output.name);
-       document.getElementById('chartcode').innerHTML = chartcode;
     });
   rq2.fail(function() {
     alert("Server error: " + rq2.responseText);
