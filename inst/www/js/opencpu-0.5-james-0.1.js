@@ -340,7 +340,7 @@ if(!window.jQuery) {
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
 
         // update the chartcode field
-        url <- Location + "R/.val";
+        var url = Location + "R/.val";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
