@@ -344,7 +344,11 @@ if(!window.jQuery) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('chartcode').innerHTML = this.responseText;
+            var text = String(this.responseText);
+            text = text.substring(
+              text.lastIndexOf("[") + 1,
+              text.lastIndexOf(";"));
+            document.getElementById('chartcode').innerHTML = text;
           }};
         xhttp.open("GET", url, true);
         xhttp.send();

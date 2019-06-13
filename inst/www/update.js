@@ -173,11 +173,6 @@ function initialize_chart_controls() {
     }
     document.getElementById("chartgrp").value = grp;
 
-    // update global variable chartcode
-    // set chartcode UI
-    chartcode = String(output.print);
-    document.getElementById('chartcode').innerHTML = chartcode;
-
     // set agegrp UI
     switch(String(output.design)) {
       case "A": grp = "0-15m"; break;
