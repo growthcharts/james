@@ -118,6 +118,7 @@ function update() {
   }
 
   // trigger chart drawing
+  alert("chartcode: " + chartcode + "   selector: ", selector);
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       bds_data : null,
       ind_loc : user_ind,
