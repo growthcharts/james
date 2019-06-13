@@ -4,15 +4,17 @@
 \alias{convert_ind_chartcodelist}
 \title{Derive chartcode list from data}
 \usage{
-convert_ind_chartcodelist(location = NULL, chartcode = NULL)
+convert_ind_chartcodelist(ind_loc = NULL, chartcode = NULL)
 }
 \arguments{
-\item{location}{A url that points to the server location where the
-data from a previous request to \code{convert_bds_ind()} are stored.}
+\item{ind_loc}{A url that points to the server location where the
+data from a previous request to \code{convert_bds_ind()} are
+stored. Optional. \code{ind_loc} takes priority over
+\code{bds_data}.}
 
 \item{chartcode}{The code of the requested growth chart. If not
-specified, the server will automatically plot child height for
-the most recent age period.}
+specified, the function will select the chart that best matches
+the input data.}
 }
 \value{
 A list with chart codes, produced by \code{chartbox::parse_chartcode}

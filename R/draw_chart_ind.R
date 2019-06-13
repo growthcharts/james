@@ -3,12 +3,8 @@
 #' The function \code{draw_chart_ind()} expect an input location from
 #' a previous call, and plots the individual data on the requested
 #' growth chart.
-#' @param location A url that points to the server location where the
-#' data from a previous request to \code{convert_bds_ind()} are stored.
-#' @param chartcode The code of the requested growth chart. If not
-#' specified, the server will automatically plot child height for
-#' the most recent age period.
 #' @rdname draw_chart
+#' @inheritParams draw_chart
 #' @return tbd
 #' @author Stef van Buuren 2019
 #' @seealso \linkS4class{individual},
@@ -16,13 +12,13 @@
 #' \code{\link[groeidiagrammen]{draw_plot}}
 #' @keywords server
 #' @export
-draw_chart_ind <- function(location = NULL, chartcode = NULL,
+draw_chart_ind <- function(ind_loc = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
   # assign object stored by convert_bds_ind to ind
-  if (length(location) == 0L) ind <- NULL
+  if (length(ind_loc) == 0L) ind <- NULL
   else {
-    con <- curl(paste0(location, "R/.val/rda"))
+    con <- curl(paste0(ind_loc, "R/.val/rda"))
     load(file = con)
     ind <- .val
     close(con)
