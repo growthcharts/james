@@ -18,7 +18,7 @@
 #' @export
 convert_ind_chartcodelist <- function(ind_loc = NULL,
                                       chartcode = NULL) {
-  selector <- ifelse(is.null(ind_loc), "chartcode", "data")
+  selector <- ifelse(is.null(chartcode), "data", "chartcode")
 
   # assign object stored by convert_bds_ind to ind
   if (length(ind_loc) == 0L) ind <- NULL
