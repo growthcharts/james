@@ -118,11 +118,12 @@ function update() {
   }
 
   // trigger chart drawing
+  document.getElementById('chartcode').innerHTML = chartcode;
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       bds_data : null,
       ind_loc : user_ind,
-      selector : "derive",
-      chartcode: null,
+      selector : selector,
+      chartcode: chartcode,
       chartgrp : chartgrp,
       agegrp   : agegrp,
       sex      : sex,
@@ -135,17 +136,16 @@ function update() {
   rq2.fail(function() {
     alert("Server error: " + rq2.responseText);
   });
-  // var chartcode = output.chartcode;
-  // document.getElementById('chartcode').innerHTML = String(chartcode);
 }
 
 function initialize_chart_controls() {
   // function executes at initialization, if there are child data
   // convert_ind_chartcodelist: load individual data (R),
   // calculate chartcode (R) and decompose chartcode (R)
+  var ind_loc = user_ind;
 
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
-    location: user_ind,
+    ind_loc: ind_loc,
     chartcode: user_chartcode
   }, function(output) {
 
@@ -171,8 +171,10 @@ function initialize_chart_controls() {
     }
     document.getElementById("chartgrp").value = grp;
 
+    // update global variable chartcode
     // set chartcode UI
-    document.getElementById('chartcode').innerHTML = String(output.chartcode);
+    chartcode = String(output.chartcode);
+    document.getElementById('chartcode').innerHTML = chartcode;
 
     // set agegrp UI
     switch(String(output.design)) {
@@ -209,7 +211,11 @@ function initialize_chart_controls() {
     //set sex UI element
     document.forms.sex[String(output.sex)].checked=true;
 
+    // set UI controls and chart
     update();
+
+    // for all subsequent calls, use derive
+    selector = "derive";
 });
 }
 

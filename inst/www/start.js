@@ -4,8 +4,27 @@ const user_bds = urlParams.get('bds');
 const user_ind = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 
-var chartgrp = document.getElementById('chartgrp');
-chartgrp.addEventListener('change', update, false);
+// define fallback chartcode
+var chartcode = "NJAH";
+
+// updating logic: use derive, unless there are data and unless
+// chartcode is directly specified
+var selector  = "derive";
+if (user_bds || user_ind) selector = "data";
+if (user_chartcode) selector = "chartcode";
+
+
+// if there are data or chartcode arguments specified by user:
+// determine chartcode, set chart controls, update visibility, draw chart
+if (user_bds || user_ind || user_chartcode) initialize_chart_controls();
+
+// no user arguments: update visibility, draw chart
+else update();
+
+
+// set onchange triggers
+var chartgrplist = document.getElementById('chartgrp');
+chartgrplist.addEventListener('change', update, false);
 
 var radios = document.forms.agegrp.elements.agegrp;
 for(var i = 0, max = radios.length; i < max; i++) {
@@ -37,7 +56,3 @@ var radios = document.forms.sex.elements.sex;
       update();
   };
 }
-
-// initialize chart controls if there are child data
-if (user_ind || user_chartcode) initialize_chart_controls();
-else update();
