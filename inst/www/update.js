@@ -223,5 +223,6 @@ function initialize_chart_controls() {
 }
 
 function sr(id, display) {
+  // set UI element display
   document.getElementById(id).style.display = display;
 }
