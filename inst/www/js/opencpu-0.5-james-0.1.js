@@ -347,7 +347,7 @@ if(!window.jQuery) {
             var text = String(this.responseText);
             text = text.substring(
               text.lastIndexOf("[") + 1,
-              text.lastIndexOf(";"));
+              text.lastIndexOf("]"));
             document.getElementById('chartcode').innerHTML = text;
           }};
         xhttp.open("GET", url, true);
