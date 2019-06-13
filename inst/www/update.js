@@ -175,7 +175,7 @@ function initialize_chart_controls() {
 
     // update global variable chartcode
     // set chartcode UI
-    chartcode = String(output.chartcode);
+    chartcode = String(output.print);
     document.getElementById('chartcode').innerHTML = chartcode;
 
     // set agegrp UI
