@@ -338,6 +338,16 @@ if(!window.jQuery) {
           svgheight = 7;
         }
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
+
+        // update the chartcode field
+        url <- Location + "R/.val/print";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('chartcode').innerHTML = this.responseText;
+          }};
+        xhttp.open("GET", url, true);
+        xhttp.send();
       }
 
       function setlocation(newloc, newn){
@@ -492,3 +502,4 @@ if(!window.jQuery) {
   }
 
 }( jQuery ));
+
