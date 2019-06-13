@@ -132,7 +132,7 @@ function update() {
       curve_interpolation : cm,
       quiet : false
     }, function(output) {
-       chartcode = String(output.chartcode);
+       chartcode = String(output);
        document.getElementById('chartcode').innerHTML = chartcode;
     });
   rq2.fail(function() {
