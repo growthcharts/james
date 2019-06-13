@@ -1,5 +1,4 @@
 // update.js
-// Update the JAMES system
 // Author: Stef van Buuren, 2019
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
@@ -7,15 +6,14 @@ function update() {
   var chartgrp = document.getElementById("chartgrp").value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
   var population = document.querySelector('input[name="etnicity"]:checked').value;
-  var g = document.getElementById('ga');
-  var ga = g.options[g.selectedIndex].value;
+  var ga = document.getElementById("ga").value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
 
   if (chartgrp == 'nl2010') {
-    document.getElementById('agegrp_1-21y').style.display = 'block';
-    document.getElementById('weekmenu').style.display = 'none';
-    document.getElementById('etnicity').style.display = 'block';
+    sr('agegrp_1-21y', 'block');
+    sr('weekmenu', 'none');
+    sr('etnicity', 'block');
   }
   if (chartgrp == 'preterm') {
     document.getElementById('agegrp_1-21y').style.display = 'none';
@@ -222,4 +220,8 @@ function initialize_chart_controls() {
 
     update();
 });
+}
+
+function sr(id, display) {
+  document.getElementById(id).style.display = display;
 }
