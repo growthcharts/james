@@ -4,8 +4,7 @@
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
-  var c = document.getElementById('chartgrp');
-  var chartgrp = c.options[c.selectedIndex].value;
+  var chartgrp = document.getElementById("chartgrp").value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
   var population = document.querySelector('input[name="etnicity"]:checked').value;
   var g = document.getElementById('ga');
