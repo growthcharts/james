@@ -118,7 +118,6 @@ function update() {
   }
 
   // trigger chart drawing
-  alert("chartcode: " + chartcode + "   selector: " + selector);
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       bds_data : null,
       ind_loc : user_ind,
@@ -142,10 +141,8 @@ function initialize_chart_controls() {
   // function executes at initialization, if there are child data
   // convert_ind_chartcodelist: load individual data (R),
   // calculate chartcode (R) and decompose chartcode (R)
-  var ind_loc = user_ind;
-
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
-    ind_loc: ind_loc,
+    ind_loc: user_ind,
     chartcode: user_chartcode
   }, function(output) {
 
@@ -179,7 +176,6 @@ function initialize_chart_controls() {
       case "D": grp = "0-21y"; break;
       default: grp = "";
     }
-    alert("grp: " + grp);
     document.forms.agegrp[grp].checked=true;
 
     // set msr UI
