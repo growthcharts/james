@@ -16,104 +16,104 @@ function update() {
     sr('etnicity', 'block');
   }
   if (chartgrp == 'preterm') {
-    document.getElementById('agegrp_1-21y').style.display = 'none';
-    document.getElementById('weekmenu').style.display = 'block';
-    document.getElementById('etnicity').style.display = 'none';
+    sr('agegrp_1-21y', 'none');
+    sr('weekmenu', 'block');
+    sr('etnicity', 'none');
   }
   if (chartgrp == 'who') {
-    document.getElementById('agegrp_1-21y').style.display = 'none';
-    document.getElementById('weekmenu').style.display = 'none';
-    document.getElementById('etnicity').style.display = 'none';
+    sr('agegrp_1-21y', 'none');
+    sr('weekmenu', 'none');
+    sr('etnicity', 'none');
   }
   if (agegrp == '0-15m' & chartgrp == 'nl2010') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'block';
-    document.getElementById('msr_wfh').style.display = 'none';
-    document.getElementById('msr_hdc').style.display = 'block';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'block';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
   }
   if (agegrp == '0-15m' & chartgrp == 'preterm') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'block';
-    document.getElementById('msr_wfh').style.display = 'none';
-    document.getElementById('msr_hdc').style.display = 'block';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'none';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
   }
   if (agegrp == '0-15m' & chartgrp == 'who') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'block';
-    document.getElementById('msr_wfh').style.display = 'none';
-    document.getElementById('msr_hdc').style.display = 'block';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'none';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
   }
   if (agegrp == '0-4y' & chartgrp == 'nl2010' & population == 'nl') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'block';
-    document.getElementById('msr_wfh').style.display = 'block';
-    document.getElementById('msr_hdc').style.display = 'block';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'block';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
   }
   if (agegrp == '0-4y' & chartgrp == 'nl2010' & population != 'nl') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'none';
-    document.getElementById('msr_wfh').style.display = 'block';
-    document.getElementById('msr_hdc').style.display = 'block';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'block';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
   }
   if (agegrp == '0-4y' & chartgrp == 'nl2010' & population == 'hs') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'none';
-    document.getElementById('msr_wfh').style.display = 'block';
-    document.getElementById('msr_hdc').style.display = 'none';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'block';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
   }
   if (agegrp == '0-4y' & chartgrp == 'preterm') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'block';
-    document.getElementById('msr_wfh').style.display = 'none';
-    document.getElementById('msr_hdc').style.display = 'none';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'none';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
   }
   if (agegrp == '0-4y' & chartgrp == 'who') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'none';
-    document.getElementById('msr_wfh').style.display = 'block';
-    document.getElementById('msr_hdc').style.display = 'none';
-    document.getElementById('msr_bmi').style.display = 'none';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'none';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
   }
   if (agegrp == '1-21y' & population != 'hs') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'none';
-    document.getElementById('msr_wfh').style.display = 'block';
-    document.getElementById('msr_hdc').style.display = 'block';
-    document.getElementById('msr_bmi').style.display = 'block';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'block';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'block');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
   }
   if (agegrp == '1-21y' & population == 'hs') {
-    document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'none';
-    document.getElementById('msr_wfh').style.display = 'block';
-    document.getElementById('msr_hdc').style.display = 'none';
-    document.getElementById('msr_bmi').style.display = 'block';
-    document.getElementById('msr_front').style.display = 'block';
-    document.getElementById('msr_back').style.display = 'none';
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'block');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
   }
 
   // call james::select_chart
