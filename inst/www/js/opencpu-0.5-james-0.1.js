@@ -317,8 +317,8 @@ if(!window.jQuery) {
         if(!Location) return;
         // svgwidth = plotdiv.width()/96;
         // svgheight = plotdiv.height()/96;
-        var side = document.forms.msr[side].checked;
-        if (side === "front" || side === "back") {
+        var msr = document.querySelector('input[name="msr"]:checked').value;
+        if (msr === "front" || msr === "back") {
 //          document.getElementById("leftfooter").style.visibility = "hidden";
 //          document.getElementById("rightfooter").style.visibility = "hidden";
           document.getElementById("navcontainer").style.height = "1326px";
