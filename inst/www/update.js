@@ -93,8 +93,8 @@ function update() {
   }
   if (agegrp == '0-4y' & chartgrp == 'who') {
     document.getElementById('msr_hgt').style.display = 'block';
-    document.getElementById('msr_wgt').style.display = 'block';
-    document.getElementById('msr_wfh').style.display = 'none';
+    document.getElementById('msr_wgt').style.display = 'none';
+    document.getElementById('msr_wfh').style.display = 'block';
     document.getElementById('msr_hdc').style.display = 'none';
     document.getElementById('msr_bmi').style.display = 'none';
     document.getElementById('msr_front').style.display = 'block';
