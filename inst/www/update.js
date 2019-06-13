@@ -9,6 +9,7 @@ function update() {
   var ga = document.getElementById("ga").value;
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
+  var cm = document.getElementById("interpolation").checked;
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
@@ -117,7 +118,6 @@ function update() {
   }
 
   // trigger chart drawing
-  var cm = document.getElementById("interpolation").checked;
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       bds_data : null,
       ind_loc : user_ind,
