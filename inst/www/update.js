@@ -116,36 +116,25 @@ function update() {
     sr('msr_back', 'none');
   }
 
-  // call james::select_chart
-  var rq1 = ocpu.rpc("select_chart", {
-    chartgrp : chartgrp,
-    agegrp   : agegrp,
-    sex      : sex,
-    etn      : population,
-    ga       : ga,
-    side     : msr
-  }, function(output) {
-    // overwrite on success
-    var chartcode = output.chartcode;
-    document.getElementById('chartcode').innerHTML = String(chartcode);
-
-    // trigger chart drawing
-    var cm = document.getElementById("interpolation").checked;
-    var rq2 = $("#plotdiv").rplot("draw_chart_ind", {
-      location : user_ind,
-      chartcode : chartcode,
+  // trigger chart drawing
+  var cm = document.getElementById("interpolation").checked;
+  var rq2 = $("#plotdiv").rplot("draw_chart", {
+      bds_data : null,
+      ind_loc : user_ind,
       curve_interpolation : cm,
+      chartgrp : chartgrp,
+      agegrp   : agegrp,
+      sex      : sex,
+      etn      : population,
+      ga       : ga,
+      side     : msr,
       quiet : false
     });
-
-    rq2.fail(function(){
-      alert("Server error: " + rq2.responseText);
-    });
+  rq2.fail(function() {
+    alert("Server error: " + rq2.responseText);
   });
-
-  rq1.fail(function() {
-    alert("R server error: " + rq1.responseText);
-  });
+  // var chartcode = output.chartcode;
+  // document.getElementById('chartcode').innerHTML = String(chartcode);
 }
 
 function initialize_chart_controls() {
