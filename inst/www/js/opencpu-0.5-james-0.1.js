@@ -317,11 +317,8 @@ if(!window.jQuery) {
         if(!Location) return;
         // svgwidth = plotdiv.width()/96;
         // svgheight = plotdiv.height()/96;
-        var chartcode = document.getElementById('chartcode').innerHTML;
-        var side = chartcode.substring(3,4);
-        var pat = /[ABC]/;
-        var res = pat.test(side);
-        if (res) {
+        var side = document.forms.msr[side].checked;
+        if (side === "front" || side === "back") {
 //          document.getElementById("leftfooter").style.visibility = "hidden";
 //          document.getElementById("rightfooter").style.visibility = "hidden";
           document.getElementById("navcontainer").style.height = "1326px";

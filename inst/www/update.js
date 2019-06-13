@@ -121,13 +121,15 @@ function update() {
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       bds_data : null,
       ind_loc : user_ind,
-      curve_interpolation : cm,
+      selector : "derive",
+      chartcode: null,
       chartgrp : chartgrp,
       agegrp   : agegrp,
       sex      : sex,
       etn      : population,
       ga       : ga,
       side     : msr,
+      curve_interpolation : cm,
       quiet : false
     });
   rq2.fail(function() {
