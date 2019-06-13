@@ -118,7 +118,6 @@ function update() {
   }
 
   // trigger chart drawing
-  document.getElementById('chartcode').innerHTML = chartcode;
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       bds_data : null,
       ind_loc : user_ind,
@@ -132,6 +131,9 @@ function update() {
       side     : msr,
       curve_interpolation : cm,
       quiet : false
+    }, function(output) {
+       chartcode = String(output.chartcode);
+       document.getElementById('chartcode').innerHTML = chartcode;
     });
   rq2.fail(function() {
     alert("Server error: " + rq2.responseText);
