@@ -148,7 +148,8 @@ function initialize_chart_controls() {
   }, function(output) {
 
     // alert user to invalid chartcode
-    if (output.chartcode === null)
+    alert("output.chartcode: " + output.chartcode + "   user_chartcode: " + user_chartcode);
+    if (!output.chartcode)
        alert("Unknown chartcode: " + user_chartcode);
 
     // set chartgrp UI element
