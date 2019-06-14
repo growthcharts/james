@@ -178,7 +178,6 @@ function initialize_chart_controls() {
       case "D": grp = "0-21y"; break;
       default: grp = "";
     }
-    alert("design: " + design + "   grp: " + grp);
     document.forms.agegrp[grp].checked=true;
 
     // set msr UI
@@ -212,6 +211,9 @@ function initialize_chart_controls() {
     // for all subsequent calls, use derive
     selector = "derive";
 });
+  rq1.fail(function() {
+    alert("Server error: " + rq1.responseText);
+  });
 }
 
 function sr(id, display) {
