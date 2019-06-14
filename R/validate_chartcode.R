@@ -2,18 +2,16 @@
 #'
 #' This function checks whether \code{chartcode} is a available
 #' in the chart library.
-#' @param chartcode Character vector of chart codes,
-#' typically something like \code{"NMAB"}
-#' @return Named logical vector with same length as \code{chartcode}.
-#' A \code{TRUE} means a pass, a \code{FALSE} means a fail.
+#' @param chartcode Chart code, typically something like \code{"NMAB"}
+#' @return The \code{chartcode} if available. \code{NULL} if not
+#' available.
 #' @seealso \code{\link{list_charts}}
 #' @examples
-#' validate_chartcode(c("NJAA", "NZXX", "PMAAN26"))
+#' validate_chartcode("NJAA")
 #' @export
 validate_chartcode <- function(chartcode = NULL) {
 
-  if (is.null(chartcode)) return(logical())
-  result <- chartcode %in% list_charts()$chartcode
-  names(result) <- chartcode
-  result
+  if (is.null(chartcode)) return(NULL)
+  if (!chartcode[1L] %in% list_charts()$chartcode) return(NULL)
+  chartcode
 }

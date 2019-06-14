@@ -26,7 +26,7 @@ convert_ind_chartcodelist <- function(ind_loc,
 
   cc <- switch(selector,
                "data" = select_chart(ind = ind)$chartcode,
-               "chartcode" = chartcode)
+               "chartcode" = validate_chartcode(chartcode))
 
   chartcodelist <- parse_chartcode(cc)
   chartcodelist$chartcode <- cc

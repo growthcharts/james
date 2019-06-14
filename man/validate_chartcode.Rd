@@ -7,19 +7,18 @@
 validate_chartcode(chartcode = NULL)
 }
 \arguments{
-\item{chartcode}{Character vector of chart codes,
-typically something like \code{"NMAB"}}
+\item{chartcode}{Chart code, typically something like \code{"NMAB"}}
 }
 \value{
-Named logical vector with same length as \code{chartcode}.
-A \code{TRUE} means a pass, a \code{FALSE} means a fail.
+The \code{chartcode} if available. \code{NULL} if not
+available.
 }
 \description{
 This function checks whether \code{chartcode} is a available
 in the chart library.
 }
 \examples{
-validate_chartcode(c("NJAA", "NZXX", "PMAAN26"))
+validate_chartcode("NJAA")
 }
 \seealso{
 \code{\link{list_charts}}

@@ -147,6 +147,10 @@ function initialize_chart_controls() {
     selector: selector
   }, function(output) {
 
+    // alert user to invalid chartcode
+    if (output.chartcode === null)
+       alert("Unknown chartcode: " + user_chartcode);
+
     // set chartgrp UI element
     var grp;
     var pop = String(output.population).toLowerCase();
