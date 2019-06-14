@@ -122,7 +122,7 @@ function update() {
       bds_data : null,
       ind_loc : user_ind,
       selector : selector,
-      chartcode: null,
+      chartcode: user_chartcode,
       chartgrp : chartgrp,
       agegrp   : agegrp,
       sex      : sex,
