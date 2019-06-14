@@ -148,9 +148,10 @@ function initialize_chart_controls() {
   }, function(output) {
 
     // alert user to invalid chartcode
-    alert("output.chartcode: " + output.chartcode + "   user_chartcode: " + user_chartcode);
-    if (!output.chartcode)
+    if (!output.chartcode) {
        alert("Unknown chartcode: " + user_chartcode);
+       return;
+    }
 
     // set chartgrp UI element
     var grp;
