@@ -18,7 +18,8 @@
 #' @export
 convert_ind_chartcodelist <- function(ind_loc = NULL,
                                       chartcode = NULL) {
-  selector <- "chartcode"
+  # temporary hack
+  selector <- "data"
   if (!is.null(ind_loc) & is.null(chartcode)) selector <- "data"
 
   # assign object stored by convert_bds_ind to ind
