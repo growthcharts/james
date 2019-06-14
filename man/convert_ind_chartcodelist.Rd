@@ -29,10 +29,10 @@ Method \code{"chartcode"} will return the chart specified by the
 A list with chart codes, produced by \code{chartbox::parse_chartcode}
 }
 \description{
-The function load individual data into, calculates the
-chartcode and returns a list of parsed chartcode. The
-function is called at initialization to automate the
-selection of the chart according to the individual data.
+The function load individual data that is already on the server,
+calculates the chartcode and returns a list of parsed chartcode.
+The function is called at initialization to automate the selection
+of the chart according to the individual data.
 }
 \seealso{
 \code{\link[chartbox]{parse_chartcode}}

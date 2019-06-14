@@ -1,9 +1,9 @@
 #' Derive chartcode list from data
 #'
-#' The function load individual data into, calculates the
-#' chartcode and returns a list of parsed chartcode. The
-#' function is called at initialization to automate the
-#' selection of the chart according to the individual data.
+#' The function load individual data that is already on the server,
+#' calculates the chartcode and returns a list of parsed chartcode.
+#' The function is called at initialization to automate the selection
+#' of the chart according to the individual data.
 #' @inheritParams draw_chart
 #' @return A list with chart codes, produced by \code{chartbox::parse_chartcode}
 #' @author Stef van Buuren 2019
