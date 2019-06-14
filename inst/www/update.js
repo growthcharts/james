@@ -169,7 +169,8 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp").value = grp;
 
     // set agegrp UI
-    switch(String(output.design)) {
+    var design = String(output.design);
+    switch(design) {
       case "A": grp = "0-15m"; break;
       case "B": case "E": grp = "0-4y"; break;
       case "C": grp = "1-21y"; break;
