@@ -4,7 +4,7 @@
 \alias{convert_ind_chartcodelist}
 \title{Derive chartcode list from data}
 \usage{
-convert_ind_chartcodelist(ind_loc = NULL, chartcode = NULL)
+convert_ind_chartcodelist(ind_loc, chartcode, selector)
 }
 \arguments{
 \item{ind_loc}{A url that points to the server location where the
@@ -12,9 +12,18 @@ data from a previous request to \code{convert_bds_ind()} are
 stored. Optional. \code{ind_loc} takes priority over
 \code{bds_data}.}
 
-\item{chartcode}{The code of the requested growth chart. If not
-specified, the function will select the chart that best matches
-the input data.}
+\item{chartcode}{The code of the requested growth chart, in the
+case the \code{selector == "chartcode"}.}
+
+\item{selector}{A string, either \code{"derive"}, \code{"data"} or
+\code{"chartcode"}, that indicates the method to decide which
+growth chart is drawn. Method \code{"derive"} (default)
+calculates the chart from parameters \code{chartgrp},
+\code{agegrp}, \code{sex}, \code{etn}, \code{ga} and \code{side}
+parameters through the \code{select_chart()} function. Method
+\code{"ind"} calculates the chart from the individual data.
+Method \code{"chartcode"} will return the chart specified by the
+\code{chartcode} parameter.}
 }
 \value{
 A list with chart codes, produced by \code{chartbox::parse_chartcode}

@@ -143,7 +143,8 @@ function initialize_chart_controls() {
   // calculate chartcode (R) and decompose chartcode (R)
   var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
     ind_loc: user_ind,
-    chartcode: user_chartcode
+    chartcode: user_chartcode,
+    selector: selector
   }, function(output) {
 
     // set chartgrp UI element

@@ -4,23 +4,15 @@
 #' chartcode and returns a list of parsed chartcode. The
 #' function is called at initialization to automate the
 #' selection of the chart according to the individual data.
-#' @param ind_loc  A url that points to the server location where the
-#'   data from a previous request to \code{convert_bds_ind()} are
-#'   stored. Optional. \code{ind_loc} takes priority over
-#'   \code{bds_data}.
-#' @param chartcode The code of the requested growth chart. If not
-#'   specified, the function will select the chart that best matches
-#'   the input data.
+#' @inheritParams draw_chart
 #' @return A list with chart codes, produced by \code{chartbox::parse_chartcode}
 #' @author Stef van Buuren 2019
 #' @seealso \code{\link[chartbox]{parse_chartcode}}
 #' @keywords server
 #' @export
-convert_ind_chartcodelist <- function(ind_loc = NULL,
-                                      chartcode = NULL) {
-  # temporary hack
-  selector <- "data"
-  if (!is.null(ind_loc) & is.null(chartcode)) selector <- "data"
+convert_ind_chartcodelist <- function(ind_loc,
+                                      chartcode,
+                                      selector) {
 
   # assign object stored by convert_bds_ind to ind
   if (length(ind_loc) == 0L) ind <- NULL

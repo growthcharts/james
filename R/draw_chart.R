@@ -8,9 +8,8 @@
 #'   data from a previous request to \code{convert_bds_ind()} are
 #'   stored. Optional. \code{ind_loc} takes priority over
 #'   \code{bds_data}.
-#' @param chartcode The code of the requested growth chart. If not
-#'   specified, the function will select the chart that best matches
-#'   the input data.
+#' @param chartcode The code of the requested growth chart, in the
+#'   case the \code{selector == "chartcode"}.
 #' @param selector A string, either \code{"derive"}, \code{"data"} or
 #'   \code{"chartcode"}, that indicates the method to decide which
 #'   growth chart is drawn. Method \code{"derive"} (default)

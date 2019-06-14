@@ -36,9 +36,8 @@ parameters through the \code{select_chart()} function. Method
 Method \code{"chartcode"} will return the chart specified by the
 \code{chartcode} parameter.}
 
-\item{chartcode}{The code of the requested growth chart. If not
-specified, the function will select the chart that best matches
-the input data.}
+\item{chartcode}{The code of the requested growth chart, in the
+case the \code{selector == "chartcode"}.}
 
 \item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 or \code{character(0)}}

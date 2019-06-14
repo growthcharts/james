@@ -14,7 +14,7 @@ draw_plot(ind, chartcode, curve_interpolation = TRUE, quiet = TRUE)
 \item{curve_interpolation}{A logical indicating whether curve interpolation shoud be applied.}
 
 \item{quiet}{Logical indicating whether chart code should be written
-to standard output. Default is \code{quiet = FALSE}.}
+to standard output. Default is \code{quiet = TRUE}.}
 }
 \value{
 A grid object
