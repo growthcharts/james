@@ -177,6 +177,7 @@ function initialize_chart_controls() {
       case "D": grp = "0-21y"; break;
       default: grp = "";
     }
+    alert("design: " + design + "   grp: " + grp);
     document.forms.agegrp[grp].checked=true;
 
     // set msr UI
