@@ -317,17 +317,23 @@ if(!window.jQuery) {
         if(!Location) return;
         // svgwidth = plotdiv.width()/96;
         // svgheight = plotdiv.height()/96;
-        svgwidth = 7;
-        svgheight = 7;
+
         // make room for A4 charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
         if (msr === "front" || msr === "back") {
-          $("#navcontainer").css("height", "+=526");
-          $("#plotcontainer").css("height", "+=526");
-          $("#plotdiv").css("width", "+=142");
-          $("#plotdiv").css("height", "+=526");
+          $("#navcontainer").css("height", "1326");
+          $("#plotcontainer").css("height", "1326");
+          $("#plotdiv").css("width", "927");
+          $("#plotdiv").css("height", "1311");
           svgwidth = 8.27;
           svgheight = 11.69;
+        } else {
+          $("#navcontainer").css("height", "800");
+          $("#plotcontainer").css("height", "800");
+          $("#plotdiv").css("width", "785");
+          $("#plotdiv").css("height", "785");
+          svgwidth = 7;
+          svgheight = 7;
         }
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
 
