@@ -56,13 +56,11 @@ h3 {
 }
 
 #chartcode {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 10px;
-  background-color: #F7F7F7;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
   position: relative;
-  bottom: 12px;
   text-align: left;
+  border: medium solid #649EC9;
   border-style: none none solid none;
-  border: thin #649EC9;
 }
 
