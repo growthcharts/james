@@ -9,13 +9,6 @@
   height: 100%;
 }
 
-/* Set gray background color and 100% height */
-.plotcontainer {
-  background-color: #F7F7F7;
-  position: absolute;
-  overflow-y: scroll;
-}
-
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
   .sidenav {
@@ -53,6 +46,8 @@ h3 {
   width: 785px;
   height: 785px;
   background-color: #F7F7F7;
+  overflow-y: scroll;
+
 /*  border-style: dotted;
     border-width: 1px; */
 }
