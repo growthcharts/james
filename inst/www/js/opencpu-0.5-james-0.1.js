@@ -269,6 +269,7 @@ if(!window.jQuery) {
 
   function initplot(targetdiv){
     if(targetdiv.data("ocpuplot")){
+      alert("Found the ocpuplot object");
       return targetdiv.data("ocpuplot");
     }
     var ocpuplot = function(){
