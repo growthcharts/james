@@ -315,10 +315,8 @@ if(!window.jQuery) {
  */
       function updatesvg(){
         if(!Location) return;
-        // svgwidth = plotdiv.width()/96;
-        // svgheight = plotdiv.height()/96;
 
-        // make room for A4 charts
+        // reserve screen space for A4 charts or square charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
         if (msr === "front" || msr === "back") {
           svgwidth = 8.27;
@@ -332,6 +330,7 @@ if(!window.jQuery) {
           plotdiv_height = 785;
         }
 
+        // now plot it, prevent flicker
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
         var img_tag = new Image(plotdiv_width, plotdiv_height);
         var img_url = Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight;
@@ -343,8 +342,6 @@ if(!window.jQuery) {
           $("#plotdiv").css("height", plotdiv_height);
         };
         img_tag.src = img_url;
-
-        // plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
 
         // update the chartcode field
         var url = Location + "R/.val";
