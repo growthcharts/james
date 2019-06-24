@@ -10,7 +10,7 @@
 }
 
 /* Set gray background color and 100% height */
-.plotcontainer {
+#plotcontainer {
   background-color: #F7F7F7;
   position: absolute;
   overflow-y: scroll;
