@@ -269,7 +269,6 @@ if(!window.jQuery) {
 
   function initplot(targetdiv){
     if(targetdiv.data("ocpuplot")){
-      alert("Found the ocpuplot object");
       return targetdiv.data("ocpuplot");
     }
     var ocpuplot = function(){
@@ -318,25 +317,17 @@ if(!window.jQuery) {
         if(!Location) return;
         // svgwidth = plotdiv.width()/96;
         // svgheight = plotdiv.height()/96;
+        svgwidth = 7;
+        svgheight = 7;
+        // make room for A4 charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
         if (msr === "front" || msr === "back") {
-//          document.getElementById("leftfooter").style.visibility = "hidden";
-//          document.getElementById("rightfooter").style.visibility = "hidden";
-          document.getElementById("navcontainer").style.height = "1326px";
-          document.getElementById("plotcontainer").style.height = "1326px";
-          document.getElementById("plotdiv").style.width = "927px";
-          document.getElementById("plotdiv").style.height = "1311px";
+          $("#navcontainer").css("height", "+=526");
+          $("#plotcontainer").css("height", "+=526");
+          $("#plotdiv").css("width", "+=142");
+          $("#plotdiv").css("height", "+=526");
           svgwidth = 8.27;
           svgheight = 11.69;
-        } else {
-//          document.getElementById("leftfooter").style.visibility = "visible";
-//          document.getElementById("rightfooter").style.visibility = "visible";
-          document.getElementById("navcontainer").style.height = "800px";
-          document.getElementById("plotcontainer").style.height = "800px";
-          document.getElementById("plotdiv").style.width = "785px";
-          document.getElementById("plotdiv").style.height = "785px";
-          svgwidth = 7;
-          svgheight = 7;
         }
         plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
 
@@ -359,7 +350,6 @@ if(!window.jQuery) {
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
-        alert("Location:  " + Location);
         if(!Location){
 //          pdf.hide();
 //          svg.hide();

@@ -50,6 +50,14 @@ h3 {
     border-width: 1px; */
 }
 
+#plotcontainer {
+  width: 800px;
+}
+
+#navcontainer {
+  width: 800px;
+}
+
 #footer {
     text-align: left;
     padding-left: 10px;
