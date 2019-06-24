@@ -1,7 +1,8 @@
 
-# james 0.5.0 
+# james 0.5.1
 
-* Remove flickering between chart transitions
+* Removes flickering between chart transitions
+* De-emphasizes the chartcode field
 
 # james 0.1.0
 
