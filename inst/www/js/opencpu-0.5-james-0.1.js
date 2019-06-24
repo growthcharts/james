@@ -321,23 +321,27 @@ if(!window.jQuery) {
         // make room for A4 charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
         if (msr === "front" || msr === "back") {
-          $("#navcontainer").css("height", "1326");
-          $("#plotcontainer").css("height", "1326");
-          $("#plotdiv").css("width", "927");
-          $("#plotdiv").css("height", "1311");
           svgwidth = 8.27;
           svgheight = 11.69;
+          plotdiv_width = 927;
+          plotdiv_height = 1311;
+          $("#navcontainer").css("height", plotdiv_height + 15);
+          $("#plotcontainer").css("height", plotdiv_height + 15);
+          $("#plotdiv").css("width", plotdiv_width);
+          $("#plotdiv").css("height", plotdiv_height);
         } else {
-          $("#navcontainer").css("height", "800");
-          $("#plotcontainer").css("height", "800");
-          $("#plotdiv").css("width", "785");
-          $("#plotdiv").css("height", "785");
           svgwidth = 7;
           svgheight = 7;
+          plotdiv_width = 785;
+          plotdiv_height = 785;
+          $("#navcontainer").css("height", plotdiv_height + 15);
+          $("#plotcontainer").css("height", plotdiv_height + 15);
+          $("#plotdiv").css("width", plotdiv_width);
+          $("#plotdiv").css("height", plotdiv_height);
         }
 
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
-        var img_tag = new Image(785, 785);
+        var img_tag = new Image(plotdiv_width, plotdiv_height);
         var img_url = Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function() {
           plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
