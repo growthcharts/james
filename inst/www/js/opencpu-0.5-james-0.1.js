@@ -359,6 +359,7 @@ if(!window.jQuery) {
       function setlocation(newloc, newn){
         n = newn || n;
         Location = newloc;
+        alert("Location:  " + Location);
         if(!Location){
 //          pdf.hide();
 //          svg.hide();
