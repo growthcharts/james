@@ -61,6 +61,7 @@ h3 {
   background-color: #F7F7F7;
   position: relative;
   bottom: 12px;
-  text-align: center;
+  text-align: left;
+  border-style: none none solid none;
 }
 
