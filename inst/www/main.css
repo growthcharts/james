@@ -34,6 +34,7 @@
 }
 
 h3 {
+  font-family: "Lucida Console", Monaco, monospace;
   font-size: 24px;
   font-weight: bold;
 }
@@ -46,8 +47,6 @@ h3 {
   width: 785px;
   height: 785px;
   background-color: #F7F7F7;
-  overflow-y: scroll;
-
 /*  border-style: dotted;
     border-width: 1px; */
 }
