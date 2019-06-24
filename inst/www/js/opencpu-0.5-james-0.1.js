@@ -325,19 +325,11 @@ if(!window.jQuery) {
           svgheight = 11.69;
           plotdiv_width = 927;
           plotdiv_height = 1311;
-          $("#navcontainer").css("height", plotdiv_height + 15);
-          $("#plotcontainer").css("height", plotdiv_height + 15);
-          $("#plotdiv").css("width", plotdiv_width);
-          $("#plotdiv").css("height", plotdiv_height);
         } else {
           svgwidth = 7;
           svgheight = 7;
           plotdiv_width = 785;
           plotdiv_height = 785;
-          $("#navcontainer").css("height", plotdiv_height + 15);
-          $("#plotcontainer").css("height", plotdiv_height + 15);
-          $("#plotdiv").css("width", plotdiv_width);
-          $("#plotdiv").css("height", plotdiv_height);
         }
 
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
@@ -345,6 +337,10 @@ if(!window.jQuery) {
         var img_url = Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function() {
           plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
+          $("#navcontainer").css("height", plotdiv_height + 15);
+          $("#plotcontainer").css("height", plotdiv_height + 15);
+          $("#plotdiv").css("width", plotdiv_width);
+          $("#plotdiv").css("height", plotdiv_height);
         };
         img_tag.src = img_url;
 
