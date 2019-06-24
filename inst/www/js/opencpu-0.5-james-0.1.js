@@ -340,7 +340,7 @@ if(!window.jQuery) {
         var img_tag = new Image();
         var img_url = "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")";
         img_tag.onload = function() {
-          document.querySelector('#plotdiv').style.backgroundImage = img_url;
+          plotdiv.css("background-image", img_url);
         };
         img_tag.src = img_url;
 
