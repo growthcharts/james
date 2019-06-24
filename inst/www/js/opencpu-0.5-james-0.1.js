@@ -337,10 +337,10 @@ if(!window.jQuery) {
         }
 
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
-        var img_tag = new Image();
-        var img_url = "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")";
+        var img_tag = new Image(785, 785);
+        var img_url = Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function() {
-          plotdiv.css("background-image", img_url);
+          plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
         };
         img_tag.src = img_url;
 
