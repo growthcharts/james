@@ -335,7 +335,16 @@ if(!window.jQuery) {
           svgwidth = 7;
           svgheight = 7;
         }
-        plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
+
+        // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
+        var img_tag = new Image();
+        var img_url = "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")";
+        img_tag.onload = function() {
+          document.querySelector('#plotdiv').style.backgroundImage = img_url;
+        };
+        img_tag.src = img_url;
+
+        // plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
 
         // update the chartcode field
         var url = Location + "R/.val";
