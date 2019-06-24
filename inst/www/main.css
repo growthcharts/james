@@ -9,6 +9,14 @@
   height: 100%;
 }
 
+/* Set gray background color and 100% height */
+.plotcontainer {
+  background-color: #F7F7F7;
+  height: 100%;
+  overflow: auto;
+}
+
+
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
   .sidenav {
@@ -22,7 +30,6 @@
 .graph {
   background-color: #F7F7F7;
   height: 100%;
-  overflow: auto;
 }
 
 /* TNO blue */
