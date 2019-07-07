@@ -26,7 +26,7 @@ Method \code{"chartcode"} will return the chart specified by the
 \code{chartcode} parameter.}
 }
 \value{
-A list with chart codes, produced by \code{chartbox::parse_chartcode}
+A list with chart codes, produced by \code{chartcatalog::parse_chartcode}
 }
 \description{
 The function load individual data that is already on the server,
@@ -35,7 +35,7 @@ The function is called at initialization to automate the selection
 of the chart according to the individual data.
 }
 \seealso{
-\code{\link[chartbox]{parse_chartcode}}
+\code{\link[chartcatalog]{parse_chartcode}}
 }
 \author{
 Stef van Buuren 2019

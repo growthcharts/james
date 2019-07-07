@@ -23,7 +23,7 @@
 #'   used)
 #' @return A list with elements \code{chartgrp}, \code{chartcode}
 #' and \code{ga}
-#' @seealso \code{\link[chartbox]{create_chartcode}},
+#' @seealso \code{\link[chartcatalog]{create_chartcode}},
 #'   \code{\link[minihealth]{individualAN-class}}
 #' @examples
 #' \dontrun{

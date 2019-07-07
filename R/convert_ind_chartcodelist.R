@@ -5,9 +5,9 @@
 #' The function is called at initialization to automate the selection
 #' of the chart according to the individual data.
 #' @inheritParams draw_chart
-#' @return A list with chart codes, produced by \code{chartbox::parse_chartcode}
+#' @return A list with chart codes, produced by \code{chartcatalog::parse_chartcode}
 #' @author Stef van Buuren 2019
-#' @seealso \code{\link[chartbox]{parse_chartcode}}
+#' @seealso \code{\link[chartcatalog]{parse_chartcode}}
 #' @keywords server
 #' @export
 convert_ind_chartcodelist <- function(ind_loc,

@@ -51,6 +51,6 @@ select_chart(p)
 }
 }
 \seealso{
-\code{\link[chartbox]{create_chartcode}},
+\code{\link[chartcatalog]{create_chartcode}},
   \code{\link[minihealth]{individualAN-class}}
 }
