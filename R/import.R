@@ -1,7 +1,7 @@
 #' @importFrom chartbox        list_charts
 #' @importFrom chartcatalog    create_chartcode parse_chartcode
+#' @importFrom chartplotter    process_chart
 #' @importFrom curl            curl
-#' @importFrom groeidiagrammen draw_plot
 #' @importFrom jsonlite        fromJSON
 #' @importFrom lubridate       ymd dmy
 #' @importFrom methods         new slot

@@ -7,7 +7,8 @@
 draw_plot <- function(ind, chartcode, curve_interpolation = TRUE,
                       quiet = TRUE) {
 
-  return(groeidiagrammen::draw_plot(ind = ind, chartcode = chartcode,
-                                    curve_interpolation = curve_interpolation,
-                                    quiet = quiet))
+  return(process_chart(individual = ind,
+                       chartcode = chartcode,
+                       curve_interpolation = curve_interpolation,
+                       quiet = quiet))
 }

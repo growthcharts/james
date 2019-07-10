@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Anthropometric Measurement and Evaluation Server (JAMES)
-Version: 0.5.1
+Version: 0.6.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -16,8 +16,8 @@ LazyData: true
 Imports: 
     chartbox (>= 0.9.0),
     chartcatalog,
+    chartplotter,
     curl,
-    groeidiagrammen (>= 0.6.1),
     jsonlite,
     lubridate,
     methods,
@@ -25,7 +25,7 @@ Imports:
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
-    stefvanbuuren/minihealth,
-    stefvanbuuren/groeidiagrammen
+    stefvanbuuren/chartplotter,
+    stefvanbuuren/minihealth
 RoxygenNote: 6.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
