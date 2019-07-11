@@ -4,8 +4,11 @@ const user_bds = urlParams.get('bds');
 const user_ind = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 
-// Fire up slider
-$(".js-range-slider").ionRangeSlider();
+// Fire up visit_slider
+var values = ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"];
+$("#visit_slider").ionRangeSlider({
+  values: values
+});
 
 // define fallback chartcode
 var chartcode = "NJAH";
