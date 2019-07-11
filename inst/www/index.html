@@ -98,7 +98,8 @@
                 <p id="chartcode"></p>
                 <br>
 
-                <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
+                <input type="checkbox" id="interpolation" checked='true' onchange="update()">
+                Curve interpolation<br>
               </div>
             </div>
           </div>
@@ -110,19 +111,36 @@
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <input type="checkbox" id="predict">
-                Voorspellen<br>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" id="growthpredictor" class="custom-control-input">
+                  <label class="custom-control-label" for="growthpredictor">Voorspeller</label>
+                </div>
+                <br>
+                <div class="form-group">
+                  <div class="form-group" id="dnr">
+                    <label for="dnr">Donor data</label>
+                    <div>
+                      <select class="form-control" id="dnr">
+                        <option value="smocc" selected>SMOCK 0-2j (1933)</option>
+                        <option value="lollypop.term">Pinkeltje at 0-4j (619)</option>
+                        <option value="lollypop.preterm">Pinkeltje pt 0-4j (1670)</option>
+                        <option value="pops">POPS pt 0-14j (834)</option>
+                        <option value="terneuzen">Terneuzen 0-30j (1642)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              <br>
               </div>
             </div>
           </div>
+        </div>  <!-- end accordion -->
+        <div class="col-sm-9 graph" id="plotcontainer">
+        <div id="plotdiv"></div>
         </div>
       </div>
-      <div class="col-sm-9 graph" id="plotcontainer">
-        <div id="plotdiv"></div>
-      </div>
     </div>
-  </div>
-
+  </div> <!-- end container-fluid -->
   <script type="text/javascript" src="start.js"></script>
 </body>
 </html>
