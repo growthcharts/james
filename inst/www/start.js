@@ -5,7 +5,11 @@ const user_ind = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 
 // Fire up visit_slider
-var values = ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"];
+var dnr = "smocc";
+var slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m"],
+                     "0_4":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","36m","45m"],
+                     "0_19": ["0w","3m","6m","12m","24m","5y","9y","10y","11y","14y","19y"],
+                     "0_29": ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","48m","6y","10y","18y","29y"]};
 $("#visit_slider").ionRangeSlider({
   values: values
 });
