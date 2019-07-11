@@ -11,8 +11,7 @@ var slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","1
                      "0_19": ["0w","3m","6m","12m","24m","5y","9y","10y","11y","14y","19y"],
                      "0_29": ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","48m","6y","10y","18y","29y"]};
 $("#visit_slider").ionRangeSlider({
-  values: values
-});
+  values: slider_values[["0_2"]]});
 
 // define fallback chartcode
 var chartcode = "NJAH";
