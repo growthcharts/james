@@ -4,12 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="js/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/ion.rangeSlider.min.css">
+  <link rel="stylesheet" href="css/ion.rangeSlider.skinShiny.css">
+  <link rel="stylesheet" href="css/shinyWidgets.css">
   <link rel="stylesheet" href="main.css">
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/popper.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/opencpu-0.5-james-0.1.js"></script>
+  <script type="text/javascript" src="js/ion.rangeSlider.min.js"></script>
+  <script type="text/javascript" src="js/shinyWidgets-bindings.min.js"></script>
+  <script type="text/javascript" src="opencpu-0.5-james-0.1.js"></script>
   <script type="text/javascript" src="update.js"></script>
 </head>
 
@@ -130,7 +135,14 @@
                     </div>
                   </div>
                 </div>
-              <br>
+                <br>
+                <div class="form-group shiny-input-container">
+                  <label class="control-label" for="visit.0_2">Bezoek</label>
+                  <input class="js-range-slider sw-slider-text" data-data-type="text" data-drag-interval="true"
+                  data-force-edges="false" data-from="3" data-from-fixed="false" data-from-shadow="false"
+                  data-grid="false" data-hide-min-max="false" data-keyboard="true" data-prettify-enabled="false"
+                  data-swvalues="[&quot;0w&quot;,&quot;4w&quot;,&quot;8w&quot;,&quot;3m&quot;,&quot;4m&quot;,&quot;6m&quot;,&quot;7.5m&quot;,&quot;9m&quot;,&quot;11m&quot;,&quot;14m&quot;,&quot;18m&quot;,&quot;24m&quot;]" data-to="9" data-to-fixed="false" data-to-shadow="false" data-type="double" id="visit.0_2"/>
+                </div>
               </div>
             </div>
           </div>
