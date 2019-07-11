@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="js/bootstrap.min.css">
   <link rel="stylesheet" href="main.css">
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/popper.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/opencpu-0.5-james-0.1.js"></script>
   <script type="text/javascript" src="update.js"></script>
@@ -21,72 +22,100 @@
         <h3>GROEIDIAGRAMMEN</h3>
 
         <br>
-        <div class="form-group">
-          <label for="exampleSelect1"><strong>Kaartserie</strong></label>
-          <select class="form-control" id="chartgrp">
-            <option value="nl2010" selected>Nederland 2010</option>
-            <option value="preterm">Prematuren</option>
-            <option value="who">WHO standaard</option>
-          </select>
-        <br>
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                Kaartkiezer
+              </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleSelect1"><strong>Kaartserie</strong></label>
+                  <select class="form-control" id="chartgrp">
+                    <option value="nl2010" selected>Nederland 2010</option>
+                    <option value="preterm">Prematuren</option>
+                    <option value="who">WHO standaard</option>
+                  </select>
+                  <br>
+                </div>
+
+                <form action="" name="agegrp">
+                  <strong>Leeftijd</strong><br>
+                  <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 maanden<br>
+                  <input type="radio" id="0-4y" value="0-4y" name="agegrp"> 0-4 jaar<br>
+                  <div id="agegrp_1-21y"><input type="radio" id="1-21y" value="1-21y" name="agegrp"> 1-21 jaar<br></div>
+                <br>
+                </form>
+
+                <form action="" name="msr">
+                  <strong>Maat</strong><br>
+                  <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Lengte<br></div>
+                  <div id="msr_wgt"><input type="radio" name="msr" id="wgt" value="wgt"> Gewicht - Leeftijd<br></div>
+                  <div id="msr_wfh"><input type="radio" name="msr" id="wfh" value="wfh"> Gewicht - Lengte<br></div>
+                  <div id="msr_hdc"><input type="radio" name="msr" id="hdc" value="hdc"> Hoofdomtrek<br></div>
+                  <div id="msr_bmi"><input type="radio" name="msr" id="bmi" value="bmi"> BMI<br></div>
+                  <div id="msr_front"><input type="radio" name="msr" id="front" value="front"> - A -<br></div>
+                  <div id="msr_back"><input type="radio" name="msr" id="back" value="back"> - B -<br></div>
+                <br>
+                </form>
+
+                <div id="weekmenu"><strong>Zwangerschapsduur</strong><br>
+                <select id="ga">
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                  <option value="32">32</option>
+                  <option value="33">33</option>
+                  <option value="34">34</option>
+                  <option value="35">35</option>
+                  <option value="36" selected>36</option>
+                </select>
+                <br><br>
+                </div>
+
+                <form action="" id="etnicity">
+                  <strong>Etniciteit</strong><br>
+                  <input type="radio" name="etnicity" id="nl" value="nl" checked="checked"> Nederlands<br>
+                  <input type="radio" name="etnicity" id="tu" value="tu"> Turks<br>
+                  <input type="radio" name="etnicity" id="ma" value="ma"> Marokkaans<br>
+                  <input type="radio" name="etnicity" id="hs" value="hs"> Hindostaans<br>
+                  <br>
+                </form>
+
+                <form action="" id="sex">
+                  <strong>Geslacht</strong><br>
+                  <input type="radio" name="sex" id="male" value="male" checked="checked"> Jongen<br>
+                  <input type="radio" name="sex" id="female" value="female"> Meisje<br>
+                  <br>
+                </form>
+
+                <p id="chartcode"></p>
+                <br>
+
+                <input type="checkbox" id="interpolation" checked='true'> Curve interpolation<br>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+              Groeivoorspeller
+            </a>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <input type="checkbox" id="predict" checked='false'>
+                Voorspellen<br>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <form action="" name="agegrp">
-          <strong>Leeftijd</strong><br>
-          <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 maanden<br>
-          <input type="radio" id="0-4y" value="0-4y" name="agegrp"> 0-4 jaar<br>
-          <div id="agegrp_1-21y"><input type="radio" id="1-21y" value="1-21y" name="agegrp"> 1-21 jaar<br></div>
-          <br>
-        </form>
-
-        <form action="" name="msr">
-          <strong>Maat</strong><br>
-          <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Lengte<br></div>
-          <div id="msr_wgt"><input type="radio" name="msr" id="wgt" value="wgt"> Gewicht - Leeftijd<br></div>
-          <div id="msr_wfh"><input type="radio" name="msr" id="wfh" value="wfh"> Gewicht - Lengte<br></div>
-          <div id="msr_hdc"><input type="radio" name="msr" id="hdc" value="hdc"> Hoofdomtrek<br></div>
-          <div id="msr_bmi"><input type="radio" name="msr" id="bmi" value="bmi"> BMI<br></div>
-          <div id="msr_front"><input type="radio" name="msr" id="front" value="front"> - A -<br></div>
-          <div id="msr_back"><input type="radio" name="msr" id="back" value="back"> - B -<br></div>
-          <br>
-        </form>
-
-        <div id="weekmenu"><strong>Zwangerschapsduur</strong><br>
-          <select id="ga">
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
-            <option value="32">32</option>
-            <option value="33">33</option>
-            <option value="34">34</option>
-            <option value="35">35</option>
-            <option value="36" selected>36</option>
-          </select>
-          <br><br>
-        </div>
-
-        <form action="" id="etnicity">
-          <strong>Etniciteit</strong><br>
-          <input type="radio" name="etnicity" id="nl" value="nl" checked="checked"> Nederlands<br>
-          <input type="radio" name="etnicity" id="tu" value="tu"> Turks<br>
-          <input type="radio" name="etnicity" id="ma" value="ma"> Marokkaans<br>
-          <input type="radio" name="etnicity" id="hs" value="hs"> Hindostaans<br>
-          <br>
-        </form>
-
-        <form action="" id="sex">
-          <strong>Geslacht</strong><br>
-          <input type="radio" name="sex" id="male" value="male" checked="checked"> Jongen<br>
-          <input type="radio" name="sex" id="female" value="female"> Meisje<br>
-          <br>
-        </form>
-        <p id="chartcode"></p>
-        <br>
-        <input type="checkbox" id="interpolation" checked='true' onchange="update()"> Curve interpolation<br>
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotdiv"></div>
