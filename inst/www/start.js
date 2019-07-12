@@ -8,6 +8,13 @@ const slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m",
 // define fallback chartcode
 var chartcode = "NJAH";
 
+// Set donordata entry
+document.getElementById("donordata").value = "lollypop.preterm";
+
+// Fire up visit slider
+$("#visitslider").ionRangeSlider({values: slider_values[["0-4"]]});
+
+
 // updating logic: use derive, unless there are data and unless
 // chartcode is directly specified
 var selector  = "derive";
