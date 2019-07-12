@@ -178,13 +178,13 @@ function initialize_chart_controls() {
     // set agegrp UI
     var design = String(output.design);
     switch(design) {
-      case "A": grp = "0-15m"; break;
-      case "B": case "E": grp = "0-4y"; break;
-      case "C": grp = "1-21y"; break;
-      case "D": grp = "0-21y"; break;
-      default: grp = "";
+      case "A": agegrp = "0-15m"; break;
+      case "B": case "E": agegrp = "0-4y"; break;
+      case "C": agegrp = "1-21y"; break;
+      case "D": agegrp = "0-21y"; break;
+      default: agegrp = "";
     }
-    document.forms.agegrp[grp].checked=true;
+    document.forms.agegrp[agegrp].checked=true;
 
     // set msr UI
     var side = String(output.side);
@@ -212,6 +212,7 @@ function initialize_chart_controls() {
     document.forms.sex[String(output.sex)].checked=true;
 
     // Fire up visit_slider
+    sw
     var dnr = "smocc";
     $("#visit_slider").ionRangeSlider({values: slider_values[["0_2"]]});
 
