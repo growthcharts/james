@@ -58,14 +58,14 @@ h3 {
 
 /* color for ionrangeslider */
 .irs--flat .irs-handle>i:first-child {
-    background-color: #00AB66;
+    background-color: #18BC9C;
 }
 .irs--flat .irs-bar {
-    background-color: #00AB66;
+    background-color: #18BC9C;
 }
 .irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
-    background-color: #00AB66;
+    background-color: #18BC9C;
 }
 .irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before {
-    border-top-color: #00AB66;
+    border-top-color: #18BC9C;
 }
