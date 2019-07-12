@@ -12,7 +12,7 @@ var chartcode = "NJAH";
 document.getElementById("donordata").value = "lollypop.preterm";
 
 // Fire up visit slider
-$("#visitslider").ionRangeSlider({values: slider_values[["0-4"]]});
+$("#visitslider").ionRangeSlider({values: slider_values[["0_4"]]});
 
 
 // updating logic: use derive, unless there are data and unless

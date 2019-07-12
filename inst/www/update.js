@@ -263,8 +263,6 @@ function initialize_chart_controls() {
     }
 
     // Set donordata entry
-    dnr = "lollypop.preterm";
-    brk = "0_4";
     document.getElementById("donordata").value = dnr;
 
     // Fire up visit slider
