@@ -176,6 +176,7 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp").value = grp;
 
     // set agegrp UI
+    var agegrp;
     var design = String(output.design);
     switch(design) {
       case "A": agegrp = "0-15m"; break;
@@ -212,6 +213,8 @@ function initialize_chart_controls() {
     document.forms.sex[String(output.sex)].checked=true;
 
     // Determine donor data
+    var dnr;
+    var brk;
     switch(grp) {
       case "nl2010":
       case "who":
