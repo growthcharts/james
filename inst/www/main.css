@@ -56,3 +56,16 @@ h3 {
   border-style: none none solid none;
 }
 
+/* color for ionrangeslider */
+.irs--flat .irs-handle>i:first-child {
+    background-color: #2C3E50;
+}
+.irs--flat .irs-bar {
+    background-color: #2C3E50;
+}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
+    background-color: #2C3E50;
+}
+.irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before {
+    border-top-color: #2C3E50;
+}
