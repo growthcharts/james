@@ -211,10 +211,59 @@ function initialize_chart_controls() {
     //set sex UI element
     document.forms.sex[String(output.sex)].checked=true;
 
-    // Fire up visit_slider
-    sw
-    var dnr = "smocc";
-    $("#visit_slider").ionRangeSlider({values: slider_values[["0_2"]]});
+    // Determine donor data
+    switch(grp) {
+      case "nl2010":
+      case "who":
+      case "":
+        switch(agegrp) {
+          case "0-15m":
+            dnr = "smocc";
+            brk = "0_2";
+            break;
+          case "0-4y":
+            dnr = "lollypop.term";
+            brk = "0_4";
+            break;
+          case "1-21y":
+          case "0-21y":
+            dnr = "terneuzen";
+            brk = "0_29";
+            break;
+          default:
+            dnr = "smocc";
+            brk = "0_2";
+            break;
+        }
+        break;
+      case "preterm":
+        switch(agegrp) {
+          case "0-15m":
+          case "0-4y":
+            dnr = "lollypop.preterm";
+            brk = "0_4";
+            break;
+          case "1-21y":
+          case "0-21y":
+            dnr = "terneuzen";
+            brk = "0_29";
+            break;
+          default:
+            dnr = "lollypop.preterm";
+            brk = "0_4";
+            break;
+        }
+        break;
+      default:
+        dnr = "smocc";
+        brk = "0_2";
+    }
+
+    // Set donordata entry
+    document.getElementById("donordata").value = dnr;
+
+    // Fire up visit slider
+    $("#visitslider").ionRangeSlider({values: slider_values[[brk]]});
 
     // set UI controls and chart
     update();
