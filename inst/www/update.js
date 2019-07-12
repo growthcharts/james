@@ -211,6 +211,10 @@ function initialize_chart_controls() {
     //set sex UI element
     document.forms.sex[String(output.sex)].checked=true;
 
+    // Fire up visit_slider
+    var dnr = "smocc";
+    $("#visit_slider").ionRangeSlider({values: slider_values[["0_2"]]});
+
     // set UI controls and chart
     update();
 
