@@ -9,7 +9,7 @@
 #'   \code{new("bse",... )}. Useful parameters are \code{models =
 #'   "bsmodel"} for setting the broken stick model, or \code{call =
 #'   as.call(...)} for setting proper reference standards.
-#' @inheritParams groeidiagrammen::draw_plot
+#' @inheritParams chartplotter::process_chart
 #' @rdname draw_chart
 #' @examples
 #' fn <- file.path(path.package("james"), "testdata", "client3.json")
@@ -19,10 +19,10 @@
 draw_chart_bds <- function(txt = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
-  ind <- convert_bds_ind(txt)
+  individual <- convert_bds_ind(txt)
 
   if (is.null(chartcode))
-    chartcode <- select_chart(ind)$chartcode
+    chartcode <- select_chart(individual)$chartcode
 
-  draw_plot(ind, chartcode, curve_interpolation, quiet = TRUE)
+  draw_plot(individual, chartcode, curve_interpolation, quiet = TRUE)
 }

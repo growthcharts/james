@@ -5,19 +5,19 @@
 #' @return A grid object
 #' @export
 draw_plot <- function(individual,
-                      chartcode,
-                      curve_interpolation = TRUE,
-                      quiet = TRUE,
-                      dnr = NULL,
-                      period = numeric(0),
-                      nmatch = 0L,
-                      user_model = 2L,
-                      exact_sex = TRUE,
-                      exact_ga = FALSE,
-                      break_ties = TRUE,
-                      show_realized = FALSE,
-                      show_future = FALSE,
-                      clip = TRUE) {
+                          chartcode,
+                          curve_interpolation = TRUE,
+                          quiet = TRUE,
+                          dnr = NULL,
+                          period = numeric(0),
+                          nmatch = 0L,
+                          user_model = 2L,
+                          exact_sex = TRUE,
+                          exact_ga = FALSE,
+                          break_ties = TRUE,
+                          show_realized = FALSE,
+                          show_future = FALSE,
+                          clip = TRUE) {
 
   process_chart(individual = individual,
                 chartcode = chartcode,

@@ -15,7 +15,8 @@ data from a previous request to \code{convert_bds_ind()} are stored.}
 specified, the server will automatically plot child height for
 the most recent age period.}
 
-\item{curve_interpolation}{A logical indicating whether curve interpolation shoud be applied.}
+\item{curve_interpolation}{A logical indicating whether curve
+interpolation shoud be applied.}
 }
 \value{
 A url pointing to the site

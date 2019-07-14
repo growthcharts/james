@@ -5,28 +5,26 @@
 #' growth chart.
 #' @rdname draw_chart
 #' @inheritParams draw_chart
-#' @return tbd
-#' @author Stef van Buuren 2019
 #' @seealso \linkS4class{individual},
-#' \code{\link[groeidiagrammen]{select_chart}}
-#' \code{\link[groeidiagrammen]{draw_plot}}
+#' \code{\link{select_chart}}
+#' \code{\link[chartplotter]{process_chart}}
 #' @keywords server
 #' @export
 draw_chart_ind <- function(ind_loc = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
   # assign object stored by convert_bds_ind to ind
-  if (length(ind_loc) == 0L) ind <- NULL
+  if (length(ind_loc) == 0L) individual <- NULL
   else {
     con <- curl(paste0(ind_loc, "R/.val/rda"))
     load(file = con)
-    ind <- .val
+    individual <- .val
     close(con)
     rm(".val")
   }
 
   if (is.null(chartcode))
-    chartcode <- select_chart(ind)$chartcode
+    chartcode <- select_chart(individual)$chartcode
 
-  draw_plot(ind, chartcode, curve_interpolation, quiet = TRUE)
+  process_chart(individual, chartcode, curve_interpolation, quiet = TRUE)
 }

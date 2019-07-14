@@ -69,8 +69,6 @@ as.call(...)} for setting proper reference standards.}
 }
 \value{
 tbd
-
-tbd
 }
 \description{
 The function \code{draw_chart()} can read data from an input
@@ -93,12 +91,10 @@ g <- draw_chart_bds(txt = fn)
 \linkS4class{individual}, \code{\link{select_chart}}
 
 \linkS4class{individual},
-\code{\link[groeidiagrammen]{select_chart}}
-\code{\link[groeidiagrammen]{draw_plot}}
+\code{\link{select_chart}}
+\code{\link[chartplotter]{process_chart}}
 }
 \author{
-Stef van Buuren 2019
-
 Stef van Buuren 2019
 }
 \keyword{server}
