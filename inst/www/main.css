@@ -56,7 +56,7 @@ h3 {
   border-style: none none solid none;
 }
 
-/* color for ionrangeslider */
+/* set color for ionrangeslider to color-succes */
 .irs--flat .irs-handle>i:first-child {
     background-color: #18BC9C;
 }

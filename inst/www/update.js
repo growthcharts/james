@@ -10,6 +10,9 @@ function update() {
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
   var cm = document.getElementById("interpolation").checked;
+  var dnr = document.getElementById("donordata").value;
+  var lo = $("#visitslider").data().from;
+  var hi = $("#visitslider").data().to;
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
@@ -265,7 +268,7 @@ function initialize_chart_controls() {
     // Set donordata entry
     document.getElementById("donordata").value = dnr;
 
-    // Fire up visit slider
+    // Set visit slider
     $("#visitslider").ionRangeSlider({values: slider_values[[brk]]});
 
     // set UI controls and chart
