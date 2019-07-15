@@ -28,6 +28,7 @@ Remotes:
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
     stefvanbuuren/chartplotter,
+    stefvanbuuren/donordata,
     stefvanbuuren/minihealth
 RoxygenNote: 6.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
