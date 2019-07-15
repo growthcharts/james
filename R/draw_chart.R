@@ -21,6 +21,10 @@
 #'   \code{chartcode} parameter.
 #' @param curve_interpolation A logical indicating whether curve
 #'   interpolation shoud be applied.
+#' @param lo Value of the left visit coded as string, e.g. \code{"4w"}
+#'   or \code{"7.5m"}
+#' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
+#'   or \code{"7.5m"}
 #' @inheritParams select_chart
 #' @rdname draw_chart
 #' @return tbd
@@ -73,6 +77,11 @@ draw_chart <- function(bds_data  = NULL,
   period <- convert_str_age(c(hi, lo))
 
   # there we go..
-  draw_plot(ind, cc, curve_interpolation, quiet = TRUE,
-            dnr = dnr, )
+  draw_plot(individual = ind,
+            chartcode = cc,
+            curve_interpolation = curve_interpolation,
+            quiet = TRUE,
+            dnr = dnr,
+            period = period,
+            nmatch = nmatch)
 }

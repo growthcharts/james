@@ -10,7 +10,9 @@
 draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
   "data", "chartcode"), chartcode = NULL, chartgrp = NULL,
   agegrp = NULL, sex = NULL, etn = NULL, ga = NULL, side = "hgt",
-  curve_interpolation = TRUE, ...)
+  curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
+  "lollypop.preterm", "lollypop.term", "pops"), lo = NULL, hi = NULL,
+  nmatch = NULL, ...)
 
 draw_chart_bds(txt = NULL, chartcode = NULL,
   curve_interpolation = TRUE, ...)
@@ -58,6 +60,19 @@ provides the 0-4 chart with weight for age (design E).}
 
 \item{curve_interpolation}{A logical indicating whether curve
 interpolation shoud be applied.}
+
+\item{dnr}{A string with the name of the donor data
+(currently available are \code{smocc}, \code{terneuzen},
+\code{lollypop.preterm} or \code{lollypop.term})}
+
+\item{lo}{Value of the left visit coded as string, e.g. \code{"4w"}
+or \code{"7.5m"}}
+
+\item{hi}{Value of the right visit coded as string, e.g. \code{"4w"}
+or \code{"7.5m"}}
+
+\item{nmatch}{Integer. Number of matches needed. When
+\code{nmatch == 0L} no matches are sought.}
 
 \item{\dots}{For \code{draw_chart_bds}, additional parameter passed
 down to \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and

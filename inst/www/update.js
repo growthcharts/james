@@ -13,6 +13,7 @@ function update() {
   var dnr = document.getElementById("donordata").value;
   var lo = $("#visitslider").data().from;
   var hi = $("#visitslider").data().to;
+  var nmatch = Number($("#matchslider").data().from);
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
@@ -133,7 +134,11 @@ function update() {
       ga       : ga,
       side     : msr,
       curve_interpolation : cm,
-      quiet : false
+      quiet : false,
+      dnr      : dnr,
+      lo       : lo,
+      hi       : hi,
+      nmatch   : nmatch
     });
   rq2.fail(function() {
     alert("Server error: " + rq2.responseText);
