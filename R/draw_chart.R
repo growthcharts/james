@@ -38,8 +38,15 @@ draw_chart <- function(bds_data  = NULL,
                        etn       = NULL,
                        ga        = NULL,
                        side      = "hgt",
-                       curve_interpolation = TRUE, ...) {
+                       curve_interpolation = TRUE,
+                       dnr       =  c("smocc", "terneuzen", "lollypop.preterm",
+                                      "lollypop.term", "pops"),
+                       lo        = NULL,
+                       hi        = NULL,
+                       nmatch    = NULL,
+                       ...) {
   selector <- match.arg(selector)
+  dnr <- match.arg(dnr)
 
   # create or load object `ind`
   if (length(ind_loc) == 0L) {
@@ -62,6 +69,10 @@ draw_chart <- function(bds_data  = NULL,
                "data" = select_chart(ind = ind)$chartcode,
                "chartcode" = chartcode)
 
+  # convert hi and lo into period vector
+  period <- convert_str_age(c(hi, lo))
+
   # there we go..
-  draw_plot(ind, cc, curve_interpolation, quiet = TRUE)
+  draw_plot(ind, cc, curve_interpolation, quiet = TRUE,
+            dnr = dnr, )
 }
