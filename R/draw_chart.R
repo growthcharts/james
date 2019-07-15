@@ -88,5 +88,10 @@ draw_chart <- function(bds_data  = NULL,
             quiet = TRUE,
             dnr = dnr,
             period = period,
-            nmatch = nmatch)
+            nmatch = nmatch,
+            exact_sex = exact_sex,
+            exact_ga = exact_ga,
+            break_ties = break_ties,
+            show_realized = show_realized,
+            show_future = show_future)
 }
