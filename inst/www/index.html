@@ -116,6 +116,7 @@
                 <div class="form-group" id="matchgroup">
                   <label class="control-label" for="matchgroup">Matches</label>
                   <input type="text" class="js-range-slider" name="" value=""
+                  onFinish = "update()"
                   data-type="single" data-grid="true" id="matchslider" />
                 </div>
                 <br>
@@ -123,7 +124,7 @@
                   <div class="form-group" id="donordatagroup">
                     <label for="donordatagroup">Donor data</label>
                     <div>
-                      <select class="form-control" id="donordata">
+                      <select class="form-control" id="donordata" onchange = "update()">
                         <option value="smocc" selected>SMOCK 0-2j (1933)</option>
                         <option value="lollypop.term">Pinkeltje at 0-4j (619)</option>
                         <option value="lollypop.preterm">Pinkeltje pt 0-4j (1670)</option>
@@ -137,7 +138,40 @@
                   <label class="control-label" for="visitgroup">Bezoek</label>
                   <input type="text" class="js-range-slider" name="" value=""
                   data-type="double" data-grid="true" data-min-interval="1"
+                  onFinish = "update()"
                   data-drag-interval="true" data-skin="flat" id="visitslider" />
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="exact_sex" type="checkbox" checked="checked" onchange="update()"/>
+                      <span>Zelfde geslacht</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="exact_ga" type="checkbox" onchange="update()"/>
+                      <span>Zelfde zwangerschapsduur</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="show_future" type="checkbox" onchange="update()"/>
+                      <span>Kijk in toekomst</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="show_realized" type="checkbox" onchange="update()"/>
+                      <span>Gerealiseerde groei</span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
