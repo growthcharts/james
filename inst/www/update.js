@@ -14,6 +14,10 @@ function update() {
   var lo = $("#visitslider").data().from;
   var hi = $("#visitslider").data().to;
   var nmatch = Number($("#matchslider").data().from);
+  var exact_sex = document.querySelector('input[name="exact_sex"]:checked').value;
+  var exact_ga = document.querySelector('input[name="exact_ga"]:checked').value;
+  var show_future = document.querySelector('input[name="show_future"]:checked').value;
+  var show_realized = document.querySelector('input[name="show_realized"]:checked').value;
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
@@ -138,7 +142,11 @@ function update() {
       dnr      : dnr,
       lo       : lo,
       hi       : hi,
-      nmatch   : nmatch
+      nmatch   : nmatch,
+      exact_sex: exact_sex,
+      exact_ga : exact_ga,
+      show_future : show_future,
+      show_realized : show_realized
     });
   rq2.fail(function() {
     alert("Server error: " + rq2.responseText);

@@ -12,7 +12,8 @@ draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
   agegrp = NULL, sex = NULL, etn = NULL, ga = NULL, side = "hgt",
   curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
   "lollypop.preterm", "lollypop.term", "pops"), lo = NULL, hi = NULL,
-  nmatch = NULL, ...)
+  nmatch = NULL, exact_sex = TRUE, exact_ga = FALSE,
+  break_ties = TRUE, show_realized = FALSE, show_future = FALSE, ...)
 
 draw_chart_bds(txt = NULL, chartcode = NULL,
   curve_interpolation = TRUE, ...)
@@ -73,6 +74,21 @@ or \code{"7.5m"}}
 
 \item{nmatch}{Integer. Number of matches needed. When
 \code{nmatch == 0L} no matches are sought.}
+
+\item{exact_sex}{A logical indicating whether sex should be
+matched exactly}
+
+\item{exact_ga}{A logical indicating whether gestational age
+should be matched exactly}
+
+\item{break_ties}{A logical indicating whether ties should broken
+randomly. The default (\code{TRUE}) breaks ties randomly.}
+
+\item{show_realized}{A logical indicating whether the realized
+growth of the target child should be drawn}
+
+\item{show_future}{A logical indicating whether the predicted
+growth of the target child should be drawn}
 
 \item{\dots}{For \code{draw_chart_bds}, additional parameter passed
 down to \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and

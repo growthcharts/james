@@ -48,6 +48,11 @@ draw_chart <- function(bds_data  = NULL,
                        lo        = NULL,
                        hi        = NULL,
                        nmatch    = NULL,
+                       exact_sex = TRUE,
+                       exact_ga = FALSE,
+                       break_ties = TRUE,
+                       show_realized = FALSE,
+                       show_future = FALSE,
                        ...) {
   selector <- match.arg(selector)
   dnr <- match.arg(dnr)
