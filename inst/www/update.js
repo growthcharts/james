@@ -14,10 +14,10 @@ function update() {
   var lo = $("#visitslider").data().from;
   var hi = $("#visitslider").data().to;
   var nmatch = Number($("#matchslider").data().from);
-  var exact_sex = document.querySelector('input[name="exact_sex"]:checked').value;
-  var exact_ga = document.querySelector('input[name="exact_ga"]:checked').value;
-  var show_future = document.querySelector('input[name="show_future"]:checked').value;
-  var show_realized = document.querySelector('input[name="show_realized"]:checked').value;
+  var exact_sex = document.getElementById("exact_sex").checked;
+  var exact_ga = document.getElementById("exact_ga").checked;
+  var show_future = document.getElementById("show_future").checked;
+  var show_realized = document.getElementById("show_realized").checked;
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');

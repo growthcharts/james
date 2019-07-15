@@ -10,7 +10,7 @@ const slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m",
 var chartcode = "NJAH";
 
 // Set donordata entry
-document.getElementById("donordata").value = "lollypop.preterm";
+document.getElementById("donordata").value = "smocc";
 
 // Fire up sliders
 $("#matchslider").ionRangeSlider({values: slider_values[["matches"]]});
