@@ -5,8 +5,8 @@
 \title{Constructs and plots the A4 growth chart}
 \usage{
 draw_plot(individual, chartcode, curve_interpolation = TRUE,
-  quiet = TRUE, dnr = NULL, period = numeric(0), nmatch = 0L,
-  user_model = 2L, exact_sex = TRUE, exact_ga = FALSE,
+  quiet = TRUE, con = NULL, dnr = NULL, period = numeric(0),
+  nmatch = 0L, user_model = 2L, exact_sex = TRUE, exact_ga = FALSE,
   break_ties = TRUE, show_realized = FALSE, show_future = FALSE,
   clip = TRUE)
 }
@@ -21,6 +21,9 @@ interpolation shoud be applied.}
 
 \item{quiet}{Logical indicating whether chart code should be
 written to standard output. Default is \code{quiet = TRUE}.}
+
+\item{con}{A connection on which the donor data reside. The
+default (\code{NULL}) reads from \code{donordata} package.}
 
 \item{dnr}{A string with the name of the donor data
 (currently available are \code{smocc}, \code{terneuzen},
