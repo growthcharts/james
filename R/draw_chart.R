@@ -60,7 +60,7 @@ draw_chart <- function(bds_data  = NULL,
   # create or load object `ind`
   if (length(ind_loc) == 0L) {
     if (length(bds_data) == 0L) ind <- NULL
-    else ind <- convert_bds_ind(bds_data)
+    else ind <- convert_bds_individual(bds_data)
   }
   else {
     con <- curl(paste0(ind_loc, "R/.val/rda"))

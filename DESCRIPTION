@@ -20,10 +20,8 @@ Imports:
     chartcatalog,
     chartplotter,
     curl,
-    jsonlite,
-    lubridate,
     methods,
-    minihealth
+    minihealth (>= 0.40.0)
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
