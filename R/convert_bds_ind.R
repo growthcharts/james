@@ -19,4 +19,3 @@
 convert_bds_ind <- function(txt = NULL, ...) {
   minihealth::convert_bds_individual(txt = txt, ...)
 }
-
