@@ -79,7 +79,7 @@ draw_chart <- function(bds_data  = NULL,
                "chartcode" = chartcode)
 
   # convert hi and lo into period vector
-  period <- convert_str_age(c(hi, lo))
+  period <- convert_str_age(c(lo, hi))
 
   # there we go..
   draw_plot(individual = ind,
