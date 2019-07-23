@@ -5,6 +5,7 @@ const user_ind = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 const slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m"], "0_4":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","36m","45m"], "0_19": ["0w","3m","6m","12m","24m","5y","9y","10y","11y","14y","19y"], "0_29": ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","48m","6y","10y","18y","29y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]};
+var slider_list = "0_2";
 
 // define fallback chartcode
 var chartcode = "NJAH";
@@ -14,7 +15,7 @@ document.getElementById("donordata").value = "smocc";
 
 // Fire up sliders
 $("#matchslider").ionRangeSlider({values: slider_values[["matches"]]});
-$("#visitslider").ionRangeSlider({values: slider_values[["0_4"]]});
+$("#visitslider").ionRangeSlider({values: slider_values[[slider_list]]});
 
 
 // updating logic: use derive, unless there are data and unless

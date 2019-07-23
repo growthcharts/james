@@ -19,6 +19,9 @@ function update() {
   var show_future = document.getElementById("show_future").checked;
   var show_realized = document.getElementById("show_realized").checked;
 
+  var hi_str = slider_values[[slider_list]][hi];
+  var lo_str = slider_values[[slider_list]][lo];
+
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
@@ -140,8 +143,8 @@ function update() {
       curve_interpolation : cm,
       quiet : false,
       dnr      : dnr,
-      lo       : lo,
-      hi       : hi,
+      lo       : lo_str,
+      hi       : hi_str,
       nmatch   : nmatch,
       exact_sex: exact_sex,
       exact_ga : exact_ga,
@@ -230,7 +233,6 @@ function initialize_chart_controls() {
 
     // Determine donor data
     var dnr;
-    var brk;
     switch(grp) {
       case "nl2010":
       case "who":
@@ -238,20 +240,20 @@ function initialize_chart_controls() {
         switch(agegrp) {
           case "0-15m":
             dnr = "smocc";
-            brk = "0_2";
+            slider_list = "0_2";
             break;
           case "0-4y":
             dnr = "lollypop.term";
-            brk = "0_4";
+            slider_list = "0_4";
             break;
           case "1-21y":
           case "0-21y":
             dnr = "terneuzen";
-            brk = "0_29";
+            slider_list = "0_29";
             break;
           default:
             dnr = "smocc";
-            brk = "0_2";
+            slider_list = "0_2";
             break;
         }
         break;
@@ -260,29 +262,29 @@ function initialize_chart_controls() {
           case "0-15m":
           case "0-4y":
             dnr = "lollypop.preterm";
-            brk = "0_4";
+            slider_list = "0_4";
             break;
           case "1-21y":
           case "0-21y":
             dnr = "terneuzen";
-            brk = "0_29";
+            slider_list = "0_29";
             break;
           default:
             dnr = "lollypop.preterm";
-            brk = "0_4";
+            slider_list = "0_4";
             break;
         }
         break;
       default:
         dnr = "smocc";
-        brk = "0_2";
+        slider_list = "0_2";
     }
 
     // Set donordata entry
     document.getElementById("donordata").value = dnr;
 
     // Set visit slider
-    $("#visitslider").ionRangeSlider({values: slider_values[[brk]]});
+    $("#visitslider").ionRangeSlider({values: slider_values[[slider_list]]});
 
     // set UI controls and chart
     update();
