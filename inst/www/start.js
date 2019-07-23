@@ -15,7 +15,17 @@ document.getElementById("donordata").value = "smocc";
 
 // Fire up sliders
 $("#matchslider").ionRangeSlider({values: slider_values[["matches"]]});
-$("#visitslider").ionRangeSlider({values: slider_values[[slider_list]]});
+$("#visitslider").ionRangeSlider({
+  type: "double",
+  skin: "flat",
+  grid_snap: true,
+  min_interval: 1,
+  drag_interval: true,
+  values: slider_values[[slider_list]],
+  onFinish: function (data) {
+            update();
+        }
+});
 
 
 // updating logic: use derive, unless there are data and unless
