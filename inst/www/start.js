@@ -14,7 +14,15 @@ var chartcode = "NJAH";
 document.getElementById("donordata").value = "smocc";
 
 // Fire up sliders
-$("#matchslider").ionRangeSlider({values: slider_values[["matches"]]});
+$("#matchslider").ionRangeSlider({
+  type: "single",
+  skin: "flat",
+  grid_snap: true,
+  values: slider_values[["matches"]],
+  onFinish: function (data) {
+            update();
+  }
+});
 $("#visitslider").ionRangeSlider({
   type: "double",
   skin: "flat",
@@ -24,7 +32,7 @@ $("#visitslider").ionRangeSlider({
   values: slider_values[[slider_list]],
   onFinish: function (data) {
             update();
-        }
+  }
 });
 
 
