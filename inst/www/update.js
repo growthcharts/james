@@ -13,7 +13,7 @@ function update() {
   var dnr = document.getElementById("donordata").value;
   var lo = $("#visitslider").data().from;
   var hi = $("#visitslider").data().to;
-  var nmatch = Number($("#matchslider").data().from);
+  var match = Number($("#matchslider").data().from);
   var exact_sex = document.getElementById("exact_sex").checked;
   var exact_ga = document.getElementById("exact_ga").checked;
   var show_future = document.getElementById("show_future").checked;
@@ -21,6 +21,7 @@ function update() {
 
   var hi_str = slider_values[[slider_list]][hi];
   var lo_str = slider_values[[slider_list]][lo];
+  var nmatch = Number(slider_values[["matches"]][match]);
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
