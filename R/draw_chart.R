@@ -50,7 +50,7 @@ draw_chart <- function(bds_data  = NULL,
                        nmatch    = NULL,
                        exact_sex = TRUE,
                        exact_ga = FALSE,
-                       break_ties = TRUE,
+                       break_ties = FALSE,
                        show_realized = FALSE,
                        show_future = FALSE,
                        ...) {
