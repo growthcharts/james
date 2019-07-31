@@ -336,8 +336,8 @@ if(!window.jQuery) {
         var img_url = Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function() {
           plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
-          $("#navcontainer").css("height", plotdiv_height + 15);
-          $("#plotcontainer").css("height", plotdiv_height + 15);
+          // $("#navcontainer").css("height", plotdiv_height + 15);
+          // $("#plotcontainer").css("height", plotdiv_height + 15);
           $("#plotdiv").css("width", plotdiv_width);
           $("#plotdiv").css("height", plotdiv_height);
         };
