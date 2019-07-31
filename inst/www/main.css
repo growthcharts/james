@@ -1,12 +1,11 @@
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {
-  height: 800px;
+.row {
+  height: 1400px;
 }
 
-/* Set gray background color and 100% height */
+/* gray background color for navigation */
 .sidenav {
   background-color: #F3F3F3;
-  height: 100%;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -15,13 +14,11 @@
     height: auto;
     padding: 15px;
   }
-  .row.content {height: auto;}
 }
 
-/* Set gray background color and 100% height */
+/* gray background color for graph area */
 .graph {
   background-color: #F7F7F7;
-  height: 100%;
 }
 
 /* TNO blue */

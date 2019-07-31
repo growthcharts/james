@@ -1,13 +1,17 @@
 // start.js
+
+// user arguments
 const urlParams = new URLSearchParams(window.location.search);
 const user_bds = urlParams.get('bds');
 const user_ind = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
+
+// internal constants
 const slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m"], "0_4":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","36m","45m"], "0_19": ["0w","3m","6m","12m","24m","5y","9y","10y","11y","14y","19y"], "0_29": ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","48m","6y","10y","18y","29y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]};
-var slider_list = "0_2";
 
-// define fallback chartcode
+// starting defaults
+var slider_list = "0_2";
 var chartcode = "NJAH";
 
 // Set donordata entry
@@ -34,7 +38,6 @@ $("#visitslider").ionRangeSlider({
             update();
   }
 });
-
 
 // updating logic: use derive, unless there are data and unless
 // chartcode is directly specified
