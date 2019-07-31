@@ -100,9 +100,10 @@ else update();
 
 function initialize_chart_controls() {
   // function executes at initialization, if there are child data
-  // convert_ind_chartcodelist: load individual data (R),
-  // calculate chartcode (R) and decompose chartcode (R)
-  var rq1 = ocpu.rpc("convert_ind_chartcodelist", {
+  // convert_ind_chartadvice() obtains useful statistics from
+  // the uploaded individual data (R) from user_ind and
+  // from user_chartcode
+  var rq1 = ocpu.rpc("convert_ind_chartadvice", {
     ind_loc: user_ind,
     chartcode: user_chartcode,
     selector: selector
