@@ -83,9 +83,6 @@ for(var i = 0, max = radios.length; i < max; i++) {
   };
 }
 
-var ga = document.getElementById('ga');
-ga.addEventListener('change', update, false);
-
 var radios = document.forms.etnicity.elements.etnicity;
   for(var i = 0, max = radios.length; i < max; i++) {
     radios[i].onclick = function() {
