@@ -30,5 +30,6 @@ convert_ind_chartcodelist <- function(ind_loc,
 
   chartcodelist <- parse_chartcode(cc)
   chartcodelist$chartcode <- cc
+  chartcodelist$agerange <- get_range(ind = ind)
   chartcodelist
 }
