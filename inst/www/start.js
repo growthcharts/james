@@ -229,7 +229,7 @@ function initialize_chart_controls() {
     // Determine dnr and slider_list depending on age range
     if (selector == "data") {
       var agerange = output.agerange;
-      alert ("agerange: " + agerange[1] + " :: " + agerange[2]);
+      alert ("agerange: " + agerange[0] + " :: " + agerange[1]);
       dnr = "smocc";
     }
 
