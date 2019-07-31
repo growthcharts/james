@@ -53,19 +53,25 @@ h3 {
   border-style: none none solid none;
 }
 
-/* form group label to bold*/
-/* .form-group label{font-weight: bold;} */
-
 /* set color for ionrangeslider to color-succes */
-.irs--flat .irs-handle>i:first-child {
+.irs--round .irs-handle>i:first-child {
     background-color: #18BC9C;
 }
-.irs--flat .irs-bar {
+.irs--round .irs-bar {
     background-color: #18BC9C;
 }
-.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
+.irs--round .irs-handle { /* fill handle */
+    background-color: #18BC9C;
+    border:4px solid #18BC9C;
+    border-radius:18px;
+    width:18px;
+    height:18px;
+    top: 28px;
+}
+
+.irs--round .irs-from, .irs--round .irs-to, .irs--round .irs-single {
     background-color: #18BC9C;
 }
-.irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before {
+.irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before {
     border-top-color: #18BC9C;
 }

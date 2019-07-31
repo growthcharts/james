@@ -20,7 +20,7 @@ document.getElementById("donordata").value = "smocc";
 // Fire up sliders
 $("#weekslider").ionRangeSlider({
   type: "single",
-  skin: "flat",
+  skin: "round",
   grid_snap: true,
   min: 25,
   max: 36,
@@ -32,7 +32,7 @@ $("#weekslider").ionRangeSlider({
 });
 $("#matchslider").ionRangeSlider({
   type: "single",
-  skin: "flat",
+  skin: "round",
   grid_snap: true,
   values: slider_values[["matches"]],
   onFinish: function (data) {
@@ -41,7 +41,7 @@ $("#matchslider").ionRangeSlider({
 });
 $("#visitslider").ionRangeSlider({
   type: "double",
-  skin: "flat",
+  skin: "round",
   grid_snap: true,
   min_interval: 1,
   drag_interval: true,
