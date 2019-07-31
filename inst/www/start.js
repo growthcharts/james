@@ -18,6 +18,18 @@ var chartcode = "NJAH";
 document.getElementById("donordata").value = "smocc";
 
 // Fire up sliders
+$("#weekslider").ionRangeSlider({
+  type: "single",
+  skin: "flat",
+  grid_snap: true,
+  min: 25,
+  max: 36,
+  from: 36,
+  step: 1,
+  onFinish: function (data) {
+            update();
+  }
+});
 $("#matchslider").ionRangeSlider({
   type: "single",
   skin: "flat",

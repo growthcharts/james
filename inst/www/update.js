@@ -6,7 +6,7 @@ function update() {
   var chartgrp = document.getElementById("chartgrp").value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
   var population = document.querySelector('input[name="etnicity"]:checked').value;
-  var ga = document.getElementById("ga").value;
+  var ga = Number($("#weekslider").data().from);
   var sex = document.querySelector('input[name="sex"]:checked').value;
   var msr = document.querySelector('input[name="msr"]:checked').value;
   var cm = document.getElementById("interpolation").checked;
@@ -216,7 +216,9 @@ function initialize_chart_controls() {
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
     if (week && weeknum >= 25 && weeknum <= 36)
-      document.getElementById("ga").value = week;
+      $("#weekslider").data("ionRangeSlider").update({
+        from: week
+      });
 
     // set etnicity
     switch(pop) {
