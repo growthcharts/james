@@ -54,9 +54,7 @@ h3 {
 }
 
 /* form group label to bold*/
-.form-group label{
-    font-weight: bold;
-}
+/* .form-group label{font-weight: bold;} */
 
 /* set color for ionrangeslider to color-succes */
 .irs--flat .irs-handle>i:first-child {
