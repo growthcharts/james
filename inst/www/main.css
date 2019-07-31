@@ -53,6 +53,12 @@ h3 {
   border-style: none none solid none;
 }
 
+/* form group label to bold*/
+.form-group label{
+    font-weight: bold;
+    font-size: 36px;
+}
+
 /* set color for ionrangeslider to color-succes */
 .irs--flat .irs-handle>i:first-child {
     background-color: #18BC9C;
