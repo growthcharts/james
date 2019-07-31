@@ -13,7 +13,8 @@ draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
   curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
   "lollypop.preterm", "lollypop.term", "pops"), lo = NULL, hi = NULL,
   nmatch = NULL, exact_sex = TRUE, exact_ga = FALSE,
-  break_ties = TRUE, show_realized = FALSE, show_future = FALSE, ...)
+  break_ties = FALSE, show_realized = FALSE, show_future = FALSE,
+  ...)
 
 draw_chart_bds(txt = NULL, chartcode = NULL,
   curve_interpolation = TRUE, ...)

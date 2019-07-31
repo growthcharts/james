@@ -23,7 +23,7 @@ interpolation shoud be applied.}
 written to standard output. Default is \code{quiet = TRUE}.}
 
 \item{con}{A connection on which the donor data reside. The
-default (\code{NULL}) reads from \code{donordata} package.}
+default (\code{NULL}) reads from \code{donorloader} package.}
 
 \item{dnr}{A string with the name of the donor data
 (currently available are \code{smocc}, \code{terneuzen},
