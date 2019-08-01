@@ -147,7 +147,8 @@ function initialize_chart_controls() {
     // Set donordata and visit slider
     var dnr = String(output.dnr);
     document.getElementById("donordata").value = dnr;
-    var values = slider_values[[String(output.slider_list)]];
+    slider_list = String(output.slider_list);
+    var values = slider_values[[slider_list]];
     var from = values.indexOf(String(output.period[0]));
     var to   = values.indexOf(String(output.period[1]));
     var slider_instance = $("#visitslider").data("ionRangeSlider");
