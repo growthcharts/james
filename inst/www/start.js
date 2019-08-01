@@ -149,7 +149,8 @@ function initialize_chart_controls() {
     var values = slider_values[[String(output.slider_list)]];
     var from = values.indexOf(String(output.period[0]));
     var to   = values.indexOf(String(output.period[1]));
-    $("#visitslider").ionRangeSlider({
+    var slider_instance = $("#visitslider").data("ionRangeSlider");
+    slider_instance.update({
       values: values,
       from: from,
       to: to});
