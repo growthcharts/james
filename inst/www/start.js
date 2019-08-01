@@ -157,7 +157,7 @@ function initialize_chart_controls() {
       to: to});
 
     // set exact-ga default for preterms
-    if (dnr == "lollypop.preterm") document.getElementById("exact_sex").checked = true;
+    if (dnr == "lollypop.preterm") document.getElementById("exact_ga").checked = true;
 
     // set UI controls and chart
     update();
