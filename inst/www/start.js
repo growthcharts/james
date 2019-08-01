@@ -145,7 +145,8 @@ function initialize_chart_controls() {
     document.forms.sex[String(output.sex)].checked=true;
 
     // Set donordata and visit slider
-    document.getElementById("donordata").value = String(output.dnr);
+    var dnr = String(output.dnr);
+    document.getElementById("donordata").value = dnr;
     var values = slider_values[[String(output.slider_list)]];
     var from = values.indexOf(String(output.period[0]));
     var to   = values.indexOf(String(output.period[1]));
