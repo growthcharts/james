@@ -82,7 +82,9 @@ initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
       dnr <- "lollypop.preterm"
       if (last_age > 4.0) dnr = "terneuzen"
     }
+    dnr
   }
+  "smocc"
 }
 
 initialize_slider_list <- function(dnr) {
