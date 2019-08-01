@@ -170,3 +170,26 @@ function initialize_chart_controls() {
     alert("Server error: " + rq1.responseText);
   });
 }
+
+function update_donordata() {
+  // update slider values and graph if user changes dnr
+  var dnr = document.getElementById("donordata").value;
+  switch (dnr){
+    case "smocc":
+      slider_list = "0-2";
+      break;
+    case "lollypop.preterm":
+    case "lollypop.term":
+      slider_list = "0-4";
+      break;
+    case "terneuzen":
+      slider_list = "0-29";
+      break;
+    default:
+      slider_list = "0-2";
+  }
+  var values = slider_values[[slider_list]];
+  $("#visitslider").data("ionRangeSlider").update({
+      values: values});
+  update();
+}
