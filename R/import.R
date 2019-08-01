@@ -1,5 +1,6 @@
 #' @importFrom chartbox        list_charts
-#' @importFrom chartcatalog    create_chartcode parse_chartcode
+#' @importFrom chartcatalog    create_chartcode get_breakpoints
+#'                             parse_chartcode
 #' @importFrom chartplotter    process_chart
 #' @importFrom curl            curl
 #' @importFrom methods         new slot

@@ -21,7 +21,7 @@ function update() {
 
   var hi_str = slider_values[[slider_list]][hi];
   var lo_str = slider_values[[slider_list]][lo];
-  var nmatch = String(slider_values[["matches"]][match]);
+  var nmatch = slider_values[["matches"]][match];
 
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');

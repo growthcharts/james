@@ -44,7 +44,7 @@ draw_chart <- function(bds_data  = NULL,
                        side      = "hgt",
                        curve_interpolation = TRUE,
                        dnr       =  c("smocc", "terneuzen", "lollypop.preterm",
-                                      "lollypop.term", "pops"),
+                                      "lollypop.term"),
                        lo        = NULL,
                        hi        = NULL,
                        nmatch    = NULL,
@@ -79,6 +79,7 @@ draw_chart <- function(bds_data  = NULL,
                "chartcode" = chartcode)
 
   # convert hi and lo into period vector
+  nmatch <- as.integer(nmatch)
   period <- convert_str_age(c(lo, hi))
 
   # there we go..
@@ -88,7 +89,7 @@ draw_chart <- function(bds_data  = NULL,
             quiet = TRUE,
             dnr = dnr,
             period = period,
-            nmatch = as.integer(nmatch),
+            nmatch = nmatch,
             exact_sex = exact_sex,
             exact_ga = exact_ga,
             break_ties = break_ties,

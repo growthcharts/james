@@ -34,6 +34,7 @@ $("#matchslider").ionRangeSlider({
   type: "single",
   skin: "round",
   grid_snap: true,
+  from: 0,
   values: slider_values[["matches"]],
   onFinish: function (data) {
             update();
@@ -115,44 +116,10 @@ function initialize_chart_controls() {
        return;
     }
 
-    // set chartgrp UI element
-    var grp;
-    var pop = String(output.population).toLowerCase();
-    switch(pop) {
-      case "nl":
-      case "tu":
-      case "ma":
-      case "hs":
-        grp = "nl2010";
-        break;
-      case "pt":
-        grp = "preterm";
-        break;
-      case "whoblue":
-      case "whopink":
-        grp = "who";
-        break;
-      default:
-        grp = "";
-    }
-    document.getElementById("chartgrp").value = grp;
-
-    // set agegrp UI
-    var agegrp;
-    var design = String(output.design);
-    switch(design) {
-      case "A": agegrp = "0-15m"; break;
-      case "B": case "E": agegrp = "0-4y"; break;
-      case "C": agegrp = "1-21y"; break;
-      case "D": agegrp = "0-21y"; break;
-      default: agegrp = "";
-    }
-    document.forms.agegrp[agegrp].checked=true;
-
-    // set msr UI
-    var side = String(output.side);
-    if (side === "-hdc") side = "back";
-    document.forms.msr[side].checked=true;
+    // set UI elements according to return vector
+    document.getElementById("chartgrp").value = String(output.chartgrp);
+    document.forms.agegrp[String(output.agegrp)].checked=true;
+    document.forms.msr[String(output.side)].checked=true;
 
     // set week slider
     var week = String(output.week);
@@ -163,82 +130,19 @@ function initialize_chart_controls() {
       });
 
     // set etnicity
-    switch(pop) {
-      case "nl":
-      case "tu":
-      case "ma":
-      case "hs":
-        document.forms.etnicity[pop].checked=true;
-        break;
-      default:
-    }
+    var pop = String(output.population).toLowerCase();
+    document.forms.etnicity[pop].checked=true;
 
     //set sex UI element
     document.forms.sex[String(output.sex)].checked=true;
 
-    var dnr;
-    // Determine dnr and slider_list depending on chartcode
-    if (selector == "chartcode") {
-      switch(grp) {
-        case "nl2010":
-        case "who":
-        case "":
-          switch(agegrp) {
-            case "0-15m":
-              dnr = "smocc";
-              slider_list = "0_2";
-              break;
-            case "0-4y":
-              dnr = "lollypop.term";
-              slider_list = "0_4";
-              break;
-            case "1-21y":
-            case "0-21y":
-              dnr = "terneuzen";
-              slider_list = "0_29";
-              break;
-            default:
-              dnr = "smocc";
-              slider_list = "0_2";
-              break;
-          }
-          break;
-        case "preterm":
-          switch(agegrp) {
-            case "0-15m":
-            case "0-4y":
-              dnr = "lollypop.preterm";
-              slider_list = "0_4";
-              break;
-            case "1-21y":
-            case "0-21y":
-              dnr = "terneuzen";
-              slider_list = "0_29";
-              break;
-            default:
-              dnr = "lollypop.preterm";
-              slider_list = "0_4";
-              break;
-          }
-          break;
-        default:
-          dnr = "smocc";
-          slider_list = "0_2";
-      }
-    }  /* end dnr/slider given chartcode */
-
-    // Determine dnr and slider_list depending on age range
-    if (selector == "data") {
-      var agerange = output.agerange;
-      alert ("agerange: " + agerange[0] + " :: " + agerange[1]);
-      dnr = "smocc";
-    }
-
-    // Set donordata entry
-    document.getElementById("donordata").value = dnr;
-
-    // Set visit slider
-    $("#visitslider").ionRangeSlider({values: slider_values[[slider_list]]});
+    // Set donordata and visit slider
+    document.getElementById("donordata").value = String(output.dnr);
+    $("#visitslider").ionRangeSlider({
+      values: slider_values[[String(output.slider_list)]],
+      from: String(output.period[0]),
+      to: String(output.period[1])
+    });
 
     // set UI controls and chart
     update();
