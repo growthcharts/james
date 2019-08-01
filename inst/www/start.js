@@ -176,17 +176,17 @@ function update_donordata() {
   var dnr = document.getElementById("donordata").value;
   switch (dnr){
     case "smocc":
-      slider_list = "0-2";
+      slider_list = "0_2";
       break;
     case "lollypop.preterm":
     case "lollypop.term":
-      slider_list = "0-4";
+      slider_list = "0_4";
       break;
     case "terneuzen":
-      slider_list = "0-29";
+      slider_list = "0_29";
       break;
     default:
-      slider_list = "0-2";
+      slider_list = "0_2";
   }
   var values = slider_values[[slider_list]];
   var slider_instance = $("#visitslider").data("ionRangeSlider");
