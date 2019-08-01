@@ -189,7 +189,9 @@ function update_donordata() {
       slider_list = "0-2";
   }
   var values = slider_values[[slider_list]];
-  $("#visitslider").data("ionRangeSlider").update({
+  var slider_instance = $("#visitslider").data("ionRangeSlider");
+  slider_instance.update({
       values: values});
+
   update();
 }
