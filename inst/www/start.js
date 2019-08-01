@@ -131,7 +131,15 @@ function initialize_chart_controls() {
 
     // set etnicity
     var pop = String(output.population).toLowerCase();
-    document.forms.etnicity[pop].checked=true;
+    switch(pop) {
+	      case "nl":
+	      case "tu":
+	      case "ma":
+	      case "hs":
+	        document.forms.etnicity[pop].checked=true;
+	        break;
+	      default:
+	    }
 
     //set sex UI element
     document.forms.sex[String(output.sex)].checked=true;
