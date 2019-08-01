@@ -146,11 +146,13 @@ function initialize_chart_controls() {
 
     // Set donordata and visit slider
     document.getElementById("donordata").value = String(output.dnr);
-    $("#visitslider").ionRangeSlider({values: slider_values[[String(output.slider_list)]]});
-    $("#visitslider").data().update({
-      from: String(output.period[0]),
-      to: String(output.period[1])
-    });
+    var values = slider_values[[String(output.slider_list)]];
+    var from = values.indexOf(String(output.period[0]));
+    var to   = values.indexOf(String(output.period[1]));
+    $("#visitslider").ionRangeSlider({
+      values: values,
+      from: from,
+      to: to});
 
     // set UI controls and chart
     update();
