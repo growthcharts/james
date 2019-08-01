@@ -4,6 +4,7 @@ initializer <- function(selector, individual, chartcode) {
   parsed   <- parse_chartcode(chartcode)
   choices  <- parsed
 
+  choices$chartcode <- chartcode
   choices$chartgrp <- initialize_chartgrp(parsed)
   choices$agegrp   <- initialize_agegrp(parsed)
   choices$side     <- initialize_side(parsed)

@@ -43,6 +43,7 @@ A list with the following elements
    may also have \code{"english"}.}
    \item{\code{week}}{A scalar indicating the gestational age at birth.
    Only used if \code{population == "PT"}.}
+   \item{\code{chartcode}}{A string indicating the chart code.}
    \item{\code{chartgrp}}{A string indicating the chart group, either \code{"nl2010"},
    \code{"preterm"} or \code{"who"}.}
    \item{\code{agegrp}}{A string indicating the age group, either \code{"0-15m"},
