@@ -50,8 +50,6 @@ initialize_side <- function(parsed) {
 }
 
 initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
-  if (!is.individual(individual)) return("smocc")
-
   # Determine dnr on chartcode if user initialized chartcode
   if (selector == "chartcode")
     return(switch(EXPR = chartgrp,
@@ -77,13 +75,15 @@ initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
   if (selector == "data") {
     last_age <- get_range(individual)[2L]
     dnr <- "smocc"
-    if (chartgrp %in% c("nl2010", "who")) {
-      if (last_age > 2.0) dnr = "lollypop.term"
-      if (last_age > 4.0) dnr = "terneuzen"
-    }
-    if (chartgrp %in% "preterm") {
-      dnr <- "lollypop.preterm"
-      if (last_age > 4.0) dnr = "terneuzen"
+    if (!is.na(last_age)) {
+      if (chartgrp %in% c("nl2010", "who")) {
+        if (last_age > 2.0) dnr = "lollypop.term"
+        if (last_age > 4.0) dnr = "terneuzen"
+      }
+      if (chartgrp %in% "preterm") {
+        dnr <- "lollypop.preterm"
+        if (last_age > 4.0) dnr = "terneuzen"
+      }
     }
   }
   dnr
