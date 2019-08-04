@@ -1,5 +1,5 @@
 initializer <- function(selector, individual, chartcode) {
-  if (is.null(chartcode) | !is.individual(individual)) return(NULL)
+  if (is.null(chartcode)) return(NULL)
 
   parsed   <- parse_chartcode(chartcode)
   choices  <- parsed
@@ -50,6 +50,8 @@ initialize_side <- function(parsed) {
 }
 
 initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
+  if (!is.individual(individual)) return("smocc")
+
   # Determine dnr on chartcode if user initialized chartcode
   if (selector == "chartcode")
     return(switch(EXPR = chartgrp,
