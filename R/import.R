@@ -5,6 +5,7 @@
 #' @importFrom curl            curl
 #' @importFrom methods         new slot
 #' @importFrom minihealth      get_range convert_bds_individual
+#'                             is.individual
 #' @importClassesFrom minihealth individual xyz bse
 NULL
 
