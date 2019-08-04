@@ -44,7 +44,6 @@ $("#visitslider").ionRangeSlider({
   type: "double",
   skin: "round",
   grid_snap: true,
-  min_interval: 1,
   drag_interval: true,
   values: slider_values[[slider_list]],
   onFinish: function (data) {
