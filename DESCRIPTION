@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: JAMES: Joint Anthropometric Measurement and Evaluation System
-Version: 0.6.0
+Version: 0.7.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -9,15 +9,15 @@ Description: This package contains the server-side functions for the
     API of the Joint Anthropometric Measurement and Evaluation 
     System (JAMES). JAMES deploys advanced analytic functionality 
     to analyze, monitor and predict individual child growth and 
-    devevelopment.
+    development.
 License: AGPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    chartbox (>= 0.13.0),
-    chartcatalog (>= 0.1.0),
+    chartbox (>= 1.0.0),
+    chartcatalog (>= 1.0.0),
     chartplotter (>= 0.5.0),
-    curl (>= 4.0),
+    curl,
     methods,
     minihealth (>= 0.45.0)
 Remotes: 
