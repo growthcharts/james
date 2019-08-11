@@ -1,6 +1,7 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-james
------
+
+## james
 
 The `james` package implements the **Joint Anthropometric Measurement
 and Evaluation System (JAMES)**, an **experimental** online resource for
@@ -12,8 +13,7 @@ for monitoring and evaluating childhood growth.
 This document explains how to set up communications with JAMES and
 provides some guidance in its use.
 
-Architecture
-------------
+## Architecture
 
 The growth charts in JAMES are programmed in `R`. JAMES makes these
 available through the [OpenCPU](https://www.opencpu.org) system for
@@ -22,8 +22,7 @@ easy integration of growth charts into any `HTTP` compliant client by
 means of OpenCPU’s [API](https://www.opencpu.org/api.html). JAMES is a
 RESTful webservice.
 
-Access
-------
+## Access
 
 JAMES is currently located at url `groeidiagrammen.nl`. The sections
 below use `curl` for illustration, but any `HTTP` client will work.
@@ -33,33 +32,31 @@ some random numbers by calling `stats::rnorm()`, in a terminal window as
 follows,
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
+curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
 
 [2.259, 0.0538, 1.0583, 0.8665, 0.8412]
 ```
 
-What JAMES can currently do
----------------------------
+## What JAMES can currently do
 
 JAMES can currently do four things:
 
 1.  provides access to 342 high-quality growth charts used by the Dutch
     youth health care;
 2.  can accept child data in BDS-format;
-3.  can create a personalized chart site with child’s data;
+3.  can create a personalised chart site with child’s data;
 4.  can create separate growth charts.
 
 I’ll explain each of these action in more detail below.
 
-Available growth charts
------------------------
+## Available growth charts
 
-Copy the [following url](http://groeidiagrammen.nl/ocpu/lib/james/www/)
+Copy the [following url](https://groeidiagrammen.nl/ocpu/lib/james/www/)
 into your browser to obtain an interactive overview of the available
 growth charts:
 
 ``` bash
-http://groeidiagrammen.nl/ocpu/lib/james/www/
+https://groeidiagrammen.nl/ocpu/lib/james/www/
 ```
 
 There are 342 different charts, each identified with a `chartcode`, a
@@ -68,13 +65,13 @@ in JAMES function can produce a tabular overview. Obtain its help file
 as
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/lib/james/man/list_charts/text
+curl https://groeidiagrammen.nl/ocpu/lib/james/man/list_charts/text
 ```
 
 The list of growth charts can be created by the following request:
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/lib/james/R/list_charts -d ""
+curl https://groeidiagrammen.nl/ocpu/lib/james/R/list_charts -d ""
 
 /ocpu/tmp/x045d183eddf2f4/R/.val
 /ocpu/tmp/x045d183eddf2f4/R/list_charts
@@ -89,7 +86,7 @@ which return a list of 8 urls created by `OpenCPU`. The table can be
 download by
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/tmp/x045d183eddf2f4/R/.val/print
+curl https://groeidiagrammen.nl/ocpu/tmp/x045d183eddf2f4/R/.val/print
 
     chartgrp chartcode population    sex design  side language week
 1     nl2010      HJAA         HS   male      A front    dutch
@@ -106,27 +103,27 @@ Note that the session key `x045d183eddf2f4` in the above example is
 specific to the call, and will be different for each session. Session
 keys and their url’s on the JAMES server will be removed after 24 hours.
 
-Posting BDS data to JAMES
--------------------------
+## Posting BDS data to JAMES
 
 ### Sending the child’s data as a JSON file
 
 Suppose that the child’s data are coded according to the specification
-[BDS JGZ
-3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
+[BDS
+JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
 and converted into `JSON` format. The JAMES server contains the
 following example:
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json
+curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json
 ```
 
 Save the file
-[client3.json](http://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json)
-on your local system by
+[client3.json](https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json)
+on your local system
+by
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O
+curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O
 ```
 
 which produces a file called `client3.json` in your work directory.
@@ -139,7 +136,7 @@ The following `curl` command re-uploads and converts the file
 `minihealth::individual`:
 
 ``` bash
-curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind
+curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind
 
 /ocpu/tmp/x06938035d05dac/R/.val
 /ocpu/tmp/x06938035d05dac/R/convert_bds_ind
@@ -154,7 +151,7 @@ curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/conve
 An print version of the result is stored in
 
 ``` r
-curl http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/R/.val/print
+curl https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/R/.val/print
 
 An object of class "individual"
 Slot "child":
@@ -340,16 +337,16 @@ var=$(jq '.' client3.json | jq -sR '.')
 echo $var
 ```
 
-Then paste into into the call to the OpenCPU server:
+Then paste into into the call to the OpenCPU
+server:
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind -d "txt=$var"
+curl https://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind -d "txt=$var"
 ```
 
 The results of the string- and file-methods are identical.
 
-Request a dedicated url to the chart site
------------------------------------------
+## Request a dedicated url to the chart site
 
 The child’s data can be plotted on any of the available charts using a
 *child chart site*. There are three ways to choose which chart is being
@@ -365,17 +362,16 @@ Options 1 and 2 determine the first chart that shown to the end user.
 
 The default chart picked by JAMES is currently hard-wired as the child’s
 height chart that contains the most recent measurements. If the child is
-a pre-term (gestational age &lt;= 36 weeks) and younger than 4 years,
-then JAMES chooses the appropriate preterm chart.
+a pre-term (gestational age \<= 36 weeks) and younger than 4 years, then
+JAMES chooses the appropriate preterm chart.
 
 The chart site with the default start can be started by combining the
-[uploaded data](http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/) and
-the main site at
-(<a href="http://groeidiagrammen.nl/ocpu/lib/james/www/" class="uri">http://groeidiagrammen.nl/ocpu/lib/james/www/</a>)
+[uploaded data](https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
+and the main site at (<https://groeidiagrammen.nl/ocpu/lib/james/www/>)
 as
 
 ``` bash
-curl "http://groeidiagrammen.nl/ocpu/lib/james/www/?ind=http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
+curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
 ```
 
 Pasting this url in your browser starts the site with the child’s data.
@@ -384,10 +380,11 @@ Pasting this url in your browser starts the site with the child’s data.
 
 Starting the site at a given growth chart is possible by specifying the
 `chartcode` parameters. For example, we may initialize the site at chart
-`PMAAN27` by
+`PMAAN27`
+by
 
 ``` bash
-curl "http://groeidiagrammen.nl/ocpu/lib/james/www/?ind=http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
+curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
 ```
 
 The site now starts with `PMAAN27` instead of `PMAHN27`. Any chart can
@@ -399,25 +396,25 @@ sensible given the child’s data.
 After the site is started the end user may change the chart on which the
 data are drawn by simply using the site controls.
 
-Requesting a single growth chart
---------------------------------
+## Requesting a single growth chart
 
 Requesting a single growth chart can be done through the main JAMES
 chart drawing function is `draw_chart()`.
 
 The `draw_chart()` function does not yet support the creation of single
 graphs. The `draw_chart_bds()` and `draw_chart_ind()` are temporary
-specialty functions that can do this. The functions are documented in
+specialty functions that can do this. The functions are documented
+    in
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
+curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 ```
 
     ##   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     ##                                  Dload  Upload   Total   Spent    Left  Speed
     ## 
       0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100  3080    0  3080    0     0  34212      0 --:--:-- --:--:-- --:--:-- 34606
+    100  4168    0  4168    0     0  16828      0 --:--:-- --:--:-- --:--:-- 16874
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart
@@ -441,7 +438,11 @@ curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ##      draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
     ##        "data", "chartcode"), chartcode = NULL, chartgrp = NULL,
     ##        agegrp = NULL, sex = NULL, etn = NULL, ga = NULL, side = "hgt",
-    ##        curve_interpolation = TRUE, ...)
+    ##        curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
+    ##        "lollypop.preterm", "lollypop.term"), lo = NULL, hi = NULL,
+    ##        nmatch = NULL, exact_sex = TRUE, exact_ga = FALSE,
+    ##        break_ties = FALSE, show_realized = FALSE, show_future = FALSE,
+    ##        ...)
     ##      
     ##      draw_chart_bds(txt = NULL, chartcode = NULL,
     ##        curve_interpolation = TRUE, ...)
@@ -485,6 +486,30 @@ curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## curve_interpolation: A logical indicating whether curve interpolation
     ##           shoud be applied.
     ## 
+    ##      dnr: A string with the name of the donor data (currently available
+    ##           are smocc, terneuzen, lollypop.preterm or lollypop.term)
+    ## 
+    ##       lo: Value of the left visit coded as string, e.g. "4w" or "7.5m"
+    ## 
+    ##       hi: Value of the right visit coded as string, e.g. "4w" or "7.5m"
+    ## 
+    ##   nmatch: Integer. Number of matches needed. When nmatch == 0L no
+    ##           matches are sought.
+    ## 
+    ## exact_sex: A logical indicating whether sex should be matched exactly
+    ## 
+    ## exact_ga: A logical indicating whether gestational age should be
+    ##           matched exactly
+    ## 
+    ## break_ties: A logical indicating whether ties should broken randomly.
+    ##           The default (TRUE) breaks ties randomly.
+    ## 
+    ## show_realized: A logical indicating whether the realized growth of the
+    ##           target child should be drawn
+    ## 
+    ## show_future: A logical indicating whether the predicted growth of the
+    ##           target child should be drawn
+    ## 
     ##      ...: For draw_chart_bds, additional parameter passed down to
     ##           fromJSON(txt, ...), new("xyz",... ) and new("bse",... ).
     ##           Useful parameters are models = "bsmodel" for setting the
@@ -497,11 +522,7 @@ curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ##      tbd
     ## 
-    ##      tbd
-    ## 
     ## Author(s):
-    ## 
-    ##      Stef van Buuren 2019
     ## 
     ##      Stef van Buuren 2019
     ## 
@@ -509,7 +530,7 @@ curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ##      individual, select_chart
     ## 
-    ##      individual, select_chart draw_plot
+    ##      individual, select_chart process_chart
     ## 
     ## Examples:
     ## 
@@ -517,10 +538,11 @@ curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ##      g <- draw_chart_bds(txt = fn)
     ## 
 
-Use `draw_chart_bds()` to draw chart directly from the BDS data file.
+Use `draw_chart_bds()` to draw chart directly from the BDS data
+file.
 
 ``` r
-curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/draw_chart_bds
+curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart_bds
 
 /ocpu/tmp/x0a862a7b6829a1/R/.val
 /ocpu/tmp/x0a862a7b6829a1/R/draw_chart_bds
@@ -532,24 +554,26 @@ curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/draw_
 /ocpu/tmp/x0a862a7b6829a1/files/DESCRIPTION
 ```
 
-Download the growth chart as
+Download the growth chart
+as
 
 ``` bash
-curl -o mychart.svg http://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
+curl -o mychart.svg https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
 ```
 
 or view it in the browser by paste the following into the url address
 field:
 
 ``` bash
-http://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
+https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
 ```
 
 If the data are already uploaded, we may use `draw_chart_ind()`. Suppose
-we want to create the A4 chart for the child. We can do so by
+we want to create the A4 chart for the child. We can do so
+by
 
 ``` bash
-curl http://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
+curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
 
 /ocpu/tmp/x029e4ee555a9e1/R/.val
 /ocpu/tmp/x029e4ee555a9e1/R/draw_chart_ind
@@ -563,10 +587,11 @@ curl http://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='http
 where we used the data previously stored from session `x06938035d05dac`.
 
 As before, we may browse the graph by pasting the following in the
-address field of the browser:
+address field of the
+browser:
 
 ``` bash
-http://groeidiagrammen.nl/ocpu/tmp/x029e4ee555a9e1/graphics/1/svg?width=8.27&height=11.69
+https://groeidiagrammen.nl/ocpu/tmp/x029e4ee555a9e1/graphics/1/svg?width=8.27&height=11.69
 ```
 
 or download it the the client’s system.
@@ -575,59 +600,57 @@ The functions `draw_chart_bds()` and `draw_chart_ind()` address special
 cases. When they are integrated in future versions of `draw_chart()`,
 both functions will be deprecated.
 
-A client in `R`
----------------
+## A client in `R`
 
 If `R` is your analysis environment, then you can use the `james.client`
 package to achieve the same result in an easier way. The functions
 `upload_bds()` and `request_chart()` in `james.client` have simple
 syntax, and automate the steps outlined above. See
-<a href="https://github.com/stefvanbuuren/james.client" class="uri">https://github.com/stefvanbuuren/james.client</a>
-for more detail.
+<https://github.com/stefvanbuuren/james.client> for more detail.
 
-Next steps
-----------
+## Next steps
 
 Still many things on the wish list:
 
--   transfer JAMES to url james.tno.nl
--   allow for more input formats
--   add https protocol
--   add functionality to test for Dutch guidelines for referral
--   add functionality to predict individual growth curves
--   extend functionality to include the *D*-score charts
+  - transfer JAMES to url james.tno.nl
+  - allow for more input formats
+  - add https protocol
+  - add functionality to test for Dutch guidelines for referral
+  - add functionality to predict individual growth curves
+  - extend functionality to include the \(D\)-score charts
 
-Known problems
---------------
+## Known problems
 
--   Older versions of Edge (before 44.11763.1.0) do not display charts
+  - Older versions of Edge (before 44.11763.1.0) do not display charts
 
-Resources
----------
+## Resources
 
--   [OpenCPU system](https://www.opencpu.org)
--   [OpenCPU API](https://www.opencpu.org/api.html)
--   <a href="https://www.w3schools.com/js/" class="uri">https://www.w3schools.com/js/</a>
--   <a href="https://www.tno.nl/groei" class="uri">https://www.tno.nl/groei</a>
-    and
-    <a href="https://www.tno.nl/growth" class="uri">https://www.tno.nl/growth</a>
--   <a href="https://github.com/stefvanbuuren/james" class="uri">https://github.com/stefvanbuuren/james</a>
--   <a href="https://github.com/stefvanbuuren/james.client" class="uri">https://github.com/stefvanbuuren/james.client</a>
--   <a href="https://github.com/stefvanbuuren/minihealth" class="uri">https://github.com/stefvanbuuren/minihealth</a>
--   <a href="https://github.com/stefvanbuuren/brokenstick" class="uri">https://github.com/stefvanbuuren/brokenstick</a>
+  - [OpenCPU system](https://www.opencpu.org)
+  - [OpenCPU API](https://www.opencpu.org/api.html)
+  - <https://www.w3schools.com/js/>
+  - <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
+  - <https://github.com/stefvanbuuren/james>
+  - <https://github.com/stefvanbuuren/james.client>
+  - <https://github.com/stefvanbuuren/minihealth>
+  - <https://github.com/stefvanbuuren/brokenstick>
 
-About
------
+## About
 
 **Work in progress**. Direct suggestions and inquiries to Stef van
-Buuren (stef.vanbuuren at tno.nl),
-<a href="https://stefvanbuuren.name" class="uri">https://stefvanbuuren.name</a>,
-<a href="https://github.com/stefvanbuuren" class="uri">https://github.com/stefvanbuuren</a>.
+Buuren (stef.vanbuuren at tno.nl), <https://stefvanbuuren.name>,
+<https://github.com/stefvanbuuren>.
 
-Literature
-----------
+## Literature
+
+<div id="refs" class="references">
+
+<div id="ref-talma2010">
 
 Talma, H., Y. Schonbeck, B. Bakker, R.A. Hirasing, and S. van Buuren.
 2010. *Groeidiagrammen 2010: Handleiding Bij Het Meten En Wegen van
 Kinderen En Het Invullen van Groeidiagrammen*. Leiden: TNO Kwaliteit van
 Leven.
+
+</div>
+
+</div>

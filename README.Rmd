@@ -1,10 +1,7 @@
 ---
-output:
-  md_document:
-    variant: markdown_github
+output: github_document
 bibliography: [README.bib]
 ---
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
@@ -43,7 +40,7 @@ In order to check whether the JAMES server is running, try generating some rando
 numbers by calling `stats::rnorm()`, in a terminal window as follows,
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
+curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
 
 [2.259, 0.0538, 1.0583, 0.8665, 0.8412]
 ```
@@ -54,17 +51,17 @@ JAMES can currently do four things:
 
 1. provides access to 342 high-quality growth charts used by the Dutch youth health care;
 2. can accept child data in BDS-format;
-3. can create a personalized chart site with child's data;
+3. can create a personalised chart site with child's data;
 4. can create separate growth charts.
 
 I'll explain each of these action in more detail below.
 
 ## Available growth charts 
 
-Copy the [following url](http://groeidiagrammen.nl/ocpu/lib/james/www/) into your browser to obtain an interactive overview of the available growth charts:
+Copy the [following url](https://groeidiagrammen.nl/ocpu/lib/james/www/) into your browser to obtain an interactive overview of the available growth charts:
 
 ```{bash}
-http://groeidiagrammen.nl/ocpu/lib/james/www/
+https://groeidiagrammen.nl/ocpu/lib/james/www/
 ```
 
 There are 342 different charts, each identified with a `chartcode`, 
@@ -72,13 +69,13 @@ a 4-7 character code identifying each design. The `list_charts()` function in
 JAMES function can produce a tabular overview. Obtain its help file as
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/lib/james/man/list_charts/text
+curl https://groeidiagrammen.nl/ocpu/lib/james/man/list_charts/text
 ```
 
 The list of growth charts can be created by the following request:
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/lib/james/R/list_charts -d ""
+curl https://groeidiagrammen.nl/ocpu/lib/james/R/list_charts -d ""
 
 /ocpu/tmp/x045d183eddf2f4/R/.val
 /ocpu/tmp/x045d183eddf2f4/R/list_charts
@@ -93,7 +90,7 @@ which return a list of 8 urls created by `OpenCPU`. The table can be
 download by
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/tmp/x045d183eddf2f4/R/.val/print
+curl https://groeidiagrammen.nl/ocpu/tmp/x045d183eddf2f4/R/.val/print
 
     chartgrp chartcode population    sex design  side language week
 1     nl2010      HJAA         HS   male      A front    dutch
@@ -120,15 +117,15 @@ and converted into `JSON` format. The JAMES server contains the
 following example:
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json
+curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json
 ```
 
 Save the file
-[client3.json](http://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json)
+[client3.json](https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json)
 on your local system by
 
 ```{bash eval=FALSE}
-curl http://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O
+curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O
 ```
 
 which produces a file called `client3.json` in your work directory. 
@@ -141,7 +138,7 @@ The following `curl` command re-uploads and converts the file
 `minihealth::individual`:
 
 ```{bash, eval = FALSE}
-curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind
+curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind
 
 /ocpu/tmp/x06938035d05dac/R/.val
 /ocpu/tmp/x06938035d05dac/R/convert_bds_ind
@@ -156,7 +153,7 @@ curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/conve
 An print version of the result is stored in 
 
 ```{r}
-curl http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/R/.val/print
+curl https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/R/.val/print
 
 An object of class "individual"
 Slot "child":
@@ -344,7 +341,7 @@ echo $var
 Then paste into into the call to the OpenCPU server: 
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind -d "txt=$var"
+curl https://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind -d "txt=$var"
 ```
 
 The results of the string- and file-methods are identical.
@@ -369,11 +366,11 @@ the child is a pre-term (gestational age <= 36 weeks) and younger than
 4 years, then JAMES chooses the appropriate preterm chart.
 
 The chart site with the default start can be started by combining the 
-[uploaded data](http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
-and the main site at (http://groeidiagrammen.nl/ocpu/lib/james/www/) 
+[uploaded data](https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
+and the main site at (https://groeidiagrammen.nl/ocpu/lib/james/www/) 
 as
 ```{bash}
-curl "http://groeidiagrammen.nl/ocpu/lib/james/www/?ind=http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
+curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
 ```
 
 Pasting this url in your browser starts the site with the child's data.
@@ -385,7 +382,7 @@ Starting the site at a given growth chart is possible by specifying the
 `PMAAN27` by 
 
 ```{bash}
-curl "http://groeidiagrammen.nl/ocpu/lib/james/www/?ind=http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
+curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
 ```
 
 The site now starts with `PMAAN27` instead of `PMAHN27`. Any chart can
@@ -408,13 +405,13 @@ specialty functions that can do this. The functions are documented
 in
 
 ```{bash eval=TRUE}
-curl http://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
+curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 ```
 
 Use `draw_chart_bds()` to draw chart directly from the BDS data file.
 
 ```{r}
-curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/draw_chart_bds
+curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart_bds
 
 /ocpu/tmp/x0a862a7b6829a1/R/.val
 /ocpu/tmp/x0a862a7b6829a1/R/draw_chart_bds
@@ -429,20 +426,20 @@ curl -F 'txt=@client3.json' http://groeidiagrammen.nl/ocpu/library/james/R/draw_
 Download the growth chart as
 
 ```{bash}
-curl -o mychart.svg http://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
+curl -o mychart.svg https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
 ```
 
 or view it in the browser by paste the following into the url address field:
 
 ```{bash}
-http://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
+https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
 ```
 
 If the data are already uploaded, we may use `draw_chart_ind()`. Suppose 
 we want to create the A4 chart for the child. We can do so by
 
 ```{bash}
-curl http://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='http://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
+curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
 
 /ocpu/tmp/x029e4ee555a9e1/R/.val
 /ocpu/tmp/x029e4ee555a9e1/R/draw_chart_ind
@@ -458,7 +455,7 @@ where we used the data previously stored from session `x06938035d05dac`.
 As before, we may browse the graph by pasting the following in the address field of the browser: 
 
 ```{bash}
-http://groeidiagrammen.nl/ocpu/tmp/x029e4ee555a9e1/graphics/1/svg?width=8.27&height=11.69
+https://groeidiagrammen.nl/ocpu/tmp/x029e4ee555a9e1/graphics/1/svg?width=8.27&height=11.69
 ```
 
 or download it the the client's system.

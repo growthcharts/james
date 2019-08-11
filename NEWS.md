@@ -1,4 +1,8 @@
 
+# james 0.7.0 
+
+* Added: Support for https
+
 # james 0.6.0 
 
 * Relocates plotting to new `chartplotter` package
