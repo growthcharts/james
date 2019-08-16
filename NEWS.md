@@ -1,3 +1,8 @@
+# james 0.8.0
+
+* Adds function `screen_curves()` for screening on JGZ guidelines. The function 
+also returns the site URL, so it acts as a one-stop-shop
+* Adds dependencies to `growthscreener`, `jamesclient` and `jsonlite`
 
 # james 0.7.0 
 

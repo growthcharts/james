@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: JAMES: Joint Anthropometric Measurement and Evaluation System
-Version: 0.7.0
+Version: 0.8.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -18,12 +18,17 @@ Imports:
     chartcatalog (>= 1.0.0),
     chartplotter (>= 0.5.0),
     curl,
+    growthscreener,
+    jamesclient,
+    jsonlite,
     methods,
     minihealth (>= 0.45.0)
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
     stefvanbuuren/chartplotter,
+    stefvanbuuren/growthscreener,
+    stefvanbuuren/jamesclient,
     stefvanbuuren/minihealth
 RoxygenNote: 6.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
