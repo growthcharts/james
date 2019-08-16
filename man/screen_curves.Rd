@@ -4,15 +4,16 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(bds_data = NULL, ind_loc = NULL)
+screen_curves(txt = NULL, location = NULL)
 }
 \arguments{
-\item{bds_data}{A JSON string, URL or file. Optional.}
+\item{txt}{a JSON string, URL or file}
 
-\item{ind_loc}{A url that points to the server location where the
-data from a previous request to \code{convert_bds_ind()} are
-stored. Optional. \code{ind_loc} takes priority over
-\code{bds_data}.}
+\item{location}{A url that points to the server location where the
+parsed data are stored. Optional. If specified, \code{location}
+takes priority over \code{txt}. \code{location} is typically
+the location of a previous \code{OpenCPU} call for uploading
+the data.}
 }
 \value{
 A JSON string
@@ -30,9 +31,9 @@ js <- readLines(fn, warn = FALSE)
 r1 <- jamesclient::upload_bds(js)
 location <- jamesclient::get_url(r1, "location")
 location
-screen_curves(ind_loc = location)
+screen_curves(location = location)
 
 # implicit upload (slower)
-screen_curves(bds_data = js)
+screen_curves(txt = js)
 }
 }
