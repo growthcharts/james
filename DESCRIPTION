@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: JAMES: Joint Anthropometric Measurement and Evaluation System
-Version: 0.8.0
+Version: 0.9.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -22,7 +22,7 @@ Imports:
     jamesclient,
     jsonlite,
     methods,
-    minihealth (>= 0.45.0)
+    minihealth (>= 0.48.0)
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
