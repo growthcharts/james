@@ -1,3 +1,7 @@
+# james 0.10.0
+
+* Set the `max.print` option to 100.000 entries in order to allow for printing the full chart list
+
 # james 0.8.0
 
 * Adds function `screen_curves()` for screening on JGZ guidelines. The function 
