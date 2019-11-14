@@ -55,7 +55,7 @@ provides the 0-4 chart with weight for age (design E).}
 \item{etn}{Either \code{'netherlands'}, \code{'turkish'},
 \code{'moroccan'} or \code{'hindustani'}}
 
-\item{ga}{Gestionational age (in completed weeks)}
+\item{ga}{Gestational age (in completed weeks)}
 
 \item{side}{Either \code{'front'}, \code{'back'}, \code{'-hdc'} or
 \code{'both'}}

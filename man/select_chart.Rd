@@ -24,7 +24,7 @@ provides the 0-4 chart with weight for age (design E).}
 \item{etn}{Either \code{'netherlands'}, \code{'turkish'},
 \code{'moroccan'} or \code{'hindustani'}}
 
-\item{ga}{Gestionational age (in completed weeks)}
+\item{ga}{Gestational age (in completed weeks)}
 
 \item{side}{Either \code{'front'}, \code{'back'}, \code{'-hdc'} or
 \code{'both'}}
@@ -39,7 +39,7 @@ and \code{ga}
 \description{
 This function controls the behavior for selecting a specific growth
 chart based on a combination of individual data and user settings.
-The default behavior select preterm chart if gestional age is lower
+The default behavior select preterm chart if gestational age is lower
 or equal to 36 weeks, and determines the age group by the
 maximum age found in the data.
 }
