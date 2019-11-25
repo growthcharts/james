@@ -4,7 +4,7 @@
 #' of class \linkS4class{individual}. The function automatically calculates
 #' standard deviation scores and broken stick conditional means per visit.
 #'
-#' This is function is a wrapper around \code{minhealth::convert_bds_individual()}.
+#' This is function is a wrapper around \code{minihealth::convert_bds_individual()}.
 #' @inheritParams minihealth::convert_bds_individual
 #' @return An object of class \linkS4class{individual}.
 #' @author Stef van Buuren 2019
@@ -17,5 +17,5 @@
 #' @keywords server
 #' @export
 convert_bds_ind <- function(txt = NULL, ...) {
-  minihealth::convert_bds_individual(txt = txt, ...)
+  convert_bds_individual(txt = txt, ...)
 }
