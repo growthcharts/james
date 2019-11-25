@@ -29,6 +29,6 @@ Remotes:
     stefvanbuuren/chartplotter,
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
-    stefvanbuuren/minihealth
+    stefvanbuuren/minihealth@stef
 RoxygenNote: 6.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
