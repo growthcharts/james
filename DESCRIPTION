@@ -22,7 +22,7 @@ Imports:
     jamesclient,
     jsonlite,
     methods,
-    minihealth (>= 0.48.0)
+    minihealth (>= 0.60.0)
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
