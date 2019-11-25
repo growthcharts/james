@@ -12,7 +12,7 @@
 #' @inheritParams chartplotter::process_chart
 #' @rdname draw_chart
 #' @examples
-#' fn <- file.path(path.package("james"), "testdata", "client3.json")
+#' fn <- system.file("testdata", "client3.json", package = "james")
 #' g <- draw_chart_bds(txt = fn)
 #' @keywords server
 #' @export

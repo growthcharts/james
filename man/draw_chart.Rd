@@ -116,7 +116,7 @@ a previous call, and plots the individual data on the requested
 growth chart.
 }
 \examples{
-fn <- file.path(path.package("james"), "testdata", "client3.json")
+fn <- system.file("testdata", "client3.json", package = "james")
 g <- draw_chart_bds(txt = fn)
 }
 \seealso{

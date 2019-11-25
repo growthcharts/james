@@ -27,7 +27,7 @@ standard deviation scores and broken stick conditional means per visit.
 This is function is a wrapper around \code{minhealth::convert_bds_individual()}.
 }
 \examples{
-fn <- file.path(path.package("james"), "testdata", "client3.json")
+fn <- system.file("testdata", "client3.json", package = "james")
 p <- convert_bds_ind(fn)
 }
 \seealso{

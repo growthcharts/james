@@ -10,7 +10,7 @@
 #' @examples
 #' \dontrun{
 #' # example json
-#' fn <- file.path(path.package("james"), "testdata", "client3.json")
+#' fn <- system.file("testdata", "client3.json", package = "james")
 #' js <- readLines(fn, warn = FALSE)
 #'
 #' # first upload, then screen

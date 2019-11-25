@@ -12,7 +12,7 @@
 #'          \code{\link[minihealth]{convert_bds_individual}}
 #'          \code{\link[jsonlite]{fromJSON}}
 #' @examples
-#' fn <- file.path(path.package("james"), "testdata", "client3.json")
+#' fn <- system.file("testdata", "client3.json", package = "james")
 #' p <- convert_bds_ind(fn)
 #' @keywords server
 #' @export
