@@ -107,7 +107,7 @@ keys and their url’s on the JAMES server will be removed after 24 hours.
 
 ### Sending the child’s data as a JSON file
 
-Suppose that the child’s data are coded according to the specification
+Suppose that the child data are coded according to the specification
 [BDS
 JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
 and converted into `JSON` format. The JAMES server contains the
@@ -414,7 +414,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ##                                  Dload  Upload   Total   Spent    Left  Speed
     ## 
       0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100  4168    0  4168    0     0  16828      0 --:--:-- --:--:-- --:--:-- 16874
+    100  4168    0  4168    0     0   9472      0 --:--:-- --:--:-- --:--:--  9472
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart

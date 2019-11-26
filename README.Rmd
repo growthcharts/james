@@ -111,7 +111,7 @@ hours.
 
 ### Sending the child's data as a JSON file
 
-Suppose that the child's data are coded according to the specification
+Suppose that the child data are coded according to the specification
 [BDS JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
 and converted into `JSON` format. The JAMES server contains the
 following example:
