@@ -414,7 +414,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ##                                  Dload  Upload   Total   Spent    Left  Speed
     ## 
       0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100  4168    0  4168    0     0   9472      0 --:--:-- --:--:-- --:--:--  9472
+    100  4168    0  4168    0     0  26213      0 --:--:-- --:--:-- --:--:-- 26213
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart
@@ -604,9 +604,9 @@ both functions will be deprecated.
 
 If `R` is your analysis environment, then you can use the `james.client`
 package to achieve the same result in an easier way. The functions
-`upload_bds()` and `request_chart()` in `james.client` have simple
-syntax, and automate the steps outlined above. See
-<https://github.com/stefvanbuuren/james.client> for more detail.
+`upload_bds()` and `request_chart()` in the `jamesclient` package have
+simple syntax, and automate the steps outlined above. See
+<https://github.com/stefvanbuuren/jamesclient> for more detail.
 
 ## Next steps
 
@@ -614,9 +614,10 @@ Still many things on the wish list:
 
   - transfer JAMES to url james.tno.nl
   - allow for more input formats
-  - add https protocol
-  - add functionality to test for Dutch guidelines for referral
-  - add functionality to predict individual growth curves
+  - add https protocol \[DONE\]
+  - add functionality to test for Dutch guidelines for referral \[DONE,
+    for length\]
+  - add functionality to predict individual growth curves \[DONE\]
   - extend functionality to include the \(D\)-score charts
 
 ## Known problems
