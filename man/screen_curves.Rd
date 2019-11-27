@@ -25,15 +25,14 @@ Screen growth curves according to JGZ guidelines
 \dontrun{
 # example json
 fn <- system.file("testdata", "client3.json", package = "james")
-js <- readLines(fn, warn = FALSE)
 
 # first upload, then screen
-r1 <- jamesclient::upload_bds(js)
+r1 <- jamesclient::upload_bds(fn)
 location <- jamesclient::get_url(r1, "location")
 location
 screen_curves(location = location)
 
-# implicit upload (slower)
-screen_curves(txt = js)
+# upload & screen
+screen_curves(fn)
 }
 }

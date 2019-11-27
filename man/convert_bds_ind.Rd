@@ -24,7 +24,7 @@ of class \linkS4class{individual}. The function automatically calculates
 standard deviation scores and broken stick conditional means per visit.
 }
 \details{
-This is function is a wrapper around \code{minhealth::convert_bds_individual()}.
+This is function is a wrapper around \code{minihealth::convert_bds_individual()}.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
