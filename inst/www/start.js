@@ -112,7 +112,7 @@ function initialize_chart_controls() {
 
     // return the session key (just for fun)
     $("#key").text(session.getKey());
-    alert("Key: " + $("#key").text());
+    // alert("Key: " + $("#key").text(session.getKey()));
 
     //retrieve the returned object async
     session.getObject(function(output){
