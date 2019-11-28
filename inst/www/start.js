@@ -207,11 +207,11 @@ function update_donordata() {
 }
 
 function showTextdiv() {
-  $("plotdiv").hide(500);
-  $("textdiv").show(500);
+  $("#plotdiv").hide(500);
+  $("#textdiv").show(500);
 }
 
 function showPlotdiv() {
-  $("plotdiv").show(500);
-  $("textdiv").hide(500);
+  $("#plotdiv").show(500);
+  $("#textdiv").hide(500);
 }
