@@ -29,7 +29,7 @@
 
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                <strong>Kaartkiezer</strong>
+                <strong onclick="showPlotdiv()">Kaartkiezer</strong>
               </a>
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -87,7 +87,6 @@
                 </form>
 
                 <p id="chartcode"></p>
-                <p id="key"></p>
                 <br>
 
                 <input type="checkbox" id="interpolation" checked='true' onchange="update()">
@@ -98,7 +97,7 @@
           <div class="card">
             <div class="card-header">
               <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-              <strong>Groeivoorspeller</strong>
+              <strong onclick="showPlotdiv()">Groeivoorspeller</strong>
             </a>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -170,7 +169,7 @@
           <div class="card">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseThree">
-                <strong>Toelichting</strong>
+                <strong onclick="showTextdiv()">Toelichting</strong>
               </a>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
@@ -192,6 +191,11 @@
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotdiv"></div>
+        <div id="textdiv" style="display: none;">
+          <p id="key"></p>
+          <p id="warnings"></p>
+          <p id="messages"></p>
+        </div>
       </div>
     </div>
   </div> <!-- end container-fluid -->

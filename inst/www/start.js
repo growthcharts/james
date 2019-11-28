@@ -110,9 +110,10 @@ function initialize_chart_controls() {
     selector: selector
   }, function(session) {
 
-    // return the session key (just for fun)
+    // return the session key
     $("#key").text(session.getKey());
-    // alert("Key: " + $("#key").text(session.getKey()));
+    $("#warnings").text(session.getWarnings());
+    $("#messages").text(session.getMessages());
 
     //retrieve the returned object async
     session.getObject(function(output){
@@ -203,4 +204,14 @@ function update_donordata() {
       values: values});
 
   update();
+}
+
+function showTextdiv() {
+  $("plotdiv").hide(500);
+  $("textdiv").show(500);
+}
+
+function showPlotdiv() {
+  $("plotdiv").show(500);
+  $("textdiv").hide(500);
 }
