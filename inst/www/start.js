@@ -112,10 +112,17 @@ function initialize_chart_controls() {
 
     // return the session key
     $("#key").text(session.getKey());
-    $("#warnings").text(session.getWarnings());
-    alert("warnings: " + session.getWarnings());
-    $("#messages").text(session.getMessages());
-    alert("messages: " + session.getMessages());
+
+    //retrieve session console, warnings and messages (async)
+    mysession.getConsole(function(outtxt){
+      $("#console").text(outtxt);
+    });
+    mysession.getWarnings(function(outtxt){
+      $("#warnings").text(outtxt);
+    });
+    mysession.getMessages(function(outtxt){
+      $("#messages").text(outtxt);
+    });
 
     //retrieve the returned object async
     session.getObject(function(output){
