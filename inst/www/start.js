@@ -104,11 +104,19 @@ function initialize_chart_controls() {
   // convert_ind_chartadvice() obtains useful statistics from
   // the uploaded individual data (R) from user_ind and
   // from user_chartcode
-  var rq1 = ocpu.rpc("convert_ind_chartadvice", {
+  var rq1 = ocpu.call("convert_ind_chartadvice", {
     ind_loc: user_ind,
     chartcode: user_chartcode,
     selector: selector
-  }, function(output) {
+  }, function(session) {
+
+    // return the session key (just for fun)
+    $("#key").text(session.getKey());
+    alert("Key: " + $("#key"));
+
+    //retrieve the returned object async
+    session.getObject(function(output){
+        //output is the object returned by the R function
 
     // alert user to invalid chartcode
     if (!output.chartcode) {
@@ -165,6 +173,7 @@ function initialize_chart_controls() {
 
     // for all subsequent calls, use derive
     selector = "derive";
+    });
 });
   rq1.fail(function() {
     alert("Server error: " + rq1.responseText);
