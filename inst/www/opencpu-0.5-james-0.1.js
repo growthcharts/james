@@ -86,6 +86,16 @@ if(!window.jQuery) {
       var url = this.getLoc() + "console/text";
       return $.get(url, success);
     };
+
+    this.getWarnings = function(success){
+      var url = this.getLoc() + "warnings/text";
+      return $.get(url, success);
+    };
+
+    this.getMessages = function(success){
+      var url = this.getLoc() + "messages/text";
+      return $.get(url, success);
+    };
   }
 
   //for POSTing raw code snippets
