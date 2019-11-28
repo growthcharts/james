@@ -114,13 +114,13 @@ function initialize_chart_controls() {
     $("#key").text(session.getKey());
 
     //retrieve session console, warnings and messages (async)
-    mysession.getConsole(function(outtxt){
+    session.getConsole(function(outtxt){
       $("#console").text(outtxt);
     });
-    mysession.getWarnings(function(outtxt){
+    session.getWarnings(function(outtxt){
       $("#warnings").text(outtxt);
     });
-    mysession.getMessages(function(outtxt){
+    session.getMessages(function(outtxt){
       $("#messages").text(outtxt);
     });
 
