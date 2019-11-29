@@ -117,8 +117,8 @@ function initialize_chart_controls() {
     session.getConsole(function(outtxt){
       $("#console").text(outtxt);
     });
-    session.getWarnings(function(outtxt){
-      $("#warnings").text(outtxt);
+    session.getWarnings(function(warnings){
+      $("#warnings").text(warnings);
     });
     session.getMessages(function(outtxt){
       $("#messages").text(outtxt);
