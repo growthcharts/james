@@ -151,6 +151,21 @@ function update() {
       exact_ga : exact_ga,
       show_future : show_future,
       show_realized : show_realized
+    }, function(session) {
+
+    // return the session key
+    $("#key").text(session.getKey());
+
+    //retrieve session console, warnings and messages (async)
+    session.getConsole(function(outtxt){
+      $("#console").text(outtxt);
+    });
+    session.getWarnings(function(warnings){
+      $("#warnings").text(warnings);
+    });
+    session.getMessages(function(outtxt){
+      $("#messages").text(outtxt);
+    });
     });
   rq2.fail(function() {
     alert("Server error: " + rq2.responseText);
