@@ -84,6 +84,15 @@ var radios = document.forms.sex.elements.sex;
   };
 }
 
+// if user_ind is specified, initialize error, warning and messages
+if (user_ind) {
+  var warn = user_ind + "/warnings/text";
+  var mess = user_ind + "/messages/text";
+  $("#key").text(user_ind);
+  $("#warnings").load(warn);
+  $("#messages").load(mess);
+}
+
 // upload data if bds is specified AND if ind is not specified
 if (user_bds && !user_ind) {
   var rq0 = ocpu.call("convert_bds_ind", {
