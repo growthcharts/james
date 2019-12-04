@@ -106,9 +106,6 @@ if (user_bds && !user_ind) {
       $("#warnings").text(warnings);});
     session.getMessages(function(messages){
       $("#messages").text(messages);});
-
-    // set global variable user_ind for further processing
-    user_ind = session.getLoc() + "R/.val";
   });
   rq0.fail(function() {
     alert("Server error: " + rq0.responseText);
