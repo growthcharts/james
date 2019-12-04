@@ -84,6 +84,28 @@ var radios = document.forms.sex.elements.sex;
   };
 }
 
+// upload data if bds is specified AND if ind is not specified
+if (user_bds && !user_ind) {
+  var rq0 = ocpu.call("convert_bds_ind", {
+    txt: user_bds
+  }, function(session) {
+    // update session key, update error, warning and messages fields
+    $("#key").text(session.getKey());
+    session.getConsole(function(outtxt){
+      $("#console").text(outtxt);});
+    session.getWarnings(function(warnings){
+      $("#warnings").text(warnings);});
+    session.getMessages(function(messages){
+      $("#messages").text(messages);});
+
+    // set global variable user_ind for further processing
+    user_ind = session.getLoc() + "R/.val";
+  });
+  rq0.fail(function() {
+    alert("Server error: " + rq0.responseText);
+  });
+}
+
 // updating logic: use derive, unless there are data and unless
 // chartcode is directly specified
 var selector  = "derive";
@@ -109,20 +131,6 @@ function initialize_chart_controls() {
     chartcode: user_chartcode,
     selector: selector
   }, function(session) {
-
-    // return the session key
-    $("#key").text(session.getKey());
-
-    //retrieve session console, warnings and messages (async)
-    session.getConsole(function(outtxt){
-      $("#console").text(outtxt);
-    });
-    session.getWarnings(function(warnings){
-      $("#warnings").text(warnings);
-    });
-    session.getMessages(function(outtxt){
-      $("#messages").text(outtxt);
-    });
 
     //retrieve the returned object async
     session.getObject(function(output){
