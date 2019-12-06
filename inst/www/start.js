@@ -84,7 +84,7 @@ var radios = document.forms.sex.elements.sex;
   };
 }
 
-// if user_ind is specified, initialize error, warning and messages
+// if user_ind is specified, report any warnings and messages
 if (user_ind) {
   var warn = user_ind + "/warnings/text";
   var mess = user_ind + "/messages/text";
@@ -100,12 +100,11 @@ if (user_bds && !user_ind) {
   }, function(session) {
     // update session key, update error, warning and messages fields
     $("#key").text(session.getKey());
-    session.getConsole(function(outtxt){
-      $("#console").text(outtxt);});
     session.getWarnings(function(warnings){
       $("#warnings").text(warnings);});
     session.getMessages(function(messages){
       $("#messages").text(messages);});
+    user_ind = session.getKey();
   });
   rq0.fail(function() {
     alert("Server error: " + rq0.responseText);
@@ -115,12 +114,12 @@ if (user_bds && !user_ind) {
 // updating logic: use derive, unless there are data and unless
 // chartcode is directly specified
 var selector  = "derive";
-if (user_bds || user_ind) selector = "data";
+if (user_ind) selector = "data";
 if (user_chartcode) selector = "chartcode";
 
 // if there are data or chartcode arguments specified by user:
 // determine chartcode, set chart controls, update visibility, draw chart
-if (user_bds || user_ind || user_chartcode) initialize_chart_controls();
+if (user_ind || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
