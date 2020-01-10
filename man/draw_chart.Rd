@@ -7,20 +7,38 @@
 \alias{draw_chart_ind}
 \title{Draw growth chart}
 \usage{
-draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
-  "data", "chartcode"), chartcode = NULL, chartgrp = NULL,
-  agegrp = NULL, sex = NULL, etn = NULL, ga = NULL, side = "hgt",
-  curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
-  "lollypop.preterm", "lollypop.term"), lo = NULL, hi = NULL,
-  nmatch = NULL, exact_sex = TRUE, exact_ga = FALSE,
-  break_ties = FALSE, show_realized = FALSE, show_future = FALSE,
-  ...)
+draw_chart(
+  bds_data = NULL,
+  ind_loc = NULL,
+  selector = c("derive", "data", "chartcode"),
+  chartcode = NULL,
+  chartgrp = NULL,
+  agegrp = NULL,
+  sex = NULL,
+  etn = NULL,
+  ga = NULL,
+  side = "hgt",
+  curve_interpolation = TRUE,
+  dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term"),
+  lo = NULL,
+  hi = NULL,
+  nmatch = NULL,
+  exact_sex = TRUE,
+  exact_ga = FALSE,
+  break_ties = FALSE,
+  show_realized = FALSE,
+  show_future = FALSE,
+  ...
+)
 
-draw_chart_bds(txt = NULL, chartcode = NULL,
-  curve_interpolation = TRUE, ...)
+draw_chart_bds(txt = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
 
-draw_chart_ind(ind_loc = NULL, chartcode = NULL,
-  curve_interpolation = TRUE, ...)
+draw_chart_ind(
+  ind_loc = NULL,
+  chartcode = NULL,
+  curve_interpolation = TRUE,
+  ...
+)
 }
 \arguments{
 \item{bds_data}{A JSON string, URL or file. Optional.}

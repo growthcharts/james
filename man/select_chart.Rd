@@ -4,9 +4,16 @@
 \alias{select_chart}
 \title{Selects the growth chart}
 \usage{
-select_chart(ind = NULL, chartgrp = NULL, agegrp = NULL,
-  sex = NULL, etn = NULL, ga = NULL, side = "hgt",
-  language = "dutch")
+select_chart(
+  ind = NULL,
+  chartgrp = NULL,
+  agegrp = NULL,
+  sex = NULL,
+  etn = NULL,
+  ga = NULL,
+  side = "hgt",
+  language = "dutch"
+)
 }
 \arguments{
 \item{ind}{An S4 object of class \code{individual} containing

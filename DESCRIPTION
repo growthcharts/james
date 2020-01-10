@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: JAMES: Joint Anthropometric Measurement and Evaluation System
-Version: 0.11.1
+Version: 0.11.2
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -30,5 +30,5 @@ Remotes:
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
     stefvanbuuren/minihealth
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 BugReports: https://github.com/stefvanbuuren/james/issues
