@@ -27,8 +27,11 @@ fn  <- system.file("extdata", "test", "http400.json", package = "jamestest")
 js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that("convert_bds_ind() on http400.json has messages",
-          expect_message(z <- convert_bds_ind(js)))
+          expect_silent(z <- convert_bds_ind(js)))
 test_that("screen_curves() on http400.json has messages",
-          expect_message(y <- screen_curves(js)))
+          expect_silent(y <- screen_curves(js,
+                                            host = "http://localhost:5656",
+                                            path = "ocpu/library/james/R/convert_bds_ind")))
 test_that("draw_chart() on http400.json has messages",
-          expect_message(v <- draw_chart(js)))
+          expect_silent(v <- draw_chart(js)))
+

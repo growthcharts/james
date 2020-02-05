@@ -4,7 +4,13 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(txt = NULL, location = NULL)
+screen_curves(
+  txt = NULL,
+  location = NULL,
+  host = "https://groeidiagrammen.nl",
+  path = "ocpu/library/james/R/convert_bds_ind",
+  query = NULL
+)
 }
 \arguments{
 \item{txt}{a JSON string, URL or file}
@@ -14,6 +20,14 @@ parsed data are stored. Optional. If specified, \code{location}
 takes priority over \code{txt}. \code{location} is typically
 the location of a previous \code{OpenCPU} call for uploading
 the data.}
+
+\item{host}{String with URL of the JAMES host machine. Defaults to
+\code{https://groeidiagrammen.nl}.}
+
+\item{path}{The end point of the request, typically an R function.
+The default is \code{path = "ocpu/library/james/R/convert_bds_ind"}}
+
+\item{query}{Passed down to \code{\link[httr]{modify_url}}.}
 }
 \value{
 A JSON string

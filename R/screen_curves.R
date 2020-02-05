@@ -1,6 +1,7 @@
 #' Screen growth curves according to JGZ guidelines
 #'
 #' @inheritParams jsonlite::fromJSON
+#' @inheritParams jamesclient::upload_bds
 #' @param location  A url that points to the server location where the
 #'   parsed data are stored. Optional. If specified, \code{location}
 #'   takes priority over \code{txt}. \code{location} is typically
@@ -22,11 +23,14 @@
 #' screen_curves(fn)
 #'}
 #' @export
-screen_curves <- function(txt = NULL, location = NULL) {
+screen_curves <- function(txt = NULL, location = NULL,
+                          host = "https://groeidiagrammen.nl",
+                          path = "ocpu/library/james/R/convert_bds_ind",
+                          query = NULL) {
 
   if (length(location) == 0L) {
     if (length(txt) > 0L) {
-      r1 <- upload_bds(txt)
+      r1 <- upload_bds(txt, host = host, path = path, query = query)
       location <- get_url(r1, "location")
     }
     else {
