@@ -1,5 +1,4 @@
-context("convert/screen/chart")
-library(httr)
+context("server-side functions")
 
 # client3.json
 fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
@@ -33,19 +32,3 @@ test_that("screen_curves() on http400.json has messages",
           expect_message(y <- screen_curves(js)))
 test_that("draw_chart() on http400.json has messages",
           expect_message(v <- draw_chart(js)))
-
-#host <- "https://groeidiagrammen.nl"
-#path <- "ocpu/library/james/R/convert_bds_ind"
-#host <- "http://localhost:5656"
-#path <- "ocpu/library/james/R/convert_bds_ind"
-# upload using function
-#url <- modify_url(url = host, path = path)
-#resp <- POST(url = url,
-#             body = list(txt = js),
-#             encode = "json",
-#             add_headers(Accept = "plain/text"))
-#browseURL(paste0(headers(resp)$location, "R/.val"))
-#browseURL(paste0(headers(resp)$location, "R/convert_bds_ind"))
-#browseURL(paste0(headers(resp)$location, "messages"))
-#test_that("file uploads to server",
-#          expect_equal(status_code(resp), 201))
