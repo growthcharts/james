@@ -21,7 +21,7 @@ growth chart is drawn. Method \code{"derive"} (default)
 calculates the chart from parameters \code{chartgrp},
 \code{agegrp}, \code{sex}, \code{etn}, \code{ga} and \code{side}
 parameters through the \code{select_chart()} function. Method
-\code{"ind"} calculates the chart from the individual data.
+\code{"data"} calculates the chart from the individual data.
 Method \code{"chartcode"} will return the chart specified by the
 \code{chartcode} parameter.}
 }

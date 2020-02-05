@@ -22,7 +22,7 @@ draw_chart(
   dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term"),
   lo = NULL,
   hi = NULL,
-  nmatch = NULL,
+  nmatch = 0L,
   exact_sex = TRUE,
   exact_ga = FALSE,
   break_ties = FALSE,
@@ -54,7 +54,7 @@ growth chart is drawn. Method \code{"derive"} (default)
 calculates the chart from parameters \code{chartgrp},
 \code{agegrp}, \code{sex}, \code{etn}, \code{ga} and \code{side}
 parameters through the \code{select_chart()} function. Method
-\code{"ind"} calculates the chart from the individual data.
+\code{"data"} calculates the chart from the individual data.
 Method \code{"chartcode"} will return the chart specified by the
 \code{chartcode} parameter.}
 
