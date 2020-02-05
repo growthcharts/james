@@ -41,8 +41,8 @@ screen_curves <- function(txt = NULL, location = NULL) {
   close(con)
   rm(".val")
 
-  res <- screen_curves_ind(ind)
   url <- paste0("https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=", location)
+  res <- screen_curves_ind(ind)
   ret <- list(UrlGroeicurven = unbox(url),
               Resultaten = res)
   toJSON(ret)
