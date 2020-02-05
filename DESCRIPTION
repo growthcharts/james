@@ -32,3 +32,6 @@ Remotes:
     stefvanbuuren/minihealth
 RoxygenNote: 7.0.2
 BugReports: https://github.com/stefvanbuuren/james/issues
+Suggests: 
+    httr,
+    testthat
