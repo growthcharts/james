@@ -17,5 +17,6 @@
 #' @keywords server
 #' @export
 convert_bds_ind <- function(txt = NULL, ...) {
-  convert_bds_individual(txt = txt, ...)
+  data_ind <<- convert_bds_individual(txt = txt, ...)
+  data_ind
 }
