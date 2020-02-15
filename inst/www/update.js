@@ -44,6 +44,7 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -53,6 +54,7 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -71,6 +73,7 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -80,6 +83,7 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -89,6 +93,7 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'none');
     sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -98,6 +103,7 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'none');
     sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
