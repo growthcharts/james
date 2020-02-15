@@ -334,8 +334,8 @@ if(!window.jQuery) {
           plotdiv_width = 927;
           plotdiv_height = 1311;
         } else {
-          svgwidth = 7;
-          svgheight = 7;
+          svgwidth = 16/2.54;
+          svgheight = 16/2.54;
           plotdiv_width = 785;
           plotdiv_height = 785;
         }
