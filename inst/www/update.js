@@ -38,16 +38,6 @@ function update() {
     sr('weekmenu', 'none');
     sr('etnicity', 'none');
   }
-  if (agegrp == '0-15m' & chartgrp == 'nl2010') {
-    sr('msr_hgt', 'block');
-    sr('msr_wgt', 'block');
-    sr('msr_wfh', 'none');
-    sr('msr_hdc', 'block');
-    sr('msr_bmi', 'none');
-    sr('msr_dsc', 'block');
-    sr('msr_front', 'block');
-    sr('msr_back', 'block');
-  }
   if (agegrp == '0-15m' & chartgrp == 'nl2010' & population == 'nl') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'block');
@@ -57,6 +47,26 @@ function update() {
     sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
+  }
+  if (agegrp == '0-15m' & chartgrp == 'nl2010' & population != 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_dsc', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '0-15m' & chartgrp == 'preterm' & population == 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_dsc', 'block');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
   }
   if (agegrp == '0-15m' & chartgrp == 'preterm' & population != 'nl') {
     sr('msr_hgt', 'block');
