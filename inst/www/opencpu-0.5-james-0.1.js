@@ -343,9 +343,9 @@ if(!window.jQuery) {
         // now plot it, prevent flicker
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
         var img_tag = new Image(plotdiv_width, plotdiv_height);
-        var img_url = Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight;
+        var img_url = Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function() {
-          plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svg?width=" + svgwidth + "&height=" + svgheight + ")");
+          plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight + ")");
           // $("#navcontainer").css("height", plotdiv_height + 15);
           // $("#plotcontainer").css("height", plotdiv_height + 15);
           $("#plotdiv").css("width", plotdiv_width);
