@@ -1,3 +1,7 @@
+# james 0.14.0
+
+* Uses the `svglite` shortcut in the javascript calls. This requires `opencpu 2.1.5.1001` and the `Arial` font to be installed on the server. 
+
 # james 0.10.0
 
 * Set the `max.print` option to 100.000 entries in order to allow for printing the full chart list
