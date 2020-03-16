@@ -18,11 +18,11 @@ Imports:
     chartcatalog (>= 1.2.0),
     chartplotter (>= 0.5.0),
     curl,
-    growthscreener (>= 1.2.0),
+    growthscreener (>= 1.4.0),
     jamesclient,
     jsonlite,
     methods,
-    minihealth (>= 0.64.0)
+    minihealth (>= 0.74.1)
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
