@@ -3,7 +3,7 @@ library(httr)
 
 # define testing host
 #host <- "https://groeidiagrammen.nl"
-#host <- "http://vps.stefvanbuuren.nl"
+#host <- "https://vps.stefvanbuuren.nl"
 host <- "http://localhost:5656"
 
 # client3.json
