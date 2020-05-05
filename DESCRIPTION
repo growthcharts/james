@@ -30,7 +30,7 @@ Remotes:
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
     stefvanbuuren/minihealth
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 BugReports: https://github.com/stefvanbuuren/james/issues
 Suggests: 
     httr,
