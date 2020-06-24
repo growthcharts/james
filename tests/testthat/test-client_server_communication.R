@@ -1,10 +1,14 @@
 context("client-server communication")
 library(httr)
 
+# hack to evade ssl verification error: certificate has expired
+# remove hack after server certificate is repaired
+# httr::set_config(config(ssl_verifypeer = 0L))
+
 # define testing host
-#host <- "https://groeidiagrammen.nl"
-#host <- "http://vps.stefvanbuuren.nl"
-host <- "http://localhost:5656"
+host <- "https://groeidiagrammen.nl"
+# host <- "https://vps.stefvanbuuren.nl"
+#host <- "http://localhost:5656"
 
 # client3.json
 fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
