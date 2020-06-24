@@ -423,7 +423,7 @@ curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw
 /ocpu/tmp/x0a862a7b6829a1/files/DESCRIPTION
 ```
 
-Download the growth chart as
+Download the growth chart as  
 
 ```{bash}
 curl -o mychart.svg https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg

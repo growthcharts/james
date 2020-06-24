@@ -1,3 +1,7 @@
+# james 0.15.0
+
+* Updated certificates in James and June and ensured that tests produced no errors
+
 # james 0.14.4
 
 * Uses fewer brokenstick knots for Terneuzen donordata

@@ -412,9 +412,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 
     ##   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     ##                                  Dload  Upload   Total   Spent    Left  Speed
-    ## 
-      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100  4168    0  4168    0     0  26213      0 --:--:-- --:--:-- --:--:-- 26213
+    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  16684      0 --:--:-- --:--:-- --:--:-- 16684
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart
@@ -435,20 +433,38 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ## Usage:
     ## 
-    ##      draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
-    ##        "data", "chartcode"), chartcode = NULL, chartgrp = NULL,
-    ##        agegrp = NULL, sex = NULL, etn = NULL, ga = NULL, side = "hgt",
-    ##        curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
-    ##        "lollypop.preterm", "lollypop.term"), lo = NULL, hi = NULL,
-    ##        nmatch = NULL, exact_sex = TRUE, exact_ga = FALSE,
-    ##        break_ties = FALSE, show_realized = FALSE, show_future = FALSE,
-    ##        ...)
+    ##      draw_chart(
+    ##        bds_data = NULL,
+    ##        ind_loc = NULL,
+    ##        selector = c("derive", "data", "chartcode"),
+    ##        chartcode = NULL,
+    ##        chartgrp = NULL,
+    ##        agegrp = NULL,
+    ##        sex = NULL,
+    ##        etn = NULL,
+    ##        ga = NULL,
+    ##        side = "hgt",
+    ##        curve_interpolation = TRUE,
+    ##        dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term"),
+    ##        lo = NULL,
+    ##        hi = NULL,
+    ##        nmatch = 0L,
+    ##        exact_sex = TRUE,
+    ##        exact_ga = FALSE,
+    ##        break_ties = FALSE,
+    ##        show_realized = FALSE,
+    ##        show_future = FALSE,
+    ##        ...
+    ##      )
     ##      
-    ##      draw_chart_bds(txt = NULL, chartcode = NULL,
-    ##        curve_interpolation = TRUE, ...)
+    ##      draw_chart_bds(txt = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
     ##      
-    ##      draw_chart_ind(ind_loc = NULL, chartcode = NULL,
-    ##        curve_interpolation = TRUE, ...)
+    ##      draw_chart_ind(
+    ##        ind_loc = NULL,
+    ##        chartcode = NULL,
+    ##        curve_interpolation = TRUE,
+    ##        ...
+    ##      )
     ##      
     ## Arguments:
     ## 
@@ -462,7 +478,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ##           indicates the method to decide which growth chart is drawn.
     ##           Method "derive" (default) calculates the chart from
     ##           parameters chartgrp, agegrp, sex, etn, ga and side parameters
-    ##           through the select_chart() function. Method "ind" calculates
+    ##           through the select_chart() function. Method "data" calculates
     ##           the chart from the individual data. Method "chartcode" will
     ##           return the chart specified by the chartcode parameter.
     ## 
@@ -479,7 +495,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ##      etn: Either 'netherlands', 'turkish', 'moroccan' or 'hindustani'
     ## 
-    ##       ga: Gestionational age (in completed weeks)
+    ##       ga: Gestational age (in completed weeks)
     ## 
     ##     side: Either 'front', 'back', '-hdc' or 'both'
     ## 
@@ -534,7 +550,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ## Examples:
     ## 
-    ##      fn <- file.path(path.package("james"), "testdata", "client3.json")
+    ##      fn <- system.file("testdata", "client3.json", package = "james")
     ##      g <- draw_chart_bds(txt = fn)
     ## 
 
