@@ -1,3 +1,7 @@
+# james 0.15.1 
+
+* Reduce printing to `.val` by `draw_chart()`
+
 # james 0.15.0
 
 * Updated certificates in James and June and ensured that tests produced no errors

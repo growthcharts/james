@@ -34,7 +34,7 @@ a RESTful webservice.
 
 JAMES is currently located at url `groeidiagrammen.nl`. The
 sections below use `curl` for illustration, but any `HTTP` client will
-work.
+work. 
 
 In order to check whether the JAMES server is running, try generating some random 
 numbers by calling `stats::rnorm()`, in a terminal window as follows,
