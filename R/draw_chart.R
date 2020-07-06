@@ -83,16 +83,16 @@ draw_chart <- function(bds_data  = NULL,
   period <- convert_str_age(c(lo, hi))
 
   # there we go..
-  draw_plot(individual = ind,
-            chartcode = cc,
-            curve_interpolation = curve_interpolation,
-            quiet = TRUE,
-            dnr = dnr,
-            period = period,
-            nmatch = nmatch,
-            exact_sex = exact_sex,
-            exact_ga = exact_ga,
-            break_ties = break_ties,
-            show_realized = show_realized,
-            show_future = show_future)
+  invisible(draw_plot(individual = ind,
+                      chartcode = cc,
+                      curve_interpolation = curve_interpolation,
+                      quiet = TRUE,
+                      dnr = dnr,
+                      period = period,
+                      nmatch = nmatch,
+                      exact_sex = exact_sex,
+                      exact_ga = exact_ga,
+                      break_ties = break_ties,
+                      show_realized = show_realized,
+                      show_future = show_future))
 }
