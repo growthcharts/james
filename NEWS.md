@@ -1,3 +1,15 @@
+# james 0.15.1 
+
+* Reduce printing to `.val` by `draw_chart()`
+
+# james 0.15.0
+
+* Updated certificates in James and June and ensured that tests produced no errors
+
+# james 0.14.4
+
+* Uses fewer brokenstick knots for Terneuzen donordata
+
 # james 0.14.0
 
 * Uses the `svglite` shortcut in the javascript calls. This requires `opencpu 2.1.5.1001` and the `Arial` font to be installed on the server. 

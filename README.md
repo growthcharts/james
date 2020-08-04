@@ -7,7 +7,7 @@ The `james` package implements the **Joint Anthropometric Measurement
 and Evaluation System (JAMES)**, an **experimental** online resource for
 creating growth charts.
 
-The webservice can be used by anyone interested in high-quality charts
+The web service can be used by anyone interested in high-quality charts
 for monitoring and evaluating childhood growth.
 
 This document explains how to set up communications with JAMES and
@@ -119,8 +119,7 @@ curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json
 
 Save the file
 [client3.json](https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json)
-on your local system
-by
+on your local system by
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O
@@ -337,8 +336,7 @@ var=$(jq '.' client3.json | jq -sR '.')
 echo $var
 ```
 
-Then paste into into the call to the OpenCPU
-server:
+Then paste into into the call to the OpenCPU server:
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/R/convert_bds_ind -d "txt=$var"
@@ -380,8 +378,7 @@ Pasting this url in your browser starts the site with the child’s data.
 
 Starting the site at a given growth chart is possible by specifying the
 `chartcode` parameters. For example, we may initialize the site at chart
-`PMAAN27`
-by
+`PMAAN27` by
 
 ``` bash
 curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
@@ -403,8 +400,7 @@ chart drawing function is `draw_chart()`.
 
 The `draw_chart()` function does not yet support the creation of single
 graphs. The `draw_chart_bds()` and `draw_chart_ind()` are temporary
-specialty functions that can do this. The functions are documented
-    in
+specialty functions that can do this. The functions are documented in
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
@@ -412,9 +408,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 
     ##   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     ##                                  Dload  Upload   Total   Spent    Left  Speed
-    ## 
-      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    100  4168    0  4168    0     0  26213      0 --:--:-- --:--:-- --:--:-- 26213
+    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  16000      0 --:--:-- --:--:-- --:--:-- 16000
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart
@@ -435,20 +429,38 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ## Usage:
     ## 
-    ##      draw_chart(bds_data = NULL, ind_loc = NULL, selector = c("derive",
-    ##        "data", "chartcode"), chartcode = NULL, chartgrp = NULL,
-    ##        agegrp = NULL, sex = NULL, etn = NULL, ga = NULL, side = "hgt",
-    ##        curve_interpolation = TRUE, dnr = c("smocc", "terneuzen",
-    ##        "lollypop.preterm", "lollypop.term"), lo = NULL, hi = NULL,
-    ##        nmatch = NULL, exact_sex = TRUE, exact_ga = FALSE,
-    ##        break_ties = FALSE, show_realized = FALSE, show_future = FALSE,
-    ##        ...)
+    ##      draw_chart(
+    ##        bds_data = NULL,
+    ##        ind_loc = NULL,
+    ##        selector = c("derive", "data", "chartcode"),
+    ##        chartcode = NULL,
+    ##        chartgrp = NULL,
+    ##        agegrp = NULL,
+    ##        sex = NULL,
+    ##        etn = NULL,
+    ##        ga = NULL,
+    ##        side = "hgt",
+    ##        curve_interpolation = TRUE,
+    ##        dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term"),
+    ##        lo = NULL,
+    ##        hi = NULL,
+    ##        nmatch = 0L,
+    ##        exact_sex = TRUE,
+    ##        exact_ga = FALSE,
+    ##        break_ties = FALSE,
+    ##        show_realized = FALSE,
+    ##        show_future = FALSE,
+    ##        ...
+    ##      )
     ##      
-    ##      draw_chart_bds(txt = NULL, chartcode = NULL,
-    ##        curve_interpolation = TRUE, ...)
+    ##      draw_chart_bds(txt = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
     ##      
-    ##      draw_chart_ind(ind_loc = NULL, chartcode = NULL,
-    ##        curve_interpolation = TRUE, ...)
+    ##      draw_chart_ind(
+    ##        ind_loc = NULL,
+    ##        chartcode = NULL,
+    ##        curve_interpolation = TRUE,
+    ##        ...
+    ##      )
     ##      
     ## Arguments:
     ## 
@@ -462,7 +474,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ##           indicates the method to decide which growth chart is drawn.
     ##           Method "derive" (default) calculates the chart from
     ##           parameters chartgrp, agegrp, sex, etn, ga and side parameters
-    ##           through the select_chart() function. Method "ind" calculates
+    ##           through the select_chart() function. Method "data" calculates
     ##           the chart from the individual data. Method "chartcode" will
     ##           return the chart specified by the chartcode parameter.
     ## 
@@ -479,7 +491,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ##      etn: Either 'netherlands', 'turkish', 'moroccan' or 'hindustani'
     ## 
-    ##       ga: Gestionational age (in completed weeks)
+    ##       ga: Gestational age (in completed weeks)
     ## 
     ##     side: Either 'front', 'back', '-hdc' or 'both'
     ## 
@@ -534,12 +546,11 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
     ## 
     ## Examples:
     ## 
-    ##      fn <- file.path(path.package("james"), "testdata", "client3.json")
+    ##      fn <- system.file("testdata", "client3.json", package = "james")
     ##      g <- draw_chart_bds(txt = fn)
     ## 
 
-Use `draw_chart_bds()` to draw chart directly from the BDS data
-file.
+Use `draw_chart_bds()` to draw chart directly from the BDS data file.
 
 ``` r
 curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart_bds
@@ -554,8 +565,7 @@ curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw
 /ocpu/tmp/x0a862a7b6829a1/files/DESCRIPTION
 ```
 
-Download the growth chart
-as
+Download the growth chart as
 
 ``` bash
 curl -o mychart.svg https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
@@ -569,8 +579,7 @@ https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
 ```
 
 If the data are already uploaded, we may use `draw_chart_ind()`. Suppose
-we want to create the A4 chart for the child. We can do so
-by
+we want to create the A4 chart for the child. We can do so by
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
@@ -587,8 +596,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='htt
 where we used the data previously stored from session `x06938035d05dac`.
 
 As before, we may browse the graph by pasting the following in the
-address field of the
-browser:
+address field of the browser:
 
 ``` bash
 https://groeidiagrammen.nl/ocpu/tmp/x029e4ee555a9e1/graphics/1/svg?width=8.27&height=11.69
@@ -647,7 +655,7 @@ Buuren (stef.vanbuuren at tno.nl), <https://stefvanbuuren.name>,
 
 <div id="ref-talma2010">
 
-Talma, H., Y. Schonbeck, B. Bakker, R.A. Hirasing, and S. van Buuren.
+Talma, H., Y. Schonbeck, B. Bakker, R. A. Hirasing, and S. van Buuren.
 2010. *Groeidiagrammen 2010: Handleiding Bij Het Meten En Wegen van
 Kinderen En Het Invullen van Groeidiagrammen*. Leiden: TNO Kwaliteit van
 Leven.

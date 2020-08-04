@@ -15,7 +15,7 @@ The `james` package implements the **Joint Anthropometric Measurement
 and Evaluation System (JAMES)**, an **experimental** online resource
 for creating growth charts.
 
-The webservice can be used by anyone interested in high-quality charts for
+The web service can be used by anyone interested in high-quality charts for
 monitoring and evaluating childhood growth.
 
 This document explains how to set up communications with JAMES and
@@ -34,7 +34,7 @@ a RESTful webservice.
 
 JAMES is currently located at url `groeidiagrammen.nl`. The
 sections below use `curl` for illustration, but any `HTTP` client will
-work.
+work. 
 
 In order to check whether the JAMES server is running, try generating some random 
 numbers by calling `stats::rnorm()`, in a terminal window as follows,
@@ -423,7 +423,7 @@ curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw
 /ocpu/tmp/x0a862a7b6829a1/files/DESCRIPTION
 ```
 
-Download the growth chart as
+Download the growth chart as  
 
 ```{bash}
 curl -o mychart.svg https://groeidiagrammen.nl/ocpu/tmp/x0a862a7b6829a1/graphics/1/svg
