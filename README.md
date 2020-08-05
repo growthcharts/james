@@ -4,7 +4,7 @@
 ## james
 
 The `james` package implements the **Joint Anthropometric Measurement
-and Evaluation System (JAMES)**, an **experimental** online resource for
+and Evaluation System (JAMES)**, an experimental online resource for
 creating growth charts.
 
 The web service can be used by anyone interested in high-quality charts
@@ -408,7 +408,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 
     ##   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     ##                                  Dload  Upload   Total   Spent    Left  Speed
-    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  16000      0 --:--:-- --:--:-- --:--:-- 16000
+    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  23178      0 --:--:-- --:--:-- --:--:-- 23178
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart

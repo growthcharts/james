@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ## james
 
 The `james` package implements the **Joint Anthropometric Measurement
-and Evaluation System (JAMES)**, an **experimental** online resource
+and Evaluation System (JAMES)**, an experimental online resource
 for creating growth charts.
 
 The web service can be used by anyone interested in high-quality charts for

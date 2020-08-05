@@ -1,3 +1,7 @@
+# james 0.16.0 
+
+* This version marges the `dscore` branch, so james now provide a `dscore` menu
+
 # james 0.15.1 
 
 * Reduce printing to `.val` by `draw_chart()`
