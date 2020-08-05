@@ -29,9 +29,11 @@ Remotes:
     stefvanbuuren/chartplotter,
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
+    stefvanbuuren/jamestest,
     stefvanbuuren/minihealth
 RoxygenNote: 7.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
 Suggests: 
     httr,
+    jamestest,
     testthat
