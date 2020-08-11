@@ -19,7 +19,7 @@ draw_chart(
   ga = NULL,
   side = "hgt",
   curve_interpolation = TRUE,
-  dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term"),
+  dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term", "pops"),
   lo = NULL,
   hi = NULL,
   nmatch = 0L,
