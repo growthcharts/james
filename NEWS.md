@@ -1,3 +1,9 @@
+# james 0.17.0 
+
+* Removes some hard paths in `screen_curves()`
+* Add server-sided `upload_txt()` for uploading data
+* Add server-sided `request_site()` for uploading data and url construction
+
 # james 0.16.0 
 
 * This version marges the `dscore` branch, so james now provide a `dscore` menu
