@@ -8,7 +8,7 @@ library(httr)
 # define testing host
 #host <- "https://groeidiagrammen.nl"
  host <- "https://vps.stefvanbuuren.nl"
-# host <- "http://localhost:5656"
+host <- "http://localhost"
 
 # client3.json
 fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
