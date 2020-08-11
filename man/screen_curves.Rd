@@ -7,7 +7,7 @@
 screen_curves(
   txt = NULL,
   location = NULL,
-  host = "https://groeidiagrammen.nl",
+  host = "http://localhost",
   path = "ocpu/library/james/R/convert_bds_ind",
   query = NULL
 )
@@ -39,9 +39,10 @@ Screen growth curves according to JGZ guidelines
 \dontrun{
 # example json
 fn <- system.file("testdata", "client3.json", package = "james")
+fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
 
 # first upload, then screen
-r1 <- jamesclient::upload_bds(fn)
+r1 <- upload_txt(fn)
 location <- jamesclient::get_url(r1, "location")
 location
 screen_curves(location = location)
