@@ -2,7 +2,7 @@
 #'
 #' Server side upload of a JSON file, string or URL with BDS data, checks the data,
 #' stores its contents as an object of class
-#' \code{\link[minihealth:individual-class]{individual}} on the server,
+#' \code{\link[minihealth:individual-class]{individual}} on host,
 #' and returns an object of class \code{\link[httr:response]{response}}
 #' that contains the results of the request.
 #' @inheritParams request_site
@@ -32,13 +32,17 @@
 #' change, so don't build applications based on this data structure. If you need
 #' components from the internal structure (e.g. Z-scores, brokenstick estimates) it
 #' is better to develop a dedicated API for obtaining these.
+#'
+#' @note Argument \code{schema} not yet implemented.
 #' @examples
 #' library(httr)
 #' fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 #' js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+#'
 #' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
-#' host <- "https://groeidiagrammen.nl"
-#' # host <- "http://localhost"
+#' surl <- "https://github.com/stefvanbuuren/minihealth/blob/master/inst/json/bds_schema_str.json"
+#' # host <- "https://groeidiagrammen.nl"
+#' host <- "http://localhost"
 #'
 #' # upload JSON file
 #' r1 <- upload_txt(fn, host)
@@ -54,7 +58,7 @@
 #' @seealso \code{\link[minihealth]{convert_bds_individual}},
 #' \code{\link{request_site}}
 #' @export
-upload_txt <- function(txt, host = "https://groeidiagrammen.nl") {
+upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) {
 
   url <- modify_url(url = host, path = "ocpu/library/james/R/convert_bds_ind")
   txt <- txt[[1L]]
@@ -64,7 +68,7 @@ upload_txt <- function(txt, host = "https://groeidiagrammen.nl") {
   if (file.exists(txt))
     # txt is a file name
     resp <- POST(url = url,
-                 body = list(txt = upload_file(txt)),
+                 body = list(txt = upload_file(txt), schema = schema),
                  encode = "multipart",
                  ua,
                  add_headers(Accept = "plain/text"))

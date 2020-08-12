@@ -4,7 +4,7 @@
 \alias{upload_txt}
 \title{Upload and parse data for JAMES}
 \usage{
-upload_txt(txt, host = "https://groeidiagrammen.nl")
+upload_txt(txt, host = "https://groeidiagrammen.nl", schema = NULL)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file, with the data (in JSON
@@ -15,6 +15,9 @@ to be according specification
 
 \item{host}{String with URL of the JAMES host machine. Defaults to
 \code{https://groeidiagrammen.nl}.}
+
+\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
+schema. Only relevant if \code{txt} is specified.}
 }
 \value{
 An object of class \code{\link[httr:response]{response}}
@@ -22,7 +25,7 @@ An object of class \code{\link[httr:response]{response}}
 \description{
 Server side upload of a JSON file, string or URL with BDS data, checks the data,
 stores its contents as an object of class
-\code{\link[minihealth:individual-class]{individual}} on the server,
+\code{\link[minihealth:individual-class]{individual}} on host,
 and returns an object of class \code{\link[httr:response]{response}}
 that contains the results of the request.
 }
@@ -50,13 +53,18 @@ change, so don't build applications based on this data structure. If you need
 components from the internal structure (e.g. Z-scores, brokenstick estimates) it
 is better to develop a dedicated API for obtaining these.
 }
+\note{
+Argument \code{schema} not yet implemented.
+}
 \examples{
 library(httr)
 fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+
 url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
-host <- "https://groeidiagrammen.nl"
-# host <- "http://localhost"
+schema_url <- "https://github.com/stefvanbuuren/minihealth/blob/master/inst/json/bds_schema_str.json"
+# host <- "https://groeidiagrammen.nl"
+host <- "http://localhost"
 
 # upload JSON file
 r1 <- upload_txt(fn, host)
