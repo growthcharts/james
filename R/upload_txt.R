@@ -40,7 +40,7 @@
 #' js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 #'
 #' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
-#' surl <- "https://github.com/stefvanbuuren/minihealth/blob/master/inst/json/bds_schema_str.json"
+#' surl <- "https://raw.githubusercontent.com/stefvanbuuren/minihealth/master/inst/json/bds_schema_str.json"
 #' # host <- "https://groeidiagrammen.nl"
 #' host <- "http://localhost"
 #'
