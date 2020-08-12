@@ -28,13 +28,5 @@ screen_curves <- function(txt = NULL, loc = NULL) {
   if (!is.null(txt))
     return(screen_curves_ind(convert_bds_individual(txt)))
   else
-    return(screen_curves_ind(read_ind(loc)))
+    return(screen_curves_ind(get_ind(loc)))
 }
-
-read_ind <- function(loc) {
-  con <- curl(paste0(loc, "R/.val/rda"))
-  load(file = con)
-  close(con)
-  .val
-}
-

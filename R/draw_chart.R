@@ -63,11 +63,7 @@ draw_chart <- function(bds_data  = NULL,
     else ind <- convert_bds_individual(bds_data)
   }
   else {
-    con <- curl(paste0(ind_loc, "R/.val/rda"))
-    load(file = con)
-    ind <- .val
-    close(con)
-    rm(".val")
+    ind <- get_ind(ind_loc)
   }
 
   # create chartcode using selector

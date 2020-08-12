@@ -62,7 +62,6 @@ fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamest
 js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
-schema_url <- "https://github.com/stefvanbuuren/minihealth/blob/master/inst/json/bds_schema_str.json"
 # host <- "https://groeidiagrammen.nl"
 host <- "http://localhost"
 

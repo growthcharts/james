@@ -43,17 +43,22 @@ host that runs \code{request_side()}.
 This not yet work with Docker because we cannot get the host URL.
 }
 \examples{
-fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
 
-# as two steps
+# as two steps (upload to default site groeidiagrammen.nl)
 resp <- upload_txt(fn)
+loc <- jamesclient::get_url(resp, "location")
+request_site(loc = loc)
+
+\dontrun{
+# upload to localhost (if running)
+resp <- upload_txt(fn, "http://localhost")
 loc <- jamesclient::get_url(resp, "location")
 request_site(loc = loc)
 
 # as one step
 request_site(fn)
-
+}
 }
 \seealso{
 \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}

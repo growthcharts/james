@@ -1,3 +1,4 @@
+# return the (likely) base URL of the ocpu server
 get_host <- function() {
   # where am I running?
   hostname <- system("hostname", intern = TRUE)
@@ -7,6 +8,7 @@ get_host <- function() {
          "http://localhost")
 }
 
+# returns url of uploaded data
 get_loc <- function(txt, host, schema) {
   tryCatch(error = function(cnd) stop("Cannot upload"),
            {
@@ -14,4 +16,12 @@ get_loc <- function(txt, host, schema) {
              get_url(resp, "location")
            }
   )
+}
+
+# returns object of S4 class individual
+get_ind <- function(loc) {
+  con <- curl(paste0(loc, "R/.val/rda"))
+  on.exit(close(con))
+  load(file = con)
+  .val
 }

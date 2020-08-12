@@ -40,7 +40,6 @@
 #' js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 #'
 #' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
-#' surl <- "https://raw.githubusercontent.com/stefvanbuuren/minihealth/master/inst/json/bds_schema_str.json"
 #' # host <- "https://groeidiagrammen.nl"
 #' host <- "http://localhost"
 #'
@@ -66,15 +65,15 @@ upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) 
   try.error <- FALSE
 
   if (file.exists(txt))
-    # txt is a file name
+    # txt is a file name: upload
     resp <- POST(url = url,
                  body = list(txt = upload_file(txt), schema = schema),
                  encode = "multipart",
                  ua,
                  add_headers(Accept = "plain/text"))
   else {
-    # if txt is a URL, read URL and convert to JSON string
-    if (!validate(txt)){
+    # txt is a URL: overwrite txt with JSON string
+    if (!validate(txt)) {
       con.url <- try(con <- url(txt, open = 'rb'), silent = TRUE)
       try.error <- inherits(con.url, "try-error")
       if (!try.error) {
@@ -82,6 +81,7 @@ upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) 
         close(con)
       }
     }
+    # txt is JSON string: upload
     resp <- POST(url = url,
                  body = list(txt = txt),
                  encode = "json",

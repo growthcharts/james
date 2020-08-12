@@ -46,11 +46,7 @@ convert_ind_chartadvice <- function(ind_loc,
   # assign object stored by convert_bds_ind to ind
   if (length(ind_loc) == 0L) ind <- NULL
   else {
-    con <- curl(paste0(ind_loc, "R/.val/rda"))
-    load(file = con)
-    ind <- .val
-    close(con)
-    rm(".val")
+    ind <- get_ind(ind_loc)
   }
 
   cc <- switch(selector,
