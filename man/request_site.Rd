@@ -36,11 +36,11 @@ child data on a previously stored server location on the server
 (argument \code{loc}).
 
 One of \code{txt} or \code{loc} need to be specified. If both are given,
-\code{txt} takes precedence.
+\code{txt} takes precedence. The \code{txt} option uploads the data to the
+host that runs \code{request_side()}.
 }
 \note{
-The \code{txt} option uploads and processes the data on the host where
-this code runs.
+This not yet work with Docker because we cannot get the host URL.
 }
 \examples{
 fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
