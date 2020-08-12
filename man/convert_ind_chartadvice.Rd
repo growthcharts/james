@@ -10,7 +10,7 @@ convert_ind_chartadvice(ind_loc, chartcode, selector)
 \item{ind_loc}{A url that points to the server location where the
 data from a previous request to \code{convert_bds_ind()} are
 stored. Optional. \code{ind_loc} takes priority over
-\code{bds_data}.}
+\code{txt}.}
 
 \item{chartcode}{The code of the requested growth chart, in the
 case the \code{selector == "chartcode"}.}

@@ -3,11 +3,11 @@
 #' The function \code{draw_chart()} can read data from an input
 #' location from a previous call, calculate the chartcode, and plot
 #' the individual data on the requested growth chart.
-#' @param bds_data A JSON string, URL or file. Optional.
+#' @param txt A JSON string, URL or file. Optional.
 #' @param ind_loc  A url that points to the server location where the
 #'   data from a previous request to \code{convert_bds_ind()} are
 #'   stored. Optional. \code{ind_loc} takes priority over
-#'   \code{bds_data}.
+#'   \code{txt}.
 #' @param chartcode The code of the requested growth chart, in the
 #'   case the \code{selector == "chartcode"}.
 #' @param selector A string, either \code{"derive"}, \code{"data"} or
@@ -32,7 +32,7 @@
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
 #' @keywords server
 #' @export
-draw_chart <- function(bds_data  = NULL,
+draw_chart <- function(txt  = NULL,
                        ind_loc   = NULL,
                        selector  = c("derive", "data", "chartcode"),
                        chartcode = NULL,
@@ -59,8 +59,8 @@ draw_chart <- function(bds_data  = NULL,
 
   # create or load object `ind`
   if (length(ind_loc) == 0L) {
-    if (length(bds_data) == 0L) ind <- NULL
-    else ind <- convert_bds_individual(bds_data)
+    if (length(txt) == 0L) ind <- NULL
+    else ind <- convert_bds_individual(txt)
   }
   else {
     ind <- get_ind(ind_loc)

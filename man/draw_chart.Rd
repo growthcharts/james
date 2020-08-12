@@ -8,7 +8,7 @@
 \title{Draw growth chart}
 \usage{
 draw_chart(
-  bds_data = NULL,
+  txt = NULL,
   ind_loc = NULL,
   selector = c("derive", "data", "chartcode"),
   chartcode = NULL,
@@ -41,12 +41,12 @@ draw_chart_ind(
 )
 }
 \arguments{
-\item{bds_data}{A JSON string, URL or file. Optional.}
+\item{txt}{A JSON string, URL or file}
 
 \item{ind_loc}{A url that points to the server location where the
 data from a previous request to \code{convert_bds_ind()} are
 stored. Optional. \code{ind_loc} takes priority over
-\code{bds_data}.}
+\code{txt}.}
 
 \item{selector}{A string, either \code{"derive"}, \code{"data"} or
 \code{"chartcode"}, that indicates the method to decide which
@@ -114,8 +114,6 @@ down to \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and
 \code{new("bse",... )}. Useful parameters are \code{models =
 "bsmodel"} for setting the broken stick model, or \code{call =
 as.call(...)} for setting proper reference standards.}
-
-\item{txt}{A JSON string, URL or file}
 }
 \value{
 tbd
