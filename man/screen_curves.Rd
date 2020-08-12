@@ -4,33 +4,20 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(
-  txt = NULL,
-  location = NULL,
-  host = "http://localhost",
-  path = "ocpu/library/james/R/convert_bds_ind",
-  query = NULL
-)
+screen_curves(txt = NULL, loc = NULL)
 }
 \arguments{
-\item{txt}{a JSON string, URL or file}
+\item{txt}{A JSON string, URL or file, with the data (in JSON
+format) to be uploaded. The variable specification are expected
+to be according specification
+\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS
+ JGZ 3.2.5}, and converted to JSON.}
 
-\item{location}{A url that points to the server location where the
-parsed data are stored. Optional. If specified, \code{location}
-takes priority over \code{txt}. \code{location} is typically
-the location of a previous \code{OpenCPU} call for uploading
-the data.}
-
-\item{host}{String with URL of the JAMES host machine. Defaults to
-\code{https://groeidiagrammen.nl}.}
-
-\item{path}{The end point of the request, typically an R function.
-The default is \code{path = "ocpu/library/james/R/convert_bds_ind"}}
-
-\item{query}{Passed down to \code{\link[httr]{modify_url}}.}
+\item{loc}{Alternative to \code{txt}. Location where data is uploaded
+and processed, for example, as obtained by \code{upload_txt()}.}
 }
 \value{
-A JSON string
+A table with screening results
 }
 \description{
 Screen growth curves according to JGZ guidelines
@@ -45,7 +32,7 @@ fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
 r1 <- upload_txt(fn)
 location <- jamesclient::get_url(r1, "location")
 location
-screen_curves(location = location)
+screen_curves(loc = location)
 
 # upload & screen
 screen_curves(fn)

@@ -1,13 +1,7 @@
 #' Screen growth curves according to JGZ guidelines
 #'
-#' @inheritParams jsonlite::fromJSON
-#' @inheritParams jamesclient::upload_bds
-#' @param location  A url that points to the server location where the
-#'   parsed data are stored. Optional. If specified, \code{location}
-#'   takes priority over \code{txt}. \code{location} is typically
-#'   the location of a previous \code{OpenCPU} call for uploading
-#'   the data.
-#' @return A JSON string
+#' @inheritParams request_site
+#' @return A table with screening results
 #' @examples
 #' \dontrun{
 #' # example json
@@ -18,37 +12,29 @@
 #' r1 <- upload_txt(fn)
 #' location <- jamesclient::get_url(r1, "location")
 #' location
-#' screen_curves(location = location)
+#' screen_curves(loc = location)
 #'
 #' # upload & screen
 #' screen_curves(fn)
 #'}
 #' @export
-screen_curves <- function(txt = NULL, location = NULL,
-                          host = "http://localhost",
-                          path = "ocpu/library/james/R/convert_bds_ind",
-                          query = NULL) {
+screen_curves <- function(txt = NULL, loc = NULL) {
 
-  if (length(location) == 0L) {
-    if (length(txt) > 0L) {
-      r1 <- upload_txt(txt, host = host)
-      location <- get_url(r1, "location")
-    }
-    else {
-      return(toJSON(list(
-        UrlGroeicurven = unbox("Data not found"),
-        Resultaten = screen_curves_ind(NULL))))
-    }
-  }
-  con <- curl(paste0(location, "R/.val/rda"))
-  load(file = con)
-  ind <- .val
-  close(con)
-  rm(".val")
+  # no input
+  if (is.null(txt) && is.null(loc))
+    return(screen_curves_ind(NULL))
 
-  url <- paste0("https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=", location)
-  res <- screen_curves_ind(ind)
-  ret <- list(UrlGroeicurven = unbox(url),
-              Resultaten = res)
-  toJSON(ret)
+  # upload txt data and return loc
+  if (!is.null(txt))
+    return(screen_curves_ind(convert_bds_individual(txt)))
+  else
+    return(screen_curves_ind(read_ind(loc)))
 }
+
+read_ind <- function(loc) {
+  con <- curl(paste0(loc, "R/.val/rda"))
+  load(file = con)
+  close(con)
+  .val
+}
+
