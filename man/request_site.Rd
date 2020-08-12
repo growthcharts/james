@@ -49,13 +49,11 @@ fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
 # as two steps
 resp <- upload_txt(fn)
 loc <- jamesclient::get_url(resp, "location")
-site_url <- request_site(loc = loc)
-site_url
-# browseURL(site_url)
+request_site(loc = loc)
 
 # as one step
-site_url <- request_site(fn)
-site_url
+request_site(fn)
+
 }
 \seealso{
 \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}

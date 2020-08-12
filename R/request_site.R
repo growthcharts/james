@@ -24,9 +24,10 @@
 #' (argument \code{loc}).
 #'
 #' One of \code{txt} or \code{loc} need to be specified. If both are given,
-#' \code{txt} takes precedence.
-#' @note The \code{txt} option uploads and processes the data on the host where
-#' this code runs.
+#' \code{txt} takes precedence. The \code{txt} option uploads the data to the
+#' host that runs \code{request_side()}.
+#'
+#' @note This not yet work with Docker because we cannot get the host URL.
 #' @examples
 #' fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 #' fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
@@ -34,41 +35,20 @@
 #' # as two steps
 #' resp <- upload_txt(fn)
 #' loc <- jamesclient::get_url(resp, "location")
-#' site_url <- request_site(loc = loc)
-#' site_url
-#' # browseURL(site_url)
+#' request_site(loc = loc)
 #'
 #' # as one step
-#' site_url <- request_site(fn)
-#' site_url
+#' request_site(fn)
+#'
 #' @export
 request_site <- function(txt = NULL, loc = NULL, schema = NULL) {
 
-  # derive static URL of host on which code runs
-  # note: under Docker, hostname is container ID, so we need to adapt
-  # this code when running under docker
-  hostname <- system("hostname", intern = TRUE)
-  host <- switch(hostname,
-                 groeidiagrammen = "https://groeidiagrammen.nl",
-                 opa = "https://vps.stefvanbuuren.nl",
-                 "http://localhost")
-  url_bare <- paste0(host, "/ocpu/lib/james/www/")
+  # What is the URL of the server where I run?
+  host <- get_host()
+  site <- paste0(host, "/ocpu/lib/james/www/")
 
-  # no input
-  if (is.null(txt) && is.null(loc)) return(url_bare)
+  if (is.null(txt) && is.null(loc)) return(site)
+  if (!is.null(txt)) loc <- get_loc(txt, host, schema)
 
-  # upload txt data and return loc
-  if (!is.null(txt)) {
-    get_loc <- function(x) {
-      tryCatch(error = function(cnd) stop("Cannot upload"),
-               {
-                 resp <- upload_txt(x, host = host)
-                 get_url(resp, "location")
-               }
-      )
-    }
-    loc <- get_loc(txt)
-  }
-
-  paste0(url_bare, "?ind=", loc)
+  paste0(site, "?ind=", loc)
 }
