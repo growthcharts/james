@@ -1,3 +1,10 @@
+# james 0.18.0
+
+* Simplifies `screen_curves()`
+* Moves functionality for AllegroSultum to `custom_list()`
+* Adds various getters
+* Makes server and data location independent
+
 # james 0.17.0 
 
 * Removes some hard paths in `screen_curves()`
