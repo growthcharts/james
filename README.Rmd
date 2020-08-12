@@ -439,7 +439,7 @@ If the data are already uploaded, we may use `draw_chart_ind()`. Suppose
 we want to create the A4 chart for the child. We can do so by
 
 ```{bash}
-curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
+curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
 
 /ocpu/tmp/x029e4ee555a9e1/R/.val
 /ocpu/tmp/x029e4ee555a9e1/R/draw_chart_ind

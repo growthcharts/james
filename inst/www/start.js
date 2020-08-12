@@ -132,7 +132,7 @@ function initialize_chart_controls() {
   // the uploaded individual data (R) from user_ind and
   // from user_chartcode
   var rq1 = ocpu.call("convert_ind_chartadvice", {
-    ind_loc: user_ind,
+    loc: user_ind,
     chartcode: user_chartcode,
     selector: selector
   }, function(session) {

@@ -10,13 +10,13 @@
 #' \code{\link[chartplotter]{process_chart}}
 #' @keywords server
 #' @export
-draw_chart_ind <- function(ind_loc = NULL, chartcode = NULL,
+draw_chart_ind <- function(loc = NULL, chartcode = NULL,
                            curve_interpolation = TRUE, ...) {
 
   # assign object stored by convert_bds_ind to ind
-  if (length(ind_loc) == 0L) individual <- NULL
+  if (length(loc) == 0L) individual <- NULL
   else {
-    ind <- get_ind(ind_loc)
+    ind <- get_ind(loc)
   }
 
   if (is.null(chartcode))

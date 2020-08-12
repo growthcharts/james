@@ -39,14 +39,14 @@
 #' @seealso \code{\link[chartcatalog]{parse_chartcode}}
 #' @keywords server
 #' @export
-convert_ind_chartadvice <- function(ind_loc,
+convert_ind_chartadvice <- function(loc,
                                     chartcode,
                                     selector) {
 
   # assign object stored by convert_bds_ind to ind
-  if (length(ind_loc) == 0L) ind <- NULL
+  if (length(loc) == 0L) ind <- NULL
   else {
-    ind <- get_ind(ind_loc)
+    ind <- get_ind(loc)
   }
 
   cc <- switch(selector,

@@ -162,7 +162,7 @@ function update() {
   // trigger chart drawing
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       txt : null,
-      ind_loc : user_ind,
+      loc : user_ind,
       selector : selector,
       chartcode: user_chartcode,
       chartgrp : chartgrp,

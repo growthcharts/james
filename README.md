@@ -408,7 +408,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 
     ##   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     ##                                  Dload  Upload   Total   Spent    Left  Speed
-    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  23178      0 --:--:-- --:--:-- --:--:-- 23178
+    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  15369      0 --:--:-- --:--:-- --:--:-- 15369
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart
@@ -582,7 +582,7 @@ If the data are already uploaded, we may use `draw_chart_ind()`. Suppose
 we want to create the A4 chart for the child. We can do so by
 
 ``` bash
-curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "ind_loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
+curl https://groeidiagrammen.nl/ocpu/lib/james/R/draw_chart_ind -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/'&chartcode='PMAAN27'"
 
 /ocpu/tmp/x029e4ee555a9e1/R/.val
 /ocpu/tmp/x029e4ee555a9e1/R/draw_chart_ind

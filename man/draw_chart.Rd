@@ -9,7 +9,7 @@
 \usage{
 draw_chart(
   txt = NULL,
-  ind_loc = NULL,
+  loc = NULL,
   selector = c("derive", "data", "chartcode"),
   chartcode = NULL,
   chartgrp = NULL,
@@ -33,19 +33,14 @@ draw_chart(
 
 draw_chart_bds(txt = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
 
-draw_chart_ind(
-  ind_loc = NULL,
-  chartcode = NULL,
-  curve_interpolation = TRUE,
-  ...
-)
+draw_chart_ind(loc = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{ind_loc}{A url that points to the server location where the
+\item{loc}{A url that points to the server location where the
 data from a previous request to \code{convert_bds_ind()} are
-stored. Optional. \code{ind_loc} takes priority over
+stored. Optional. \code{loc} takes priority over
 \code{txt}.}
 
 \item{selector}{A string, either \code{"derive"}, \code{"data"} or
