@@ -77,7 +77,7 @@ upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) 
       con.url <- try(con <- url(txt, open = 'rb'), silent = TRUE)
       try.error <- inherits(con.url, "try-error")
       if (!try.error) {
-        txt <- toJSON(fromJSON(txt, flatten = TRUE))
+        txt <- toJSON(fromJSON(txt, flatten = TRUE), auto_unbox = TRUE)
         close(con)
       }
     }
