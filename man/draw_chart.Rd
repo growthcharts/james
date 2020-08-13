@@ -10,8 +10,8 @@
 draw_chart(
   txt = NULL,
   loc = NULL,
-  selector = c("derive", "data", "chartcode"),
   chartcode = NULL,
+  selector = c("data", "derive"),
   chartgrp = NULL,
   agegrp = NULL,
   sex = NULL,
@@ -41,18 +41,19 @@ draw_chart_ind(loc = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
 \item{loc}{Alternative to \code{txt}. Location where data is uploaded
 and processed, for example, as obtained by \code{upload_txt()}.}
 
-\item{selector}{A string, either \code{"derive"}, \code{"data"} or
-\code{"chartcode"}, that indicates the method to decide which
-growth chart is drawn. Method \code{"derive"} (default)
-calculates the chart from parameters \code{chartgrp},
-\code{agegrp}, \code{sex}, \code{etn}, \code{ga} and \code{side}
-parameters through the \code{select_chart()} function. Method
-\code{"data"} calculates the chart from the individual data.
-Method \code{"chartcode"} will return the chart specified by the
-\code{chartcode} parameter.}
+\item{chartcode}{Optional. The code of the requested growth chart.
+If not specified or if not valid, the function calculates the chart code
+by the method specified by the \code{selector} argument.}
 
-\item{chartcode}{The code of the requested growth chart, in the
-case the \code{selector == "chartcode"}.}
+\item{selector}{Either \code{data} or \code{"derive"} specifying the
+method to decide between growth charts:
+  \describe{
+  \item{\code{"data"}}{Calculate chart code from the individual data by
+  \code{select_chart()} (default).}
+  \item{\code{"derive"}}{Calculate chart code from parameters
+  \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn}, \code{ga}
+  and \code{side} by \code{select_chart()}}
+  }}
 
 \item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 or \code{character(0)}}
@@ -109,12 +110,10 @@ down to \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and
 as.call(...)} for setting proper reference standards.}
 }
 \value{
-tbd
+A \code{gTree} object.
 }
 \description{
-The function \code{draw_chart()} can read data from an input
-location from a previous call, calculate the chartcode, and plot
-the individual data on the requested growth chart.
+The function \code{draw_chart()} plots individual data on the growth chart.
 
 The function \code{draw_chart_bds()} convert bds data into an object
 of class \linkS4class{individual}, and then draws the
@@ -126,6 +125,8 @@ growth chart.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
+g <- draw_chart(txt = fn)
+fn <- system.file("testdata", "client3.json", package = "james")
 g <- draw_chart_bds(txt = fn)
 }
 \seealso{
@@ -136,6 +137,6 @@ g <- draw_chart_bds(txt = fn)
 \code{\link[chartplotter]{process_chart}}
 }
 \author{
-Stef van Buuren 2019
+Stef van Buuren 2020
 }
 \keyword{server}

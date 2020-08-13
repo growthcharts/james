@@ -1,37 +1,37 @@
 #' Draw growth chart
 #'
-#' The function \code{draw_chart()} can read data from an input
-#' location from a previous call, calculate the chartcode, and plot
-#' the individual data on the requested growth chart.
+#' The function \code{draw_chart()} plots individual data on the growth chart.
 #' @inheritParams request_site
-#' @param chartcode The code of the requested growth chart, in the
-#'   case the \code{selector == "chartcode"}.
-#' @param selector A string, either \code{"derive"}, \code{"data"} or
-#'   \code{"chartcode"}, that indicates the method to decide which
-#'   growth chart is drawn. Method \code{"derive"} (default)
-#'   calculates the chart from parameters \code{chartgrp},
-#'   \code{agegrp}, \code{sex}, \code{etn}, \code{ga} and \code{side}
-#'   parameters through the \code{select_chart()} function. Method
-#'   \code{"data"} calculates the chart from the individual data.
-#'   Method \code{"chartcode"} will return the chart specified by the
-#'   \code{chartcode} parameter.
-#' @param curve_interpolation A logical indicating whether curve
-#'   interpolation shoud be applied.
+#' @inheritParams select_chart
+#' @inheritParams chartplotter::process_chart
+#' @param chartcode Optional. The code of the requested growth chart.
+#' If not specified or if not valid, the function calculates the chart code
+#' by the method specified by the \code{selector} argument.
+#' @param selector Either \code{data} or \code{"derive"} specifying the
+#' method to decide between growth charts:
+#'   \describe{
+#'   \item{\code{"data"}}{Calculate chart code from the individual data by
+#'   \code{select_chart()} (default).}
+#'   \item{\code{"derive"}}{Calculate chart code from parameters
+#'   \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn}, \code{ga}
+#'   and \code{side} by \code{select_chart()}}
+#'   }
 #' @param lo Value of the left visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
 #' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
-#' @inheritParams select_chart
-#' @rdname draw_chart
-#' @return tbd
-#' @author Stef van Buuren 2019
+#' @return A \code{gTree} object.
+#' @author Stef van Buuren 2020
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
 #' @keywords server
+#' @examples
+#' fn <- system.file("testdata", "client3.json", package = "james")
+#' g <- draw_chart(txt = fn)
 #' @export
 draw_chart <- function(txt  = NULL,
                        loc   = NULL,
-                       selector  = c("derive", "data", "chartcode"),
                        chartcode = NULL,
+                       selector  = c("data", "derive"),
                        chartgrp  = NULL,
                        agegrp    = NULL,
                        sex       = NULL,
@@ -57,28 +57,27 @@ draw_chart <- function(txt  = NULL,
   else ind <- get_ind(loc)
 
   # create chartcode using selector
-  cc <- switch(selector,
-               "derive" = select_chart(
-                 ind = NULL, chartgrp = chartgrp, agegrp = agegrp,
-                 sex = sex, etn = etn, ga = ga, side = side)$chartcode,
-               "data" = select_chart(ind = ind)$chartcode,
-               "chartcode" = chartcode)
+  if (!validate_chartcode(chartcode))
+    chartcode <- switch(selector,
+                        "data" = select_chart(ind = ind)$chartcode,
+                        "derive" = select_chart(
+                          ind = NULL, chartgrp = chartgrp, agegrp = agegrp,
+                          sex = sex, etn = etn, ga = ga, side = side)$chartcode)
 
   # convert hi and lo into period vector
   nmatch <- as.integer(nmatch)
   period <- convert_str_age(c(lo, hi))
 
   # there we go..
-  invisible(draw_plot(individual = ind,
-                      chartcode = cc,
-                      curve_interpolation = curve_interpolation,
-                      quiet = TRUE,
-                      dnr = dnr,
-                      period = period,
-                      nmatch = nmatch,
-                      exact_sex = exact_sex,
-                      exact_ga = exact_ga,
-                      break_ties = break_ties,
-                      show_realized = show_realized,
-                      show_future = show_future))
+  process_chart(individual = ind,
+                chartcode = chartcode,
+                curve_interpolation = curve_interpolation,
+                dnr = dnr,
+                period = period,
+                nmatch = nmatch,
+                exact_sex = exact_sex,
+                exact_ga = exact_ga,
+                break_ties = break_ties,
+                show_realized = show_realized,
+                show_future = show_future)
 }
