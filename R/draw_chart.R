@@ -35,7 +35,7 @@
 draw_chart <- function(txt  = NULL,
                        loc   = NULL,
                        chartcode = NULL,
-                       selector  = c("data", "derive"),
+                       selector  = c("data", "derive", "chartcode"),
                        curve_interpolation = TRUE,
                        dnr       =  c("smocc", "terneuzen", "lollypop.preterm",
                                       "lollypop.term", "pops"),
