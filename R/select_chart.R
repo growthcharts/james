@@ -21,6 +21,7 @@
 #'   \code{'both'}
 #' @param language Language: \code{'dutch'} or \code{'english'} (not
 #'   used)
+#' @param \dots Not used.
 #' @return A list with elements \code{chartgrp}, \code{chartcode}
 #' and \code{ga}
 #' @seealso \code{\link[chartcatalog]{create_chartcode}},
@@ -39,7 +40,8 @@ select_chart <- function(ind      = NULL,
                          etn      = NULL,
                          ga       = NULL,
                          side     = "hgt",
-                         language = "dutch") {
+                         language = "dutch",
+                         ...) {
 
   # choose defaults depending on individual
   if (!is.null(ind)) {

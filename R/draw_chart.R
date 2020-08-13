@@ -20,6 +20,9 @@
 #'   or \code{"7.5m"}
 #' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
+#' @param \dots Parameter passed down to the \code{select_chart()} function,
+#' such as \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn},
+#' \code{ga} and \code{side}.
 #' @return A \code{gTree} object.
 #' @author Stef van Buuren 2020
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
@@ -32,12 +35,6 @@ draw_chart <- function(txt  = NULL,
                        loc   = NULL,
                        chartcode = NULL,
                        selector  = c("data", "derive"),
-                       chartgrp  = NULL,
-                       agegrp    = NULL,
-                       sex       = NULL,
-                       etn       = NULL,
-                       ga        = NULL,
-                       side      = "hgt",
                        curve_interpolation = TRUE,
                        dnr       =  c("smocc", "terneuzen", "lollypop.preterm",
                                       "lollypop.term", "pops"),
@@ -61,8 +58,7 @@ draw_chart <- function(txt  = NULL,
     chartcode <- switch(selector,
                         "data" = select_chart(ind = ind)$chartcode,
                         "derive" = select_chart(
-                          ind = NULL, chartgrp = chartgrp, agegrp = agegrp,
-                          sex = sex, etn = etn, ga = ga, side = side)$chartcode)
+                          ind = NULL, ...)$chartcode)
 
   # convert hi and lo into period vector
   nmatch <- as.integer(nmatch)
