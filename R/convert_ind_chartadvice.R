@@ -42,12 +42,7 @@
 convert_ind_chartadvice <- function(loc,
                                     chartcode,
                                     selector) {
-
-  # assign object stored by convert_bds_ind to ind
-  if (length(loc) == 0L) ind <- NULL
-  else {
-    ind <- get_ind(loc)
-  }
+  ind <- get_ind(loc)
 
   # create chartcode using selector
   if (!validate_chartcode(chartcode))
