@@ -38,10 +38,8 @@ draw_chart_ind(loc = NULL, chartcode = NULL, curve_interpolation = TRUE, ...)
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{loc}{A url that points to the server location where the
-data from a previous request to \code{convert_bds_ind()} are
-stored. Optional. \code{loc} takes priority over
-\code{txt}.}
+\item{loc}{Alternative to \code{txt}. Location where data is uploaded
+and processed, for example, as obtained by \code{upload_txt()}.}
 
 \item{selector}{A string, either \code{"derive"}, \code{"data"} or
 \code{"chartcode"}, that indicates the method to decide which
