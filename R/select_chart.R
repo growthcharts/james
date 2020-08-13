@@ -7,7 +7,7 @@
 #' maximum age found in the data.
 #' @aliases select_chart
 #' @param ind An S4 object of class \code{individual} containing
-#'   data of the individual.
+#'   data of the individual, or \code{NULL}.
 #' @param chartgrp  The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 #' or \code{character(0)}
 #' @param agegrp Either \code{'0-15m'}, \code{'0-4y'}, \code{'1-21y'},

@@ -17,7 +17,7 @@ select_chart(
 }
 \arguments{
 \item{ind}{An S4 object of class \code{individual} containing
-data of the individual.}
+data of the individual, or \code{NULL}.}
 
 \item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 or \code{character(0)}}
