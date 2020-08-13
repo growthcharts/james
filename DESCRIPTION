@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: JAMES: Joint Anthropometric Measurement and Evaluation System
-Version: 0.18.0
+Version: 0.19.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>

@@ -1,3 +1,10 @@
+# james 0.19.0
+
+* `validate_chartcode()` is no longer exported, and returns `TRUE`/`FALSE`
+* Change of behavior in `draw_chart()`: When the user specifies a valid `chartcode`, then this chart is selected, irrespective of `selector`.
+* Removes superfluous functions `draw_chart_ind()`, `draw_chart_bds` and `draw_plot()`
+* Moves `select_chart()` arguments in `draw_chart()` to dots
+
 # james 0.18.0
 
 * Simplifies `screen_curves()`
