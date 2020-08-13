@@ -10,8 +10,7 @@ validate_chartcode(chartcode = NULL)
 \item{chartcode}{Chart code, typically something like \code{"NMAB"}}
 }
 \value{
-The \code{chartcode} if available. \code{NULL} if not
-available.
+\code{TRUE} or \code{FALSE}.
 }
 \description{
 This function checks whether \code{chartcode} is a available
