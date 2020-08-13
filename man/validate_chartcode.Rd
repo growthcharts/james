@@ -16,9 +16,6 @@ validate_chartcode(chartcode = NULL)
 This function checks whether \code{chartcode} is a available
 in the chart library.
 }
-\examples{
-validate_chartcode("NJAA")
-}
 \seealso{
 \code{\link{list_charts}}
 }

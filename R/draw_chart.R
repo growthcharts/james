@@ -14,7 +14,8 @@
 #'   \code{select_chart()} (default).}
 #'   \item{\code{"derive"}}{Calculate chart code from parameters
 #'   \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn}, \code{ga}
-#'   and \code{side} by \code{select_chart()}}
+#'   and \code{side} by \code{select_chart()}.}
+#'   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}.}
 #'   }
 #' @param lo Value of the left visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
@@ -58,7 +59,8 @@ draw_chart <- function(txt  = NULL,
     chartcode <- switch(selector,
                         "data" = select_chart(ind = ind)$chartcode,
                         "derive" = select_chart(
-                          ind = NULL, ...)$chartcode)
+                          ind = NULL, ...)$chartcode,
+                        "chartcode" = chartcode)
 
   # convert hi and lo into period vector
   nmatch <- as.integer(nmatch)

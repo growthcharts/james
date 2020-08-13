@@ -43,7 +43,8 @@ method to decide between growth charts:
   \code{select_chart()} (default).}
   \item{\code{"derive"}}{Calculate chart code from parameters
   \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn}, \code{ga}
-  and \code{side} by \code{select_chart()}}
+  and \code{side} by \code{select_chart()}.}
+  \item{\code{"chartcode"}}{Take string specified in \code{chartcode}.}
   }}
 
 \item{curve_interpolation}{A logical indicating whether curve

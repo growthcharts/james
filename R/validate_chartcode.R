@@ -5,8 +5,6 @@
 #' @param chartcode Chart code, typically something like \code{"NMAB"}
 #' @return \code{TRUE} or \code{FALSE}.
 #' @seealso \code{\link{list_charts}}
-#' @examples
-#' validate_chartcode("NJAA")
 validate_chartcode <- function(chartcode = NULL) {
 
   if (is.null(chartcode)) return(FALSE)
