@@ -27,10 +27,10 @@ custom_list <- function(txt = NULL, loc = NULL) {
 
   res <- screen_curves_ind(ind)
 
-  last_dscore <- ind@dsc@y[length(ind@dsc@y)]
+  last_dscore <- ifelse(is.null(ind), NA, ind@dsc@y[length(ind@dsc@y)])
 
   ret <- list(UrlGroeicurven = unbox(site),
               Resultaten = res,
-              LaatsteDscore = last_dscore)
+              LaatsteDscore = unbox(last_dscore))
   toJSON(ret)
 }
