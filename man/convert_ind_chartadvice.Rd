@@ -7,23 +7,22 @@
 convert_ind_chartadvice(loc, chartcode, selector)
 }
 \arguments{
-\item{loc}{A url that points to the server location where the
-data from a previous request to \code{convert_bds_ind()} are
-stored. Optional. \code{loc} takes priority over
-\code{txt}.}
+\item{loc}{Alternative to \code{txt}. Location where data is uploaded
+and processed, for example, as obtained by \code{upload_txt()}.}
 
-\item{chartcode}{The code of the requested growth chart, in the
-case the \code{selector == "chartcode"}.}
+\item{chartcode}{Optional. The code of the requested growth chart.
+If not specified or if not valid, the function calculates the chart code
+by the method specified by the \code{selector} argument.}
 
-\item{selector}{A string, either \code{"derive"}, \code{"data"} or
-\code{"chartcode"}, that indicates the method to decide which
-growth chart is drawn. Method \code{"derive"} (default)
-calculates the chart from parameters \code{chartgrp},
-\code{agegrp}, \code{sex}, \code{etn}, \code{ga} and \code{side}
-parameters through the \code{select_chart()} function. Method
-\code{"data"} calculates the chart from the individual data.
-Method \code{"chartcode"} will return the chart specified by the
-\code{chartcode} parameter.}
+\item{selector}{Either \code{data} or \code{"derive"} specifying the
+method to decide between growth charts:
+  \describe{
+  \item{\code{"data"}}{Calculate chart code from the individual data by
+  \code{select_chart()} (default).}
+  \item{\code{"derive"}}{Calculate chart code from parameters
+  \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn}, \code{ga}
+  and \code{side} by \code{select_chart()}}
+  }}
 }
 \value{
 A list with the following elements
