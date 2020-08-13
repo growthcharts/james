@@ -19,7 +19,8 @@ get_loc <- function(txt, host, schema) {
 }
 
 # returns object of S4 class individual
-get_ind <- function(loc) {
+get_ind <- function(loc = NULL) {
+  if (is.null(loc)) return(NULL)
   con <- curl(paste0(loc, "R/.val/rda"))
   on.exit(close(con))
   load(file = con)
