@@ -3,6 +3,7 @@
 #'                             parse_chartcode
 #' @importFrom chartplotter    process_chart
 #' @importFrom curl            curl
+#' @importFrom grid            grid.draw
 #' @importFrom growthscreener  screen_curves_ind
 #' @importFrom httr            add_headers build_url content GET
 #'                             modify_url POST

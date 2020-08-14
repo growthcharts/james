@@ -74,16 +74,17 @@ draw_chart <- function(txt  = NULL,
   period <- convert_str_age(c(lo, hi))
 
   # there we go..
-  process_chart(individual = ind,
-                chartcode = chartcode,
-                curve_interpolation = curve_interpolation,
-                quiet = quiet,
-                dnr = dnr,
-                period = period,
-                nmatch = nmatch,
-                exact_sex = exact_sex,
-                exact_ga = exact_ga,
-                break_ties = break_ties,
-                show_realized = show_realized,
-                show_future = show_future)
+  g <- process_chart(individual = ind,
+                     chartcode = chartcode,
+                     curve_interpolation = curve_interpolation,
+                     quiet = quiet,
+                     dnr = dnr,
+                     period = period,
+                     nmatch = nmatch,
+                     exact_sex = exact_sex,
+                     exact_ga = exact_ga,
+                     break_ties = break_ties,
+                     show_realized = show_realized,
+                     show_future = show_future)
+  grid.draw(g)
 }
