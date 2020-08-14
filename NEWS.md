@@ -5,6 +5,8 @@
 * Replaces `is.null(x)` by `!length(x)`
 * Removes `stop()` within `tryCatch`
 * Provides extra argument `txt`, so making `get_ind()` more intelligent
+* Undoes behavior change in `draw_chart()` in `0.19.0` because that killed interactivity
+* Undoes `dots` in `draw_chart()` because that didn't play well with requests
 
 # james 0.19.0
 

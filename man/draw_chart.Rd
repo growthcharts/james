@@ -8,7 +8,7 @@ draw_chart(
   txt = NULL,
   loc = NULL,
   chartcode = NULL,
-  selector = c("data", "derive", "chartcode"),
+  selector = c("derive", "data", "chartcode"),
   chartgrp = NULL,
   agegrp = NULL,
   sex = NULL,
@@ -38,18 +38,21 @@ to be according specification
 \item{loc}{Alternative to \code{txt}. Location where data is uploaded
 and processed, for example, as obtained by \code{upload_txt()}.}
 
-\item{chartcode}{Optional. The code of the requested growth chart.
-If not specified or if not valid, the function calculates the chart code
-by the method specified by the \code{selector} argument.}
+\item{chartcode}{Optional. The code of the requested growth chart.}
 
-\item{selector}{Either \code{data} or \code{"derive"} specifying the
-method to decide between growth charts:
+\item{selector}{Either \code{"data"}, \code{"derive"} or \code{"chartcode"}.
+In general, the function calculates the chart code by looking at the
+data (method \code{"data"}), the covariates (method \code{"derive"}).
+Setting \code{selector = "chartcode"} overrides this behavior, and select
+the chart specified in the \code{chartcode} argument. More in detail, the
+following behavior decides between growth charts:
   \describe{
+  \item{\code{"derive"}}{Calculate chart code from a combination of user
+  specifications (\code{chartgrp}, \code{agegrp}, \code{side}) and child
+  covariates (\code{sex}, \code{etn}, \code{ga}) by \code{select_chart()}.
+  (default)}
   \item{\code{"data"}}{Calculate chart code from the individual data by
-  \code{select_chart()} (default).}
-  \item{\code{"derive"}}{Calculate chart code from parameters
-  \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn}, \code{ga}
-  and \code{side} by \code{select_chart()}.}
+  \code{select_chart()}.}
   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}.}
   }}
 
