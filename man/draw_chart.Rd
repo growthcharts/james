@@ -25,7 +25,8 @@ draw_chart(
   exact_ga = FALSE,
   break_ties = FALSE,
   show_realized = FALSE,
-  show_future = FALSE
+  show_future = FALSE,
+  draw_grob = TRUE
 )
 }
 \arguments{
@@ -106,6 +107,9 @@ growth of the target child should be drawn}
 
 \item{show_future}{A logical indicating whether the predicted
 growth of the target child should be drawn}
+
+\item{draw_grob}{Logical. Should chart be plotted on current device?
+Default is \code{TRUE}.}
 }
 \value{
 A \code{gTree} object.

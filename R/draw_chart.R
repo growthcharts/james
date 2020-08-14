@@ -24,6 +24,8 @@
 #'   or \code{"7.5m"}
 #' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
+#' @param draw_grob Logical. Should chart be plotted on current device?
+#' Default is \code{TRUE}.
 #' @return A \code{gTree} object.
 #' @author Stef van Buuren 2020
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
@@ -53,7 +55,8 @@ draw_chart <- function(txt  = NULL,
                        exact_ga = FALSE,
                        break_ties = FALSE,
                        show_realized = FALSE,
-                       show_future = FALSE) {
+                       show_future = FALSE,
+                       draw_grob = TRUE) {
   selector <- match.arg(selector)
   dnr <- match.arg(dnr)
 
@@ -86,5 +89,6 @@ draw_chart <- function(txt  = NULL,
                      break_ties = break_ties,
                      show_realized = show_realized,
                      show_future = show_future)
-  grid.draw(g)
+  if (draw_grob) grid.draw(g)
+  invisible(g)
 }
