@@ -160,9 +160,9 @@ function update() {
   }
 
   // handle null user inputs
-  var utxt = '{}';
-  var uloc = '{}';
-  var ucode  = '{}';
+  var utxt = '';
+  var uloc = '';
+  var ucode  = '';
   if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
   if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;

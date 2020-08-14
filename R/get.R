@@ -18,14 +18,14 @@ get_loc <- function(txt, host, schema) {
   )
 }
 
-# returns object of S4 class individual
-get_ind <- function(txt = NULL, loc = NULL) {
+# returns object of S4 class individual or NULL
+get_ind <- function(txt = "", loc = "") {
 
   # no ind
-  if (!length(txt) && !length(loc)) return(NULL)
+  if (is.empty(txt) && is.empty(loc)) return(NULL)
 
   # create ind on-the-fly
-  if (length(txt)) return(convert_bds_individual(txt))
+  if (!is.empty(txt)) return(convert_bds_individual(txt))
 
   # download ind
   con <- curl(url = paste0(loc, "R/.val/rda"), open = "rb")
@@ -33,3 +33,5 @@ get_ind <- function(txt = NULL, loc = NULL) {
   load(file = con)
   .val
 }
+
+is.empty <- function(x) nchar(x[1L]) == 0L

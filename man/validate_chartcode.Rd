@@ -4,7 +4,7 @@
 \alias{validate_chartcode}
 \title{Validates a growth chart code}
 \usage{
-validate_chartcode(chartcode = NULL)
+validate_chartcode(chartcode = "")
 }
 \arguments{
 \item{chartcode}{Chart code, typically something like \code{"NMAB"}}

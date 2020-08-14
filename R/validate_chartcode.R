@@ -5,9 +5,9 @@
 #' @param chartcode Chart code, typically something like \code{"NMAB"}
 #' @return \code{TRUE} or \code{FALSE}.
 #' @seealso \code{\link{list_charts}}
-validate_chartcode <- function(chartcode = NULL) {
+validate_chartcode <- function(chartcode = "") {
 
-  if (!length(chartcode)) return(FALSE)
+  if (is.empty(chartcode)) return(FALSE)
   chartcode[1L] %in% list_charts()$chartcode
 }
 

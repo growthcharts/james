@@ -1,5 +1,5 @@
-initializer <- function(selector, individual, chartcode) {
-  if (!length(chartcode)) return(NULL)
+initializer <- function(selector, individual, chartcode = "") {
+  if (is.empty(chartcode)) return(NULL)
 
   parsed   <- parse_chartcode(chartcode)
   choices  <- parsed

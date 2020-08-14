@@ -33,7 +33,7 @@
 #' g <- draw_chart(txt = fn)
 #' @export
 draw_chart <- function(txt  = NULL,
-                       loc   = NULL,
+                       loc  = NULL,
                        chartcode = NULL,
                        selector  = c("derive", "data", "chartcode"),
                        chartgrp  = NULL,
