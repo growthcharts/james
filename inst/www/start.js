@@ -93,7 +93,9 @@ if (user_loc) {
   $("#messages").load(mess);
 }
 
-// upload data if bds is specified AND if ind is not specified
+// if txt (=JSON BDS data) is specified
+// AND if loc (=URL to ind data) is not specified
+// upload data, and initialise user_loc
 if (user_txt && !user_loc) {
   var rq0 = ocpu.call("convert_bds_ind", {
     txt: user_txt
@@ -111,29 +113,36 @@ if (user_txt && !user_loc) {
   });
 }
 
-// updating logic: use derive, unless there are data and unless
-// chartcode is directly specified
+// updating logic to select charts
+// 1. use "derive" based on user interaction
 var selector  = "derive";
+// 2. use "data" if we can load child data
 if (user_loc) selector = "data";
+// 3. use hard chartcode if user specified one
 if (user_chartcode) selector = "chartcode";
 
-// if there are data or chartcode arguments specified by user:
-// determine chartcode, set chart controls, update visibility, draw chart
+// in the last two cases:
+// calculate chartcode, set chart controls, update visibility, draw chart
 if (user_loc || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
 
-
-
 function initialize_chart_controls() {
-  // function executes at initialization, if there are child data
+  // function executes at initialization
   // convert_ind_chartadvice() obtains useful statistics from
   // the uploaded individual data (R) from user_loc and
   // from user_chartcode
+
+  // handle null user inputs
+  var uloc = '{}';
+  var ucode  = '{}';
+  if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
+  if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
+
   var rq1 = ocpu.call("convert_ind_chartadvice", {
-    loc: user_loc,
-    chartcode: user_chartcode,
+    loc: uloc,
+    chartcode: ucode,
     selector: selector
   }, function(session) {
 
