@@ -43,12 +43,9 @@ convert_ind_chartadvice <- function(loc,
                                     chartcode,
                                     selector) {
   ind <- get_ind(loc = loc)
-
-  # create chartcode using selector
-  if (!validate_chartcode(chartcode))
-    chartcode <- switch(selector,
-                        "data" = select_chart(ind = ind)$chartcode,
-                        "chartcode" = chartcode)
+  chartcode <- switch(selector,
+                      "data" = select_chart(ind = ind)$chartcode,
+                      "chartcode" = chartcode)
 
   initializer(selector, ind, chartcode)
 }
