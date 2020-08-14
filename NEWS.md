@@ -1,3 +1,7 @@
+# james 0.21.0
+
+* The communication between javascript and R is now based on empty strings instead of `null` and `NULL`. * The site is functional again!
+
 # james 0.20.0
 
 * Major change: Systematic use of `txt` and `loc` arguments in both `R` and javascript
