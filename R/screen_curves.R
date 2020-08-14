@@ -19,14 +19,5 @@
 #'}
 #' @export
 screen_curves <- function(txt = NULL, loc = NULL) {
-
-  # no input
-  if (is.null(txt) && is.null(loc))
-    return(screen_curves_ind(NULL))
-
-  # upload txt data and return loc
-  if (!is.null(txt))
-    return(screen_curves_ind(convert_bds_individual(txt)))
-  else
-    return(screen_curves_ind(get_ind(loc)))
+  screen_curves_ind(get_ind(txt, loc))
 }

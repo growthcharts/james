@@ -159,12 +159,20 @@ function update() {
     sr('msr_back', 'none');
   }
 
+  // handle null user inputs
+  var utxt = '{}';
+  var uloc = '{}';
+  var ucode  = '{}';
+  if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
+  if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
+  if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
+
   // trigger chart drawing
   var rq2 = $("#plotdiv").rplot("draw_chart", {
-      txt : null,
-      loc : user_ind,
+      txt : utxt,
+      loc : uloc,
+      chartcode: ucode,
       selector : selector,
-      chartcode: user_chartcode,
       chartgrp : chartgrp,
       agegrp   : agegrp,
       sex      : sex,

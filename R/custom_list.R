@@ -22,8 +22,7 @@ custom_list <- function(txt = NULL, loc = NULL) {
 
   site <- request_site(txt, loc)
 
-  if (!is.null(txt)) ind <- convert_bds_individual(txt)
-  else ind <- get_ind(loc)
+  ind <- get_ind(txt, loc)
 
   res <- screen_curves_ind(ind)
 

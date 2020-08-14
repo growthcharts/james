@@ -10,18 +10,25 @@ get_host <- function() {
 
 # returns url of uploaded data
 get_loc <- function(txt, host, schema) {
-  tryCatch(error = function(cnd) stop("Cannot upload"),
-           {
-             resp <- upload_txt(txt, host = host, schema = schema)
-             get_url(resp, "location")
-           }
+  tryCatch(expr = {
+    resp <- upload_txt(txt, host = host, schema = schema)
+    get_url(resp, "location")
+  },
+  error = function(cnd) paste("Cannot upload", txt)
   )
 }
 
 # returns object of S4 class individual
-get_ind <- function(loc = NULL) {
-  if (is.null(loc)) return(NULL)
-  con <- curl(paste0(loc, "R/.val/rda"))
+get_ind <- function(txt = NULL, loc = NULL) {
+
+  # no ind
+  if (!length(txt) && !length(loc)) return(NULL)
+
+  # create ind on-the-fly
+  if (length(txt)) return(convert_bds_individual(txt))
+
+  # download ind
+  con <- curl(url = paste0(loc, "R/.val/rda"), open = "rb")
   on.exit(close(con))
   load(file = con)
   .val

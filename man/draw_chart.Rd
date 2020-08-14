@@ -8,8 +8,15 @@ draw_chart(
   txt = NULL,
   loc = NULL,
   chartcode = NULL,
-  selector = c("data", "derive"),
+  selector = c("data", "derive", "chartcode"),
+  chartgrp = NULL,
+  agegrp = NULL,
+  sex = NULL,
+  etn = NULL,
+  ga = NULL,
+  side = "hgt",
   curve_interpolation = TRUE,
+  quiet = FALSE,
   dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term", "pops"),
   lo = NULL,
   hi = NULL,
@@ -18,8 +25,7 @@ draw_chart(
   exact_ga = FALSE,
   break_ties = FALSE,
   show_realized = FALSE,
-  show_future = FALSE,
-  ...
+  show_future = FALSE
 )
 }
 \arguments{
@@ -47,8 +53,28 @@ method to decide between growth charts:
   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}.}
   }}
 
+\item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
+or \code{character(0)}}
+
+\item{agegrp}{Either \code{'0-15m'}, \code{'0-4y'}, \code{'1-21y'},
+\code{'0-21y'} or \code{'0-4ya'}. Age group \code{'0-4ya'}
+provides the 0-4 chart with weight for age (design E).}
+
+\item{sex}{Either \code{'male'} or \code{'female'}}
+
+\item{etn}{Either \code{'netherlands'}, \code{'turkish'},
+\code{'moroccan'} or \code{'hindustani'}}
+
+\item{ga}{Gestational age (in completed weeks)}
+
+\item{side}{Either \code{'front'}, \code{'back'}, \code{'-hdc'} or
+\code{'both'}}
+
 \item{curve_interpolation}{A logical indicating whether curve
 interpolation shoud be applied.}
+
+\item{quiet}{Logical indicating whether chart code should be
+written to standard output. Default is \code{quiet = TRUE}.}
 
 \item{dnr}{A string with the name of the donor data
 (currently available are \code{smocc}, \code{terneuzen},
@@ -77,10 +103,6 @@ growth of the target child should be drawn}
 
 \item{show_future}{A logical indicating whether the predicted
 growth of the target child should be drawn}
-
-\item{\dots}{Parameter passed down to the \code{select_chart()} function,
-such as \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn},
-\code{ga} and \code{side}.}
 }
 \value{
 A \code{gTree} object.

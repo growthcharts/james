@@ -21,9 +21,6 @@
 #'   or \code{"7.5m"}
 #' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
-#' @param \dots Parameter passed down to the \code{select_chart()} function,
-#' such as \code{chartgrp}, \code{agegrp}, \code{sex}, \code{etn},
-#' \code{ga} and \code{side}.
 #' @return A \code{gTree} object.
 #' @author Stef van Buuren 2020
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
@@ -36,7 +33,14 @@ draw_chart <- function(txt  = NULL,
                        loc   = NULL,
                        chartcode = NULL,
                        selector  = c("data", "derive", "chartcode"),
+                       chartgrp  = NULL,
+                       agegrp    = NULL,
+                       sex       = NULL,
+                       etn       = NULL,
+                       ga        = NULL,
+                       side      = "hgt",
                        curve_interpolation = TRUE,
+                       quiet     = FALSE,
                        dnr       =  c("smocc", "terneuzen", "lollypop.preterm",
                                       "lollypop.term", "pops"),
                        lo        = NULL,
@@ -46,21 +50,21 @@ draw_chart <- function(txt  = NULL,
                        exact_ga = FALSE,
                        break_ties = FALSE,
                        show_realized = FALSE,
-                       show_future = FALSE,
-                       ...) {
+                       show_future = FALSE) {
   selector <- match.arg(selector)
   dnr <- match.arg(dnr)
 
-  if (!is.null(txt)) ind <- convert_bds_individual(txt)
-  else ind <- get_ind(loc)
-
-  # create chartcode using selector
-  if (!validate_chartcode(chartcode))
-    chartcode <- switch(selector,
-                        "data" = select_chart(ind = ind)$chartcode,
-                        "derive" = select_chart(
-                          ind = NULL, ...)$chartcode,
-                        "chartcode" = chartcode)
+  ind <- get_ind(txt, loc)
+  chartcode <- switch(selector,
+                      "data" = select_chart(ind = ind)$chartcode,
+                      "derive" = select_chart(ind = NULL,
+                                              chartgrp = chartgrp,
+                                              agegrp = agegrp,
+                                              sex = sex,
+                                              etn = etn,
+                                              ga = ga,
+                                              side = side)$chartcode,
+                      "chartcode" = chartcode)
 
   # convert hi and lo into period vector
   nmatch <- as.integer(nmatch)
@@ -70,6 +74,7 @@ draw_chart <- function(txt  = NULL,
   process_chart(individual = ind,
                 chartcode = chartcode,
                 curve_interpolation = curve_interpolation,
+                quiet = quiet,
                 dnr = dnr,
                 period = period,
                 nmatch = nmatch,

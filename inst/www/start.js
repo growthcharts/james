@@ -2,8 +2,8 @@
 
 // user arguments
 const urlParams = new URLSearchParams(window.location.search);
-const user_bds = urlParams.get('bds');
-const user_ind = urlParams.get('ind');
+const user_txt = urlParams.get('txt');
+const user_loc = urlParams.get('loc');
 const user_chartcode = urlParams.get('chartcode');
 
 // internal constants
@@ -84,19 +84,19 @@ var radios = document.forms.sex.elements.sex;
   };
 }
 
-// if user_ind is specified, report any warnings and messages
-if (user_ind) {
-  var warn = user_ind + "/warnings/text";
-  var mess = user_ind + "/messages/text";
-  $("#key").text(user_ind);
+// if user_loc is specified, report any warnings and messages
+if (user_loc) {
+  var warn = user_loc + "/warnings/text";
+  var mess = user_loc + "/messages/text";
+  $("#key").text(user_loc);
   $("#warnings").load(warn);
   $("#messages").load(mess);
 }
 
 // upload data if bds is specified AND if ind is not specified
-if (user_bds && !user_ind) {
+if (user_txt && !user_loc) {
   var rq0 = ocpu.call("convert_bds_ind", {
-    txt: user_bds
+    txt: user_txt
   }, function(session) {
     // update session key, update error, warning and messages fields
     $("#key").text(session.getKey());
@@ -104,7 +104,7 @@ if (user_bds && !user_ind) {
       $("#warnings").text(warnings);});
     session.getMessages(function(messages){
       $("#messages").text(messages);});
-    user_ind = session.getKey();
+    user_loc = session.getKey();
   });
   rq0.fail(function() {
     alert("Server error: " + rq0.responseText);
@@ -114,12 +114,12 @@ if (user_bds && !user_ind) {
 // updating logic: use derive, unless there are data and unless
 // chartcode is directly specified
 var selector  = "derive";
-if (user_ind) selector = "data";
+if (user_loc) selector = "data";
 if (user_chartcode) selector = "chartcode";
 
 // if there are data or chartcode arguments specified by user:
 // determine chartcode, set chart controls, update visibility, draw chart
-if (user_ind || user_chartcode) initialize_chart_controls();
+if (user_loc || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
@@ -129,10 +129,10 @@ else update();
 function initialize_chart_controls() {
   // function executes at initialization, if there are child data
   // convert_ind_chartadvice() obtains useful statistics from
-  // the uploaded individual data (R) from user_ind and
+  // the uploaded individual data (R) from user_loc and
   // from user_chartcode
   var rq1 = ocpu.call("convert_ind_chartadvice", {
-    loc: user_ind,
+    loc: user_loc,
     chartcode: user_chartcode,
     selector: selector
   }, function(session) {
@@ -195,6 +195,7 @@ function initialize_chart_controls() {
     update();
 
     // for all subsequent calls, use derive
+    // this allows user to change charts interactively
     selector = "derive";
     });
 });

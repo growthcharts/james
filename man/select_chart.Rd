@@ -12,8 +12,7 @@ select_chart(
   etn = NULL,
   ga = NULL,
   side = "hgt",
-  language = "dutch",
-  ...
+  language = "dutch"
 )
 }
 \arguments{
@@ -39,8 +38,6 @@ provides the 0-4 chart with weight for age (design E).}
 
 \item{language}{Language: \code{'dutch'} or \code{'english'} (not
 used)}
-
-\item{\dots}{Not used.}
 }
 \value{
 A list with elements \code{chartgrp}, \code{chartcode}

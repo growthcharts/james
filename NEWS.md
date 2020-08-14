@@ -1,3 +1,11 @@
+# james 0.20.0
+
+* Major change: Systematic use of `txt` and `loc` arguments in both `R` and javascript
+* Codes `null` values in javascript by `{}` before making request to `R`
+* Replaces `is.null(x)` by `!length(x)`
+* Removes `stop()` within `tryCatch`
+* Provides extra argument `txt`, so making `get_ind()` more intelligent
+
 # james 0.19.0
 
 * `validate_chartcode()` is no longer exported, and returns `TRUE`/`FALSE`

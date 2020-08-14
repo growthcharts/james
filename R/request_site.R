@@ -13,7 +13,7 @@
 #' @param schema Optional. A JSON string, URL or file that selects the JSON validation
 #' schema. Only relevant if \code{txt} is specified.
 #' @return URL composed of JAMES server and query string starting
-#' with \code{?ind=...}, which indicates the URL of the uploaded
+#' with \code{?loc=...}, which indicates the URL of the uploaded
 #' child data
 #' @seealso \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}
 #' @details
@@ -55,5 +55,5 @@ request_site <- function(txt = NULL, loc = NULL, schema = NULL) {
   if (is.null(txt) && is.null(loc)) return(site)
   if (!is.null(txt)) loc <- get_loc(txt, host, schema)
 
-  paste0(site, "?ind=", loc)
+  paste0(site, "?loc=", loc)
 }

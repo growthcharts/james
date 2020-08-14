@@ -369,7 +369,7 @@ and the main site at (<https://groeidiagrammen.nl/ocpu/lib/james/www/>)
 as
 
 ``` bash
-curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
+curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
 ```
 
 Pasting this url in your browser starts the site with the child’s data.
@@ -381,7 +381,7 @@ Starting the site at a given growth chart is possible by specifying the
 `PMAAN27` by
 
 ``` bash
-curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?ind=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
+curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
 ```
 
 The site now starts with `PMAAN27` instead of `PMAHN27`. Any chart can
@@ -408,7 +408,7 @@ curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
 
     ##   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     ##                                  Dload  Upload   Total   Spent    Left  Speed
-    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  15369      0 --:--:-- --:--:-- --:--:-- 15369
+    ##   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  4288    0  4288    0     0  21333      0 --:--:-- --:--:-- --:--:-- 21333
     ## draw_chart                package:james                R Documentation
     ## 
     ## Draw growth chart

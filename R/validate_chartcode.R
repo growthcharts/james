@@ -7,7 +7,7 @@
 #' @seealso \code{\link{list_charts}}
 validate_chartcode <- function(chartcode = NULL) {
 
-  if (is.null(chartcode)) return(FALSE)
+  if (!length(chartcode)) return(FALSE)
   chartcode[1L] %in% list_charts()$chartcode
 }
 

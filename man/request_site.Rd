@@ -21,7 +21,7 @@ schema. Only relevant if \code{txt} is specified.}
 }
 \value{
 URL composed of JAMES server and query string starting
-with \code{?ind=...}, which indicates the URL of the uploaded
+with \code{?loc=...}, which indicates the URL of the uploaded
 child data
 }
 \description{

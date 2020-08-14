@@ -21,7 +21,6 @@
 #'   \code{'both'}
 #' @param language Language: \code{'dutch'} or \code{'english'} (not
 #'   used)
-#' @param \dots Not used.
 #' @return A list with elements \code{chartgrp}, \code{chartcode}
 #' and \code{ga}
 #' @seealso \code{\link[chartcatalog]{create_chartcode}},
@@ -40,8 +39,7 @@ select_chart <- function(ind      = NULL,
                          etn      = NULL,
                          ga       = NULL,
                          side     = "hgt",
-                         language = "dutch",
-                         ...) {
+                         language = "dutch") {
 
   # choose defaults depending on individual
   if (!is.null(ind)) {
@@ -51,10 +49,6 @@ select_chart <- function(ind      = NULL,
     if (is.null(sex))      sex      <- select_sex(ind)
     if (is.null(etn))      etn      <- "nl"
   }
-
-  # if (chartgrp == "preterm") browser()
-  # select week 36 for non-preterms
-  # if (chartgrp == "preterm") ga <- min(ga, 36)
 
   # now get the chartcode
   chartcode <- create_chartcode(
