@@ -96,14 +96,13 @@ if (user_loc) {
 // updating logic to select charts
 // 1. use "derive" based on user interaction
 var selector  = "derive";
-// 2. use "data" if we can load child data
-if (user_loc) selector = "data";
+// 2. use "data" if we can calculate or load child data
+if (user_txt || user_loc) selector = "data";
 // 3. use hard chartcode if user specified one
 if (user_chartcode) selector = "chartcode";
 
-// in the last two cases:
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_loc || user_chartcode) initialize_chart_controls();
+if (user_txt || user_loc || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
