@@ -35,14 +35,13 @@
 #'    \item{\code{period}}{A character vector of two elements, indicating the first and last period for the
 #'    matching analysis, e.g. like \code{c("3m", "14m")}.}
 #'    }
-#' @author Stef van Buuren 2019
+#' @author Stef van Buuren 2020
 #' @seealso \code{\link[chartcatalog]{parse_chartcode}}
 #' @keywords server
 #' @export
-convert_ind_chartadvice <- function(loc,
-                                    chartcode,
-                                    selector) {
-  ind <- get_ind(loc = loc)
+convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
+                                    selector = NULL) {
+  ind <- get_ind(txt = txt, loc = loc)
   chartcode <- switch(selector,
                       "data" = select_chart(ind = ind)$chartcode,
                       "chartcode" = chartcode)

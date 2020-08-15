@@ -93,31 +93,6 @@ if (user_loc) {
   $("#messages").load(mess);
 }
 
-// if txt (=JSON BDS data) is specified
-// AND if loc (=URL to ind data) is not specified
-// upload data, and initialise user_loc
-
-// handle null user inputs
-var utxt = '';
-if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-
-if (user_txt && !user_loc) {
-  var rq0 = ocpu.call("convert_bds_ind", {
-    txt: utxt
-  }, function(session) {
-    // update session key, update error, warning and messages fields
-    $("#key").text(session.getKey());
-    session.getWarnings(function(warnings){
-      $("#warnings").text(warnings);});
-    session.getMessages(function(messages){
-      $("#messages").text(messages);});
-    user_loc = session.getKey();
-  });
-  rq0.fail(function() {
-    alert("Server error: " + rq0.responseText);
-  });
-}
-
 // updating logic to select charts
 // 1. use "derive" based on user interaction
 var selector  = "derive";
@@ -140,12 +115,15 @@ function initialize_chart_controls() {
   // from user_chartcode
 
   // handle null user inputs
+  var utxt = '';
   var uloc = '';
   var ucode  = '';
+  if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
   if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   var rq1 = ocpu.call("convert_ind_chartadvice", {
+    txt: utxt,
     loc: uloc,
     chartcode: ucode,
     selector: selector

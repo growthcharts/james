@@ -4,9 +4,14 @@
 \alias{convert_ind_chartadvice}
 \title{Derive advice on chart choice from data}
 \usage{
-convert_ind_chartadvice(loc, chartcode, selector)
+convert_ind_chartadvice(txt = "", loc = "", chartcode = "", selector = NULL)
 }
 \arguments{
+\item{txt}{A JSON string, URL or file with the data in JSON
+format. The input data adhere to specification
+\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
+and are converted to JSON according to \code{schema}.}
+
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
@@ -70,6 +75,6 @@ of proper chart and analysis defaults according to the child data.
 \code{\link[chartcatalog]{parse_chartcode}}
 }
 \author{
-Stef van Buuren 2019
+Stef van Buuren 2020
 }
 \keyword{server}
