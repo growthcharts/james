@@ -7,8 +7,8 @@
 convert_ind_chartadvice(loc, chartcode, selector)
 }
 \arguments{
-\item{loc}{Alternative to \code{txt}. Location where data is uploaded
-and processed, for example, as obtained by \code{upload_txt()}.}
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
+and converted to internal server format.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

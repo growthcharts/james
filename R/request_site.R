@@ -1,59 +1,110 @@
 #' Request site containing personalised charts
 #'
-#' Server-side function cto construct a URL to a site that shows a personalised
+#' Server-side function to construct a URL to a site that shows a personalised
 #' growth chart. The site includes a navigation bar so that the end
-#' user can tweak chart choice.
-#' @param txt A JSON string, URL or file, with the data (in JSON
-#'   format) to be uploaded. The variable specification are expected
-#'   to be according specification
-#'   \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS
-#'    JGZ 3.2.5}, and converted to JSON.
-#' @param loc Alternative to \code{txt}. Location where data is uploaded
-#' and processed, for example, as obtained by \code{upload_txt()}.
+#' user can interact to chart choices.
+#' @param txt A JSON string, URL or file with the data in JSON
+#' format. The input data adhere to specification
+#' \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
+#' and are converted to JSON according to \code{schema}.
+#' @param loc Alternative to \code{txt}. Location where input data is uploaded
+#' and converted to internal server format.
 #' @param schema Optional. A JSON string, URL or file that selects the JSON validation
-#' schema. Only relevant if \code{txt} is specified.
-#' @return URL composed of JAMES server and query string starting
-#' with \code{?loc=...}, which indicates the URL of the uploaded
-#' child data
+#' schema. Only used if the \code{txt} argument is specified.
+#' @param upload Logical. If \code{TRUE} then \code{request_site()} will upload
+#' the data in \code{txt} and return a site address with the \code{?loc=} query appended.
+#' The default (\code{FALSE}) just appends \code{?txt=} to the site url, thus
+#' deferring validation and conversion to internal representation to the site.
+#' @param host URL of the JAMES server. By default, host is the currently
+#' running server that processes the request.
+#' @return URL composed of JAMES server, possibly appended by query string starting
+#' with \code{?txt=} or \code{?loc=}.
 #' @seealso \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}
 #' @details
+#' One of \code{txt} or \code{loc} needs to be specified. If both are given,
+#' \code{txt} takes precedence. If neither is given, then the function returns
+#' the base site without any data.
 #'
-#' The function can take child data in two forms: 1) a JSON file with
-#' BDS-formatted child data (argument \code{txt}) or, 2) a URL with
-#' child data on a previously stored server location on the server
-#' (argument \code{loc}).
+#' @note This function does not yet work with Docker because we cannot get the
+#' host URL name.
+#' The output form \code{?txt=} currently ignores the \code{schema} argument.
 #'
-#' One of \code{txt} or \code{loc} need to be specified. If both are given,
-#' \code{txt} takes precedence. The \code{txt} option uploads the data to the
-#' host that runs \code{request_side()}.
-#'
-#' @note This not yet work with Docker because we cannot get the host URL.
 #' @examples
-#' fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+#' fn <- system.file("testdata", "client3.json", package = "james")
+#' js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+#' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 #'
-#' # as two steps (upload to default site groeidiagrammen.nl)
+#' # solutions that create a ?loc= parameter
+#'
+#' # upload JSON string to default host, return site url
+#' site <- request_site(js, upload = TRUE)
+#' site
+#' browseURL(site)
+#' request_site(url, upload = TRUE)
+#'
+#' # same, as two steps, starting from file name
 #' resp <- upload_txt(fn)
 #' loc <- jamesclient::get_url(resp, "location")
 #' request_site(loc = loc)
 #'
-#' \dontrun{
-#' # upload to localhost (if running)
-#' resp <- upload_txt(fn, "http://localhost")
-#' loc <- jamesclient::get_url(resp, "location")
-#' request_site(loc = loc)
+#' # solutions that create a ?txt= parameter
 #'
-#' # as one step
 #' request_site(fn)
-#' }
+#' request_site(js)
+#' request_site(url)
 #' @export
-request_site <- function(txt = NULL, loc = NULL, schema = NULL) {
+request_site <- function(txt = "", loc = "", schema = "",
+                         upload = FALSE, host = NULL) {
+
+  txt <- txt[1L]
+  loc <- loc[1L]
 
   # What is the URL of the server where I run?
-  host <- get_host()
+  if (is.null(host)) host <- get_host()
   site <- paste0(host, "/ocpu/lib/james/www/")
 
-  if (is.null(txt) && is.null(loc)) return(site)
-  if (!is.null(txt)) loc <- get_loc(txt, host, schema)
+  # no data
+  if (is.empty(txt) && is.empty(loc))
+    return(site)
+
+  # return ?txt=
+  if (!is.empty(txt) && !upload) {
+
+    # json string
+    if (validate(txt)) {
+      return(paste0(site, "?txt=", minify(txt)))
+    }
+
+    # url
+    if (startsWith(txt, "http")) {
+      req <- curl::curl_fetch_memory(txt)
+      if (req$status_code != 200L) {
+        message("txt = ", txt, ", - status code", req$status_code, ".")
+        return(site)
+      }
+      js <- rawToChar(req$content)
+      if (!validate(js)) {
+        message("txt = ", txt, " - URL does not contain valid JSON.")
+        return(site)
+      }
+      return(paste0(site, "?txt=", minify(js)))
+    }
+
+    # file
+    # when run as server - Is this a security risk?
+    if (file.exists(txt)) {
+      js <- jsonlite::toJSON(jsonlite::fromJSON(txt), auto_unbox = TRUE)
+      if (!validate(js)) {
+        message("txt = ", txt, " - File does not contain valid JSON.")
+        return(site)
+      }
+      return(paste0(site, "?txt=", minify(js)))
+    }
+  }
+
+  # # return ?loc=, possibly after upload of txt
+  if (!is.empty(txt) && upload)
+    loc <- get_loc(txt, host, schema)
 
   paste0(site, "?loc=", loc)
 }

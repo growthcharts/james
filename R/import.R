@@ -9,7 +9,7 @@
 #'                             modify_url POST
 #'                             upload_file
 #' @importFrom jamesclient     get_url
-#' @importFrom jsonlite        fromJSON toJSON unbox validate
+#' @importFrom jsonlite        fromJSON minify toJSON unbox validate
 #' @importFrom methods         new slot
 #' @importFrom minihealth      convert_bds_individual
 #'                             get_range verify

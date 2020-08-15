@@ -7,17 +7,16 @@
 upload_txt(txt, host = "https://groeidiagrammen.nl", schema = NULL)
 }
 \arguments{
-\item{txt}{A JSON string, URL or file, with the data (in JSON
-format) to be uploaded. The variable specification are expected
-to be according specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS
- JGZ 3.2.5}, and converted to JSON.}
+\item{txt}{A JSON string, URL or file with the data in JSON
+format. The input data adhere to specification
+\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
+and are converted to JSON according to \code{schema}.}
 
 \item{host}{String with URL of the JAMES host machine. Defaults to
 \code{https://groeidiagrammen.nl}.}
 
 \item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
-schema. Only relevant if \code{txt} is specified.}
+schema. Only used if the \code{txt} argument is specified.}
 }
 \value{
 An object of class \code{\link[httr:response]{response}}

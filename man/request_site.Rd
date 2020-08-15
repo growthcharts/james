@@ -4,61 +4,70 @@
 \alias{request_site}
 \title{Request site containing personalised charts}
 \usage{
-request_site(txt = NULL, loc = NULL, schema = NULL)
+request_site(txt = "", loc = "", schema = "", upload = FALSE, host = NULL)
 }
 \arguments{
-\item{txt}{A JSON string, URL or file, with the data (in JSON
-format) to be uploaded. The variable specification are expected
-to be according specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS
- JGZ 3.2.5}, and converted to JSON.}
+\item{txt}{A JSON string, URL or file with the data in JSON
+format. The input data adhere to specification
+\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
+and are converted to JSON according to \code{schema}.}
 
-\item{loc}{Alternative to \code{txt}. Location where data is uploaded
-and processed, for example, as obtained by \code{upload_txt()}.}
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
+and converted to internal server format.}
 
 \item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
-schema. Only relevant if \code{txt} is specified.}
+schema. Only used if the \code{txt} argument is specified.}
+
+\item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
+the data in \code{txt} and return a site address with the \code{?loc=} query appended.
+The default (\code{FALSE}) just appends \code{?txt=} to the site url, thus
+deferring validation and conversion to internal representation to the site.}
+
+\item{host}{URL of the JAMES server. By default, host is the currently
+running server that processes the request.}
 }
 \value{
-URL composed of JAMES server and query string starting
-with \code{?loc=...}, which indicates the URL of the uploaded
-child data
+URL composed of JAMES server, possibly appended by query string starting
+with \code{?txt=} or \code{?loc=}.
 }
 \description{
-Server-side function cto construct a URL to a site that shows a personalised
+Server-side function to construct a URL to a site that shows a personalised
 growth chart. The site includes a navigation bar so that the end
-user can tweak chart choice.
+user can interact to chart choices.
 }
 \details{
-The function can take child data in two forms: 1) a JSON file with
-BDS-formatted child data (argument \code{txt}) or, 2) a URL with
-child data on a previously stored server location on the server
-(argument \code{loc}).
-
-One of \code{txt} or \code{loc} need to be specified. If both are given,
-\code{txt} takes precedence. The \code{txt} option uploads the data to the
-host that runs \code{request_side()}.
+One of \code{txt} or \code{loc} needs to be specified. If both are given,
+\code{txt} takes precedence. If neither is given, then the function returns
+the base site without any data.
 }
 \note{
-This not yet work with Docker because we cannot get the host URL.
+This function does not yet work with Docker because we cannot get the
+host URL name.
+The output form \code{?txt=} currently ignores the \code{schema} argument.
 }
 \examples{
-fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+fn <- system.file("testdata", "client3.json", package = "james")
+js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 
-# as two steps (upload to default site groeidiagrammen.nl)
+# solutions that create a ?loc= parameter
+
+# upload JSON string to default host, return site url
+site <- request_site(js, upload = TRUE)
+site
+browseURL(site)
+request_site(url, upload = TRUE)
+
+# same, as two steps, starting from file name
 resp <- upload_txt(fn)
 loc <- jamesclient::get_url(resp, "location")
 request_site(loc = loc)
 
-\dontrun{
-# upload to localhost (if running)
-resp <- upload_txt(fn, "http://localhost")
-loc <- jamesclient::get_url(resp, "location")
-request_site(loc = loc)
+# solutions that create a ?txt= parameter
 
-# as one step
 request_site(fn)
-}
+request_site(js)
+request_site(url)
 }
 \seealso{
 \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}

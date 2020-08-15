@@ -7,14 +7,13 @@
 custom_list(txt = NULL, loc = NULL)
 }
 \arguments{
-\item{txt}{A JSON string, URL or file, with the data (in JSON
-format) to be uploaded. The variable specification are expected
-to be according specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS
- JGZ 3.2.5}, and converted to JSON.}
+\item{txt}{A JSON string, URL or file with the data in JSON
+format. The input data adhere to specification
+\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
+and are converted to JSON according to \code{schema}.}
 
-\item{loc}{Alternative to \code{txt}. Location where data is uploaded
-and processed, for example, as obtained by \code{upload_txt()}.}
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
+and converted to internal server format.}
 }
 \value{
 A table with screening results
