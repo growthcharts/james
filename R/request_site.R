@@ -13,7 +13,7 @@
 #' schema. Only used if the \code{txt} argument is specified.
 #' @param upload Logical. If \code{TRUE} then \code{request_site()} will upload
 #' the data in \code{txt} and return a site address with the \code{?loc=} query appended.
-#' The default (\code{FALSE}) just appends \code{?txt=} to the site url, thus
+#' Setting (\code{FALSE}) just appends \code{?txt=} to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
 #' @param host URL of the JAMES server. By default, host is the currently
 #' running server that processes the request.
@@ -37,10 +37,10 @@
 #' # solutions that create a ?loc= parameter
 #'
 #' # upload JSON string to default host, return site url
-#' site <- request_site(js, upload = TRUE)
+#' site <- request_site(js)
 #' site
 #' browseURL(site)
-#' request_site(url, upload = TRUE)
+#' request_site(url)
 #'
 #' # same, as two steps, starting from file name
 #' resp <- upload_txt(fn)
@@ -49,12 +49,12 @@
 #'
 #' # solutions that create a ?txt= parameter
 #'
-#' request_site(fn)
-#' request_site(js)
-#' request_site(url)
+#' request_site(fn, upload = FALSE)
+#' request_site(js, upload = FALSE)
+#' request_site(url, upload = FALSE)
 #' @export
 request_site <- function(txt = "", loc = "", schema = NULL,
-                         upload = FALSE, host = NULL) {
+                         upload = TRUE, host = NULL) {
 
   txt <- txt[1L]
   loc <- loc[1L]

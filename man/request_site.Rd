@@ -4,7 +4,7 @@
 \alias{request_site}
 \title{Request site containing personalised charts}
 \usage{
-request_site(txt = "", loc = "", schema = NULL, upload = FALSE, host = NULL)
+request_site(txt = "", loc = "", schema = NULL, upload = TRUE, host = NULL)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -20,7 +20,7 @@ schema. Only used if the \code{txt} argument is specified.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
 the data in \code{txt} and return a site address with the \code{?loc=} query appended.
-The default (\code{FALSE}) just appends \code{?txt=} to the site url, thus
+Setting (\code{FALSE}) just appends \code{?txt=} to the site url, thus
 deferring validation and conversion to internal representation to the site.}
 
 \item{host}{URL of the JAMES server. By default, host is the currently
@@ -53,10 +53,10 @@ url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 # solutions that create a ?loc= parameter
 
 # upload JSON string to default host, return site url
-site <- request_site(js, upload = TRUE)
+site <- request_site(js)
 site
 browseURL(site)
-request_site(url, upload = TRUE)
+request_site(url)
 
 # same, as two steps, starting from file name
 resp <- upload_txt(fn)
@@ -65,9 +65,9 @@ request_site(loc = loc)
 
 # solutions that create a ?txt= parameter
 
-request_site(fn)
-request_site(js)
-request_site(url)
+request_site(fn, upload = FALSE)
+request_site(js, upload = FALSE)
+request_site(url, upload = FALSE)
 }
 \seealso{
 \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}
