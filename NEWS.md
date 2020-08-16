@@ -1,3 +1,7 @@
+# james 0.22.1
+
+* Tweaks behavior of `draw_chart()` for more intuitive API.
+
 # james 0.22.0
 
 * Uses better defaults (`""` instead of `NULL`) for outward facing functions.
