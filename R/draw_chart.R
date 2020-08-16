@@ -5,21 +5,23 @@
 #' @inheritParams select_chart
 #' @inheritParams chartplotter::process_chart
 #' @param chartcode Optional. The code of the requested growth chart.
-#' @param selector Either \code{"data"}, \code{"derive"} or \code{"chartcode"}.
-#' In general, the function calculates the chart code by looking at the
-#' data (method \code{"data"}), the covariates (method \code{"derive"}).
-#' Setting \code{selector = "chartcode"} overrides this behavior, and select
-#' the chart specified in the \code{chartcode} argument. More in detail, the
-#' following behavior decides between growth charts:
+#' @param selector Either \code{"chartcode"}, \code{"data"} or \code{"derive"}.
+#' The function can calculate the chart code by looking at the child
+#' data (method \code{"data"}) or user input (method \code{"derive"}).
+#' More in detail, the following behaviour decides between growth charts:
 #'   \describe{
+#'   \item{\code{"data"}}{Calculate chart code from the individual data.
+#'   This setting chooses the "optimal" chart for a given individual set of data.}
 #'   \item{\code{"derive"}}{Calculate chart code from a combination of user
-#'   specifications (\code{chartgrp}, \code{agegrp}, \code{side}) and child
-#'   covariates (\code{sex}, \code{etn}, \code{ga}) by \code{select_chart()}.
-#'   (default)}
-#'   \item{\code{"data"}}{Calculate chart code from the individual data by
-#'   \code{select_chart()}.}
-#'   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}.}
+#'   data: \code{chartgrp}, \code{agegrp}, \code{side}, \code{sex},
+#'   \code{etn}, \code{ga}. The method does not use individual data. Use
+#'   this setting when chart choice needs to be reactive on user input.}
+#'   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
 #'   }
+#' If there is a valid \code{ind} object, then the function simply obeys
+#' the \code{selector} setting. If no valid \code{ind} object is found,
+#' the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
+#' is empty, then the function selects method \code{"derive"}.
 #' @param lo Value of the left visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
 #' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
@@ -37,7 +39,7 @@
 draw_chart <- function(txt  = "",
                        loc  = "",
                        chartcode = "",
-                       selector  = c("derive", "data", "chartcode"),
+                       selector  = c("data", "derive", "chartcode"),
                        chartgrp  = NULL,
                        agegrp    = NULL,
                        sex       = NULL,
@@ -61,16 +63,30 @@ draw_chart <- function(txt  = "",
   dnr <- match.arg(dnr)
 
   ind <- get_ind(txt, loc)
-  chartcode <- switch(selector,
-                      "derive" = select_chart(ind = NULL,
-                                              chartgrp = chartgrp,
-                                              agegrp = agegrp,
-                                              sex = sex,
-                                              etn = etn,
-                                              ga = ga,
-                                              side = side)$chartcode,
-                      "data" = select_chart(ind = ind)$chartcode,
-                      "chartcode" = chartcode)
+
+  # if we have no ind, prioritise chartcode over derive
+  # except when chartcode is empty
+  if (is.null(ind)) {
+    if (chartcode == "") chartcode <- select_chart(ind = NULL,
+                                                   chartgrp = chartgrp,
+                                                   agegrp = agegrp,
+                                                   sex = sex,
+                                                   etn = etn,
+                                                   ga = ga,
+                                                   side = side)$chartcode
+  } else {
+    # listen to selector
+    chartcode <- switch(selector,
+                        "data" = select_chart(ind = ind)$chartcode,
+                        "derive" = select_chart(ind = NULL,
+                                                chartgrp = chartgrp,
+                                                agegrp = agegrp,
+                                                sex = sex,
+                                                etn = etn,
+                                                ga = ga,
+                                                side = side)$chartcode,
+                        "chartcode" = chartcode)
+  }
 
   # convert hi and lo into period vector
   nmatch <- as.integer(nmatch)

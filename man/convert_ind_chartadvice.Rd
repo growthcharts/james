@@ -22,21 +22,23 @@ and converted to internal server format.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 
-\item{selector}{Either \code{"data"}, \code{"derive"} or \code{"chartcode"}.
-In general, the function calculates the chart code by looking at the
-data (method \code{"data"}), the covariates (method \code{"derive"}).
-Setting \code{selector = "chartcode"} overrides this behavior, and select
-the chart specified in the \code{chartcode} argument. More in detail, the
-following behavior decides between growth charts:
+\item{selector}{Either \code{"chartcode"}, \code{"data"} or \code{"derive"}.
+The function can calculate the chart code by looking at the child
+data (method \code{"data"}) or user input (method \code{"derive"}).
+More in detail, the following behaviour decides between growth charts:
   \describe{
+  \item{\code{"data"}}{Calculate chart code from the individual data.
+  This setting chooses the "optimal" chart for a given individual set of data.}
   \item{\code{"derive"}}{Calculate chart code from a combination of user
-  specifications (\code{chartgrp}, \code{agegrp}, \code{side}) and child
-  covariates (\code{sex}, \code{etn}, \code{ga}) by \code{select_chart()}.
-  (default)}
-  \item{\code{"data"}}{Calculate chart code from the individual data by
-  \code{select_chart()}.}
-  \item{\code{"chartcode"}}{Take string specified in \code{chartcode}.}
-  }}
+  data: \code{chartgrp}, \code{agegrp}, \code{side}, \code{sex},
+  \code{etn}, \code{ga}. The method does not use individual data. Use
+  this setting when chart choice needs to be reactive on user input.}
+  \item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
+  }
+If there is a valid \code{ind} object, then the function simply obeys
+the \code{selector} setting. If no valid \code{ind} object is found,
+the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
+is empty, then the function selects method \code{"derive"}.}
 }
 \value{
 A list with the following elements
