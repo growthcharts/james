@@ -1,3 +1,7 @@
+# james 0.22.0
+
+* Uses better defaults (`""` instead of `NULL`) for outward facing functions.
+
 # james 0.21.0
 
 * The communication between javascript and R is now based on empty strings instead of `null` and `NULL`. * The site is functional again!
