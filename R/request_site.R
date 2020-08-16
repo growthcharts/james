@@ -53,7 +53,7 @@
 #' request_site(js)
 #' request_site(url)
 #' @export
-request_site <- function(txt = "", loc = "", schema = "",
+request_site <- function(txt = "", loc = "", schema = NULL,
                          upload = FALSE, host = NULL) {
 
   txt <- txt[1L]

@@ -18,6 +18,6 @@
 #' screen_curves(fn)
 #'}
 #' @export
-screen_curves <- function(txt = NULL, loc = NULL) {
+screen_curves <- function(txt = "", loc = "") {
   screen_curves_ind(get_ind(txt, loc))
 }

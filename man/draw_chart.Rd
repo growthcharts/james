@@ -5,9 +5,9 @@
 \title{Draw growth chart}
 \usage{
 draw_chart(
-  txt = NULL,
-  loc = NULL,
-  chartcode = NULL,
+  txt = "",
+  loc = "",
+  chartcode = "",
   selector = c("derive", "data", "chartcode"),
   chartgrp = NULL,
   agegrp = NULL,

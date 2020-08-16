@@ -4,7 +4,7 @@
 \alias{convert_bds_ind}
 \title{Convert json BSD data for single individual to class individual}
 \usage{
-convert_bds_ind(txt = NULL, ...)
+convert_bds_ind(txt = "", ...)
 }
 \arguments{
 \item{txt}{a JSON string, URL or file}

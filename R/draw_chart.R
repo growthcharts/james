@@ -34,9 +34,9 @@
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' g <- draw_chart(txt = fn)
 #' @export
-draw_chart <- function(txt  = NULL,
-                       loc  = NULL,
-                       chartcode = NULL,
+draw_chart <- function(txt  = "",
+                       loc  = "",
+                       chartcode = "",
                        selector  = c("derive", "data", "chartcode"),
                        chartgrp  = NULL,
                        agegrp    = NULL,

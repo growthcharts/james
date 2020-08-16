@@ -4,7 +4,7 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(txt = NULL, loc = NULL)
+screen_curves(txt = "", loc = "")
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON

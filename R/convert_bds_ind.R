@@ -16,6 +16,6 @@
 #' p <- convert_bds_ind(fn)
 #' @keywords server
 #' @export
-convert_bds_ind <- function(txt = NULL, ...) {
+convert_bds_ind <- function(txt = "", ...) {
   convert_bds_individual(txt = txt, ...)
 }

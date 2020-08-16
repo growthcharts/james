@@ -18,7 +18,7 @@
 #' identical(list1, list2)
 #' }
 #' @export
-custom_list <- function(txt = NULL, loc = NULL) {
+custom_list <- function(txt = "", loc = "") {
 
   site <- request_site(txt, loc)
 

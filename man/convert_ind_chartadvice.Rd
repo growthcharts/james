@@ -4,7 +4,12 @@
 \alias{convert_ind_chartadvice}
 \title{Derive advice on chart choice from data}
 \usage{
-convert_ind_chartadvice(txt = "", loc = "", chartcode = "", selector = NULL)
+convert_ind_chartadvice(
+  txt = "",
+  loc = "",
+  chartcode = "",
+  selector = c("data", "chartcode")
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON

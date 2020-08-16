@@ -4,7 +4,7 @@
 \alias{custom_list}
 \title{Provides a Screen growth curves according to JGZ guidelines}
 \usage{
-custom_list(txt = NULL, loc = NULL)
+custom_list(txt = "", loc = "")
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
