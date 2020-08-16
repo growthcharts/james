@@ -1,6 +1,7 @@
 # james 0.22.1
 
 * Tweaks behavior of `draw_chart()` for more intuitive API.
+* Change default in `request_site()` to upload
 
 # james 0.22.0
 
