@@ -28,6 +28,8 @@
 #'   or \code{"7.5m"}
 #' @param draw_grob Logical. Should chart be plotted on current device?
 #' Default is \code{TRUE}.
+#' @param bds_data Legacy for \code{txt}
+#' @param ind_loc Legacy for \code{loc}
 #' @return A \code{gTree} object.
 #' @author Stef van Buuren 2020
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
@@ -58,7 +60,13 @@ draw_chart <- function(txt  = "",
                        break_ties = FALSE,
                        show_realized = FALSE,
                        show_future = FALSE,
-                       draw_grob = TRUE) {
+                       draw_grob = TRUE,
+                       bds_data = "",
+                       ind_loc = "") {
+  # legacy
+  if (!is.empty(bds_data)) txt <- bds_data
+  if (!is.empty(ind_loc)) loc <- ind_loc
+
   selector <- match.arg(selector)
   dnr <- match.arg(dnr)
 

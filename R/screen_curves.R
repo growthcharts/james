@@ -1,6 +1,7 @@
 #' Screen growth curves according to JGZ guidelines
 #'
 #' @inheritParams request_site
+#' @param location Legacy for \code{loc}
 #' @return A table with screening results
 #' @examples
 #' \dontrun{
@@ -18,6 +19,9 @@
 #' screen_curves(fn)
 #'}
 #' @export
-screen_curves <- function(txt = "", loc = "") {
+screen_curves <- function(txt = "", loc = "", location = "") {
+  # legacy
+  if (!is.empty(location)) return(custom_list(txt = txt, loc = location))
+
   screen_curves_ind(get_ind(txt, loc))
 }
