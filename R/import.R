@@ -6,8 +6,8 @@
 #' @importFrom grid            grid.draw
 #' @importFrom growthscreener  screen_curves_ind
 #' @importFrom httr            add_headers build_url content GET
-#'                             modify_url POST
-#'                             upload_file
+#'                             headers message_for_status modify_url POST
+#'                             status_code upload_file
 #' @importFrom jamesclient     get_url
 #' @importFrom jsonlite        fromJSON minify toJSON unbox validate
 #' @importFrom methods         new slot

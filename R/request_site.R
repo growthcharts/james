@@ -106,5 +106,5 @@ request_site <- function(txt = "", loc = "", schema = NULL,
   if (!is.empty(txt) && upload)
     loc <- get_loc(txt, host, schema)
 
-  paste0(site, "?loc=", loc)
+  ifelse(loc == "", site, paste0(site, "?loc=", loc))
 }

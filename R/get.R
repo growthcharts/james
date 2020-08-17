@@ -10,12 +10,15 @@ get_host <- function() {
 
 # returns url of uploaded data
 get_loc <- function(txt, host, schema) {
-  tryCatch(expr = {
-    resp <- upload_txt(txt, host = host, schema = schema)
-    get_url(resp, "location")
-  },
-  error = function(cnd) paste("Cannot upload", txt)
-  )
+
+  resp <- upload_txt(txt, host = host, schema = schema)
+  if (status_code(resp) != 201L) {
+    message_for_status(resp,
+                       task = paste0("upload data", "\n",
+                                     content(resp, "text", encoding = "utf-8")))
+    return("")
+  }
+  headers(resp)$location
 }
 
 # returns object of S4 class individual or NULL
