@@ -4,7 +4,7 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(txt = "", loc = "", location = "")
+screen_curves(txt = "", loc = "", location = "", legacy = TRUE)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -16,6 +16,8 @@ and are converted to JSON according to \code{schema}.}
 and converted to internal server format.}
 
 \item{location}{Legacy for \code{loc}}
+
+\item{legacy}{Logical indicating whether legacy should be done.}
 }
 \value{
 A table with screening results
