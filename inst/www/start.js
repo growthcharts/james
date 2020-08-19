@@ -52,6 +52,25 @@ $("#visitslider").ionRangeSlider({
   }
 });
 
+
+// use active accordion menu to change plot
+var active = "groei";
+
+$('#groei').click(function (){
+        if (active != "groei"){
+          active = "groei";
+          update();
+        }
+    });
+
+$('#ontwikkeling').click(function (){
+        if (active != "ontwikkeling"){
+          active = "ontwikkeling";
+          update();
+        }
+    });
+
+
 // set onchange triggers
 var chartgrplist = document.getElementById('chartgrp');
 chartgrplist.addEventListener('change', update, false);

@@ -3,12 +3,18 @@
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
+  if (active == "groei"){
+    var msr = document.querySelector('input[name="msr"]:checked').value;
+  } else if (active == "ontwikkeling"){
+    var msr = "dsc";
+  }
+
   var chartgrp = document.getElementById("chartgrp").value;
   var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
   var population = document.querySelector('input[name="etnicity"]:checked').value;
   var ga = Number($("#weekslider").data().from);
   var sex = document.querySelector('input[name="sex"]:checked').value;
-  var msr = document.querySelector('input[name="msr"]:checked').value;
+  //var msr = document.querySelector('input[name="msr"]:checked').value;
   var cm = document.getElementById("interpolation").checked;
   var dnr = document.getElementById("donordata").value;
   var lo = $("#visitslider").data().from;
