@@ -348,6 +348,10 @@ data are drawn by simply using the site controls.
 
 `screen_curves` | Screen growth curves according to JGZ guidelines
 
+``` bash
+curl https://groeidiagrammen.nl/ocpu/library/james/R/screen_curves -d "txt=$var"
+```
+
 ## Create one request with list of return values
 
 `custom_list` | Create JSON string with custom return
