@@ -51,9 +51,21 @@ $("#visitslider").ionRangeSlider({
             update();
   }
 });
+$("#weekslider_dsc").ionRangeSlider({
+  type: "single",
+  skin: "round",
+  grid_snap: true,
+  min: 25,
+  max: 36,
+  from: 36,
+  step: 1,
+  onFinish: function (data) {
+            update();
+  }
+});
 
 
-// use active accordion menu to change plot
+// set active accordion page
 var active = "groei";
 
 $('#groei').click(function (){
@@ -74,6 +86,10 @@ $('#ontwikkeling').click(function (){
 // set onchange triggers
 var chartgrplist = document.getElementById('chartgrp');
 chartgrplist.addEventListener('change', update, false);
+
+// AHJL: not sure if the _dsc chartgrp requires this
+var chartgrplist_dsc = document.getElementById('chartgrp_dsc');
+chartgrplist_dsc.addEventListener('change', update, false);
 
 var radios = document.forms.agegrp.elements.agegrp;
 for(var i = 0, max = radios.length; i < max; i++) {
@@ -99,6 +115,13 @@ var radios = document.forms.etnicity.elements.etnicity;
 var radios = document.forms.sex.elements.sex;
   for(var i = 0, max = radios.length; i < max; i++) {
     radios[i].onclick = function() {
+      update();
+  };
+}
+
+var radios = document.forms.agegrp_dsc.elements.agegrp_dsc;
+for(var i = 0, max = radios.length; i < max; i++) {
+  radios[i].onclick = function() {
       update();
   };
 }

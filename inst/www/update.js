@@ -3,18 +3,23 @@
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
+  // grab active variables
   if (active == "groei"){
     var msr = document.querySelector('input[name="msr"]:checked').value;
+    var chartgrp = document.getElementById("chartgrp").value;
+    var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
+    var population = document.querySelector('input[name="etnicity"]:checked').value;
+    var ga = Number($("#weekslider").data().from);
   } else if (active == "ontwikkeling"){
     var msr = "dsc";
+    var population = "nl";
+    // _dsc equivalents of relevant controls
+    var chartgrp = document.getElementById("chartgrp_dsc").value;
+    var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
+    var ga = Number($("#weekslider_dsc").data().from);
   }
 
-  var chartgrp = document.getElementById("chartgrp").value;
-  var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
-  var population = document.querySelector('input[name="etnicity"]:checked').value;
-  var ga = Number($("#weekslider").data().from);
   var sex = document.querySelector('input[name="sex"]:checked').value;
-  //var msr = document.querySelector('input[name="msr"]:checked').value;
   var cm = document.getElementById("interpolation").checked;
   var dnr = document.getElementById("donordata").value;
   var lo = $("#visitslider").data().from;
@@ -29,15 +34,18 @@ function update() {
   var lo_str = slider_values[[slider_list]][lo];
   var nmatch = slider_values[["matches"]][match];
 
+  // set active UI elements
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
     sr('etnicity', 'block');
+    sr('weekmenu_dsc', 'none');
   }
   if (chartgrp == 'preterm') {
     sr('agegrp_1-21y', 'none');
     sr('weekmenu', 'block');
     sr('etnicity', 'none');
+    sr('weekmenu_dsc', 'block');
   }
   if (chartgrp == 'who') {
     sr('agegrp_1-21y', 'none');
