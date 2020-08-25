@@ -4,7 +4,13 @@
 \alias{draw_chart_bds}
 \title{Convert bds-format data to individual and return growth chart}
 \usage{
-draw_chart_bds(txt = "", chartcode = "", curve_interpolation = TRUE, ...)
+draw_chart_bds(
+  txt = "",
+  chartcode = "",
+  curve_interpolation = TRUE,
+  selector = "chartcode",
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
@@ -13,6 +19,10 @@ draw_chart_bds(txt = "", chartcode = "", curve_interpolation = TRUE, ...)
 
 \item{curve_interpolation}{A logical indicating whether curve
 interpolation shoud be applied.}
+
+\item{selector}{Legacy addition to solve a problem in jgzApp. See
+\code{draw_chart} for interpretation. The default is set to
+\code{"chartcode"}.}
 
 \item{\dots}{For \code{draw_chart_bds}, additional parameter passed
 down to \code{fromJSON(txt, ...)}, \code{new("xyz",... )} and
@@ -24,6 +34,9 @@ as.call(...)} for setting proper reference standards.}
 The function \code{draw_chart_bds()} convert bds data into an object
 of class \linkS4class{individual}, and then draws the
 individual data on the requested growth chart.
+}
+\note{
+DEPRECATED. USE draw_chart INSTEAD.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
