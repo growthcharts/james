@@ -11,7 +11,7 @@
 
 * Enhancements:
 
-1. The site accept now the `?txt=` query parameter, which bypasses the new to upload data.
+1. The site accept now the `?txt=` query parameter, which bypasses the need to upload data.
 2. The new function `request_site` constructs URL's for personalised sites.
 3. The new function `custom_list` creates a custom list of return values (formerly implemented by `screen_curves`), and adds a new element containing the D-score from the last observation.
 4. The JAMES server location is now independent of the data location, so uploaded data can be stored on an external URL that is under control of the client.
