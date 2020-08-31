@@ -31,6 +31,3 @@ resp <- POST(url = url,
 test_that("file client3.json is screened",
           expect_equal(status_code(resp), 201))
 
-jsonlite::fromJSON(get_url(resp))
-z <- download_as_list(resp)
-
