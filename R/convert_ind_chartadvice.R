@@ -40,7 +40,11 @@
 #' @keywords server
 #' @export
 convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
-                                    selector = c("data", "chartcode")) {
+                                    selector = c("data", "chartcode"),
+                                    ind_loc = "") {
+  # legacy
+  if (!is.empty(ind_loc)) loc <- ind_loc
+
   selector <- match.arg(selector)
   ind <- get_ind(txt = txt, loc = loc)
   chartcode <- switch(selector,

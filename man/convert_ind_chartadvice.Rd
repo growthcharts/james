@@ -8,7 +8,8 @@ convert_ind_chartadvice(
   txt = "",
   loc = "",
   chartcode = "",
-  selector = c("data", "chartcode")
+  selector = c("data", "chartcode"),
+  ind_loc = ""
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ If there is a valid \code{ind} object, then the function simply obeys
 the \code{selector} setting. If no valid \code{ind} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
+
+\item{ind_loc}{Legacy for \code{loc}}
 }
 \value{
 A list with the following elements

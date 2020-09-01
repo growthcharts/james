@@ -7,16 +7,17 @@
 3. All analysis functions now accept `txt` and `loc` input. When both are specified, `txt` takes precedence.
 4. For consistency, function `upload_txt` replaces `update_bds`.
 5. Function `screen_curves` no longer returns a list, but only the screening results, consistent with its naming. A new function `custom_list` takes over this task from `screen_curves`.
-6. Removed functions: `update_bds` (replaced by `upload_txt`), `draw_chart_bds`, `draw_chart_ind`, `draw_plot` (replaced by `draw_chart`).
+6. Removed functions: `draw_chart_bds`, `draw_chart_ind`, `draw_plot` (replaced by `draw_chart`).
 
 * Enhancements:
 
 1. The site accept now the `?txt=` query parameter, which bypasses the need to upload data.
 2. The new function `request_site` constructs URL's for personalised sites.
 3. The new function `custom_list` creates a custom list of return values (formerly implemented by `screen_curves`), and adds a new element containing the D-score from the last observation.
-4. The JAMES server location is now independent of the data location, so uploaded data can be stored on an external URL that is under control of the client.
-5. The javascript reduces the number of calls via `OpenCPU`, resulting in speedier site updates.
-6. Function `draw_chart` gets a new parameter `draw_grob` argument, which allows the user to defer drawing and to tweak the `gTree` object directly.
+4. A new function `update_txt()` to upload data to JAMES
+5. The JAMES server location is now independent of the data location, so uploaded data can be stored on an external URL that is under control of the client.
+6. The javascript reduces the number of calls via `OpenCPU`, resulting in speedier site updates.
+7. Function `draw_chart` gets a new parameter `draw_grob` argument, which allows the user to defer drawing and to tweak the `gTree` object directly.
 
 
 # james 0.22.1
