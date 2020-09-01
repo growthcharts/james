@@ -1,3 +1,9 @@
+# james 0.24.0
+
+* Re-introduces legacy functions `draw_chart_bds`, `draw_chart_ind``
+* Changes `screen_curves` to old bahavior, thus producing a list instead of a table
+* Re-introduces arguments `bds_data`, `location`, `ind_loc` and `?ind=`
+
 # james 0.23.0
 
 * Major update incorporating the following **breaking changes** since `james 0.16.0`
