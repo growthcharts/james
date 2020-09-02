@@ -41,5 +41,5 @@ custom_list <- function(txt = "", loc = "") {
                 Resultaten = res,
                 LaatsteDscore = unbox(last_dscore))
   }
-  toJSON(ret)
+  ret
 }

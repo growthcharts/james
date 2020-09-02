@@ -20,11 +20,14 @@
 #'
 #' # upload & screen
 #' screen_curves(fn)
-#'}
+#' }
 #' @export
 screen_curves <- function(txt = "", loc = "", location = "", legacy = TRUE) {
   # legacy
   if (!is.empty(location)) loc <- location
-  if (legacy) custom_list(txt = txt, loc = loc)
-  else toJSON(screen_curves_ind(get_ind(txt, loc)))
+  if (legacy) {
+    toJSON(custom_list(txt = txt, loc = loc))
+  } else {
+    toJSON(screen_curves_ind(get_ind(txt, loc)))
+  }
 }
