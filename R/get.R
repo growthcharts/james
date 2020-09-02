@@ -36,4 +36,4 @@ get_ind <- function(txt = "", loc = "", schema = NULL) {
   .val
 }
 
-is.empty <- function(x) nchar(x[1L]) == 0L
+is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
