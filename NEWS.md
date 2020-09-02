@@ -1,3 +1,7 @@
+# james 0.24.1 
+
+* Solves a problem in `screen_curves()`. The function now always returns a JSON result
+
 # james 0.24.0
 
 * Re-introduces legacy functions `draw_chart_bds`, `draw_chart_ind``
