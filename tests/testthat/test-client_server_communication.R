@@ -39,7 +39,7 @@ test_that("file client3.json get a site",
           expect_equal(status_code(resp), 201))
 
 
-path <- "ocpu/library/james/R/screen_curves"
+path <- "ocpu/library/james/R/screen_growth"
 url <- modify_url(url = host, path = path)
 resp <- POST(url = url,
              body = list(txt = js),
@@ -71,7 +71,7 @@ resp <- POST(url = url,
 test_that("file not_a_vector.json uploads to server",
           expect_equal(status_code(resp), 201))
 
-path <- "ocpu/library/james/R/screen_curves"
+path <- "ocpu/library/james/R/screen_growth"
 url <- modify_url(url = host, path = path)
 resp <- POST(url = url,
              body = list(txt = js),
@@ -103,7 +103,7 @@ resp <- POST(url = url,
 test_that("file http400.json uploads to server",
           expect_equal(status_code(resp), 201))
 
-path <- "ocpu/library/james/R/screen_curves"
+path <- "ocpu/library/james/R/screen_growth"
 url <- modify_url(url = host, path = path)
 resp <- POST(url = url,
              body = list(txt = js),

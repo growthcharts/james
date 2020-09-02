@@ -59,7 +59,7 @@
 #' @export
 upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) {
 
-  url <- modify_url(url = host, path = "ocpu/library/james/R/convert_bds_ind")
+  url <- modify_url(url = host, path = "ocpu/library/james/R/fetch_loc")
   txt <- txt[[1L]]
   ua <- get0("ua", mode = "list")
   try.error <- FALSE
