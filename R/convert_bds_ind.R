@@ -5,6 +5,9 @@
 #' standard deviation scores and broken stick conditional means per visit.
 #'
 #' This is function is a wrapper around \code{minihealth::convert_bds_individual()}.
+#' @note Deprecated because the function name is internally oriented. Use
+#' \code{\link{fetch_loc}} instead.
+#' @name convert_bds_ind-deprecated
 #' @inheritParams minihealth::convert_bds_individual
 #' @return An object of class \linkS4class{individual}.
 #' @author Stef van Buuren 2019
@@ -17,5 +20,8 @@
 #' @keywords server
 #' @export
 convert_bds_ind <- function(txt = "", ...) {
+  .Deprecated("fetch_loc",
+    msg = "convert_bds_ind() is deprecated. Please use fetch_loc() instead."
+  )
   convert_bds_individual(txt = txt, ...)
 }

@@ -42,6 +42,11 @@
 convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
                                     selector = c("data", "chartcode"),
                                     ind_loc = "") {
+  if (!missing(ind_loc)) {
+    warning("Argument ind_loc is deprecated; please use loc instead.",
+            call. = FALSE)
+  }
+
   # legacy
   if (!is.empty(ind_loc)) loc <- ind_loc
 

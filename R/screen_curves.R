@@ -1,11 +1,15 @@
 #' Screen growth curves according to JGZ guidelines
 #'
+#' @name screen_curves-deprecated
 #' @inheritParams request_site
 #' @param location Legacy for \code{loc}
 #' @param legacy Logical indicating whether legacy should be done.
 #' @return A JSON string containing a table with screening results
-#' @note \code{screen_curves} is the only function in \code{james} that
-#' returns its result as JSON.
+#' @note Deprecated for consistency. Function returns JSON, whereas all other
+#' functions return the R object. The alternative \code{\link{screen_growth}}
+#' requests only results from screening. The alternative \code{\link{custom_list}}
+#' produces the same list as \code{screen_curves}, but does not convert the
+#' result to JSON.
 #' @examples
 #' \dontrun{
 #' # example json
@@ -23,6 +27,9 @@
 #' }
 #' @export
 screen_curves <- function(txt = "", loc = "", location = "", legacy = TRUE) {
+  .Deprecated("screen_growth",
+              msg = "screen_curves() is deprecated. Please use screen_growth() or custom_list() instead."
+  )
   # legacy
   if (!is.empty(location)) loc <- location
   if (legacy) {

@@ -63,6 +63,15 @@ draw_chart <- function(txt  = "",
                        draw_grob = TRUE,
                        bds_data = "",
                        ind_loc = "") {
+  if (!missing(bds_data)) {
+    warning("Argument bds_data is deprecated; please use txt instead.",
+            call. = FALSE)
+  }
+  if (!missing(ind_loc)) {
+    warning("Argument ind_loc is deprecated; please use loc instead.",
+            call. = FALSE)
+  }
+
   # legacy
   if (!is.empty(bds_data)) txt <- bds_data
   if (!is.empty(ind_loc)) loc <- ind_loc
