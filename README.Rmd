@@ -42,18 +42,16 @@ curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
   |Function           | Description                                | Interesting URL's        | Contents                       |
   |------------------ | ------------------------------------------ | ------------------------ | -------------------------------|
   |`list_charts`      | List available growth charts               | `R/.val/json`            | Table of charts, JSON          |
-  |                   |                                            | `R/.val`                 | Table of charts, text          |
-  |`fetch_loc`        | Validate, convert and store input data     | `messages`               | parse messages                 |
-  |                   |                                            | `R/.val`                 | `minihealth::individual` (int) |
+  |                   |                                            | `R/.val/text`            | Table of charts, text          |
+  |`fetch_loc`        | Validate, convert and store input data     | `messages/json`          | parse messages, JSON           |
   |`draw_chart`       | Draw chart, predict future growth          | `graphics/1/svglite`     | chart, `svglite` format        |
   |                   |                                            | `graphics/1/png`         | chart, `png` format            |
-  |                   |                                            | `messages`               | parse, graph messages          |
-  |                   |                                            | `R/.val`                 | `grid::gtree` object (int)     |
-  |`request_site`     | Create site URL with personalised charts   | `R/.val/json`            | site URL, JSON                 |
-  |                   |                                            | `messages`               | parse, site messages           |
+  |                   |                                            | `messages/json`          | parse, graph messages, JSON    |
+  |`request_site`     | Site URL with personalised charts          | `R/.val/json`            | site URL, JSON                 |
+  |                   |                                            | `messages/json`          | parse, site messages, JSON     |
   |`calculate_dscore` | Calculate the D-score for each visit       | `R/.val/json`            | D-score table, JSON            |
   |`screen_growth`    | Screen growth along JGZ guidelines         | `R/.val/json`            | screening table, JSON          |
-  |                   |                                            | `messages`               | parse, screen messages         |
+  |                   |                                            | `messages/json`          | parse, screen msg, JSON        |
   |`custom_list`      | Create list with custom returns            | `R/.val/json`            | list of returns, JSON          |
 
 The primary user functions cover out wide range of activities. Let us look into these in some more detail.
