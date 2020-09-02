@@ -6,6 +6,7 @@
 * Adds function `calculate_dscore()`
 * Transfers the toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
 * Adds function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
+* Adds deprecated warnings to `convert_bds_ind()`, `draw_chart_bds`, `draw_chart_ind` and `screen_curves`
 
 # james 0.24.1 
 
@@ -13,7 +14,7 @@
 
 # james 0.24.0
 
-* Re-introduces legacy functions `draw_chart_bds`, `draw_chart_ind``
+* Re-introduces legacy functions `draw_chart_bds`, `draw_chart_ind`
 * Changes `screen_curves` to old bahavior, thus producing a list instead of a table
 * Re-introduces arguments `bds_data`, `location`, `ind_loc` and `?ind=`
 
