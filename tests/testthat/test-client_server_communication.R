@@ -10,6 +10,12 @@ library(httr)
 #host <- "https://vps.stefvanbuuren.nl"
 host <- "http://localhost"
 
+path <- "ocpu/library/james/R/list_charts"
+url <- modify_url(url = host, path = path)
+resp <- POST(url = url)
+test_that("list_charts provide OK response",
+          expect_equal(status_code(resp), 201))
+
 # client3.json
 fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
@@ -22,6 +28,16 @@ resp <- POST(url = url,
              add_headers(Accept = "plain/text"))
 test_that("file client3.json uploads to server",
           expect_equal(status_code(resp), 201))
+
+path <- "ocpu/library/james/R/request_site"
+url <- modify_url(url = host, path = path)
+resp <- POST(url = url,
+             body = list(txt = js),
+             encode = "json",
+             add_headers(Accept = "plain/text"))
+test_that("file client3.json get a site",
+          expect_equal(status_code(resp), 201))
+
 
 path <- "ocpu/library/james/R/screen_curves"
 url <- modify_url(url = host, path = path)
