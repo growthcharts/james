@@ -4,6 +4,8 @@
 * Adds table of legacy functions indicating preferred alternatives
 * Adds function `fetch_loc()` that should take over from `upload_txt()` (which implements client functionality) and `convert_bds_ind()` (which has a terrible name)
 * Adds function `calculate_dscore()`
+* Transfers the toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
+* Adds function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
 
 # james 0.24.1 
 
