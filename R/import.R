@@ -11,7 +11,7 @@
 #' @importFrom jamesclient     get_url
 #' @importFrom jsonlite        fromJSON minify toJSON unbox validate
 #' @importFrom methods         new slot
-#' @importFrom minihealth      convert_bds_individual
+#' @importFrom minihealth      convert_bds_individual is.individual
 #'                             get_range verify
 #' @importClassesFrom minihealth individual xyz bse
 NULL
