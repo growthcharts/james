@@ -1,3 +1,10 @@
+# james 0.24.2
+
+* Adds table of primary user functions to README
+* Adds table of legacy functions indicating preferred alternatives
+* Adds function `fetch_loc()` that should take over from `upload_txt()` (which implements client functionality) and `convert_bds_ind()` (which has a terrible name)
+* Adds function `calculate_dscore()`
+
 # james 0.24.1 
 
 * Solves a problem in `screen_curves()`. The function now always returns a JSON result
