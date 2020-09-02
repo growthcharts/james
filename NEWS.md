@@ -7,6 +7,7 @@
 * Transfers the toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
 * Adds function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
 * Adds deprecated warnings to `convert_bds_ind()`, `draw_chart_bds`, `draw_chart_ind` and `screen_curves`
+* Update tests to account for deprecated functions and arguments
 
 # james 0.24.1 
 
