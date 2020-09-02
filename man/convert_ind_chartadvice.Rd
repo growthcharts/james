@@ -41,7 +41,7 @@ the \code{selector} setting. If no valid \code{ind} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
-\item{ind_loc}{Legacy for \code{loc}}
+\item{ind_loc}{Legacy for \code{loc}. Use \code{loc} instead.}
 }
 \value{
 A list with the following elements

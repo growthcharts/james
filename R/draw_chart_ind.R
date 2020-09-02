@@ -10,7 +10,7 @@
 #' @keywords server
 #' @export
 draw_chart_ind <- function(loc = "", chartcode = "",
-                           curve_interpolation = TRUE, ...) {
+                           curve_interpolation = TRUE) {
 
   # legacy
   draw_chart(loc = loc, chartcode = chartcode,

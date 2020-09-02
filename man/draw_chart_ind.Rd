@@ -4,7 +4,7 @@
 \alias{draw_chart_ind}
 \title{Draw growth chart with individual data}
 \usage{
-draw_chart_ind(loc = "", chartcode = "", curve_interpolation = TRUE, ...)
+draw_chart_ind(loc = "", chartcode = "", curve_interpolation = TRUE)
 }
 \arguments{
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded

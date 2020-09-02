@@ -112,11 +112,11 @@ growth of the target child should be drawn}
 growth of the target child should be drawn}
 
 \item{draw_grob}{Logical. Should chart be plotted on current device?
-Default is \code{TRUE}.}
+Default is \code{TRUE}. For internal use only.}
 
-\item{bds_data}{Legacy for \code{txt}}
+\item{bds_data}{Legacy for \code{txt}. Use \code{txt} instead.}
 
-\item{ind_loc}{Legacy for \code{loc}}
+\item{ind_loc}{Legacy for \code{loc}. Use \code{loc} instead.}
 }
 \value{
 A \code{gTree} object.

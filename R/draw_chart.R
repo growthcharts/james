@@ -27,9 +27,9 @@
 #' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
 #'   or \code{"7.5m"}
 #' @param draw_grob Logical. Should chart be plotted on current device?
-#' Default is \code{TRUE}.
-#' @param bds_data Legacy for \code{txt}
-#' @param ind_loc Legacy for \code{loc}
+#' Default is \code{TRUE}. For internal use only.
+#' @param bds_data Legacy for \code{txt}. Use \code{txt} instead.
+#' @param ind_loc Legacy for \code{loc}. Use \code{loc} instead.
 #' @return A \code{gTree} object.
 #' @author Stef van Buuren 2020
 #' @seealso \linkS4class{individual}, \code{\link{select_chart}}
