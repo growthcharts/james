@@ -3,12 +3,14 @@
 #' @inheritParams request_site
 #' @param location Legacy for \code{loc}
 #' @param legacy Logical indicating whether legacy should be done.
-#' @return A table with screening results
+#' @return A JSON string containing a table with screening results
+#' @note \code{screen_curves} is the only function in \code{james} that
+#' returns its result as JSON.
 #' @examples
 #' \dontrun{
 #' # example json
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+#' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
 #'
 #' # first upload, then screen
 #' r1 <- upload_txt(fn)
@@ -24,5 +26,5 @@ screen_curves <- function(txt = "", loc = "", location = "", legacy = TRUE) {
   # legacy
   if (!is.empty(location)) loc <- location
   if (legacy) custom_list(txt = txt, loc = loc)
-  else screen_curves_ind(get_ind(txt, loc))
+  else toJSON(screen_curves_ind(get_ind(txt, loc)))
 }

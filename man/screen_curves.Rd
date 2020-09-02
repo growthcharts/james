@@ -20,16 +20,20 @@ and converted to internal server format.}
 \item{legacy}{Logical indicating whether legacy should be done.}
 }
 \value{
-A table with screening results
+A JSON string containing a table with screening results
 }
 \description{
 Screen growth curves according to JGZ guidelines
+}
+\note{
+\code{screen_curves} is the only function in \code{james} that
+returns its result as JSON.
 }
 \examples{
 \dontrun{
 # example json
 fn <- system.file("testdata", "client3.json", package = "james")
-fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
 
 # first upload, then screen
 r1 <- upload_txt(fn)
