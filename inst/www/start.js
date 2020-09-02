@@ -64,7 +64,6 @@ $("#weekslider_dsc").ionRangeSlider({
   }
 });
 
-
 // set active accordion page
 var active = "groei";
 
@@ -82,12 +81,10 @@ $('#ontwikkeling').click(function (){
         }
     });
 
-
 // set onchange triggers
 var chartgrplist = document.getElementById('chartgrp');
 chartgrplist.addEventListener('change', update, false);
 
-// AHJL: not sure if the _dsc chartgrp requires this
 var chartgrplist_dsc = document.getElementById('chartgrp_dsc');
 chartgrplist_dsc.addEventListener('change', update, false);
 
@@ -180,9 +177,14 @@ function initialize_chart_controls() {
        return;
     }
 
+    // set accordion menus according to return vector
+    showCards(String(output.accordion));
+
     // set UI elements according to return vector
     document.getElementById("chartgrp").value = String(output.chartgrp);
+    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
     document.forms.agegrp[String(output.agegrp)].checked=true;
+    if (String(output.agegrp) !== "0-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
     document.forms.msr[String(output.side)].checked=true;
 
     // set week slider
@@ -190,6 +192,9 @@ function initialize_chart_controls() {
     var weeknum = Math.trunc(Number(week));
     if (week && weeknum >= 25 && weeknum <= 36)
       $("#weekslider").data("ionRangeSlider").update({
+        from: week
+      });
+      $("#weekslider_dsc").data("ionRangeSlider").update({
         from: week
       });
 
@@ -270,4 +275,21 @@ function showTextdiv() {
 function showPlotdiv() {
   $("#plotdiv").show(500);
   $("#textdiv").hide(500);
+}
+
+function showCards(show = "all") {
+  if (show == "all") {
+    sr('ontwikkelingcard', 'block');
+    sr('ontwikkelingcard', 'block');
+    $('#collapseOne').collapse('show');
+
+  } else if (show == "groei") {
+    sr('ontwikkelingcard', 'none');
+    $('#collapseOne').collapse('show');
+
+  } else if (show == "ontwikkeling") {
+    sr('groeicard', 'none');
+    $('#collapseTwo').collapse('show');
+    active = "ontwikkeling";
+  }
 }

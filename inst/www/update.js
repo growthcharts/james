@@ -3,6 +3,7 @@
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
+
   // grab active variables
   if (active == "groei"){
     var msr = document.querySelector('input[name="msr"]:checked').value;
@@ -10,13 +11,14 @@ function update() {
     var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
     var population = document.querySelector('input[name="etnicity"]:checked').value;
     var ga = Number($("#weekslider").data().from);
+    document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active == "ontwikkeling"){
     var msr = "dsc";
     var population = "nl";
-    // _dsc equivalents of relevant controls
     var chartgrp = document.getElementById("chartgrp_dsc").value;
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
     var ga = Number($("#weekslider_dsc").data().from);
+    document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
 
   var sex = document.querySelector('input[name="sex"]:checked').value;
@@ -58,7 +60,6 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -68,7 +69,6 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -78,7 +78,6 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -88,7 +87,6 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -98,7 +96,6 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -108,7 +105,6 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -118,7 +114,6 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -128,7 +123,6 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'none');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -138,7 +132,6 @@ function update() {
     sr('msr_wfh', 'none');
     sr('msr_hdc', 'none');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -148,7 +141,6 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'none');
     sr('msr_bmi', 'none');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -158,7 +150,6 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'block');
     sr('msr_bmi', 'block');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
@@ -168,7 +159,6 @@ function update() {
     sr('msr_wfh', 'block');
     sr('msr_hdc', 'none');
     sr('msr_bmi', 'block');
-    sr('msr_dsc', 'none');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
@@ -210,7 +200,6 @@ function update() {
     alert("Server error: " + rq2.responseText);
   });
 }
-
 
 function sr(id, display) {
   // set UI element display

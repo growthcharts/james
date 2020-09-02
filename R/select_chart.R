@@ -48,6 +48,10 @@ select_chart <- function(ind      = NULL,
     if (is.null(ga))       ga       <- select_ga(ind)
     if (is.null(sex))      sex      <- select_sex(ind)
     if (is.null(etn))      etn      <- "nl"
+    side <- switch(initialize_accordion(ind),
+                   "all" = "hgt",
+                   "groei" = "hgt",
+                   "ontwikkeling" = "dsc")
   }
 
   # now get the chartcode
@@ -92,3 +96,4 @@ select_sex <- function(ind) {
   if (sex %in% c("male", "female")) return(sex)
   return("male")
 }
+

@@ -4,13 +4,13 @@ library(httr)
 library(jamesclient)
 
 # define testing host
-# host <- "https://groeidiagrammen.nl"
+host <- "https://groeidiagrammen.nl"
 # host <- "https://vps.stefvanbuuren.nl"
-host <- "http://localhost"
+# host <- "http://localhost"
 
 # client3.json
 fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
-fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+# fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
 js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 path <- "ocpu/library/james/R/convert_bds_ind"
@@ -31,6 +31,10 @@ resp <- POST(url = url,
 test_that("file client3.json is screened",
           expect_equal(status_code(resp), 201))
 
-jsonlite::fromJSON(get_url(resp))
-z <- download_as_list(resp)
 
+# Allegro Sultum 1 sept 2020
+laura_dev <- system.file("testdata", "Laura_S_dev.json", package = "james")
+screen_curves(txt = laura_dev)
+
+laura_dev_2 <- system.file("testdata", "Laura_S_dev_2.json", package = "james")
+screen_curves(txt = laura_dev_2)

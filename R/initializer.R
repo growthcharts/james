@@ -17,6 +17,7 @@ initializer <- function(selector, individual, chartcode = "") {
   choices$period   <- initialize_period(individual,
                                         choices$dnr,
                                         choices$agegrp)
+  choices$accordion <- initialize_accordion(individual)
 
   choices
 }
@@ -114,4 +115,18 @@ initialize_period <- function(individual, dnr, agegrp) {
                     "14m")
 
   c(period1, period2)
+}
+
+initialize_accordion <- function(individual) {
+  # check for hgt, wgt and hdc
+  groei <- any(!is.na(slot(individual, "hgt")@y),
+               !is.na(slot(individual, "wgt")@y),
+               !is.na(slot(individual, "hdc")@y))
+  # check for dsc
+  ontwikkeling <- any(!is.na(slot(individual, "dsc")@y))
+
+  if (groei & ontwikkeling) return("all")
+  if (groei) return("groei")
+  if (ontwikkeling) return("ontwikkeling")
+  return("all")
 }

@@ -53,6 +53,14 @@ h3 {
   border-style: none none solid none;
 }
 
+#chartcode_dsc {
+  font-size: 14px;
+  position: relative;
+  text-align: left;
+  border: medium solid #649EC9;
+  border-style: none none solid none;
+}
+
 /* set color for ionrangeslider to color-succes */
 .irs--round .irs-handle>i:first-child {
     background-color: #18BC9C;
