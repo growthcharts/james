@@ -391,13 +391,13 @@ This following table lists functions that are active in the current
 version, but that we will not further develop. Please replace them by
 the suggested alternative.
 
-| Function          | Description                            | Preferred alternative          |
-| ----------------- | -------------------------------------- | ------------------------------ |
-| `convert_bds_ind` | Validate, convert and store input data | `fetch_loc`                    |
-| `upload_txt`      | Validate, convert and store input data | `jamesclient::upload_txt`      |
-| `draw_chart_bds`  | Draw chart from uploaded               | `draw_chart(txt = ...)`        |
-| `draw_chart_ind`  | Draw chart from cached data            | `draw_chart(loc = ...)`        |
-| `screen_curves`   | Screen growth along JGZ guidelines     | `screen_growth`, `custom_list` |
+| Function          | Description                             | Preferred alternative          |
+| ----------------- | --------------------------------------- | ------------------------------ |
+| `convert_bds_ind` | Validate, convert, store input (server) | `fetch_loc`                    |
+| `upload_txt`      | Validate, convert, store input (client) | `jamesclient::upload_txt`      |
+| `draw_chart_bds`  | Draw chart from uploaded                | `draw_chart(txt = ...)`        |
+| `draw_chart_ind`  | Draw chart from cached data             | `draw_chart(loc = ...)`        |
+| `screen_curves`   | Screen growth along JGZ guidelines      | `screen_growth`, `custom_list` |
 
 This following table lists argument names that are active in the current
 version, but that will be phased out for consistency. Please replace

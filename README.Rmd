@@ -338,8 +338,8 @@ This following table lists functions that are active in the current version, but
 
   |Function           | Description                                | Preferred alternative          |
   |------------------ | ------------------------------------------ | ------------------------------ |
-  |`convert_bds_ind`  | Validate, convert and store input data     | `fetch_loc`                    |
-  |`upload_txt`       | Validate, convert and store input data     | `jamesclient::upload_txt`      |
+  |`convert_bds_ind`  | Validate, convert, store input (server)    | `fetch_loc`                    |
+  |`upload_txt`       | Validate, convert, store input (client)    | `jamesclient::upload_txt`      |
   |`draw_chart_bds`   | Draw chart from uploaded                   | `draw_chart(txt = ...)`        |
   |`draw_chart_ind`   | Draw chart from cached data                | `draw_chart(loc = ...)`        |
   |`screen_curves`    | Screen growth along JGZ guidelines         | `screen_growth`, `custom_list` |
