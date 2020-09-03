@@ -1,27 +1,28 @@
 # james 0.24.3
 
-* Runs styler on all R sources
+* Run styler on all R sources
+* Move `upload_txt()` to `jamesclient` package
 
 # james 0.24.2
 
-* Adds table of primary user functions to README
-* Adds table of legacy functions indicating preferred alternatives
-* Adds function `fetch_loc()` that should take over from `upload_txt()` (which implements client functionality) and `convert_bds_ind()` (which has a terrible name)
-* Adds function `calculate_dscore()`
-* Transfers the toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
-* Adds function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
-* Adds deprecated warnings to `convert_bds_ind()`, `draw_chart_bds`, `draw_chart_ind` and `screen_curves`
+* Add table of primary user functions to README
+* Add table of legacy functions indicating preferred alternatives
+* Add function `fetch_loc()` that should take over from `upload_txt()` (which implements client functionality) and `convert_bds_ind()` (which has a terrible name)
+* Add function `calculate_dscore()`
+* Transfer toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
+* Add function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
+* Add deprecated warnings to `convert_bds_ind()`, `draw_chart_bds`, `draw_chart_ind` and `screen_curves`
 * Update tests to account for deprecated functions and arguments
 
 # james 0.24.1 
 
-* Solves a problem in `screen_curves()`. The function now always returns a JSON result
+* Solve problem in `screen_curves()`. The function now always returns a JSON result
 
 # james 0.24.0
 
-* Re-introduces legacy functions `draw_chart_bds`, `draw_chart_ind`
-* Changes `screen_curves` to old bahavior, thus producing a list instead of a table
-* Re-introduces arguments `bds_data`, `location`, `ind_loc` and `?ind=`
+* Re-introduce legacy functions `draw_chart_bds`, `draw_chart_ind`
+* Change `screen_curves` to old bahavior, thus producing a list instead of a table
+* Re-introduce arguments `bds_data`, `location`, `ind_loc` and `?ind=`
 
 # james 0.23.0
 
