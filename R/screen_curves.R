@@ -11,20 +11,18 @@
 #' produces the same list as \code{screen_curves}, but does not convert the
 #' result to JSON.
 #' @examples
-#' \dontrun{
 #' # example json
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
 #'
 #' # first upload, then screen
-#' r1 <- upload_txt(fn)
+#' r1 <- jamesclient::upload_txt(fn)
 #' location <- jamesclient::get_url(r1, "location")
 #' location
 #' screen_curves(loc = location)
 #'
 #' # upload & screen
 #' screen_curves(fn)
-#' }
 #' @export
 screen_curves <- function(txt = "", loc = "", location = "", legacy = TRUE) {
   .Deprecated("screen_growth",

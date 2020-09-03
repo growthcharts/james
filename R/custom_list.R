@@ -4,19 +4,17 @@
 #' @return A table with screening results
 #' @return A list with custom parts
 #' @examples
-#' \dontrun{
 #' fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
 #' host <- "http://localhost"
 #'
 #' # first upload, then create custom list
-#' r1 <- upload_txt(fn, host = host)
+#' r1 <- jamesclient::upload_txt(fn, host = host)
 #' loc <- jamesclient::get_url(r1, "location")
 #' list1 <- custom_list(loc = loc)
 #'
 #' # upload & screen
 #' list2 <- custom_list(fn)
 #' identical(list1, list2)
-#' }
 #' @export
 custom_list <- function(txt = "", loc = "") {
   site <- request_site(txt, loc)

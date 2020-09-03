@@ -26,11 +26,9 @@
 #' @seealso \code{\link[chartcatalog]{create_chartcode}},
 #'   \code{\link[minihealth]{individualAN-class}}
 #' @examples
-#' \dontrun{
-#' cab <- groeivoorspeller::installed.cabinets
-#' p <- cab[[1]][[1]]
-#' select_chart(p)
-#' }
+#' data("installed.cabinets", package = "jamestest")
+#' ind <- installed.cabinets[[3]][[1]]
+#' select_chart(ind)
 #' @export
 select_chart <- function(ind = NULL,
                          chartgrp = NULL,

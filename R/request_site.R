@@ -19,7 +19,7 @@
 #' running server that processes the request.
 #' @return URL composed of JAMES server, possibly appended by query string starting
 #' with \code{?txt=} or \code{?loc=}.
-#' @seealso \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}
+#' @seealso \code{\link[jamesclient]{upload_txt}}, \code{\link[jamesclient]{get_url}}
 #' @details
 #' One of \code{txt} or \code{loc} needs to be specified. If both are given,
 #' \code{txt} takes precedence. If neither is given, then the function returns
@@ -43,7 +43,7 @@
 #' request_site(url)
 #'
 #' # same, as two steps, starting from file name
-#' resp <- upload_txt(fn)
+#' resp <- jamesclient::upload_txt(fn)
 #' loc <- jamesclient::get_url(resp, "location")
 #' request_site(loc = loc)
 #'
