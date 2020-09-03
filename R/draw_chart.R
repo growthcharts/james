@@ -38,23 +38,25 @@
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' g <- draw_chart(txt = fn)
 #' @export
-draw_chart <- function(txt  = "",
-                       loc  = "",
+draw_chart <- function(txt = "",
+                       loc = "",
                        chartcode = "",
-                       selector  = c("data", "derive", "chartcode"),
-                       chartgrp  = NULL,
-                       agegrp    = NULL,
-                       sex       = NULL,
-                       etn       = NULL,
-                       ga        = NULL,
-                       side      = "hgt",
+                       selector = c("data", "derive", "chartcode"),
+                       chartgrp = NULL,
+                       agegrp = NULL,
+                       sex = NULL,
+                       etn = NULL,
+                       ga = NULL,
+                       side = "hgt",
                        curve_interpolation = TRUE,
-                       quiet     = FALSE,
-                       dnr       =  c("smocc", "terneuzen", "lollypop.preterm",
-                                      "lollypop.term", "pops"),
-                       lo        = NULL,
-                       hi        = NULL,
-                       nmatch    = 0L,
+                       quiet = FALSE,
+                       dnr = c(
+                         "smocc", "terneuzen", "lollypop.preterm",
+                         "lollypop.term", "pops"
+                       ),
+                       lo = NULL,
+                       hi = NULL,
+                       nmatch = 0L,
                        exact_sex = TRUE,
                        exact_ga = FALSE,
                        break_ties = FALSE,
@@ -65,11 +67,13 @@ draw_chart <- function(txt  = "",
                        ind_loc = "") {
   if (!missing(bds_data)) {
     warning("Argument bds_data is deprecated; please use txt instead.",
-            call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!missing(ind_loc)) {
     warning("Argument ind_loc is deprecated; please use loc instead.",
-            call. = FALSE)
+      call. = FALSE
+    )
   }
 
   # legacy
@@ -84,25 +88,32 @@ draw_chart <- function(txt  = "",
   # if we have no ind, prioritise chartcode over derive
   # except when chartcode is empty
   if (is.null(ind)) {
-    if (chartcode == "") chartcode <- select_chart(ind = NULL,
-                                                   chartgrp = chartgrp,
-                                                   agegrp = agegrp,
-                                                   sex = sex,
-                                                   etn = etn,
-                                                   ga = ga,
-                                                   side = side)$chartcode
+    if (chartcode == "") {
+      chartcode <- select_chart(
+        ind = NULL,
+        chartgrp = chartgrp,
+        agegrp = agegrp,
+        sex = sex,
+        etn = etn,
+        ga = ga,
+        side = side
+      )$chartcode
+    }
   } else {
     # listen to selector
     chartcode <- switch(selector,
-                        "data" = select_chart(ind = ind)$chartcode,
-                        "derive" = select_chart(ind = NULL,
-                                                chartgrp = chartgrp,
-                                                agegrp = agegrp,
-                                                sex = sex,
-                                                etn = etn,
-                                                ga = ga,
-                                                side = side)$chartcode,
-                        "chartcode" = chartcode)
+      "data" = select_chart(ind = ind)$chartcode,
+      "derive" = select_chart(
+        ind = NULL,
+        chartgrp = chartgrp,
+        agegrp = agegrp,
+        sex = sex,
+        etn = etn,
+        ga = ga,
+        side = side
+      )$chartcode,
+      "chartcode" = chartcode
+    )
   }
 
   # convert hi and lo into period vector
@@ -110,18 +121,20 @@ draw_chart <- function(txt  = "",
   period <- convert_str_age(c(lo, hi))
 
   # there we go..
-  g <- process_chart(individual = ind,
-                     chartcode = chartcode,
-                     curve_interpolation = curve_interpolation,
-                     quiet = quiet,
-                     dnr = dnr,
-                     period = period,
-                     nmatch = nmatch,
-                     exact_sex = exact_sex,
-                     exact_ga = exact_ga,
-                     break_ties = break_ties,
-                     show_realized = show_realized,
-                     show_future = show_future)
+  g <- process_chart(
+    individual = ind,
+    chartcode = chartcode,
+    curve_interpolation = curve_interpolation,
+    quiet = quiet,
+    dnr = dnr,
+    period = period,
+    nmatch = nmatch,
+    exact_sex = exact_sex,
+    exact_ga = exact_ga,
+    break_ties = break_ties,
+    show_realized = show_realized,
+    show_future = show_future
+  )
   if (draw_grob) grid.draw(g)
   invisible(g)
 }

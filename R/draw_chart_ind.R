@@ -14,12 +14,13 @@
 #' @export
 draw_chart_ind <- function(loc = "", chartcode = "",
                            curve_interpolation = TRUE) {
-
   .Deprecated("draw_chart",
-              msg = "draw_chart_ind() is deprecated. Please use draw_chart() instead."
+    msg = "draw_chart_ind() is deprecated. Please use draw_chart() instead."
   )
 
   # legacy
-  draw_chart(loc = loc, chartcode = chartcode,
-             curve_interpolation = curve_interpolation)
+  draw_chart(
+    loc = loc, chartcode = chartcode,
+    curve_interpolation = curve_interpolation
+  )
 }

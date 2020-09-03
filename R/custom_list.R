@@ -19,7 +19,6 @@
 #' }
 #' @export
 custom_list <- function(txt = "", loc = "") {
-
   site <- request_site(txt, loc)
 
   ind <- get_ind(txt, loc)
@@ -34,12 +33,16 @@ custom_list <- function(txt = "", loc = "") {
 
   # list of two elements if nu D-score, else 3 elements
   if (is.null(last_dscore)) {
-    ret <- list(UrlGroeicurven = unbox(site),
-                Resultaten = res)
+    ret <- list(
+      UrlGroeicurven = unbox(site),
+      Resultaten = res
+    )
   } else {
-    ret <- list(UrlGroeicurven = unbox(site),
-                Resultaten = res,
-                LaatsteDscore = unbox(last_dscore))
+    ret <- list(
+      UrlGroeicurven = unbox(site),
+      Resultaten = res,
+      LaatsteDscore = unbox(last_dscore)
+    )
   }
   ret
 }

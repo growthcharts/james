@@ -28,7 +28,7 @@
 #' @export
 screen_curves <- function(txt = "", loc = "", location = "", legacy = TRUE) {
   .Deprecated("screen_growth",
-              msg = "screen_curves() is deprecated. Please use screen_growth() or custom_list() instead."
+    msg = "screen_curves() is deprecated. Please use screen_growth() or custom_list() instead."
   )
   # legacy
   if (!is.empty(location)) loc <- location

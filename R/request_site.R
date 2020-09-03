@@ -55,7 +55,6 @@
 #' @export
 request_site <- function(txt = "", loc = "", schema = NULL,
                          upload = TRUE, host = NULL) {
-
   txt <- txt[1L]
   loc <- loc[1L]
 
@@ -64,8 +63,9 @@ request_site <- function(txt = "", loc = "", schema = NULL,
   site <- paste0(host, "/ocpu/lib/james/www/")
 
   # no data
-  if (is.empty(txt) && is.empty(loc))
+  if (is.empty(txt) && is.empty(loc)) {
     return(site)
+  }
 
   # return ?txt=
   if (!is.empty(txt) && !upload) {
@@ -103,8 +103,9 @@ request_site <- function(txt = "", loc = "", schema = NULL,
   }
 
   # # return ?loc=, possibly after upload of txt
-  if (!is.empty(txt) && upload)
+  if (!is.empty(txt) && upload) {
     loc <- get_loc(txt, host, schema)
+  }
 
   ifelse(loc == "", site, paste0(site, "?loc=", loc))
 }

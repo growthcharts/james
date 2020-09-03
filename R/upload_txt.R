@@ -36,8 +36,8 @@
 #' @note Argument \code{schema} not yet implemented.
 #' @examples
 #' library(httr)
-#' fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
-#' js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+#' fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
+#' js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 #'
 #' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 #' # host <- "https://groeidiagrammen.nl"
@@ -58,23 +58,24 @@
 #' \code{\link{request_site}}
 #' @export
 upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) {
-
   url <- modify_url(url = host, path = "ocpu/library/james/R/fetch_loc")
   txt <- txt[[1L]]
   ua <- get0("ua", mode = "list")
   try.error <- FALSE
 
-  if (file.exists(txt))
+  if (file.exists(txt)) {
     # txt is a file name: upload
-    resp <- POST(url = url,
-                 body = list(txt = upload_file(txt), schema = schema),
-                 encode = "multipart",
-                 ua,
-                 add_headers(Accept = "plain/text"))
-  else {
+    resp <- POST(
+      url = url,
+      body = list(txt = upload_file(txt), schema = schema),
+      encode = "multipart",
+      ua,
+      add_headers(Accept = "plain/text")
+    )
+  } else {
     # txt is a URL: overwrite txt with JSON string
     if (!validate(txt)) {
-      con.url <- try(con <- url(txt, open = 'rb'), silent = TRUE)
+      con.url <- try(con <- url(txt, open = "rb"), silent = TRUE)
       try.error <- inherits(con.url, "try-error")
       if (!try.error) {
         txt <- toJSON(fromJSON(txt, flatten = TRUE), auto_unbox = TRUE)
@@ -82,21 +83,25 @@ upload_txt <- function(txt, host = "https://groeidiagrammen.nl", schema = NULL) 
       }
     }
     # txt is JSON string: upload
-    resp <- POST(url = url,
-                 body = list(txt = txt),
-                 encode = "json",
-                 ua,
-                 add_headers(Accept = "plain/text"))
+    resp <- POST(
+      url = url,
+      body = list(txt = txt),
+      encode = "json",
+      ua,
+      add_headers(Accept = "plain/text")
+    )
   }
 
   # throw warnings and messages
   if (try.error) warning("Data URL not found (404)")
   url_warnings <- get_url(resp, "warnings")
   url_messages <- get_url(resp, "messages")
-  if (length(url_warnings) >= 1L)
+  if (length(url_warnings) >= 1L) {
     warning(content(GET(url_warnings), "text", encoding = "utf-8"))
-  if (length(url_messages) >= 1L)
+  }
+  if (length(url_messages) >= 1L) {
     message(content(GET(url_messages), "text", encoding = "utf-8"))
+  }
 
   resp
 }

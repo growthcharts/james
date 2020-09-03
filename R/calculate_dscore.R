@@ -16,8 +16,8 @@
 #' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
 #' d <- calculate_dscore(txt = fn)
 #' @export
-calculate_dscore <- function(txt  = "",
-                             loc  = "",
+calculate_dscore <- function(txt = "",
+                             loc = "",
                              output = c("table", "last_visit", "last_dscore")) {
   output <- match.arg(output)
   ind <- get_ind(txt, loc)
@@ -29,16 +29,19 @@ calculate_dscore <- function(txt  = "",
 
   yname <- "dsc"
   df <- data.frame(
-    date = format(slot(ind, "dob")  + round(slot(ind, yname)@x * 365.25), format = "%Y%m%d"),
+    date = format(slot(ind, "dob") + round(slot(ind, yname)@x * 365.25), format = "%Y%m%d"),
     x = slot(ind, yname)@x,
     y = slot(ind, yname)@y,
     z = slot(ind, yname)@z,
     check.names = FALSE,
-    fix.empty.names = FALSE)
+    fix.empty.names = FALSE
+  )
 
-  if (output == "last_visit")
+  if (output == "last_visit") {
     return(df[nrow(df), ])
-  if (output == "last_dscore")
+  }
+  if (output == "last_dscore") {
     return(df[nrow(df), "y"])
+  }
   df
 }

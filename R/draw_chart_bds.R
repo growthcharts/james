@@ -27,11 +27,12 @@ draw_chart_bds <- function(txt = "", chartcode = "",
 
   # legacy
   .Deprecated("draw_chart",
-              msg = "draw_chart_bds() is deprecated. Please use draw_chart() instead."
+    msg = "draw_chart_bds() is deprecated. Please use draw_chart() instead."
   )
 
-  draw_chart(txt = txt, chartcode = chartcode,
-             curve_interpolation = curve_interpolation,
-             selector = selector)
+  draw_chart(
+    txt = txt, chartcode = chartcode,
+    curve_interpolation = curve_interpolation,
+    selector = selector
+  )
 }
-

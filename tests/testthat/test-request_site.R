@@ -17,7 +17,7 @@ site_laura_gro <- request_site(laura_gro, host = host)
 site_laura_dev <- request_site(laura_dev, host = host)
 site_laura_dev_2 <- request_site(laura_dev_2, host = host)
 
-site_kevin  <- request_site(kevin, host = host)
+site_kevin <- request_site(kevin, host = host)
 site_kevin_gro <- request_site(kevin_gro, host = host)
 site_kevin_dev <- request_site(kevin_dev, host = host)
 

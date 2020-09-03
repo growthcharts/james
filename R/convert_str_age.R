@@ -11,5 +11,3 @@ convert_str_age <- function(s) {
   z[units == "m"] <- z[units == "m"] / 12
   round(z, 4)
 }
-
-

@@ -44,7 +44,8 @@ convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
                                     ind_loc = "") {
   if (!missing(ind_loc)) {
     warning("Argument ind_loc is deprecated; please use loc instead.",
-            call. = FALSE)
+      call. = FALSE
+    )
   }
 
   # legacy
@@ -53,8 +54,9 @@ convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
   selector <- match.arg(selector)
   ind <- get_ind(txt = txt, loc = loc)
   chartcode <- switch(selector,
-                      "data" = select_chart(ind = ind)$chartcode,
-                      "chartcode" = chartcode)
+    "data" = select_chart(ind = ind)$chartcode,
+    "chartcode" = chartcode
+  )
 
   initializer(selector, ind, chartcode)
 }

@@ -57,8 +57,8 @@ Argument \code{schema} not yet implemented.
 }
 \examples{
 library(httr)
-fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
-js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
+js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 # host <- "https://groeidiagrammen.nl"
