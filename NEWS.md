@@ -1,3 +1,7 @@
+# james 0.24.3
+
+* Runs styler on all R sources
+
 # james 0.24.2
 
 * Adds table of primary user functions to README
