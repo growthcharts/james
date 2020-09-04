@@ -21,7 +21,7 @@ Imports:
     grid,
     growthscreener (>= 1.4.0),
     httr,
-    jamesclient,
+    jamesclient (>= 0.11.0),
     jsonlite,
     methods,
     minihealth (>= 0.75.0)
