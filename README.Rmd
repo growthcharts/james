@@ -366,7 +366,7 @@ curl https://groeidiagrammen.nl/ocpu/tmp/x04fc43cfd709b7/R/.val/json
 ```
 
 
-### Create one request with list of return values
+## Create one request with list of return values
 
 In some cases, we would like to bundle return values from a custom set of calls. That is the job of `custom_list`. The current version of `custom_list` will return a site URL (created by `request_site`), a table of screening results (created by `screen_growth`) and the last D-score (created by `calculate_dscore`). For example, the calls 
 
