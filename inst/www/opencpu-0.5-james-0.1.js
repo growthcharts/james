@@ -363,6 +363,7 @@ if(!window.jQuery) {
               text.lastIndexOf("[") + 1,
               text.lastIndexOf("]"));
             document.getElementById('chartcode').innerHTML = text;
+            document.getElementById('chartcode_dsc').innerHTML = text;
             chartcode = text;
           }};
         xhttp.open("GET", url, true);

@@ -38,7 +38,7 @@ select_chart <- function(ind      = NULL,
                          sex      = NULL,
                          etn      = NULL,
                          ga       = NULL,
-                         side     = "hgt",
+                         side     = NULL,
                          language = "dutch") {
 
   # choose defaults depending on individual
@@ -48,10 +48,7 @@ select_chart <- function(ind      = NULL,
     if (is.null(ga))       ga       <- select_ga(ind)
     if (is.null(sex))      sex      <- select_sex(ind)
     if (is.null(etn))      etn      <- "nl"
-    side <- switch(initialize_accordion(ind),
-                   "all" = "hgt",
-                   "groei" = "hgt",
-                   "ontwikkeling" = "dsc")
+    if (is.null(side))     side     <- select_side(ind)
   }
 
   # now get the chartcode
@@ -97,3 +94,9 @@ select_sex <- function(ind) {
   return("male")
 }
 
+select_side <- function(ind) {
+  if(any(!is.na(slot(ind, "hgt")@y))) return("hgt")
+  if(any(!is.na(slot(ind, "wgt")@y))) return("hgt") # wgt?
+  if(any(!is.na(slot(ind, "hdc")@y))) return("hgt") # hdc?
+  if(any(!is.na(slot(ind, "dsc")@y))) return("dsc")
+}
