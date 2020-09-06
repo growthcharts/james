@@ -11,7 +11,7 @@ select_chart(
   sex = NULL,
   etn = NULL,
   ga = NULL,
-  side = "hgt",
+  side = NULL,
   language = "dutch"
 )
 }
