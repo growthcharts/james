@@ -328,7 +328,8 @@ if(!window.jQuery) {
 
         // reserve screen space for A4 charts or square charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
-        if (msr === "front" || msr === "back") {
+        if (msr === "front" & active !== "ontwikkeling" ||
+            msr === "back" & active !== "ontwikkeling" ) {
           svgwidth = 8.27;
           svgheight = 11.69;
           plotdiv_width = 927;
