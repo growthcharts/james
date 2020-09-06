@@ -182,10 +182,13 @@ function initialize_chart_controls() {
 
     // set UI elements according to return vector
     document.getElementById("chartgrp").value = String(output.chartgrp);
-    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
     document.forms.agegrp[String(output.agegrp)].checked=true;
+
+    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
     if (String(output.agegrp) !== "0-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
-    document.forms.msr[String(output.side)].checked=true;
+
+    // there is no msr for dsc anymore.
+    if (String(output.side) !== "dsc") {document.forms.msr[String(output.side)].checked=true;}
 
     // set week slider
     var week = String(output.week);
