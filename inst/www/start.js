@@ -6,8 +6,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const user_txt = urlParams.get('txt');
 // legacy ind
 // const user_loc = urlParams.get('loc');
-var userloc = urlParams.get('loc');
-if (urlParams.has('ind')) userloc = urlParams.get('ind');
+var user_loc = urlParams.get('loc');
+if (urlParams.has('ind')) user_loc = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 
 
@@ -141,12 +141,12 @@ if (user_loc) {
 // 1. use "derive" based on user interaction
 var selector  = "derive";
 // 2. use "data" if we can calculate or load child data
-if (user_txt || userloc) selector = "data";
+if (user_txt || user_loc) selector = "data";
 // 3. use hard chartcode if user specified one
 if (user_chartcode) selector = "chartcode";
 
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || userloc || user_chartcode) initialize_chart_controls();
+if (user_txt || user_loc || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
@@ -154,7 +154,7 @@ else update();
 function initialize_chart_controls() {
   // function executes at initialization
   // convert_ind_chartadvice() obtains useful statistics from
-  // the uploaded individual data (R) from userloc and
+  // the uploaded individual data (R) from user_loc and
   // from user_chartcode
 
   // handle null user inputs
@@ -162,7 +162,7 @@ function initialize_chart_controls() {
   var uloc = '';
   var ucode  = '';
   if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-  if (typeof userloc !== "undefined" && userloc !== null)  uloc = userloc;
+  if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   var rq1 = ocpu.call("convert_ind_chartadvice", {
