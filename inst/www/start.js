@@ -2,9 +2,14 @@
 
 // user arguments
 const urlParams = new URLSearchParams(window.location.search);
+
 const user_txt = urlParams.get('txt');
-const user_loc = urlParams.get('loc');
+// legacy ind
+// const user_loc = urlParams.get('loc');
+var userloc = urlParams.get('loc');
+if (urlParams.has('ind')) userloc = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
+
 
 // internal constants
 const slider_values = {"0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m"], "0_4":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","36m","45m"], "0_19": ["0w","3m","6m","12m","24m","5y","9y","10y","11y","14y","19y"], "0_29": ["0w","3m","6m","14m","24m","48m","10y","18y"],
@@ -136,12 +141,12 @@ if (user_loc) {
 // 1. use "derive" based on user interaction
 var selector  = "derive";
 // 2. use "data" if we can calculate or load child data
-if (user_txt || user_loc) selector = "data";
+if (user_txt || userloc) selector = "data";
 // 3. use hard chartcode if user specified one
 if (user_chartcode) selector = "chartcode";
 
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || user_loc || user_chartcode) initialize_chart_controls();
+if (user_txt || userloc || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
@@ -149,7 +154,7 @@ else update();
 function initialize_chart_controls() {
   // function executes at initialization
   // convert_ind_chartadvice() obtains useful statistics from
-  // the uploaded individual data (R) from user_loc and
+  // the uploaded individual data (R) from userloc and
   // from user_chartcode
 
   // handle null user inputs
@@ -157,7 +162,7 @@ function initialize_chart_controls() {
   var uloc = '';
   var ucode  = '';
   if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-  if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
+  if (typeof userloc !== "undefined" && userloc !== null)  uloc = userloc;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   var rq1 = ocpu.call("convert_ind_chartadvice", {

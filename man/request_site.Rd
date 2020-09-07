@@ -59,7 +59,7 @@ browseURL(site)
 request_site(url)
 
 # same, as two steps, starting from file name
-resp <- upload_txt(fn)
+resp <- jamesclient::upload_txt(fn)
 loc <- jamesclient::get_url(resp, "location")
 request_site(loc = loc)
 
@@ -70,5 +70,5 @@ request_site(js, upload = FALSE)
 request_site(url, upload = FALSE)
 }
 \seealso{
-\code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}
+\code{\link[jamesclient]{upload_txt}}, \code{\link[jamesclient]{get_url}}
 }

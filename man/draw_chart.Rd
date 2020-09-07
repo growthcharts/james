@@ -26,7 +26,9 @@ draw_chart(
   break_ties = FALSE,
   show_realized = FALSE,
   show_future = FALSE,
-  draw_grob = TRUE
+  draw_grob = TRUE,
+  bds_data = "",
+  ind_loc = ""
 )
 }
 \arguments{
@@ -110,7 +112,11 @@ growth of the target child should be drawn}
 growth of the target child should be drawn}
 
 \item{draw_grob}{Logical. Should chart be plotted on current device?
-Default is \code{TRUE}.}
+Default is \code{TRUE}. For internal use only.}
+
+\item{bds_data}{Legacy for \code{txt}. Use \code{txt} instead.}
+
+\item{ind_loc}{Legacy for \code{loc}. Use \code{loc} instead.}
 }
 \value{
 A \code{gTree} object.

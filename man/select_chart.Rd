@@ -51,11 +51,9 @@ or equal to 36 weeks, and determines the age group by the
 maximum age found in the data.
 }
 \examples{
-\dontrun{
-cab <- groeivoorspeller::installed.cabinets
-p <- cab[[1]][[1]]
-select_chart(p)
-}
+data("installed.cabinets", package = "jamestest")
+ind <- installed.cabinets[[3]][[1]]
+select_chart(ind)
 }
 \seealso{
 \code{\link[chartcatalog]{create_chartcode}},

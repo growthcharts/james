@@ -32,7 +32,27 @@ follows,
 curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
 ```
 
-## Available growth charts
+## Primary JAMES user functionality
+
+| Function           | Description                            | Interesting URL’s    | Contents                    |
+| ------------------ | -------------------------------------- | -------------------- | --------------------------- |
+| `list_charts`      | List available growth charts           | `R/.val/json`        | Table of charts, JSON       |
+|                    |                                        | `R/.val/text`        | Table of charts, text       |
+| `fetch_loc`        | Validate, convert and store input data | `messages/json`      | parse messages, JSON        |
+| `draw_chart`       | Draw chart, predict future growth      | `graphics/1/svglite` | chart, `svglite` format     |
+|                    |                                        | `graphics/1/png`     | chart, `png` format         |
+|                    |                                        | `messages/json`      | parse, graph messages, JSON |
+| `request_site`     | Site URL with personalised charts      | `R/.val/json`        | site URL, JSON              |
+|                    |                                        | `messages/json`      | parse, site messages, JSON  |
+| `calculate_dscore` | Calculate the D-score for each visit   | `R/.val/json`        | D-score table, JSON         |
+| `screen_growth`    | Screen growth along JGZ guidelines     | `R/.val/json`        | screening table, JSON       |
+|                    |                                        | `messages/json`      | parse, screen msg, JSON     |
+| `custom_list`      | Create list with custom returns        | `R/.val/json`        | list of returns, JSON       |
+
+The primary user functions cover out wide range of activities. Let us
+look into these in some more detail.
+
+### Available growth charts
 
 The site <https://groeidiagrammen.nl/ocpu/lib/james/www/> provides a
 quick round-trip of growth charts. JAMES currently offers 394 different
@@ -55,7 +75,35 @@ into a JSON file by the following request:
 curl https://groeidiagrammen.nl/ocpu/lib/james/R/list_charts/json -d "" -o ~/Downloads/jamescharts.json
 ```
 
-The first entry looks like
+A request to `list_charts` on JAMES will yield a response like
+
+``` bash
+Response [https://groeidiagrammen.nl/ocpu/library/james/R/list_charts]
+  Date: 2020-09-02 13:29
+  Status: 201
+  Content-Type: text/plain; charset=utf-8
+  Size: 248 B
+/ocpu/tmp/x07c4471d08dbd3/R/.val
+/ocpu/tmp/x07c4471d08dbd3/R/list_charts
+/ocpu/tmp/x07c4471d08dbd3/stdout
+/ocpu/tmp/x07c4471d08dbd3/source
+/ocpu/tmp/x07c4471d08dbd3/console
+/ocpu/tmp/x07c4471d08dbd3/info
+/ocpu/tmp/x07c4471d08dbd3/files/DESCRIPTION
+```
+
+The status is 201 (Resources created), and the unique session `{key}` is
+`x07c4471d08dbd3`. Note that this changes with each request, so if you
+are replicating these commands, be sure to change `{key}` accordingly.
+Session keys and their url’s remain valid for 24 hours. See
+<https://www.opencpu.org/api.html> for succinct documentation of the
+OpenCPU interface.
+
+Not all information that JAMES return is interesting. In this case, we
+would like to see the table of charts in JSON format. We may these
+obtain this table from the URL
+`https://groeidiagrammen.nl/ocpu/tmp/x07c4471d08dbd3/R/.val/json`. The
+first entry looks like
 
 ``` json
 {
@@ -70,14 +118,14 @@ The first entry looks like
 }
 ```
 
-The most important field is `chartcode`, which contains a unique 4-7
-character code identifying the particular chart. In this example, code
-`HJAA` represents a chart for boys with Indo-Surinamese background
-(population `HS`) and design `A` (chart with head circumference, length
-and weight for boys aged 0-15 months). The codes are compatible and
-extend those used in Talma et al. (2010).
+The central field is `chartcode`, which contains a unique 4-7 character
+code identifying the particular chart. In this example, code `HJAA`
+represents a chart for boys with Indo-Surinamese background (population
+`HS`) and design `A` (chart with head circumference, length and weight
+for boys aged 0-15 months). The codes are compatible and extend those
+used in Talma et al. (2010).
 
-## Requesting a growth chart
+### Requesting a growth chart
 
 We may download growth chart `HJAA` with the `draw_chart()` function as
 follows:
@@ -99,12 +147,6 @@ This produces the following output
 /ocpu/tmp/x038e163dc6de71/files/DESCRIPTION
 ```
 
-See <https://www.opencpu.org/api.html> for succinct documentation of the
-OpenCPU interface. The `{key}` part is here `x038e163dc6de71`. Note that
-this changes with each request, so if you are replicating these
-commands, be sure to change `{key}` accordingly. Session keys and their
-url’s remain valid for 24 hours.
-
 View the chart in the browser by pasting the following into the url
 address field:
 
@@ -121,12 +163,12 @@ curl -o mychart.svg 'https://groeidiagrammen.nl/ocpu/tmp/x038e163dc6de71/graphic
 In order to obtain the right canvas size, the URL needs to be in quotes
 and the request needs `-H 'Cache-Control: max-age=0'` option added.
 
-## Adding data to charts
+### Adding data to charts
 
 Until now, we have only seen empty growth charts. This section describes
 various ways to add child data to the charts.
 
-### Data format
+#### Data format
 
 The [BDS
 JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12)
@@ -155,7 +197,7 @@ which produces a file called `client3.json` in your working directory.
 For testing purposes, you may change its values, but please keep the
 general structure intact.
 
-### Charting a JSON file
+#### Charting the child data, JSON file
 
 The following `curl` command uploads and converts the file, and plots
 the data on a growth chart:
@@ -184,7 +226,7 @@ https://groeidiagrammen.nl/ocpu/tmp/x0f59c6526dba8a/graphics/1/svglite
 JAMES automatically selected the length-by-age chart for preterm girls
 born at a gestational age of 27 weeks.
 
-### Charting a JSON string
+#### Charting the child data, JSON string
 
 Send the child’s data as a JSON string instead of a file provides some
 more flexibility. The following code assumes that utility `jq` is
@@ -239,17 +281,17 @@ input data. On the other hand, caching also requires some more work on
 the client side. The nature of the application determines which method
 works best.
 
-### Example of data cache
+#### Example of data cache
 
 An example, let’s create a chart in two steps. We first upload the data
-using `upload_txt`, which accepts JSON input and return the location
-with the uploaded data.
+using `fetch_loc`, which accepts JSON input and return the location with
+the uploaded data.
 
 ``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/upload_txt -d "txt=$var"
+curl https://groeidiagrammen.nl/ocpu/library/james/R/fetch_loc -d "txt=$var"
 
 /ocpu/tmp/x02691745d874cc/R/.val
-/ocpu/tmp/x02691745d874cc/R/upload_txt
+/ocpu/tmp/x02691745d874cc/R/fetch_loc
 /ocpu/tmp/x02691745d874cc/stdout
 /ocpu/tmp/x02691745d874cc/source
 /ocpu/tmp/x02691745d874cc/console
@@ -262,19 +304,6 @@ We create the chart by
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"
 ```
-
-## Primary JAMES user functionality
-
-| Function        | Description                                      |
-| --------------- | ------------------------------------------------ |
-| `upload_txt`    | Validate, convert and store input data           |
-| `draw_chart`    | Draw growth chart, predict future growth         |
-| `request_site`  | Create site URL with personalised charts         |
-| `screen_curves` | Screen growth curves according to JGZ guidelines |
-| `custom_list`   | Create JSON string with custom return            |
-
-Use `upload_txt()` to obtain a location of the cache (`loc`). All other
-functions support both the `txt` and `loc` input parameters.
 
 ## Request a dedicated url to the chart site
 
@@ -292,7 +321,7 @@ URL to the site base URL. The combined URL starts a personalised site
 with the child’s data.
 
 Alternatively, if we already obtained a `loc` parameters (e.g. by using
-`upload_txt`), we can combine that with the site base URL as follows.
+`fetch_loc`), we can combine that with the site base URL as follows.
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"
@@ -307,7 +336,7 @@ There are three ways to choose which chart is being plotted:
 
 Options 1 and 2 determine the first chart that is shown to the end user.
 
-### Site with default chart
+#### Site with default chart
 
 The default chart picked by JAMES is currently hard-wired as the child’s
 height chart that contains the most recent measurements. If the child is
@@ -339,18 +368,140 @@ The site now starts with `PMAAN27` instead of `PMAHN27`. Any chart can
 be chosen. It is the responsability of the developer that the choice is
 sensible given the child’s data.
 
-### Site with user-specified chart
+#### Site with user-specified chart
 
 After the site is started the end user may change the chart on which the
 data are drawn by simply using the site controls.
 
 ## Screen growth curves according to JGZ guidelines
 
-`screen_curves` | Screen growth curves according to JGZ guidelines
+`screen_growth` | Screen growth curves according to JGZ guidelines
+
+``` bash
+curl https://groeidiagrammen.nl/ocpu/library/james/R/screen_growth -d "txt=$var"
+```
+
+We obtain the screening results as
+
+``` bash
+curl https://groeidiagrammen.nl/ocpu/tmp/x04fc43cfd709b7/R/.val/json
+```
+
+    [
+      {
+        "Categorie": 1000,
+        "CategorieOmschrijving": "Lengte",
+        "Code": 1031,
+        "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+        "Versie": "1.6.0",
+        "Leeftijd0": "20181111",
+        "Leeftijd1": "20181211"
+      },
+      {
+        "Categorie": 2000,
+        "CategorieOmschrijving": "Gewicht",
+        "Code": 2031,
+        "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+        "Versie": "1.6.0",
+        "Leeftijd0": "20181111",
+        "Leeftijd1": "20181211"
+      },
+      {
+        "Categorie": 3000,
+        "CategorieOmschrijving": "Hoofdomtrek",
+        "Code": 3031,
+        "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+        "Versie": "1.6.0",
+        "Leeftijd0": "20181111",
+        "Leeftijd1": "20181211"
+      }
+    ]
 
 ## Create one request with list of return values
 
-`custom_list` | Create JSON string with custom return
+In some cases, we would like to bundle return values from a custom set
+of calls. That is the job of `custom_list`. The current version of
+`custom_list` will return a site URL (created by `request_site`), a
+table of screening results (created by `screen_growth`) and the last
+D-score (created by `calculate_dscore`). For example, the calls
+
+``` bash
+curl https://groeidiagrammen.nl/ocpu/library/james/R/custom_list -d "txt=$var"
+curl https://groeidiagrammen.nl//ocpu/tmp/x098464a29301fe/R/.val/json
+```
+
+return
+
+    {
+      "UrlGroeicurven": "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x03ee2514b1b1d2/",
+      "Resultaten": [
+        {
+          "Categorie": 1000,
+          "CategorieOmschrijving": "Lengte",
+          "Code": 1031,
+          "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+          "Versie": "1.6.0",
+          "Leeftijd0": "20181111",
+          "Leeftijd1": "20181211"
+        },
+        {
+          "Categorie": 2000,
+          "CategorieOmschrijving": "Gewicht",
+          "Code": 2031,
+          "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+          "Versie": "1.6.0",
+          "Leeftijd0": "20181111",
+          "Leeftijd1": "20181211"
+        },
+        {
+          "Categorie": 3000,
+          "CategorieOmschrijving": "Hoofdomtrek",
+          "Code": 3031,
+          "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+          "Versie": "1.6.0",
+          "Leeftijd0": "20181111",
+          "Leeftijd1": "20181211"
+        }
+      ]
+    }
+
+which contains the return values generated by `request_site` (called
+“UrlGroeicurven” here) and by `screen_growth` (called “Resultaten”
+here). There no result for `calculate_dscore` because the data do not
+contain any developmental scores that would be needed to calculate a
+D-score.
+
+In principle, `custom_list` provides an option for clients to bundle the
+results of multiple requests into one call. The current functionality,
+however, is limited to what is indicated in this section.
+
+## Legacy functionality
+
+This following table lists functions that are active in the current
+version, but that we will not further develop. Please replace them by
+the suggested alternative.
+
+| Function          | Description                             | Preferred alternative          |
+| ----------------- | --------------------------------------- | ------------------------------ |
+| `convert_bds_ind` | Validate, convert, store input (server) | `fetch_loc`                    |
+| `upload_txt`      | Validate, convert, store input (client) | `jamesclient::upload_txt`      |
+| `draw_chart_bds`  | Draw chart from uploaded                | `draw_chart(txt = ...)`        |
+| `draw_chart_ind`  | Draw chart from cached data             | `draw_chart(loc = ...)`        |
+| `screen_curves`   | Screen growth along JGZ guidelines      | `screen_growth`, `custom_list` |
+
+This following table lists argument names that are active in the current
+version, but that will be phased out for consistency. Please replace
+them by the suggested alternative.
+
+| Argument   | Description                         | Preferred alternative |
+| ---------- | ----------------------------------- | --------------------- |
+| `bds_data` | JSON input data                     | `txt`                 |
+| `ind_loc`  | Location with cached data.          | `loc`                 |
+| `location` | Location with cached data.          | `loc`                 |
+| `?ind=`    | URL query parameter for cached data | `?loc=`               |
+
+At some point these functions and argument names will be deprecated and
+removed.
 
 ## Next steps
 

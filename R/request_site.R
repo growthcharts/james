@@ -19,7 +19,7 @@
 #' running server that processes the request.
 #' @return URL composed of JAMES server, possibly appended by query string starting
 #' with \code{?txt=} or \code{?loc=}.
-#' @seealso \code{\link{upload_txt}}, \code{\link[jamesclient]{get_url}}
+#' @seealso \code{\link[jamesclient]{upload_txt}}, \code{\link[jamesclient]{get_url}}
 #' @details
 #' One of \code{txt} or \code{loc} needs to be specified. If both are given,
 #' \code{txt} takes precedence. If neither is given, then the function returns
@@ -43,7 +43,7 @@
 #' request_site(url)
 #'
 #' # same, as two steps, starting from file name
-#' resp <- upload_txt(fn)
+#' resp <- jamesclient::upload_txt(fn)
 #' loc <- jamesclient::get_url(resp, "location")
 #' request_site(loc = loc)
 #'
@@ -55,7 +55,6 @@
 #' @export
 request_site <- function(txt = "", loc = "", schema = NULL,
                          upload = TRUE, host = NULL) {
-
   txt <- txt[1L]
   loc <- loc[1L]
 
@@ -64,8 +63,9 @@ request_site <- function(txt = "", loc = "", schema = NULL,
   site <- paste0(host, "/ocpu/lib/james/www/")
 
   # no data
-  if (is.empty(txt) && is.empty(loc))
+  if (is.empty(txt) && is.empty(loc)) {
     return(site)
+  }
 
   # return ?txt=
   if (!is.empty(txt) && !upload) {
@@ -103,8 +103,9 @@ request_site <- function(txt = "", loc = "", schema = NULL,
   }
 
   # # return ?loc=, possibly after upload of txt
-  if (!is.empty(txt) && upload)
+  if (!is.empty(txt) && upload) {
     loc <- get_loc(txt, host, schema)
+  }
 
   ifelse(loc == "", site, paste0(site, "?loc=", loc))
 }

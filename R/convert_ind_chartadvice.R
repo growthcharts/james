@@ -40,12 +40,23 @@
 #' @keywords server
 #' @export
 convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
-                                    selector = c("data", "chartcode")) {
+                                    selector = c("data", "chartcode"),
+                                    ind_loc = "") {
+  if (!missing(ind_loc)) {
+    warning("Argument ind_loc is deprecated; please use loc instead.",
+      call. = FALSE
+    )
+  }
+
+  # legacy
+  if (!is.empty(ind_loc)) loc <- ind_loc
+
   selector <- match.arg(selector)
   ind <- get_ind(txt = txt, loc = loc)
   chartcode <- switch(selector,
-                      "data" = select_chart(ind = ind)$chartcode,
-                      "chartcode" = chartcode)
+    "data" = select_chart(ind = ind)$chartcode,
+    "chartcode" = chartcode
+  )
 
   initializer(selector, ind, chartcode)
 }

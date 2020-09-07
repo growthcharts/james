@@ -2,6 +2,5 @@
 #'
 #' @export
 list_charts <- function() {
-
   chartbox::list_charts()
 }

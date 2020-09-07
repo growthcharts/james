@@ -1,3 +1,29 @@
+# james 0.24.3
+
+* Run styler on all R sources
+* Move `upload_txt()` to `jamesclient` package
+
+# james 0.24.2
+
+* Add table of primary user functions to README
+* Add table of legacy functions indicating preferred alternatives
+* Add function `fetch_loc()` that should take over from `upload_txt()` (which implements client functionality) and `convert_bds_ind()` (which has a terrible name)
+* Add function `calculate_dscore()`
+* Transfer toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
+* Add function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
+* Add deprecated warnings to `convert_bds_ind()`, `draw_chart_bds`, `draw_chart_ind` and `screen_curves`
+* Update tests to account for deprecated functions and arguments
+
+# james 0.24.1 
+
+* Solve problem in `screen_curves()`. The function now always returns a JSON result
+
+# james 0.24.0
+
+* Re-introduce legacy functions `draw_chart_bds`, `draw_chart_ind`
+* Change `screen_curves` to old bahavior, thus producing a list instead of a table
+* Re-introduce arguments `bds_data`, `location`, `ind_loc` and `?ind=`
+
 # james 0.23.0
 
 * Major update incorporating the following **breaking changes** since `james 0.16.0`
@@ -7,16 +33,17 @@
 3. All analysis functions now accept `txt` and `loc` input. When both are specified, `txt` takes precedence.
 4. For consistency, function `upload_txt` replaces `update_bds`.
 5. Function `screen_curves` no longer returns a list, but only the screening results, consistent with its naming. A new function `custom_list` takes over this task from `screen_curves`.
-6. Removed functions: `update_bds` (replaced by `upload_txt`), `draw_chart_bds`, `draw_chart_ind`, `draw_plot` (replaced by `draw_chart`).
+6. Removed functions: `draw_chart_bds`, `draw_chart_ind`, `draw_plot` (replaced by `draw_chart`).
 
 * Enhancements:
 
-1. The site accept now the `?txt=` query parameter, which bypasses the new to upload data.
+1. The site accept now the `?txt=` query parameter, which bypasses the need to upload data.
 2. The new function `request_site` constructs URL's for personalised sites.
 3. The new function `custom_list` creates a custom list of return values (formerly implemented by `screen_curves`), and adds a new element containing the D-score from the last observation.
-4. The JAMES server location is now independent of the data location, so uploaded data can be stored on an external URL that is under control of the client.
-5. The javascript reduces the number of calls via `OpenCPU`, resulting in speedier site updates.
-6. Function `draw_chart` gets a new parameter `draw_grob` argument, which allows the user to defer drawing and to tweak the `gTree` object directly.
+4. A new function `update_txt()` to upload data to JAMES
+5. The JAMES server location is now independent of the data location, so uploaded data can be stored on an external URL that is under control of the client.
+6. The javascript reduces the number of calls via `OpenCPU`, resulting in speedier site updates.
+7. Function `draw_chart` gets a new parameter `draw_grob` argument, which allows the user to defer drawing and to tweak the `gTree` object directly.
 
 
 # james 0.22.1
