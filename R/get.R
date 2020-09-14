@@ -1,9 +1,10 @@
 # return the (likely) base URL of the ocpu server
-get_host <- function(servername = "james") {
+get_host <- function() {
   # where am I running?
-  switch(servername,
-    james = "https://groeidiagrammen.nl",
-    june = "https://vps.stefvanbuuren.nl",
+  hostname <- system("hostname", intern = TRUE)
+  switch(hostname,
+    groeidiagrammen.nl = "https://groeidiagrammen.nl",
+    opa = "https://vps.stefvanbuuren.nl",
     "http://localhost"
   )
 }
