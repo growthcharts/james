@@ -3,11 +3,6 @@ library(httr)
 
 library(jamesclient)
 
-# define testing host
-host <- "https://groeidiagrammen.nl"
-# host <- "https://vps.stefvanbuuren.nl"
-host <- "http://localhost"
-
 # client3.json
 fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 # fn <- system.file("testdata", "Laura_S_dev.json", package = "james")

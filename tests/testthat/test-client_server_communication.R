@@ -5,11 +5,6 @@ library(httr)
 # remove hack after server certificate is repaired
 # httr::set_config(config(ssl_verifypeer = 0L))
 
-# define testing host
-# host <- "https://groeidiagrammen.nl"
-# host <- "https://vps.stefvanbuuren.nl"
-host <- "http://localhost"
-
 path <- "ocpu/library/james/R/list_charts"
 url <- modify_url(url = host, path = path)
 resp <- POST(url = url)

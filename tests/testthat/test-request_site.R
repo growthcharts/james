@@ -7,10 +7,6 @@ kevin <- system.file("testdata", "Kevin_S.json", package = "james")
 kevin_gro <- system.file("testdata", "Kevin_S_gro.json", package = "james")
 kevin_dev <- system.file("testdata", "Kevin_S_dev.json", package = "james")
 
-host1 <- "https://groeidiagrammen.nl"
-host3 <- "http://localhost"
-host <- host3
-
 site_laura <- request_site(laura, host = host)
 site_laura_gro <- request_site(laura_gro, host = host)
 site_laura_dev <- request_site(laura_dev, host = host)
