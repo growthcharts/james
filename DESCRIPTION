@@ -14,17 +14,20 @@ License: AGPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    chartbox (>= 1.2.0),
-    chartcatalog (>= 1.2.0),
+    chartbox (>= 1.2.1),
+    chartcatalog (>= 1.5.0),
     chartplotter (>= 0.11.0),
     curl,
     grid,
-    growthscreener (>= 1.4.0),
+    growthscreener (>= 1.6.0),
     httr,
     jamesclient (>= 0.11.0),
     jsonlite,
     methods,
-    minihealth (>= 0.75.0)
+    minihealth (>= 0.80.2)
+Suggests: 
+    jamestest (>= 0.23.0),
+    testthat
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
@@ -35,6 +38,3 @@ Remotes:
     stefvanbuuren/minihealth
 RoxygenNote: 7.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
-Suggests: 
-    jamestest,
-    testthat
