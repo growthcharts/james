@@ -26,7 +26,7 @@ custom_list <- function(txt = "", loc = "") {
   last_dscore <- NULL
   if (!is.null(ind)) {
     d <- ind@dsc@y[length(ind@dsc@y)]
-    if (!is.na(d)) last_dscore <- d
+    if (length(d) && !is.na(d)) last_dscore <- d
   }
 
   # list of two elements if nu D-score, else 3 elements
