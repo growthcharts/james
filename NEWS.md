@@ -1,21 +1,21 @@
-# james 0.24.3
+# james 0.25.0
 
-* Run styler on all R sources
-* Move `upload_txt()` to `jamesclient` package
+Major changes:
 
-# james 0.24.2
-
+* Splits the site output into "Groei", "Ontwikkeling" and "Voorspeller"
+* Add function `fetch_loc()` as a replacement for `upload_txt()` and `convert_bds_ind()`
+* Add function `screen_growth()` as a replacement for `screen_curves()`
+* Add function `calculate_dscore()`
 * Add table of primary user functions to README
 * Add table of legacy functions indicating preferred alternatives
-* Add function `fetch_loc()` that should take over from `upload_txt()` (which implements client functionality) and `convert_bds_ind()` (which has a terrible name)
-* Add function `calculate_dscore()`
+* Run styler on all R sources
+* Move out `upload_txt()` to `jamesclient` package
 * Transfer toJSON() call in `custom_list()` to its caller screen_curves(), so `custom_list()` doesn't anymore JSONify the function result
-* Add function `screen_growth()`, a replacement for `screen_curves()` (which is now locked for backward compatibility)
+
+Minor changes
+
 * Add deprecated warnings to `convert_bds_ind()`, `draw_chart_bds`, `draw_chart_ind` and `screen_curves`
 * Update tests to account for deprecated functions and arguments
-
-# james 0.24.1 
-
 * Solve problem in `screen_curves()`. The function now always returns a JSON result
 
 # james 0.24.0
