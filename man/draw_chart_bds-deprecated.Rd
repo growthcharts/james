@@ -18,8 +18,8 @@ draw_chart_bds(
 
 \item{chartcode}{A string with chart code}
 
-\item{curve_interpolation}{A logical indicating whether curve
-interpolation shoud be applied.}
+\item{curve_interpolation}{A logical indicating whether curve interpolation
+shoud be applied.}
 
 \item{selector}{Legacy addition to solve a problem in jgzApp. See
 \code{draw_chart} for interpretation. The default is set to
