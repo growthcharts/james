@@ -1,3 +1,7 @@
+# james 0.26.0
+
+* Solves a bug that prevented proper initialisation for 1-21y charts
+
 # james 0.25.0
 
 Major changes:
