@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## Joint Anthropometric Measurement and Evaluation System (JAMES)
+## Joint Automatic Measurement and Evaluation System (JAMES)
 
 JAMES is an experimental web service for creating and interpreting
 charts of child growth and development. The current version
@@ -35,7 +35,7 @@ curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
 ## Primary JAMES user functionality
 
 | Function           | Description                            | Interesting URL’s    | Contents                    |
-| ------------------ | -------------------------------------- | -------------------- | --------------------------- |
+|--------------------|----------------------------------------|----------------------|-----------------------------|
 | `list_charts`      | List available growth charts           | `R/.val/json`        | Table of charts, JSON       |
 |                    |                                        | `R/.val/text`        | Table of charts, text       |
 | `fetch_loc`        | Validate, convert and store input data | `messages/json`      | parse messages, JSON        |
@@ -60,8 +60,8 @@ charts, divided into three chart groups:
 
 1.  140 charts for children of various ethnicities, age groups and
     outcomes (Talma et al. 2010);
-2.  240 charts specifically designed for preterms (Bocca-Tjeertes et al.
-    2012);
+2.  240 charts specifically designed for preterms (Bocca-Tjeertes et
+    al. 2012);
 3.  14 charts based on the WHO Child Growth Standards (WHO 2006);
 
 The `list_charts()` function in JAMES function produces a tabular
@@ -170,8 +170,8 @@ various ways to add child data to the charts.
 
 #### Data format
 
-The [BDS
-JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12)
+The [BDS JGZ
+3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12)
 protocol facilitates the exchange of data between parties active in the
 Dutch youth health care. The format is basically a codebook of
 variables. Each variable has a number: `bdsnummer`. JAMES adopts the
@@ -340,8 +340,8 @@ Options 1 and 2 determine the first chart that is shown to the end user.
 
 The default chart picked by JAMES is currently hard-wired as the child’s
 height chart that contains the most recent measurements. If the child is
-a pre-term (gestational age \<= 36 weeks) and younger than 4 years, then
-JAMES chooses the appropriate preterm chart.
+a pre-term (gestational age &lt;= 36 weeks) and younger than 4 years,
+then JAMES chooses the appropriate preterm chart.
 
 The chart site with the default start can be started by combining the
 [uploaded data](https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
@@ -375,7 +375,7 @@ data are drawn by simply using the site controls.
 
 ## Screen growth curves according to JGZ guidelines
 
-`screen_growth` | Screen growth curves according to JGZ guidelines
+`screen_growth` \| Screen growth curves according to JGZ guidelines
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/R/screen_growth -d "txt=$var"
@@ -482,7 +482,7 @@ version, but that we will not further develop. Please replace them by
 the suggested alternative.
 
 | Function          | Description                             | Preferred alternative          |
-| ----------------- | --------------------------------------- | ------------------------------ |
+|-------------------|-----------------------------------------|--------------------------------|
 | `convert_bds_ind` | Validate, convert, store input (server) | `fetch_loc`                    |
 | `upload_txt`      | Validate, convert, store input (client) | `jamesclient::upload_txt`      |
 | `draw_chart_bds`  | Draw chart from uploaded                | `draw_chart(txt = ...)`        |
@@ -494,7 +494,7 @@ version, but that will be phased out for consistency. Please replace
 them by the suggested alternative.
 
 | Argument   | Description                         | Preferred alternative |
-| ---------- | ----------------------------------- | --------------------- |
+|------------|-------------------------------------|-----------------------|
 | `bds_data` | JSON input data                     | `txt`                 |
 | `ind_loc`  | Location with cached data.          | `loc`                 |
 | `location` | Location with cached data.          | `loc`                 |
@@ -507,14 +507,14 @@ removed.
 
 Things that were still on the wish list in Sept 2019:
 
-  - transfer JAMES to url james.tno.nl \[wait for docker version\]
-  - allow for more input formats \[NOW support for both `txt` and
+-   transfer JAMES to url james.tno.nl \[wait for docker version\]
+-   allow for more input formats \[NOW support for both `txt` and
     `loc`\]
-  - add https protocol \[DONE\]
-  - add functionality to test for Dutch guidelines for referral \[DONE,
+-   add https protocol \[DONE\]
+-   add functionality to test for Dutch guidelines for referral \[DONE,
     3 guidelines\]
-  - add functionality to predict individual growth curves \[DONE\]
-  - extend functionality to include the \(D\)-score charts \[DONE\]
+-   add functionality to predict individual growth curves \[DONE\]
+-   extend functionality to include the *D*-score charts \[DONE\]
 
 ## Architecture
 
@@ -527,14 +527,14 @@ RESTful webservice.
 
 ## Resources
 
-  - [OpenCPU system](https://www.opencpu.org)
-  - [OpenCPU API](https://www.opencpu.org/api.html)
-  - <https://www.w3schools.com/js/>
-  - <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
-  - <https://github.com/stefvanbuuren/james>
-  - <https://github.com/stefvanbuuren/james.client>
-  - <https://github.com/stefvanbuuren/minihealth>
-  - <https://github.com/stefvanbuuren/brokenstick>
+-   [OpenCPU system](https://www.opencpu.org)
+-   [OpenCPU API](https://www.opencpu.org/api.html)
+-   <https://www.w3schools.com/js/>
+-   <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
+-   <https://github.com/stefvanbuuren/james>
+-   <https://github.com/stefvanbuuren/james.client>
+-   <https://github.com/stefvanbuuren/minihealth>
+-   <https://github.com/stefvanbuuren/brokenstick>
 
 ## About
 
@@ -544,9 +544,9 @@ Buuren (stef.vanbuuren at tno.nl), <https://stefvanbuuren.name>,
 
 ## Literature
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-bocca-tjeertes2012">
+<div id="ref-bocca-tjeertes2012" class="csl-entry">
 
 Bocca-Tjeertes, I. F. A., S. van Buuren, A. F. Bos, J. M. Kerstens, E.
 M. ten Vergert, and Reijneveld.S. A. 2012. “Growth of Preterm and
@@ -555,7 +555,7 @@ Variability in Growth Charts.” *Journal of Pediatrics* 161 (3): 460–65.
 
 </div>
 
-<div id="ref-talma2010">
+<div id="ref-talma2010" class="csl-entry">
 
 Talma, H., Y. Schonbeck, B. Bakker, R. A. Hirasing, and S. van Buuren.
 2010. *Groeidiagrammen 2010: Handleiding Bij Het Meten En Wegen van
@@ -564,7 +564,7 @@ Leven.
 
 </div>
 
-<div id="ref-who2006">
+<div id="ref-who2006" class="csl-entry">
 
 WHO, Multicentre Growth Reference Study Group. 2006. “WHO Child Growth
 Standards Based on Length/Height, Weight and Age.” *Acta Paediatrica* 95

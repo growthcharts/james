@@ -9,7 +9,7 @@ bibliography: [README.bib]
 knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```
 
-## Joint Anthropometric Measurement and Evaluation System (JAMES)
+## Joint Automatic Measurement and Evaluation System (JAMES)
 
 JAMES is an experimental web service for creating and interpreting charts of child growth and
 development. The current version
