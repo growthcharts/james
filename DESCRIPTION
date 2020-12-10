@@ -13,6 +13,8 @@ Description: This package contains the server-side functions for the
 License: AGPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends: 
+    clopus
 Imports: 
     chartbox (>= 1.2.1),
     chartcatalog (>= 1.5.0),
@@ -32,6 +34,7 @@ Remotes:
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
     stefvanbuuren/chartplotter,
+    stefvanbuuren/clopus,
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
     stefvanbuuren/jamestest,

@@ -77,15 +77,15 @@ provides the 0-4 chart with weight for age (design E).}
 \item{side}{Either \code{'front'}, \code{'back'}, \code{'-hdc'} or
 \code{'both'}}
 
-\item{curve_interpolation}{A logical indicating whether curve interpolation
-shoud be applied.}
+\item{curve_interpolation}{A logical indicating whether curve
+interpolation shoud be applied.}
 
-\item{quiet}{Logical indicating whether chart code should be written to
-standard output. Default is \code{quiet = TRUE}.}
+\item{quiet}{Logical indicating whether chart code should be
+written to standard output. Default is \code{quiet = TRUE}.}
 
-\item{dnr}{A string with the name of the donor data (currently
-available are \code{smocc}, \code{terneuzen}, \code{lollypop.preterm} or
-\code{lollypop.term})}
+\item{dnr}{A string with the name of the donor data
+(currently available are \code{smocc}, \code{terneuzen},
+\code{lollypop.preterm} or \code{lollypop.term})}
 
 \item{lo}{Value of the left visit coded as string, e.g. \code{"4w"}
 or \code{"7.5m"}}
@@ -93,22 +93,23 @@ or \code{"7.5m"}}
 \item{hi}{Value of the right visit coded as string, e.g. \code{"4w"}
 or \code{"7.5m"}}
 
-\item{nmatch}{Integer. Number of matches needed. When \code{nmatch == 0L}
-no matches are sought.}
+\item{nmatch}{Integer. Number of matches needed. When
+\code{nmatch == 0L} no matches are sought.}
 
-\item{exact_sex}{A logical indicating whether sex should be matched exactly}
-
-\item{exact_ga}{A logical indicating whether gestational age should be
+\item{exact_sex}{A logical indicating whether sex should be
 matched exactly}
 
-\item{break_ties}{A logical indicating whether ties should broken randomly.
-The default (\code{TRUE}) breaks ties randomly.}
+\item{exact_ga}{A logical indicating whether gestational age
+should be matched exactly}
 
-\item{show_realized}{A logical indicating whether the realized growth of the
-target child should be drawn}
+\item{break_ties}{A logical indicating whether ties should broken
+randomly. The default (\code{TRUE}) breaks ties randomly.}
 
-\item{show_future}{A logical indicating whether the predicted growth of the
-target child should be drawn}
+\item{show_realized}{A logical indicating whether the realized
+growth of the target child should be drawn}
+
+\item{show_future}{A logical indicating whether the predicted
+growth of the target child should be drawn}
 
 \item{draw_grob}{Logical. Should chart be plotted on current device?
 Default is \code{TRUE}. For internal use only.}

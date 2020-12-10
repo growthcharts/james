@@ -13,8 +13,8 @@ and converted to internal server format.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 
-\item{curve_interpolation}{A logical indicating whether curve interpolation
-shoud be applied.}
+\item{curve_interpolation}{A logical indicating whether curve
+interpolation shoud be applied.}
 }
 \description{
 The function \code{draw_chart_ind()} expect an input location from

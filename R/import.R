@@ -1,3 +1,4 @@
+#' @import     clopus
 #' @importFrom chartbox        list_charts
 #' @importFrom chartcatalog    create_chartcode get_breakpoints
 #'                             parse_chartcode
