@@ -18,7 +18,7 @@ Depends:
 Imports: 
     chartbox (>= 1.2.1),
     chartcatalog (>= 1.5.0),
-    chartplotter (>= 0.11.0),
+    chartplotter (>= 0.13.1),
     curl,
     grid,
     growthscreener (>= 1.6.0),
@@ -26,14 +26,14 @@ Imports:
     jamesclient (>= 0.11.0),
     jsonlite,
     methods,
-    minihealth (>= 0.80.2)
+    minihealth (>= 0.83.0)
 Suggests: 
     jamestest (>= 0.23.0),
     testthat
 Remotes: 
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
-    stefvanbuuren/chartplotter,
+    stefvanbuuren/chartplotter@transform_matches,
     stefvanbuuren/clopus,
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
