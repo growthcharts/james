@@ -1,12 +1,12 @@
 Package: james
 Type: Package
-Title: JAMES: Joint Anthropometric Measurement and Evaluation System
+Title: JAMES: Joint Automatic Measurement and Evaluation System
 Version: 0.26.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
 Description: This package contains the server-side functions for the 
-    API of the Joint Anthropometric Measurement and Evaluation 
+    API of the Joint Automatic Measurement and Evaluation 
     System (JAMES). JAMES deploys advanced analytic functionality 
     to analyze, monitor and predict individual child growth and 
     development.
