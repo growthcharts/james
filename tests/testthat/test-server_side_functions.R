@@ -39,6 +39,7 @@ test_that(
   "screen_growth() on not_a_vector.json has messages",
   expect_message(screen_growth(js))
 )
+
 test_that(
   "draw_chart() on not_a_vector.json has messages",
   expect_message(draw_chart(js))

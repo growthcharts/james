@@ -50,10 +50,7 @@ draw_chart <- function(txt = "",
                        side = "hgt",
                        curve_interpolation = TRUE,
                        quiet = FALSE,
-                       dnr = c(
-                         "smocc", "terneuzen", "lollypop.preterm",
-                         "lollypop.term", "pops"
-                       ),
+                       dnr = c("smocc", "terneuzen", "lollypop", "pops"),
                        lo = NULL,
                        hi = NULL,
                        nmatch = 0L,
