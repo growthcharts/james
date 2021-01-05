@@ -235,7 +235,7 @@ function initialize_chart_controls() {
       to: to});
 
     // set exact-ga default for preterms
-    if (dnr == "lollypop.preterm") document.getElementById("exact_ga").checked = true;
+    // if (dnr == "lollypop.preterm") document.getElementById("exact_ga").checked = true;
 
     // set UI controls and chart
     update();
@@ -257,8 +257,7 @@ function update_donordata() {
     case "smocc":
       slider_list = "0_2";
       break;
-    case "lollypop.preterm":
-    case "lollypop.term":
+    case "lollypop":
       slider_list = "0_4";
       break;
     case "terneuzen":

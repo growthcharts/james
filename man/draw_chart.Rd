@@ -17,7 +17,7 @@ draw_chart(
   side = "hgt",
   curve_interpolation = TRUE,
   quiet = FALSE,
-  dnr = c("smocc", "terneuzen", "lollypop.preterm", "lollypop.term", "pops"),
+  dnr = c("smocc", "terneuzen", "lollypop", "pops"),
   lo = NULL,
   hi = NULL,
   nmatch = 0L,
@@ -85,7 +85,7 @@ written to standard output. Default is \code{quiet = TRUE}.}
 
 \item{dnr}{A string with the name of the donor data
 (currently available are \code{smocc}, \code{terneuzen},
-\code{lollypop.preterm} or \code{lollypop.term})}
+\code{lollypop} and \code{pops})}
 
 \item{lo}{Value of the left visit coded as string, e.g. \code{"4w"}
 or \code{"7.5m"}}

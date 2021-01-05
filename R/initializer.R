@@ -62,21 +62,21 @@ initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
     return(switch(EXPR = chartgrp,
       nl2010 = switch(EXPR = agegrp,
         "0-15m" = "smocc",
-        "0-4y"  = "lollypop.term",
+        "0-4y"  = "lollypop",
         "1-21y" = "terneuzen",
         "0-21y" = "terneuzen",
         "smocc"
       ),
       who = switch(EXPR = agegrp,
         "0-15m" = "smocc",
-        "0-4y"  = "lollypop.term",
+        "0-4y"  = "lollypop",
         "1-21y" = "terneuzen",
         "0-21y" = "terneuzen",
         "smocc"
       ),
       preterm = switch(EXPR = agegrp,
-        "0-15m" = "lollypop.preterm",
-        "0-4y"  = "lollypop.preterm",
+        "0-15m" = "lollypop",
+        "0-4y"  = "lollypop",
         "1-21y" = "terneuzen",
         "0-21y" = "terneuzen"
       ),
@@ -89,11 +89,11 @@ initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
     dnr <- "smocc"
     if (!is.na(last_age)) {
       if (chartgrp %in% c("nl2010", "who")) {
-        if (last_age > 2.0) dnr <- "lollypop.term"
+        if (last_age > 2.0) dnr <- "lollypop"
         if (last_age > 4.0) dnr <- "terneuzen"
       }
       if (chartgrp %in% "preterm") {
-        dnr <- "lollypop.preterm"
+        dnr <- "lollypop"
         if (last_age > 4.0) dnr <- "terneuzen"
       }
     }

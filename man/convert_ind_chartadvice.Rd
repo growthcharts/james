@@ -67,7 +67,7 @@ A list with the following elements
    \item{\code{agegrp}}{A string indicating the age group, either \code{"0-15m"},
    \code{"0-4y"}, \code{"1-21y"} or \code{"0-21y"}.}
    \item{\code{dnr}}{A string indicating the donor dataset for matching, either \code{"smocc"},
-   \code{"lollypop.term"}, \code{"lollypop.preterm"} or \code{"terneuzen"}.}
+   \code{"lollypop"}, \code{"terneuzen"} or \code{"pops"}.}
    \item{\code{slider_list}}{A string indicating the set of slider labels, either \code{"0_2"},
    \code{"0_4"} or \code{"0_29"}.}
    \item{\code{period}}{A character vector of two elements, indicating the first and last period for the
