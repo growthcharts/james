@@ -1,3 +1,9 @@
+# james 0.27.0
+
+* Combines `lollypop.term` and `lollypop.preterm` into `lollypop`
+* Simplifies donordata menu
+* Renames "anthropometric" to "automatic"
+
 # james 0.26.0
 
 * Solves a bug that prevented proper initialisation for 1-21y charts
