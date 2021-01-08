@@ -1,3 +1,7 @@
+# james 0.27.1
+
+* Repairs a problem in the slider_list initialisation
+
 # james 0.27.0
 
 * Combines `lollypop.term` and `lollypop.preterm` into `lollypop`
