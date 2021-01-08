@@ -104,9 +104,9 @@ initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
 initialize_slider_list <- function(dnr) {
   switch(dnr,
     smocc = "0_2",
-    lollypop.preterm = "0_4",
-    lollypop.term = "0_4",
+    lollypop = "0_4",
     terneuzen = "0_29",
+    pops = "0-19",
     "0_2"
   )
 }
