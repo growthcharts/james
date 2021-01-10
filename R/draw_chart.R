@@ -4,6 +4,9 @@
 #' @inheritParams request_site
 #' @inheritParams select_chart
 #' @inheritParams chartplotter::process_chart
+#' @param dnr Donor data, Prediction horizon: \code{"0-2"}, \code{"2-4"}
+#' or \code{"4-18"}. May also be \code{"smocc"}, \code{"lollypop"},
+#' \code{"terneuzen"} or \code{"pops"}.
 #' @param chartcode Optional. The code of the requested growth chart.
 #' @param selector Either \code{"chartcode"}, \code{"data"} or \code{"derive"}.
 #' The function can calculate the chart code by looking at the child
@@ -50,7 +53,8 @@ draw_chart <- function(txt = "",
                        side = "hgt",
                        curve_interpolation = TRUE,
                        quiet = FALSE,
-                       dnr = c("smocc", "terneuzen", "lollypop", "pops"),
+                       dnr = c("0-2", "2-4", "4-18",
+                               "smocc", "lollypop", "terneuzen", "pops"),
                        lo = NULL,
                        hi = NULL,
                        nmatch = 0L,

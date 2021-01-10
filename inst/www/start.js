@@ -255,17 +255,15 @@ function update_donordata() {
   // update slider values and graph if user changes dnr
   var dnr = document.getElementById("donordata").value;
   switch (dnr){
-    case "smocc":
+    case "0-2":
       slider_list = "0_2";
       break;
-    case "lollypop":
+    case "2-4":
       slider_list = "0_4";
       break;
-    case "terneuzen":
+    case "4-18":
       slider_list = "0_29";
       break;
-    case "pops":
-      slider_list = "0-19";
     default:
       slider_list = "0_2";
   }
