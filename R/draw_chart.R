@@ -53,8 +53,7 @@ draw_chart <- function(txt = "",
                        side = "hgt",
                        curve_interpolation = TRUE,
                        quiet = FALSE,
-                       dnr = c("0-2", "2-4", "4-18",
-                               "smocc", "lollypop", "terneuzen", "pops"),
+                       dnr = "0-2",
                        lo = NULL,
                        hi = NULL,
                        nmatch = 0L,
@@ -82,7 +81,9 @@ draw_chart <- function(txt = "",
   if (!is.empty(ind_loc)) loc <- ind_loc
 
   selector <- match.arg(selector)
-  dnr <- match.arg(dnr)
+  dnr <- match.arg(dnr,
+                   choices = c("0-2", "2-4", "4-18", "smocc", "lollypop",
+                               "terneuzen", "pops"))
 
   ind <- get_ind(txt, loc)
 

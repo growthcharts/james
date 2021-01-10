@@ -17,7 +17,7 @@ draw_chart(
   side = "hgt",
   curve_interpolation = TRUE,
   quiet = FALSE,
-  dnr = c("0-2", "2-4", "4-18", "smocc", "lollypop", "terneuzen", "pops"),
+  dnr = "0-2",
   lo = NULL,
   hi = NULL,
   nmatch = 0L,
