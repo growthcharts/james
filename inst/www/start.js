@@ -1,6 +1,5 @@
 // start.js
 
-// user arguments
 const urlParams = new URLSearchParams(window.location.search);
 
 const user_txt = urlParams.get('txt');
@@ -24,7 +23,7 @@ var slider_list = "0_2";
 var chartcode = "NJAH";
 
 // Set donordata entry
-document.getElementById("donordata").value = "smocc";
+document.getElementById("donordata").value = "0-2";
 
 // Fire up sliders
 $("#weekslider").ionRangeSlider({
