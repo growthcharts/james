@@ -57,6 +57,9 @@ initialize_side <- function(parsed) {
 }
 
 initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
+  # default if nothing is set
+  dnr <- "0-2"
+
   # Determine dnr on chartcode if user initialized chartcode
   if (selector == "chartcode") {
     return(switch(EXPR = chartgrp,
