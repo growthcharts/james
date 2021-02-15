@@ -1,3 +1,7 @@
+# james 0.28.1 
+
+* Include `jamesyzy` dependency
+
 # james 0.28.0
 
 * Switch to an age-related choice for donordata: `0-2`, `2-4` and `4-18`.
