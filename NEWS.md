@@ -1,4 +1,8 @@
-# james 0.28.1 
+# james 0.28.2
+
+* Downgrade to `chartplotter 0.15.0`
+
+# james 0.28.1
 
 * Include `jamesyzy` dependency
 
