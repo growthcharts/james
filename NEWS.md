@@ -1,3 +1,7 @@
+# james 0.29.0
+
+* Include `svglite` dependency as needed by the javascript calls
+
 # james 0.28.2
 
 * Downgrade to `chartplotter 0.15.0`

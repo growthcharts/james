@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: JAMES: Joint Automatic Measurement and Evaluation System
-Version: 0.28.2
+Version: 0.29.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -15,11 +15,12 @@ Encoding: UTF-8
 LazyData: true
 Depends: 
     clopus,
-    jamesyzy
+    jamesyzy,
+    svglite
 Imports: 
     chartbox (>= 1.2.1),
     chartcatalog (>= 1.5.0),
-    chartplotter (>= 0.15.0),
+    chartplotter (>= 0.18.0),
     curl,
     grid,
     growthscreener (>= 1.6.0),
