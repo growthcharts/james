@@ -20,7 +20,7 @@ Depends:
 Imports: 
     chartbox (>= 1.2.1),
     chartcatalog (>= 1.5.0),
-    chartplotter (>= 0.18.0),
+    chartplotter (>= 0.18.1),
     curl,
     grid,
     growthscreener (>= 1.6.0),
