@@ -89,8 +89,7 @@ draw_chart <- function(txt = "",
 
   # if we have no ind, prioritise chartcode over derive
   # except when chartcode is empty
-  if (is.null(ind)) {
-    if (chartcode == "") {
+  if (is.null(ind) && chartcode == "") {
       chartcode <- select_chart(
         ind = NULL,
         chartgrp = chartgrp,
@@ -100,7 +99,6 @@ draw_chart <- function(txt = "",
         ga = ga,
         side = side
       )$chartcode
-    }
   } else {
     # listen to selector
     chartcode <- switch(selector,
