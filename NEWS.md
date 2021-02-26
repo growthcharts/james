@@ -1,18 +1,22 @@
+# james 0.29.1 
+
+* Simplifies testing condition in `draw_chart()`
+
 # james 0.29.0
 
-* Include `svglite` dependency as needed by the javascript calls
+* Includes `svglite` dependency as needed by the javascript calls
 
 # james 0.28.2
 
-* Downgrade to `chartplotter 0.15.0`
+* Downgrades to `chartplotter 0.15.0`
 
 # james 0.28.1
 
-* Include `jamesyzy` dependency
+* Includes `jamesyzy` dependency
 
 # james 0.28.0
 
-* Switch to an age-related choice for donordata: `0-2`, `2-4` and `4-18`.
+* Switches to an age-related choice for donordata: `0-2`, `2-4` and `4-18`.
 
 # james 0.27.1
 
