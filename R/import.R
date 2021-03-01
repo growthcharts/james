@@ -1,5 +1,5 @@
 #' @import     clopus
-#' @import     jamesyzy
+#' @import     nlreferences
 #' @import     svglite
 #' @importFrom chartbox        list_charts
 #' @importFrom chartcatalog    create_chartcode get_breakpoints

@@ -1,3 +1,7 @@
+# james 0.30.0
+
+* Uses the `nlreferences` package
+
 # james 0.29.1 
 
 * Simplifies testing condition in `draw_chart()`
