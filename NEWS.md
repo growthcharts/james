@@ -1,3 +1,7 @@
+# james 0.31.0
+
+* Removes `clopus` dependency
+
 # james 0.30.0
 
 * Uses the `nlreferences` package
