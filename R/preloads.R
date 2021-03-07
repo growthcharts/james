@@ -1,7 +1,7 @@
 preloads <- function() {
   c(
     "james", "chartbox", "chartcatalog", "chartplotter",
-    "minihealth", "brokenstick", "clopus", "curvematching",
+    "minihealth", "brokenstick", "curvematching",
     "donorloader", "donordata"
   )
 }

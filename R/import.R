@@ -1,4 +1,3 @@
-#' @import     clopus
 #' @import     nlreferences
 #' @import     svglite
 #' @importFrom chartbox        list_charts
