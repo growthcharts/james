@@ -42,7 +42,7 @@ test_that(
 
 test_that(
   "draw_chart() on not_a_vector.json has messages",
-  expect_message(draw_chart(js))
+  expect_message(draw_chart(js, draw_grob = FALSE))
 )
 
 # problematic json file http400.json identified by Allegro Sultum - Feb 2020
@@ -61,3 +61,4 @@ test_that(
   "draw_chart() on http400.json has messages",
   expect_silent(draw_chart(js, quiet = TRUE))
 )
+
