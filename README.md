@@ -176,7 +176,7 @@ protocol facilitates the exchange of data between parties active in the
 Dutch youth health care. The format is basically a codebook of
 variables. Each variable has a number: `bdsnummer`. JAMES adopts the
 format, and accepts data in JSON format according to a [JSON
-schema](https://raw.githubusercontent.com/stefvanbuuren/minihealth/master/inst/json/bds_schema_str.json).
+schema](https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/json/bds_schema_str.json).
 
 A minimal example of the data according to the schema is:
 
@@ -533,7 +533,7 @@ RESTful webservice.
 -   <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
 -   <https://github.com/stefvanbuuren/james>
 -   <https://github.com/stefvanbuuren/james.client>
--   <https://github.com/stefvanbuuren/minihealth>
+-   <https://github.com/growthcharts/bdsreader>
 -   <https://github.com/stefvanbuuren/brokenstick>
 
 ## About
