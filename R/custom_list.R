@@ -19,7 +19,7 @@
 custom_list <- function(txt = "", loc = "") {
   site <- request_site(txt, loc)
 
-  ind <- get_ind(txt, loc)
+  ind <- get_tgt(txt, loc)
 
   res <- screen_curves_ind(ind)
 

@@ -6,8 +6,7 @@
 #' or equal to 36 weeks, and determines the age group by the
 #' maximum age found in the data.
 #' @aliases select_chart
-#' @param ind An S4 object of class \code{individual} containing
-#'   data of the individual, or \code{NULL}.
+#' @param target A tibble with a \code{person} attribute, or \code{NULL}.
 #' @param chartgrp  The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 #' or \code{character(0)}
 #' @param agegrp Either \code{'0-15m'}, \code{'0-4y'}, \code{'1-21y'},
@@ -23,14 +22,13 @@
 #'   used)
 #' @return A list with elements \code{chartgrp}, \code{chartcode}
 #' and \code{ga}
-#' @seealso \code{\link[chartcatalog]{create_chartcode}},
-#'   \code{\link[minihealth]{individualAN-class}}
+#' @seealso \code{\link[chartcatalog]{create_chartcode}}
 #' @examples
-#' data("installed.cabinets", package = "jamestest")
-#' ind <- installed.cabinets[[3]][[1]]
-#' select_chart(ind)
+#' #data("installed.cabinets", package = "jamestest")
+#' #ind <- installed.cabinets[[3]][[1]]
+#' #select_chart(tgt)
 #' @export
-select_chart <- function(ind = NULL,
+select_chart <- function(target = NULL,
                          chartgrp = NULL,
                          agegrp   = NULL,
                          sex      = NULL,
@@ -40,13 +38,13 @@ select_chart <- function(ind = NULL,
                          language = "dutch") {
 
   # choose defaults depending on individual
-  if (!is.null(ind)) {
-    if (is.null(agegrp)) agegrp <- select_agegrp(ind)
-    if (is.null(chartgrp)) chartgrp <- select_chartgrp(ind)
-    if (is.null(ga))       ga       <- select_ga(ind)
-    if (is.null(sex))      sex      <- select_sex(ind)
+  if (!is.null(target)) {
+    if (is.null(agegrp)) agegrp <- select_agegrp(target)
+    if (is.null(chartgrp)) chartgrp <- select_chartgrp(target)
+    if (is.null(ga))       ga       <- select_ga(target)
+    if (is.null(sex))      sex      <- select_sex(target)
     if (is.null(etn))      etn      <- "nl"
-    if (is.null(side))     side     <- select_side(ind)
+    if (is.null(side))     side     <- select_side(target)
   }
 
   # now get the chartcode
@@ -62,19 +60,21 @@ select_chart <- function(ind = NULL,
   ))
 }
 
-select_chartgrp <- function(ind) {
+select_chartgrp <- function(tgt) {
   # automatic chartgrp setting based on ga
-  ga <- slot(ind, "ga")
+  ga <- persondata(tgt)$ga
   if (is.na(ga)) {
     return("nl2010")
   }
   ifelse(ga <= 36, "preterm", "nl2010")
 }
 
-select_agegrp <- function(ind) {
+select_agegrp <- function(tgt) {
   # automatic agegrp setting based on last age
+
   # get maximum age
-  max_age <- get_range(ind)[2L]
+  x <- tgt$age
+  max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
 
   # assign default age group
   if (is.na(max_age)) {
@@ -86,8 +86,8 @@ select_agegrp <- function(ind) {
   agegrp
 }
 
-select_ga <- function(ind) {
-  ga <- slot(ind, "ga")
+select_ga <- function(tgt) {
+  ga <- persondata(tgt)$ga
   if (is.na(ga)) {
     return(32)
   }
@@ -97,17 +97,17 @@ select_ga <- function(ind) {
   ga
 }
 
-select_sex <- function(ind) {
-  sex <- slot(ind, "sex")
+select_sex <- function(tgt) {
+  sex <- persondata(tgt)$sex
   if (sex %in% c("male", "female")) {
     return(sex)
   }
-  return("male")
+  "male"
 }
 
-select_side <- function(ind) {
-  if(any(!is.na(slot(ind, "hgt")@y))) return("hgt")
-  if(any(!is.na(slot(ind, "wgt")@y))) return("hgt") # wgt?
-  if(any(!is.na(slot(ind, "hdc")@y))) return("hgt") # hdc?
-  if(any(!is.na(slot(ind, "dsc")@y))) return("dsc")
+select_side <- function(tgt) {
+  yname <- tgt$yname
+  if (any(c("hgt", "wgt", "hdc") %in% yname)) return("hgt")
+  if (any(c("dsc") %in% yname)) return("dsc")
+  "hgt"
 }

@@ -5,7 +5,7 @@
 \title{Selects the growth chart}
 \usage{
 select_chart(
-  ind = NULL,
+  target = NULL,
   chartgrp = NULL,
   agegrp = NULL,
   sex = NULL,
@@ -16,8 +16,7 @@ select_chart(
 )
 }
 \arguments{
-\item{ind}{An S4 object of class \code{individual} containing
-data of the individual, or \code{NULL}.}
+\item{target}{A tibble with a \code{person} attribute, or \code{NULL}.}
 
 \item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 or \code{character(0)}}
@@ -51,11 +50,10 @@ or equal to 36 weeks, and determines the age group by the
 maximum age found in the data.
 }
 \examples{
-data("installed.cabinets", package = "jamestest")
-ind <- installed.cabinets[[3]][[1]]
-select_chart(ind)
+#data("installed.cabinets", package = "jamestest")
+#ind <- installed.cabinets[[3]][[1]]
+#select_chart(tgt)
 }
 \seealso{
-\code{\link[chartcatalog]{create_chartcode}},
-  \code{\link[minihealth]{individualAN-class}}
+\code{\link[chartcatalog]{create_chartcode}}
 }

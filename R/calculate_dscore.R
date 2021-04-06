@@ -20,28 +20,22 @@ calculate_dscore <- function(txt = "",
                              loc = "",
                              output = c("table", "last_visit", "last_dscore")) {
   output <- match.arg(output)
-  ind <- get_ind(txt, loc)
+  tgt <- get_tgt(txt, loc)
 
-  if (!is.individual(ind)) {
+  if (!hasName(attributes(tgt), "person")) {
     message("Cannot calculate D-score")
     return(NULL)
   }
 
-  yname <- "dsc"
-  df <- data.frame(
-    date = format(slot(ind, "dob") + round(slot(ind, yname)@x * 365.25), format = "%Y%m%d"),
-    x = slot(ind, yname)@x,
-    y = slot(ind, yname)@y,
-    z = slot(ind, yname)@z,
-    check.names = FALSE,
-    fix.empty.names = FALSE
-  )
+  df <- tgt %>%
+    filter(.data$yname == "dsc") %>%
+    mutate(date = format(attr(!! tgt, "person")$dob + round(.data$age * 365.25), "%Y%m%d"))
 
   if (output == "last_visit") {
     return(df[nrow(df), ])
   }
   if (output == "last_dscore") {
-    return(df[nrow(df), "y"])
+    return(pull(df[nrow(df), "y"]))
   }
   df
 }

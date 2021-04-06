@@ -1,8 +1,9 @@
 #' Convert bds-format data to individual and return growth chart
 #'
 #' The function \code{draw_chart_bds()} convert bds data into an object
-#' of class \linkS4class{individual}, and then draws the
+#' of class individual, and then draws the
 #' individual data on the requested growth chart.
+#' Superseded by \code{\link{draw_chart}}.
 #' @name draw_chart_bds-deprecated
 #' @param txt   A JSON string, URL or file
 #' @param selector Legacy addition to solve a problem in jgzApp. See
@@ -14,8 +15,6 @@
 #'   "bsmodel"} for setting the broken stick model, or \code{call =
 #'   as.call(...)} for setting proper reference standards.
 #' @inheritParams chartplotter::process_chart
-#' @note Deprecated. Please use the more comprehensive \code{\link{draw_chart}}
-#' function.
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' g <- draw_chart_bds(txt = fn)

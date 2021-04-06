@@ -33,12 +33,9 @@ as.call(...)} for setting proper reference standards.}
 }
 \description{
 The function \code{draw_chart_bds()} convert bds data into an object
-of class \linkS4class{individual}, and then draws the
+of class individual, and then draws the
 individual data on the requested growth chart.
-}
-\note{
-Deprecated. Please use the more comprehensive \code{\link{draw_chart}}
-function.
+Superseded by \code{\link{draw_chart}}.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")

@@ -17,28 +17,30 @@ Depends:
     nlreferences,
     svglite
 Imports: 
+    bdsreader,
     chartbox (>= 1.2.1),
     chartcatalog (>= 1.5.0),
     chartplotter (>= 0.18.1),
+    dplyr,
     curl,
     grid,
     growthscreener (>= 1.6.0),
     httr,
     jamesclient (>= 0.11.0),
     jsonlite,
-    methods,
-    minihealth (>= 0.83.0)
+    rlang,
+    utils
 Suggests: 
     jamestest (>= 0.23.0),
     testthat
 Remotes: 
+    growthcharts/bdsreader,
     growthcharts/nlreferences,
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
     stefvanbuuren/chartplotter,
     stefvanbuuren/growthscreener,
     stefvanbuuren/jamesclient,
-    stefvanbuuren/jamestest,
-    stefvanbuuren/minihealth
+    stefvanbuuren/jamestest
 RoxygenNote: 7.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues

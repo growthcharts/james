@@ -21,8 +21,8 @@
 #'   this setting when chart choice needs to be reactive on user input.}
 #'   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
 #'   }
-#' If there is a valid \code{ind} object, then the function simply obeys
-#' the \code{selector} setting. If no valid \code{ind} object is found,
+#' If there is a valid \code{tgt} object, then the function simply obeys
+#' the \code{selector} setting. If no valid \code{tgt} object is found,
 #' the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 #' is empty, then the function selects method \code{"derive"}.
 #' @param lo Value of the left visit coded as string, e.g. \code{"4w"}
@@ -35,7 +35,7 @@
 #' @param ind_loc Legacy for \code{loc}. Use \code{loc} instead.
 #' @return A \code{gTree} object.
 #' @author Stef van Buuren 2020
-#' @seealso \linkS4class{individual}, \code{\link{select_chart}}
+#' @seealso \code{\link{select_chart}}
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
@@ -85,13 +85,13 @@ draw_chart <- function(txt = "",
                    choices = c("0-2", "2-4", "4-18", "smocc", "lollypop",
                                "terneuzen", "pops"))
 
-  ind <- get_ind(txt, loc)
+  tgt <- get_tgt(txt, loc)
 
-  # if we have no ind, prioritise chartcode over derive
+  # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty
-  if (is.null(ind) && chartcode == "") {
+  if (is.null(tgt) && chartcode == "") {
       chartcode <- select_chart(
-        ind = NULL,
+        target = NULL,
         chartgrp = chartgrp,
         agegrp = agegrp,
         sex = sex,
@@ -102,9 +102,9 @@ draw_chart <- function(txt = "",
   } else {
     # listen to selector
     chartcode <- switch(selector,
-      "data" = select_chart(ind = ind)$chartcode,
+      "data" = select_chart(target = tgt)$chartcode,
       "derive" = select_chart(
-        ind = NULL,
+        target = NULL,
         chartgrp = chartgrp,
         agegrp = agegrp,
         sex = sex,
@@ -122,7 +122,7 @@ draw_chart <- function(txt = "",
 
   # there we go..
   g <- process_chart(
-    individual = ind,
+    target = tgt,
     chartcode = chartcode,
     curve_interpolation = curve_interpolation,
     quiet = quiet,

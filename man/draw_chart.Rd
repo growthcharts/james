@@ -55,8 +55,8 @@ More in detail, the following behaviour decides between growth charts:
   this setting when chart choice needs to be reactive on user input.}
   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
   }
-If there is a valid \code{ind} object, then the function simply obeys
-the \code{selector} setting. If no valid \code{ind} object is found,
+If there is a valid \code{tgt} object, then the function simply obeys
+the \code{selector} setting. If no valid \code{tgt} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
@@ -129,7 +129,7 @@ fn <- system.file("testdata", "client3.json", package = "james")
 g <- draw_chart(txt = fn)
 }
 \seealso{
-\linkS4class{individual}, \code{\link{select_chart}}
+\code{\link{select_chart}}
 }
 \author{
 Stef van Buuren 2020

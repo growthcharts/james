@@ -26,7 +26,6 @@ Deprecated. Please use the more comprehensive \code{\link{draw_chart}}
 function.
 }
 \seealso{
-\linkS4class{individual},
 \code{\link{select_chart}}
 \code{\link[chartplotter]{process_chart}}
 }

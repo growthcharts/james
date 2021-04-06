@@ -24,8 +24,8 @@ get_loc <- function(txt, host, schema) {
   headers(resp)$location
 }
 
-# returns object of S4 class individual or NULL
-get_ind <- function(txt = "", loc = "", schema = NULL) {
+# returns targetl or NULL
+get_tgt <- function(txt = "", loc = "", schema = NULL) {
 
   # no ind
   if (is.empty(txt) && is.empty(loc)) {
@@ -34,7 +34,7 @@ get_ind <- function(txt = "", loc = "", schema = NULL) {
 
   # create ind on-the-fly
   if (!is.empty(txt)) {
-    return(convert_bds_individual(txt, schema = schema))
+    return(read_bds(txt, schema = schema))
   }
 
   # download ind

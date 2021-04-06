@@ -8,39 +8,25 @@
 convert_bds_ind(txt = "", ...)
 }
 \arguments{
-\item{txt}{a JSON string, URL or file}
+\item{txt}{A JSON string, URL or file}
 
-\item{...}{Additional parameter passed down to
-\code{fromJSON(txt, ...)}, \code{new("xyz",... )} and
-\code{new("bse",... )}. Useful parameters are \code{models =
-"bsmodel"} for setting the broken stick model, or \code{call =
-as.call(...)} for setting proper reference standards.}
+\item{...}{Additional parameter passed down to}
 }
 \value{
-An object of class \linkS4class{individual}.
+A tibble with a person attribute.
 }
 \description{
-This function takes data from a json source and saves as a an object
-of class \linkS4class{individual}. The function automatically calculates
-standard deviation scores and broken stick conditional means per visit.
-}
-\details{
-This is function is a wrapper around \code{minihealth::convert_bds_individual()}.
+This function takes data from a json source and saves as a tibble with
+a person attribute.
 }
 \note{
-Deprecated because the function name is internally oriented. Use
-\code{\link{fetch_loc}} instead.
+Deprecated. Use \code{\link{fetch_loc}} instead.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
 p <- convert_bds_ind(fn)
 }
-\seealso{
-\linkS4class{individual}, \linkS4class{bse}, \linkS4class{xyz},
-         \code{\link[minihealth]{convert_bds_individual}}
-         \code{\link[jsonlite]{fromJSON}}
-}
 \author{
-Stef van Buuren 2019
+Stef van Buuren 2021
 }
 \keyword{server}

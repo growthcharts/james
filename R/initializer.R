@@ -1,4 +1,4 @@
-initializer <- function(selector, individual, chartcode = "") {
+initializer <- function(selector, target, chartcode = "") {
   if (is.empty(chartcode)) {
     return(NULL)
   }
@@ -13,15 +13,15 @@ initializer <- function(selector, individual, chartcode = "") {
   choices$dnr <- initialize_dnr(
     parsed,
     selector,
-    individual,
+    target,
     choices$chartgrp,
     choices$agegrp
   )
   choices$slider_list <- initialize_slider_list(choices$dnr)
-  choices$period   <- initialize_period(individual,
+  choices$period   <- initialize_period(target,
                                         choices$dnr,
                                         choices$agegrp)
-  choices$accordion <- initialize_accordion(individual)
+  choices$accordion <- initialize_accordion(target)
 
   choices
 }
@@ -56,7 +56,7 @@ initialize_side <- function(parsed) {
   side
 }
 
-initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
+initialize_dnr <- function(parsed, selector, target, chartgrp, agegrp) {
   # default if nothing is set
   dnr <- "0-2"
 
@@ -88,11 +88,14 @@ initialize_dnr <- function(parsed, selector, individual, chartgrp, agegrp) {
   }
   # Determine dnr based on the uploaded data
   if (selector == "data") {
-    last_age <- get_range(individual)[2L]
+    # get maximum age
+    x <- target$age
+    max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
+
     dnr <- "0-2"
-    if (!is.na(last_age)) {
-      if (last_age > 2.0) dnr <- "2-4"
-      if (last_age > 4.0) dnr <- "4-18"
+    if (!is.na(max_age)) {
+      if (max_age > 2.0) dnr <- "2-4"
+      if (max_age > 4.0) dnr <- "4-18"
     }
   }
   dnr
@@ -110,11 +113,17 @@ initialize_slider_list <- function(dnr) {
          "0_2")
 }
 
-initialize_period <- function(individual, dnr, agegrp) {
+initialize_period <- function(target, dnr, agegrp) {
   # period 1: first breakpoint equal to larger than last observed age
   brk <- get_breakpoints(dnr)
-  last_age <- get_range(individual)[2L]
-  period1 <- brk$label[last_age <= brk$age][1L]
+
+  # get maximum age
+  x <- target$age
+  max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
+
+  # period 1
+  period1 <- NA_real_
+  if (!is.na(max_age)) period1 <- brk$label[max_age <= brk$age][1L]
   if (is.na(period1)) period1 <- "0w"
 
   # period 2: last breakpoint on the requested chart
@@ -129,16 +138,14 @@ initialize_period <- function(individual, dnr, agegrp) {
   c(period1, period2)
 }
 
-initialize_accordion <- function(individual) {
+initialize_accordion <- function(target) {
   # check for hgt, wgt and hdc
-  groei <- any(!is.na(slot(individual, "hgt")@y),
-               !is.na(slot(individual, "wgt")@y),
-               !is.na(slot(individual, "hdc")@y))
-  # check for dsc
-  ontwikkeling <- any(!is.na(slot(individual, "dsc")@y))
+  yname <- target$yname
+  has_growth <- any(c("hgt", "wgt", "hdc") %in% yname)
+  has_dev <- any("dsc" %in% yname)
 
-  if (groei & ontwikkeling) return("all")
-  if (groei) return("groei")
-  if (ontwikkeling) return("ontwikkeling")
+  if (has_growth && has_dev) return("all")
+  if (has_growth) return("groei")
+  if (has_dev) return("ontwikkeling")
   return("all")
 }

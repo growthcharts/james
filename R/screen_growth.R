@@ -17,5 +17,5 @@
 #' screen_growth(fn)
 #' @export
 screen_growth <- function(txt = "", loc = "") {
-  screen_curves_ind(get_ind(txt, loc))
+  screen_curves_ind(get_tgt(txt, loc))
 }

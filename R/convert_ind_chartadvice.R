@@ -2,7 +2,7 @@
 #'
 #' The function loads individual data from an url,
 #' calculates the chartcode and returns a list of parsed chartcode
-#' and agerange of the data.
+#' and age range of the data.
 #' The function is called at initialization to automate seting
 #' of proper chart and analysis defaults according to the child data.
 #' @inheritParams draw_chart
@@ -39,7 +39,7 @@
 #' @seealso \code{\link[chartcatalog]{parse_chartcode}}
 #' @keywords server
 #' @export
-convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
+convert_tgt_chartadvice <- function(txt = "", loc = "", chartcode = "",
                                     selector = c("data", "chartcode"),
                                     ind_loc = "") {
   if (!missing(ind_loc)) {
@@ -52,11 +52,11 @@ convert_ind_chartadvice <- function(txt = "", loc = "", chartcode = "",
   if (!is.empty(ind_loc)) loc <- ind_loc
 
   selector <- match.arg(selector)
-  ind <- get_ind(txt = txt, loc = loc)
+  tgt <- get_tgt(txt = txt, loc = loc)
   chartcode <- switch(selector,
-    "data" = select_chart(ind = ind)$chartcode,
+    "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode
   )
 
-  initializer(selector, ind, chartcode)
+  initializer(selector, tgt, chartcode)
 }
