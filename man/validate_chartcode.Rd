@@ -17,5 +17,5 @@ This function checks whether \code{chartcode} is a available
 in the chart library.
 }
 \seealso{
-\code{\link{list_charts}}
+\code{\link[=list_charts]{list_charts()}}
 }

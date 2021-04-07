@@ -1,14 +1,14 @@
 #' Calculates the D-score and DAZ for each visit
 #'
-#' The function \code{draw_chart()} plots individual data on the growth chart.
+#' The function `draw_chart()` plots individual data on the growth chart.
 #' @inheritParams request_site
-#' @param output A string, either \code{"table"}, \code{"last_visit"} or
-#' '\code{"last_dscore"} specifying the result. The default \code{"table"}
-#' returns a table with four columns: \code{"date"}, \code{"x"} (age),
-#' \code{"y"} (D-score) and \code{"z"} (DAZ). The number of rows equals to
-#' the number of visits. If \code{output} equals \code{"last_visit"} the
-#' function returns only the last row. If \code{output} equals
-#' \code{"last_dscore"} the function returns only the D-score from the last row.
+#' @param output A string, either `"table"`, `"last_visit"` or
+#' '`"last_dscore"` specifying the result. The default `"table"`
+#' returns a table with four columns: `"date"`, `"x"` (age),
+#' `"y"` (D-score) and `"z"` (DAZ). The number of rows equals to
+#' the number of visits. If `output` equals `"last_visit"` the
+#' function returns only the last row. If `output` equals
+#' `"last_dscore"` the function returns only the D-score from the last row.
 #' @return A table, row or scalar.
 #' @author Stef van Buuren 2020
 #' @keywords server

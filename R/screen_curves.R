@@ -2,13 +2,13 @@
 #'
 #' @name screen_curves-deprecated
 #' @inheritParams request_site
-#' @param location Legacy for \code{loc}
+#' @param location Legacy for `loc`
 #' @param legacy Logical indicating whether legacy should be done.
 #' @return A JSON string containing a table with screening results
 #' @note Deprecated for consistency. Function returns JSON, whereas all other
-#' functions return the R object. The alternative \code{\link{screen_growth}}
-#' requests only results from screening. The alternative \code{\link{custom_list}}
-#' produces the same list as \code{screen_curves}, but does not convert the
+#' functions return the R object. The alternative [screen_growth()]
+#' requests only results from screening. The alternative [custom_list()]
+#' produces the same list as `screen_curves`, but does not convert the
 #' result to JSON.
 #' @examples
 #' # # example json

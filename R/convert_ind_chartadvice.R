@@ -8,35 +8,35 @@
 #' @inheritParams draw_chart
 #' @return A list with the following elements
 #' \describe{
-#'    \item{\code{population}}{A string identifying the population,
-#'    e.g. \code{'NL'},\code{'MA'}, \code{'TU'} or \code{'PT'}.}
-#'    \item{\code{sex}}{A string \code{"male"}, \code{"female"} or
-#'    \code{"undifferentiated"}.}
-#'    \item{\code{design}}{A letter indicating the chart design: \code{'A'} = 0-15m,
-#'    \code{'B'} = 0-4y, \code{'C'} = 1-21y, \code{'D'} = 0-21y, \code{'E'} =
+#'    \item{`population`}{A string identifying the population,
+#'    e.g. `'NL'`,`'MA'`, `'TU'` or `'PT'`.}
+#'    \item{`sex`}{A string `"male"`, `"female"` or
+#'    `"undifferentiated"`.}
+#'    \item{`design`}{A letter indicating the chart design: `'A'` = 0-15m,
+#'    `'B'` = 0-4y, `'C'` = 1-21y, `'D'` = 0-21y, `'E'` =
 #'    0-4ya.}
-#'    \item{\code{side}}{A string indicating the side or \code{yname}:
-#'    \code{'front'}, \code{'back'}, \code{'both'}, \code{'hgt'},
-#'    \code{'wgt'}, \code{'hdc'}, \code{'bmi'}, \code{'wfh'}}
-#'    \item{\code{language}}{The language in which the chart is drawn. Currently only
-#'    \code{"dutch"} charts are implemented, but for \code{population == "PT"} we
-#'    may also have \code{"english"}.}
-#'    \item{\code{week}}{A scalar indicating the gestational age at birth.
-#'    Only used if \code{population == "PT"}.}
-#'    \item{\code{chartcode}}{A string indicating the chart code.}
-#'    \item{\code{chartgrp}}{A string indicating the chart group, either \code{"nl2010"},
-#'    \code{"preterm"} or \code{"who"}.}
-#'    \item{\code{agegrp}}{A string indicating the age group, either \code{"0-15m"},
-#'    \code{"0-4y"}, \code{"1-21y"} or \code{"0-21y"}.}
-#'    \item{\code{dnr}}{A string indicating the donor dataset for matching, either \code{"smocc"},
-#'    \code{"lollypop"}, \code{"terneuzen"} or \code{"pops"}.}
-#'    \item{\code{slider_list}}{A string indicating the set of slider labels, either \code{"0_2"},
-#'    \code{"0_4"} or \code{"0_29"}.}
-#'    \item{\code{period}}{A character vector of two elements, indicating the first and last period for the
-#'    matching analysis, e.g. like \code{c("3m", "14m")}.}
+#'    \item{`side`}{A string indicating the side or `yname`:
+#'    `'front'`, `'back'`, `'both'`, `'hgt'`,
+#'    `'wgt'`, `'hdc'`, `'bmi'`, `'wfh'`}
+#'    \item{`language`}{The language in which the chart is drawn. Currently only
+#'    `"dutch"` charts are implemented, but for `population == "PT"` we
+#'    may also have `"english"`.}
+#'    \item{`week`}{A scalar indicating the gestational age at birth.
+#'    Only used if `population == "PT"`.}
+#'    \item{`chartcode`}{A string indicating the chart code.}
+#'    \item{`chartgrp`}{A string indicating the chart group, either `"nl2010"`,
+#'    `"preterm"` or `"who"`.}
+#'    \item{`agegrp`}{A string indicating the age group, either `"0-15m"`,
+#'    `"0-4y"`, `"1-21y"` or `"0-21y"`.}
+#'    \item{`dnr`}{A string indicating the donor dataset for matching, either `"smocc"`,
+#'    `"lollypop"`, `"terneuzen"` or `"pops"`.}
+#'    \item{`slider_list`}{A string indicating the set of slider labels, either `"0_2"`,
+#'    `"0_4"` or `"0_29"`.}
+#'    \item{`period`}{A character vector of two elements, indicating the first and last period for the
+#'    matching analysis, e.g. like `c("3m", "14m")`.}
 #'    }
 #' @author Stef van Buuren 2020
-#' @seealso \code{\link[chartcatalog]{parse_chartcode}}
+#' @seealso [chartcatalog::parse_chartcode()]
 #' @keywords server
 #' @export
 convert_tgt_chartadvice <- function(txt = "", loc = "", chartcode = "",

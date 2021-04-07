@@ -46,15 +46,15 @@ and converted to internal server format.}
 The function can calculate the chart code by looking at the child
 data (method \code{"data"}) or user input (method \code{"derive"}).
 More in detail, the following behaviour decides between growth charts:
-  \describe{
-  \item{\code{"data"}}{Calculate chart code from the individual data.
-  This setting chooses the "optimal" chart for a given individual set of data.}
-  \item{\code{"derive"}}{Calculate chart code from a combination of user
-  data: \code{chartgrp}, \code{agegrp}, \code{side}, \code{sex},
-  \code{etn}, \code{ga}. The method does not use individual data. Use
-  this setting when chart choice needs to be reactive on user input.}
-  \item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
-  }
+\describe{
+\item{\code{"data"}}{Calculate chart code from the individual data.
+This setting chooses the "optimal" chart for a given individual set of data.}
+\item{\code{"derive"}}{Calculate chart code from a combination of user
+data: \code{chartgrp}, \code{agegrp}, \code{side}, \code{sex},
+\code{etn}, \code{ga}. The method does not use individual data. Use
+this setting when chart choice needs to be reactive on user input.}
+\item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
+}
 If there is a valid \code{tgt} object, then the function simply obeys
 the \code{selector} setting. If no valid \code{tgt} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
@@ -129,7 +129,7 @@ fn <- system.file("testdata", "client3.json", package = "james")
 g <- draw_chart(txt = fn)
 }
 \seealso{
-\code{\link{select_chart}}
+\code{\link[=select_chart]{select_chart()}}
 }
 \author{
 Stef van Buuren 2020

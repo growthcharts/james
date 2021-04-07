@@ -55,5 +55,5 @@ maximum age found in the data.
 #select_chart(tgt)
 }
 \seealso{
-\code{\link[chartcatalog]{create_chartcode}}
+\code{\link[chartcatalog:create_chartcode]{chartcatalog::create_chartcode()}}
 }

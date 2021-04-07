@@ -28,8 +28,8 @@ Screen growth curves according to JGZ guidelines
 }
 \note{
 Deprecated for consistency. Function returns JSON, whereas all other
-functions return the R object. The alternative \code{\link{screen_growth}}
-requests only results from screening. The alternative \code{\link{custom_list}}
+functions return the R object. The alternative \code{\link[=screen_growth]{screen_growth()}}
+requests only results from screening. The alternative \code{\link[=custom_list]{custom_list()}}
 produces the same list as \code{screen_curves}, but does not convert the
 result to JSON.
 }

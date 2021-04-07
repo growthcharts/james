@@ -2,7 +2,7 @@
 #'
 #' This function takes data from a json source and saves as a tibble with
 #' a person attribute.
-#' @note Deprecated. Use \code{\link{fetch_loc}} instead.
+#' @note Deprecated. Use [fetch_loc()] instead.
 #' @name convert_bds_ind-deprecated
 #' @inheritParams bdsreader::read_bds
 #' @return A tibble with a person attribute.

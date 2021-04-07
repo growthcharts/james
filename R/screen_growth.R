@@ -1,7 +1,7 @@
 #' Screen growth curves according to JGZ guidelines
 #'
 #' @inheritParams request_site
-#' @note \code{screen_growth} superseeds \code{screen_curves} and will
+#' @note `screen_growth` superseeds `screen_curves` and will
 #' only return results from growth screening.
 #' @examples
 #' # example json

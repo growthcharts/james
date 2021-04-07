@@ -30,8 +30,8 @@ fn <- system.file("testdata", "client3.json", package = "james")
 p <- fetch_loc(fn)
 }
 \seealso{
-\code{\link[bdsreader]{read_bds}}
-         \code{\link[jsonlite]{fromJSON}}
+\code{\link[bdsreader:read_bds]{bdsreader::read_bds()}}
+\code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 }
 \author{
 Stef van Buuren 2021

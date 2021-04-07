@@ -1,41 +1,41 @@
 #' Draw growth chart
 #'
-#' The function \code{draw_chart()} plots individual data on the growth chart.
+#' The function `draw_chart()` plots individual data on the growth chart.
 #' @inheritParams request_site
 #' @inheritParams select_chart
 #' @inheritParams chartplotter::process_chart
-#' @param dnr Donor data, Prediction horizon: \code{"0-2"}, \code{"2-4"}
-#' or \code{"4-18"}. May also be \code{"smocc"}, \code{"lollypop"},
-#' \code{"terneuzen"} or \code{"pops"}.
+#' @param dnr Donor data, Prediction horizon: `"0-2"`, `"2-4"`
+#' or `"4-18"`. May also be `"smocc"`, `"lollypop"`,
+#' `"terneuzen"` or `"pops"`.
 #' @param chartcode Optional. The code of the requested growth chart.
-#' @param selector Either \code{"chartcode"}, \code{"data"} or \code{"derive"}.
+#' @param selector Either `"chartcode"`, `"data"` or `"derive"`.
 #' The function can calculate the chart code by looking at the child
-#' data (method \code{"data"}) or user input (method \code{"derive"}).
+#' data (method `"data"`) or user input (method `"derive"`).
 #' More in detail, the following behaviour decides between growth charts:
 #'   \describe{
-#'   \item{\code{"data"}}{Calculate chart code from the individual data.
+#'   \item{`"data"`}{Calculate chart code from the individual data.
 #'   This setting chooses the "optimal" chart for a given individual set of data.}
-#'   \item{\code{"derive"}}{Calculate chart code from a combination of user
-#'   data: \code{chartgrp}, \code{agegrp}, \code{side}, \code{sex},
-#'   \code{etn}, \code{ga}. The method does not use individual data. Use
+#'   \item{`"derive"`}{Calculate chart code from a combination of user
+#'   data: `chartgrp`, `agegrp`, `side`, `sex`,
+#'   `etn`, `ga`. The method does not use individual data. Use
 #'   this setting when chart choice needs to be reactive on user input.}
-#'   \item{\code{"chartcode"}}{Take string specified in \code{chartcode}}
+#'   \item{`"chartcode"`}{Take string specified in `chartcode`}
 #'   }
-#' If there is a valid \code{tgt} object, then the function simply obeys
-#' the \code{selector} setting. If no valid \code{tgt} object is found,
-#' the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
-#' is empty, then the function selects method \code{"derive"}.
-#' @param lo Value of the left visit coded as string, e.g. \code{"4w"}
-#'   or \code{"7.5m"}
-#' @param hi Value of the right visit coded as string, e.g. \code{"4w"}
-#'   or \code{"7.5m"}
+#' If there is a valid `tgt` object, then the function simply obeys
+#' the `selector` setting. If no valid `tgt` object is found,
+#' the `"chartcode"` argument is taken. However, if the `"chartcode"`
+#' is empty, then the function selects method `"derive"`.
+#' @param lo Value of the left visit coded as string, e.g. `"4w"`
+#'   or `"7.5m"`
+#' @param hi Value of the right visit coded as string, e.g. `"4w"`
+#'   or `"7.5m"`
 #' @param draw_grob Logical. Should chart be plotted on current device?
-#' Default is \code{TRUE}. For internal use only.
-#' @param bds_data Legacy for \code{txt}. Use \code{txt} instead.
-#' @param ind_loc Legacy for \code{loc}. Use \code{loc} instead.
-#' @return A \code{gTree} object.
+#' Default is `TRUE`. For internal use only.
+#' @param bds_data Legacy for `txt`. Use `txt` instead.
+#' @param ind_loc Legacy for `loc`. Use `loc` instead.
+#' @return A `gTree` object.
 #' @author Stef van Buuren 2020
-#' @seealso \code{\link{select_chart}}
+#' @seealso [select_chart()]
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")

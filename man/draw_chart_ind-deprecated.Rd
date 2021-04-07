@@ -22,11 +22,11 @@ a previous call, and plots the individual data on the requested
 growth chart.
 }
 \note{
-Deprecated. Please use the more comprehensive \code{\link{draw_chart}}
+Deprecated. Please use the more comprehensive \code{\link[=draw_chart]{draw_chart()}}
 function.
 }
 \seealso{
-\code{\link{select_chart}}
-\code{\link[chartplotter]{process_chart}}
+\code{\link[=select_chart]{select_chart()}}
+\code{\link[chartplotter:process_chart]{chartplotter::process_chart()}}
 }
 \keyword{server}

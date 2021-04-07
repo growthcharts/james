@@ -44,3 +44,4 @@ Remotes:
     stefvanbuuren/jamestest
 RoxygenNote: 7.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
+Roxygen: list(markdown = TRUE)

@@ -19,8 +19,8 @@ and converted to internal server format.}
 schema. Only used if the \code{txt} argument is specified.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
-the data in \code{txt} and return a site address with the \code{?loc=} query appended.
-Setting (\code{FALSE}) just appends \code{?txt=} to the site url, thus
+the data in \code{txt} and return a site address with the \verb{?loc=} query appended.
+Setting (\code{FALSE}) just appends \verb{?txt=} to the site url, thus
 deferring validation and conversion to internal representation to the site.}
 
 \item{host}{URL of the JAMES server. By default, host is the currently
@@ -28,7 +28,7 @@ running server that processes the request.}
 }
 \value{
 URL composed of JAMES server, possibly appended by query string starting
-with \code{?txt=} or \code{?loc=}.
+with \verb{?txt=} or \verb{?loc=}.
 }
 \description{
 Server-side function to construct a URL to a site that shows a personalised
@@ -43,7 +43,7 @@ the base site without any data.
 \note{
 This function does not yet work with Docker because we cannot get the
 host URL name.
-The output form \code{?txt=} currently ignores the \code{schema} argument.
+The output form \verb{?txt=} currently ignores the \code{schema} argument.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
@@ -70,5 +70,5 @@ request_site(js, upload = FALSE)
 request_site(url, upload = FALSE)
 }
 \seealso{
-\code{\link[jamesclient]{upload_txt}}, \code{\link[jamesclient]{get_url}}
+\code{\link[jamesclient:upload_txt]{jamesclient::upload_txt()}}, \code{\link[jamesclient:get_url]{jamesclient::get_url()}}
 }

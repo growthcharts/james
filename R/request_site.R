@@ -5,29 +5,29 @@
 #' user can interact to chart choices.
 #' @param txt A JSON string, URL or file with the data in JSON
 #' format. The input data adhere to specification
-#' \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
-#' and are converted to JSON according to \code{schema}.
-#' @param loc Alternative to \code{txt}. Location where input data is uploaded
+#' [BDS JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
+#' and are converted to JSON according to `schema`.
+#' @param loc Alternative to `txt`. Location where input data is uploaded
 #' and converted to internal server format.
 #' @param schema Optional. A JSON string, URL or file that selects the JSON validation
-#' schema. Only used if the \code{txt} argument is specified.
-#' @param upload Logical. If \code{TRUE} then \code{request_site()} will upload
-#' the data in \code{txt} and return a site address with the \code{?loc=} query appended.
-#' Setting (\code{FALSE}) just appends \code{?txt=} to the site url, thus
+#' schema. Only used if the `txt` argument is specified.
+#' @param upload Logical. If `TRUE` then `request_site()` will upload
+#' the data in `txt` and return a site address with the `?loc=` query appended.
+#' Setting (`FALSE`) just appends `?txt=` to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
 #' @param host URL of the JAMES server. By default, host is the currently
 #' running server that processes the request.
 #' @return URL composed of JAMES server, possibly appended by query string starting
-#' with \code{?txt=} or \code{?loc=}.
-#' @seealso \code{\link[jamesclient]{upload_txt}}, \code{\link[jamesclient]{get_url}}
+#' with `?txt=` or `?loc=`.
+#' @seealso [jamesclient::upload_txt()], [jamesclient::get_url()]
 #' @details
-#' One of \code{txt} or \code{loc} needs to be specified. If both are given,
-#' \code{txt} takes precedence. If neither is given, then the function returns
+#' One of `txt` or `loc` needs to be specified. If both are given,
+#' `txt` takes precedence. If neither is given, then the function returns
 #' the base site without any data.
 #'
 #' @note This function does not yet work with Docker because we cannot get the
 #' host URL name.
-#' The output form \code{?txt=} currently ignores the \code{schema} argument.
+#' The output form `?txt=` currently ignores the `schema` argument.
 #'
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")

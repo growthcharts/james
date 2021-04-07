@@ -6,23 +6,23 @@
 #' or equal to 36 weeks, and determines the age group by the
 #' maximum age found in the data.
 #' @aliases select_chart
-#' @param target A tibble with a \code{person} attribute, or \code{NULL}.
-#' @param chartgrp  The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
-#' or \code{character(0)}
-#' @param agegrp Either \code{'0-15m'}, \code{'0-4y'}, \code{'1-21y'},
-#'   \code{'0-21y'} or \code{'0-4ya'}. Age group \code{'0-4ya'}
+#' @param target A tibble with a `person` attribute, or `NULL`.
+#' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'`
+#' or `character(0)`
+#' @param agegrp Either `'0-15m'`, `'0-4y'`, `'1-21y'`,
+#'   `'0-21y'` or `'0-4ya'`. Age group `'0-4ya'`
 #'   provides the 0-4 chart with weight for age (design E).
-#' @param sex Either \code{'male'} or \code{'female'}
-#' @param etn Either \code{'netherlands'}, \code{'turkish'},
-#'   \code{'moroccan'} or \code{'hindustani'}
+#' @param sex Either `'male'` or `'female'`
+#' @param etn Either `'netherlands'`, `'turkish'`,
+#'   `'moroccan'` or `'hindustani'`
 #' @param ga  Gestational age (in completed weeks)
-#' @param side Either \code{'front'}, \code{'back'}, \code{'-hdc'} or
-#'   \code{'both'}
-#' @param language Language: \code{'dutch'} or \code{'english'} (not
+#' @param side Either `'front'`, `'back'`, `'-hdc'` or
+#'   `'both'`
+#' @param language Language: `'dutch'` or `'english'` (not
 #'   used)
-#' @return A list with elements \code{chartgrp}, \code{chartcode}
-#' and \code{ga}
-#' @seealso \code{\link[chartcatalog]{create_chartcode}}
+#' @return A list with elements `chartgrp`, `chartcode`
+#' and `ga`
+#' @seealso [chartcatalog::create_chartcode()]
 #' @examples
 #' #data("installed.cabinets", package = "jamestest")
 #' #ind <- installed.cabinets[[3]][[1]]
