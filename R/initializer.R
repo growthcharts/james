@@ -18,9 +18,11 @@ initializer <- function(selector, target, chartcode = "") {
     choices$agegrp
   )
   choices$slider_list <- initialize_slider_list(choices$dnr)
-  choices$period   <- initialize_period(target,
-                                        choices$dnr,
-                                        choices$agegrp)
+  choices$period <- initialize_period(
+    target,
+    choices$dnr,
+    choices$agegrp
+  )
   choices$accordion <- initialize_accordion(target)
 
   choices
@@ -28,25 +30,25 @@ initializer <- function(selector, target, chartcode = "") {
 
 initialize_chartgrp <- function(parsed) {
   switch(EXPR = tolower(parsed$population),
-         nl = "nl2010",
-         tu = "nl2010",
-         ma = "nl2010",
-         hs = "nl2010",
-         pt = "preterm",
-         whoblue = "who",
-         whopink = "who",
-         ""
+    nl = "nl2010",
+    tu = "nl2010",
+    ma = "nl2010",
+    hs = "nl2010",
+    pt = "preterm",
+    whoblue = "who",
+    whopink = "who",
+    ""
   )
 }
 
 initialize_agegrp <- function(parsed) {
   switch(EXPR = parsed$design,
-         A = "0-15m",
-         B = "0-4y",
-         C = "1-21y",
-         D = "0-21y",
-         E = "0-4y",
-         ""
+    A = "0-15m",
+    B = "0-4y",
+    C = "1-21y",
+    D = "0-21y",
+    E = "0-4y",
+    ""
   )
 }
 
@@ -63,27 +65,27 @@ initialize_dnr <- function(parsed, selector, target, chartgrp, agegrp) {
   # Determine dnr on chartcode if user initialized chartcode
   if (selector == "chartcode") {
     return(switch(EXPR = chartgrp,
-                  nl2010 = switch(EXPR = agegrp,
-                                  "0-15m" = "0-2",
-                                  "0-4y"  = "2-4",
-                                  "1-21y" = "4-18",
-                                  "0-21y" = "4-18",
-                                  "0-2"
-                  ),
-                  who = switch(EXPR = agegrp,
-                               "0-15m" = "0-2",
-                               "0-4y"  = "2-4",
-                               "1-21y" = "4-18",
-                               "0-21y" = "4-18",
-                               "0-2"
-                  ),
-                  preterm = switch(EXPR = agegrp,
-                                   "0-15m" = "0-2",
-                                   "0-4y"  = "2-4",
-                                   "1-21y" = "4-18",
-                                   "0-21y" = "4-18"
-                  ),
-                  "0-2"
+      nl2010 = switch(EXPR = agegrp,
+        "0-15m" = "0-2",
+        "0-4y"  = "2-4",
+        "1-21y" = "4-18",
+        "0-21y" = "4-18",
+        "0-2"
+      ),
+      who = switch(EXPR = agegrp,
+        "0-15m" = "0-2",
+        "0-4y"  = "2-4",
+        "1-21y" = "4-18",
+        "0-21y" = "4-18",
+        "0-2"
+      ),
+      preterm = switch(EXPR = agegrp,
+        "0-15m" = "0-2",
+        "0-4y"  = "2-4",
+        "1-21y" = "4-18",
+        "0-21y" = "4-18"
+      ),
+      "0-2"
     ))
   }
   # Determine dnr based on the uploaded data
@@ -103,14 +105,15 @@ initialize_dnr <- function(parsed, selector, target, chartgrp, agegrp) {
 
 initialize_slider_list <- function(dnr) {
   switch(dnr,
-         "0-2"  = "0_2",
-         "2-4"  = "0_4",
-         "4-18" = "0_29",
-         smocc = "0_2",
-         lollypop = "0_4",
-         terneuzen = "0_29",
-         pops = "0_19",
-         "0_2")
+    "0-2"  = "0_2",
+    "2-4"  = "0_4",
+    "4-18" = "0_29",
+    smocc = "0_2",
+    lollypop = "0_4",
+    terneuzen = "0_29",
+    pops = "0_19",
+    "0_2"
+  )
 }
 
 initialize_period <- function(target, dnr, agegrp) {
@@ -128,11 +131,11 @@ initialize_period <- function(target, dnr, agegrp) {
 
   # period 2: last breakpoint on the requested chart
   period2 <- switch(EXPR = agegrp,
-                    "0-15m" = "14m",
-                    "0-4y"  = "45m",
-                    "1-21y" = "18y",
-                    "0-21y" = "18y",
-                    "14m"
+    "0-15m" = "14m",
+    "0-4y"  = "45m",
+    "1-21y" = "18y",
+    "0-21y" = "18y",
+    "14m"
   )
 
   c(period1, period2)
@@ -144,8 +147,14 @@ initialize_accordion <- function(target) {
   has_growth <- any(c("hgt", "wgt", "hdc") %in% yname)
   has_dev <- any("dsc" %in% yname)
 
-  if (has_growth && has_dev) return("all")
-  if (has_growth) return("groei")
-  if (has_dev) return("ontwikkeling")
+  if (has_growth && has_dev) {
+    return("all")
+  }
+  if (has_growth) {
+    return("groei")
+  }
+  if (has_dev) {
+    return("ontwikkeling")
+  }
   return("all")
 }

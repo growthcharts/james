@@ -29,7 +29,7 @@ calculate_dscore <- function(txt = "",
 
   df <- tgt %>%
     filter(.data$yname == "dsc") %>%
-    mutate(date = format(attr(!! tgt, "person")$dob + round(.data$age * 365.25), "%Y%m%d"))
+    mutate(date = format(attr(!!tgt, "person")$dob + round(.data$age * 365.25), "%Y%m%d"))
 
   if (output == "last_visit") {
     return(df[nrow(df), ])

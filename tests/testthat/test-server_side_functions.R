@@ -61,4 +61,3 @@ test_that(
   "draw_chart() on http400.json has messages",
   expect_silent(draw_chart(js, quiet = TRUE))
 )
-

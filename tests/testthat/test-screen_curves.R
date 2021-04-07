@@ -4,9 +4,9 @@ library(httr)
 library(jamesclient)
 
 # client3.json
-fn  <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
+fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
 # fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-js  <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 path <- "ocpu/library/james/R/fetch_loc"
 url <- modify_url(url = host, path = path)

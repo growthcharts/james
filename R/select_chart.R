@@ -24,27 +24,27 @@
 #' and `ga`
 #' @seealso [chartcatalog::create_chartcode()]
 #' @examples
-#' #data("installed.cabinets", package = "jamestest")
-#' #ind <- installed.cabinets[[3]][[1]]
-#' #select_chart(tgt)
+#' # data("installed.cabinets", package = "jamestest")
+#' # ind <- installed.cabinets[[3]][[1]]
+#' # select_chart(tgt)
 #' @export
 select_chart <- function(target = NULL,
                          chartgrp = NULL,
-                         agegrp   = NULL,
-                         sex      = NULL,
-                         etn      = NULL,
-                         ga       = NULL,
-                         side     = NULL,
+                         agegrp = NULL,
+                         sex = NULL,
+                         etn = NULL,
+                         ga = NULL,
+                         side = NULL,
                          language = "dutch") {
 
   # choose defaults depending on individual
   if (!is.null(target)) {
     if (is.null(agegrp)) agegrp <- select_agegrp(target)
     if (is.null(chartgrp)) chartgrp <- select_chartgrp(target)
-    if (is.null(ga))       ga       <- select_ga(target)
-    if (is.null(sex))      sex      <- select_sex(target)
-    if (is.null(etn))      etn      <- "nl"
-    if (is.null(side))     side     <- select_side(target)
+    if (is.null(ga)) ga <- select_ga(target)
+    if (is.null(sex)) sex <- select_sex(target)
+    if (is.null(etn)) etn <- "nl"
+    if (is.null(side)) side <- select_side(target)
   }
 
   # now get the chartcode
@@ -107,7 +107,11 @@ select_sex <- function(tgt) {
 
 select_side <- function(tgt) {
   yname <- tgt$yname
-  if (any(c("hgt", "wgt", "hdc") %in% yname)) return("hgt")
-  if (any(c("dsc") %in% yname)) return("dsc")
+  if (any(c("hgt", "wgt", "hdc") %in% yname)) {
+    return("hgt")
+  }
+  if (any(c("dsc") %in% yname)) {
+    return("dsc")
+  }
   "hgt"
 }

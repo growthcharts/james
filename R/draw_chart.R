@@ -82,23 +82,26 @@ draw_chart <- function(txt = "",
 
   selector <- match.arg(selector)
   dnr <- match.arg(dnr,
-                   choices = c("0-2", "2-4", "4-18", "smocc", "lollypop",
-                               "terneuzen", "pops"))
+    choices = c(
+      "0-2", "2-4", "4-18", "smocc", "lollypop",
+      "terneuzen", "pops"
+    )
+  )
 
   tgt <- get_tgt(txt, loc)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty
   if (is.null(tgt) && chartcode == "") {
-      chartcode <- select_chart(
-        target = NULL,
-        chartgrp = chartgrp,
-        agegrp = agegrp,
-        sex = sex,
-        etn = etn,
-        ga = ga,
-        side = side
-      )$chartcode
+    chartcode <- select_chart(
+      target = NULL,
+      chartgrp = chartgrp,
+      agegrp = agegrp,
+      sex = sex,
+      etn = etn,
+      ga = ga,
+      side = side
+    )$chartcode
   } else {
     # listen to selector
     chartcode <- switch(selector,
