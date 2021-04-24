@@ -40,8 +40,8 @@ Remotes:
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
     stefvanbuuren/chartplotter,
-    stefvanbuuren/growthscreener,
-    stefvanbuuren/jamesclient
+    stefvanbuuren/growthscreener@bdsreader,
+    stefvanbuuren/jamesclient@bdsreader
 RoxygenNote: 7.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
 Roxygen: list(markdown = TRUE)
