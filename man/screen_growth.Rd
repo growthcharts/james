@@ -26,11 +26,11 @@ Screen growth curves according to JGZ guidelines
 only return results from growth screening.
 }
 \examples{
-# example json
+host <- "http://localhost"
 fn <- system.file("testdata", "client3.json", package = "james")
 
 # first upload, then screen
-r1 <- jamesclient::upload_txt(fn)
+r1 <- jamesclient::upload_txt(fn, host = host)
 location <- jamesclient::get_url(r1, "location")
 location
 screen_growth(loc = location)

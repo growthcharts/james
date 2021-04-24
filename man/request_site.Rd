@@ -55,25 +55,38 @@ The output form \verb{?txt=} currently ignores the \code{schema} argument.
 fn <- system.file("testdata", "client3.json", package = "james")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
+host <- "http://localhost"
 
-# solutions that create a ?loc= parameter
+# solutions that upload the data and create a URL with the `?loc=` query parameter
 
-# upload JSON string to default host, return site url
-site <- request_site(js)
+# upload file - does not work (object 'bds_schema_str.json' not found)
+site <- request_site(fn, host = host)
+# browseURL(site)
+
+# upload JSON string
+site <- request_site(js, host = host)
 site
-browseURL(site)
-request_site(url)
+# browseURL(site)
 
-# same, as two steps, starting from file name
-resp <- jamesclient::upload_txt(fn)
+# upload URL
+site <- request_site(url, host = host)
+site
+# browseURL(site)
+
+# same, but in two steps, starting from file name
+# this also works for js and url
+resp <- jamesclient::upload_txt(fn, host = host)
 loc <- jamesclient::get_url(resp, "location")
-request_site(loc = loc)
+site <- request_site(loc = loc)
+site
+# browseURL(site)
 
-# solutions that create a ?txt= parameter
-
-request_site(fn, upload = FALSE)
-request_site(js, upload = FALSE)
-request_site(url, upload = FALSE)
+# solutions that create an immediate ?txt=[..data..] query
+# this method does not create a cache on the server
+site <- request_site(fn, upload = FALSE)
+site <- request_site(js, upload = FALSE)
+site <- request_site(url, upload = FALSE)
+# browseURL(site)
 }
 \seealso{
 \code{\link[jamesclient:upload_txt]{jamesclient::upload_txt()}}, \code{\link[jamesclient:get_url]{jamesclient::get_url()}}

@@ -13,7 +13,7 @@
 #' list1 <- custom_list(loc = loc)
 #'
 #' # upload & screen
-#' list2 <- custom_list(fn)
+#' list2 <- custom_list(txt = fn)
 #' identical(list1, list2)
 #' @export
 custom_list <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
