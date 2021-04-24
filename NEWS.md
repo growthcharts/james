@@ -1,3 +1,11 @@
+# james 0.31.0.1
+
+* Breaking changes
+* Replace `jamestest` dependency by `jamesdemodata` package
+* Replace `minihealth` dependency by `bdsreader` package
+* Style all files
+* Switch to `markdown` documentation
+
 # james 0.31.0
 
 * Removes `clopus` dependency
