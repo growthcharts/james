@@ -1,10 +1,11 @@
-# james 0.31.0.1
+# james 0.32.0
 
 -   Breaking changes
 -   Replace `jamestest` dependency by `jamesdemodata` package
 -   Replace `minihealth` dependency by `bdsreader` package
 -   Style all files
 -   Switch to `markdown` documentation
+-   Use `localhost` in examples (localhost should be on)
 
 # james 0.31.0
 
