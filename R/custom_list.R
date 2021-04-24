@@ -19,14 +19,17 @@
 custom_list <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
   site <- request_site(txt, loc, schema = schema)
 
-  ind <- get_tgt(txt, loc, schema = schema)
+  tgt <- get_tgt(txt, loc, schema = schema)
 
-  res <- screen_curves_ind(ind)
+  res <- screen_curves_ind(tgt)
 
   last_dscore <- NULL
-  if (!is.null(ind)) {
-    d <- ind@dsc@y[length(ind@dsc@y)]
-    if (length(d) && !is.na(d)) last_dscore <- d
+  if (!is.null(tgt)) {
+    idx <- tgt$yname == "dsc"
+    if (any(idx)) {
+      d <- tgt$y[idx][sum(idx)]
+      if (length(d) && !is.na(d)) last_dscore <- d
+    }
   }
 
   # list of two elements if nu D-score, else 3 elements

@@ -156,7 +156,7 @@ else update();
 
 function initialize_chart_controls() {
   // function executes at initialization
-  // convert_ind_chartadvice() obtains useful statistics from
+  // convert_tgt_chartadvice() obtains useful statistics from
   // the uploaded individual data (R) from user_loc and
   // from user_chartcode
 
@@ -168,7 +168,7 @@ function initialize_chart_controls() {
   if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
-  var rq1 = ocpu.call("convert_ind_chartadvice", {
+  var rq1 = ocpu.call("convert_tgt_chartadvice", {
     txt: utxt,
     loc: uloc,
     chartcode: ucode,
