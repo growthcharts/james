@@ -1,7 +1,7 @@
 context("server-side functions")
 
 # client3.json
-fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamestest")
+fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that(
@@ -24,7 +24,7 @@ test_that(
 )
 
 # problematic json file not_a_vector.json identified by Allegro Sultum - Feb 2020
-fn <- system.file("extdata", "test", "not_a_vector.json", package = "jamestest")
+fn <- system.file("extdata", "bds_str", "test", "not_a_vector.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that(
@@ -46,7 +46,7 @@ test_that(
 )
 
 # problematic json file http400.json identified by Allegro Sultum - Feb 2020
-fn <- system.file("extdata", "test", "http400.json", package = "jamestest")
+fn <- system.file("extdata", "bds_str", "test", "http400.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that(

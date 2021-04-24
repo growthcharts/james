@@ -31,17 +31,17 @@ Imports:
     rlang,
     utils
 Suggests: 
-    jamestest (>= 0.23.0),
+    jamesdemodata (>= 0.23.0),
     testthat
 Remotes: 
     growthcharts/bdsreader,
+    growthcharts/jamesdemodata,
     growthcharts/nlreferences,
     stefvanbuuren/chartbox,
     stefvanbuuren/chartcatalog,
     stefvanbuuren/chartplotter,
     stefvanbuuren/growthscreener,
-    stefvanbuuren/jamesclient,
-    stefvanbuuren/jamestest
+    stefvanbuuren/jamesclient
 RoxygenNote: 7.1.1
 BugReports: https://github.com/stefvanbuuren/james/issues
 Roxygen: list(markdown = TRUE)

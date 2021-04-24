@@ -23,10 +23,6 @@
 #' @return A list with elements `chartgrp`, `chartcode`
 #' and `ga`
 #' @seealso [chartcatalog::create_chartcode()]
-#' @examples
-#' # data("installed.cabinets", package = "jamestest")
-#' # ind <- installed.cabinets[[3]][[1]]
-#' # select_chart(tgt)
 #' @export
 select_chart <- function(target = NULL,
                          chartgrp = NULL,

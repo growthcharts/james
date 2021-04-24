@@ -4,7 +4,7 @@
 #' @return A table with screening results
 #' @return A list with custom parts
 #' @examples
-#' fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+#' fn <- system.file("extdata", "bds_str", "smocc", "Laura_S.json", package = "jamesdemodata")
 #' host <- "http://localhost"
 #'
 #' # first upload, then create custom list
@@ -16,10 +16,10 @@
 #' list2 <- custom_list(fn)
 #' identical(list1, list2)
 #' @export
-custom_list <- function(txt = "", loc = "") {
-  site <- request_site(txt, loc)
+custom_list <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
+  site <- request_site(txt, loc, schema = schema)
 
-  ind <- get_tgt(txt, loc)
+  ind <- get_tgt(txt, loc, schema = schema)
 
   res <- screen_curves_ind(ind)
 
