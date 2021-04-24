@@ -49,11 +49,6 @@ The default behavior select preterm chart if gestational age is lower
 or equal to 36 weeks, and determines the age group by the
 maximum age found in the data.
 }
-\examples{
-#data("installed.cabinets", package = "jamestest")
-#ind <- installed.cabinets[[3]][[1]]
-#select_chart(tgt)
-}
 \seealso{
 \code{\link[chartcatalog:create_chartcode]{chartcatalog::create_chartcode()}}
 }

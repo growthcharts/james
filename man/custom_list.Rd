@@ -4,7 +4,7 @@
 \alias{custom_list}
 \title{Provides a Screen growth curves according to JGZ guidelines}
 \usage{
-custom_list(txt = "", loc = "")
+custom_list(txt = "", loc = "", schema = "bds_schema_str.json")
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -14,6 +14,9 @@ and are converted to JSON according to \code{schema}.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
+
+\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
+schema. Only used if the \code{txt} argument is specified.}
 }
 \value{
 A table with screening results
@@ -24,7 +27,7 @@ A list with custom parts
 Provides a Screen growth curves according to JGZ guidelines
 }
 \examples{
-fn <- system.file("extdata", "smocc", "Laura_S.json", package = "jamestest")
+fn <- system.file("extdata", "bds_str", "smocc", "Laura_S.json", package = "jamesdemodata")
 host <- "http://localhost"
 
 # first upload, then create custom list

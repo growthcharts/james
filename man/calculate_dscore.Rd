@@ -7,6 +7,7 @@
 calculate_dscore(
   txt = "",
   loc = "",
+  schema = "bds_schema_str.json",
   output = c("table", "last_visit", "last_dscore")
 )
 }
@@ -18,6 +19,9 @@ and are converted to JSON according to \code{schema}.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
+
+\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
+schema. Only used if the \code{txt} argument is specified.}
 
 \item{output}{A string, either \code{"table"}, \code{"last_visit"} or
 '\code{"last_dscore"} specifying the result. The default \code{"table"}

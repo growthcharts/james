@@ -7,6 +7,7 @@
 draw_chart(
   txt = "",
   loc = "",
+  schema = "bds_schema_str.json",
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
   chartgrp = NULL,
@@ -39,6 +40,9 @@ and are converted to JSON according to \code{schema}.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
+
+\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
+schema. Only used if the \code{txt} argument is specified.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

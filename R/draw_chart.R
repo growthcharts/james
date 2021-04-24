@@ -43,6 +43,7 @@
 #' @export
 draw_chart <- function(txt = "",
                        loc = "",
+                       schema = "bds_schema_str.json",
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
                        chartgrp = NULL,
@@ -88,7 +89,7 @@ draw_chart <- function(txt = "",
     )
   )
 
-  tgt <- get_tgt(txt, loc)
+  tgt <- get_tgt(txt, loc, schema = schema)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty

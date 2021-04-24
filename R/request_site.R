@@ -53,7 +53,8 @@
 #' request_site(js, upload = FALSE)
 #' request_site(url, upload = FALSE)
 #' @export
-request_site <- function(txt = "", loc = "", schema = NULL,
+request_site <- function(txt = "", loc = "",
+                         schema = "bds_schema_str.json",
                          upload = TRUE, host = NULL) {
   txt <- txt[1L]
   loc <- loc[1L]

@@ -39,7 +39,9 @@
 #' @seealso [chartcatalog::parse_chartcode()]
 #' @keywords server
 #' @export
-convert_tgt_chartadvice <- function(txt = "", loc = "", chartcode = "",
+convert_tgt_chartadvice <- function(txt = "", loc = "",
+                                    schema = "bds_schema_str.json",
+                                    chartcode = "",
                                     selector = c("data", "chartcode"),
                                     ind_loc = "") {
   if (!missing(ind_loc)) {
@@ -52,7 +54,7 @@ convert_tgt_chartadvice <- function(txt = "", loc = "", chartcode = "",
   if (!is.empty(ind_loc)) loc <- ind_loc
 
   selector <- match.arg(selector)
-  tgt <- get_tgt(txt = txt, loc = loc)
+  tgt <- get_tgt(txt = txt, loc = loc, schema = schema)
   chartcode <- switch(selector,
     "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode

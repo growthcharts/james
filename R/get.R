@@ -25,7 +25,7 @@ get_loc <- function(txt, host, schema) {
 }
 
 # returns targetl or NULL
-get_tgt <- function(txt = "", loc = "", schema = NULL) {
+get_tgt <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
 
   # no ind
   if (is.empty(txt) && is.empty(loc)) {
