@@ -246,7 +246,7 @@ function initialize_chart_controls() {
     });
 });
   rq1.fail(function() {
-    alert("Server error: " + rq1.responseText);
+    alert("Server error (rq1): " + rq1.responseText);
   });
 }
 

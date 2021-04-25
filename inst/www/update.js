@@ -197,7 +197,7 @@ function update() {
 
     });
   rq2.fail(function() {
-    alert("Server error: " + rq2.responseText);
+    alert("Server error (rq2): " + rq2.responseText);
   });
 }
 
