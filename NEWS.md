@@ -1,11 +1,18 @@
+# james 0.33.0
+
+- Tranfers repo to `growthcharts` organisation
+- Adds `schema` argument to users facing functions, set `bds_schema_str.json` as default
+- Adds automatic GHA R CMD check
+- Cleans out error so that R CMD check runs without errors
+
 # james 0.32.0
 
 -   Breaking changes
--   Replace `jamestest` dependency by `jamesdemodata` package
--   Replace `minihealth` dependency by `bdsreader` package
--   Style all files
--   Switch to `markdown` documentation
--   Use `localhost` in examples (localhost should be on)
+-   Replaces `jamestest` dependency by `jamesdemodata` package
+-   Replaces `minihealth` dependency by `bdsreader` package
+-   Styles all files
+-   Switches to `markdown` documentation
+-   Uses `localhost` in examples (localhost should be on)
 
 # james 0.31.0
 
