@@ -14,7 +14,6 @@ License: AGPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    nlreferences,
     svglite
 Imports: 
     bdsreader,
@@ -40,8 +39,7 @@ Remotes:
     growthcharts/chartplotter,
     growthcharts/growthscreener,
     growthcharts/jamesclient,
-    growthcharts/jamesdemodata,
-    growthcharts/nlreferences
+    growthcharts/jamesdemodata
 RoxygenNote: 7.1.1
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
