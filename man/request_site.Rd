@@ -58,7 +58,7 @@ url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 host <- "http://localhost"
 
 # solutions that upload the data and create a URL with the `?loc=` query parameter
-
+\dontrun{
 # upload file - does not work (object 'bds_schema_str.json' not found)
 site <- request_site(fn, host = host)
 # browseURL(site)
@@ -87,6 +87,7 @@ site <- request_site(fn, upload = FALSE)
 site <- request_site(js, upload = FALSE)
 site <- request_site(url, upload = FALSE)
 # browseURL(site)
+}
 }
 \seealso{
 \code{\link[jamesclient:upload_txt]{jamesclient::upload_txt()}}, \code{\link[jamesclient:get_url]{jamesclient::get_url()}}

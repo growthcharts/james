@@ -6,7 +6,7 @@
 #' @examples
 #' fn <- system.file("extdata", "bds_str", "smocc", "Laura_S.json", package = "jamesdemodata")
 #' host <- "http://localhost"
-#'
+#' \dontrun{
 #' # first upload, then create custom list
 #' r1 <- jamesclient::upload_txt(fn, host = host)
 #' loc <- jamesclient::get_url(r1, "location")
@@ -15,6 +15,7 @@
 #' # upload & screen
 #' list2 <- custom_list(txt = fn)
 #' identical(list1, list2)
+#' }
 #' @export
 custom_list <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
   site <- request_site(txt, loc, schema = schema)

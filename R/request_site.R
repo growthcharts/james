@@ -36,7 +36,7 @@
 #' host <- "http://localhost"
 #'
 #' # solutions that upload the data and create a URL with the `?loc=` query parameter
-#'
+#' \dontrun{
 #' # upload file - does not work (object 'bds_schema_str.json' not found)
 #' site <- request_site(fn, host = host)
 #' # browseURL(site)
@@ -65,6 +65,7 @@
 #' site <- request_site(js, upload = FALSE)
 #' site <- request_site(url, upload = FALSE)
 #' # browseURL(site)
+#' }
 #' @export
 request_site <- function(txt = "", loc = "",
                          schema = "bds_schema_str.json",

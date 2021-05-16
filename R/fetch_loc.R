@@ -10,7 +10,7 @@
 #' @param txt A JSON string, URL or file
 #' @param schema The name of one the the built-in schema's.
 #' The default (`NULL`) loads `"bds_schema_str.json"`. See
-#' <https://github.com/stefvanbuuren/bdsreader/tree/master/inst/json>
+#' <https://github.com/growthcharts/bdsreader/tree/master/inst/json>
 #' for available schema's.
 #' @return A tibble with a person attribute
 #' @author Stef van Buuren 2021

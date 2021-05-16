@@ -29,6 +29,7 @@ only return results from growth screening.
 host <- "http://localhost"
 fn <- system.file("testdata", "client3.json", package = "james")
 
+\dontrun{
 # first upload, then screen
 r1 <- jamesclient::upload_txt(fn, host = host)
 location <- jamesclient::get_url(r1, "location")
@@ -37,4 +38,5 @@ screen_growth(loc = location)
 
 # upload & screen
 screen_growth(fn)
+}
 }

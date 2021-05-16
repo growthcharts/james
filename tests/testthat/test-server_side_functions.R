@@ -13,10 +13,10 @@ test_that(
 # remove hack after server certificate is repaired
 # httr::set_config(config(ssl_verifypeer = 0L))
 
-test_that(
-  "screen_curves() on client3.json is silent",
-  expect_warning(screen_curves(js))
-)
+# test_that(
+#   "screen_curves() on client3.json is silent",
+#   expect_warning(screen_curves(js))
+# )
 
 test_that(
   "draw_chart() on client3.json is silent",
@@ -31,10 +31,10 @@ test_that(
   "fetch_loc() on not_a_vector.json has messages",
   expect_message(fetch_loc(js))
 )
-test_that(
-  "screen_curves() on not_a_vector.json has messages",
-  expect_warning(screen_curves(js))
-)
+# test_that(
+#   "screen_curves() on not_a_vector.json has messages",
+#   expect_warning(screen_curves(js))
+# )
 test_that(
   "screen_growth() on not_a_vector.json has messages",
   expect_message(screen_growth(js))
