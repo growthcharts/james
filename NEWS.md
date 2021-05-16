@@ -1,3 +1,7 @@
+# james 0.33.1
+
+- Removes unneeded `nlreferences` dependency
+
 # james 0.33.0
 
 - Tranfers repo to `growthcharts` organisation
