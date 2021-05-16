@@ -1,5 +1,6 @@
-# james 0.33.1
+# james 0.34.0
 
+- Update dependency versions
 - Removes unneeded `nlreferences` dependency
 
 # james 0.33.0

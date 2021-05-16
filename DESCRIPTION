@@ -1,11 +1,11 @@
 Package: james
 Type: Package
-Title: JAMES: Joint Automatic Measurement and Evaluation System
-Version: 0.33.1
+Title: Joint Automatic Measurement and Evaluation System
+Version: 0.34.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
-Description: This package contains the server-side functions for the 
+Description: Server-sided functions for the 
     API of the Joint Automatic Measurement and Evaluation 
     System (JAMES). JAMES deploys advanced analytic functionality 
     to analyze, monitor and predict individual child growth and 
@@ -16,21 +16,21 @@ LazyData: true
 Depends: 
     svglite
 Imports: 
-    bdsreader,
-    chartbox (>= 1.2.1),
-    chartcatalog (>= 1.5.0),
-    chartplotter (>= 0.18.1),
+    bdsreader (>= 0.6.0),
+    chartbox (>= 1.4.0),
+    chartcatalog (>= 1.8.0),
+    chartplotter (>= 0.25.1),
     dplyr,
     curl,
     grid,
-    growthscreener (>= 1.6.0),
+    growthscreener (>= 1.9.0),
     httr,
-    jamesclient (>= 0.11.0),
+    jamesclient (>= 0.15.0),
     jsonlite,
     rlang,
     utils
 Suggests: 
-    jamesdemodata (>= 0.23.0),
+    jamesdemodata (>= 0.5.0),
     testthat
 Remotes: 
     growthcharts/bdsreader,
