@@ -3,6 +3,11 @@
 
 ## Joint Automatic Measurement and Evaluation System (JAMES)
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/growthcharts/james/workflows/R-CMD-check/badge.svg)](https://github.com/growthcharts/james/actions)
+<!-- badges: end -->
+
 JAMES is an experimental web service for creating and interpreting
 charts of child growth and development. The current version
 
@@ -531,10 +536,10 @@ RESTful webservice.
 -   [OpenCPU API](https://www.opencpu.org/api.html)
 -   <https://www.w3schools.com/js/>
 -   <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
--   <https://github.com/stefvanbuuren/james>
--   <https://github.com/stefvanbuuren/james.client>
+-   <https://github.com/growthcharts/james>
+-   <https://github.com/growthcharts/jamesclient>
 -   <https://github.com/growthcharts/bdsreader>
--   <https://github.com/stefvanbuuren/brokenstick>
+-   <https://github.com/growthcharts/brokenstick>
 
 ## About
 

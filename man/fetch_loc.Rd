@@ -11,7 +11,7 @@ fetch_loc(txt = "", schema = "bds_schema_str.json")
 
 \item{schema}{The name of one the the built-in schema's.
 The default (\code{NULL}) loads \code{"bds_schema_str.json"}. See
-\url{https://github.com/stefvanbuuren/bdsreader/tree/master/inst/json}
+\url{https://github.com/growthcharts/bdsreader/tree/master/inst/json}
 for available schema's.}
 }
 \value{
