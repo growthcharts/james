@@ -1,5 +1,6 @@
-# james 0.34.1
+# james 0.35.0
 
+- Checks spelling and updates word list
 - Adds token to GHA R-CMD-CHECK
 - Removes LICENCE file, which makes CMD-CHECK complain
 - Install V8 lib in linux workflow
@@ -90,7 +91,7 @@ Minor changes
 # james 0.24.0
 
 -   Re-introduce legacy functions `draw_chart_bds`, `draw_chart_ind`
--   Change `screen_curves` to old bahavior, thus producing a list instead of a table
+-   Change `screen_curves` to old behavior, thus producing a list instead of a table
 -   Re-introduce arguments `bds_data`, `location`, `ind_loc` and `?ind=`
 
 # james 0.23.0
@@ -149,7 +150,7 @@ Minor changes
 # james 0.18.0
 
 -   Simplifies `screen_curves()`
--   Moves functionality for AllegroSultum to `custom_list()`
+-   Moves functionality for Allegro Sultum to `custom_list()`
 -   Adds various getters
 -   Makes server and data location independent
 
