@@ -65,7 +65,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-        shell: sudo apt-get install libv8-dev
 
       - name: Install dependencies
         env:
