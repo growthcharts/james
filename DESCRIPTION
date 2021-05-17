@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 0.34.0
+Version: 0.34.1
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -10,7 +10,7 @@ Description: Server-sided functions for the
     System (JAMES). JAMES deploys advanced analytic functionality 
     to analyze, monitor and predict individual child growth and 
     development.
-License: AGPL-3 + file LICENSE
+License: AGPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: 

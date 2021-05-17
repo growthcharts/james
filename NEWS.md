@@ -1,3 +1,9 @@
+# james 0.34.1
+
+- Adds token to GHA R-CMD-CHECK
+- Removes LICENCE file, which makes CMD-CHECK complain
+- Install V8 lib in linux workflow
+
 # james 0.34.0
 
 - Update dependency versions
