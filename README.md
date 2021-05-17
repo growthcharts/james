@@ -63,7 +63,7 @@ The site <https://groeidiagrammen.nl/ocpu/lib/james/www/> provides a
 quick round-trip of growth charts. JAMES currently offers 394 different
 charts, divided into three chart groups:
 
-1.  140 charts for children of various ethnicities, age groups and
+1.  140 charts for children of various etnicities, age groups and
     outcomes (Talma et al. 2010);
 2.  240 charts specifically designed for preterms (Bocca-Tjeertes et
     al. 2012);
@@ -370,7 +370,7 @@ curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen
 ```
 
 The site now starts with `PMAAN27` instead of `PMAHN27`. Any chart can
-be chosen. It is the responsability of the developer that the choice is
+be chosen. It is the responsibility of the developer that the choice is
 sensible given the child’s data.
 
 #### Site with user-specified chart
@@ -525,7 +525,7 @@ Things that were still on the wish list in Sept 2019:
 
 The growth charts in JAMES are programmed in `R`. JAMES makes these
 available through the [OpenCPU](https://www.opencpu.org) system for
-scientific computing and reproducuble research. The system allows for
+scientific computing and reproducible research. The system allows for
 easy integration of growth charts into any `HTTP` compliant client by
 means of OpenCPU’s [API](https://www.opencpu.org/api.html). JAMES is a
 RESTful webservice.

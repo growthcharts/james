@@ -82,7 +82,7 @@ matching analysis, e.g. like \code{c("3m", "14m")}.}
 The function loads individual data from an url,
 calculates the chartcode and returns a list of parsed chartcode
 and age range of the data.
-The function is called at initialization to automate seting
+The function is called at initialization to automate setting
 of proper chart and analysis defaults according to the child data.
 }
 \seealso{
