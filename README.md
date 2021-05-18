@@ -532,14 +532,11 @@ RESTful webservice.
 
 ## Resources
 
+-   [JAMES Internals](https://stefvanbuuren.name/jamesdocs/)
 -   [OpenCPU system](https://www.opencpu.org)
 -   [OpenCPU API](https://www.opencpu.org/api.html)
 -   <https://www.w3schools.com/js/>
 -   <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
--   <https://github.com/growthcharts/james>
--   <https://github.com/growthcharts/jamesclient>
--   <https://github.com/growthcharts/bdsreader>
--   <https://github.com/growthcharts/brokenstick>
 
 ## About
 
