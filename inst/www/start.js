@@ -9,6 +9,8 @@ var user_loc = urlParams.get('loc');
 if (urlParams.has('ind')) user_loc = urlParams.get('ind');
 const user_chartcode = urlParams.get('chartcode');
 
+ocpu.seturl("/ocpu/library/james/R"); //hardcode path
+
 
 // internal constants
 const slider_values = {
