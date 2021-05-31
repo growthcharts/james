@@ -1,3 +1,8 @@
+# james 0.36.0
+
+- Update to R 4.1.0
+- Solves a bug that resulted from changes in the internal format of the grid package. The james package now depends on `grid 4.1.0` and hence on `R >= 4.1`.
+
 # james 0.35.0
 
 - Checks spelling and updates word list

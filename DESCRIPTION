@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 0.35.0
+Version: 0.36.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -12,17 +12,16 @@ Description: Server-sided functions for the
     development.
 License: AGPL-3
 Encoding: UTF-8
-LazyData: true
 Depends: 
     svglite
 Imports: 
     bdsreader (>= 0.6.0),
-    chartbox (>= 1.4.0),
+    chartbox (>= 1.6.0),
     chartcatalog (>= 1.8.0),
     chartplotter (>= 0.25.1),
     dplyr,
     curl,
-    grid,
+    grid (>= 4.1.0),
     growthscreener (>= 1.9.0),
     httr,
     jamesclient (>= 0.15.0),
