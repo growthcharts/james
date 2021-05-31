@@ -63,7 +63,7 @@ draw_chart <- function(txt = "",
                        break_ties = FALSE,
                        show_realized = FALSE,
                        show_future = FALSE,
-                       draw_grob = FALSE,
+                       draw_grob = TRUE,
                        bds_data = "",
                        ind_loc = "") {
   if (!missing(bds_data)) {

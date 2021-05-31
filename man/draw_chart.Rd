@@ -27,7 +27,7 @@ draw_chart(
   break_ties = FALSE,
   show_realized = FALSE,
   show_future = FALSE,
-  draw_grob = FALSE,
+  draw_grob = TRUE,
   bds_data = "",
   ind_loc = ""
 )
