@@ -21,44 +21,44 @@
     <div class="row content">
       <div class="col-sm-3 sidenav" id="navcontainer">
         <br>
-        <h3>GROEIDIAGRAMMEN</h3>
+        <h3>GROWTH CHARTS</h3>
 
         <br>
         <div id="accordion">
-          <!-- Groei card  -->
-          <div class="card" id = "groeicard">
+          <!-- Growth card  -->
+          <div class="card" id = "growthcard">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#collapseOne" id = "groei">
-                <strong onclick="showPlotdiv()">Groei</strong>
+              <a class="card-link" data-toggle="collapse" href="#collapseOne" id = "growth">
+                <strong onclick="showPlotdiv()">Growth</strong>
               </a>
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
               <div class="card-body">
 
                 <div class="form-group">
-                  <label for="exampleSelect1"><strong>Kaartserie</strong></label>
+                  <label for="exampleSelect1"><strong>Chart series</strong></label>
                   <select class="form-control" id="chartgrp">
-                    <option value="nl2010" selected>Nederland 2010</option>
-                    <option value="preterm">Prematuren</option>
-                    <option value="who">WHO standaard</option>
+                    <option value="nl2010" selected>Netherlands 2010</option>
+                    <option value="preterm">Preterms NL</option>
+                    <option value="who">WHO Standards</option>
                   </select>
                   <br>
                 </div>
 
                 <form action="" name="agegrp">
-                  <strong>Leeftijd</strong><br>
-                  <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 maanden<br>
-                  <input type="radio" id="0-4y" value="0-4y" name="agegrp"> 0-4 jaar<br>
-                  <div id="agegrp_1-21y"><input type="radio" id="1-21y" value="1-21y" name="agegrp"> 1-21 jaar<br></div>
+                  <strong>Age</strong><br>
+                  <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 months<br>
+                  <input type="radio" id="0-4y" value="0-4y" name="agegrp"> 0-4 year<br>
+                  <div id="agegrp_1-21y"><input type="radio" id="1-21y" value="1-21y" name="agegrp"> 1-21 year<br></div>
                 <br>
                 </form>
 
                 <form action="" name="msr">
-                  <strong>Maat</strong><br>
-                  <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Lengte<br></div>
-                  <div id="msr_wgt"><input type="radio" name="msr" id="wgt" value="wgt"> Gewicht - Leeftijd<br></div>
-                  <div id="msr_wfh"><input type="radio" name="msr" id="wfh" value="wfh"> Gewicht - Lengte<br></div>
-                  <div id="msr_hdc"><input type="radio" name="msr" id="hdc" value="hdc"> Hoofdomtrek<br></div>
+                  <strong>Measure</strong><br>
+                  <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Height<br></div>
+                  <div id="msr_wgt"><input type="radio" name="msr" id="wgt" value="wgt"> Weight - Age<br></div>
+                  <div id="msr_wfh"><input type="radio" name="msr" id="wfh" value="wfh"> Weight - Height<br></div>
+                  <div id="msr_hdc"><input type="radio" name="msr" id="hdc" value="hdc"> Head circumference<br></div>
                   <div id="msr_bmi"><input type="radio" name="msr" id="bmi" value="bmi"> BMI<br></div>
                   <div id="msr_front"><input type="radio" name="msr" id="front" value="front"> - A -<br></div>
                   <div id="msr_back"><input type="radio" name="msr" id="back" value="back"> - B -<br></div>
@@ -66,23 +66,23 @@
                 </form>
 
                 <div class="form-group" id="weekmenu">
-                  <label class="control-label" for="matchgroup"><strong>Zwangerschapsduur</strong></label>
+                  <label class="control-label" for="matchgroup"><strong>Gestational Age</strong></label>
                   <input type="text" name="" value="" id="weekslider" />
                 </div>
 
                 <form action="" id="etnicity">
-                  <strong>Etniciteit</strong><br>
-                  <input type="radio" name="etnicity" id="nl" value="nl" checked="checked"> Nederlands<br>
-                  <input type="radio" name="etnicity" id="tu" value="tu"> Turks<br>
-                  <input type="radio" name="etnicity" id="ma" value="ma"> Marokkaans<br>
-                  <input type="radio" name="etnicity" id="hs" value="hs"> Hindostaans<br>
+                  <strong>Ethnicity</strong><br>
+                  <input type="radio" name="etnicity" id="nl" value="nl" checked="checked"> Dutch<br>
+                  <input type="radio" name="etnicity" id="tu" value="tu"> Turkish<br>
+                  <input type="radio" name="etnicity" id="ma" value="ma"> Moroccan<br>
+                  <input type="radio" name="etnicity" id="hs" value="hs"> Hindostanic<br>
                   <br>
                 </form>
 
                 <form action="" id="sex">
-                  <strong>Geslacht</strong><br>
-                  <input type="radio" name="sex" id="male" value="male" checked="checked"> Jongen<br>
-                  <input type="radio" name="sex" id="female" value="female"> Meisje<br>
+                  <strong>Sex</strong><br>
+                  <input type="radio" name="sex" id="male" value="male" checked="checked"> Boy<br>
+                  <input type="radio" name="sex" id="female" value="female"> Girl<br>
                   <br>
                 </form>
 
@@ -95,34 +95,34 @@
             </div>
           </div>
 
-          <!-- Ontwikkeling card  -->
-          <div class="card" id = "ontwikkelingcard">
+          <!-- Development card  -->
+          <div class="card" id = "developmentcard">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#collapseTwo" id = "ontwikkeling">
-                <strong onclick="showPlotdiv()">Ontwikkeling</strong>
+              <a class="card-link" data-toggle="collapse" href="#collapseTwo" id = "development">
+                <strong onclick="showPlotdiv()">Development</strong>
               </a>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
               <div class="card-body">
 
                 <div class="form-group">
-                  <label for="exampleSelect1"><strong>Kaartserie</strong></label>
+                  <label for="exampleSelect1"><strong>Chart series</strong></label>
                   <select class="form-control" id="chartgrp_dsc">
-                    <option value="nl2010" selected>Nederland 2010</option>
-                    <option value="preterm">Prematuren</option>
+                    <option value="nl2010" selected>Nederlands 2010</option>
+                    <option value="preterm">Preterms NL</option>
                   </select>
                   <br>
                 </div>
 
                 <form action="" name="agegrp_dsc">
-                  <strong>Leeftijd</strong><br>
-                  <input type="radio" id="0-15m" value="0-15m" name="agegrp_dsc" checked="checked"> 0-15 maanden<br>
-                  <input type="radio" id="0-4y" value="0-4y" name="agegrp_dsc"> 0-4 jaar<br>
+                  <strong>Age</strong><br>
+                  <input type="radio" id="0-15m" value="0-15m" name="agegrp_dsc" checked="checked"> 0-15 months<br>
+                  <input type="radio" id="0-4y" value="0-4y" name="agegrp_dsc"> 0-4 year<br>
                 <br>
                 </form>
 
                 <div class="form-group" id="weekmenu_dsc">
-                  <label class="control-label" for="matchgroup"><strong>Zwangerschapsduur</strong></label>
+                  <label class="control-label" for="matchgroup"><strong>Gestational Age</strong></label>
                   <input type="text" name="" value="" id="weekslider_dsc" />
                 </div>
 
@@ -139,7 +139,7 @@
           <div class="card">
             <div class="card-header">
               <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" id = "voorspeller">
-              <strong onclick="showPlotdiv()">Voorspeller</strong>
+              <strong onclick="showPlotdiv()">Predictor</strong>
             </a>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
@@ -152,19 +152,19 @@
                 <br>
 
                 <div class="form-group" id="donordatagroup">
-                  <label for="donordatagroup"><strong>Voorspel horizon</strong></label>
+                  <label for="donordatagroup"><strong>Prediction horizon</strong></label>
                   <div>
                     <select class="form-control" id="donordata" onchange = "update_donordata()">
-                      <option value="0-2" selected>Tussen 0-2 jaar</option>
-                      <option value="2-4">Tussen 2-4 jaar</option>
-                      <option value="4-18">Tussen 4-18 jaar</option>
+                      <option value="0-2" selected>Between 0-2 years</option>
+                      <option value="2-4">Between 2-4 years</option>
+                      <option value="4-18">Between 4-18 years</option>
                     </select>
                   </div>
                 </div>
                 <br>
 
                 <div class="form-group" id="visitgroup">
-                  <label class="control-label" for="visitgroup"><strong>Bezoek</strong></label>
+                  <label class="control-label" for="visitgroup"><strong>Visit</strong></label>
                   <input type="text" name="" value="" id="visitslider" />
                 </div>
 
@@ -172,7 +172,7 @@
                   <div class="checkbox">
                     <label>
                       <input id="exact_sex" type="checkbox" checked="checked" onchange="update()"/>
-                      <span>Zelfde geslacht</span>
+                      <span>Same sex</span>
                     </label>
                   </div>
                 </div>
@@ -181,7 +181,7 @@
                   <div class="checkbox">
                     <label>
                       <input id="exact_ga" type="checkbox" onchange="update()"/>
-                      <span>Zelfde zwangerschapsduur</span>
+                      <span>Same gestational age</span>
                     </label>
                   </div>
                 </div>
@@ -190,7 +190,7 @@
                   <div class="checkbox">
                     <label>
                       <input id="show_future" type="checkbox" onchange="update()"/>
-                      <span>Kijk in toekomst</span>
+                      <span>Look into future</span>
                     </label>
                   </div>
                 </div>
@@ -199,7 +199,7 @@
                   <div class="checkbox">
                     <label>
                       <input id="show_realized" type="checkbox" onchange="update()"/>
-                      <span>Gerealiseerde groei</span>
+                      <span>Realised growth</span>
                     </label>
                   </div>
                 </div>
@@ -212,14 +212,14 @@
           <div class="card">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseFour" id = "meldingen">
-                <strong onclick="showTextdiv()">Meldingen</strong>
+                <strong onclick="showTextdiv()">Messages</strong>
               </a>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
               <div class="card-body">
               <form action="" name="messagegrp">
-                  <strong>Berichtklasse</strong><br>
-                  <input type="radio" id="messdata" value="data" name="messagegrp" checked="checked"> Gegevens<br>
+                  <strong>Message class</strong><br>
+                  <input type="radio" id="messdata" value="data" name="messagegrp" checked="checked"> Data<br>
 <!--                  <input type="radio" id="messscreen" value="screen" name="messagegrp"> Richtlijnen<br>
                   <input type="radio" id="messanal" value="analysis" name="messagegrp"> Analyse<br>  -->
                 <br>

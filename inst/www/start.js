@@ -73,18 +73,18 @@ $("#weekslider_dsc").ionRangeSlider({
 });
 
 // set active accordion page
-var active = "groei";
+var active = "growth";
 
-$('#groei').click(function (){
-        if (active != "groei"){
-          active = "groei";
+$('#growth').click(function (){
+        if (active != "growth"){
+          active = "growth";
           update();
         }
     });
 
-$('#ontwikkeling').click(function (){
-        if (active != "ontwikkeling"){
-          active = "ontwikkeling";
+$('#development').click(function (){
+        if (active != "development"){
+          active = "development";
           update();
         }
     });
@@ -286,17 +286,17 @@ function showPlotdiv() {
 
 function showCards(show = "all") {
   if (show == "all") {
-    sr('ontwikkelingcard', 'block');
-    sr('ontwikkelingcard', 'block');
+    sr('developmentcard', 'block');
+    sr('developmentcard', 'block');
     $('#collapseOne').collapse('show');
 
-  } else if (show == "groei") {
-    sr('ontwikkelingcard', 'none');
+  } else if (show == "growth") {
+    sr('developmentcard', 'none');
     $('#collapseOne').collapse('show');
 
-  } else if (show == "ontwikkeling") {
-    sr('groeicard', 'none');
+  } else if (show == "development") {
+    sr('growthcard', 'none');
     $('#collapseTwo').collapse('show');
-    active = "ontwikkeling";
+    active = "development";
   }
 }

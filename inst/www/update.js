@@ -5,14 +5,14 @@
 function update() {
 
   // grab active variables
-  if (active == "groei"){
+  if (active == "growth"){
     var msr = document.querySelector('input[name="msr"]:checked').value;
     var chartgrp = document.getElementById("chartgrp").value;
     var agegrp = document.querySelector('input[name="agegrp"]:checked').value;
     var population = document.querySelector('input[name="etnicity"]:checked').value;
     var ga = Number($("#weekslider").data().from);
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
-  } else if (active == "ontwikkeling"){
+  } else if (active == "development"){
     var msr = "dsc";
     var population = "nl";
     var chartgrp = document.getElementById("chartgrp_dsc").value;
