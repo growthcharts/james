@@ -2,6 +2,7 @@
 #'
 #' @name screen_curves-deprecated
 #' @inheritParams request_site
+#' @inheritParams bdsreader::read_bds
 #' @param location Legacy for `loc`
 #' @param legacy Logical indicating whether legacy should be done.
 #' @return A JSON string containing a table with screening results
@@ -24,8 +25,8 @@
 #' # # upload & screen
 #' # screen_curves(fn)
 #' @export
-screen_curves <- function(txt = "", loc = "", location = "",
-                          schema = "bds_schema_str.json", legacy = TRUE) {
+screen_curves <- function(txt = "", loc = "", location = "", version = 1L,
+                          legacy = TRUE) {
   .Deprecated("screen_growth",
     msg = "screen_curves() is deprecated. Please use screen_growth() or custom_list() instead."
   )
@@ -34,6 +35,6 @@ screen_curves <- function(txt = "", loc = "", location = "",
   if (legacy) {
     toJSON(custom_list(txt = txt, loc = loc))
   } else {
-    toJSON(screen_curves_ind(get_tgt(txt, loc, schema = schema)))
+    toJSON(screen_curves_ind(get_tgt(txt, loc, version = version)))
   }
 }

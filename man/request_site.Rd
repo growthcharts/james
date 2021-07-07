@@ -4,13 +4,7 @@
 \alias{request_site}
 \title{Request site containing personalised charts}
 \usage{
-request_site(
-  txt = "",
-  loc = "",
-  schema = "bds_schema_str.json",
-  upload = TRUE,
-  host = NULL
-)
+request_site(txt = "", loc = "", version = 1L, upload = TRUE, host = NULL)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -21,8 +15,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
-schema. Only used if the \code{txt} argument is specified.}
+\item{version}{Integer. JSON schema version number. There are currently two
+schemas supported, versions \code{1} and \code{2}.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
 the data in \code{txt} and return a site address with the \verb{?loc=} query appended.

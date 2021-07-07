@@ -6,12 +6,7 @@
 #' The function is useful for caching input data over multiple requests to
 #' `OpenCPU`. The cached data feed into other JAMES functions by means
 #' of the `"loc"` argument. The server wipes the cached data after 24 hours.
-#'
-#' @param txt A JSON string, URL or file
-#' @param schema The name of one the the built-in schema's.
-#' The default (`NULL`) loads `"bds_schema_str.json"`. See
-#' <https://github.com/growthcharts/bdsreader/tree/master/inst/json>
-#' for available schema's.
+#' @inheritParams bdsreader::read_bds
 #' @return A tibble with a person attribute
 #' @author Stef van Buuren 2021
 #' @seealso [bdsreader::read_bds()]
@@ -22,6 +17,6 @@
 #' @keywords server
 #' @export
 fetch_loc <- function(txt = "",
-                      schema = "bds_schema_str.json") {
-  read_bds(txt = txt, schema = schema)
+                      version = 1L) {
+  read_bds(txt = txt, version = version)
 }

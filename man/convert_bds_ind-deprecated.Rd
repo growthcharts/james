@@ -10,7 +10,7 @@ convert_bds_ind(txt = "", ...)
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{...}{Pass down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 A tibble with a person attribute.

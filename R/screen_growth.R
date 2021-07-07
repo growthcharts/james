@@ -1,6 +1,7 @@
 #' Screen growth curves according to JGZ guidelines
 #'
 #' @inheritParams request_site
+#' @inheritParams bdsreader::read_bds
 #' @note `screen_growth` superseeds `screen_curves` and will
 #' only return results from growth screening.
 #' @examples
@@ -18,6 +19,6 @@
 #' screen_growth(fn)
 #' }
 #' @export
-screen_growth <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
-  screen_curves_ind(get_tgt(txt, loc, schema = schema))
+screen_growth <- function(txt = "", loc = "", version = 1L) {
+  screen_curves_ind(get_tgt(txt, loc, version = version))
 }

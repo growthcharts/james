@@ -5,13 +5,7 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(
-  txt = "",
-  loc = "",
-  location = "",
-  schema = "bds_schema_str.json",
-  legacy = TRUE
-)
+screen_curves(txt = "", loc = "", location = "", version = 1L, legacy = TRUE)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -24,8 +18,8 @@ and converted to internal server format.}
 
 \item{location}{Legacy for \code{loc}}
 
-\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
-schema. Only used if the \code{txt} argument is specified.}
+\item{version}{Integer. JSON schema version number. There are currently two
+schemas supported, versions \code{1} and \code{2}.}
 
 \item{legacy}{Logical indicating whether legacy should be done.}
 }

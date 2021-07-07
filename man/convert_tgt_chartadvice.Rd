@@ -7,7 +7,7 @@
 convert_tgt_chartadvice(
   txt = "",
   loc = "",
-  schema = "bds_schema_str.json",
+  version = 1L,
   chartcode = "",
   selector = c("data", "chartcode"),
   ind_loc = ""
@@ -22,8 +22,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
-schema. Only used if the \code{txt} argument is specified.}
+\item{version}{Integer. JSON schema version number. There are currently two
+schemas supported, versions \code{1} and \code{2}.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 
