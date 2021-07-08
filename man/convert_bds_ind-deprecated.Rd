@@ -5,13 +5,13 @@
 \alias{convert_bds_ind}
 \title{Convert json BSD data for single individual to class individual}
 \usage{
-convert_bds_ind(txt = "", version = 2L, ...)
+convert_bds_ind(txt = "", format = 2L, ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{version}{Integer. JSON schema version number. There are currently two
-schemas supported, versions \code{1} and \code{2}.}
+\item{format}{Integer. JSON schema format number. There are currently two
+schemas supported, formats \code{1} and \code{2}.}
 
 \item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
@@ -27,7 +27,7 @@ Deprecated. Use \code{\link[=fetch_loc]{fetch_loc()}} instead.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-p <- convert_bds_ind(fn, version = 1)
+p <- convert_bds_ind(fn, format = 1)
 }
 \author{
 Stef van Buuren 2021

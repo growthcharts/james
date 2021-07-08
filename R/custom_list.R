@@ -18,10 +18,10 @@
 #' identical(list1, list2)
 #' }
 #' @export
-custom_list <- function(txt = "", loc = "", version = 2L) {
-  site <- request_site(txt, loc, version = version)
+custom_list <- function(txt = "", loc = "", format = 2L) {
+  site <- request_site(txt, loc, format = format)
 
-  tgt <- get_tgt(txt, loc, version = version)
+  tgt <- get_tgt(txt, loc, format = format)
 
   res <- screen_curves_ind(tgt)
 

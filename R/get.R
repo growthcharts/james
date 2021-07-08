@@ -10,8 +10,8 @@ get_host <- function() {
 }
 
 # returns url of uploaded data
-get_loc <- function(txt, host, version) {
-  resp <- upload_txt(txt, host = host, version = version)
+get_loc <- function(txt, host, format) {
+  resp <- upload_txt(txt, host = host, format = format)
   if (status_code(resp) != 201L) {
     message_for_status(resp,
       task = paste0(

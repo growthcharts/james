@@ -67,7 +67,7 @@
 #' }
 #' @export
 request_site <- function(txt = "", loc = "",
-                         version = 2L,
+                         format = 2L,
                          upload = TRUE, host = NULL) {
   txt <- txt[1L]
   loc <- loc[1L]
@@ -118,7 +118,7 @@ request_site <- function(txt = "", loc = "",
 
   # # return ?loc=, possibly after upload of txt
   if (!is.empty(txt) && upload) {
-    loc <- get_loc(txt, host, version = version)
+    loc <- get_loc(txt, host, format = format)
   }
 
   ifelse(loc == "", site, paste0(site, "?loc=", loc))

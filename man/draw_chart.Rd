@@ -7,7 +7,7 @@
 draw_chart(
   txt = "",
   loc = "",
-  version = 2L,
+  format = 2L,
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
   chartgrp = NULL,
@@ -42,8 +42,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{version}{Integer. JSON schema version number. There are currently two
-schemas supported, versions \code{1} and \code{2}.}
+\item{format}{Integer. JSON schema format number. There are currently two
+schemas supported, formats \code{1} and \code{2}.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 
@@ -133,7 +133,7 @@ The function \code{draw_chart()} plots individual data on the growth chart.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-g <- draw_chart(txt = fn, version = 1)
+g <- draw_chart(txt = fn, format = 1)
 }
 \seealso{
 \code{\link[=select_chart]{select_chart()}}

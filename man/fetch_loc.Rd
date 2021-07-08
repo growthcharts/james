@@ -4,13 +4,13 @@
 \alias{fetch_loc}
 \title{Uploads, parses, converts and stores data on the server for further processing}
 \usage{
-fetch_loc(txt = "", version = 2L)
+fetch_loc(txt = "", format = 2L)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{version}{Integer. JSON schema version number. There are currently two
-schemas supported, versions \code{1} and \code{2}.}
+\item{format}{Integer. JSON schema format number. There are currently two
+schemas supported, formats \code{1} and \code{2}.}
 }
 \value{
 A tibble with a person attribute
@@ -25,7 +25,7 @@ of the \code{"loc"} argument. The server wipes the cached data after 24 hours.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-p <- fetch_loc(fn, version = 1)
+p <- fetch_loc(fn, format = 1)
 }
 \seealso{
 \code{\link[bdsreader:read_bds]{bdsreader::read_bds()}}

@@ -40,11 +40,11 @@
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' g <- draw_chart(txt = fn, version = 1)
+#' g <- draw_chart(txt = fn, format = 1)
 #' @export
 draw_chart <- function(txt = "",
                        loc = "",
-                       version = 2L,
+                       format = 2L,
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
                        chartgrp = NULL,
@@ -91,7 +91,7 @@ draw_chart <- function(txt = "",
     )
   )
 
-  tgt <- get_tgt(txt, loc, version = version)
+  tgt <- get_tgt(txt, loc, format = format)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty

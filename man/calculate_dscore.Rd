@@ -7,7 +7,7 @@
 calculate_dscore(
   txt = "",
   loc = "",
-  version = 2L,
+  format = 2L,
   output = c("table", "last_visit", "last_dscore")
 )
 }
@@ -20,8 +20,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{version}{Integer. JSON schema version number. There are currently two
-schemas supported, versions \code{1} and \code{2}.}
+\item{format}{Integer. JSON schema format number. There are currently two
+schemas supported, formats \code{1} and \code{2}.}
 
 \item{output}{A string, either \code{"table"}, \code{"last_visit"} or
 '\code{"last_dscore"} specifying the result. The default \code{"table"}
@@ -39,7 +39,7 @@ The function \code{draw_chart()} plots individual data on the growth chart.
 }
 \examples{
 fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-d <- calculate_dscore(txt = fn, version = 1)
+d <- calculate_dscore(txt = fn, format = 1)
 }
 \author{
 Stef van Buuren 2020

@@ -7,7 +7,7 @@
 convert_tgt_chartadvice(
   txt = "",
   loc = "",
-  version = 2L,
+  format = 2L,
   chartcode = "",
   selector = c("data", "chartcode"),
   ind_loc = ""
@@ -22,8 +22,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{version}{Integer. JSON schema version number. There are currently two
-schemas supported, versions \code{1} and \code{2}.}
+\item{format}{Integer. JSON schema format number. There are currently two
+schemas supported, formats \code{1} and \code{2}.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

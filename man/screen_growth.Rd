@@ -4,7 +4,7 @@
 \alias{screen_growth}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_growth(txt = "", loc = "", version = 2L)
+screen_growth(txt = "", loc = "", format = 2L)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -15,8 +15,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{version}{Integer. JSON schema version number. There are currently two
-schemas supported, versions \code{1} and \code{2}.}
+\item{format}{Integer. JSON schema format number. There are currently two
+schemas supported, formats \code{1} and \code{2}.}
 }
 \description{
 Screen growth curves according to JGZ guidelines

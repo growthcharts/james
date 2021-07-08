@@ -35,7 +35,7 @@ test_that(
 
 # Allegro Sultum 1 sept 2020
 laura_dev <- system.file("testdata", "Laura_S_dev.json", package = "james")
-screen_growth(txt = laura_dev, version = 1)
+screen_growth(txt = laura_dev, format = 1)
 
 laura_dev_2 <- system.file("testdata", "Laura_S_dev_2.json", package = "james")
-screen_growth(txt = laura_dev_2, version = 1)
+screen_growth(txt = laura_dev_2, format = 1)

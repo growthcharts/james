@@ -11,18 +11,18 @@ host <- "https://groeidiagrammen.nl"
 
 test_that(
   "creates site_laura, with messages",
-  expect_message(site_laura <- request_site(laura, host = host, version = 1))
+  expect_message(site_laura <- request_site(laura, host = host, format = 1))
 )
 
-#site_laura_gro <- request_site(laura_gro, host = host, version = 1)
-#site_laura_dev <- request_site(laura_dev, host = host, version = 1)
-#site_laura_dev_2 <- request_site(laura_dev_2, host = host, version = 1)
+#site_laura_gro <- request_site(laura_gro, host = host, format = 1)
+#site_laura_dev <- request_site(laura_dev, host = host, format = 1)
+#site_laura_dev_2 <- request_site(laura_dev_2, host = host, format = 1)
 
 test_that(
   "creates site_kevin, with messages",
-  expect_message(site_kevin <- request_site(kevin, host = host, version = 1))
+  expect_message(site_kevin <- request_site(kevin, host = host, format = 1))
 )
-# site_kevin_gro <- request_site(kevin_gro, host = host, version = 1)
-# site_kevin_dev <- request_site(kevin_dev, host = host, version = 1)
+# site_kevin_gro <- request_site(kevin_gro, host = host, format = 1)
+# site_kevin_dev <- request_site(kevin_dev, host = host, format = 1)
 
 # browseURL(site_laura)

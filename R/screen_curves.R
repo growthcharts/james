@@ -25,7 +25,7 @@
 #' # # upload & screen
 #' # screen_curves(fn)
 #' @export
-screen_curves <- function(txt = "", loc = "", location = "", version = 2L,
+screen_curves <- function(txt = "", loc = "", location = "", format = 2L,
                           legacy = TRUE) {
   .Deprecated("screen_growth",
     msg = "screen_curves() is deprecated. Please use screen_growth() or custom_list() instead."
@@ -35,6 +35,6 @@ screen_curves <- function(txt = "", loc = "", location = "", version = 2L,
   if (legacy) {
     toJSON(custom_list(txt = txt, loc = loc))
   } else {
-    toJSON(screen_curves_ind(get_tgt(txt, loc, version = version)))
+    toJSON(screen_curves_ind(get_tgt(txt, loc, format = format)))
   }
 }
