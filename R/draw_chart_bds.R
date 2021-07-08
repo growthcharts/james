@@ -15,12 +15,14 @@
 #'   "bsmodel"` for setting the broken stick model, or `call =
 #'   as.call(...)` for setting proper reference standards.
 #' @inheritParams chartplotter::process_chart
+#' @inheritParams bdsreader::set_schema
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' g <- draw_chart_bds(txt = fn)
+#' g <- draw_chart_bds(txt = fn, version = 1)
 #' @keywords server
 #' @export
-draw_chart_bds <- function(txt = "", chartcode = "",
+draw_chart_bds <- function(txt = "", version = 2L,
+                           chartcode = "",
                            curve_interpolation = TRUE,
                            selector = "chartcode", ...) {
 
@@ -30,7 +32,7 @@ draw_chart_bds <- function(txt = "", chartcode = "",
   )
 
   draw_chart(
-    txt = txt, chartcode = chartcode,
+    txt = txt, version = version, chartcode = chartcode,
     curve_interpolation = curve_interpolation,
     selector = selector
   )

@@ -7,7 +7,7 @@
 draw_chart(
   txt = "",
   loc = "",
-  version = 1L,
+  version = 2L,
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
   chartgrp = NULL,
@@ -133,7 +133,7 @@ The function \code{draw_chart()} plots individual data on the growth chart.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-g <- draw_chart(txt = fn)
+g <- draw_chart(txt = fn, version = 1)
 }
 \seealso{
 \code{\link[=select_chart]{select_chart()}}

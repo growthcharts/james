@@ -4,7 +4,7 @@
 \alias{request_site}
 \title{Request site containing personalised charts}
 \usage{
-request_site(txt = "", loc = "", version = 1L, upload = TRUE, host = NULL)
+request_site(txt = "", loc = "", version = 2L, upload = TRUE, host = NULL)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON

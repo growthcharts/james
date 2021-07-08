@@ -4,7 +4,7 @@
 \alias{screen_growth}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_growth(txt = "", loc = "", version = 1L)
+screen_growth(txt = "", loc = "", version = 2L)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON

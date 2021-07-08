@@ -4,7 +4,7 @@
 \alias{fetch_loc}
 \title{Uploads, parses, converts and stores data on the server for further processing}
 \usage{
-fetch_loc(txt = "", version = 1L)
+fetch_loc(txt = "", version = 2L)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
@@ -25,7 +25,7 @@ of the \code{"loc"} argument. The server wipes the cached data after 24 hours.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-p <- fetch_loc(fn)
+p <- fetch_loc(fn, version = 1)
 }
 \seealso{
 \code{\link[bdsreader:read_bds]{bdsreader::read_bds()}}

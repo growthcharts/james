@@ -7,7 +7,7 @@
 convert_tgt_chartadvice(
   txt = "",
   loc = "",
-  version = 1L,
+  version = 2L,
   chartcode = "",
   selector = c("data", "chartcode"),
   ind_loc = ""

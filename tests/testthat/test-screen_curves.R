@@ -1,11 +1,10 @@
-context("screen_curves")
 library(httr)
-
 library(jamesclient)
 
 # client3.json
 fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
+host <- "https://groeidiagrammen.nl"
 
 path <- "ocpu/library/james/R/fetch_loc"
 url <- modify_url(url = host, path = path)
