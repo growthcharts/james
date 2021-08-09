@@ -7,7 +7,7 @@
 \usage{
 draw_chart_bds(
   txt = "",
-  format = 2L,
+  format = "1.0",
   chartcode = "",
   curve_interpolation = TRUE,
   selector = "chartcode",
@@ -17,8 +17,8 @@ draw_chart_bds(
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{format}{Integer. JSON schema format number. There are currently two
-schemas supported, formats \code{1} and \code{2}.}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
 
 \item{chartcode}{A string with chart code}
 
@@ -41,6 +41,6 @@ Superseded by \code{\link[=draw_chart]{draw_chart()}}.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-g <- draw_chart_bds(txt = fn, format = 1)
+g <- draw_chart_bds(txt = fn)
 }
 \keyword{server}

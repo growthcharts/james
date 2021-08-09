@@ -13,10 +13,10 @@
 #'          [jsonlite::fromJSON()]
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' p <- fetch_loc(fn, format = 1)
+#' p <- fetch_loc(fn)
 #' @keywords server
 #' @export
 fetch_loc <- function(txt = "",
-                      format = 2L) {
+                      format = "1.0") {
   read_bds(txt = txt, format = format)
 }

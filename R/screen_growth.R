@@ -19,6 +19,6 @@
 #' screen_growth(fn)
 #' }
 #' @export
-screen_growth <- function(txt = "", loc = "", format = 2L) {
+screen_growth <- function(txt = "", loc = "", format = "1.0") {
   screen_curves_ind(get_tgt(txt, loc, format = format))
 }

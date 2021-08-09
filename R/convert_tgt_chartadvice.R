@@ -40,7 +40,7 @@
 #' @keywords server
 #' @export
 convert_tgt_chartadvice <- function(txt = "", loc = "",
-                                    format = 2L,
+                                    format = "1.0",
                                     chartcode = "",
                                     selector = c("data", "chartcode"),
                                     ind_loc = "") {

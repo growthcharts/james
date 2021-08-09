@@ -4,7 +4,7 @@
 \alias{custom_list}
 \title{Provides a Screen growth curves according to JGZ guidelines}
 \usage{
-custom_list(txt = "", loc = "", format = 2L)
+custom_list(txt = "", loc = "", format = "1.0")
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -15,8 +15,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{format}{Integer. JSON schema format number. There are currently two
-schemas supported, formats \code{1} and \code{2}.}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
 }
 \value{
 A table with screening results

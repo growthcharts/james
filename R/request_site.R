@@ -67,7 +67,7 @@
 #' }
 #' @export
 request_site <- function(txt = "", loc = "",
-                         format = 2L,
+                         format = "1.0",
                          upload = TRUE, host = NULL) {
   txt <- txt[1L]
   loc <- loc[1L]

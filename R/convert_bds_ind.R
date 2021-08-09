@@ -9,10 +9,10 @@
 #' @author Stef van Buuren 2021
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' p <- convert_bds_ind(fn, format = 1)
+#' p <- convert_bds_ind(fn)
 #' @keywords server
 #' @export
-convert_bds_ind <- function(txt = "", format = 2L, ...) {
+convert_bds_ind <- function(txt = "", format = "1.0", ...) {
   .Deprecated("fetch_loc",
     msg = "convert_bds_ind() is deprecated. Please use fetch_loc() instead."
   )

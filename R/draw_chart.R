@@ -40,11 +40,11 @@
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' g <- draw_chart(txt = fn, format = 1)
+#' g <- draw_chart(txt = fn)
 #' @export
 draw_chart <- function(txt = "",
                        loc = "",
-                       format = 2L,
+                       format = "1.0",
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
                        chartgrp = NULL,

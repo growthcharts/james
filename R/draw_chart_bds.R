@@ -18,10 +18,10 @@
 #' @inheritParams bdsreader::set_schema
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
-#' g <- draw_chart_bds(txt = fn, format = 1)
+#' g <- draw_chart_bds(txt = fn)
 #' @keywords server
 #' @export
-draw_chart_bds <- function(txt = "", format = 2L,
+draw_chart_bds <- function(txt = "", format = "1.0",
                            chartcode = "",
                            curve_interpolation = TRUE,
                            selector = "chartcode", ...) {

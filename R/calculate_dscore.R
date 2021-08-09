@@ -15,11 +15,11 @@
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-#' d <- calculate_dscore(txt = fn, format = 1)
+#' d <- calculate_dscore(txt = fn)
 #' @export
 calculate_dscore <- function(txt = "",
                              loc = "",
-                             format = 2L,
+                             format = "1.0",
                              output = c("table", "last_visit", "last_dscore")) {
   output <- match.arg(output)
   tgt <- get_tgt(txt, loc, format = format)
