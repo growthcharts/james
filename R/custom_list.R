@@ -1,6 +1,7 @@
 #' Provides a Screen growth curves according to JGZ guidelines
 #'
 #' @inheritParams request_site
+#' @inheritParams bdsreader::read_bds
 #' @return A table with screening results
 #' @return A list with custom parts
 #' @examples
@@ -17,10 +18,10 @@
 #' identical(list1, list2)
 #' }
 #' @export
-custom_list <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
-  site <- request_site(txt, loc, schema = schema)
+custom_list <- function(txt = "", loc = "", format = "1.0") {
+  site <- request_site(txt, loc, format = format)
 
-  tgt <- get_tgt(txt, loc, schema = schema)
+  tgt <- get_tgt(txt, loc, format = format)
 
   res <- screen_curves_ind(tgt)
 

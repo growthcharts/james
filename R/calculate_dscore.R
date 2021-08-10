@@ -9,6 +9,7 @@
 #' the number of visits. If `output` equals `"last_visit"` the
 #' function returns only the last row. If `output` equals
 #' `"last_dscore"` the function returns only the D-score from the last row.
+#' @inheritParams bdsreader::read_bds
 #' @return A table, row or scalar.
 #' @author Stef van Buuren 2020
 #' @keywords server
@@ -18,10 +19,10 @@
 #' @export
 calculate_dscore <- function(txt = "",
                              loc = "",
-                             schema = "bds_schema_str.json",
+                             format = "1.0",
                              output = c("table", "last_visit", "last_dscore")) {
   output <- match.arg(output)
-  tgt <- get_tgt(txt, loc, schema = schema)
+  tgt <- get_tgt(txt, loc, format = format)
 
   if (!hasName(attributes(tgt), "person")) {
     message("Cannot calculate D-score")

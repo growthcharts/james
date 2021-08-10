@@ -4,7 +4,7 @@
 \alias{screen_growth}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_growth(txt = "", loc = "", schema = "bds_schema_str.json")
+screen_growth(txt = "", loc = "", format = "1.0")
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -15,8 +15,8 @@ and are converted to JSON according to \code{schema}.}
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
 
-\item{schema}{Optional. A JSON string, URL or file that selects the JSON validation
-schema. Only used if the \code{txt} argument is specified.}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
 }
 \description{
 Screen growth curves according to JGZ guidelines

@@ -10,8 +10,8 @@ get_host <- function() {
 }
 
 # returns url of uploaded data
-get_loc <- function(txt, host, schema) {
-  resp <- upload_txt(txt, host = host, schema = schema)
+get_loc <- function(txt, host, format) {
+  resp <- upload_txt(txt, host = host, format = format)
   if (status_code(resp) != 201L) {
     message_for_status(resp,
       task = paste0(
@@ -25,7 +25,7 @@ get_loc <- function(txt, host, schema) {
 }
 
 # returns targetl or NULL
-get_tgt <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
+get_tgt <- function(txt = "", loc = "", ...) {
 
   # no ind
   if (is.empty(txt) && is.empty(loc)) {
@@ -34,7 +34,7 @@ get_tgt <- function(txt = "", loc = "", schema = "bds_schema_str.json") {
 
   # create ind on-the-fly
   if (!is.empty(txt)) {
-    return(read_bds(txt, schema = schema))
+    return(read_bds(txt, ...))
   }
 
   # download ind
