@@ -1,4 +1,3 @@
-context("screen_growth")
 library(httr)
 
 library(jamesclient)

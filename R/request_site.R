@@ -9,14 +9,13 @@
 #' and are converted to JSON according to `schema`.
 #' @param loc Alternative to `txt`. Location where input data is uploaded
 #' and converted to internal server format.
-#' @param schema Optional. A JSON string, URL or file that selects the JSON validation
-#' schema. Only used if the `txt` argument is specified.
 #' @param upload Logical. If `TRUE` then `request_site()` will upload
 #' the data in `txt` and return a site address with the `?loc=` query appended.
 #' Setting (`FALSE`) just appends `?txt=` to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
 #' @param host URL of the JAMES server. By default, host is the currently
 #' running server that processes the request.
+#' @inheritParams bdsreader::read_bds
 #' @return URL composed of JAMES server, possibly appended by query string starting
 #' with `?txt=` or `?loc=`.
 #' @seealso [jamesclient::upload_txt()], [jamesclient::get_url()]
@@ -68,7 +67,7 @@
 #' }
 #' @export
 request_site <- function(txt = "", loc = "",
-                         schema = "bds_schema_str.json",
+                         format = "1.0",
                          upload = TRUE, host = NULL) {
   txt <- txt[1L]
   loc <- loc[1L]
@@ -119,7 +118,7 @@ request_site <- function(txt = "", loc = "",
 
   # # return ?loc=, possibly after upload of txt
   if (!is.empty(txt) && upload) {
-    loc <- get_loc(txt, host, schema)
+    loc <- get_loc(txt, host, format = format)
   }
 
   ifelse(loc == "", site, paste0(site, "?loc=", loc))

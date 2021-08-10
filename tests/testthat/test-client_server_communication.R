@@ -1,9 +1,9 @@
-context("client-server communication")
 library(httr)
 
 # hack to evade ssl verification error: certificate has expired
 # remove hack after server certificate is repaired
 # httr::set_config(config(ssl_verifypeer = 0L))
+host <- "https://groeidiagrammen.nl"
 
 path <- "ocpu/library/james/R/list_charts"
 url <- modify_url(url = host, path = path)
@@ -72,7 +72,7 @@ test_that(
 
 
 # problematic json file not_a_vector.json identified by Allegro Sultum - Feb 2020
-fn <- system.file("extdata", "bds_str", "test", "not_a_vector.json", package = "jamesdemodata")
+fn <- system.file("extdata", "bds_v1.0", "test", "not_a_vector.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 path <- "ocpu/library/james/R/convert_bds_ind"
@@ -116,7 +116,7 @@ test_that(
 
 
 # problematic json file http400.json identified by Allegro Sultum - Feb 2020
-fn <- system.file("extdata", "bds_str", "test", "http400.json", package = "jamesdemodata")
+fn <- system.file("extdata", "bds_v1.0", "test", "http400.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 path <- "ocpu/library/james/R/convert_bds_ind"

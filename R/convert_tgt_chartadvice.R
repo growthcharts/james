@@ -40,7 +40,7 @@
 #' @keywords server
 #' @export
 convert_tgt_chartadvice <- function(txt = "", loc = "",
-                                    schema = "bds_schema_str.json",
+                                    format = "1.0",
                                     chartcode = "",
                                     selector = c("data", "chartcode"),
                                     ind_loc = "") {
@@ -54,7 +54,7 @@ convert_tgt_chartadvice <- function(txt = "", loc = "",
   if (!is.empty(ind_loc)) loc <- ind_loc
 
   selector <- match.arg(selector)
-  tgt <- get_tgt(txt = txt, loc = loc, schema = schema)
+  tgt <- get_tgt(txt = txt, loc = loc, format = format)
   chartcode <- switch(selector,
     "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode

@@ -5,12 +5,15 @@
 \alias{convert_bds_ind}
 \title{Convert json BSD data for single individual to class individual}
 \usage{
-convert_bds_ind(txt = "", ...)
+convert_bds_ind(txt = "", format = "1.0", ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{...}{Pass down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 A tibble with a person attribute.

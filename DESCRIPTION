@@ -15,10 +15,10 @@ Encoding: UTF-8
 Depends: 
     svglite
 Imports: 
-    bdsreader (>= 0.7.0),
+    bdsreader (>= 0.9.1),
     chartbox (>= 1.6.0),
-    chartcatalog (>= 1.8.0),
-    chartplotter (>= 0.25.1),
+    chartcatalog (>= 1.9.0),
+    chartplotter (>= 0.27.0),
     dplyr,
     curl,
     grid (>= 4.1.0),
@@ -29,7 +29,7 @@ Imports:
     rlang,
     utils
 Suggests: 
-    jamesdemodata (>= 0.6.0),
+    jamesdemodata (>= 0.7.0),
     testthat
 Remotes: 
     growthcharts/bdsreader,

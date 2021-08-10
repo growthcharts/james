@@ -4,15 +4,13 @@
 \alias{fetch_loc}
 \title{Uploads, parses, converts and stores data on the server for further processing}
 \usage{
-fetch_loc(txt = "", schema = "bds_schema_str.json")
+fetch_loc(txt = "", format = "1.0")
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{schema}{The name of one the the built-in schema's.
-The default (\code{NULL}) loads \code{"bds_schema_str.json"}. See
-\url{https://github.com/growthcharts/bdsreader/tree/master/inst/json}
-for available schema's.}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
 }
 \value{
 A tibble with a person attribute

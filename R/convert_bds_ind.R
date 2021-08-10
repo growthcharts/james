@@ -12,9 +12,9 @@
 #' p <- convert_bds_ind(fn)
 #' @keywords server
 #' @export
-convert_bds_ind <- function(txt = "", ...) {
+convert_bds_ind <- function(txt = "", format = "1.0", ...) {
   .Deprecated("fetch_loc",
     msg = "convert_bds_ind() is deprecated. Please use fetch_loc() instead."
   )
-  fetch_loc(txt = txt, ...)
+  fetch_loc(txt = txt, format = format, ...)
 }

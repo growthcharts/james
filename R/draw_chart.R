@@ -4,6 +4,7 @@
 #' @inheritParams request_site
 #' @inheritParams select_chart
 #' @inheritParams chartplotter::process_chart
+#' @inheritParams bdsreader::read_bds
 #' @param dnr Donor data, Prediction horizon: `"0-2"`, `"2-4"`
 #' or `"4-18"`. May also be `"smocc"`, `"lollypop"`,
 #' `"terneuzen"` or `"pops"`.
@@ -43,7 +44,7 @@
 #' @export
 draw_chart <- function(txt = "",
                        loc = "",
-                       schema = "bds_schema_str.json",
+                       format = "1.0",
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
                        chartgrp = NULL,
@@ -65,7 +66,8 @@ draw_chart <- function(txt = "",
                        show_future = FALSE,
                        draw_grob = TRUE,
                        bds_data = "",
-                       ind_loc = "") {
+                       ind_loc = "",
+                       ...) {
   if (!missing(bds_data)) {
     warning("Argument bds_data is deprecated; please use txt instead.",
       call. = FALSE
@@ -89,7 +91,7 @@ draw_chart <- function(txt = "",
     )
   )
 
-  tgt <- get_tgt(txt, loc, schema = schema)
+  tgt <- get_tgt(txt, loc, format = format)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty
