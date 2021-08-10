@@ -1,3 +1,15 @@
+# james 0.37.0
+
+## Major changes
+
+- Adds support for data formats "1.0" (Allegro Sultum), "1.1" (numeric version) and "2.0" (Eaglescience)
+- Introduces the `format` argument to `bds_read()` and `bds_write()`
+- Introduces `auto_format` as a way to minimise confusion about the data format
+
+## Minor changes
+
+- Uses longer paths in the javascript header to deal with Apache rewrites
+
 # james 0.36.0
 
 - Update to R 4.1.0
