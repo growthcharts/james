@@ -117,7 +117,7 @@ function update() {
     sr('msr_front', 'block');
     sr('msr_back', 'block');
   }
-  if (agegrp == '0-4y' & chartgrp == 'nl2010' & (population == 'hs' | population == "ds")) {
+  if (agegrp == '0-4y' & chartgrp == 'nl2010' & population == 'hs') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'none');
     sr('msr_wfh', 'block');
@@ -161,15 +161,6 @@ function update() {
     sr('msr_bmi', 'block');
     sr('msr_front', 'block');
     sr('msr_back', 'none');
-  }
-  if (agegrp == '1-21y' & population == 'ds') {
-    sr('msr_hgt', 'block');
-    sr('msr_wgt', 'none');
-    sr('msr_wfh', 'block');
-    sr('msr_hdc', 'none');
-    sr('msr_bmi', 'block');
-    sr('msr_front', 'block');
-    sr('msr_back', 'block');
   }
 
   // handle null user inputs
