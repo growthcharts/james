@@ -218,6 +218,7 @@ function initialize_chart_controls() {
 	      case "tu":
 	      case "ma":
 	      case "hs":
+	      case "ds":
 	        document.forms.etnicity[pop].checked=true;
 	        break;
 	      default:
