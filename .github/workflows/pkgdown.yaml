@@ -10,7 +10,7 @@ jobs:
   pkgdown:
     runs-on: macOS-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.PRIVATE_REPOSITORIES }}
     steps:
       - uses: actions/checkout@v2
 
@@ -20,7 +20,7 @@ jobs:
 
       - name: Query dependencies
         env:
-          GITHUB_PAT: ${{ secrets.REPO_ONLY_TOKEN }}
+          GITHUB_PAT: ${{ secrets.PRIVATE_REPOSITORIES }}
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
@@ -36,7 +36,7 @@ jobs:
 
       - name: Install dependencies
         env:
-          GITHUB_PAT: ${{ secrets.REPO_ONLY_TOKEN }}
+          GITHUB_PAT: ${{ secrets.PRIVATE_REPOSITORIES }}
         run: |
           remotes::install_deps(dependencies = TRUE)
           install.packages("pkgdown", type = "binary")
