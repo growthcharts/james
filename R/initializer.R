@@ -34,6 +34,7 @@ initialize_chartgrp <- function(parsed) {
     tu = "nl2010",
     ma = "nl2010",
     hs = "nl2010",
+    ds = "nl2010",
     pt = "preterm",
     whoblue = "who",
     whopink = "who",
