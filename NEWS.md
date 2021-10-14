@@ -1,3 +1,7 @@
+# james 0.39.0
+
+- Add `authenticate_jwt()` to parse JSON web token
+
 # james 0.38.0
 
 - Adds full stack of Down Syndrome charts to javascript site
