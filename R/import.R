@@ -13,6 +13,7 @@
 #'                             status_code upload_file
 #' @importFrom jamesclient     get_url upload_txt
 #' @importFrom jsonlite        fromJSON minify toJSON unbox validate
+#' @importFrom jose            jwt_decode_sig
 #' @importFrom rlang           .data
 #' @importFrom utils           hasName
 NULL
