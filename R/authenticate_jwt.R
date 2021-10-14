@@ -2,6 +2,8 @@
 #'
 #' The function `authenticate_jwt` decrypts a JSON webtoken using a public key.
 #' Returns `TRUE` if the request is granted to JAMES.
+#'
+#' @inheritParams jose::jwt_encode_sig
 #' @return A boolean
 #' @author Arjan Huizing 2021
 #' @keywords authentication
@@ -13,11 +15,11 @@
 #'
 #' authenticate_jwt(jwt, pubkey)
 #' @export
-authenticate_jwt <- function(jwt, pubkey){
-  pubkey <- "placeholder" # needs a server location!
-  parsed_claim <- jwt_decode_sig(jwt, pubkey)
-  apps <- strsplit(parsed_claim$applications, split = ";")
+authenticate_jwt <- function(jwt = NULL, pubkey = NULL) {
+  if (is.null(jwt)) stop("JAMES: No token.")
+  if (is.null(pubkey)) stop("JAMES: No public key.")
 
-  return(TRUE) # turned off for now.
-  #return("james" %in% (unlist(apps)))
+  parsed_claim <- jwt_decode_sig(jwt, pubkey)
+  apps <- unlist(strsplit(parsed_claim$applications, split = ";"))
+  return("james" %in% apps)
 }

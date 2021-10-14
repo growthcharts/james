@@ -25,11 +25,13 @@ Imports:
     growthscreener (>= 1.9.0),
     httr,
     jamesclient (>= 0.15.0),
+    jose,
     jsonlite,
     rlang,
     utils
 Suggests: 
     jamesdemodata (>= 0.7.0),
+    openssl,
     testthat
 Remotes: 
     growthcharts/bdsreader,
@@ -39,6 +41,6 @@ Remotes:
     growthcharts/growthscreener,
     growthcharts/jamesclient,
     growthcharts/jamesdemodata
-RoxygenNote: 7.1.1
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
