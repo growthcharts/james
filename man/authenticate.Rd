@@ -2,7 +2,7 @@
 % Please edit documentation in R/authenticate_jwt.R
 \name{authenticate_jwt}
 \alias{authenticate_jwt}
-\title{Authenticate request}
+\title{Authentication request}
 \usage{
 authenticate_jwt(jwt = NULL, pubkey = NULL)
 }
@@ -21,12 +21,11 @@ Returns \code{TRUE} if the request is granted to JAMES.
 \examples{
 key <- openssl::rsa_keygen(bits = 2048)
 pubkey <- as.list(key)$pubkey
-claim <- jose::jwt_claim(user = "test", session_key = 123456, applications = "james;srm;psycat")
+claim <- jose::jwt_claim(user = "test", session_key = 123, applications = "james;srm;psycat")
 jwt <- jose::jwt_encode_sig(claim, key = key)
-
-authenticate_jwt(jwt, pubkey)
+james:::authenticate_jwt(jwt, pubkey)
 }
 \author{
-Arjan Huizing 2021
+Arjan Huizing, Stef van Buuren 2021
 }
 \keyword{authentication}
