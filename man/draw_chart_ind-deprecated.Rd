@@ -5,7 +5,7 @@
 \alias{draw_chart_ind}
 \title{Draw growth chart with individual data}
 \usage{
-draw_chart_ind(loc = "", chartcode = "", curve_interpolation = TRUE)
+draw_chart_ind(loc = "", chartcode = "", curve_interpolation = TRUE, ...)
 }
 \arguments{
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
@@ -15,6 +15,8 @@ and converted to internal server format.}
 
 \item{curve_interpolation}{A logical indicating whether curve
 interpolation shoud be applied.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \description{
 The function \code{draw_chart_ind()} expect an input location from

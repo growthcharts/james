@@ -68,7 +68,10 @@
 #' @export
 request_site <- function(txt = "", loc = "",
                          format = "1.0",
-                         upload = TRUE, host = NULL) {
+                         upload = TRUE, host = NULL,
+                         ...) {
+  authenticate(...)
+
   txt <- txt[1L]
   loc <- loc[1L]
 

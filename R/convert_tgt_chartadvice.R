@@ -43,7 +43,9 @@ convert_tgt_chartadvice <- function(txt = "", loc = "",
                                     format = "1.0",
                                     chartcode = "",
                                     selector = c("data", "chartcode"),
-                                    ind_loc = "") {
+                                    ind_loc = "",
+                                    ...) {
+  authenticate(...)
   if (!missing(ind_loc)) {
     warning("Argument ind_loc is deprecated; please use loc instead.",
       call. = FALSE

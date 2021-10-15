@@ -4,7 +4,10 @@
 \alias{list_charts}
 \title{List the available growth charts}
 \usage{
-list_charts()
+list_charts(...)
+}
+\arguments{
+\item{\dots}{Used for authentication}
 }
 \description{
 List the available growth charts

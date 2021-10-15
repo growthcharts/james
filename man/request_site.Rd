@@ -4,7 +4,14 @@
 \alias{request_site}
 \title{Request site containing personalised charts}
 \usage{
-request_site(txt = "", loc = "", format = "1.0", upload = TRUE, host = NULL)
+request_site(
+  txt = "",
+  loc = "",
+  format = "1.0",
+  upload = TRUE,
+  host = NULL,
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -25,6 +32,8 @@ deferring validation and conversion to internal representation to the site.}
 
 \item{host}{URL of the JAMES server. By default, host is the currently
 running server that processes the request.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 URL composed of JAMES server, possibly appended by query string starting

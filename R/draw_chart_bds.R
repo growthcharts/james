@@ -25,6 +25,7 @@ draw_chart_bds <- function(txt = "", format = "1.0",
                            chartcode = "",
                            curve_interpolation = TRUE,
                            selector = "chartcode", ...) {
+  authenticate(...)
 
   # legacy
   .Deprecated("draw_chart",

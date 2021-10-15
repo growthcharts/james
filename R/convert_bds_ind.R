@@ -13,6 +13,7 @@
 #' @keywords server
 #' @export
 convert_bds_ind <- function(txt = "", format = "1.0", ...) {
+  authenticate(...)
   .Deprecated("fetch_loc",
     msg = "convert_bds_ind() is deprecated. Please use fetch_loc() instead."
   )

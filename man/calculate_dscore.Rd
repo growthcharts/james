@@ -8,7 +8,8 @@ calculate_dscore(
   txt = "",
   loc = "",
   format = "1.0",
-  output = c("table", "last_visit", "last_dscore")
+  output = c("table", "last_visit", "last_dscore"),
+  ...
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ returns a table with four columns: \code{"date"}, \code{"x"} (age),
 the number of visits. If \code{output} equals \code{"last_visit"} the
 function returns only the last row. If \code{output} equals
 \code{"last_dscore"} the function returns only the D-score from the last row.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 A table, row or scalar.

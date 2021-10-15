@@ -4,7 +4,7 @@
 \alias{custom_list}
 \title{Provides a Screen growth curves according to JGZ guidelines}
 \usage{
-custom_list(txt = "", loc = "", format = "1.0")
+custom_list(txt = "", loc = "", format = "1.0", ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -17,6 +17,8 @@ and converted to internal server format.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 A table with screening results

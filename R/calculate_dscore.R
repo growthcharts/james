@@ -20,7 +20,9 @@
 calculate_dscore <- function(txt = "",
                              loc = "",
                              format = "1.0",
-                             output = c("table", "last_visit", "last_dscore")) {
+                             output = c("table", "last_visit", "last_dscore"),
+                             ...) {
+  authenticate(...)
   output <- match.arg(output)
   tgt <- get_tgt(txt, loc, format = format)
 

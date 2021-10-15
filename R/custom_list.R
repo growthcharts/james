@@ -18,7 +18,8 @@
 #' identical(list1, list2)
 #' }
 #' @export
-custom_list <- function(txt = "", loc = "", format = "1.0") {
+custom_list <- function(txt = "", loc = "", format = "1.0", ...) {
+  authenticate(...)
   site <- request_site(txt, loc, format = format)
 
   tgt <- get_tgt(txt, loc, format = format)

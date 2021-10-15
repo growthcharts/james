@@ -10,7 +10,8 @@ convert_tgt_chartadvice(
   format = "1.0",
   chartcode = "",
   selector = c("data", "chartcode"),
-  ind_loc = ""
+  ind_loc = "",
+  ...
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
 \item{ind_loc}{Legacy for \code{loc}. Use \code{loc} instead.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 A list with the following elements

@@ -17,6 +17,8 @@
 #' @keywords server
 #' @export
 fetch_loc <- function(txt = "",
-                      format = "1.0") {
+                      format = "1.0",
+                      ...) {
+  authenticate(...)
   read_bds(txt = txt, format = format)
 }

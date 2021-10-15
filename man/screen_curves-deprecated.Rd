@@ -5,7 +5,14 @@
 \alias{screen_curves}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_curves(txt = "", loc = "", location = "", format = "1.0", legacy = TRUE)
+screen_curves(
+  txt = "",
+  loc = "",
+  location = "",
+  format = "1.0",
+  legacy = TRUE,
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -22,6 +29,8 @@ and converted to internal server format.}
 three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
 
 \item{legacy}{Logical indicating whether legacy should be done.}
+
+\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
 \value{
 A JSON string containing a table with screening results
