@@ -29,6 +29,12 @@ monitoring and evaluating childhood growth. This document highlights some
 applications of JAMES, and provides pointers to relevant background
 information.
 
+## Deprecation note
+
+We will be offering Docker containers running JAMES from November 2021 onwards, 
+and phase out the functionality described below. Work in progress is at 
+<https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0>.
+
 ## Check whether JAMES is running
 
 JAMES is currently located at url `groeidiagrammen.nl`. The sections below use
@@ -337,7 +343,7 @@ We obtain the screening results as
 curl https://groeidiagrammen.nl/ocpu/tmp/x04fc43cfd709b7/R/.val/json
 ````
 
-```
+```{json}
 [
   {
     "Categorie": 1000,
@@ -381,7 +387,7 @@ curl https://groeidiagrammen.nl//ocpu/tmp/x098464a29301fe/R/.val/json
 
 return
 
-```
+```{json}
 {
   "UrlGroeicurven": "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x03ee2514b1b1d2/",
   "Resultaten": [

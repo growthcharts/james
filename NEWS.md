@@ -1,6 +1,6 @@
 # james 0.39.0
 
-- Add `authenticate_jwt()` to parse JSON web token
+- Adds authentication of externally facing services with a JSON web token
 
 # james 0.38.0
 

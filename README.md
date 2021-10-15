@@ -24,6 +24,12 @@ monitoring and evaluating childhood growth. This document highlights
 some applications of JAMES, and provides pointers to relevant background
 information.
 
+## Deprecation note
+
+We will be offering Docker containers running JAMES from November 2021
+onwards, and phase out the functionality described below. Work in
+progress is at <https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0>.
+
 ## Check whether JAMES is running
 
 JAMES is currently located at url `groeidiagrammen.nl`. The sections
@@ -345,8 +351,8 @@ Options 1 and 2 determine the first chart that is shown to the end user.
 
 The default chart picked by JAMES is currently hard-wired as the child’s
 height chart that contains the most recent measurements. If the child is
-a pre-term (gestational age &lt;= 36 weeks) and younger than 4 years,
-then JAMES chooses the appropriate preterm chart.
+a pre-term (gestational age \<= 36 weeks) and younger than 4 years, then
+JAMES chooses the appropriate preterm chart.
 
 The chart site with the default start can be started by combining the
 [uploaded data](https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
@@ -388,39 +394,42 @@ curl https://groeidiagrammen.nl/ocpu/library/james/R/screen_growth -d "txt=$var"
 
 We obtain the screening results as
 
-``` bash
+````` bash
 curl https://groeidiagrammen.nl/ocpu/tmp/x04fc43cfd709b7/R/.val/json
-```
+````
+`````
 
-    [
-      {
-        "Categorie": 1000,
-        "CategorieOmschrijving": "Lengte",
-        "Code": 1031,
-        "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-        "Versie": "1.6.0",
-        "Leeftijd0": "20181111",
-        "Leeftijd1": "20181211"
-      },
-      {
-        "Categorie": 2000,
-        "CategorieOmschrijving": "Gewicht",
-        "Code": 2031,
-        "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-        "Versie": "1.6.0",
-        "Leeftijd0": "20181111",
-        "Leeftijd1": "20181211"
-      },
-      {
-        "Categorie": 3000,
-        "CategorieOmschrijving": "Hoofdomtrek",
-        "Code": 3031,
-        "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-        "Versie": "1.6.0",
-        "Leeftijd0": "20181111",
-        "Leeftijd1": "20181211"
-      }
-    ]
+``` json
+[
+  {
+    "Categorie": 1000,
+    "CategorieOmschrijving": "Lengte",
+    "Code": 1031,
+    "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+    "Versie": "1.6.0",
+    "Leeftijd0": "20181111",
+    "Leeftijd1": "20181211"
+  },
+  {
+    "Categorie": 2000,
+    "CategorieOmschrijving": "Gewicht",
+    "Code": 2031,
+    "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+    "Versie": "1.6.0",
+    "Leeftijd0": "20181111",
+    "Leeftijd1": "20181211"
+  },
+  {
+    "Categorie": 3000,
+    "CategorieOmschrijving": "Hoofdomtrek",
+    "Code": 3031,
+    "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+    "Versie": "1.6.0",
+    "Leeftijd0": "20181111",
+    "Leeftijd1": "20181211"
+  }
+]
+```
 
 ## Create one request with list of return values
 
@@ -437,38 +446,40 @@ curl https://groeidiagrammen.nl//ocpu/tmp/x098464a29301fe/R/.val/json
 
 return
 
+``` json
+{
+  "UrlGroeicurven": "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x03ee2514b1b1d2/",
+  "Resultaten": [
     {
-      "UrlGroeicurven": "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x03ee2514b1b1d2/",
-      "Resultaten": [
-        {
-          "Categorie": 1000,
-          "CategorieOmschrijving": "Lengte",
-          "Code": 1031,
-          "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-          "Versie": "1.6.0",
-          "Leeftijd0": "20181111",
-          "Leeftijd1": "20181211"
-        },
-        {
-          "Categorie": 2000,
-          "CategorieOmschrijving": "Gewicht",
-          "Code": 2031,
-          "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-          "Versie": "1.6.0",
-          "Leeftijd0": "20181111",
-          "Leeftijd1": "20181211"
-        },
-        {
-          "Categorie": 3000,
-          "CategorieOmschrijving": "Hoofdomtrek",
-          "Code": 3031,
-          "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-          "Versie": "1.6.0",
-          "Leeftijd0": "20181111",
-          "Leeftijd1": "20181211"
-        }
-      ]
+      "Categorie": 1000,
+      "CategorieOmschrijving": "Lengte",
+      "Code": 1031,
+      "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+      "Versie": "1.6.0",
+      "Leeftijd0": "20181111",
+      "Leeftijd1": "20181211"
+    },
+    {
+      "Categorie": 2000,
+      "CategorieOmschrijving": "Gewicht",
+      "Code": 2031,
+      "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+      "Versie": "1.6.0",
+      "Leeftijd0": "20181111",
+      "Leeftijd1": "20181211"
+    },
+    {
+      "Categorie": 3000,
+      "CategorieOmschrijving": "Hoofdomtrek",
+      "Code": 3031,
+      "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+      "Versie": "1.6.0",
+      "Leeftijd0": "20181111",
+      "Leeftijd1": "20181211"
     }
+  ]
+}
+```
 
 which contains the return values generated by `request_site` (called
 “UrlGroeicurven” here) and by `screen_growth` (called “Resultaten”
