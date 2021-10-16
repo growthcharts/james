@@ -279,15 +279,15 @@
     },
     "dscore": {
       "Package": "dscore",
-      "Version": "1.4.2",
+      "Version": "1.4.3",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "dscore",
       "RemoteUsername": "d-score",
       "RemoteRef": "HEAD",
-      "RemoteSha": "5ebaf35c4ae1c37a1314ef1cdafc8efe45b36e1c",
-      "Hash": "3c424e7cf0dd733a1f3ec2d5991a0c95"
+      "RemoteSha": "bbda47a90684109b26d6a3dde1a2b9ec82276abd",
+      "Hash": "c6ad9becce35569230bdd4fe64d00d18"
     },
     "ellipsis": {
       "Package": "ellipsis",
