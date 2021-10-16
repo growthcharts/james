@@ -10,7 +10,7 @@ jobs:
   pkgdown:
     runs-on: macOS-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
     steps:
       - uses: actions/checkout@v2
 
@@ -38,8 +38,6 @@ jobs:
           brew install harfbuzz
 
       - name: Install dependencies
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
         run: |
           install.packages("pkgdown", type = "binary")
           remotes::install_deps(dependencies = TRUE)
