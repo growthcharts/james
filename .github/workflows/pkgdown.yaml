@@ -38,6 +38,8 @@ jobs:
           brew install harfbuzz
 
       - name: Install dependencies
+        env:
+          GITHUB_PAT: ${{ secrets.PRIVATE_REPOSITORIES }}
         run: |
           install.packages("pkgdown", type = "binary")
           remotes::install_deps(dependencies = TRUE)
