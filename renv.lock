@@ -74,7 +74,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.9.3",
+      "Version": "0.10.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/centile, growthcharts/nlreferences,\ngrowthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -82,8 +82,8 @@
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "de68b5745581db5be2b945761eadfe62a931b3f6",
-      "Hash": "35955fcd10ab5baca1baaf9ca52c1a73"
+      "RemoteSha": "7a8d0ff8dc248f009cc92a40ef74699063c077ee",
+      "Hash": "1db6ce6e29c02a99cfd743e2cbb5a163"
     },
     "bit": {
       "Package": "bit",
