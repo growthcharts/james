@@ -1,3 +1,7 @@
+# james 0.40.0
+
+- Repairs a problem with `bdsreader` that prevented D-score calculation with format = "2.0"
+
 # james 0.39.0
 
 - Adds authentication of externally facing services with a JSON web token
