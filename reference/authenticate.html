@@ -73,7 +73,7 @@ Returns TRUE if the request is granted to JAMES." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.40.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.41.0</span>
       </span>
     </div>
 
@@ -122,18 +122,19 @@ Returns TRUE if the request is granted to JAMES." />
 Returns <code>TRUE</code> if the request is granted to JAMES.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>authenticate</span><span class='op'>(</span>jwt <span class='op'>=</span> <span class='cn'>NULL</span>, pubkey <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>authenticate</span><span class='op'>(</span>authToken <span class='op'>=</span> <span class='cn'>NULL</span>, pubkey <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>jwt</th>
-      <td><p>string containing the JSON Web Token (JWT)</p></td>
+      <th>authToken</th>
+      <td><p>String containing the JSON Web Token (JWT)</p></td>
     </tr>
     <tr>
       <th>pubkey</th>
-      <td><p>path or object with RSA or EC public key, see <a href='https://rdrr.io/pkg/openssl/man/read_key.html'>openssl::read_pubkey</a>.</p></td>
+      <td><p>Path or object with RSA or EC public key. When not given,
+JAMES will search internally for the public key.</p></td>
     </tr>
     <tr>
       <th>...</th>
