@@ -6,3 +6,4 @@ README.bib
 README.Rmd
 ^README\.Rmd$
 ^\.github$
+^data-raw$

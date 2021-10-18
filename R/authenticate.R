@@ -4,7 +4,9 @@
 #' Returns `TRUE` if the request is granted to JAMES.
 #'
 #' @rdname authenticate
-#' @inheritParams jose::jwt_encode_sig
+#' @param authToken String containing the JSON Web Token (JWT)
+#' @param pubkey Path or object with RSA or EC public key. When not given,
+#' JAMES will search internally for the public key.
 #' @param \dots Not used
 #' @return A boolean
 #' @author Arjan Huizing, Stef van Buuren 2021
@@ -15,8 +17,8 @@
 #' claim <- jose::jwt_claim(user = "test", session_key = 123, applications = "james;srm;psycat")
 #' jwt <- jose::jwt_encode_sig(claim, key = key)
 #' james:::authenticate(jwt, pubkey)
-authenticate <- function(jwt = NULL, pubkey = NULL, ...) {
-  if (!authenticate_jwt(jwt = jwt, pubkey = pubkey)) {
+authenticate <- function(authToken = NULL, pubkey = NULL, ...) {
+  if (!authenticate_jwt(jwt = authToken, pubkey = pubkey)) {
     stop("JAMES: No authorisation.")
   }
   return(invisible(TRUE))
@@ -27,7 +29,9 @@ authenticate_jwt <- function(jwt = NULL, pubkey = NULL) {
     return(TRUE)
   }
   if (is.null(jwt)) stop("JAMES: No token found.")
-  if (is.null(pubkey)) stop("JAMES: No public key found.")
+  if (is.null(pubkey)) {
+    pubkey <- get0("pubkey", envir = asNamespace("james"))
+  }
   parsed_claim <- jwt_decode_sig(jwt, pubkey)
   apps <- unlist(strsplit(parsed_claim$applications, split = ";"))
   return("james" %in% apps)

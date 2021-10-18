@@ -4,12 +4,13 @@
 \alias{authenticate}
 \title{Authentication request}
 \usage{
-authenticate(jwt = NULL, pubkey = NULL, ...)
+authenticate(authToken = NULL, pubkey = NULL, ...)
 }
 \arguments{
-\item{jwt}{string containing the JSON Web Token (JWT)}
+\item{authToken}{String containing the JSON Web Token (JWT)}
 
-\item{pubkey}{path or object with RSA or EC public key, see \link[openssl:read_key]{openssl::read_pubkey}.}
+\item{pubkey}{Path or object with RSA or EC public key. When not given,
+JAMES will search internally for the public key.}
 
 \item{\dots}{Not used}
 }
