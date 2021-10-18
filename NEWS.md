@@ -1,3 +1,8 @@
+# james 0.41.0
+
+- Builds in fall back in case `pubkey` is not given to `authenticate`
+- Changes argument `jwt` to `authToken` for easy integration
+
 # james 0.40.0
 
 - Repairs a problem with `bdsreader` that prevented D-score calculation with format = "2.0"
