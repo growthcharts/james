@@ -1,1 +1,1 @@
-JWT_AUTH="n"
+JWT_AUTH="y"
