@@ -14,7 +14,7 @@
 #' @examples
 #' key <- openssl::rsa_keygen(bits = 2048)
 #' pubkey <- as.list(key)$pubkey
-#' claim <- jose::jwt_claim(user = "test", session_key = 123, applications = "james;srm;psycat")
+#' claim <- jose::jwt_claim(data = list(applications = "james;srm;psycat"))
 #' jwt <- jose::jwt_encode_sig(claim, key = key)
 #' james:::authenticate(jwt, pubkey)
 authenticate <- function(authToken = NULL, pubkey = NULL, ...) {
@@ -33,7 +33,7 @@ authenticate_jwt <- function(jwt = NULL, pubkey = NULL) {
     pubkey <- get0("pubkey", envir = asNamespace("james"))
   }
   parsed_claim <- jwt_decode_sig(jwt, pubkey)
-  apps <- unlist(strsplit(parsed_claim$applications, split = ";"))
+  apps <- tolower(strtrim(unlist(strsplit(parsed_claim$data$applications, split = ";")), 5L))
   return("james" %in% apps)
 }
 

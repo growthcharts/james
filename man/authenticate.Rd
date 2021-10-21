@@ -24,7 +24,7 @@ Returns \code{TRUE} if the request is granted to JAMES.
 \examples{
 key <- openssl::rsa_keygen(bits = 2048)
 pubkey <- as.list(key)$pubkey
-claim <- jose::jwt_claim(user = "test", session_key = 123, applications = "james;srm;psycat")
+claim <- jose::jwt_claim(data = list(applications = "james;srm;psycat"))
 jwt <- jose::jwt_encode_sig(claim, key = key)
 james:::authenticate(jwt, pubkey)
 }
