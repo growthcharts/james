@@ -1,3 +1,7 @@
+# james 0.41.1
+
+- Adds an explicit `authToken` argument for `list_charts()`
+
 # james 0.42.0
 
 - Refreshes the public key for Eaglescience integration
