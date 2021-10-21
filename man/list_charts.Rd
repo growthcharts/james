@@ -4,9 +4,11 @@
 \alias{list_charts}
 \title{List the available growth charts}
 \usage{
-list_charts(...)
+list_charts(authToken = NULL, ...)
 }
 \arguments{
+\item{authToken}{A JSON web token.}
+
 \item{\dots}{Used for authentication}
 }
 \description{
