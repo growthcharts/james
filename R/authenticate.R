@@ -19,7 +19,7 @@
 #' james:::authenticate(jwt, pubkey)
 authenticate <- function(authToken = NULL, pubkey = NULL, ...) {
   if (!authenticate_jwt(jwt = authToken, pubkey = pubkey)) {
-    stop("JAMES: No authorisation.")
+    stop("JAMES: No authorisation.", call. = FALSE)
   }
   return(invisible(TRUE))
 }
@@ -28,7 +28,7 @@ authenticate_jwt <- function(jwt = NULL, pubkey = NULL) {
   if (!authenticate_status()) {
     return(TRUE)
   }
-  if (is.null(jwt)) stop("JAMES: No token found.")
+  if (is.null(jwt)) stop("JAMES: No token found.", call. = FALSE)
   if (is.null(pubkey)) {
     pubkey <- get0("pubkey", envir = asNamespace("james"))
   }
