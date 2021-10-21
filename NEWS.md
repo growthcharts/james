@@ -1,3 +1,8 @@
+# james 0.42.0
+
+- Refreshes the public key for Eaglescience integration
+- Solves a problem with token validation
+
 # james 0.41.0
 
 - Builds in fall back in case `pubkey` is not given to `authenticate`
