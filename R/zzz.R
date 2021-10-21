@@ -1,5 +1,5 @@
 .onLoad <- function(libname, pkgname) {
-  Sys.setenv("JWT_AUTH" = "n")
+  Sys.setenv("JWT_AUTH" = "y")
   op <- options()
   op.james <- list(
     max.print = 100000
