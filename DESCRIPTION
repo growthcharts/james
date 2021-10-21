@@ -33,7 +33,8 @@ Imports:
 Suggests: 
     jamesdemodata (>= 0.7.0),
     openssl,
-    testthat
+    testthat,
+    usethis
 Remotes: 
     growthcharts/bdsreader,
     growthcharts/chartbox,
