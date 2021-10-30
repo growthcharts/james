@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.42.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.42.1</span>
       </span>
     </div>
 
@@ -175,19 +175,20 @@ produces the same list as <code>screen_curves</code>, but does not convert the
 result to JSON.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># # example json</span>
-<span class='co'># fn &lt;- system.file("testdata", "client3.json", package = "james")</span>
-<span class='co'># fn &lt;- system.file("testdata", "Laura_S_dev.json", package = "james")</span>
-<span class='co'>#</span>
-<span class='co'># # first upload, then screen</span>
-<span class='co'># r1 &lt;- jamesclient::upload_txt(fn)</span>
-<span class='co'># location &lt;- jamesclient::get_url(r1, "location")</span>
-<span class='co'># location</span>
-<span class='co'># screen_curves(loc = location)</span>
-<span class='co'>#</span>
-<span class='co'># # upload &amp; screen</span>
-<span class='co'># screen_curves(fn)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># # example json</span></span>
+<span class='r-in'><span class='co'># fn &lt;- system.file("testdata", "client3.json", package = "james")</span></span>
+<span class='r-in'><span class='co'># fn &lt;- system.file("testdata", "Laura_S_dev.json", package = "james")</span></span>
+<span class='r-in'><span class='co'>#</span></span>
+<span class='r-in'><span class='co'># # first upload, then screen</span></span>
+<span class='r-in'><span class='co'># r1 &lt;- jamesclient::upload_txt(fn)</span></span>
+<span class='r-in'><span class='co'># location &lt;- jamesclient::get_url(r1, "location")</span></span>
+<span class='r-in'><span class='co'># location</span></span>
+<span class='r-in'><span class='co'># screen_curves(loc = location)</span></span>
+<span class='r-in'><span class='co'>#</span></span>
+<span class='r-in'><span class='co'># # upload &amp; screen</span></span>
+<span class='r-in'><span class='co'># screen_curves(fn)</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -74,7 +74,7 @@ user can interact to chart choices." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.42.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.42.1</span>
       </span>
     </div>
 
@@ -190,43 +190,43 @@ The output form <code>?txt=</code> currently ignores the <code>schema</code> arg
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/jamesclient/man/upload_txt.html'>jamesclient::upload_txt()</a></code>, <code><a href='https://rdrr.io/pkg/jamesclient/man/get_url.html'>jamesclient::get_url()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"testdata"</span>, <span class='st'>"client3.json"</span>, package <span class='op'>=</span> <span class='st'>"james"</span><span class='op'>)</span>
-<span class='va'>js</span> <span class='op'>&lt;-</span> <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></span><span class='op'>(</span><span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>, auto_unbox <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>"https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"</span>
-<span class='va'>host</span> <span class='op'>&lt;-</span> <span class='st'>"http://localhost"</span>
-
-<span class='co'># solutions that upload the data and create a URL with the `?loc=` query parameter</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># upload file - does not work (object 'bds_schema_str.json' not found)</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>fn</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span>
-<span class='co'># browseURL(site)</span>
-
-<span class='co'># upload JSON string</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>js</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span>
-<span class='va'>site</span>
-<span class='co'># browseURL(site)</span>
-
-<span class='co'># upload URL</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>url</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span>
-<span class='va'>site</span>
-<span class='co'># browseURL(site)</span>
-
-<span class='co'># same, but in two steps, starting from file name</span>
-<span class='co'># this also works for js and url</span>
-<span class='va'>resp</span> <span class='op'>&lt;-</span> <span class='fu'>jamesclient</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jamesclient/man/upload_txt.html'>upload_txt</a></span><span class='op'>(</span><span class='va'>fn</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span>
-<span class='va'>loc</span> <span class='op'>&lt;-</span> <span class='fu'>jamesclient</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jamesclient/man/get_url.html'>get_url</a></span><span class='op'>(</span><span class='va'>resp</span>, <span class='st'>"location"</span><span class='op'>)</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span>loc <span class='op'>=</span> <span class='va'>loc</span><span class='op'>)</span>
-<span class='va'>site</span>
-<span class='co'># browseURL(site)</span>
-
-<span class='co'># solutions that create an immediate ?txt=[..data..] query</span>
-<span class='co'># this method does not create a cache on the server</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>fn</span>, upload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>js</span>, upload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>url</span>, upload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='co'># browseURL(site)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"testdata"</span>, <span class='st'>"client3.json"</span>, package <span class='op'>=</span> <span class='st'>"james"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>js</span> <span class='op'>&lt;-</span> <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></span><span class='op'>(</span><span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>, auto_unbox <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>"https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"</span></span>
+<span class='r-in'><span class='va'>host</span> <span class='op'>&lt;-</span> <span class='st'>"http://localhost"</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># solutions that upload the data and create a URL with the `?loc=` query parameter</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># upload file - does not work (object 'bds_schema_str.json' not found)</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>fn</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># browseURL(site)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># upload JSON string</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>js</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>site</span></span>
+<span class='r-in'><span class='co'># browseURL(site)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># upload URL</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>url</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>site</span></span>
+<span class='r-in'><span class='co'># browseURL(site)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># same, but in two steps, starting from file name</span></span>
+<span class='r-in'><span class='co'># this also works for js and url</span></span>
+<span class='r-in'><span class='va'>resp</span> <span class='op'>&lt;-</span> <span class='fu'>jamesclient</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jamesclient/man/upload_txt.html'>upload_txt</a></span><span class='op'>(</span><span class='va'>fn</span>, host <span class='op'>=</span> <span class='va'>host</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>loc</span> <span class='op'>&lt;-</span> <span class='fu'>jamesclient</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jamesclient/man/get_url.html'>get_url</a></span><span class='op'>(</span><span class='va'>resp</span>, <span class='st'>"location"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span>loc <span class='op'>=</span> <span class='va'>loc</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>site</span></span>
+<span class='r-in'><span class='co'># browseURL(site)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># solutions that create an immediate ?txt=[..data..] query</span></span>
+<span class='r-in'><span class='co'># this method does not create a cache on the server</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>fn</span>, upload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>js</span>, upload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>request_site</span><span class='op'>(</span><span class='va'>url</span>, upload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># browseURL(site)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
