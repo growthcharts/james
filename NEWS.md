@@ -1,3 +1,7 @@
+# james 0.43.1
+
+- Update renv to `donorloader 0.31.1`
+
 # james 0.43.0
 
 - Update renv to `brokenstick 2.0.0`
