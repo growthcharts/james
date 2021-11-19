@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.1",
+    "Version": "4.1.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -122,15 +122,10 @@
     },
     "brokenstick": {
       "Package": "brokenstick",
-      "Version": "1.1.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "brokenstick",
-      "RemoteUsername": "growthcharts",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "9b969afb099b6e1693600944bae48d90271f85ef",
-      "Hash": "43b3ce8d4658432fdde2ddca480ac0d8"
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0c4c0d380836bd1a109a4c0d4a2c25ea"
     },
     "callr": {
       "Package": "callr",
@@ -202,6 +197,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "ebaa97ac99cc2daf04e77eecc7b781d7"
+    },
+    "coda": {
+      "Package": "coda",
+      "Version": "0.19-4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "24b6d006b8b2343876cf230687546932"
     },
     "cpp11": {
       "Package": "cpp11",
