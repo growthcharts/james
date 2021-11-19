@@ -1,3 +1,7 @@
+# james 0.43.0
+
+- Update renv to `brokenstick 2.0.0`
+
 # james 0.41.1
 
 - Adds an explicit `authToken` argument for `list_charts()`
