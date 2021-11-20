@@ -1,4 +1,3 @@
-#' @import     svglite
 #' @importFrom bdsreader       read_bds persondata
 #' @importFrom chartbox        list_charts
 #' @importFrom chartcatalog    create_chartcode get_breakpoints
