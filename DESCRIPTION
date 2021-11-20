@@ -13,7 +13,8 @@ Description: Server-sided functions for the
 License: AGPL-3
 Encoding: UTF-8
 Depends: 
-    R (>= 2.10)
+    R (>= 2.10),
+    svglite
 Imports: 
     bdsreader (>= 0.9.1),
     chartbox (>= 1.6.0),
