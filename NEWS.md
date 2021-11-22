@@ -1,3 +1,8 @@
+# james 0.43.2
+
+- Adds forgotten `authenticate` to `draw_chart()`
+- Updates renv.lock to `chartplotter 0.28.0`
+
 # james 0.43.1
 
 - Update renv to `donorloader 0.31.1`
