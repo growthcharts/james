@@ -68,6 +68,8 @@ draw_chart <- function(txt = "",
                        bds_data = "",
                        ind_loc = "",
                        ...) {
+  authenticate(...)
+
   if (!missing(bds_data)) {
     warning("Argument bds_data is deprecated; please use txt instead.",
       call. = FALSE
