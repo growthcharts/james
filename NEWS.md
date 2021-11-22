@@ -1,3 +1,7 @@
+# james 0.43.3
+
+- Prevent "the condition has length > 1 and only the first element will be used" in `draw_chart()`
+
 # james 0.43.2
 
 - Adds forgotten `authenticate` to `draw_chart()`
