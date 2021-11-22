@@ -97,6 +97,7 @@ draw_chart <- function(txt = "",
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty
+  chartcode <- chartcode[1L]
   if (is.null(tgt) && chartcode == "") {
     chartcode <- select_chart(
       target = NULL,
