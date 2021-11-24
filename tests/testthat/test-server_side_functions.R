@@ -40,7 +40,7 @@ test_that(
 
 test_that(
   "draw_chart() on not_a_vector.json has messages",
-  expect_message(draw_chart(js, draw_grob = FALSE))
+  expect_message(g <- draw_chart(js, draw_grob = FALSE, quiet = TRUE))
 )
 
 # problematic json file http400.json identified by Allegro Sultum - Feb 2020
@@ -51,11 +51,12 @@ test_that(
   "fetch_loc() on http400.json has messages",
   expect_silent(fetch_loc(js))
 )
+
 # test_that("screen_curves() on http400.json has messages",
 #          expect_silent(y <- screen_curves(js,
 #                                            host = "http://localhost:5656",
 #                                            path = "ocpu/library/james/R/convert_bds_ind")))
 test_that(
   "draw_chart() on http400.json has messages",
-  expect_silent(draw_chart(js, quiet = TRUE))
+  expect_silent(draw_chart(js, draw_grob = FALSE, quiet = TRUE))
 )
