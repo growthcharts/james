@@ -1,3 +1,7 @@
+# james 0.44.0
+
+- Increase dependencies to `bdsreader 0.11.0` and `jamesclient 0.18.0`
+
 # james 0.43.3
 
 - Prevent "the condition has length > 1 and only the first element will be used" in `draw_chart()`
