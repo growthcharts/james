@@ -74,7 +74,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.10.3",
+      "Version": "0.11.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/centile, growthcharts/nlreferences,\ngrowthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -82,8 +82,8 @@
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "bb1295537fab814a755fcac1228397b2a371e375",
-      "Hash": "ecb1e970b281cbb383c76f83a2b147fc"
+      "RemoteSha": "d0bc20f7f023ba7c2378b1a7e23d7d8b42bf226f",
+      "Hash": "d7f9193935a3a550c6577f1c6f5933e2"
     },
     "bit": {
       "Package": "bit",
@@ -427,7 +427,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.17.1",
+      "Version": "0.18.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/bdsreader, growthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -435,8 +435,8 @@
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "e8d2db2c421620ef205d3818f7a6858ff73006b1",
-      "Hash": "85ba0336b2f296a3c71c4a5e8d950538"
+      "RemoteSha": "2ccce2585ed338032fb2146cc954413a9d1d0221",
+      "Hash": "6734bbb27ef519090f55f04f58a7fb84"
     },
     "jamesdemodata": {
       "Package": "jamesdemodata",
