@@ -806,6 +806,13 @@
       "Repository": "CRAN",
       "Hash": "7243004a708d06d4716717fa1ff5b2fe"
     },
+    "tinytex": {
+      "Package": "tinytex",
+      "Version": "0.35",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1d7220fe46159fb9f5c99a44354a2bff"
+    },
     "tzdb": {
       "Package": "tzdb",
       "Version": "0.2.0",
