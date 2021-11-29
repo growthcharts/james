@@ -15,7 +15,7 @@
 #' @importFrom jsonlite        fromJSON minify toJSON unbox validate
 #' @importFrom jose            jwt_decode_sig
 #' @importFrom rlang           .data
-#' @importFrom utils           hasName
+#' @importFrom utils           hasName packageDate packageVersion
 NULL
 
 globalVariables(".val")
