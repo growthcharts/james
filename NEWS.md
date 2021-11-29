@@ -1,3 +1,7 @@
+# james 0.44.1
+
+- Adds a `version()` function
+
 # james 0.44.0
 
 - Increase dependencies to `bdsreader 0.11.0` and `jamesclient 0.18.0`
