@@ -1,3 +1,7 @@
+# james 0.45.0
+
+- Solves a bug in `bdsreader` that prevented reading data from a URL 
+
 # james 0.44.1
 
 - Adds a `version()` function

@@ -74,7 +74,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.11.0",
+      "Version": "0.13.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/centile, growthcharts/nlreferences,\ngrowthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -82,8 +82,8 @@
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "d0bc20f7f023ba7c2378b1a7e23d7d8b42bf226f",
-      "Hash": "d7f9193935a3a550c6577f1c6f5933e2"
+      "RemoteSha": "937067ca91792ab44d4f8067b324b60b455074e4",
+      "Hash": "bcc866bb42ea0d7c03edcb35617ce77d"
     },
     "bit": {
       "Package": "bit",
@@ -207,10 +207,10 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.4.1",
+      "Version": "0.4.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "70976176dfd7f179f212783aab2547b1"
+      "Hash": "fa53ce256cd280f468c080a58ea5ba8c"
     },
     "crayon": {
       "Package": "crayon",
@@ -365,10 +365,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.5.0",
+      "Version": "1.5.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5ccb956a6d09b4ca448094582f8c7571"
+      "Hash": "e01bc1fe0c20954ec97eac86640abc70"
     },
     "growthscreener": {
       "Package": "growthscreener",
@@ -745,10 +745,10 @@
     },
     "stringi": {
       "Package": "stringi",
-      "Version": "1.7.5",
+      "Version": "1.7.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "cd50dc9b449de3d3b47cdc9976886999"
+      "Hash": "bba431031d30789535745a9627ac9271"
     },
     "stringr": {
       "Package": "stringr",
