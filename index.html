@@ -23,6 +23,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,18 +37,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.44.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.45.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -56,7 +52,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/growthcharts/james/">
+  <a href="https://github.com/growthcharts/james/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -74,36 +70,36 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="joint-automatic-measurement-and-evaluation-system-james" class="section level2">
-<h2 class="hasAnchor">
-<a href="#joint-automatic-measurement-and-evaluation-system-james" class="anchor"></a>Joint Automatic Measurement and Evaluation System (JAMES)</h2>
+<div class="section level2">
+<h2 id="joint-automatic-measurement-and-evaluation-system-james">Joint Automatic Measurement and Evaluation System (JAMES)<a class="anchor" aria-label="anchor" href="#joint-automatic-measurement-and-evaluation-system-james"></a>
+</h2>
 <!-- badges: start -->
 
 <p>JAMES is an experimental web service for creating and interpreting charts of child growth and development. The current version</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>provides access to high-quality growth charts used by the Dutch youth health care;</li>
-<li>interchanges data coded according to the <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13">Basisdataset JGZ</a>;</li>
+<li>interchanges data coded according to the <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13" class="external-link">Basisdataset JGZ</a>;</li>
 <li>screens for abnormal height, weight and head circumference;</li>
 <li>converts developmental data into the D-score;</li>
 <li>predicts future growth and development.</li>
 </ol>
 <p>The service can be used by anyone interested in high-quality charts for monitoring and evaluating childhood growth. This document highlights some applications of JAMES, and provides pointers to relevant background information.</p>
 </div>
-<div id="deprecation-note" class="section level2">
-<h2 class="hasAnchor">
-<a href="#deprecation-note" class="anchor"></a>Deprecation note</h2>
-<p>We will be offering Docker containers running JAMES from November 2021 onwards, and phase out the functionality described below. Work in progress is at <a href="https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0" class="uri">https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0</a>.</p>
+<div class="section level2">
+<h2 id="deprecation-note">Deprecation note<a class="anchor" aria-label="anchor" href="#deprecation-note"></a>
+</h2>
+<p>We will be offering Docker containers running JAMES from November 2021 onwards, and phase out the functionality described below. Work in progress is at <a href="https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0" class="external-link uri">https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0</a>.</p>
 </div>
-<div id="check-whether-james-is-running" class="section level2">
-<h2 class="hasAnchor">
-<a href="#check-whether-james-is-running" class="anchor"></a>Check whether JAMES is running</h2>
+<div class="section level2">
+<h2 id="check-whether-james-is-running">Check whether JAMES is running<a class="anchor" aria-label="anchor" href="#check-whether-james-is-running"></a>
+</h2>
 <p>JAMES is currently located at url <code>groeidiagrammen.nl</code>. The sections below use <code>curl</code> for illustration, but any <code>HTTP</code> client will work.</p>
-<p>In order to check whether the JAMES server is running, try generating some random numbers by calling <code><a href="https://rdrr.io/r/stats/Normal.html">stats::rnorm()</a></code>, in a terminal window as follows,</p>
+<p>In order to check whether the JAMES server is running, try generating some random numbers by calling <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">stats::rnorm()</a></code>, in a terminal window as follows,</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5</span></code></pre></div>
 </div>
-<div id="primary-james-user-functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#primary-james-user-functionality" class="anchor"></a>Primary JAMES user functionality</h2>
+<div class="section level2">
+<h2 id="primary-james-user-functionality">Primary JAMES user functionality<a class="anchor" aria-label="anchor" href="#primary-james-user-functionality"></a>
+</h2>
 <table class="table">
 <colgroup>
 <col width="18%">
@@ -193,11 +189,11 @@
 </tbody>
 </table>
 <p>The primary user functions cover out wide range of activities. Let us look into these in some more detail.</p>
-<div id="available-growth-charts" class="section level3">
-<h3 class="hasAnchor">
-<a href="#available-growth-charts" class="anchor"></a>Available growth charts</h3>
-<p>The site <a href="https://groeidiagrammen.nl/ocpu/lib/james/www/" class="uri">https://groeidiagrammen.nl/ocpu/lib/james/www/</a> provides a quick round-trip of growth charts. JAMES currently offers 394 different charts, divided into three chart groups:</p>
-<ol>
+<div class="section level3">
+<h3 id="available-growth-charts">Available growth charts<a class="anchor" aria-label="anchor" href="#available-growth-charts"></a>
+</h3>
+<p>The site <a href="https://groeidiagrammen.nl/ocpu/lib/james/www/" class="external-link uri">https://groeidiagrammen.nl/ocpu/lib/james/www/</a> provides a quick round-trip of growth charts. JAMES currently offers 394 different charts, divided into three chart groups:</p>
+<ol style="list-style-type: decimal">
 <li>140 charts for children of various etnicities, age groups and outcomes (Talma et al. 2010);</li>
 <li>240 charts specifically designed for preterms (Bocca-Tjeertes et al. 2012);</li>
 <li>14 charts based on the WHO Child Growth Standards (WHO 2006);</li>
@@ -218,7 +214,7 @@
 <span id="cb3-10"><a href="#cb3-10"></a><span class="ex">/ocpu/tmp/x07c4471d08dbd3/console</span></span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="ex">/ocpu/tmp/x07c4471d08dbd3/info</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="ex">/ocpu/tmp/x07c4471d08dbd3/files/DESCRIPTION</span></span></code></pre></div>
-<p>The status is 201 (Resources created), and the unique session <code>{key}</code> is <code>x07c4471d08dbd3</code>. Note that this changes with each request, so if you are replicating these commands, be sure to change <code>{key}</code> accordingly. Session keys and their url’s remain valid for 24 hours. See <a href="https://www.opencpu.org/api.html" class="uri">https://www.opencpu.org/api.html</a> for succinct documentation of the OpenCPU interface.</p>
+<p>The status is 201 (Resources created), and the unique session <code>{key}</code> is <code>x07c4471d08dbd3</code>. Note that this changes with each request, so if you are replicating these commands, be sure to change <code>{key}</code> accordingly. Session keys and their url’s remain valid for 24 hours. See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for succinct documentation of the OpenCPU interface.</p>
 <p>Not all information that JAMES return is interesting. In this case, we would like to see the table of charts in JSON format. We may these obtain this table from the URL <code>https://groeidiagrammen.nl/ocpu/tmp/x07c4471d08dbd3/R/.val/json</code>. The first entry looks like</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">{</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">"chartgrp"</span><span class="fu">:</span> <span class="st">"nl2010"</span><span class="fu">,</span></span>
@@ -232,9 +228,9 @@
 <span id="cb4-10"><a href="#cb4-10"></a><span class="fu">}</span></span></code></pre></div>
 <p>The central field is <code>chartcode</code>, which contains a unique 4-7 character code identifying the particular chart. In this example, code <code>HJAA</code> represents a chart for boys with Indo-Surinamese background (population <code>HS</code>) and design <code>A</code> (chart with head circumference, length and weight for boys aged 0-15 months). The codes are compatible and extend those used in Talma et al. (2010).</p>
 </div>
-<div id="requesting-a-growth-chart" class="section level3">
-<h3 class="hasAnchor">
-<a href="#requesting-a-growth-chart" class="anchor"></a>Requesting a growth chart</h3>
+<div class="section level3">
+<h3 id="requesting-a-growth-chart">Requesting a growth chart<a class="anchor" aria-label="anchor" href="#requesting-a-growth-chart"></a>
+</h3>
 <p>We may download growth chart <code>HJAA</code> with the <code><a href="reference/draw_chart.html">draw_chart()</a></code> function as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d <span class="st">"chartcode='HJAA'"</span></span></code></pre></div>
 <p>This produces the following output</p>
@@ -252,24 +248,24 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">curl</span> -o mychart.svg <span class="st">'https://groeidiagrammen.nl/ocpu/tmp/x038e163dc6de71/graphics/1/svglite?width=8.27&amp;height=11.69'</span> -H <span class="st">'Cache-Control: max-age=0'</span></span></code></pre></div>
 <p>In order to obtain the right canvas size, the URL needs to be in quotes and the request needs <code>-H 'Cache-Control: max-age=0'</code> option added.</p>
 </div>
-<div id="adding-data-to-charts" class="section level3">
-<h3 class="hasAnchor">
-<a href="#adding-data-to-charts" class="anchor"></a>Adding data to charts</h3>
+<div class="section level3">
+<h3 id="adding-data-to-charts">Adding data to charts<a class="anchor" aria-label="anchor" href="#adding-data-to-charts"></a>
+</h3>
 <p>Until now, we have only seen empty growth charts. This section describes various ways to add child data to the charts.</p>
-<div id="data-format" class="section level4">
-<h4 class="hasAnchor">
-<a href="#data-format" class="anchor"></a>Data format</h4>
-<p>The <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12">BDS JGZ 3.2.5</a> protocol facilitates the exchange of data between parties active in the Dutch youth health care. The format is basically a codebook of variables. Each variable has a number: <code>bdsnummer</code>. JAMES adopts the format, and accepts data in JSON format according to a <a href="https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/json/bds_schema_str.json">JSON schema</a>.</p>
+<div class="section level4">
+<h4 id="data-format">Data format<a class="anchor" aria-label="anchor" href="#data-format"></a>
+</h4>
+<p>The <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a> protocol facilitates the exchange of data between parties active in the Dutch youth health care. The format is basically a codebook of variables. Each variable has a number: <code>bdsnummer</code>. JAMES adopts the format, and accepts data in JSON format according to a <a href="https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/json/bds_schema_str.json" class="external-link">JSON schema</a>.</p>
 <p>A minimal example of the data according to the schema is:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json</span></code></pre></div>
-<p>Save the file <a href="https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json">client3.json</a> on your local system by</p>
+<p>Save the file <a href="https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json" class="external-link">client3.json</a> on your local system by</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O</span></code></pre></div>
 <p>which produces a file called <code>client3.json</code> in your working directory.</p>
 <p>For testing purposes, you may change its values, but please keep the general structure intact.</p>
 </div>
-<div id="charting-the-child-data-json-file" class="section level4">
-<h4 class="hasAnchor">
-<a href="#charting-the-child-data-json-file" class="anchor"></a>Charting the child data, JSON file</h4>
+<div class="section level4">
+<h4 id="charting-the-child-data-json-file">Charting the child data, JSON file<a class="anchor" aria-label="anchor" href="#charting-the-child-data-json-file"></a>
+</h4>
 <p>The following <code>curl</code> command uploads and converts the file, and plots the data on a growth chart:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">curl</span> -F <span class="st">'txt=@client3.json'</span> https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
@@ -286,9 +282,9 @@
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">https</span>://groeidiagrammen.nl/ocpu/tmp/x0f59c6526dba8a/graphics/1/svglite</span></code></pre></div>
 <p>JAMES automatically selected the length-by-age chart for preterm girls born at a gestational age of 27 weeks.</p>
 </div>
-<div id="charting-the-child-data-json-string" class="section level4">
-<h4 class="hasAnchor">
-<a href="#charting-the-child-data-json-string" class="anchor"></a>Charting the child data, JSON string</h4>
+<div class="section level4">
+<h4 id="charting-the-child-data-json-string">Charting the child data, JSON string<a class="anchor" aria-label="anchor" href="#charting-the-child-data-json-string"></a>
+</h4>
 <p>Send the child’s data as a JSON string instead of a file provides some more flexibility. The following code assumes that utility <code>jq</code> is installed.</p>
 <p>First, convert the JSON file into a JSON string, with double quotes (<code>"</code>) properly escaped.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="va">var=$(</span><span class="ex">jq</span> <span class="st">'.'</span> client3.json <span class="kw">|</span> <span class="ex">jq</span> -sR <span class="st">'.'</span><span class="va">)</span></span>
@@ -300,11 +296,11 @@
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text</span></code></pre></div>
 </div>
 </div>
-<div id="data-cache" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-cache" class="anchor"></a>Data cache</h3>
+<div class="section level3">
+<h3 id="data-cache">Data cache<a class="anchor" aria-label="anchor" href="#data-cache"></a>
+</h3>
 <p>JAMES takes the following general steps to plot data:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>The client sends a request that posts the child data;</li>
 <li>The server validates the input;</li>
 <li>The server transforms the data into JAMES internal format;</li>
@@ -314,9 +310,9 @@
 </ol>
 <p>All JAMES functions support the complete set of actions through the <code>txt</code> parameter, as used above. In addition, many functions also accept the cached result from steps 1-3 as input through the <code>loc</code> parameter. More in particular, the <code>loc</code> method saves the result after step 3, and feeds the location of the converted data into a second request that applies the plotting. Both <code>txt</code> and <code>loc</code>methods yield the same result.</p>
 <p>The obvious advantage of caching is that validation has only to be done once. In cases where the user needs multiple analyses for the same child, for example for building an interactive site, caching may result in snappier behaviour. It may also be easier to diagnose errors in the input data. On the other hand, caching also requires some more work on the client side. The nature of the application determines which method works best.</p>
-<div id="example-of-data-cache" class="section level4">
-<h4 class="hasAnchor">
-<a href="#example-of-data-cache" class="anchor"></a>Example of data cache</h4>
+<div class="section level4">
+<h4 id="example-of-data-cache">Example of data cache<a class="anchor" aria-label="anchor" href="#example-of-data-cache"></a>
+</h4>
 <p>An example, let’s create a chart in two steps. We first upload the data using <code>fetch_loc</code>, which accepts JSON input and return the location with the uploaded data.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/fetch_loc -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
@@ -332,9 +328,9 @@
 </div>
 </div>
 </div>
-<div id="request-a-dedicated-url-to-the-chart-site" class="section level2">
-<h2 class="hasAnchor">
-<a href="#request-a-dedicated-url-to-the-chart-site" class="anchor"></a>Request a dedicated url to the chart site</h2>
+<div class="section level2">
+<h2 id="request-a-dedicated-url-to-the-chart-site">Request a dedicated url to the chart site<a class="anchor" aria-label="anchor" href="#request-a-dedicated-url-to-the-chart-site"></a>
+</h2>
 <p>The child’s data can be plotted on any of the available charts using a <em>child chart site</em>. We can construct a child’s site by means of the following request.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>[<span class="st">"https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x0dde6c563edb40/"</span>]</span></code></pre></div>
@@ -343,36 +339,36 @@
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d <span class="st">"loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a>[<span class="st">"https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/"</span>]</span></code></pre></div>
 <p>There are three ways to choose which chart is being plotted:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>JAMES picks a default chart;</li>
 <li>The developer provides a <code>chartcode</code> parameter;</li>
 <li>The end user manipulates the interactive controls.</li>
 </ol>
 <p>Options 1 and 2 determine the first chart that is shown to the end user.</p>
-<div id="site-with-default-chart" class="section level4">
-<h4 class="hasAnchor">
-<a href="#site-with-default-chart" class="anchor"></a>Site with default chart</h4>
+<div class="section level4">
+<h4 id="site-with-default-chart">Site with default chart<a class="anchor" aria-label="anchor" href="#site-with-default-chart"></a>
+</h4>
 <p>The default chart picked by JAMES is currently hard-wired as the child’s height chart that contains the most recent measurements. If the child is a pre-term (gestational age &lt;= 36 weeks) and younger than 4 years, then JAMES chooses the appropriate preterm chart.</p>
-<p>The chart site with the default start can be started by combining the <a href="https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/">uploaded data</a> and the main site at (<a href="https://groeidiagrammen.nl/ocpu/lib/james/www/" class="uri">https://groeidiagrammen.nl/ocpu/lib/james/www/</a>) as</p>
+<p>The chart site with the default start can be started by combining the <a href="https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/" class="external-link">uploaded data</a> and the main site at (<a href="https://groeidiagrammen.nl/ocpu/lib/james/www/" class="external-link uri">https://groeidiagrammen.nl/ocpu/lib/james/www/</a>) as</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">curl</span> <span class="st">"https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"</span></span></code></pre></div>
 <p>Pasting this url in your browser starts the site with the child’s data.</p>
 </div>
-<div id="site-with-developer-specified-chart" class="section level3">
-<h3 class="hasAnchor">
-<a href="#site-with-developer-specified-chart" class="anchor"></a>Site with developer-specified chart</h3>
+<div class="section level3">
+<h3 id="site-with-developer-specified-chart">Site with developer-specified chart<a class="anchor" aria-label="anchor" href="#site-with-developer-specified-chart"></a>
+</h3>
 <p>Starting the site at a given growth chart is possible by specifying the <code>chartcode</code> parameters. For example, we may initialize the site at chart <code>PMAAN27</code> by</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">curl</span> <span class="st">"https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&amp;chartcode=PMAAN27"</span></span></code></pre></div>
 <p>The site now starts with <code>PMAAN27</code> instead of <code>PMAHN27</code>. Any chart can be chosen. It is the responsibility of the developer that the choice is sensible given the child’s data.</p>
-<div id="site-with-user-specified-chart" class="section level4">
-<h4 class="hasAnchor">
-<a href="#site-with-user-specified-chart" class="anchor"></a>Site with user-specified chart</h4>
+<div class="section level4">
+<h4 id="site-with-user-specified-chart">Site with user-specified chart<a class="anchor" aria-label="anchor" href="#site-with-user-specified-chart"></a>
+</h4>
 <p>After the site is started the end user may change the chart on which the data are drawn by simply using the site controls.</p>
 </div>
 </div>
 </div>
-<div id="screen-growth-curves-according-to-jgz-guidelines" class="section level2">
-<h2 class="hasAnchor">
-<a href="#screen-growth-curves-according-to-jgz-guidelines" class="anchor"></a>Screen growth curves according to JGZ guidelines</h2>
+<div class="section level2">
+<h2 id="screen-growth-curves-according-to-jgz-guidelines">Screen growth curves according to JGZ guidelines<a class="anchor" aria-label="anchor" href="#screen-growth-curves-according-to-jgz-guidelines"></a>
+</h2>
 <p><code>screen_growth</code> | Screen growth curves according to JGZ guidelines</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/screen_growth -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span></code></pre></div>
 <p>We obtain the screening results as</p>
@@ -408,9 +404,9 @@
 <span id="cb24-28"><a href="#cb24-28"></a>  <span class="fu">}</span></span>
 <span id="cb24-29"><a href="#cb24-29"></a><span class="ot">]</span></span></code></pre></div>
 </div>
-<div id="create-one-request-with-list-of-return-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create-one-request-with-list-of-return-values" class="anchor"></a>Create one request with list of return values</h2>
+<div class="section level2">
+<h2 id="create-one-request-with-list-of-return-values">Create one request with list of return values<a class="anchor" aria-label="anchor" href="#create-one-request-with-list-of-return-values"></a>
+</h2>
 <p>In some cases, we would like to bundle return values from a custom set of calls. That is the job of <code>custom_list</code>. The current version of <code>custom_list</code> will return a site URL (created by <code>request_site</code>), a table of screening results (created by <code>screen_growth</code>) and the last D-score (created by <code>calculate_dscore</code>). For example, the calls</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/custom_list -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="ex">curl</span> https://groeidiagrammen.nl//ocpu/tmp/x098464a29301fe/R/.val/json</span></code></pre></div>
@@ -450,9 +446,9 @@
 <p>which contains the return values generated by <code>request_site</code> (called “UrlGroeicurven” here) and by <code>screen_growth</code> (called “Resultaten” here). There no result for <code>calculate_dscore</code> because the data do not contain any developmental scores that would be needed to calculate a D-score.</p>
 <p>In principle, <code>custom_list</code> provides an option for clients to bundle the results of multiple requests into one call. The current functionality, however, is limited to what is indicated in this section.</p>
 </div>
-<div id="legacy-functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#legacy-functionality" class="anchor"></a>Legacy functionality</h2>
+<div class="section level2">
+<h2 id="legacy-functionality">Legacy functionality<a class="anchor" aria-label="anchor" href="#legacy-functionality"></a>
+</h2>
 <p>This following table lists functions that are active in the current version, but that we will not further develop. Please replace them by the suggested alternative.</p>
 <table class="table">
 <colgroup>
@@ -474,7 +470,7 @@
 <tr class="even">
 <td><code>upload_txt</code></td>
 <td>Validate, convert, store input (client)</td>
-<td><code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html">jamesclient::upload_txt</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">jamesclient::upload_txt</a></code></td>
 </tr>
 <tr class="odd">
 <td><code>draw_chart_bds</code></td>
@@ -527,62 +523,51 @@
 </table>
 <p>At some point these functions and argument names will be deprecated and removed.</p>
 </div>
-<div id="next-steps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#next-steps" class="anchor"></a>Next steps</h2>
+<div class="section level2">
+<h2 id="next-steps">Next steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
+</h2>
 <p>Things that were still on the wish list in Sept 2019:</p>
 <ul>
-<li>transfer JAMES to url james.tno.nl <br><span class="math display"><em>w</em><em>a</em><em>i</em><em>t</em><em>f</em><em>o</em><em>r</em><em>d</em><em>o</em><em>c</em><em>k</em><em>e</em><em>r</em><em>v</em><em>e</em><em>r</em><em>s</em><em>i</em><em>o</em><em>n</em></span><br>
-</li>
-<li>allow for more input formats <br><span class="math display">$$NOW support for both `txt` and
-`loc`$$</span><br>
-</li>
-<li>add https protocol <br><span class="math display"><em>D</em><em>O</em><em>N</em><em>E</em></span><br>
-</li>
-<li>add functionality to test for Dutch guidelines for referral <br><span class="math display"><em>D</em><em>O</em><em>N</em><em>E</em>, 3<em>g</em><em>u</em><em>i</em><em>d</em><em>e</em><em>l</em><em>i</em><em>n</em><em>e</em><em>s</em></span><br>
-</li>
-<li>add functionality to predict individual growth curves <br><span class="math display"><em>D</em><em>O</em><em>N</em><em>E</em></span><br>
-</li>
-<li>extend functionality to include the <em>D</em>-score charts <br><span class="math display"><em>D</em><em>O</em><em>N</em><em>E</em></span><br>
-</li>
+<li>transfer JAMES to url james.tno.nl [wait for docker version]</li>
+<li>allow for more input formats [NOW support for both <code>txt</code> and <code>loc</code>]</li>
+<li>add https protocol [DONE]</li>
+<li>add functionality to test for Dutch guidelines for referral [DONE, 3 guidelines]</li>
+<li>add functionality to predict individual growth curves [DONE]</li>
+<li>extend functionality to include the <em>D</em>-score charts [DONE]</li>
 </ul>
 </div>
-<div id="architecture" class="section level2">
-<h2 class="hasAnchor">
-<a href="#architecture" class="anchor"></a>Architecture</h2>
-<p>The growth charts in JAMES are programmed in <code>R</code>. JAMES makes these available through the <a href="https://www.opencpu.org">OpenCPU</a> system for scientific computing and reproducible research. The system allows for easy integration of growth charts into any <code>HTTP</code> compliant client by means of OpenCPU’s <a href="https://www.opencpu.org/api.html">API</a>. JAMES is a RESTful webservice.</p>
+<div class="section level2">
+<h2 id="architecture">Architecture<a class="anchor" aria-label="anchor" href="#architecture"></a>
+</h2>
+<p>The growth charts in JAMES are programmed in <code>R</code>. JAMES makes these available through the <a href="https://www.opencpu.org" class="external-link">OpenCPU</a> system for scientific computing and reproducible research. The system allows for easy integration of growth charts into any <code>HTTP</code> compliant client by means of OpenCPU’s <a href="https://www.opencpu.org/api.html" class="external-link">API</a>. JAMES is a RESTful webservice.</p>
 </div>
-<div id="resources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#resources" class="anchor"></a>Resources</h2>
+<div class="section level2">
+<h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
+</h2>
 <ul>
-<li><a href="https://stefvanbuuren.name/jamesdocs/">JAMES Internals</a></li>
-<li><a href="https://www.opencpu.org">OpenCPU system</a></li>
-<li><a href="https://www.opencpu.org/api.html">OpenCPU API</a></li>
-<li><a href="https://www.w3schools.com/js/" class="uri">https://www.w3schools.com/js/</a></li>
+<li><a href="https://stefvanbuuren.name/jamesdocs/" class="external-link">JAMES Internals</a></li>
+<li><a href="https://www.opencpu.org" class="external-link">OpenCPU system</a></li>
+<li><a href="https://www.opencpu.org/api.html" class="external-link">OpenCPU API</a></li>
+<li><a href="https://www.w3schools.com/js/" class="external-link uri">https://www.w3schools.com/js/</a></li>
 <li>
-<a href="https://www.tno.nl/groei" class="uri">https://www.tno.nl/groei</a> and <a href="https://www.tno.nl/growth" class="uri">https://www.tno.nl/growth</a>
+<a href="https://www.tno.nl/groei" class="external-link uri">https://www.tno.nl/groei</a> and <a href="https://www.tno.nl/growth" class="external-link uri">https://www.tno.nl/growth</a>
 </li>
 </ul>
 </div>
-<div id="about" class="section level2">
-<h2 class="hasAnchor">
-<a href="#about" class="anchor"></a>About</h2>
-<p><strong>Work in progress</strong>. Direct suggestions and inquiries to Stef van Buuren (stef.vanbuuren at tno.nl), <a href="https://stefvanbuuren.name" class="uri">https://stefvanbuuren.name</a>, <a href="https://github.com/stefvanbuuren" class="uri">https://github.com/stefvanbuuren</a>.</p>
+<div class="section level2">
+<h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+</h2>
+<p><strong>Work in progress</strong>. Direct suggestions and inquiries to Stef van Buuren (stef.vanbuuren at tno.nl), <a href="https://stefvanbuuren.name" class="external-link uri">https://stefvanbuuren.name</a>, <a href="https://github.com/stefvanbuuren" class="external-link uri">https://github.com/stefvanbuuren</a>.</p>
 </div>
-<div id="literature" class="section level2">
-<h2 class="hasAnchor">
-<a href="#literature" class="anchor"></a>Literature</h2>
+<div class="section level2">
+<h2 id="literature">Literature<a class="anchor" aria-label="anchor" href="#literature"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-bocca-tjeertes2012" class="csl-entry">
 <p>Bocca-Tjeertes, I. F. A., S. van Buuren, A. F. Bos, J. M. Kerstens, E. M. ten Vergert, and Reijneveld.S. A. 2012. “Growth of Preterm and Fullterm Children Aged 0-4 Years: Integrating Median Growth and Variability in Growth Charts.” <em>Journal of Pediatrics</em> 161 (3): 460–65.</p>
 </div>
 <div id="ref-talma2010" class="csl-entry">
-<p>Talma, H., Y. Schonbeck, B. Bakker, R. A. Hirasing, and S. van Buuren.</p>
-<ol>
-<li>
-<em>Groeidiagrammen 2010: Handleiding Bij Het Meten En Wegen van Kinderen En Het Invullen van Groeidiagrammen</em>. Leiden: TNO Kwaliteit van Leven.</li>
-</ol>
+<p>Talma, H., Y. Schonbeck, B. Bakker, R. A. Hirasing, and S. van Buuren. 2010. <em>Groeidiagrammen 2010: Handleiding Bij Het Meten En Wegen van Kinderen En Het Invullen van Groeidiagrammen</em>. Leiden: TNO Kwaliteit van Leven.</p>
 </div>
 <div id="ref-who2006" class="csl-entry">
 <p>WHO, Multicentre Growth Reference Study Group. 2006. “WHO Child Growth Standards Based on Length/Height, Weight and Age.” <em>Acta Paediatrica</em> 95 (Supplement 450): 76–85.</p>
@@ -594,43 +579,54 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/growthcharts/james/">https://​github.com/​growthcharts/​james/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/growthcharts/james/issues">https://​github.com/​growthcharts/​james/​issues</a>
-</li>
+<li><a href="https://github.com/growthcharts/james/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/growthcharts/james/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/AGPL-3">AGPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/AGPL-3" class="external-link">AGPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing james</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Stef van Buuren <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/growthcharts/james/actions"><img src="https://github.com/growthcharts/james/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/growthcharts/james/actions" class="external-link"><img src="https://github.com/growthcharts/james/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Stef van Buuren.</p>
+  <p></p>
+<p>Developed by Stef van Buuren.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -638,6 +634,8 @@
 
   
 
+
+  
 
   </body>
 </html>
