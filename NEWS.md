@@ -1,3 +1,7 @@
+# james 0.45.1
+
+- Update `renv.lock` to `jamesclient 0.20.0`
+
 # james 0.45.0
 
 - Solves a bug in `bdsreader` that prevented reading data from a URL 
