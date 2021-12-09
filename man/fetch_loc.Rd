@@ -4,13 +4,10 @@
 \alias{fetch_loc}
 \title{Uploads, parses, converts and stores data on the server for further processing}
 \usage{
-fetch_loc(txt = "", format = "1.0", ...)
+fetch_loc(txt = "", ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
-
-\item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
 
 \item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 }
