@@ -1,3 +1,7 @@
+# james 0.45.3
+
+- Solve authentication bug in `validate_chartcode()`
+
 # james 0.45.2
 
 - Vectorise and export `validate_chartcode()`
