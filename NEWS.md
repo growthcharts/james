@@ -1,3 +1,7 @@
+# james 0.46.0
+
+- Adds `list_screeners()` to produce overview of JGZ guidelines
+
 # james 0.45.4
 
 - Send dots in `fetch_loc(...)` to `bdsreader::read_bds(...)`
