@@ -7,7 +7,7 @@
 #' @importFrom curl            curl
 #' @importFrom dplyr           %>% all_of filter mutate pull select
 #' @importFrom grid            grid.draw
-#' @importFrom growthscreener  screen_curves_ind
+#' @importFrom growthscreener  list_screeners screen_curves_ind
 #' @importFrom httr            add_headers build_url content GET
 #'                             headers message_for_status modify_url POST
 #'                             status_code upload_file
