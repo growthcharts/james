@@ -3,11 +3,13 @@
 #' This function checks whether `chartcode` is a available
 #' in the chart library.
 #' @param chartcode Chart code, typically something like `"NMAB"`
-#' @return `TRUE` or `FALSE`.
+#' @return A logical vector of with `length(chartcode)` elements.
 #' @seealso [list_charts()]
+#' @export
 validate_chartcode <- function(chartcode = "") {
+  authenticate(...)
   if (is.empty(chartcode)) {
     return(FALSE)
   }
-  chartcode[1L] %in% list_charts()$chartcode
+  chartcode %in% list_charts()$chartcode
 }

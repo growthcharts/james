@@ -10,7 +10,7 @@ validate_chartcode(chartcode = "")
 \item{chartcode}{Chart code, typically something like \code{"NMAB"}}
 }
 \value{
-\code{TRUE} or \code{FALSE}.
+A logical vector of with \code{length(chartcode)} elements.
 }
 \description{
 This function checks whether \code{chartcode} is a available
