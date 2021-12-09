@@ -4,10 +4,12 @@
 \alias{validate_chartcode}
 \title{Validates a growth chart code}
 \usage{
-validate_chartcode(chartcode = "")
+validate_chartcode(chartcode = "", ...)
 }
 \arguments{
 \item{chartcode}{Chart code, typically something like \code{"NMAB"}}
+
+\item{\dots}{Used for authentication}
 }
 \value{
 A logical vector of with \code{length(chartcode)} elements.
