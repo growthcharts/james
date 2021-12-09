@@ -1,3 +1,7 @@
+# james 0.45.4
+
+- Send dots in `fetch_loc(...)` to `bdsreader::read_bds(...)`
+
 # james 0.45.3
 
 - Solve authentication bug in `validate_chartcode()`
