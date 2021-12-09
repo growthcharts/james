@@ -1,3 +1,7 @@
+# james 0.45.2
+
+- Vectorise and export `validate_chartcode()`
+
 # james 0.45.1
 
 - Update `renv.lock` to `jamesclient 0.20.0`
