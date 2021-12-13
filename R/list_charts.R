@@ -5,5 +5,5 @@
 #' @export
 list_charts <- function(...) {
   authenticate(...)
-  chartbox::list_charts()
+  chartbox::list_charts(...)
 }

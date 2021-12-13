@@ -21,5 +21,5 @@
 #' @export
 screen_growth <- function(txt = "", loc = "", format = "1.0", ...) {
   authenticate(...)
-  screen_curves_ind(get_tgt(txt, loc, format = format))
+  screen_curves_ind(ind = get_tgt(txt, loc, format = format), ...)
 }

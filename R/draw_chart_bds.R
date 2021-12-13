@@ -35,6 +35,7 @@ draw_chart_bds <- function(txt = "", format = "1.0",
   draw_chart(
     txt = txt, format = format, chartcode = chartcode,
     curve_interpolation = curve_interpolation,
-    selector = selector
+    selector = selector,
+    ...
   )
 }

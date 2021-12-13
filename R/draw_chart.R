@@ -142,7 +142,8 @@ draw_chart <- function(txt = "",
     exact_ga = exact_ga,
     break_ties = break_ties,
     show_realized = show_realized,
-    show_future = show_future
+    show_future = show_future,
+    ...
   )
   if (draw_grob) grid.draw(g)
   invisible(g)

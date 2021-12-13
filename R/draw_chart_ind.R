@@ -21,6 +21,7 @@ draw_chart_ind <- function(loc = "", chartcode = "",
   # legacy
   draw_chart(
     loc = loc, chartcode = chartcode,
-    curve_interpolation = curve_interpolation
+    curve_interpolation = curve_interpolation,
+    ...
   )
 }

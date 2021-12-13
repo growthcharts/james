@@ -7,8 +7,11 @@
 list_screeners(...)
 }
 \arguments{
-\item{\dots}{Used for authentication}
+\item{\dots}{Used for authentication, passed down to \code{\link[growthscreener:list_screeners]{growthscreener::list_screeners()}}.}
 }
 \description{
 List the available growth screeners
+}
+\examples{
+head(list_screeners(ynames = "hgt"), 2)
 }
