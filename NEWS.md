@@ -1,3 +1,8 @@
+# james 0.46.2
+
+- Pass down arguments in all functions using `\dots`
+- Sync to `jamesclient 0.23.0`
+
 # james 0.46.1
 
 - Sync to `bdsreader 0.14.0` and `jamesclient 0.22.0`
