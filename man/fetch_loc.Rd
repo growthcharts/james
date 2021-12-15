@@ -20,7 +20,7 @@ contents, converts it to an internal JAMES target object,
 and stores the result on the server for further processing.
 The function is useful for caching input data over multiple requests to
 \code{OpenCPU}. The cached data feed into other JAMES functions by means
-of the \code{"loc"} argument. The server wipes the cached data after 24 hours.
+of the \code{"loc"} argument. The server wipes the cached data after 2 hours.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")

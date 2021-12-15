@@ -26,7 +26,7 @@ information.
 
 ## Deprecation note
 
-We will be offering Docker containers running JAMES from November 2021
+We will be offering Docker containers running JAMES from January 2022
 onwards, and phase out the functionality described below. Work in
 progress is at <https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0>.
 
@@ -106,7 +106,7 @@ Response [https://groeidiagrammen.nl/ocpu/library/james/R/list_charts]
 The status is 201 (Resources created), and the unique session `{key}` is
 `x07c4471d08dbd3`. Note that this changes with each request, so if you
 are replicating these commands, be sure to change `{key}` accordingly.
-Session keys and their url’s remain valid for 24 hours. See
+Session keys and their url’s remain valid for 2 hours. See
 <https://www.opencpu.org/api.html> for succinct documentation of the
 OpenCPU interface.
 
