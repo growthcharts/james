@@ -1,3 +1,7 @@
+# james 0.46.3
+
+- Update docs for `fetch_loc()`
+
 # james 0.46.2
 
 - Pass down arguments in all functions using `\dots`
