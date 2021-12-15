@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.46.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.47.0</span>
       </span>
     </div>
 
@@ -127,7 +127,7 @@
 <td>Table of charts, text</td>
 </tr>
 <tr class="odd">
-<td><code>fetch_loc</code></td>
+<td><code>upload_data</code></td>
 <td>Validate, convert and store input data</td>
 <td><code>messages/json</code></td>
 <td>parse messages, JSON</td>
@@ -313,11 +313,11 @@
 <div class="section level4">
 <h4 id="example-of-data-cache">Example of data cache<a class="anchor" aria-label="anchor" href="#example-of-data-cache"></a>
 </h4>
-<p>An example, let’s create a chart in two steps. We first upload the data using <code>fetch_loc</code>, which accepts JSON input and return the location with the uploaded data.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/fetch_loc -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span>
+<p>An example, let’s create a chart in two steps. We first upload the data using <code><a href="reference/upload_data.html">upload_data()</a></code>, which accepts JSON input and return the location with the uploaded data.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/upload_data -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="ex">/ocpu/tmp/x02691745d874cc/R/.val</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="ex">/ocpu/tmp/x02691745d874cc/R/fetch_loc</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="ex">/ocpu/tmp/x02691745d874cc/R/upload_data</span></span>
 <span id="cb16-5"><a href="#cb16-5"></a><span class="ex">/ocpu/tmp/x02691745d874cc/stdout</span></span>
 <span id="cb16-6"><a href="#cb16-6"></a><span class="ex">/ocpu/tmp/x02691745d874cc/source</span></span>
 <span id="cb16-7"><a href="#cb16-7"></a><span class="ex">/ocpu/tmp/x02691745d874cc/console</span></span>
@@ -335,7 +335,7 @@
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d <span class="st">"txt=</span><span class="va">$var</span><span class="st">"</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>[<span class="st">"https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x0dde6c563edb40/"</span>]</span></code></pre></div>
 <p>This command uploads and checks the input data, and appends the result URL to the site base URL. The combined URL starts a personalised site with the child’s data.</p>
-<p>Alternatively, if we already obtained a <code>loc</code> parameters (e.g. by using <code>fetch_loc</code>), we can combine that with the site base URL as follows.</p>
+<p>Alternatively, if we already obtained a <code>loc</code> parameters, we can combine that with the site base URL as follows.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">curl</span> https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d <span class="st">"loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a>[<span class="st">"https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/"</span>]</span></code></pre></div>
 <p>There are three ways to choose which chart is being plotted:</p>
@@ -465,24 +465,29 @@
 <tr class="odd">
 <td><code>convert_bds_ind</code></td>
 <td>Validate, convert, store input (server)</td>
-<td><code>fetch_loc</code></td>
+<td><code>upload_data</code></td>
 </tr>
 <tr class="even">
+<td><code>fetch_loc</code></td>
+<td>Validate, convert, store input (server)</td>
+<td><code>upload_data</code></td>
+</tr>
+<tr class="odd">
 <td><code>upload_txt</code></td>
 <td>Validate, convert, store input (client)</td>
 <td><code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">jamesclient::upload_txt</a></code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>draw_chart_bds</code></td>
 <td>Draw chart from uploaded</td>
 <td><code>draw_chart(txt = ...)</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>draw_chart_ind</code></td>
 <td>Draw chart from cached data</td>
 <td><code>draw_chart(loc = ...)</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>screen_curves</code></td>
 <td>Screen growth along JGZ guidelines</td>
 <td>
