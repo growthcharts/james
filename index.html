@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.46.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.46.3</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
 <div class="section level2">
 <h2 id="deprecation-note">Deprecation note<a class="anchor" aria-label="anchor" href="#deprecation-note"></a>
 </h2>
-<p>We will be offering Docker containers running JAMES from November 2021 onwards, and phase out the functionality described below. Work in progress is at <a href="https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0" class="external-link uri">https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0</a>.</p>
+<p>We will be offering Docker containers running JAMES from January 2022 onwards, and phase out the functionality described below. Work in progress is at <a href="https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0" class="external-link uri">https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="check-whether-james-is-running">Check whether JAMES is running<a class="anchor" aria-label="anchor" href="#check-whether-james-is-running"></a>
@@ -214,7 +214,7 @@
 <span id="cb3-10"><a href="#cb3-10"></a><span class="ex">/ocpu/tmp/x07c4471d08dbd3/console</span></span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="ex">/ocpu/tmp/x07c4471d08dbd3/info</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="ex">/ocpu/tmp/x07c4471d08dbd3/files/DESCRIPTION</span></span></code></pre></div>
-<p>The status is 201 (Resources created), and the unique session <code>{key}</code> is <code>x07c4471d08dbd3</code>. Note that this changes with each request, so if you are replicating these commands, be sure to change <code>{key}</code> accordingly. Session keys and their url’s remain valid for 24 hours. See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for succinct documentation of the OpenCPU interface.</p>
+<p>The status is 201 (Resources created), and the unique session <code>{key}</code> is <code>x07c4471d08dbd3</code>. Note that this changes with each request, so if you are replicating these commands, be sure to change <code>{key}</code> accordingly. Session keys and their url’s remain valid for 2 hours. See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for succinct documentation of the OpenCPU interface.</p>
 <p>Not all information that JAMES return is interesting. In this case, we would like to see the table of charts in JSON format. We may these obtain this table from the URL <code>https://groeidiagrammen.nl/ocpu/tmp/x07c4471d08dbd3/R/.val/json</code>. The first entry looks like</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">{</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">"chartgrp"</span><span class="fu">:</span> <span class="st">"nl2010"</span><span class="fu">,</span></span>
