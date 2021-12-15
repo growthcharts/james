@@ -2,7 +2,7 @@
 #'
 #' This function takes data from a json source and saves as a tibble with
 #' a person attribute.
-#' @note Deprecated. Use [fetch_loc()] instead.
+#' @note Deprecated. Use [upload_data()] instead.
 #' @name convert_bds_ind-deprecated
 #' @inheritParams bdsreader::read_bds
 #' @return A tibble with a person attribute.
@@ -14,8 +14,8 @@
 #' @export
 convert_bds_ind <- function(txt = "", format = "1.0", ...) {
   authenticate(...)
-  .Deprecated("fetch_loc",
-    msg = "convert_bds_ind() is deprecated. Please use fetch_loc() instead."
+  .Deprecated("upload_data",
+    msg = "convert_bds_ind() is deprecated. Please use upload_data() instead."
   )
-  fetch_loc(txt = txt, format = format, ...)
+  upload_data(txt = txt, format = format, ...)
 }

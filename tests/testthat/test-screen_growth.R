@@ -7,7 +7,7 @@ fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesde
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 host <- "http://localhost"
 
-path <- "ocpu/library/james/R/fetch_loc"
+path <- "ocpu/library/james/R/upload_data"
 url <- modify_url(url = host, path = path)
 resp <- POST(
   url = url,

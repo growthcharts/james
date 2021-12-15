@@ -53,7 +53,7 @@ curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
   |------------------ | ------------------------------------------ | ------------------------ | -------------------------------|
   |`list_charts`      | List available growth charts               | `R/.val/json`            | Table of charts, JSON          |
   |                   |                                            | `R/.val/text`            | Table of charts, text          |
-  |`fetch_loc`        | Validate, convert and store input data     | `messages/json`          | parse messages, JSON           |
+  |`upload_data`      | Validate, convert and store input data     | `messages/json`          | parse messages, JSON           |
   |`draw_chart`       | Draw chart, predict future growth          | `graphics/1/svglite`     | chart, `svglite` format        |
   |                   |                                            | `graphics/1/png`         | chart, `png` format            |
   |                   |                                            | `messages/json`          | parse, graph messages, JSON    |
@@ -246,13 +246,13 @@ The obvious advantage of caching is that validation has only to be done once. In
 
 #### Example of data cache
 
-An example, let's create a chart in two steps. We first upload the data using `fetch_loc`, which accepts JSON input and return the location with the uploaded data.
+An example, let's create a chart in two steps. We first upload the data using `upload_data()`, which accepts JSON input and return the location with the uploaded data.
 
-```{bash}
-curl https://groeidiagrammen.nl/ocpu/library/james/R/fetch_loc -d "txt=$var"
+```{bash eval=FALSE}
+curl https://groeidiagrammen.nl/ocpu/library/james/R/upload_data -d "txt=$var"
 
 /ocpu/tmp/x02691745d874cc/R/.val
-/ocpu/tmp/x02691745d874cc/R/fetch_loc
+/ocpu/tmp/x02691745d874cc/R/upload_data
 /ocpu/tmp/x02691745d874cc/stdout
 /ocpu/tmp/x02691745d874cc/source
 /ocpu/tmp/x02691745d874cc/console
@@ -278,7 +278,7 @@ curl https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d "txt=$
 
 This command uploads and checks the input data, and appends the result URL to the site base URL. The combined URL starts a personalised site with the child's data.
 
-Alternatively, if we already obtained a `loc` parameters (e.g. by using `fetch_loc`), we can combine that with the site base URL as follows.
+Alternatively, if we already obtained a `loc` parameters, we can combine that with the site base URL as follows.
 
 ```{bash}
 curl https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"
@@ -433,7 +433,8 @@ This following table lists functions that are active in the current version, but
 
   |Function           | Description                                | Preferred alternative          |
   |------------------ | ------------------------------------------ | ------------------------------ |
-  |`convert_bds_ind`  | Validate, convert, store input (server)    | `fetch_loc`                    |
+  |`convert_bds_ind`  | Validate, convert, store input (server)    | `upload_data`                  |
+  |`fetch_loc`        | Validate, convert, store input (server)    | `upload_data`                  |
   |`upload_txt`       | Validate, convert, store input (client)    | `jamesclient::upload_txt`      |
   |`draw_chart_bds`   | Draw chart from uploaded                   | `draw_chart(txt = ...)`        |
   |`draw_chart_ind`   | Draw chart from cached data                | `draw_chart(loc = ...)`        |

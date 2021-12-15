@@ -3,8 +3,8 @@ fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesde
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that(
-  "fetch_loc() on client3.json is silent",
-  expect_silent(fetch_loc(js))
+  "upload_data() on client3.json is silent",
+  expect_silent(upload_data(js))
 )
 
 # hack to evade ssl verification error: certificate has expired
@@ -26,8 +26,8 @@ fn <- system.file("extdata", "bds_v1.0", "test", "not_a_vector.json", package = 
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that(
-  "fetch_loc() on not_a_vector.json has messages",
-  expect_message(fetch_loc(js))
+  "upload_data() on not_a_vector.json has messages",
+  expect_message(upload_data(js))
 )
 # test_that(
 #   "screen_curves() on not_a_vector.json has messages",
@@ -48,8 +48,8 @@ fn <- system.file("extdata", "bds_v1.0", "test", "http400.json", package = "jame
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
 test_that(
-  "fetch_loc() on http400.json has messages",
-  expect_silent(fetch_loc(js))
+  "upload_data() on http400.json has messages",
+  expect_silent(upload_data(js))
 )
 
 # test_that("screen_curves() on http400.json has messages",

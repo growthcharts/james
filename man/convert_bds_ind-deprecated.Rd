@@ -23,7 +23,7 @@ This function takes data from a json source and saves as a tibble with
 a person attribute.
 }
 \note{
-Deprecated. Use \code{\link[=fetch_loc]{fetch_loc()}} instead.
+Deprecated. Use \code{\link[=upload_data]{upload_data()}} instead.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
