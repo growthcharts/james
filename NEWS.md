@@ -1,3 +1,7 @@
+# james 0.47.0
+
+- Decrecate `fetch_loc()` by the better-named `upload_data()`
+
 # james 0.46.3
 
 - Update docs for `fetch_loc()`
