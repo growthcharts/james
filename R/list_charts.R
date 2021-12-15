@@ -1,7 +1,7 @@
 #' List available growth charts
 #'
-#' @param chartgrp Optional. String chart group name, e.g. \code{chartgrp = "who"}.
-#' If omitted, \code{list_charts()} return all charts groups.
+#' @param chartgrp Optional. String chart group name, e.g. `chartgrp = "who"`.
+#' If omitted, `list_charts()` return all charts groups.
 #' @param \dots Passed down to [chartbox::list_charts()]
 #' @return A \code{data.frame} with eight columns:
 #' \describe{
