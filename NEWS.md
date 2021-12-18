@@ -1,3 +1,9 @@
+# james 0.48.0
+
+- Copy over all arguments from `bdsreader::read_bds()` to `upload_data()`
+- Update documentation
+- Do not pass down `\dots` to `jsonlite::FROMjson()`
+
 # james 0.47.0
 
 - Decrecate `fetch_loc()` by the better-named `upload_data()`
