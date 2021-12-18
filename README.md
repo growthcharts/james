@@ -142,7 +142,7 @@ We may download growth chart `HJAA` with the `draw_chart()` function as
 follows:
 
 ``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "chartcode='HJAA'"
+curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "chartcode='HJAA'&selector='chartcode'"
 ```
 
 This produces the following output
