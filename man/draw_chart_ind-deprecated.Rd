@@ -16,7 +16,7 @@ and converted to internal server format.}
 \item{curve_interpolation}{A logical indicating whether curve
 interpolation shoud be applied.}
 
-\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{...}{Ignored}
 }
 \description{
 The function \code{draw_chart_ind()} expect an input location from

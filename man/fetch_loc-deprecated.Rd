@@ -10,7 +10,7 @@ fetch_loc(txt = "", ...)
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{...}{Ignored}
 }
 \value{
 A tibble with a person attribute

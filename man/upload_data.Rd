@@ -4,15 +4,40 @@
 \alias{upload_data}
 \title{Uploads, parses, converts and stores data on the server}
 \usage{
-upload_data(txt = "", ...)
+upload_data(
+  txt = "",
+  auto_format = TRUE,
+  format = "1.0",
+  schema = NULL,
+  append_ddi = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{auto_format}{Logical. Should the format be read from the data? Default is \code{TRUE}.}
+
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
+\code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
+for new applications.}
+
+\item{schema}{A file name (optionally including the path) with the JSON
+validation schema.
+The \code{schema} argument overrides \code{format}. The function extracts the
+version number for the basename, and overwrites the
+\code{format} argument by version number.}
+
+\item{append_ddi}{Should the DDI responses be appended?}
+
+\item{verbose}{Show verbose output for \code{\link[centile:y2z]{centile::y2z()}}}
+
+\item{\dots}{Used for additional parameters}
 }
 \value{
-A tibble with a person attribute
+A tibble with an attribute called \code{"person"}
 }
 \description{
 Uploads JSON data that adhere to the BDS-format, parses its

@@ -26,11 +26,13 @@ and converted to internal server format.}
 \item{location}{Legacy for \code{loc}}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
+three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
+\code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
+for new applications.}
 
 \item{legacy}{Logical indicating whether legacy should be done.}
 
-\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{...}{Ignored}
 }
 \value{
 A JSON string containing a table with screening results

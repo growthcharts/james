@@ -7,7 +7,8 @@
 #' `OpenCPU`. The cached data feed into other JAMES functions by means
 #' of the `"loc"` argument. The server wipes the cached data after 2 hours.
 #' @inheritParams bdsreader::read_bds
-#' @return A tibble with a person attribute
+#' @param \dots Used for additional parameters
+#' @return A tibble with an attribute called `"person"`
 #' @author Stef van Buuren 2021
 #' @seealso [bdsreader::read_bds()]
 #'          [jsonlite::fromJSON()]
@@ -16,7 +17,19 @@
 #' p <- upload_data(fn)
 #' @keywords server
 #' @export
-upload_data <- function(txt = "", ...) {
+upload_data <- function(txt = "",
+                        auto_format = TRUE,
+                        format = "1.0",
+                        schema = NULL,
+                        append_ddi = FALSE,
+                        verbose = FALSE,
+                        ...) {
   authenticate(...)
-  read_bds(txt = txt, ...)
+  read_bds(txt = txt,
+           auto_format = auto_format,
+           format = format,
+           schema = schema,
+           append_ddi = append_ddi,
+           verbose = verbose,
+           ...)
 }

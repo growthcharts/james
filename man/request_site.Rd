@@ -23,7 +23,9 @@ and are converted to JSON according to \code{schema}.}
 and converted to internal server format.}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
+three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
+\code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
+for new applications.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
 the data in \code{txt} and return a site address with the \verb{?loc=} query appended.
@@ -33,7 +35,7 @@ deferring validation and conversion to internal representation to the site.}
 \item{host}{URL of the JAMES server. By default, host is the currently
 running server that processes the request.}
 
-\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{...}{Ignored}
 }
 \value{
 URL composed of JAMES server, possibly appended by query string starting

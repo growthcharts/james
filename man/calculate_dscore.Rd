@@ -22,7 +22,9 @@ and are converted to JSON according to \code{schema}.}
 and converted to internal server format.}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{1.0}, \code{1.1} and \code{2.0}.}
+three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
+\code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
+for new applications.}
 
 \item{output}{A string, either \code{"table"}, \code{"last_visit"} or
 '\code{"last_dscore"} specifying the result. The default \code{"table"}
@@ -32,7 +34,7 @@ the number of visits. If \code{output} equals \code{"last_visit"} the
 function returns only the last row. If \code{output} equals
 \code{"last_dscore"} the function returns only the D-score from the last row.}
 
-\item{...}{Passed down to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
+\item{...}{Ignored}
 }
 \value{
 A table, row or scalar.
