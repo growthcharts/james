@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.47.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.48.0</span>
       </span>
     </div>
 
@@ -77,11 +77,13 @@ and converted to internal server format.</p></dd>
 <dd><p>Legacy for <code>loc</code></p></dd>
 <dt>format</dt>
 <dd><p>String. JSON data schema version number. There are currently
-three schemas supported: <code>1.0</code>, <code>1.1</code> and <code>2.0</code>.</p></dd>
+three schemas supported: <code>"1.0"</code>, <code>"1.1"</code> and <code>"2.0"</code>. Formats <code>"1.0"</code> and
+<code>"1.1"</code> are included for backward compatibility only. Use <code>format = "2.0"</code>
+for new applications.</p></dd>
 <dt>legacy</dt>
 <dd><p>Logical indicating whether legacy should be done.</p></dd>
 <dt>...</dt>
-<dd><p>Passed down to <code><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">jsonlite::fromJSON()</a></code></p></dd>
+<dd><p>Ignored</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

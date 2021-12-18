@@ -19,7 +19,7 @@ user can interact to chart choices."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.47.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.48.0</span>
       </span>
     </div>
 
@@ -79,7 +79,9 @@ and are converted to JSON according to <code>schema</code>.</p></dd>
 and converted to internal server format.</p></dd>
 <dt>format</dt>
 <dd><p>String. JSON data schema version number. There are currently
-three schemas supported: <code>1.0</code>, <code>1.1</code> and <code>2.0</code>.</p></dd>
+three schemas supported: <code>"1.0"</code>, <code>"1.1"</code> and <code>"2.0"</code>. Formats <code>"1.0"</code> and
+<code>"1.1"</code> are included for backward compatibility only. Use <code>format = "2.0"</code>
+for new applications.</p></dd>
 <dt>upload</dt>
 <dd><p>Logical. If <code>TRUE</code> then <code>request_site()</code> will upload
 the data in <code>txt</code> and return a site address with the <code>?loc=</code> query appended.
@@ -89,7 +91,7 @@ deferring validation and conversion to internal representation to the site.</p><
 <dd><p>URL of the JAMES server. By default, host is the currently
 running server that processes the request.</p></dd>
 <dt>...</dt>
-<dd><p>Passed down to <code><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">jsonlite::fromJSON()</a></code></p></dd>
+<dd><p>Ignored</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
