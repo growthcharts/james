@@ -10,7 +10,7 @@ list_charts(chartgrp = NULL, ...)
 \item{chartgrp}{Optional. String chart group name, e.g. \code{chartgrp = "who"}.
 If omitted, \code{list_charts()} return all charts groups.}
 
-\item{\dots}{Passed down to \code{\link[chartbox:list_charts]{chartbox::list_charts()}}}
+\item{\dots}{Not used}
 }
 \value{
 A \code{data.frame} with eight columns:

@@ -2,7 +2,7 @@
 #'
 #' @param chartgrp Optional. String chart group name, e.g. `chartgrp = "who"`.
 #' If omitted, `list_charts()` return all charts groups.
-#' @param \dots Passed down to [chartbox::list_charts()]
+#' @param \dots Not used
 #' @return A \code{data.frame} with eight columns:
 #' \describe{
 #' \item{\code{chartgrp}}{Chart group code}
@@ -24,5 +24,5 @@
 #' @export
 list_charts <- function(chartgrp = NULL, ...) {
   authenticate(...)
-  chartbox::list_charts(chartgrp = chartgrp, ...)
+  chartbox::list_charts(chartgrp = chartgrp)
 }
