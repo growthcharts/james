@@ -1,3 +1,7 @@
+# james 0.48.1
+
+- Block passing of `\dots` to `chartbox::list_charts()`
+
 # james 0.48.0
 
 - Copy over all arguments from `bdsreader::read_bds()` to `upload_data()`
