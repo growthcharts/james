@@ -4,13 +4,17 @@
 \alias{screen_growth}
 \title{Screen growth curves according to JGZ guidelines}
 \usage{
-screen_growth(txt = "", loc = "", format = "1.0", ...)
+screen_growth(
+  txt = "",
+  loc = "",
+  format = "1.0",
+  ynames = c("hgt", "wgt", "hdc"),
+  na.omit = TRUE,
+  ...
+)
 }
 \arguments{
-\item{txt}{A JSON string, URL or file with the data in JSON
-format. The input data adhere to specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
-and are converted to JSON according to \code{schema}.}
+\item{txt}{A JSON string, URL or file}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded
 and converted to internal server format.}
@@ -19,6 +23,13 @@ and converted to internal server format.}
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
 \code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
 for new applications.}
+
+\item{ynames}{Character vector identifying the measures to be
+screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
+
+\item{na.omit}{A logical indicating whether records with a missing
+\code{x} (age) or \code{y} (yname) should be removed. Defaults to
+\code{TRUE}.}
 
 \item{...}{Ignored}
 }

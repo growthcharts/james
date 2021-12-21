@@ -4,9 +4,12 @@
 \alias{list_screeners}
 \title{List the available growth screeners}
 \usage{
-list_screeners(...)
+list_screeners(ynames = c("hgt", "wgt", "hdc"), ...)
 }
 \arguments{
+\item{ynames}{Character vector identifying the measures to be
+screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
+
 \item{\dots}{Used for authentication, passed down to \code{\link[growthscreener:list_screeners]{growthscreener::list_screeners()}}.}
 }
 \description{
