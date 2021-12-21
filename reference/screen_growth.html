@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.48.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.49.0</span>
       </span>
     </div>
 
@@ -53,16 +53,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">screen_growth</span><span class="op">(</span>txt <span class="op">=</span> <span class="st">""</span>, loc <span class="op">=</span> <span class="st">""</span>, format <span class="op">=</span> <span class="st">"1.0"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">screen_growth</span><span class="op">(</span>
+  txt <span class="op">=</span> <span class="st">""</span>,
+  loc <span class="op">=</span> <span class="st">""</span>,
+  format <span class="op">=</span> <span class="st">"1.0"</span>,
+  ynames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"hdc"</span><span class="op">)</span>,
+  na.omit <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="va">...</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>txt</dt>
-<dd><p>A JSON string, URL or file with the data in JSON
-format. The input data adhere to specification
-<a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a>,
-and are converted to JSON according to <code>schema</code>.</p></dd>
+<dd><p>A JSON string, URL or file</p></dd>
 <dt>loc</dt>
 <dd><p>Alternative to <code>txt</code>. Location where input data is uploaded
 and converted to internal server format.</p></dd>
@@ -71,6 +75,13 @@ and converted to internal server format.</p></dd>
 three schemas supported: <code>"1.0"</code>, <code>"1.1"</code> and <code>"2.0"</code>. Formats <code>"1.0"</code> and
 <code>"1.1"</code> are included for backward compatibility only. Use <code>format = "2.0"</code>
 for new applications.</p></dd>
+<dt>ynames</dt>
+<dd><p>Character vector identifying the measures to be
+screened. By default, <code>ynames = c("hgt", "wgt", "hdc")</code>.</p></dd>
+<dt>na.omit</dt>
+<dd><p>A logical indicating whether records with a missing
+<code>x</code> (age) or <code>y</code> (yname) should be removed. Defaults to
+<code>TRUE</code>.</p></dd>
 <dt>...</dt>
 <dd><p>Ignored</p></dd>
 </dl></div>
