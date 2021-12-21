@@ -1,5 +1,6 @@
 #' Screen growth curves according to JGZ guidelines
 #'
+#' @name screen_growth-deprecated
 #' @inheritParams bdsreader::read_bds
 #' @inheritParams request_site
 #' @param ynames Character vector identifying the measures to be
@@ -7,8 +8,6 @@
 #' @param na.omit A logical indicating whether records with a missing
 #' `x` (age) or `y` (yname) should be removed. Defaults to
 #' `TRUE`.
-#' @note `screen_growth` superseeds `screen_curves` and will
-#' only return results from growth screening.
 #' @examples
 #' host <- "http://localhost"
 #' fn <- system.file("testdata", "client3.json", package = "james")
@@ -31,6 +30,8 @@ screen_growth <- function(txt = "",
                           na.omit = TRUE,
                           ...) {
   authenticate(...)
+  .Deprecated("apply_screeners",
+              msg = "screen_growth() is deprecated. Please use apply_screeners() instead.")
   screen_curves_ind(ind = get_tgt(txt, loc, format = format),
                     ynames = ynames,
                     na.omit = na.omit,

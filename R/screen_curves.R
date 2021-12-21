@@ -28,8 +28,8 @@
 screen_curves <- function(txt = "", loc = "", location = "", format = "1.0",
                           legacy = TRUE, ...) {
   authenticate(...)
-  .Deprecated("screen_growth",
-    msg = "screen_curves() is deprecated. Please use screen_growth() or custom_list() instead."
+  .Deprecated("apply_screeners",
+    msg = "screen_curves() is deprecated. Please use apply_screeners() instead."
   )
   # legacy
   if (!is.empty(location)) loc <- location
