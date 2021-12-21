@@ -13,6 +13,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/apply_screeners.html</loc>
+  </url>
+  <url>
     <loc>/reference/authenticate.html</loc>
   </url>
   <url>
@@ -55,7 +58,7 @@
     <loc>/reference/screen_curves-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/screen_growth.html</loc>
+    <loc>/reference/screen_growth-deprecated.html</loc>
   </url>
   <url>
     <loc>/reference/select_chart.html</loc>
