@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 0.48.1
+Version: 0.49.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -23,7 +23,7 @@ Imports:
     dplyr,
     curl,
     grid (>= 4.1.0),
-    growthscreener (>= 1.9.0),
+    growthscreener (>= 1.12.0),
     httr,
     jamesclient (>= 0.18.0),
     jose,

@@ -372,7 +372,7 @@
     },
     "growthscreener": {
       "Package": "growthscreener",
-      "Version": "1.11.0",
+      "Version": "1.12.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/bdsreader, growthcharts/centile,\ngrowthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteType": "github",
@@ -380,8 +380,8 @@
       "RemoteRepo": "growthscreener",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "393cc4bf17dc8387b33715086952a120cc81f859",
-      "Hash": "103f0f33452681615eaaf2929e676b41"
+      "RemoteSha": "fa650e23f80bbc4b72867cb3f13424325fa9a05c",
+      "Hash": "199fddf92c83871eb684aa962b299837"
     },
     "highr": {
       "Package": "highr",

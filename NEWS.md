@@ -1,3 +1,7 @@
+# james 0.49.0
+
+- Make relevant screener parameters visible in james package
+
 # james 0.48.1
 
 - Block passing of `\dots` to `chartbox::list_charts()`
