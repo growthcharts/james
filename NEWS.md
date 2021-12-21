@@ -1,5 +1,6 @@
 # james 0.49.0
 
+- Replace `screen_curves()` and `screen_growth()` by `apply_screeners()`
 - Make relevant screener parameters visible in james package
 
 # james 0.48.1
