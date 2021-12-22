@@ -1,3 +1,7 @@
+# james 0.51.2
+
+- Remove chart element from `request_blend()` because of problems with the JSON representation
+
 # james 0.51.1
 
 - Return chart from `request_blend()` now contains SVG instead of grob
