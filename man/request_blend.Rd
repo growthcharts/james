@@ -16,14 +16,22 @@ and are converted to JSON according to \code{schema}.}
 and converted to internal server format.}
 
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
-returns all standard end points.}
+returns the results of all standard end points.}
 
 \item{...}{Ignored}
 }
 \value{
-A table with screening results
-
-A list with custom parts
+The default \code{blend = "standard"} return a list with the following
+components:
+\describe{
+\item{\code{txt}}{String, file or URL with child data}
+\item{\code{loc}}{URL of uploaded and processed child data}
+\item{\code{child}}{Processed child level data}
+\item{\code{time}}{Processed time level data}
+\item{\code{chart}}{Growth chart figure (svglite)}
+\item{\code{screeners}}{Results from application of screeners to child data}
+\item{\code{site}}{URL with personalised child data}
+}
 }
 \description{
 Provides a Screen growth curves according to JGZ guidelines
@@ -31,12 +39,4 @@ Provides a Screen growth curves according to JGZ guidelines
 \examples{
 fn <- system.file("extdata", "bds_v2.0", "smocc", "Laura_S.json", package = "jamesdemodata")
 results <- request_blend(txt = fn)
-\dontrun{
-# the more complicated way
-# first upload, then create custom list
-host <- "http://localhost"
-r1 <- jamesclient::upload_txt(fn, host = host)
-loc <- jamesclient::get_url(r1, "location")
-list1 <- request_blend(loc = loc)
-}
 }

@@ -2,20 +2,21 @@
 #'
 #' @inheritParams request_site
 #' @param blend A string indicating the requested blend. The default (`"standard"`)
-#' returns all standard end points.
-#' @return A table with screening results
-#' @return A list with custom parts
+#' returns the results of all standard end points.
+#' @return The default `blend = "standard"` return a list with the following
+#' components:
+#' \describe{
+#'   \item{`txt`}{String, file or URL with child data}
+#'   \item{`loc`}{URL of uploaded and processed child data}
+#'   \item{`child`}{Processed child level data}
+#'   \item{`time`}{Processed time level data}
+#'   \item{`chart`}{Growth chart figure (svglite)}
+#'   \item{`screeners`}{Results from application of screeners to child data}
+#'   \item{`site`}{URL with personalised child data}
+#' }
 #' @examples
 #' fn <- system.file("extdata", "bds_v2.0", "smocc", "Laura_S.json", package = "jamesdemodata")
 #' results <- request_blend(txt = fn)
-#' \dontrun{
-#' # the more complicated way
-#' # first upload, then create custom list
-#' host <- "http://localhost"
-#' r1 <- jamesclient::upload_txt(fn, host = host)
-#' loc <- jamesclient::get_url(r1, "location")
-#' list1 <- request_blend(loc = loc)
-#' }
 #' @export
 request_blend <- function(txt = "", loc = "", blend = "standard", ...) {
   authenticate(...)
@@ -35,7 +36,7 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
   site <- request_site(txt, loc, ...)
   loc <- strsplit(site, "?loc=", fixed = TRUE)[[1]][2]
   if (is.na(loc)) loc <- ""
-  data <- get_tgt(loc = loc)
+  tgt <- get_tgt(loc = loc)
   chart <- draw_chart(loc = loc, ...)
   screeners <- apply_screeners(loc = loc, ...)
 
@@ -43,7 +44,8 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
     txt = txt,
     loc = loc,
     site = site,
-    data = data,
+    child = attr(tgt, "person", exact = TRUE),
+    time = tgt,
     chart = chart,
     screeners = screeners
   )
