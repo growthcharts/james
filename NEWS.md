@@ -1,3 +1,7 @@
+# james 0.51.1
+
+- Return chart from `request_blend()` now contains SVG instead of grob
+
 # james 0.51.0
 
 - Add `request_blend()` that acts like a one-stop-shop
