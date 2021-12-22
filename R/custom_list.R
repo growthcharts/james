@@ -20,6 +20,11 @@
 #' @export
 custom_list <- function(txt = "", loc = "", format = "1.0", ...) {
   authenticate(...)
+
+  .Deprecated("request_blend",
+              msg = "custom_list() is deprecated and will disappear in Sept 2022. Please use request_blend(..., blend = 'allegro') instead."
+  )
+
   site <- request_site(txt, loc, format = format)
 
   tgt <- get_tgt(txt, loc, format = format)

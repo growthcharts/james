@@ -15,7 +15,7 @@ draw_chart_ind <- function(loc = "", chartcode = "",
                            curve_interpolation = TRUE, ...) {
   authenticate(...)
   .Deprecated("draw_chart",
-    msg = "draw_chart_ind() is deprecated. Please use draw_chart() instead."
+    msg = "draw_chart_ind() is deprecated and will disappear in Sept 2022. Please use draw_chart() instead."
   )
 
   # legacy

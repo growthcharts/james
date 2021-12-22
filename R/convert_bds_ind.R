@@ -15,7 +15,7 @@
 convert_bds_ind <- function(txt = "", format = "1.0", ...) {
   authenticate(...)
   .Deprecated("upload_data",
-    msg = "convert_bds_ind() is deprecated. Please use upload_data() instead."
+    msg = "convert_bds_ind() is deprecated and will disappear in Sept 2022. Please use upload_data() instead."
   )
   upload_data(txt = txt, format = format, ...)
 }

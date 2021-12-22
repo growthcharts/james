@@ -48,7 +48,7 @@ the \code{selector} setting. If no valid \code{tgt} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
-\item{ind_loc}{Legacy for \code{loc}. Use \code{loc} instead.}
+\item{ind_loc}{Legacy. Will disappear in Sept 2022. Use \code{loc} instead.}
 
 \item{...}{Ignored}
 }

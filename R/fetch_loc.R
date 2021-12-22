@@ -21,6 +21,6 @@ fetch_loc <- function(txt = "",
                       ...) {
   authenticate(...)
   .Deprecated("upload_data",
-              msg = "fetch_loc() is deprecated. Please use upload_data() instead.")
+              msg = "fetch_loc() is deprecated and will disappear in Sept 2022. Please use upload_data() instead.")
   upload_data(txt = txt, ...)
 }

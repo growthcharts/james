@@ -29,7 +29,7 @@ draw_chart_bds <- function(txt = "", format = "1.0",
 
   # legacy
   .Deprecated("draw_chart",
-    msg = "draw_chart_bds() is deprecated. Please use draw_chart() instead."
+    msg = "draw_chart_bds() is deprecated and will disappear in Sept 2022. Please use draw_chart() instead."
   )
 
   draw_chart(

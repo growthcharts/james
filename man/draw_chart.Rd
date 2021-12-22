@@ -121,9 +121,9 @@ growth of the target child should be drawn}
 \item{draw_grob}{Logical. Should chart be plotted on current device?
 Default is \code{TRUE}. For internal use only.}
 
-\item{bds_data}{Legacy for \code{txt}. Use \code{txt} instead.}
+\item{bds_data}{Legacy. Will disappear in Sept 2022. Use \code{txt} instead.}
 
-\item{ind_loc}{Legacy for \code{loc}. Use \code{loc} instead.}
+\item{ind_loc}{Legacy. Will disappear in Sept 2022. Use \code{loc} instead.}
 
 \item{...}{Ignored}
 }
@@ -141,6 +141,6 @@ g <- draw_chart(txt = fn)
 \code{\link[=select_chart]{select_chart()}}
 }
 \author{
-Stef van Buuren 2020
+Stef van Buuren 2021
 }
 \keyword{server}

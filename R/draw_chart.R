@@ -32,10 +32,10 @@
 #'   or `"7.5m"`
 #' @param draw_grob Logical. Should chart be plotted on current device?
 #' Default is `TRUE`. For internal use only.
-#' @param bds_data Legacy for `txt`. Use `txt` instead.
-#' @param ind_loc Legacy for `loc`. Use `loc` instead.
+#' @param bds_data Legacy. Will disappear in Sept 2022. Use `txt` instead.
+#' @param ind_loc Legacy. Will disappear in Sept 2022. Use `loc` instead.
 #' @return A `gTree` object.
-#' @author Stef van Buuren 2020
+#' @author Stef van Buuren 2021
 #' @seealso [select_chart()]
 #' @keywords server
 #' @examples
@@ -71,12 +71,12 @@ draw_chart <- function(txt = "",
   authenticate(...)
 
   if (!missing(bds_data)) {
-    warning("Argument bds_data is deprecated; please use txt instead.",
+    warning("Argument bds_data is deprecated and will disappear in Sept 2022; please use txt instead.",
       call. = FALSE
     )
   }
   if (!missing(ind_loc)) {
-    warning("Argument ind_loc is deprecated; please use loc instead.",
+    warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use loc instead.",
       call. = FALSE
     )
   }
