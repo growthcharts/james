@@ -1,3 +1,9 @@
+# james 0.51.0
+
+- Add `request_blend()` that acts like a one-stop-shop
+- Deprecate `custom_list()` in favour of `request_blend()`
+- Add messages that indicate removal of deprecated function in Sept 2022
+
 # james 0.49.0
 
 - Replace `screen_curves()` and `screen_growth()` by `apply_screeners()`
