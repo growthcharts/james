@@ -10,7 +10,7 @@
 #'   \item{`loc`}{URL of uploaded and processed child data}
 #'   \item{`child`}{Processed child level data}
 #'   \item{`time`}{Processed time level data}
-#'   \item{`chart`}{Growth chart figure (svglite)}
+#'   \item{`chart`}{SVG of growth chart}
 #'   \item{`screeners`}{Results from application of screeners to child data}
 #'   \item{`site`}{URL with personalised child data}
 #' }
@@ -37,7 +37,21 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
   loc <- strsplit(site, "?loc=", fixed = TRUE)[[1]][2]
   if (is.na(loc)) loc <- ""
   tgt <- get_tgt(loc = loc)
-  chart <- draw_chart(loc = loc, ...)
+
+  # render chart as svg
+  chart <- draw_chart(loc = loc, draw_grob = FALSE, ...)
+  sidecode <- substr(chart$name, 4L, 4L)
+  if (sidecode %in% c("A", "B", "C", "X")) {
+    width <- 8.27
+    height <- 11.69
+  } else {
+    width <- 7.09
+    height <- 7.09
+  }
+  s <- svglite::svgstring(width = width, height = height)
+  grid.draw(chart)
+  dev.off()
+
   screeners <- apply_screeners(loc = loc, ...)
 
   result <- list(
@@ -46,7 +60,7 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
     site = site,
     child = attr(tgt, "person", exact = TRUE),
     time = tgt,
-    chart = chart,
+    chart = s(),
     screeners = screeners
   )
   return(result)

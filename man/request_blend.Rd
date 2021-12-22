@@ -28,7 +28,7 @@ components:
 \item{\code{loc}}{URL of uploaded and processed child data}
 \item{\code{child}}{Processed child level data}
 \item{\code{time}}{Processed time level data}
-\item{\code{chart}}{Growth chart figure (svglite)}
+\item{\code{chart}}{SVG of growth chart}
 \item{\code{screeners}}{Results from application of screeners to child data}
 \item{\code{site}}{URL with personalised child data}
 }
