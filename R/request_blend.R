@@ -2,7 +2,8 @@
 #'
 #' @inheritParams request_site
 #' @param blend A string indicating the requested blend. The default (`"standard"`)
-#' returns the results of all standard end points.
+#' returns the results of the standard end points that produces tables. Graphs
+#' are not supported.
 #' @return The default `blend = "standard"` return a list with the following
 #' components:
 #' \describe{

@@ -16,7 +16,8 @@ and are converted to JSON according to \code{schema}.}
 and converted to internal server format.}
 
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
-returns the results of all standard end points.}
+returns the results of the standard end points that produces tables. Graphs
+are not supported.}
 
 \item{...}{Ignored}
 }
