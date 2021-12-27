@@ -18,8 +18,7 @@ for new applications.}
 \item{...}{Ignored}
 }
 \value{
-An object of class \code{target}. Basically a list with elements \code{psn}
-(persondata) and \code{xyz} (timedata).
+A list with elements \code{psn} (persondata) and \code{xyz} (timedata).
 }
 \description{
 Convert json BSD data for single individual to class individual

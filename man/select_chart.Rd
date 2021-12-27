@@ -16,8 +16,7 @@ select_chart(
 )
 }
 \arguments{
-\item{target}{An object of class \code{target}. Basically a list with
-elements \code{psn} (persondata) and \code{xyz} (timedata).}
+\item{target}{A list with elements \code{psn} (persondata) and \code{xyz} (timedata).}
 
 \item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 or \code{character(0)}}

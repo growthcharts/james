@@ -16,8 +16,10 @@
 #'   \item{`site`}{URL with personalised child data}
 #' }
 #' @examples
+#' \dontrun{
 #' fn <- system.file("extdata", "bds_v2.0", "smocc", "Laura_S.json", package = "jamesdemodata")
 #' results <- request_blend(txt = fn)
+#' }
 #' @export
 request_blend <- function(txt = "", loc = "", blend = "standard", ...) {
   authenticate(...)

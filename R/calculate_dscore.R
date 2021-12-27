@@ -26,7 +26,7 @@ calculate_dscore <- function(txt = "",
   output <- match.arg(output)
   tgt <- get_tgt(txt, loc, format = format)
 
-  if (!inherits(tgt, "target")) {
+  if (!is.list(tgt)) {
     message("Cannot calculate D-score")
     return(NULL)
   }

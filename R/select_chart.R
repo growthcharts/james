@@ -6,8 +6,7 @@
 #' or equal to 36 weeks, and determines the age group by the
 #' maximum age found in the data.
 #' @aliases select_chart
-#' @param target An object of class `target`. Basically a list with
-#' elements `psn` (persondata) and `xyz` (timedata).
+#' @param target A list with elements `psn` (persondata) and `xyz` (timedata).
 #' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'`
 #' or `character(0)`
 #' @param agegrp Either `'0-15m'`, `'0-4y'`, `'1-21y'`,
@@ -33,6 +32,8 @@ select_chart <- function(target = NULL,
                          ga = NULL,
                          side = NULL,
                          language = "dutch") {
+
+
 
   # choose defaults depending on individual
   if (!is.null(target)) {
@@ -68,9 +69,10 @@ select_chartgrp <- function(tgt) {
 
 select_agegrp <- function(tgt) {
   # automatic agegrp setting based on last age
+  time <- timedata(tgt)
 
   # get maximum age
-  x <- tgt$age
+  x <- time$age
   max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
 
   # assign default age group
@@ -103,7 +105,7 @@ select_sex <- function(tgt) {
 }
 
 select_side <- function(tgt) {
-  yname <- tgt$yname
+  yname <- timedata(tgt)[["yname"]]
   if (any(c("hgt", "wgt", "hdc") %in% yname)) {
     return("hgt")
   }

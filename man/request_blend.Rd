@@ -37,6 +37,8 @@ components:
 Provides a Screen growth curves according to JGZ guidelines
 }
 \examples{
+\dontrun{
 fn <- system.file("extdata", "bds_v2.0", "smocc", "Laura_S.json", package = "jamesdemodata")
 results <- request_blend(txt = fn)
+}
 }

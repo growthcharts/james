@@ -92,7 +92,7 @@ initialize_dnr <- function(parsed, selector, target, chartgrp, agegrp) {
   # Determine dnr based on the uploaded data
   if (selector == "data") {
     # get maximum age
-    x <- target$age
+    x <- timedata(target)[["age"]]
     max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
 
     dnr <- "0-2"
@@ -122,7 +122,7 @@ initialize_period <- function(target, dnr, agegrp) {
   brk <- get_breakpoints(dnr)
 
   # get maximum age
-  x <- target$age
+  x <- timedata(target)[["age"]]
   max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
 
   # period 1
@@ -144,7 +144,7 @@ initialize_period <- function(target, dnr, agegrp) {
 
 initialize_accordion <- function(target) {
   # check for hgt, wgt and hdc
-  yname <- target$yname
+  yname <- timedata(target)[["yname"]]
   has_growth <- any(c("hgt", "wgt", "hdc") %in% yname)
   has_dev <- any("dsc" %in% yname)
 
