@@ -26,14 +26,16 @@ calculate_dscore <- function(txt = "",
   output <- match.arg(output)
   tgt <- get_tgt(txt, loc, format = format)
 
-  if (!hasName(attributes(tgt), "person")) {
+  if (!inherits(tgt, "target")) {
     message("Cannot calculate D-score")
     return(NULL)
   }
 
-  df <- tgt %>%
+  time <- timedata(tgt)
+  child <- persondata(tgt)
+  df <- time %>%
     filter(.data$yname == "dsc") %>%
-    mutate(date = format(attr(!!tgt, "person")$dob + round(.data$age * 365.25), "%Y%m%d"))
+    mutate(date = format(child[["dob"]] + round(.data$age * 365.25), "%Y%m%d"))
 
   if (output == "last_visit") {
     return(df[nrow(df), ])

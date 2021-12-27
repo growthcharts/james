@@ -34,8 +34,8 @@ test_that(
 #   expect_warning(screen_curves(js))
 # )
 test_that(
-  "screen_growth() on not_a_vector.json has messages",
-  expect_message(screen_growth(js))
+  "screen_growth() on not_a_vector.json has warnings",
+  expect_warning(screen_growth(js))
 )
 
 test_that(
@@ -60,3 +60,4 @@ test_that(
   "draw_chart() on http400.json has messages",
   expect_silent(draw_chart(js, draw_grob = FALSE, quiet = TRUE))
 )
+

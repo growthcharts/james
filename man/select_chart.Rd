@@ -16,7 +16,8 @@ select_chart(
 )
 }
 \arguments{
-\item{target}{A tibble with a \code{person} attribute, or \code{NULL}.}
+\item{target}{An object of class \code{target}. Basically a list with
+elements \code{psn} (persondata) and \code{xyz} (timedata).}
 
 \item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}
 or \code{character(0)}}
@@ -43,9 +44,9 @@ A list with elements \code{chartgrp}, \code{chartcode}
 and \code{ga}
 }
 \description{
-This function controls the behavior for selecting a specific growth
+This function controls the behaviour for selecting a specific growth
 chart based on a combination of individual data and user settings.
-The default behavior select preterm chart if gestational age is lower
+The default behaviour select preterm chart if gestational age is lower
 or equal to 36 weeks, and determines the age group by the
 maximum age found in the data.
 }

@@ -1,11 +1,10 @@
 #' Convert json BSD data for single individual to class individual
 #'
-#' This function takes data from a json source and saves as a tibble with
-#' a person attribute.
 #' @note Deprecated. Use [upload_data()] instead.
 #' @name convert_bds_ind-deprecated
 #' @inheritParams bdsreader::read_bds
-#' @return A tibble with a person attribute.
+#' @return An object of class `target`. Basically a list with elements `psn`
+#' (persondata) and `xyz` (timedata).
 #' @author Stef van Buuren 2021
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")

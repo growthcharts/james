@@ -1,5 +1,5 @@
 #' @import     svglite
-#' @importFrom bdsreader       read_bds persondata
+#' @importFrom bdsreader       read_bds persondata timedata
 #' @importFrom chartbox        list_charts
 #' @importFrom chartcatalog    create_chartcode get_breakpoints
 #'                             parse_chartcode

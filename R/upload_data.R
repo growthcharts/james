@@ -8,7 +8,8 @@
 #' of the `"loc"` argument. The server wipes the cached data after 2 hours.
 #' @inheritParams bdsreader::read_bds
 #' @param \dots Used for additional parameters
-#' @return A tibble with an attribute called `"person"`
+#' @return An object of class `target`. Basically a list with elements `psn`
+#' (persondata) and `xyz` (timedata).
 #' @author Stef van Buuren 2021
 #' @seealso [bdsreader::read_bds()]
 #'          [jsonlite::fromJSON()]

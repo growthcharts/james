@@ -37,7 +37,8 @@ version number for the basename, and overwrites the
 \item{\dots}{Used for additional parameters}
 }
 \value{
-A tibble with an attribute called \code{"person"}
+An object of class \code{target}. Basically a list with elements \code{psn}
+(persondata) and \code{xyz} (timedata).
 }
 \description{
 Uploads JSON data that adhere to the BDS-format, parses its

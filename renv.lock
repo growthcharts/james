@@ -53,10 +53,10 @@
     },
     "V8": {
       "Package": "V8",
-      "Version": "3.6.0",
+      "Version": "4.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "075e000b3f9f5eb05f22e3d7bef9f016"
+      "Hash": "916996b97ed2c882b0e748b79c75a0ec"
     },
     "askpass": {
       "Package": "askpass",
@@ -81,9 +81,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "b9b4e5cf7885a7f193c7b0d66c4a744b316a0304",
-      "Hash": "305d283aecf032955ca47167fbb7429b"
+      "RemoteRef": "personclass",
+      "RemoteSha": "65edca56f7b60f48f8ea7e8c3cfc9c8c024aef14",
+      "Hash": "a9b01bf5b2ab59ec2e40b8dd612b3096"
     },
     "bit": {
       "Package": "bit",
@@ -379,9 +379,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "growthscreener",
       "RemoteUsername": "growthcharts",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "fa650e23f80bbc4b72867cb3f13424325fa9a05c",
-      "Hash": "199fddf92c83871eb684aa962b299837"
+      "RemoteRef": "personclass",
+      "RemoteSha": "f900e701e8cded4d499f7696abb54db546a6ca81",
+      "Hash": "f24cdbb812c4f9efa3f7115b410fddd2"
     },
     "highr": {
       "Package": "highr",

@@ -18,11 +18,11 @@ for new applications.}
 \item{...}{Ignored}
 }
 \value{
-A tibble with a person attribute.
+An object of class \code{target}. Basically a list with elements \code{psn}
+(persondata) and \code{xyz} (timedata).
 }
 \description{
-This function takes data from a json source and saves as a tibble with
-a person attribute.
+Convert json BSD data for single individual to class individual
 }
 \note{
 Deprecated. Use \code{\link[=upload_data]{upload_data()}} instead.

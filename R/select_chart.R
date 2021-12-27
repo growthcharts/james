@@ -1,12 +1,13 @@
 #' Selects the growth chart
 #'
-#' This function controls the behavior for selecting a specific growth
+#' This function controls the behaviour for selecting a specific growth
 #' chart based on a combination of individual data and user settings.
-#' The default behavior select preterm chart if gestational age is lower
+#' The default behaviour select preterm chart if gestational age is lower
 #' or equal to 36 weeks, and determines the age group by the
 #' maximum age found in the data.
 #' @aliases select_chart
-#' @param target A tibble with a `person` attribute, or `NULL`.
+#' @param target An object of class `target`. Basically a list with
+#' elements `psn` (persondata) and `xyz` (timedata).
 #' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'`
 #' or `character(0)`
 #' @param agegrp Either `'0-15m'`, `'0-4y'`, `'1-21y'`,

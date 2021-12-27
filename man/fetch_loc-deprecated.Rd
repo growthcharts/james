@@ -13,11 +13,12 @@ fetch_loc(txt = "", ...)
 \item{...}{Ignored}
 }
 \value{
-A tibble with a person attribute
+An object of class \code{target}. Basically a list with elements \code{psn}
+(persondata) and \code{xyz} (timedata).
 }
 \description{
 Uploads JSON data that adhere to the BDS-format, parses its
-contents, converts it to an internal JAMES target object,
+contents, converts it to an internal JAMES object of class \code{target},
 and stores the result on the server for further processing.
 The function is useful for caching input data over multiple requests to
 \code{OpenCPU}. The cached data feed into other JAMES functions by means

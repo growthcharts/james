@@ -59,8 +59,8 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
     txt = txt,
     loc = loc,
     site = site,
-    child = attr(tgt, "person", exact = TRUE),
-    time = tgt,
+    child = persondata(tgt),
+    time = timedata(tgt),
 #    chart = s(),
     screeners = screeners
   )
