@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 0.51.2
+Version: 0.52.0
 Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
     role = c("aut", "cre"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -16,23 +16,23 @@ Depends:
     R (>= 2.10),
     svglite
 Imports: 
-    bdsreader (>= 0.15.0),
-    chartbox (>= 1.6.0),
-    chartcatalog (>= 1.9.0),
-    chartplotter (>= 0.27.0),
+    bdsreader (>= 0.16.1),
+    chartbox (>= 1.10.0),
+    chartcatalog (>= 1.10.0),
+    chartplotter (>= 0.29.0),
     dplyr,
     curl,
     grDevices,
     grid (>= 4.1.0),
-    growthscreener (>= 1.12.0),
+    growthscreener (>= 1.14.0),
     httr,
-    jamesclient (>= 0.18.0),
+    jamesclient (>= 0.23.0),
     jose,
     jsonlite,
     rlang,
     utils
 Suggests: 
-    jamesdemodata (>= 0.7.0),
+    jamesdemodata (>= 0.7.1),
     openssl,
     testthat,
     usethis

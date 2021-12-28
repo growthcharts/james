@@ -1,3 +1,11 @@
+# james 0.52.0
+
+- Breaking change is data structure
+- Change data structure of `read_bds()` to a simple list to ease standard JSON representation
+- Adapt various JAMES functions to work with change to simple list
+- Update to `bdsreader 0.17.0`
+- Update `renv.lock`
+
 # james 0.51.2
 
 - Remove chart element from `request_blend()` because of problems with the JSON representation
