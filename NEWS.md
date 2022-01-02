@@ -1,3 +1,7 @@
+# james 0.52.1
+
+- Update documentation of `request_blend()`
+
 # james 0.52.0
 
 - Breaking change is data structure
