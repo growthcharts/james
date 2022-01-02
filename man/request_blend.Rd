@@ -2,7 +2,7 @@
 % Please edit documentation in R/request_blend.R
 \name{request_blend}
 \alias{request_blend}
-\title{Provides a Screen growth curves according to JGZ guidelines}
+\title{Provides multiple outputs in one request}
 \usage{
 request_blend(txt = "", loc = "", blend = "standard", ...)
 }
@@ -17,7 +17,7 @@ and converted to internal server format.}
 
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
 returns the results of the standard end points that produces tables. Graphs
-are not supported.}
+are currently not supported.}
 
 \item{...}{Ignored}
 }
@@ -34,7 +34,8 @@ components:
 }
 }
 \description{
-Provides a Screen growth curves according to JGZ guidelines
+Function \code{request_blend()} acts as a one-stop-shop to obtain multiple
+outputs through one request.
 }
 \examples{
 \dontrun{

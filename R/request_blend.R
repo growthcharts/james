@@ -1,9 +1,11 @@
-#' Provides a Screen growth curves according to JGZ guidelines
+#' Provides multiple outputs in one request
 #'
+#' Function `request_blend()` acts as a one-stop-shop to obtain multiple
+#' outputs through one request.
 #' @inheritParams request_site
 #' @param blend A string indicating the requested blend. The default (`"standard"`)
 #' returns the results of the standard end points that produces tables. Graphs
-#' are not supported.
+#' are currently not supported.
 #' @return The default `blend = "standard"` return a list with the following
 #' components:
 #' \describe{
