@@ -1,6 +1,10 @@
+# james 0.53.0
+
+- Adds host names `ijgz.eaglescience.nl` and `james.groeidiagrammen.nl` to `get_host()`
+
 # james 0.52.1
 
-- Update documentation of `request_blend()`
+- Updates documentation of `request_blend()`
 
 # james 0.52.0
 
