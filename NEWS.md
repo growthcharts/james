@@ -1,3 +1,7 @@
+# james 0.54.0
+
+- Upgrades james.groeidiagrammen.nl to https
+
 # james 0.53.0
 
 - Adds host names `ijgz.eaglescience.nl` and `james.groeidiagrammen.nl` to `get_host()`
