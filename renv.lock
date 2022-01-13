@@ -427,7 +427,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.23.0",
+      "Version": "0.25.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/bdsreader, growthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -435,8 +435,8 @@
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "70b6e451fbd1c7526358be0321b58bd8eae97a7f",
-      "Hash": "f0e080d0b9c5a3ee2e297224267e3cbd"
+      "RemoteSha": "80264a2f40fa82ec91d84f866a4b9c7c7af6f847",
+      "Hash": "8aafaac0df192610888dd19ddee191d7"
     },
     "jamesdemodata": {
       "Package": "jamesdemodata",
@@ -598,10 +598,10 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "1.4.5",
+      "Version": "1.4.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5406fd37ef0bf9b88c8a4f264d6ec220"
+      "Hash": "69fdf291af288f32fd4cd93315084ea8"
     },
     "pillar": {
       "Package": "pillar",
