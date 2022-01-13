@@ -4,7 +4,7 @@ get_host <- function() {
   hostname <- system("hostname", intern = TRUE)
   switch(hostname,
     groeidiagrammen.nl = "https://groeidiagrammen.nl",
-    james.groeidiagrammen.nl = "http://james.groeidiagrammen.nl",
+    james.groeidiagrammen.nl = "https://james.groeidiagrammen.nl",
     ijgz.eaglescience.nl = "https://ijgz.eaglescience.nl/modules/james",
     opa = "https://vps.stefvanbuuren.nl",
     "http://localhost"
