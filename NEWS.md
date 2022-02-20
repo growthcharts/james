@@ -1,3 +1,8 @@
+# james 0.55.0
+
+- Updates to `renv 0.15.2`
+- Update to current R packages
+
 # james 0.54.0
 
 - Upgrades james.groeidiagrammen.nl to https
