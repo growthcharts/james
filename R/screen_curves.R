@@ -36,7 +36,7 @@ screen_curves <- function(txt = "", loc = "", location = "", format = "1.0",
   if (legacy) {
     toJSON(custom_list(txt = txt, loc = loc, ...))
   } else {
-    toJSON(screen_curves_ind(ind = get_tgt(txt, loc, format = format),
+    toJSON(screen_curves_ind(ind = get_tgt(txt = txt, loc = loc, format = format),
                              ...))
   }
 }

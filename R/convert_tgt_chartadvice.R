@@ -39,7 +39,9 @@
 #' @seealso [chartcatalog::parse_chartcode()]
 #' @keywords server
 #' @export
-convert_tgt_chartadvice <- function(txt = "", loc = "",
+convert_tgt_chartadvice <- function(txt = "",
+                                    session = "",
+                                    loc = "",
                                     format = "1.0",
                                     chartcode = "",
                                     selector = c("data", "chartcode"),
@@ -56,7 +58,7 @@ convert_tgt_chartadvice <- function(txt = "", loc = "",
   if (!is.empty(ind_loc)) loc <- ind_loc
 
   selector <- match.arg(selector)
-  tgt <- get_tgt(txt = txt, loc = loc, format = format)
+  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
   chartcode <- switch(selector,
     "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode

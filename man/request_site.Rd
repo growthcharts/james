@@ -6,6 +6,7 @@
 \usage{
 request_site(
   txt = "",
+  session = "",
   loc = "",
   format = "1.0",
   upload = TRUE,
@@ -19,8 +20,9 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
-and converted to internal server format.}
+\item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
+
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
@@ -64,7 +66,7 @@ host <- "http://localhost"
 
 # solutions that upload the data and create a URL with the `?loc=` query parameter
 \dontrun{
-# upload file - does not work (object 'bds_schema_str.json' not found)
+# upload file - works with docker on localhost
 site <- request_site(fn, host = host)
 # browseURL(site)
 

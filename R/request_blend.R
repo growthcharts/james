@@ -23,25 +23,25 @@
 #' results <- request_blend(txt = fn)
 #' }
 #' @export
-request_blend <- function(txt = "", loc = "", blend = "standard", ...) {
+request_blend <- function(txt = "", session = "", loc = "", blend = "standard", ...) {
   authenticate(...)
 
   if (blend == "standard") {
-    return(request_blend_standard(txt = txt, loc = loc, ...))
+    return(request_blend_standard(txt = txt, session = session, loc = loc, ...))
   }
 
   if (blend == "allegro") {
-    return(request_blend_allegro(txt = txt, loc = loc, ...))
+    return(request_blend_allegro(txt = txt, session = session, loc = loc, ...))
   }
 
   stop("blend", blend, "not found.")
 }
 
-request_blend_standard <- function(txt = "", loc = "", ...) {
-  site <- request_site(txt, loc, ...)
-  loc <- strsplit(site, "?loc=", fixed = TRUE)[[1]][2]
-  if (is.na(loc)) loc <- ""
-  tgt <- get_tgt(loc = loc)
+request_blend_standard <- function(txt = "", session = "", loc = "", ...) {
+  site <- request_site(txt = txt, session = session, loc = loc, ...)
+  session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
+  if (is.na(session)) session <- ""
+  tgt <- get_tgt(session = session)
 
   # render chart as svg
   #chart <- draw_chart(loc = loc, draw_grob = FALSE, ...)
@@ -57,11 +57,11 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
   #grid.draw(chart)
   #dev.off()
 
-  screeners <- apply_screeners(loc = loc, ...)
+  screeners <- apply_screeners(session = session, ...)
 
   result <- list(
     txt = txt,
-    loc = loc,
+    session = session,
     site = site,
     child = persondata(tgt),
     time = timedata(tgt),
@@ -71,15 +71,17 @@ request_blend_standard <- function(txt = "", loc = "", ...) {
   return(result)
 }
 
-request_blend_allegro <- function(txt = "", loc = "", format = "1.0", ...) {
-  site <- request_site(txt, loc, format = format)
+request_blend_allegro <- function(txt = "", session = "", loc = "", format = "1.0", ...) {
+  site <- request_site(txt = txt, session = session, loc = loc, format = format)
 
-  tgt <- get_tgt(txt, loc, format = format)
-
-  res <- screen_curves_ind(tgt)
+  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
+  res <- growthscreener::screen_curves_ind(ind = tgt)
 
   last_dscore <- NULL
   if (!is.null(tgt)) {
+
+    # FIXME: This is likely to be an error if tgt is a list (no data frame)
+
     idx <- tgt$yname == "dsc"
     if (any(idx)) {
       d <- tgt$y[idx][sum(idx)]

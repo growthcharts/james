@@ -26,11 +26,27 @@ get_loc <- function(txt, host, format) {
   headers(resp)$location
 }
 
+# returns session of uploaded data
+get_session <- function(txt, host, format) {
+  resp <- upload_txt(txt, host = host, format = format)
+  if (status_code(resp) != 201L) {
+    message_for_status(resp,
+                       task = paste0(
+                         "upload data", "\n",
+                         content(resp, "text", encoding = "utf-8")
+                       )
+    )
+    return("")
+  }
+  get_url(resp, "session")
+}
+
+
 # returns targetl or NULL
-get_tgt <- function(txt = "", loc = "", ...) {
+get_tgt <- function(txt = "", session = "", loc = "", ...) {
 
   # no ind
-  if (is.empty(txt) && is.empty(loc)) {
+  if (is.empty(txt) && is.empty(session) && is.empty(loc)) {
     return(NULL)
   }
 
@@ -39,8 +55,16 @@ get_tgt <- function(txt = "", loc = "", ...) {
     return(read_bds(txt, ...))
   }
 
+  # construct url from session or loc
+  if (!is.empty(session)) {
+    url <- paste0("http://localhost/", session, "/rda")
+  } else {
+    # use oldstyle url for compatibility
+    url <- paste0(loc, "R/.val/rda")
+  }
+
   # download ind
-  con <- curl(url = paste0(loc, "R/.val/rda"), open = "rb")
+  con <- curl(url = url, open = "rb")
   on.exit(close(con))
   load(file = con)
   .val

@@ -8,8 +8,7 @@
 draw_chart_ind(loc = "", chartcode = "", curve_interpolation = TRUE, ...)
 }
 \arguments{
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
-and converted to internal server format.}
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

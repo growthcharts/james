@@ -32,7 +32,7 @@ screen_growth <- function(txt = "",
   authenticate(...)
   .Deprecated("apply_screeners",
               msg = "screen_growth() is deprecated. Please use apply_screeners() instead.")
-  screen_curves_ind(ind = get_tgt(txt, loc, format = format),
+  screen_curves_ind(ind = get_tgt(txt = txt, loc = loc, format = format),
                     ynames = ynames,
                     na.omit = na.omit,
                     ...)

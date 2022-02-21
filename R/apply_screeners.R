@@ -21,13 +21,18 @@
 #' }
 #' @export
 apply_screeners <- function(txt = "",
+                            session = "",
                             loc = "",
                             format = "1.0",
                             ynames = c("hgt", "wgt", "hdc"),
                             na.omit = TRUE,
                             ...) {
   authenticate(...)
-  growthscreener::screen_curves_ind(ind = get_tgt(txt, loc, format = format),
+  tgt <- get_tgt(txt = txt,
+                 session = session,
+                 loc = loc,
+                 format = format)
+  growthscreener::screen_curves_ind(ind = tgt,
                                     ynames = ynames,
                                     na.omit = na.omit,
                                     ...)

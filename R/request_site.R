@@ -7,8 +7,8 @@
 #' format. The input data adhere to specification
 #' [BDS JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
 #' and are converted to JSON according to `schema`.
-#' @param loc Alternative to `txt`. Location where input data is uploaded
-#' and converted to internal server format.
+#' @param session Alternative to `txt`. Session key where input data is uploaded.
+#' @param loc Alternative to `txt`. Location where input data is uploaded.
 #' @param upload Logical. If `TRUE` then `request_site()` will upload
 #' the data in `txt` and return a site address with the `?loc=` query appended.
 #' Setting (`FALSE`) just appends `?txt=` to the site url, thus
@@ -36,7 +36,7 @@
 #'
 #' # solutions that upload the data and create a URL with the `?loc=` query parameter
 #' \dontrun{
-#' # upload file - does not work (object 'bds_schema_str.json' not found)
+#' # upload file - works with docker on localhost
 #' site <- request_site(fn, host = host)
 #' # browseURL(site)
 #'
@@ -66,13 +66,17 @@
 #' # browseURL(site)
 #' }
 #' @export
-request_site <- function(txt = "", loc = "",
+request_site <- function(txt = "",
+                         session = "",
+                         loc = "",
                          format = "1.0",
-                         upload = TRUE, host = NULL,
+                         upload = TRUE,
+                         host = NULL,
                          ...) {
   authenticate(...)
 
   txt <- txt[1L]
+  session <- session[1L]
   loc <- loc[1L]
 
   # What is the URL of the server where I run?
@@ -80,7 +84,7 @@ request_site <- function(txt = "", loc = "",
   site <- paste0(host, "/ocpu/lib/james/www/")
 
   # no data
-  if (is.empty(txt) && is.empty(loc)) {
+  if (is.empty(txt) && is.empty(session) && is.empty(loc)) {
     return(site)
   }
 
@@ -120,9 +124,17 @@ request_site <- function(txt = "", loc = "",
   }
 
   # # return ?loc=, possibly after upload of txt
+  # if (!is.empty(txt) && upload) {
+  #   loc <- get_loc(txt, host, format = format)
+  # }
+  #
+  # ifelse(loc == "", site, paste0(site, "?loc=", loc))
+
+  # return ?session=, possibly after upload of txt
   if (!is.empty(txt) && upload) {
-    loc <- get_loc(txt, host, format = format)
+    session <- get_session(txt, host, format = format)
   }
 
-  ifelse(loc == "", site, paste0(site, "?loc=", loc))
-}
+  ifelse(session == "", site, paste0(site, "?session=", session))
+
+  }

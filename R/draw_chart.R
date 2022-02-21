@@ -43,6 +43,7 @@
 #' g <- draw_chart(txt = fn)
 #' @export
 draw_chart <- function(txt = "",
+                       session = "",
                        loc = "",
                        format = "1.0",
                        chartcode = "",
@@ -93,7 +94,7 @@ draw_chart <- function(txt = "",
     )
   )
 
-  tgt <- get_tgt(txt, loc, format = format)
+  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty

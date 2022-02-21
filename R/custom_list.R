@@ -18,18 +18,17 @@
 #' identical(list1, list2)
 #' }
 #' @export
-custom_list <- function(txt = "", loc = "", format = "1.0", ...) {
+custom_list <- function(txt = "", session = "", loc = "", format = "1.0", ...) {
   authenticate(...)
 
   .Deprecated("request_blend",
               msg = "custom_list() is deprecated and will disappear in Sept 2022. Please use request_blend(..., blend = 'allegro') instead."
   )
 
-  site <- request_site(txt, loc, format = format)
+  site <- request_site(txt = txt, session = session, loc = loc, format = format)
 
-  tgt <- get_tgt(txt, loc, format = format)
-
-  res <- screen_curves_ind(tgt)
+  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
+  res <- growthscreener::screen_curves_ind(ind = tgt)
 
   last_dscore <- NULL
   if (!is.null(tgt)) {

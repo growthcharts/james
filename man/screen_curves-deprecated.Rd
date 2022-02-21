@@ -20,8 +20,7 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
-and converted to internal server format.}
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{location}{Legacy for \code{loc}}
 

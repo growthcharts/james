@@ -4,7 +4,7 @@
 \alias{request_blend}
 \title{Provides multiple outputs in one request}
 \usage{
-request_blend(txt = "", loc = "", blend = "standard", ...)
+request_blend(txt = "", session = "", loc = "", blend = "standard", ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -12,8 +12,9 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded
-and converted to internal server format.}
+\item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
+
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
 returns the results of the standard end points that produces tables. Graphs
