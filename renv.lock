@@ -628,16 +628,16 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.25.0.9000",
+      "Version": "0.26.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/bdsreader, growthcharts/jamesdemodata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
-      "RemoteRef": "remove_location_header",
-      "RemoteSha": "588e022cc778021dd7c0feab6b160dd580d3f45d",
-      "Hash": "1ef6820fc479c4510e7c8180e29bc654",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "039ecb2590c024b9f805c3c533da0ea3d6298bab",
+      "Hash": "dffa367b35853d45c48c31c69885bc20",
       "Requirements": [
         "bdsreader",
         "curl",
@@ -681,10 +681,10 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.7.3",
+      "Version": "1.8.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "68c37fd8f863c6273dcd24928c17d6e1",
+      "Hash": "d07e729b27b372429d42d24d503613a0",
       "Requirements": []
     },
     "jsonvalidate": {
