@@ -1,3 +1,20 @@
+# james 0.55.0.9000
+
+## Breaking changes
+
+- Updates to `jamesclient 0.25.0.9000` that defines new JAMES response object
+- Replaces `loc` parameter by `session` parameter
+- Add deprecated notes about the `loc` parameter
+- Replaces all calls to `jamesclient::upload_txt()` by `jamesclient::james_post()`
+- Works with extended `c("james_post", "httr")` response vector
+
+## Other changes
+
+- Moves all deprecated functions into `deprecated.R`
+- Creates new `internal.R` to bundle internal helpers
+- Removes superfluous `preloads.R`
+- Adapts the `last_dscore` calculation to work with `psn` and `xyz` list components
+
 # james 0.55.0
 
 - Updates to `renv 0.15.2`
