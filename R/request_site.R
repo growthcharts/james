@@ -85,7 +85,7 @@ request_site <- function(txt = "",
 
   # What is the URL of the server where I run?
   if (is.null(host)) host <- get_host()
-  site <- paste0(host, "/www/")
+  site <- paste0(host, "/site/")
 
   # no data
   if (is.empty(txt) && is.empty(session)) {
