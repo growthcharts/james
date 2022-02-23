@@ -1,16 +1,21 @@
 // start.js
 
 const urlParams = new URLSearchParams(window.location.search);
-
 const user_txt = urlParams.get('txt');
-// legacy ind
-// const user_loc = urlParams.get('loc');
-var user_loc = urlParams.get('loc');
-if (urlParams.has('ind')) user_loc = urlParams.get('ind');
+const user_session =  urlParams.get('session');
 const user_chartcode = urlParams.get('chartcode');
 
-ocpu.seturl("/ocpu/library/james/R"); //hardcode path
+// legacy: get loc and ind query parameters
+var user_loc = urlParams.get('loc');
+if (urlParams.has('ind')) user_loc = urlParams.get('ind');
 
+// calculate user_loc if user specified the session
+if (user_session) {
+  user_loc = 'http://localhost/' + user_session;
+}
+
+//hardcode path
+ocpu.seturl("/ocpu/library/james/R");
 
 // internal constants
 const slider_values = {
