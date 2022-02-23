@@ -13,24 +13,30 @@
 #' apply_screeners(fn)
 #' \dontrun{
 #' # first upload, then screen
-#' host <- "http://localhost"
-#' r1 <- jamesclient::upload_txt(fn, host = host)
-#' location <- jamesclient::get_url(r1, "location")
-#' location
-#' apply_screeners(loc = location)
+#' library(jamesclient)
+#' r1 <- james_post(path = "data/upload/json", txt = fn)
+#' r2 <- james_post(path = "screeners/apply/json", loc = r1$location)
+#' r3 <- james_post(path = "screeners/apply/json", session = r1$session)
 #' }
 #' @export
 apply_screeners <- function(txt = "",
                             session = "",
-                            loc = "",
                             format = "1.0",
                             ynames = c("hgt", "wgt", "hdc"),
                             na.omit = TRUE,
+                            loc = "",
                             ...) {
   authenticate(...)
+
+  if (!missing(loc)) {
+    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+            call. = FALSE
+    )
+    session <- loc2session(loc)
+  }
+
   tgt <- get_tgt(txt = txt,
                  session = session,
-                 loc = loc,
                  format = format)
   growthscreener::screen_curves_ind(ind = tgt,
                                     ynames = ynames,

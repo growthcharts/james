@@ -10,7 +10,7 @@
 #' components:
 #' \describe{
 #'   \item{`txt`}{String, file or URL with child data}
-#'   \item{`loc`}{URL of uploaded and processed child data}
+#'   \item{`session`}{Session with uploaded child data}
 #'   \item{`child`}{Processed child level data}
 #'   \item{`time`}{Processed time level data}
 # #'   \item{`chart`}{SVG of growth chart}
@@ -23,22 +23,33 @@
 #' results <- request_blend(txt = fn)
 #' }
 #' @export
-request_blend <- function(txt = "", session = "", loc = "", blend = "standard", ...) {
+request_blend <- function(txt = "",
+                          session = "",
+                          blend = "standard",
+                          loc = "",
+                          ...) {
   authenticate(...)
 
+  if (!missing(loc)) {
+    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+            call. = FALSE
+    )
+    session <- loc2session(loc)
+  }
+
   if (blend == "standard") {
-    return(request_blend_standard(txt = txt, session = session, loc = loc, ...))
+    return(request_blend_standard(txt = txt, session = session, ...))
   }
 
   if (blend == "allegro") {
-    return(request_blend_allegro(txt = txt, session = session, loc = loc, ...))
+    return(request_blend_allegro(txt = txt, session = session, ...))
   }
 
   stop("blend", blend, "not found.")
 }
 
-request_blend_standard <- function(txt = "", session = "", loc = "", ...) {
-  site <- request_site(txt = txt, session = session, loc = loc, ...)
+request_blend_standard <- function(txt = "", session = "", ...) {
+  site <- request_site(txt = txt, session = session, ...)
   session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
   if (is.na(session)) session <- ""
   tgt <- get_tgt(session = session)
@@ -71,20 +82,20 @@ request_blend_standard <- function(txt = "", session = "", loc = "", ...) {
   return(result)
 }
 
-request_blend_allegro <- function(txt = "", session = "", loc = "", format = "1.0", ...) {
-  site <- request_site(txt = txt, session = session, loc = loc, format = format)
+request_blend_allegro <- function(txt = "", session = "", format = "1.0", ...) {
+  site <- request_site(txt = txt, session = session, format = format, ...)
+  session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
+  if (is.na(session)) session <- ""
+  tgt <- get_tgt(session = session)
 
-  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
   res <- growthscreener::screen_curves_ind(ind = tgt)
 
   last_dscore <- NULL
   if (!is.null(tgt)) {
-
-    # FIXME: This is likely to be an error if tgt is a list (no data frame)
-
-    idx <- tgt$yname == "dsc"
+    time <- timedata(tgt)
+    idx <- time$yname == "dsc"
     if (any(idx)) {
-      d <- tgt$y[idx][sum(idx)]
+      d <- time$y[idx][sum(idx)]
       if (length(d) && !is.na(d)) last_dscore <- d
     }
   }

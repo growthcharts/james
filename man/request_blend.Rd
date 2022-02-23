@@ -4,7 +4,7 @@
 \alias{request_blend}
 \title{Provides multiple outputs in one request}
 \usage{
-request_blend(txt = "", session = "", loc = "", blend = "standard", ...)
+request_blend(txt = "", session = "", blend = "standard", loc = "", ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
@@ -14,11 +14,13 @@ and are converted to JSON according to \code{schema}.}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
-
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
 returns the results of the standard end points that produces tables. Graphs
 are currently not supported.}
+
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
+Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+use \code{session} instead.}
 
 \item{...}{Ignored}
 }
@@ -27,7 +29,7 @@ The default \code{blend = "standard"} return a list with the following
 components:
 \describe{
 \item{\code{txt}}{String, file or URL with child data}
-\item{\code{loc}}{URL of uploaded and processed child data}
+\item{\code{session}}{Session with uploaded child data}
 \item{\code{child}}{Processed child level data}
 \item{\code{time}}{Processed time level data}
 \item{\code{screeners}}{Results from application of screeners to child data}

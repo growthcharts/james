@@ -7,7 +7,6 @@
 draw_chart(
   txt = "",
   session = "",
-  loc = "",
   format = "1.0",
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
@@ -29,6 +28,7 @@ draw_chart(
   show_realized = FALSE,
   show_future = FALSE,
   draw_grob = TRUE,
+  loc = "",
   bds_data = "",
   ind_loc = "",
   ...
@@ -41,8 +41,6 @@ format. The input data adhere to specification
 and are converted to JSON according to \code{schema}.}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
-
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
@@ -122,6 +120,10 @@ growth of the target child should be drawn}
 
 \item{draw_grob}{Logical. Should chart be plotted on current device?
 Default is \code{TRUE}. For internal use only.}
+
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
+Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+use \code{session} instead.}
 
 \item{bds_data}{Legacy. Will disappear in Sept 2022. Use \code{txt} instead.}
 

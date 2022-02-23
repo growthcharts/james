@@ -7,10 +7,10 @@
 request_site(
   txt = "",
   session = "",
-  loc = "",
   format = "1.0",
   upload = TRUE,
   host = NULL,
+  loc = "",
   ...
 )
 }
@@ -22,26 +22,28 @@ and are converted to JSON according to \code{schema}.}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
-
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
 \code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
 for new applications.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
-the data in \code{txt} and return a site address with the \verb{?loc=} query appended.
+the data in \code{txt} and return a site address with the \verb{?session=} query appended.
 Setting (\code{FALSE}) just appends \verb{?txt=} to the site url, thus
 deferring validation and conversion to internal representation to the site.}
 
 \item{host}{URL of the JAMES server. By default, host is the currently
 running server that processes the request.}
 
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
+Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+use \code{session} instead.}
+
 \item{...}{Ignored}
 }
 \value{
 URL composed of JAMES server, possibly appended by query string starting
-with \verb{?txt=} or \verb{?loc=}.
+with \verb{?txt=} or \verb{?session=}.
 }
 \description{
 Server-side function to construct a URL to a site that shows a personalised
@@ -49,14 +51,9 @@ growth chart. The site includes a navigation bar so that the end
 user can interact to chart choices.
 }
 \details{
-One of \code{txt} or \code{loc} needs to be specified. If both are given,
+One of \code{txt} or \code{session} needs to be specified. If both are given,
 \code{txt} takes precedence. If neither is given, then the function returns
 the base site without any data.
-}
-\note{
-This function does not yet work with Docker because we cannot get the
-host URL name.
-The output form \verb{?txt=} currently ignores the \code{schema} argument.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
@@ -64,7 +61,7 @@ js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 host <- "http://localhost"
 
-# solutions that upload the data and create a URL with the `?loc=` query parameter
+# solutions that upload the data and create a URL with the `?session=` query parameter
 \dontrun{
 # upload file - works with docker on localhost
 site <- request_site(fn, host = host)
@@ -82,9 +79,9 @@ site
 
 # same, but in two steps, starting from file name
 # this also works for js and url
-resp <- jamesclient::upload_txt(fn, host = host)
-loc <- jamesclient::get_url(resp, "location")
-site <- request_site(loc = loc)
+resp <- jamesclient::james_post(path = "data/upload", txt = fn)
+session <- jamesclient::get_url(resp, "session")
+site <- request_site(session = session)
 site
 # browseURL(site)
 
@@ -97,5 +94,5 @@ site <- request_site(url, upload = FALSE)
 }
 }
 \seealso{
-\code{\link[jamesclient:upload_txt]{jamesclient::upload_txt()}}, \code{\link[jamesclient:get_url]{jamesclient::get_url()}}
+\code{\link[jamesclient:james_post]{jamesclient::james_post()}}, \code{\link[jamesclient:get_url]{jamesclient::get_url()}}
 }

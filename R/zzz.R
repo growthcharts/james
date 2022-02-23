@@ -7,5 +7,5 @@
   toset <- names(op)
   options(op.james[toset])
 
-  invisible()
+  invisible(NULL)
 }

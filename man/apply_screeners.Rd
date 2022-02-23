@@ -7,10 +7,10 @@
 apply_screeners(
   txt = "",
   session = "",
-  loc = "",
   format = "1.0",
   ynames = c("hgt", "wgt", "hdc"),
   na.omit = TRUE,
+  loc = "",
   ...
 )
 }
@@ -18,8 +18,6 @@ apply_screeners(
 \item{txt}{A JSON string, URL or file}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
-
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
@@ -32,6 +30,10 @@ screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
 \item{na.omit}{A logical indicating whether records with a missing
 \code{x} (age) or \code{y} (yname) should be removed. Defaults to
 \code{TRUE}.}
+
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
+Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+use \code{session} instead.}
 
 \item{...}{Ignored}
 }
@@ -46,10 +48,9 @@ fn <- system.file("testdata", "client3.json", package = "james")
 apply_screeners(fn)
 \dontrun{
 # first upload, then screen
-host <- "http://localhost"
-r1 <- jamesclient::upload_txt(fn, host = host)
-location <- jamesclient::get_url(r1, "location")
-location
-apply_screeners(loc = location)
+library(jamesclient)
+r1 <- james_post(path = "data/upload/json", txt = fn)
+r2 <- james_post(path = "screeners/apply/json", loc = r1$location)
+r3 <- james_post(path = "screeners/apply/json", session = r1$session)
 }
 }

@@ -41,24 +41,29 @@
 #' @export
 convert_tgt_chartadvice <- function(txt = "",
                                     session = "",
-                                    loc = "",
                                     format = "1.0",
                                     chartcode = "",
                                     selector = c("data", "chartcode"),
+                                    loc = "",
                                     ind_loc = "",
                                     ...) {
   authenticate(...)
   if (!missing(ind_loc)) {
-    warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use loc instead.",
+    warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use session instead.",
       call. = FALSE
     )
+    session <- loc2session(ind_loc)
   }
 
-  # legacy
-  if (!is.empty(ind_loc)) loc <- ind_loc
+  if (!missing(loc)) {
+    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+            call. = FALSE
+    )
+    session <- loc2session(loc)
+  }
 
   selector <- match.arg(selector)
-  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format)
   chartcode <- switch(selector,
     "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode

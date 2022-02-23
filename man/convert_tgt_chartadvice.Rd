@@ -7,10 +7,10 @@
 convert_tgt_chartadvice(
   txt = "",
   session = "",
-  loc = "",
   format = "1.0",
   chartcode = "",
   selector = c("data", "chartcode"),
+  loc = "",
   ind_loc = "",
   ...
 )
@@ -22,8 +22,6 @@ format. The input data adhere to specification
 and are converted to JSON according to \code{schema}.}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
-
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
@@ -49,6 +47,10 @@ If there is a valid \code{tgt} object, then the function simply obeys
 the \code{selector} setting. If no valid \code{tgt} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
+
+\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
+Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+use \code{session} instead.}
 
 \item{ind_loc}{Legacy. Will disappear in Sept 2022. Use \code{loc} instead.}
 

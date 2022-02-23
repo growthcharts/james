@@ -12,7 +12,7 @@
 #' @importFrom httr            add_headers build_url content GET
 #'                             headers message_for_status modify_url POST
 #'                             status_code upload_file
-#' @importFrom jamesclient     get_url upload_txt
+#' @importFrom jamesclient     get_url james_post
 #' @importFrom jsonlite        fromJSON minify toJSON unbox validate
 #' @importFrom jose            jwt_decode_sig
 #' @importFrom rlang           .data

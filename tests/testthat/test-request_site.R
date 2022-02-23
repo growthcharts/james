@@ -7,7 +7,7 @@ kevin <- system.file("testdata", "Kevin_S.json", package = "james")
 kevin_gro <- system.file("testdata", "Kevin_S_gro.json", package = "james")
 kevin_dev <- system.file("testdata", "Kevin_S_dev.json", package = "james")
 
-host <- "https://groeidiagrammen.nl"
+host <- "http://localhost"
 
 test_that(
   "creates site_laura, with messages",

@@ -5,7 +5,8 @@
 #' and stores the result on the server for further processing.
 #' The function is useful for caching input data over multiple requests to
 #' `OpenCPU`. The cached data feed into other JAMES functions by means
-#' of the `"loc"` argument. The server wipes the cached data after 2 hours.
+#' of the `session` header in the response. The server wipes the
+#' cached data after 2 hours.
 #' @inheritParams bdsreader::read_bds
 #' @param \dots Used for additional parameters
 #' @return A list with elements `psn` (persondata) and `xyz` (timedata).

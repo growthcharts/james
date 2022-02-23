@@ -44,7 +44,6 @@
 #' @export
 draw_chart <- function(txt = "",
                        session = "",
-                       loc = "",
                        format = "1.0",
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
@@ -66,6 +65,7 @@ draw_chart <- function(txt = "",
                        show_realized = FALSE,
                        show_future = FALSE,
                        draw_grob = TRUE,
+                       loc = "",
                        bds_data = "",
                        ind_loc = "",
                        ...) {
@@ -75,16 +75,20 @@ draw_chart <- function(txt = "",
     warning("Argument bds_data is deprecated and will disappear in Sept 2022; please use txt instead.",
       call. = FALSE
     )
+    txt <- bds_data
   }
   if (!missing(ind_loc)) {
-    warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use loc instead.",
+    warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use session instead.",
       call. = FALSE
     )
+    session <- loc2session(ind_loc)
   }
-
-  # legacy
-  if (!is.empty(bds_data)) txt <- bds_data
-  if (!is.empty(ind_loc)) loc <- ind_loc
+  if (!missing(loc)) {
+    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+            call. = FALSE
+    )
+    session <- loc2session(loc)
+  }
 
   selector <- match.arg(selector)
   dnr <- match.arg(dnr,
@@ -94,7 +98,7 @@ draw_chart <- function(txt = "",
     )
   )
 
-  tgt <- get_tgt(txt = txt, session = session, loc = loc, format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty

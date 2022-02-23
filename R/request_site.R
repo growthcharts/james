@@ -8,25 +8,23 @@
 #' [BDS JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
 #' and are converted to JSON according to `schema`.
 #' @param session Alternative to `txt`. Session key where input data is uploaded.
-#' @param loc Alternative to `txt`. Location where input data is uploaded.
 #' @param upload Logical. If `TRUE` then `request_site()` will upload
-#' the data in `txt` and return a site address with the `?loc=` query appended.
+#' the data in `txt` and return a site address with the `?session=` query appended.
 #' Setting (`FALSE`) just appends `?txt=` to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
 #' @param host URL of the JAMES server. By default, host is the currently
 #' running server that processes the request.
+#' @param loc Alternative to `txt`. Location where input data is uploaded.
+#' Argument `loc` is deprecated and will disappear in Sept 2022; please
+#' use `session` instead.
 #' @inheritParams bdsreader::read_bds
 #' @return URL composed of JAMES server, possibly appended by query string starting
-#' with `?txt=` or `?loc=`.
-#' @seealso [jamesclient::upload_txt()], [jamesclient::get_url()]
+#' with `?txt=` or `?session=`.
+#' @seealso [jamesclient::james_post()], [jamesclient::get_url()]
 #' @details
-#' One of `txt` or `loc` needs to be specified. If both are given,
+#' One of `txt` or `session` needs to be specified. If both are given,
 #' `txt` takes precedence. If neither is given, then the function returns
 #' the base site without any data.
-#'
-#' @note This function does not yet work with Docker because we cannot get the
-#' host URL name.
-#' The output form `?txt=` currently ignores the `schema` argument.
 #'
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
@@ -34,7 +32,7 @@
 #' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 #' host <- "http://localhost"
 #'
-#' # solutions that upload the data and create a URL with the `?loc=` query parameter
+#' # solutions that upload the data and create a URL with the `?session=` query parameter
 #' \dontrun{
 #' # upload file - works with docker on localhost
 #' site <- request_site(fn, host = host)
@@ -52,9 +50,9 @@
 #'
 #' # same, but in two steps, starting from file name
 #' # this also works for js and url
-#' resp <- jamesclient::upload_txt(fn, host = host)
-#' loc <- jamesclient::get_url(resp, "location")
-#' site <- request_site(loc = loc)
+#' resp <- jamesclient::james_post(path = "data/upload", txt = fn)
+#' session <- jamesclient::get_url(resp, "session")
+#' site <- request_site(session = session)
 #' site
 #' # browseURL(site)
 #'
@@ -68,23 +66,29 @@
 #' @export
 request_site <- function(txt = "",
                          session = "",
-                         loc = "",
                          format = "1.0",
                          upload = TRUE,
                          host = NULL,
+                         loc = "",
                          ...) {
   authenticate(...)
 
+  if (!missing(loc)) {
+    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+            call. = FALSE
+    )
+    session <- loc2session(loc)
+  }
+
   txt <- txt[1L]
   session <- session[1L]
-  loc <- loc[1L]
 
   # What is the URL of the server where I run?
   if (is.null(host)) host <- get_host()
-  site <- paste0(host, "/ocpu/lib/james/www/")
+  site <- paste0(host, "/www/")
 
   # no data
-  if (is.empty(txt) && is.empty(session) && is.empty(loc)) {
+  if (is.empty(txt) && is.empty(session)) {
     return(site)
   }
 
@@ -122,13 +126,6 @@ request_site <- function(txt = "",
       return(paste0(site, "?txt=", minify(js)))
     }
   }
-
-  # # return ?loc=, possibly after upload of txt
-  # if (!is.empty(txt) && upload) {
-  #   loc <- get_loc(txt, host, format = format)
-  # }
-  #
-  # ifelse(loc == "", site, paste0(site, "?loc=", loc))
 
   # return ?session=, possibly after upload of txt
   if (!is.empty(txt) && upload) {
