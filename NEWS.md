@@ -1,3 +1,7 @@
+# james 0.55.0.9003
+
+- Correct the JAMES site URL to `localhost/site/?session=x0..`
+
 # james 0.55.0.9002
 
 - Update `renv.lock` with `jamesclient` dev 
