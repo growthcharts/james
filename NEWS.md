@@ -1,3 +1,7 @@
+# james 0.55.0.9002
+
+- Update `renv.lock` with `jamesclient` dev 
+
 # james 0.55.0.9001
 
 - Add processing for new `session` query argument

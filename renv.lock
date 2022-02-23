@@ -636,8 +636,8 @@
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "remove_location_header",
-      "RemoteSha": "e798f1eb8ffe9804fa08e95575ea614d5c64cde0",
-      "Hash": "cdb3990d11cda1e0738637170b232705",
+      "RemoteSha": "588e022cc778021dd7c0feab6b160dd580d3f45d",
+      "Hash": "1ef6820fc479c4510e7c8180e29bc654",
       "Requirements": [
         "bdsreader",
         "curl",
