@@ -15,7 +15,7 @@ if (user_session) {
 }
 
 //hardcode path
-ocpu.seturl("/ocpu/library/james/R");
+ocpu.seturl("/ocpu/library/james/R/");
 
 // internal constants
 const slider_values = {
