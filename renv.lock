@@ -628,7 +628,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.26.0",
+      "Version": "0.26.1",
       "Source": "GitHub",
       "Remotes": "growthcharts/bdsreader, growthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -636,8 +636,8 @@
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "039ecb2590c024b9f805c3c533da0ea3d6298bab",
-      "Hash": "dffa367b35853d45c48c31c69885bc20",
+      "RemoteSha": "18f763ce07fd488a468f9665eecde904516ddc21",
+      "Hash": "b41613a62cb641ff2d59137a5ff178ed",
       "Requirements": [
         "bdsreader",
         "curl",
