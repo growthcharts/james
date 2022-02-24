@@ -2,7 +2,7 @@
 
 ## Breaking changes
 
-- Uses generalised `httr` response object as defined in `jamesclient 0.26.0`
+- Uses generalised `httr` response object as defined in `jamesclient 0.26.1`
 - Replaces `loc` parameter by `session` parameter
 - Adds deprecated notes about the `loc` parameter
 - Replaces all calls to `jamesclient::upload_txt()` by `jamesclient::james_post()`
