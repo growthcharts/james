@@ -1,24 +1,13 @@
-# james 0.55.0.9003
-
-- Correct the JAMES site URL to `localhost/site/?session=x0..`
-
-# james 0.55.0.9002
-
-- Update `renv.lock` with `jamesclient` dev 
-
-# james 0.55.0.9001
-
-- Add processing for new `session` query argument
-
-# james 0.55.0.9000
+# james 0.56.0
 
 ## Breaking changes
 
-- Updates to `jamesclient 0.25.0.9000` that defines new JAMES response object
+- Uses generalised `httr` response object as defined in `jamesclient 0.26.0`
 - Replaces `loc` parameter by `session` parameter
-- Add deprecated notes about the `loc` parameter
+- Adds deprecated notes about the `loc` parameter
 - Replaces all calls to `jamesclient::upload_txt()` by `jamesclient::james_post()`
-- Works with extended `c("james_post", "httr")` response vector
+- Update `renv.lock` with `jamesclient` and other R package updates
+- Adds processing steps for new `session` query argument
 
 ## Other changes
 
