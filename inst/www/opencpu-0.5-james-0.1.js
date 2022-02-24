@@ -163,8 +163,8 @@ if(!window.jQuery) {
 
     //ajax call
     var jqxhr = $.ajax(settings).done(function(){
-      var loc = jqxhr.getResponseHeader('Location') || console.log("Location response header missing.");
       var key = jqxhr.getResponseHeader('X-ocpu-session') || console.log("X-ocpu-session response header missing.");
+      var loc = 'http://localhost/' + key;
       var txt = jqxhr.responseText;
 
       //in case of cors we translate relative paths to the target domain
