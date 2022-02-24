@@ -10,8 +10,8 @@ kevin_dev <- system.file("testdata", "Kevin_S_dev.json", package = "james")
 host <- "http://localhost"
 
 test_that(
-  "creates site_laura, with messages",
-  expect_message(site_laura <- request_site(laura, host = host))
+  "creates site_laura",
+  expect_silent(site_laura <- request_site(laura, host = host))
 )
 
 #site_laura_gro <- request_site(laura_gro, host = host)
@@ -19,8 +19,8 @@ test_that(
 #site_laura_dev_2 <- request_site(laura_dev_2, host = host)
 
 test_that(
-  "creates site_kevin, with messages",
-  expect_message(site_kevin <- request_site(kevin, host = host))
+  "creates site_kevin",
+  expect_silent(site_kevin <- request_site(kevin, host = host))
 )
 # site_kevin_gro <- request_site(kevin_gro, host = host)
 # site_kevin_dev <- request_site(kevin_dev, host = host)
