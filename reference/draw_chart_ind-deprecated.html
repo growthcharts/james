@@ -19,7 +19,7 @@ growth chart."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.55.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.0</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@ growth chart."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draw growth chart with individual data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/growthcharts/james/blob/HEAD/R/draw_chart_ind.R" class="external-link"><code>R/draw_chart_ind.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/growthcharts/james/blob/HEAD/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
     <div class="hidden name"><code>draw_chart_ind-deprecated.Rd</code></div>
     </div>
 
@@ -63,8 +63,9 @@ growth chart.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>loc</dt>
-<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded
-and converted to internal server format.</p></dd>
+<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
+Argument <code>loc</code> is deprecated and will disappear in Sept 2022; please
+use <code>session</code> instead.</p></dd>
 <dt>chartcode</dt>
 <dd><p>Optional. The code of the requested growth chart.</p></dd>
 <dt>curve_interpolation</dt>

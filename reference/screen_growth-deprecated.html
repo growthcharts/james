@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.55.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.0</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Screen growth curves according to JGZ guidelines</h1>
-    <small class="dont-index">Source: <a href="https://github.com/growthcharts/james/blob/HEAD/R/screen_growth.R" class="external-link"><code>R/screen_growth.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/growthcharts/james/blob/HEAD/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
     <div class="hidden name"><code>screen_growth-deprecated.Rd</code></div>
     </div>
 
@@ -68,8 +68,9 @@
     <dl><dt>txt</dt>
 <dd><p>A JSON string, URL or file</p></dd>
 <dt>loc</dt>
-<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded
-and converted to internal server format.</p></dd>
+<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
+Argument <code>loc</code> is deprecated and will disappear in Sept 2022; please
+use <code>session</code> instead.</p></dd>
 <dt>format</dt>
 <dd><p>String. JSON data schema version number. There are currently
 three schemas supported: <code>"1.0"</code>, <code>"1.1"</code> and <code>"2.0"</code>. Formats <code>"1.0"</code> and
@@ -93,10 +94,14 @@ screened. By default, <code>ynames = c("hgt", "wgt", "hdc")</code>.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># first upload, then screen</span></span>
-<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt</a></span><span class="op">(</span><span class="va">fn</span>, host <span class="op">=</span> <span class="va">host</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"data/upload"</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">location</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/get_url.html" class="external-link">get_url</a></span><span class="op">(</span><span class="va">r1</span>, <span class="st">"location"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">location</span></span>
 <span class="r-in"><span class="fu">screen_growth</span><span class="op">(</span>loc <span class="op">=</span> <span class="va">location</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">session</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/get_url.html" class="external-link">get_url</a></span><span class="op">(</span><span class="va">r1</span>, <span class="st">"session"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">session</span></span>
+<span class="r-in"><span class="fu">screen_growth</span><span class="op">(</span>session <span class="op">=</span> <span class="va">session</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># upload &amp; screen</span></span>
 <span class="r-in"><span class="fu">screen_growth</span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span>

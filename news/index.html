@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.55.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.0</span>
       </span>
     </div>
 
@@ -47,6 +47,29 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.56.0" id="james-0560">james 0.56.0<a class="anchor" aria-label="anchor" href="#james-0560"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-0-56-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-56-0"></a></h3>
+<ul><li>Uses generalised <code>httr</code> response object as defined in <code>jamesclient 0.26.0</code>
+</li>
+<li>Replaces <code>loc</code> parameter by <code>session</code> parameter</li>
+<li>Adds deprecated notes about the <code>loc</code> parameter</li>
+<li>Replaces all calls to <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">jamesclient::upload_txt()</a></code> by <code><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">jamesclient::james_post()</a></code>
+</li>
+<li>Update <code>renv.lock</code> with <code>jamesclient</code> and other R package updates</li>
+<li>Adds processing steps for new <code>session</code> query argument</li>
+</ul></div>
+<div class="section level3">
+<h3 id="other-changes-0-56-0">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-0-56-0"></a></h3>
+<ul><li>Moves all deprecated functions into <code>deprecated.R</code>
+</li>
+<li>Creates new <code>internal.R</code> to bundle internal helpers</li>
+<li>Removes superfluous <code>preloads.R</code>
+</li>
+<li>Adapts the <code>last_dscore</code> calculation to work with <code>psn</code> and <code>xyz</code> list components</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.55.0" id="james-0550">james 0.55.0<a class="anchor" aria-label="anchor" href="#james-0550"></a></h2>
 <ul><li>Updates to <code>renv 0.15.2</code>
@@ -316,7 +339,7 @@
 <h2 class="page-header" data-toc-text="0.25.0" id="james-0250">james 0.25.0<a class="anchor" aria-label="anchor" href="#james-0250"></a></h2>
 <p>Major changes:</p>
 <ul><li>Splits the site output into “Groei”, “Ontwikkeling” and “Voorspeller”</li>
-<li>Add function <code><a href="../reference/fetch_loc-deprecated.html">fetch_loc()</a></code> as a replacement for <code>upload_txt()</code> and <code><a href="../reference/convert_bds_ind-deprecated.html">convert_bds_ind()</a></code>
+<li>Add function <code><a href="../reference/fetch_loc-deprecated.html">fetch_loc()</a></code> as a replacement for <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt()</a></code> and <code><a href="../reference/convert_bds_ind-deprecated.html">convert_bds_ind()</a></code>
 </li>
 <li>Add function <code><a href="../reference/screen_growth-deprecated.html">screen_growth()</a></code> as a replacement for <code><a href="../reference/screen_curves-deprecated.html">screen_curves()</a></code>
 </li>
@@ -325,7 +348,7 @@
 <li>Add table of primary user functions to README</li>
 <li>Add table of legacy functions indicating preferred alternatives</li>
 <li>Run styler on all R sources</li>
-<li>Move out <code>upload_txt()</code> to <code>jamesclient</code> package</li>
+<li>Move out <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt()</a></code> to <code>jamesclient</code> package</li>
 <li>Transfer toJSON() call in <code><a href="../reference/custom_list.html">custom_list()</a></code> to its caller screen_curves(), so <code><a href="../reference/custom_list.html">custom_list()</a></code> doesn’t anymore JSONify the function result</li>
 </ul><p>Minor changes</p>
 <ul><li>Add deprecated warnings to <code><a href="../reference/convert_bds_ind-deprecated.html">convert_bds_ind()</a></code>, <code>draw_chart_bds</code>, <code>draw_chart_ind</code> and <code>screen_curves</code>
@@ -413,7 +436,7 @@
 <h2 class="page-header" data-toc-text="0.17.0" id="james-0170">james 0.17.0<a class="anchor" aria-label="anchor" href="#james-0170"></a></h2>
 <ul><li>Removes some hard paths in <code><a href="../reference/screen_curves-deprecated.html">screen_curves()</a></code>
 </li>
-<li>Add server-sided <code>upload_txt()</code> for uploading data</li>
+<li>Add server-sided <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt()</a></code> for uploading data</li>
 <li>Add server-sided <code><a href="../reference/request_site.html">request_site()</a></code> for uploading data and url construction</li>
 </ul></div>
     <div class="section level2">

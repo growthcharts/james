@@ -18,7 +18,7 @@ outputs through one request."><!-- mathjax --><script src="https://cdnjs.cloudfl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.55.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.0</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@ outputs through one request.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">request_blend</span><span class="op">(</span>txt <span class="op">=</span> <span class="st">""</span>, loc <span class="op">=</span> <span class="st">""</span>, blend <span class="op">=</span> <span class="st">"standard"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">request_blend</span><span class="op">(</span>txt <span class="op">=</span> <span class="st">""</span>, session <span class="op">=</span> <span class="st">""</span>, blend <span class="op">=</span> <span class="st">"standard"</span>, loc <span class="op">=</span> <span class="st">""</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -65,13 +65,16 @@ outputs through one request.</p>
 format. The input data adhere to specification
 <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a>,
 and are converted to JSON according to <code>schema</code>.</p></dd>
-<dt>loc</dt>
-<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded
-and converted to internal server format.</p></dd>
+<dt>session</dt>
+<dd><p>Alternative to <code>txt</code>. Session key where input data is uploaded.</p></dd>
 <dt>blend</dt>
 <dd><p>A string indicating the requested blend. The default (<code>"standard"</code>)
 returns the results of the standard end points that produces tables. Graphs
 are currently not supported.</p></dd>
+<dt>loc</dt>
+<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
+Argument <code>loc</code> is deprecated and will disappear in Sept 2022; please
+use <code>session</code> instead.</p></dd>
 <dt>...</dt>
 <dd><p>Ignored</p></dd>
 </dl></div>
@@ -81,8 +84,8 @@ are currently not supported.</p></dd>
 components:</p><dl><dt><code>txt</code></dt>
 <dd><p>String, file or URL with child data</p></dd>
 
-<dt><code>loc</code></dt>
-<dd><p>URL of uploaded and processed child data</p></dd>
+<dt><code>session</code></dt>
+<dd><p>Session with uploaded child data</p></dd>
 
 <dt><code>child</code></dt>
 <dd><p>Processed child level data</p></dd>

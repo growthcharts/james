@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.55.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.0</span>
       </span>
     </div>
 
@@ -55,10 +55,11 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">apply_screeners</span><span class="op">(</span>
   txt <span class="op">=</span> <span class="st">""</span>,
-  loc <span class="op">=</span> <span class="st">""</span>,
+  session <span class="op">=</span> <span class="st">""</span>,
   format <span class="op">=</span> <span class="st">"1.0"</span>,
   ynames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"hdc"</span><span class="op">)</span>,
   na.omit <span class="op">=</span> <span class="cn">TRUE</span>,
+  loc <span class="op">=</span> <span class="st">""</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -67,9 +68,8 @@
     <h2>Arguments</h2>
     <dl><dt>txt</dt>
 <dd><p>A JSON string, URL or file</p></dd>
-<dt>loc</dt>
-<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded
-and converted to internal server format.</p></dd>
+<dt>session</dt>
+<dd><p>Alternative to <code>txt</code>. Session key where input data is uploaded.</p></dd>
 <dt>format</dt>
 <dd><p>String. JSON data schema version number. There are currently
 three schemas supported: <code>"1.0"</code>, <code>"1.1"</code> and <code>"2.0"</code>. Formats <code>"1.0"</code> and
@@ -82,6 +82,10 @@ screened. By default, <code>ynames = c("hgt", "wgt", "hdc")</code>.</p></dd>
 <dd><p>A logical indicating whether records with a missing
 <code>x</code> (age) or <code>y</code> (yname) should be removed. Defaults to
 <code>TRUE</code>.</p></dd>
+<dt>loc</dt>
+<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
+Argument <code>loc</code> is deprecated and will disappear in Sept 2022; please
+use <code>session</code> instead.</p></dd>
 <dt>...</dt>
 <dd><p>Ignored</p></dd>
 </dl></div>
@@ -111,11 +115,10 @@ screened. By default, <code>ynames = c("hgt", "wgt", "hdc")</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 1.14.0  20181111  20181211</span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># first upload, then screen</span></span>
-<span class="r-in"><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"http://localhost"</span></span>
-<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt</a></span><span class="op">(</span><span class="va">fn</span>, host <span class="op">=</span> <span class="va">host</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">location</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/get_url.html" class="external-link">get_url</a></span><span class="op">(</span><span class="va">r1</span>, <span class="st">"location"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">location</span></span>
-<span class="r-in"><span class="fu">apply_screeners</span><span class="op">(</span>loc <span class="op">=</span> <span class="va">location</span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/growthcharts/jamesclient" class="external-link">jamesclient</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"screeners/apply/json"</span>, loc <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">location</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"screeners/apply/json"</span>, session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

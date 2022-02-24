@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.55.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.0</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Screen growth curves according to JGZ guidelines</h1>
-    <small class="dont-index">Source: <a href="https://github.com/growthcharts/james/blob/HEAD/R/screen_curves.R" class="external-link"><code>R/screen_curves.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/growthcharts/james/blob/HEAD/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
     <div class="hidden name"><code>screen_curves-deprecated.Rd</code></div>
     </div>
 
@@ -71,8 +71,9 @@ format. The input data adhere to specification
 <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a>,
 and are converted to JSON according to <code>schema</code>.</p></dd>
 <dt>loc</dt>
-<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded
-and converted to internal server format.</p></dd>
+<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
+Argument <code>loc</code> is deprecated and will disappear in Sept 2022; please
+use <code>session</code> instead.</p></dd>
 <dt>location</dt>
 <dd><p>Legacy for <code>loc</code></p></dd>
 <dt>format</dt>
@@ -105,7 +106,7 @@ result to JSON.</p>
 <span class="r-in"><span class="co"># fn &lt;- system.file("testdata", "Laura_S_dev.json", package = "james")</span></span>
 <span class="r-in"><span class="co">#</span></span>
 <span class="r-in"><span class="co"># # first upload, then screen</span></span>
-<span class="r-in"><span class="co"># r1 &lt;- jamesclient::upload_txt(fn)</span></span>
+<span class="r-in"><span class="co"># r1 &lt;- jamesclient::james_post(path = "data/upload", txt = fn)</span></span>
 <span class="r-in"><span class="co"># location &lt;- jamesclient::get_url(r1, "location")</span></span>
 <span class="r-in"><span class="co"># location</span></span>
 <span class="r-in"><span class="co"># screen_curves(loc = location)</span></span>
