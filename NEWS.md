@@ -1,3 +1,7 @@
+# james 0.56.2
+
+- Adds the hostname `test.groeidiagrammen.nl`
+
 # james 0.56.0
 
 ## Breaking changes
