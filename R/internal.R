@@ -28,7 +28,7 @@ get_host <- function() {
   switch(hostname,
          groeidiagrammen.nl = "https://groeidiagrammen.nl",
          james.groeidiagrammen.nl = "https://james.groeidiagrammen.nl",
-         test.groeidiagrammen.nl = "https://test.groeidiagrammen.nl",
+         test.groeidiagrammen.nl = "http://127.0.0.1:80",
          ijgz.eaglescience.nl = "https://ijgz.eaglescience.nl/modules/james",
          opa = "https://vps.stefvanbuuren.nl",
          "http://localhost"
