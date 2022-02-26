@@ -1,3 +1,7 @@
+# james 0.56.7
+
+- Adds the scheme argument to the call of `rq1`
+
 # james 0.56.6
 
 - Repair protocol bug for warnings and messages
