@@ -1,3 +1,7 @@
+# james 0.56.6
+
+- Repair protocol bug for warnings and messages
+
 # james 0.56.5
 
 - Obtains current host and protocol from javascript URL
