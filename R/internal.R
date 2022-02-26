@@ -67,7 +67,7 @@ get_session <- function(txt, host, format) {
 
 
 # returns targetl or NULL
-get_tgt <- function(txt = "", session = "", ...) {
+get_tgt <- function(txt = "", scheme = "", host = "", session = "", ...) {
 
   # no ind
   if (is.empty(txt) && is.empty(session)) {
@@ -80,7 +80,7 @@ get_tgt <- function(txt = "", session = "", ...) {
   }
 
   # download data from session
-  url <- paste0("http://localhost/", session, "/rda")
+  url <- paste0(scheme, "//", host, "/", session, "/rda")
   con <- curl(url = url, open = "rb")
   on.exit(close(con))
   load(file = con)

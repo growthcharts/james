@@ -6,6 +6,9 @@
 #' The function is called at initialization to automate setting
 #' of proper chart and analysis defaults according to the child data.
 #' @inheritParams draw_chart
+#' @param scheme  Protocol, either "http" or "https"
+#' @param host    Name of the host
+#' @param session OpenCPU session key with the uploaded data
 #' @return A list with the following elements
 #' \describe{
 #'    \item{`population`}{A string identifying the population,
@@ -40,6 +43,8 @@
 #' @keywords server
 #' @export
 convert_tgt_chartadvice <- function(txt = "",
+                                    scheme = "https:",
+                                    host = "localhost",
                                     session = "",
                                     format = "1.0",
                                     chartcode = "",
@@ -48,14 +53,15 @@ convert_tgt_chartadvice <- function(txt = "",
                                     ind_loc = "",
                                     ...) {
   authenticate(...)
-  if (!missing(ind_loc)) {
+
+  if (!missing(ind_loc) && missing(session)) {
     warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use session instead.",
       call. = FALSE
     )
     session <- loc2session(ind_loc)
   }
 
-  if (!missing(loc)) {
+  if (!missing(loc) && missing(session)) {
     warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
             call. = FALSE
     )
@@ -63,7 +69,11 @@ convert_tgt_chartadvice <- function(txt = "",
   }
 
   selector <- match.arg(selector)
-  tgt <- get_tgt(txt = txt, session = session, format = format)
+  tgt <- get_tgt(txt = txt,
+                 scheme = scheme,
+                 host = host,
+                 session = session,
+                 format = format)
   chartcode <- switch(selector,
     "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode

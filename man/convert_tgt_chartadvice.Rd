@@ -6,6 +6,8 @@
 \usage{
 convert_tgt_chartadvice(
   txt = "",
+  scheme = "https:",
+  host = "localhost",
   session = "",
   format = "1.0",
   chartcode = "",
@@ -21,7 +23,11 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
+\item{scheme}{Protocol, either "http" or "https"}
+
+\item{host}{Name of the host}
+
+\item{session}{OpenCPU session key with the uploaded data}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and

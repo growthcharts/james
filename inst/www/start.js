@@ -4,15 +4,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const user_txt = urlParams.get('txt');
 const user_session =  urlParams.get('session');
 const user_chartcode = urlParams.get('chartcode');
-
-// legacy: get loc and ind query parameters
-var user_loc = urlParams.get('loc');
-if (urlParams.has('ind')) user_loc = urlParams.get('ind');
-
-// calculate user_loc if user specified the session
-if (user_session) {
-  user_loc = 'http://localhost/' + user_session;
-}
+const protocol = window.location.protocol;
+const hostname = window.location.hostname;
 
 //hardcode path
 ocpu.seturl("/ocpu/library/james/R");
@@ -138,11 +131,11 @@ for(var i = 0, max = radios.length; i < max; i++) {
   };
 }
 
-// if user_loc is specified, report any warnings and messages
-if (user_loc) {
-  var warn = user_loc + "/warnings/text";
-  var mess = user_loc + "/messages/text";
-  $("#key").text(user_loc);
+// if user_session is specified, report any warnings and messages
+if (user_session) {
+  var warn = 'https://' + hostname + '/' + user_session + "/warnings/text";
+  var mess = 'https://' + hostname + '/' + user_session + "/messages/text";
+  $("#session").text(user_session);
   $("#warnings").load(warn);
   $("#messages").load(mess);
 }
@@ -151,12 +144,12 @@ if (user_loc) {
 // 1. use "derive" based on user interaction
 var selector  = "derive";
 // 2. use "data" if we can calculate or load child data
-if (user_txt || user_loc) selector = "data";
+if (user_txt || user_session) selector = "data";
 // 3. use hard chartcode if user specified one
 if (user_chartcode) selector = "chartcode";
 
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || user_loc || user_chartcode) initialize_chart_controls();
+if (user_txt || user_session || user_chartcode) initialize_chart_controls();
 
 // no user arguments: update visibility, draw chart
 else update();
@@ -169,15 +162,16 @@ function initialize_chart_controls() {
 
   // handle null user inputs
   var utxt = '';
-  var uloc = '';
+  var uses = '';
   var ucode  = '';
   if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-  if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
+  if (typeof user_session !== "undefined" && user_session !== null)  uses = user_session;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   var rq1 = ocpu.call("convert_tgt_chartadvice", {
     txt: utxt,
-    loc: uloc,
+    host: hostname,
+    session: uses,
     chartcode: ucode,
     selector: selector
   }, function(session) {
@@ -254,7 +248,7 @@ function initialize_chart_controls() {
     });
 });
   rq1.fail(function() {
-    alert("Server error (rq1): " + rq1.responseText);
+    alert("Server error (rq1, convert_tgt_chartadvice): " + rq1.responseText);
   });
 }
 
