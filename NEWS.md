@@ -1,3 +1,10 @@
+# james 0.56.5
+
+- Obtains current host and protocol from javascript URL
+- Replaces `uloc` session indicator by `uses` (user session)
+- Adds arguments `scheme`, `host` and `session` to `convert_tgt_chartadvice()`
+- Renames `$key` to `$session` in JS
+
 # james 0.56.4
 
 - Reset to `https://test.groeidiagrammen.nl`
