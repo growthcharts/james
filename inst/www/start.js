@@ -170,6 +170,7 @@ function initialize_chart_controls() {
 
   var rq1 = ocpu.call("convert_tgt_chartadvice", {
     txt: utxt,
+    scheme: protocol,
     host: hostname,
     session: uses,
     chartcode: ucode,

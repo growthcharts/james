@@ -56,7 +56,7 @@ convert_tgt_chartadvice <- function(txt = "",
 
   if (!missing(ind_loc) && missing(session)) {
     warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use session instead.",
-      call. = FALSE
+            call. = FALSE
     )
     session <- loc2session(ind_loc)
   }
@@ -68,13 +68,16 @@ convert_tgt_chartadvice <- function(txt = "",
     session <- loc2session(loc)
   }
 
-  selector <- match.arg(selector)
   tgt <- get_tgt(txt = txt,
                  scheme = scheme,
                  host = host,
                  session = session,
                  format = format)
-  chartcode <- switch(selector,
+
+  selector <- match.arg(selector)
+  if (chartcode != "") selector <- "chartcode"
+  chartcode <- switch(
+    selector,
     "data" = select_chart(target = tgt)$chartcode,
     "chartcode" = chartcode
   )
