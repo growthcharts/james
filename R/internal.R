@@ -68,7 +68,7 @@ get_tgt <- function(txt = "", scheme = "", host = "", session = "", ...) {
 
   if (is.empty(host)) host <- get_host()
   if (is.empty(scheme)) {
-    scheme <- ifelse(host == "localhost", "http", "https")
+    scheme <- ifelse(host == "localhost", "http:", "https:")
   }
 
   # no ind
