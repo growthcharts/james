@@ -66,10 +66,14 @@ get_session <- function(txt, host, format) {
 # returns targetl or NULL
 get_tgt <- function(txt = "", scheme = "", host = "", session = "", ...) {
 
-  if (is.empty(host)) host <- get_host()
+  if (is.empty(host)) {
+    host <- get_host()
+    message("host: ", host)
+  }
   if (is.empty(scheme)) {
     scheme <- ifelse(host == "localhost", "http:", "https:")
   }
+  message("scheme: ", scheme)
 
   # no ind
   if (is.empty(txt) && is.empty(session)) {
