@@ -6,8 +6,8 @@
 \usage{
 convert_tgt_chartadvice(
   txt = "",
-  scheme = "https:",
-  host = "localhost",
+  scheme = "",
+  host = "",
   session = "",
   format = "1.0",
   chartcode = "",

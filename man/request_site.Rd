@@ -6,10 +6,11 @@
 \usage{
 request_site(
   txt = "",
+  scheme = "",
+  host = "",
   session = "",
   format = "1.0",
   upload = TRUE,
-  host = NULL,
   loc = "",
   ...
 )
@@ -19,6 +20,10 @@ request_site(
 format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
+
+\item{scheme}{Protocol, either "http" or "https"}
+
+\item{host}{Name of the host}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
 
@@ -31,9 +36,6 @@ for new applications.}
 the data in \code{txt} and return a site address with the \verb{?session=} query appended.
 Setting (\code{FALSE}) just appends \verb{?txt=} to the site url, thus
 deferring validation and conversion to internal representation to the site.}
-
-\item{host}{URL of the JAMES server. By default, host is the currently
-running server that processes the request.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
 Argument \code{loc} is deprecated and will disappear in Sept 2022; please

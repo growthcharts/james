@@ -6,9 +6,6 @@
 #' The function is called at initialization to automate setting
 #' of proper chart and analysis defaults according to the child data.
 #' @inheritParams draw_chart
-#' @param scheme  Protocol, either "http" or "https"
-#' @param host    Name of the host
-#' @param session OpenCPU session key with the uploaded data
 #' @return A list with the following elements
 #' \describe{
 #'    \item{`population`}{A string identifying the population,
@@ -43,8 +40,8 @@
 #' @keywords server
 #' @export
 convert_tgt_chartadvice <- function(txt = "",
-                                    scheme = "https:",
-                                    host = "localhost",
+                                    scheme = "",
+                                    host = "",
                                     session = "",
                                     format = "1.0",
                                     chartcode = "",

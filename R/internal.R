@@ -26,12 +26,9 @@ get_host <- function() {
   # where am I running?
   hostname <- system("hostname", intern = TRUE)
   switch(hostname,
-         groeidiagrammen.nl = "https://groeidiagrammen.nl",
-         james.groeidiagrammen.nl = "https://james.groeidiagrammen.nl",
-         test.groeidiagrammen.nl = "https://test.groeidiagrammen.nl",
-         ijgz.eaglescience.nl = "https://ijgz.eaglescience.nl/modules/james",
-         opa = "https://vps.stefvanbuuren.nl",
-         "http://localhost"
+         ijgz.eaglescience.nl = "ijgz.eaglescience.nl/modules/james",
+         opa = "vps.stefvanbuuren.nl",
+         hostname
   )
 }
 
@@ -68,6 +65,11 @@ get_session <- function(txt, host, format) {
 
 # returns targetl or NULL
 get_tgt <- function(txt = "", scheme = "", host = "", session = "", ...) {
+
+  if (is.empty(host)) host <- get_host()
+  if (is.empty(scheme)) {
+    scheme <- ifelse(host == "localhost", "http", "https")
+  }
 
   # no ind
   if (is.empty(txt) && is.empty(session)) {

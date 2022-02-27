@@ -165,16 +165,18 @@ function update() {
 
   // handle null user inputs
   var utxt = '';
-  var uloc = '';
+  var uses = '';
   var ucode  = '';
   if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-  if (typeof user_loc !== "undefined" && user_loc !== null)  uloc = user_loc;
+  if (typeof user_session !== "undefined" && user_session !== null)  uses = user_session;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   // trigger chart drawing
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       txt : utxt,
-      loc : uloc,
+      scheme: protocol,
+      host: hostname,
+      session: uses,
       chartcode: ucode,
       selector : selector,
       chartgrp : chartgrp,
@@ -197,7 +199,7 @@ function update() {
 
     });
   rq2.fail(function() {
-    alert("Server error (rq2): " + rq2.responseText);
+    alert("Server error (rq2 - draw_chart): " + rq2.responseText);
   });
 }
 

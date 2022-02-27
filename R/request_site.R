@@ -12,12 +12,10 @@
 #' the data in `txt` and return a site address with the `?session=` query appended.
 #' Setting (`FALSE`) just appends `?txt=` to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
-#' @param host URL of the JAMES server. By default, host is the currently
-#' running server that processes the request.
 #' @param loc Alternative to `txt`. Location where input data is uploaded.
 #' Argument `loc` is deprecated and will disappear in Sept 2022; please
 #' use `session` instead.
-#' @inheritParams bdsreader::read_bds
+#' @inheritParams draw_chart
 #' @return URL composed of JAMES server, possibly appended by query string starting
 #' with `?txt=` or `?session=`.
 #' @seealso [jamesclient::james_post()], [jamesclient::get_url()]
@@ -65,10 +63,11 @@
 #' }
 #' @export
 request_site <- function(txt = "",
+                         scheme = "",
+                         host = "",
                          session = "",
                          format = "1.0",
                          upload = TRUE,
-                         host = NULL,
                          loc = "",
                          ...) {
   authenticate(...)
@@ -84,8 +83,7 @@ request_site <- function(txt = "",
   session <- session[1L]
 
   # What is the URL of the server where I run?
-  if (is.null(host)) host <- get_host()
-  site <- paste0(host, "/site/")
+  site <- paste0(scheme, "//", host, "/site/")
 
   # no data
   if (is.empty(txt) && is.empty(session)) {
@@ -134,4 +132,4 @@ request_site <- function(txt = "",
 
   ifelse(session == "", site, paste0(site, "?session=", session))
 
-  }
+}
