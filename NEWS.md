@@ -1,3 +1,7 @@
+# james 0.56.8
+
+- Implement a more robust host and scheme finder
+
 # james 0.56.7
 
 - Adds the scheme argument to the call of `rq1`
