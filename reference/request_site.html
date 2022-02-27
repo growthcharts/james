@@ -19,7 +19,7 @@ user can interact to chart choices."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.8</span>
       </span>
     </div>
 
@@ -59,10 +59,11 @@ user can interact to chart choices.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">request_site</span><span class="op">(</span>
   txt <span class="op">=</span> <span class="st">""</span>,
+  scheme <span class="op">=</span> <span class="st">""</span>,
+  host <span class="op">=</span> <span class="st">""</span>,
   session <span class="op">=</span> <span class="st">""</span>,
   format <span class="op">=</span> <span class="st">"1.0"</span>,
   upload <span class="op">=</span> <span class="cn">TRUE</span>,
-  host <span class="op">=</span> <span class="cn">NULL</span>,
   loc <span class="op">=</span> <span class="st">""</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
@@ -75,6 +76,10 @@ user can interact to chart choices.</p>
 format. The input data adhere to specification
 <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a>,
 and are converted to JSON according to <code>schema</code>.</p></dd>
+<dt>scheme</dt>
+<dd><p>Protocol, either "http" or "https"</p></dd>
+<dt>host</dt>
+<dd><p>Name of the host</p></dd>
 <dt>session</dt>
 <dd><p>Alternative to <code>txt</code>. Session key where input data is uploaded.</p></dd>
 <dt>format</dt>
@@ -87,9 +92,6 @@ for new applications.</p></dd>
 the data in <code>txt</code> and return a site address with the <code>?session=</code> query appended.
 Setting (<code>FALSE</code>) just appends <code>?txt=</code> to the site url, thus
 deferring validation and conversion to internal representation to the site.</p></dd>
-<dt>host</dt>
-<dd><p>URL of the JAMES server. By default, host is the currently
-running server that processes the request.</p></dd>
 <dt>loc</dt>
 <dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
 Argument <code>loc</code> is deprecated and will disappear in Sept 2022; please
