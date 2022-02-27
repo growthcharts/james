@@ -1,3 +1,7 @@
+# james 0.56.9
+
+- Repair scheme typo
+
 # james 0.56.8
 
 - Implement a more robust host and scheme finder
