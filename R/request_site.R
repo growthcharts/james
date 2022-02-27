@@ -83,6 +83,12 @@ request_site <- function(txt = "",
   session <- session[1L]
 
   # What is the URL of the server where I run?
+  if (is.empty(host)) {
+    host <- get_host()
+  }
+  if (is.empty(scheme)) {
+    scheme <- ifelse(host == "localhost", "http:", "https:")
+  }
   site <- paste0(scheme, "//", host, "/site/")
 
   # no data

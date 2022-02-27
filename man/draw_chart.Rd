@@ -6,9 +6,9 @@
 \usage{
 draw_chart(
   txt = "",
-  scheme = "",
-  host = "",
-  session = "",
+  scheme = NULL,
+  host = NULL,
+  session = NULL,
   format = "1.0",
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
