@@ -1,43 +1,11 @@
-# james 0.56.10
+# james 0.57.0
 
-- Make host definition consistent as http://myhost
-- Remove scheme argument everywhere
-- Use txt, host, session, format argument sequence in all functions
-
-# james 0.56.9
-
-- Repair scheme typo
-
-# james 0.56.8
-
-- Implement a more robust host and scheme finder
-
-# james 0.56.7
-
-- Adds the scheme argument to the call of `rq1`
-
-# james 0.56.6
-
-- Repair protocol bug for warnings and messages
-
-# james 0.56.5
-
+- Makes host definitions consistent everywhere as `http://myhost`
+- Uses txt, host, session, format argument sequence in all functions
 - Obtains current host and protocol from javascript URL
 - Replaces `uloc` session indicator by `uses` (user session)
 - Adds arguments `scheme`, `host` and `session` to `convert_tgt_chartadvice()`
 - Renames `$key` to `$session` in JS
-
-# james 0.56.4
-
-- Reset to `https://test.groeidiagrammen.nl`
-
-# james 0.56.3
-
-- Try local ip for `test.groeidiagrammen.nl`
-
-# james 0.56.2
-
-- Adds the hostname `test.groeidiagrammen.nl`
 
 # james 0.56.0
 
