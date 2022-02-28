@@ -6,9 +6,8 @@
 \usage{
 draw_chart(
   txt = "",
-  scheme = NULL,
-  host = NULL,
-  session = NULL,
+  host = "",
+  session = "",
   format = "1.0",
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
@@ -41,8 +40,6 @@ draw_chart(
 format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
-
-\item{scheme}{Protocol, either "http" or "https"}
 
 \item{host}{Name of the host}
 

@@ -20,6 +20,7 @@
 #' }
 #' @export
 apply_screeners <- function(txt = "",
+                            host = "",
                             session = "",
                             format = "1.0",
                             ynames = c("hgt", "wgt", "hdc"),
@@ -36,6 +37,7 @@ apply_screeners <- function(txt = "",
   }
 
   tgt <- get_tgt(txt = txt,
+                 host = host,
                  session = session,
                  format = format)
   growthscreener::screen_curves_ind(ind = tgt,

@@ -6,7 +6,6 @@
 \usage{
 request_site(
   txt = "",
-  scheme = "",
   host = "",
   session = "",
   format = "1.0",
@@ -20,8 +19,6 @@ request_site(
 format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
-
-\item{scheme}{Protocol, either "http" or "https"}
 
 \item{host}{Name of the host}
 
@@ -66,32 +63,30 @@ host <- "http://localhost"
 # solutions that upload the data and create a URL with the `?session=` query parameter
 \dontrun{
 # upload file - works with docker on localhost
-site <- request_site(fn, host = host)
+site <- request_site(host = host, txt = fn)
 # browseURL(site)
 
 # upload JSON string
-site <- request_site(js, host = host)
+site <- request_site(host = host, txt = js)
 site
 # browseURL(site)
 
 # upload URL
-site <- request_site(url, host = host)
+site <- request_site(host = host, txt = url)
 site
 # browseURL(site)
 
 # same, but in two steps, starting from file name
 # this also works for js and url
 resp <- jamesclient::james_post(path = "data/upload", txt = fn)
-session <- jamesclient::get_url(resp, "session")
-site <- request_site(session = session)
+session <- resp$session
+site <- request_site(host = host, session = session)
 site
 # browseURL(site)
 
 # solutions that create an immediate ?txt=[..data..] query
 # this method does not create a cache on the server
-site <- request_site(fn, upload = FALSE)
-site <- request_site(js, upload = FALSE)
-site <- request_site(url, upload = FALSE)
+site <- request_site(host = host, txt = js, upload = FALSE)
 # browseURL(site)
 }
 }

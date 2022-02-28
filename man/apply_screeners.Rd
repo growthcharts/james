@@ -6,6 +6,7 @@
 \usage{
 apply_screeners(
   txt = "",
+  host = "",
   session = "",
   format = "1.0",
   ynames = c("hgt", "wgt", "hdc"),
@@ -16,6 +17,8 @@ apply_screeners(
 }
 \arguments{
 \item{txt}{A JSON string, URL or file}
+
+\item{host}{Name of the host}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
 

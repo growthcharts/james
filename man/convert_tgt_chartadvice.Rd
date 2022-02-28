@@ -6,7 +6,6 @@
 \usage{
 convert_tgt_chartadvice(
   txt = "",
-  scheme = "",
   host = "",
   session = "",
   format = "1.0",
@@ -22,8 +21,6 @@ convert_tgt_chartadvice(
 format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
-
-\item{scheme}{Protocol, either "http" or "https"}
 
 \item{host}{Name of the host}
 

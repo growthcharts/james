@@ -5,7 +5,6 @@
 #' @inheritParams select_chart
 #' @inheritParams chartplotter::process_chart
 #' @inheritParams bdsreader::read_bds
-#' @param scheme  Protocol, either "http" or "https"
 #' @param host    Name of the host
 #' @param session OpenCPU session key with the uploaded data
 #' @param dnr Donor data, Prediction horizon: `"0-2"`, `"2-4"`
@@ -46,9 +45,8 @@
 #' g <- draw_chart(txt = fn)
 #' @export
 draw_chart <- function(txt = "",
-                       scheme = NULL,
-                       host = NULL,
-                       session = NULL,
+                       host = "",
+                       session = "",
                        format = "1.0",
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
@@ -104,7 +102,6 @@ draw_chart <- function(txt = "",
   )
 
   tgt <- get_tgt(txt = txt,
-                 scheme = scheme,
                  host = host,
                  session = session,
                  format = format)

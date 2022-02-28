@@ -23,13 +23,11 @@ convert_str_age <- function(s) {
 
 # return the (likely) base URL of the ocpu server
 get_host <- function() {
-  # where am I running?
   hostname <- system("hostname", intern = TRUE)
-  switch(hostname,
-         ijgz.eaglescience.nl = "ijgz.eaglescience.nl/modules/james",
-         opa = "vps.stefvanbuuren.nl",
-         hostname
-  )
+  if (hostname == "opa") hostname <- "vps.stefvanbuuren.nl"
+  scheme <- ifelse(hostname == "localhost", "http:", "https:")
+  host <- paste0(scheme, "//", hostname)
+  return(host)
 }
 
 # returns url of uploaded data
@@ -64,16 +62,13 @@ get_session <- function(txt, host, format) {
 
 
 # returns targetl or NULL
-get_tgt <- function(txt = "", scheme = "", host = "", session = "", ...) {
+get_tgt <- function(txt = "", host = "", session = "", ...) {
+
+  url <- parse_url(host)
 
   if (is.empty(host)) {
     host <- get_host()
-    message("host: ", host)
   }
-  if (is.empty(scheme)) {
-    scheme <- ifelse(host == "localhost", "http:", "https:")
-  }
-  message("scheme: ", scheme)
 
   # no ind
   if (is.empty(txt) && is.empty(session)) {
@@ -86,7 +81,7 @@ get_tgt <- function(txt = "", scheme = "", host = "", session = "", ...) {
   }
 
   # download data from session
-  url <- paste0(scheme, "//", host, "/", session, "/rda")
+  url <- paste0(host, "/", session, "/rda")
   con <- curl(url = url, open = "rb")
   on.exit(close(con))
   load(file = con)

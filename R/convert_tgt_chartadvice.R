@@ -40,7 +40,6 @@
 #' @keywords server
 #' @export
 convert_tgt_chartadvice <- function(txt = "",
-                                    scheme = "",
                                     host = "",
                                     session = "",
                                     format = "1.0",
@@ -66,7 +65,6 @@ convert_tgt_chartadvice <- function(txt = "",
   }
 
   tgt <- get_tgt(txt = txt,
-                 scheme = scheme,
                  host = host,
                  session = session,
                  format = format)

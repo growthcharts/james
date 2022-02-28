@@ -4,13 +4,22 @@
 \alias{request_blend}
 \title{Provides multiple outputs in one request}
 \usage{
-request_blend(txt = "", session = "", blend = "standard", loc = "", ...)
+request_blend(
+  txt = "",
+  host = "",
+  session = "",
+  blend = "standard",
+  loc = "",
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL or file with the data in JSON
 format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
+
+\item{host}{Name of the host}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
 

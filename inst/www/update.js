@@ -173,10 +173,9 @@ function update() {
 
   // trigger chart drawing
   var rq2 = $("#plotdiv").rplot("draw_chart", {
-      txt : utxt,
-      scheme: protocol,
-      host: hostname,
-      session: uses,
+      txt      : utxt,
+      host     : host,
+      session  : uses,
       chartcode: ucode,
       selector : selector,
       chartgrp : chartgrp,
@@ -186,7 +185,7 @@ function update() {
       ga       : ga,
       side     : msr,
       curve_interpolation : cm,
-      quiet : false,
+      quiet    : false,
       dnr      : dnr,
       lo       : lo_str,
       hi       : hi_str,

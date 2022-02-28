@@ -6,6 +6,7 @@
 \usage{
 calculate_dscore(
   txt = "",
+  host = "",
   session = "",
   format = "1.0",
   output = c("table", "last_visit", "last_dscore"),
@@ -18,6 +19,8 @@ calculate_dscore(
 format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
+
+\item{host}{Name of the host}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
 

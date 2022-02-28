@@ -24,6 +24,7 @@
 #' }
 #' @export
 request_blend <- function(txt = "",
+                          host = "",
                           session = "",
                           blend = "standard",
                           loc = "",
@@ -38,21 +39,21 @@ request_blend <- function(txt = "",
   }
 
   if (blend == "standard") {
-    return(request_blend_standard(txt = txt, session = session, ...))
+    return(request_blend_standard(txt = txt, host = host, session = session, ...))
   }
 
   if (blend == "allegro") {
-    return(request_blend_allegro(txt = txt, session = session, ...))
+    return(request_blend_allegro(txt = txt, host = host, session = session, ...))
   }
 
   stop("blend", blend, "not found.")
 }
 
-request_blend_standard <- function(txt = "", session = "", ...) {
-  site <- request_site(txt = txt, session = session, ...)
+request_blend_standard <- function(txt, host, session, ...) {
+  site <- request_site(txt = txt, host = host, session = session, ...)
   session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
   if (is.na(session)) session <- ""
-  tgt <- get_tgt(session = session)
+  tgt <- get_tgt(host = host, session = session)
 
   # render chart as svg
   #chart <- draw_chart(loc = loc, draw_grob = FALSE, ...)
@@ -68,7 +69,7 @@ request_blend_standard <- function(txt = "", session = "", ...) {
   #grid.draw(chart)
   #dev.off()
 
-  screeners <- apply_screeners(session = session, ...)
+  screeners <- apply_screeners(host = host, session = session, ...)
 
   result <- list(
     txt = txt,
@@ -82,11 +83,11 @@ request_blend_standard <- function(txt = "", session = "", ...) {
   return(result)
 }
 
-request_blend_allegro <- function(txt = "", session = "", format = "1.0", ...) {
-  site <- request_site(txt = txt, session = session, format = format, ...)
+request_blend_allegro <- function(txt, host, session, format = "1.0", ...) {
+  site <- request_site(txt = txt, host = host, session = session, format = format, ...)
   session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
   if (is.na(session)) session <- ""
-  tgt <- get_tgt(session = session)
+  tgt <- get_tgt(host = host, session = session)
 
   res <- growthscreener::screen_curves_ind(ind = tgt)
 
