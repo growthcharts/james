@@ -19,7 +19,7 @@ user can interact to chart choices."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.56.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.57.0</span>
       </span>
     </div>
 
@@ -59,7 +59,6 @@ user can interact to chart choices.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">request_site</span><span class="op">(</span>
   txt <span class="op">=</span> <span class="st">""</span>,
-  scheme <span class="op">=</span> <span class="st">""</span>,
   host <span class="op">=</span> <span class="st">""</span>,
   session <span class="op">=</span> <span class="st">""</span>,
   format <span class="op">=</span> <span class="st">"1.0"</span>,
@@ -76,8 +75,6 @@ user can interact to chart choices.</p>
 format. The input data adhere to specification
 <a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a>,
 and are converted to JSON according to <code>schema</code>.</p></dd>
-<dt>scheme</dt>
-<dd><p>Protocol, either "http" or "https"</p></dd>
 <dt>host</dt>
 <dd><p>Name of the host</p></dd>
 <dt>session</dt>
@@ -125,32 +122,30 @@ the base site without any data.</p>
 <span class="r-in"><span class="co"># solutions that upload the data and create a URL with the `?session=` query parameter</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># upload file - works with docker on localhost</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span><span class="va">fn</span>, host <span class="op">=</span> <span class="va">host</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># browseURL(site)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># upload JSON string</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span><span class="va">js</span>, host <span class="op">=</span> <span class="va">host</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">site</span></span>
 <span class="r-in"><span class="co"># browseURL(site)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># upload URL</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span><span class="va">url</span>, host <span class="op">=</span> <span class="va">host</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">url</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">site</span></span>
 <span class="r-in"><span class="co"># browseURL(site)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># same, but in two steps, starting from file name</span></span>
 <span class="r-in"><span class="co"># this also works for js and url</span></span>
 <span class="r-in"><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"data/upload"</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">session</span> <span class="op">&lt;-</span> <span class="fu">jamesclient</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/get_url.html" class="external-link">get_url</a></span><span class="op">(</span><span class="va">resp</span>, <span class="st">"session"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span>session <span class="op">=</span> <span class="va">session</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">session</span> <span class="op">&lt;-</span> <span class="va">resp</span><span class="op">$</span><span class="va">session</span></span>
+<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, session <span class="op">=</span> <span class="va">session</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">site</span></span>
 <span class="r-in"><span class="co"># browseURL(site)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># solutions that create an immediate ?txt=[..data..] query</span></span>
 <span class="r-in"><span class="co"># this method does not create a cache on the server</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span><span class="va">fn</span>, upload <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span><span class="va">js</span>, upload <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span><span class="va">url</span>, upload <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu">request_site</span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span>, upload <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># browseURL(site)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
