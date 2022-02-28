@@ -1,3 +1,9 @@
+# james 0.56.10
+
+- Make host definition consistent as http://myhost
+- Remove scheme argument everywhere
+- Use txt, host, session, format argument sequence in all functions
+
 # james 0.56.9
 
 - Repair scheme typo
