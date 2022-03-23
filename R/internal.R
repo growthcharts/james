@@ -75,7 +75,7 @@ get_tgt <- function(txt = "", session = "", ...) {
   }
 
   # download data from session
-  data <- eval(parse(text = paste0(session, "::.val")))
+  data <- eval(parse(text = paste0(session, ":.val")))
   return(data)
 }
 
