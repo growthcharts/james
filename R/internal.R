@@ -62,13 +62,7 @@ get_session <- function(txt, host, format) {
 
 
 # returns targetl or NULL
-get_tgt <- function(txt = "", host = "", session = "", ...) {
-
-  url <- parse_url(host)
-
-  if (is.empty(host)) {
-    host <- get_host()
-  }
+get_tgt <- function(txt = "", session = "", ...) {
 
   # no ind
   if (is.empty(txt) && is.empty(session)) {
@@ -81,11 +75,7 @@ get_tgt <- function(txt = "", host = "", session = "", ...) {
   }
 
   # download data from session
-  url <- paste0(host, "/", session, "/rda")
-  con <- curl(url = url, open = "rb")
-  on.exit(close(con))
-  load(file = con)
-  return(.val)
+  return(session)
 }
 
 is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
