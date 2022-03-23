@@ -75,7 +75,7 @@ get_tgt <- function(txt = "", session = "", ...) {
   }
 
   # download data from session
-  return(eval(parse(text = session)))
+  return(eval(parse(text = paste0(session, "::.val"))))
 }
 
 is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
