@@ -45,7 +45,7 @@ get_loc <- function(txt, host, format) {
   get_url(resp, "location")
 }
 
-# returns session of uploaded data
+# uploads data and returns session
 get_session <- function(txt, host, format) {
   resp <- james_post(host = host, path = "data/upload", txt = txt, format = format)
   if (status_code(resp) != 201L) {
@@ -79,5 +79,33 @@ get_tgt <- function(txt = "", session = "", ...) {
   data <- get_session_object(session)
   return(data)
 }
+
+#' Load data from a previous OpenCPU session on same host
+#'
+#' This function loads data from a previous OpenCPU session on the same host.
+#' The assumption is that sessions are stored in path `/tmp/ocpu-store`.
+#' Provides a short-cut to the data eliminating the need to make self-requests.
+#'
+#' @param session Character, e.g. `session = "x077dd78bd0bbc6"`
+#' @param object  Character, e.g. `object = ".val"`. Refers to objects within the
+#' `/R` path (e.g. function returns or variables saved in scripts).
+#' @return
+#' If found, object from a the session. If not found, the function generates a
+#' warning and return `NULL`.
+#' @examples
+#' \dontrun{
+#' get_session_object(session = "x02a93ec661121", object = ".val")
+#' }
+get_session_object = function(session, object = ".val") {
+  sessionenv <- new.env()
+  sessionfile <- file.path("/tmp/ocpu-store", session, ".RData")
+  if (file.exists(sessionfile)) {
+    load(sessionfile, envir = sessionenv)
+    return(sessionenv[[object]])
+  }
+  warning("session not found: ", session)
+  return(NULL)
+}
+
 
 is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
