@@ -174,7 +174,6 @@ function update() {
   // trigger chart drawing
   var rq2 = $("#plotdiv").rplot("draw_chart", {
       txt      : utxt,
-      host     : host,
       session  : uses,
       chartcode: ucode,
       selector : selector,
