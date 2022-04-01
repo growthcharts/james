@@ -66,7 +66,7 @@
 #' }
 #' @export
 request_site <- function(txt = "",
-                         sitehost,
+                         sitehost = "",
                          session = "",
                          format = "1.0",
                          upload = TRUE,
@@ -81,21 +81,14 @@ request_site <- function(txt = "",
     session <- loc2session(loc)
   }
 
-  if (missing(sitehost)) {
+  if (is.empty(sitehost)) {
     warning("Argument sitehost not found. Defaulting to http://localhost.",
-            call. = FALSE
-    )
+            call. = FALSE)
     sitehost <- "http://localhost"
   }
 
   txt <- txt[1L]
   session <- session[1L]
-
-  # What is the URL of the server where I run?
-  # if (is.empty(host)) {
-  #   host <- get_host()
-  # }
-
   url <- parse_url(sitehost)
 
   # no data
