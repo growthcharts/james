@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.2",
+    "Version": "4.1.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -628,18 +628,17 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.26.1",
+      "Version": "0.29.0",
       "Source": "GitHub",
-      "Remotes": "growthcharts/bdsreader, growthcharts/jamesdemodata",
+      "Remotes": "growthcharts/jamesdemodata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "18f763ce07fd488a468f9665eecde904516ddc21",
-      "Hash": "b41613a62cb641ff2d59137a5ff178ed",
+      "RemoteSha": "b71d1642cb6642874c9c2f3f49c6c24166f3afa0",
+      "Hash": "c218d6f865902bc1cf1cbd0a892323b8",
       "Requirements": [
-        "bdsreader",
         "curl",
         "httr",
         "jsonlite"
@@ -886,10 +885,10 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "1.4.6",
+      "Version": "2.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "69fdf291af288f32fd4cd93315084ea8",
+      "Hash": "cf4329aac12c2c44089974559c18e446",
       "Requirements": [
         "askpass"
       ]

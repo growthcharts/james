@@ -26,7 +26,7 @@ Imports:
     grid (>= 4.1.0),
     growthscreener (>= 1.14.0),
     httr,
-    jamesclient (>= 0.26.1),
+    jamesclient (>= 0.29.0),
     jose,
     jsonlite,
     rlang,
