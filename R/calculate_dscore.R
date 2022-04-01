@@ -18,7 +18,6 @@
 #' d <- calculate_dscore(txt = fn)
 #' @export
 calculate_dscore <- function(txt = "",
-                             host = "",
                              session = "",
                              format = "1.0",
                              output = c("table", "last_visit", "last_dscore"),
@@ -35,7 +34,6 @@ calculate_dscore <- function(txt = "",
 
   output <- match.arg(output)
   tgt <- get_tgt(txt = txt,
-                 host = host,
                  session = session,
                  format = format)
 

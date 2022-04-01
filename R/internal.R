@@ -46,8 +46,8 @@ get_loc <- function(txt, host, format) {
 }
 
 # uploads data and returns session
-get_session <- function(txt, host, format) {
-  resp <- james_post(host = host, path = "data/upload", txt = txt, format = format)
+get_session <- function(txt, sitehost, format) {
+  resp <- james_post(sitehost = sitehost, path = "data/upload", txt = txt, format = format)
   if (status_code(resp) != 201L) {
     message_for_status(resp,
                        task = paste0(

@@ -6,7 +6,7 @@
 \usage{
 request_site(
   txt = "",
-  host = "",
+  sitehost,
   session = "",
   format = "1.0",
   upload = TRUE,
@@ -20,9 +20,12 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{host}{Name of the host}
+\item{sitehost}{The host that renders the site. Normally, that would be equal
+to the host on which JAMES runs. If not specified, the function throws a warning
+and sets \code{sitehost} to \code{"http://localhost"}.}
 
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
+\item{session}{Alternative to \code{txt}. Session key where input data is uploaded
+on \code{sitehost}.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
@@ -30,7 +33,8 @@ three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \c
 for new applications.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
-the data in \code{txt} and return a site address with the \verb{?session=} query appended.
+the data in \code{txt} to \code{sitehost} and return a site address with
+the \verb{?session=} query appended.
 Setting (\code{FALSE}) just appends \verb{?txt=} to the site url, thus
 deferring validation and conversion to internal representation to the site.}
 
@@ -63,16 +67,16 @@ host <- "http://localhost"
 # solutions that upload the data and create a URL with the `?session=` query parameter
 \dontrun{
 # upload file - works with docker on localhost
-site <- request_site(host = host, txt = fn)
+site <- request_site(sitehost = host, txt = fn)
 # browseURL(site)
 
 # upload JSON string
-site <- request_site(host = host, txt = js)
+site <- request_site(sitehost = host, txt = js)
 site
 # browseURL(site)
 
 # upload URL
-site <- request_site(host = host, txt = url)
+site <- request_site(sitehost = host, txt = url)
 site
 # browseURL(site)
 
@@ -80,13 +84,13 @@ site
 # this also works for js and url
 resp <- jamesclient::james_post(path = "data/upload", txt = fn)
 session <- resp$session
-site <- request_site(host = host, session = session)
+site <- request_site(sitehost = host, session = session)
 site
 # browseURL(site)
 
 # solutions that create an immediate ?txt=[..data..] query
 # this method does not create a cache on the server
-site <- request_site(host = host, txt = js, upload = FALSE)
+site <- request_site(sitehost = host, txt = js, upload = FALSE)
 # browseURL(site)
 }
 }

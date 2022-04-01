@@ -6,7 +6,6 @@
 \usage{
 apply_screeners(
   txt = "",
-  host = "",
   session = "",
   format = "1.0",
   ynames = c("hgt", "wgt", "hdc"),
@@ -18,9 +17,8 @@ apply_screeners(
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{host}{Name of the host}
-
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
+\item{session}{Alternative to \code{txt}. Session key where input data is uploaded
+on \code{sitehost}.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and

@@ -6,7 +6,7 @@
 \usage{
 request_blend(
   txt = "",
-  host = "",
+  sitehost = "",
   session = "",
   blend = "standard",
   loc = "",
@@ -19,9 +19,12 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{host}{Name of the host}
+\item{sitehost}{The host that renders the site. Normally, that would be equal
+to the host on which JAMES runs. If not specified, the function throws a warning
+and sets \code{sitehost} to \code{"http://localhost"}.}
 
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded.}
+\item{session}{Alternative to \code{txt}. Session key where input data is uploaded
+on \code{sitehost}.}
 
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
 returns the results of the standard end points that produces tables. Graphs

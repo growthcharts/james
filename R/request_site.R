@@ -7,9 +7,14 @@
 #' format. The input data adhere to specification
 #' [BDS JGZ 3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12),
 #' and are converted to JSON according to `schema`.
-#' @param session Alternative to `txt`. Session key where input data is uploaded.
+#' @param sitehost The host that renders the site. Normally, that would be equal
+#' to the host on which JAMES runs. If not specified, the function throws a warning
+#' and sets `sitehost` to `"http://localhost"`.
+#' @param session Alternative to `txt`. Session key where input data is uploaded
+#' on `sitehost`.
 #' @param upload Logical. If `TRUE` then `request_site()` will upload
-#' the data in `txt` and return a site address with the `?session=` query appended.
+#' the data in `txt` to `sitehost` and return a site address with
+#' the `?session=` query appended.
 #' Setting (`FALSE`) just appends `?txt=` to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
 #' @param loc Alternative to `txt`. Location where input data is uploaded.
@@ -33,16 +38,16 @@
 #' # solutions that upload the data and create a URL with the `?session=` query parameter
 #' \dontrun{
 #' # upload file - works with docker on localhost
-#' site <- request_site(host = host, txt = fn)
+#' site <- request_site(sitehost = host, txt = fn)
 #' # browseURL(site)
 #'
 #' # upload JSON string
-#' site <- request_site(host = host, txt = js)
+#' site <- request_site(sitehost = host, txt = js)
 #' site
 #' # browseURL(site)
 #'
 #' # upload URL
-#' site <- request_site(host = host, txt = url)
+#' site <- request_site(sitehost = host, txt = url)
 #' site
 #' # browseURL(site)
 #'
@@ -50,18 +55,18 @@
 #' # this also works for js and url
 #' resp <- jamesclient::james_post(path = "data/upload", txt = fn)
 #' session <- resp$session
-#' site <- request_site(host = host, session = session)
+#' site <- request_site(sitehost = host, session = session)
 #' site
 #' # browseURL(site)
 #'
 #' # solutions that create an immediate ?txt=[..data..] query
 #' # this method does not create a cache on the server
-#' site <- request_site(host = host, txt = js, upload = FALSE)
+#' site <- request_site(sitehost = host, txt = js, upload = FALSE)
 #' # browseURL(site)
 #' }
 #' @export
 request_site <- function(txt = "",
-                         host = "",
+                         sitehost,
                          session = "",
                          format = "1.0",
                          upload = TRUE,
@@ -76,15 +81,22 @@ request_site <- function(txt = "",
     session <- loc2session(loc)
   }
 
+  if (missing(sitehost)) {
+    warning("Argument sitehost not found. Defaulting to http://localhost.",
+            call. = FALSE
+    )
+    sitehost <- "http://localhost"
+  }
+
   txt <- txt[1L]
   session <- session[1L]
 
   # What is the URL of the server where I run?
-  if (is.empty(host)) {
-    host <- get_host()
-  }
+  # if (is.empty(host)) {
+  #   host <- get_host()
+  # }
 
-  url <- parse_url(host)
+  url <- parse_url(sitehost)
 
   # no data
   if (is.empty(txt) && is.empty(session)) {
@@ -93,7 +105,7 @@ request_site <- function(txt = "",
 
   # return session query, possibly after upload of txt
   if (!is.empty(txt) && is.empty(session) && upload) {
-    session <- get_session(txt, host, format = format)
+    session <- get_session(txt, sitehost, format = format)
   }
 
   if (!is.empty(session)) {
