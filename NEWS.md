@@ -1,3 +1,13 @@
+# james 0.58.0
+
+- Changes to make an isolated `http` API
+- Allows for host names such as  `http://myhost/module` with a partial path
+- Reads `OpenCPU` session from the local file system
+- Removes `host` arguments to functions
+- Removes `host` parameter from javascript calls
+- Introduces `sitehost` argument for `request_site()`
+- Update to `jamesclient 0.30.0`
+
 # james 0.57.0
 
 - Makes host definitions consistent everywhere as `http://myhost`
