@@ -635,9 +635,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "b71d1642cb6642874c9c2f3f49c6c24166f3afa0",
-      "Hash": "c218d6f865902bc1cf1cbd0a892323b8",
+      "RemoteRef": "remove_mod",
+      "RemoteSha": "7aa261a5fce3127548ce157029814f0e0cc04204",
+      "Hash": "96ff8217ec63ec4d3fa87a31bbe3314e",
       "Requirements": [
         "curl",
         "httr",

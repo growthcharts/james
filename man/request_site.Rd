@@ -6,7 +6,7 @@
 \usage{
 request_site(
   txt = "",
-  sitehost,
+  sitehost = "",
   session = "",
   format = "1.0",
   upload = TRUE,
