@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">james</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.57.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.58.0</span>
       </span>
     </div>
 
@@ -55,7 +55,6 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">apply_screeners</span><span class="op">(</span>
   txt <span class="op">=</span> <span class="st">""</span>,
-  host <span class="op">=</span> <span class="st">""</span>,
   session <span class="op">=</span> <span class="st">""</span>,
   format <span class="op">=</span> <span class="st">"1.0"</span>,
   ynames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"hdc"</span><span class="op">)</span>,
@@ -69,10 +68,9 @@
     <h2>Arguments</h2>
     <dl><dt>txt</dt>
 <dd><p>A JSON string, URL or file</p></dd>
-<dt>host</dt>
-<dd><p>Name of the host</p></dd>
 <dt>session</dt>
-<dd><p>Alternative to <code>txt</code>. Session key where input data is uploaded.</p></dd>
+<dd><p>Alternative to <code>txt</code>. Session key where input data is uploaded
+on <code>sitehost</code>.</p></dd>
 <dt>format</dt>
 <dd><p>String. JSON data schema version number. There are currently
 three schemas supported: <code>"1.0"</code>, <code>"1.1"</code> and <code>"2.0"</code>. Formats <code>"1.0"</code> and
