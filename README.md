@@ -1,589 +1,1331 @@
-
+---
+title: JAMES - Joint Automatic Measurement and Evaluation System
+subtitle: JAMES 1.2.0
+author: Stef van Buuren, Arjan Huizing (TNO Child Health)
+output:
+  html_document:
+    number_sections: false
+    theme: united
+    code_dowload: true
+    keep_md: true
+editor_options: 
+  chunk_output_type: console
+---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## Joint Automatic Measurement and Evaluation System (JAMES)
 
-<!-- badges: start -->
 
-[![R-CMD-check](https://github.com/growthcharts/james/workflows/R-CMD-check/badge.svg)](https://github.com/growthcharts/james/actions)
-<!-- badges: end -->
+## Overview
 
-JAMES is an experimental web service for creating and interpreting
-charts of child growth and development. The current version
+JAMES is a web service for creating and interpreting charts of child growth and development. The current version
 
-1.  provides access to high-quality growth charts used by the Dutch
-    youth health care;
-2.  interchanges data coded according to the [Basisdataset
-    JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13);
-3.  screens for abnormal height, weight and head circumference;
-4.  converts developmental data into the D-score;
-5.  predicts future growth and development.
+1. provides access to high-quality growth charts used by the Dutch youth health care;
+2. interchanges data coded according to the [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13);
+3. screens for abnormal height, weight and head circumference;
+4. converts developmental data into the D-score;
+5. predicts future growth and development.
 
-The service can be used by anyone interested in high-quality charts for
-monitoring and evaluating childhood growth. This document highlights
-some applications of JAMES, and provides pointers to relevant background
-information.
+JAMES is a RESTful API that runs on a remote host. The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information.
 
-## Deprecation note
+The service aids in monitoring and evaluating childhood growth. JAMES is created and maintained by the Netherlands Organisation for Applied Scientific Research TNO. Please contact Stef van Buuren <stef.vanbuuren at tno.nl> for further information.
 
-We will be offering Docker containers running JAMES from January 2022
-onwards, and phase out the functionality described below. Work in
-progress is at <https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0>.
+### Primary JAMES user functionality
 
-## Check whether JAMES is running
+  | Verb  | API Endpoint stem          | Description                                | Maps to `james` function |
+  |:------|:-------------------------- |:------------------------------------------ |:-------------------------|
+  | POST  | `/data/upload/{dfm}`       | Upload child data                          | `upload_data()`          |
+  | POST  | `/charts/draw/{ffm}`       | Draw child data on growth chart            | `draw_chart()`           |
+  | POST  | `/charts/list/{dfm}`       | List available growth charts               | `list_charts()`          |
+  | POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
+  | POST  | `/screeners/apply/{dfm}`   | Apply growth screeners to child data       | `apply_screeners()`      |
+  | POST  | `/screeners/list/{dfm}`    | List available growth screeners            | `list_screeners()`       |
+  | POST  | `/site/request/{dfm}`      | Request personalised site                  | `request_site()`         |
+  | POST  | `/blend/request/{sfm}`     | Obtain a blend from multiple end points    | `request_blend()`        |
+  | POST  | `/version/{dfm}`           | Obtain version information                 | `version()`              |
+  | GET   | `/{session}/{info}`        | Extract session details                    |                          |
+  | GET   | `/{2}/{1}/man`             | Consult R help                             | `help({1}_{2})`          |
+  
+The table lists the defined API end points and the mapping to each end point to the corresponding R function. 
 
-JAMES is currently located at url `groeidiagrammen.nl`. The sections
-below use `curl` for illustration, but any `HTTP` client will work.
+The current OpenAPI definition of JAMES is at <https://app.swaggerhub.com/apis-docs/stefvanbuuren/james> (version 1.2.0, April 2022). Note that this definition may evolve over time.
 
-In order to check whether the JAMES server is running, try generating
-some random numbers by calling `stats::rnorm()`, in a terminal window as
-follows,
+### Output formats
 
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
+JAMES is built on top of the [**OpenCPU API**](https://www.opencpu.org/api.html), a powerful and flexible way for online deployment of R functionality. Although it is possible to use JAMES without knowledge of OpenCPU, it is useful to browse the OpenCPU features. 
+
+OpenCPU offers multiple output formats out of the box. JAMES supports a subset of these through the `/{session}/{info}` end point. Here `session` is a special session code generated by OpenCPU that identifies the server location containing the results of a request. The output format `info` is one of the following:
+
+| `{info}`   | Description                                    |
+|:-----------|:-----------------------------------------------|
+| `json`     | Function result as JSON                        |
+| `print`    | Function result as formatted as print          |
+| `csv`      | Function result as comma-separated format      |
+| `tab`      | Function result as tab-delimited format        |
+| `md`       | Function result as markdown format             |
+| `svglite`  | Function result as SVG graph                   |
+| `warnings` | Warnings from the R execution                  |
+| `messages` | Messages, especially data validation info      |
+| `console`  | Console print out, useful for locating errors  |
+| `stdout`   | Standard output                                |
+| `info`     | Overview of JAMES deployment                   |
+| `parent`   | Parent directory of all OpenCPU session output |
+
+In addition, the user can request the function result in a particular form. JAMES distinguishes the following groups of formats.
+
+| Format group | Description                                                |
+|:-------------|:-----------------------------------------------------------|
+| `dfm`        | Data format: `json`, `csv`, `tab`, `md`, `print`, `parent` |
+| `ffm`        | Figure format: `svglite`, `print`, `parent`                |
+| `sfm`        | System format:  `json`, `print`, `parent`                  |
+
+In general, the user can specify the desired format by appending the format name to the URL. See <https://www.opencpu.org/api.html#api-formats> for examples.
+
+### Objective
+
+This document provides a quick introduction into the main JAMES features, and how these can be assessed from `R` and from the command line.
+
+
+## Features 
+
+### **`/version`**: Obtain version information
+
+Let us first check whether JAMES is running. The following code makes a simple request to JAMES to see whether it is alive and to return the version number of the underlying `james` R package. We illustrate both requests in `R` and in `bash`.
+
+#### {.tabset}
+
+##### **R**
+
+We first need to install and load packages.
+
+
+```r
+install.packages(c("remotes", "httr", "jsonlite"))
+remotes::install_github("growthcharts/jamesclient")
+remotes::install_github("growthcharts/bdsreader")
 ```
 
-## Primary JAMES user functionality
 
-| Function           | Description                            | Interesting URL’s    | Contents                    |
-|--------------------|----------------------------------------|----------------------|-----------------------------|
-| `list_charts`      | List available growth charts           | `R/.val/json`        | Table of charts, JSON       |
-|                    |                                        | `R/.val/text`        | Table of charts, text       |
-| `upload_data`      | Validate, convert and store input data | `messages/json`      | parse messages, JSON        |
-| `draw_chart`       | Draw chart, predict future growth      | `graphics/1/svglite` | chart, `svglite` format     |
-|                    |                                        | `graphics/1/png`     | chart, `png` format         |
-|                    |                                        | `messages/json`      | parse, graph messages, JSON |
-| `request_site`     | Site URL with personalised charts      | `R/.val/json`        | site URL, JSON              |
-|                    |                                        | `messages/json`      | parse, site messages, JSON  |
-| `calculate_dscore` | Calculate the D-score for each visit   | `R/.val/json`        | D-score table, JSON         |
-| `screen_growth`    | Screen growth along JGZ guidelines     | `R/.val/json`        | screening table, JSON       |
-|                    |                                        | `messages/json`      | parse, screen msg, JSON     |
-| `custom_list`      | Create list with custom returns        | `R/.val/json`        | list of returns, JSON       |
-
-The primary user functions cover out wide range of activities. Let us
-look into these in some more detail.
-
-### Available growth charts
-
-The site <https://groeidiagrammen.nl/ocpu/lib/james/www/> provides a
-quick round-trip of growth charts. JAMES currently offers 394 different
-charts, divided into three chart groups:
-
-1.  140 charts for children of various etnicities, age groups and
-    outcomes (Talma et al. 2010);
-2.  240 charts specifically designed for preterms (Bocca-Tjeertes et
-    al. 2012);
-3.  14 charts based on the WHO Child Growth Standards (WHO 2006);
-
-The `list_charts()` function in JAMES function produces a tabular
-overview of all charts.
-
-We may uses any HTTP client to download the list of growth charts. Many
-systems have the `curl` command already installed. We download the list
-into a JSON file by the following request:
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/lib/james/R/list_charts/json -d "" -o ~/Downloads/jamescharts.json
+```r
+library(jamesclient)
+library(httr)
+library(jsonlite)
 ```
 
-A request to `list_charts` on JAMES will yield a response like
+Let's find out the JAMES version number. In this document, we define the server that hosts JAMES as follows.
 
-``` bash
-Response [https://groeidiagrammen.nl/ocpu/library/james/R/list_charts]
-  Date: 2020-09-02 13:29
-  Status: 201
-  Content-Type: text/plain; charset=utf-8
-  Size: 248 B
-/ocpu/tmp/x07c4471d08dbd3/R/.val
-/ocpu/tmp/x07c4471d08dbd3/R/list_charts
-/ocpu/tmp/x07c4471d08dbd3/stdout
-/ocpu/tmp/x07c4471d08dbd3/source
-/ocpu/tmp/x07c4471d08dbd3/console
-/ocpu/tmp/x07c4471d08dbd3/info
-/ocpu/tmp/x07c4471d08dbd3/files/DESCRIPTION
+
+```r
+host <- "https://james.groeidiagrammen.nl"
+system(paste0("echo ", host, " > .host"))
 ```
 
-The status is 201 (Resources created), and the unique session `{key}` is
-`x07c4471d08dbd3`. Note that this changes with each request, so if you
-are replicating these commands, be sure to change `{key}` accordingly.
-Session keys and their url’s remain valid for 2 hours. See
-<https://www.opencpu.org/api.html> for succinct documentation of the
-OpenCPU interface.
+We first illustrate a method that makes two requests to the server. The following commands call the `/version/json` end point in the JAMES API.
 
-Not all information that JAMES return is interesting. In this case, we
-would like to see the table of charts in JSON format. We may these
-obtain this table from the URL
-`https://groeidiagrammen.nl/ocpu/tmp/x07c4471d08dbd3/R/.val/json`. The
-first entry looks like
 
-``` json
+```r
+r <- james_post(host = host, path = "version/json")
+```
+
+The function result is an object of class `james_post` and consists of various components.
+
+
+```r
+names(r)
+```
+
+```
+##  [1] "url"          "status_code"  "headers"      "all_headers"  "cookies"     
+##  [6] "content"      "date"         "times"        "request"      "handle"      
+## [11] "request_path" "parsed"       "warnings"     "messages"     "session"
+```
+
+```r
+r$url
+```
+
+```
+## [1] "https://james.groeidiagrammen.nl/version/json"
+```
+
+Most of the element are documented in the `response` object in the `httr` package. For example, we could use the call `httr::status_code(r)` to obtain the status code. The function `james_post()` adds the last five elements:
+
+- `r$request_path` echoes the endpoint, here `/version/json`;
+- `r$parsed` is a parsed version of the element `r$content`. Here it is a list of elements like names of the package, its date, and so on. In case of an error of the server function, we find the error message here;
+- `r$warnings` contain any warnings thrown during execution;
+- `r$messages` contain any messages, e.g. data reading errors;
+- `r$session` (like x092644b440c0f5) is a unique session code.
+
+The `jamesclient::james_post()` function wraps the basis workhorse `httr::POST()` that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.
+
+
+```r
+path <- "version/json"
+url <- parse_url(host)
+url <- modify_url(url, path = file.path(url$path, path), query = "auto_unbox=true")
+r <- POST(url)
+fromJSON(content(r, type = "text", encoding = "UTF-8"))
+```
+
+```
+## $package
+## [1] "james"
+## 
+## $packageVersion
+## [1] "0.58.0"
+## 
+## $packageDate
+## [1] "2022-04-03"
+## 
+## $Rversion
+## [1] "4.1.2"
+```
+
+##### **bash**
+
+We use the `curl` Linux command. If needed, on Ubuntu install `curl` as
+
+
+```bash
+sudo apt update
+sudo apt -y install curl
+```
+
+Let’s find out the JAMES version number. We first illustrate a method that makes two requests to the server.
+
+The following `bash` commands call the `/version` API end point
+
+
+```bash
+curl -sX POST $(cat .host)/version > resp
+```
+
+The response to the request consists of a set of URLs created on the server, each of which contains details on the response. 
+
+
+```bash
+cat resp
+```
+
+```
+## /ocpu/tmp/x03a88807ceb5db/R/.val
+## /ocpu/tmp/x03a88807ceb5db/R/version
+## /ocpu/tmp/x03a88807ceb5db/stdout
+## /ocpu/tmp/x03a88807ceb5db/source
+## /ocpu/tmp/x03a88807ceb5db/console
+## /ocpu/tmp/x03a88807ceb5db/info
+## /ocpu/tmp/x03a88807ceb5db/files/DESCRIPTION
+```
+
+The path element following `tmp/` is a unique session key. See <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU API.
+
+The next snippet constructs the URL of a JSON representation of the result and downloads the contents of the URL as a file `value1`.
+
+
+```bash
+curl -s $(cat .host)$(head -1 resp)/json?auto_unbox=true > value1
+cat value1
+```
+
+```
+## {
+##   "package": "james",
+##   "packageVersion": "0.58.0",
+##   "packageDate": "2022-04-03",
+##   "Rversion": "4.1.2"
+## }
+```
+
+The above sequence makes two requests to the server. The following code compacts both steps into one.
+
+
+```bash
+curl -sX POST $(cat .host)/version/json?auto_unbox=true > value2
+cat value2
+```
+
+```
+## {
+##   "package": "james",
+##   "packageVersion": "0.58.0",
+##   "packageDate": "2022-04-03",
+##   "Rversion": "4.1.2"
+## }
+```
+
+
+
+#### {-}
+
+### **`/data/upload`**: Upload child data
+
+JAMES understands data that conform to the [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/) coded as JSON according to a [JSON schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json). This section explains how we create, validate and upload child data to JAMES.
+
+#### {.tabset}
+
+##### **R**
+
+Let us assume that we have already have child data in `R` stored as a `data.frame` or `tibble`. Here we work with longitudinal demo data `maria` from the `bdsreader` package.
+
+
+```r
+library(bdsreader)
+maria
+```
+
+```
+## $child
+## # A tibble: 1 × 13
+##   src      id name  dob    sex     gad   smo    bw dobf  dobm   hgtm  hgtf etn  
+##   <chr> <dbl> <chr> <chr>  <chr> <dbl> <dbl> <dbl> <chr> <chr> <dbl> <dbl> <chr>
+## 1 1234   5678 Maria 11-10… fema…   189     1   990 04-0… 02-1…   167   190 NL   
+## 
+## $time
+## # A tibble: 2 × 8
+##   src      id    age sex       ga   hgt   wgt   hdc
+##   <chr> <dbl>  <dbl> <chr>  <dbl> <dbl> <dbl> <dbl>
+## 1 1234   5678 0.0849 female    27  38    1.25  27  
+## 2 1234   5678 0.167  female    27  43.5  2.1   30.5
+```
+
+The dataset for Maria consists of a list of two elements: `child` and `time`. The `child` element contain child-level variables, such as sex or height of parents. Element `time` is a tibble with measured body data at two different ages. 
+
+The `bdsreader` package contains a function `export_as_bds()` that can convert and save the data in a JSON formatted file.
+
+
+```r
+export_as_bds(maria, ids = 5678, name = "maria", indent = 2)
+```
+
+```
+## Processing file: maria.json
+```
+
+This statement writes a file named `"maria.json"` to the working directory. 
+
+```
 {
-  "chartgrp": "nl2010",
-  "chartcode": "HJAA",
-  "population": "HS",
-  "sex": "male",
-  "design": "A",
-  "side": "front",
-  "language": "dutch",
-  "week": ""
-}
-```
-
-The central field is `chartcode`, which contains a unique 4-7 character
-code identifying the particular chart. In this example, code `HJAA`
-represents a chart for boys with Indo-Surinamese background (population
-`HS`) and design `A` (chart with head circumference, length and weight
-for boys aged 0-15 months). The codes are compatible and extend those
-used in Talma et al. (2010).
-
-### Requesting a growth chart
-
-We may download growth chart `HJAA` with the `draw_chart()` function as
-follows:
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "chartcode='HJAA'&selector='chartcode'"
-```
-
-This produces the following output
-
-``` bash
-/ocpu/tmp/x038e163dc6de71/R/.val
-/ocpu/tmp/x038e163dc6de71/R/draw_chart
-/ocpu/tmp/x038e163dc6de71/graphics/1
-/ocpu/tmp/x038e163dc6de71/stdout
-/ocpu/tmp/x038e163dc6de71/source
-/ocpu/tmp/x038e163dc6de71/console
-/ocpu/tmp/x038e163dc6de71/info
-/ocpu/tmp/x038e163dc6de71/files/DESCRIPTION
-```
-
-View the chart in the browser by pasting the following into the url
-address field:
-
-``` bash
-https://groeidiagrammen.nl/ocpu/tmp/x038e163dc6de71/graphics/1/svglite?width=8.27&height=11.69
-```
-
-or download the growth chart as
-
-``` bash
-curl -o mychart.svg 'https://groeidiagrammen.nl/ocpu/tmp/x038e163dc6de71/graphics/1/svglite?width=8.27&height=11.69' -H 'Cache-Control: max-age=0'
-```
-
-In order to obtain the right canvas size, the URL needs to be in quotes
-and the request needs `-H 'Cache-Control: max-age=0'` option added.
-
-### Adding data to charts
-
-Until now, we have only seen empty growth charts. This section describes
-various ways to add child data to the charts.
-
-#### Data format
-
-The [BDS JGZ
-3.2.5](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12)
-protocol facilitates the exchange of data between parties active in the
-Dutch youth health care. The format is basically a codebook of
-variables. Each variable has a number: `bdsnummer`. JAMES adopts the
-format, and accepts data in JSON format according to a [JSON
-schema](https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/json/bds_schema_str.json).
-
-A minimal example of the data according to the schema is:
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json
-```
-
-Save the file
-[client3.json](https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json)
-on your local system by
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json -O
-```
-
-which produces a file called `client3.json` in your working directory.
-
-For testing purposes, you may change its values, but please keep the
-general structure intact.
-
-#### Charting the child data, JSON file
-
-The following `curl` command uploads and converts the file, and plots
-the data on a growth chart:
-
-``` bash
-curl -F 'txt=@client3.json' https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart
-
-/ocpu/tmp/x0f59c6526dba8a/R/.val
-/ocpu/tmp/x0f59c6526dba8a/R/draw_chart
-/ocpu/tmp/x0f59c6526dba8a/graphics/1
-/ocpu/tmp/x0f59c6526dba8a/stdout
-/ocpu/tmp/x0f59c6526dba8a/source
-/ocpu/tmp/x0f59c6526dba8a/console
-/ocpu/tmp/x0f59c6526dba8a/info
-/ocpu/tmp/x0f59c6526dba8a/files/client3.json
-/ocpu/tmp/x0f59c6526dba8a/files/DESCRIPTION
-```
-
-As before, you can draw the chart by pasting the following URL in the
-browser:
-
-``` bash
-https://groeidiagrammen.nl/ocpu/tmp/x0f59c6526dba8a/graphics/1/svglite
-```
-
-JAMES automatically selected the length-by-age chart for preterm girls
-born at a gestational age of 27 weeks.
-
-#### Charting the child data, JSON string
-
-Send the child’s data as a JSON string instead of a file provides some
-more flexibility. The following code assumes that utility `jq` is
-installed.
-
-First, convert the JSON file into a JSON string, with double quotes
-(`"`) properly escaped.
-
-``` bash
-var=$(jq '.' client3.json | jq -sR '.')
-echo $var
-```
-
-Then run the following command requesting chart code `PMAAN27`:
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "txt=$var&chartcode='PMAAN27'&selector='chartcode'"
-```
-
-The results returns an URL pointing to an A4 formatted different chart
-for preterm girls with the points added.
-
-There are many more options possible. See the help in:
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/lib/james/man/draw_chart/text
-```
-
-### Data cache
-
-JAMES takes the following general steps to plot data:
-
-1.  The client sends a request that posts the child data;
-2.  The server validates the input;
-3.  The server transforms the data into JAMES internal format;
-4.  The server adds the data points to the chart;
-5.  The server sends a response to the client;
-6.  The client interprets the response.
-
-All JAMES functions support the complete set of actions through the
-`txt` parameter, as used above. In addition, many functions also accept
-the cached result from steps 1-3 as input through the `loc` parameter.
-More in particular, the `loc` method saves the result after step 3, and
-feeds the location of the converted data into a second request that
-applies the plotting. Both `txt` and `loc`methods yield the same result.
-
-The obvious advantage of caching is that validation has only to be done
-once. In cases where the user needs multiple analyses for the same
-child, for example for building an interactive site, caching may result
-in snappier behaviour. It may also be easier to diagnose errors in the
-input data. On the other hand, caching also requires some more work on
-the client side. The nature of the application determines which method
-works best.
-
-#### Example of data cache
-
-An example, let’s create a chart in two steps. We first upload the data
-using `upload_data()`, which accepts JSON input and return the location
-with the uploaded data.
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/upload_data -d "txt=$var"
-
-/ocpu/tmp/x02691745d874cc/R/.val
-/ocpu/tmp/x02691745d874cc/R/upload_data
-/ocpu/tmp/x02691745d874cc/stdout
-/ocpu/tmp/x02691745d874cc/source
-/ocpu/tmp/x02691745d874cc/console
-/ocpu/tmp/x02691745d874cc/info
-/ocpu/tmp/x02691745d874cc/files/DESCRIPTION
-```
-
-We create the chart by
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"
-```
-
-## Request a dedicated url to the chart site
-
-The child’s data can be plotted on any of the available charts using a
-*child chart site*. We can construct a child’s site by means of the
-following request.
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d "txt=$var"
-["https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x0dde6c563edb40/"]
-```
-
-This command uploads and checks the input data, and appends the result
-URL to the site base URL. The combined URL starts a personalised site
-with the child’s data.
-
-Alternatively, if we already obtained a `loc` parameters, we can combine
-that with the site base URL as follows.
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/request_site/json -d "loc='https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/'"
-["https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x02691745d874cc/"]
-```
-
-There are three ways to choose which chart is being plotted:
-
-1.  JAMES picks a default chart;
-2.  The developer provides a `chartcode` parameter;
-3.  The end user manipulates the interactive controls.
-
-Options 1 and 2 determine the first chart that is shown to the end user.
-
-#### Site with default chart
-
-The default chart picked by JAMES is currently hard-wired as the child’s
-height chart that contains the most recent measurements. If the child is
-a pre-term (gestational age \<= 36 weeks) and younger than 4 years, then
-JAMES chooses the appropriate preterm chart.
-
-The chart site with the default start can be started by combining the
-[uploaded data](https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
-and the main site at (<https://groeidiagrammen.nl/ocpu/lib/james/www/>)
-as
-
-``` bash
-curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
-```
-
-Pasting this url in your browser starts the site with the child’s data.
-
-### Site with developer-specified chart
-
-Starting the site at a given growth chart is possible by specifying the
-`chartcode` parameters. For example, we may initialize the site at chart
-`PMAAN27` by
-
-``` bash
-curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/&chartcode=PMAAN27"
-```
-
-The site now starts with `PMAAN27` instead of `PMAHN27`. Any chart can
-be chosen. It is the responsibility of the developer that the choice is
-sensible given the child’s data.
-
-#### Site with user-specified chart
-
-After the site is started the end user may change the chart on which the
-data are drawn by simply using the site controls.
-
-## Screen growth curves according to JGZ guidelines
-
-`screen_growth` \| Screen growth curves according to JGZ guidelines
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/screen_growth -d "txt=$var"
-```
-
-We obtain the screening results as
-
-````` bash
-curl https://groeidiagrammen.nl/ocpu/tmp/x04fc43cfd709b7/R/.val/json
-````
-`````
-
-``` json
-[
-  {
-    "Categorie": 1000,
-    "CategorieOmschrijving": "Lengte",
-    "Code": 1031,
-    "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    "Versie": "1.6.0",
-    "Leeftijd0": "20181111",
-    "Leeftijd1": "20181211"
-  },
-  {
-    "Categorie": 2000,
-    "CategorieOmschrijving": "Gewicht",
-    "Code": 2031,
-    "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    "Versie": "1.6.0",
-    "Leeftijd0": "20181111",
-    "Leeftijd1": "20181211"
-  },
-  {
-    "Categorie": 3000,
-    "CategorieOmschrijving": "Hoofdomtrek",
-    "Code": 3031,
-    "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    "Versie": "1.6.0",
-    "Leeftijd0": "20181111",
-    "Leeftijd1": "20181211"
-  }
-]
-```
-
-## Create one request with list of return values
-
-In some cases, we would like to bundle return values from a custom set
-of calls. That is the job of `custom_list`. The current version of
-`custom_list` will return a site URL (created by `request_site`), a
-table of screening results (created by `screen_growth`) and the last
-D-score (created by `calculate_dscore`). For example, the calls
-
-``` bash
-curl https://groeidiagrammen.nl/ocpu/library/james/R/custom_list -d "txt=$var"
-curl https://groeidiagrammen.nl//ocpu/tmp/x098464a29301fe/R/.val/json
-```
-
-return
-
-``` json
-{
-  "UrlGroeicurven": "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x03ee2514b1b1d2/",
-  "Resultaten": [
+  "Format": "2.0",
+  "OrganisatieCode": 1234,
+  "Referentie": "Maria",
+  "ClientGegevens": [
     {
-      "Categorie": 1000,
-      "CategorieOmschrijving": "Lengte",
-      "Code": 1031,
-      "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-      "Versie": "1.6.0",
-      "Leeftijd0": "20181111",
-      "Leeftijd1": "20181211"
+      "ElementNummer": 19,
+      "Waarde": "2"
     },
     {
-      "Categorie": 2000,
-      "CategorieOmschrijving": "Gewicht",
-      "Code": 2031,
-      "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-      "Versie": "1.6.0",
-      "Leeftijd0": "20181111",
-      "Leeftijd1": "20181211"
+      "ElementNummer": 20,
+      "Waarde": "20181011"
     },
     {
-      "Categorie": 3000,
-      "CategorieOmschrijving": "Hoofdomtrek",
-      "Code": 3031,
-      "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-      "Versie": "1.6.0",
-      "Leeftijd0": "20181111",
-      "Leeftijd1": "20181211"
+      "ElementNummer": 82,
+      "Waarde": 189
+    },
+    {
+      "ElementNummer": 91,
+      "Waarde": "1"
+    },
+    {
+      "ElementNummer": 110,
+      "Waarde": 990
+    },
+    {
+      "ElementNummer": 238,
+      "Waarde": 1670
+    },
+    {
+      "ElementNummer": 240,
+      "Waarde": 1900
+    },
+    {
+      "GenesteElementen": [
+        {
+          "ElementNummer": 63,
+          "Waarde": "19950704"
+        },
+        {
+          "ElementNummer": 71
+        },
+        {
+          "ElementNummer": 62,
+          "Waarde": "01"
+        }
+      ]
+    },
+    {
+      "GenesteElementen": [
+        {
+          "ElementNummer": 63,
+          "Waarde": "19901202"
+        },
+        {
+          "ElementNummer": 71
+        },
+        {
+          "ElementNummer": 62,
+          "Waarde": "02"
+        }
+      ]
+    }
+  ],
+  "ContactMomenten": [
+    {
+      "Tijdstip": "20181111",
+      "Elementen": [
+        {
+          "ElementNummer": 235,
+          "Waarde": 380
+        },
+        {
+          "ElementNummer": 245,
+          "Waarde": 1250
+        },
+        {
+          "ElementNummer": 252,
+          "Waarde": 270
+        }
+      ]
+    },
+    {
+      "Tijdstip": "20181211",
+      "Elementen": [
+        {
+          "ElementNummer": 235,
+          "Waarde": 435
+        },
+        {
+          "ElementNummer": 245,
+          "Waarde": 2100
+        },
+        {
+          "ElementNummer": 252,
+          "Waarde": 305
+        }
+      ]
     }
   ]
 }
 ```
 
-which contains the return values generated by `request_site` (called
-“UrlGroeicurven” here) and by `screen_growth` (called “Resultaten”
-here). There no result for `calculate_dscore` because the data do not
-contain any developmental scores that would be needed to calculate a
-D-score.
 
-In principle, `custom_list` provides an option for clients to bundle the
-results of multiple requests into one call. The current functionality,
-however, is limited to what is indicated in this section.
+There are now four ways to upload the data to JAMES:
 
-## Legacy functionality
+1. Upload the file `"maria.json"`;
+2. Convert to a string and upload;
+3. Convert to a JSON object and upload;
+4. Read the JSON from a URL.
 
-This following table lists functions that are active in the current
-version, but that we will not further develop. Please replace them by
-the suggested alternative.
+The `james_post()` function can call the `/upload/json` API end point and handles these cases as follows:
 
-| Function          | Description                             | Preferred alternative          |
-|-------------------|-----------------------------------------|--------------------------------|
-| `convert_bds_ind` | Validate, convert, store input (server) | `upload_data`                  |
-| `fetch_loc`       | Validate, convert, store input (server) | `upload_data`                  |
-| `upload_txt`      | Validate, convert, store input (client) | `jamesclient::upload_txt`      |
-| `draw_chart_bds`  | Draw chart from uploaded                | `draw_chart(txt = ...)`        |
-| `draw_chart_ind`  | Draw chart from cached data             | `draw_chart(loc = ...)`        |
-| `screen_curves`   | Screen growth along JGZ guidelines      | `screen_growth`, `custom_list` |
 
-This following table lists argument names that are active in the current
-version, but that will be phased out for consistency. Please replace
-them by the suggested alternative.
+```r
+# upload as file
+fn <- "maria.json"
+r1 <- james_post(host = host, path = "data/upload/json", txt = fn)
+status_code(r1)
+```
 
-| Argument   | Description                         | Preferred alternative |
-|------------|-------------------------------------|-----------------------|
-| `bds_data` | JSON input data                     | `txt`                 |
-| `ind_loc`  | Location with cached data.          | `loc`                 |
-| `location` | Location with cached data.          | `loc`                 |
-| `?ind=`    | URL query parameter for cached data | `?loc=`               |
+```
+## [1] 201
+```
 
-At some point these functions and argument names will be deprecated and
-removed.
+```r
+# upload as string
+js <- read_json_js(fn)
+r2 <- james_post(host = host, path = "data/upload/json", txt = js)
+status_code(r2)
+```
 
-## Next steps
+```
+## [1] 201
+```
 
-Things that were still on the wish list in Sept 2019:
+```r
+# upload as JSON object
+jo <- read_json_jo(fn)
+r3 <- james_post(host = host, path = "data/upload/json", txt = jo)
+status_code(r3)
+```
 
--   transfer JAMES to url james.tno.nl \[wait for docker version\]
--   allow for more input formats \[NOW support for both `txt` and
-    `loc`\]
--   add https protocol \[DONE\]
--   add functionality to test for Dutch guidelines for referral \[DONE,
-    3 guidelines\]
--   add functionality to predict individual growth curves \[DONE\]
--   extend functionality to include the *D*-score charts \[DONE\]
+```
+## [1] 201
+```
 
-## Architecture
+```r
+# upload as URL
+url <- file.path(host, "ocpu/library/bdsreader/examples/maria.json")
+r4 <- james_post(host = host, path = "data/upload/json", txt = url)
+status_code(r4)
+```
 
-The growth charts in JAMES are programmed in `R`. JAMES makes these
-available through the [OpenCPU](https://www.opencpu.org) system for
-scientific computing and reproducible research. The system allows for
-easy integration of growth charts into any `HTTP` compliant client by
-means of OpenCPU’s [API](https://www.opencpu.org/api.html). JAMES is a
-RESTful webservice.
+```
+## [1] 201
+```
+
+If the status is 201, the data are uploaded to JAMES and processed. For example, the processed data after file upload is available as an R data frame under element `r1$parsed`. 
+
+
+```r
+r1$parsed
+```
+
+```
+## $psn
+##   id  name        dob       dobf       dobm src    sex gad ga smo  bw hgtm hgtf
+## 1 -1 Maria 2018-10-11 1995-07-04 1990-12-02   0 female 189 27   1 990  167  190
+##   agem etn
+## 1   27  NL
+## 
+## $xyz
+##       age xname yname zname                  zref       x       y      z
+## 1  0.0849   age   hgt hgt_z nl_2012_hgt_female_27  0.0849 38.0000 -0.158
+## 2  0.1670   age   hgt hgt_z nl_2012_hgt_female_27  0.1670 43.5000  0.047
+## 3  0.0849   age   wgt wgt_z nl_2012_wgt_female_27  0.0849  1.2500 -0.203
+## 4  0.1670   age   wgt wgt_z nl_2012_wgt_female_27  0.1670  2.1000  0.015
+## 5  0.0849   age   hdc hdc_z nl_2012_hdc_female_27  0.0849 27.0000 -0.709
+## 6  0.1670   age   hdc hdc_z nl_2012_hdc_female_27  0.1670 30.5000 -0.913
+## 7  0.0849   age   bmi bmi_z nl_1997_bmi_female_nl  0.0849  8.6565 -5.719
+## 8  0.1670   age   bmi bmi_z nl_1997_bmi_female_nl  0.1670 11.0979 -3.767
+## 9  0.0849   hgt   wfh wfh_z   nl_2012_wfh_female_ 38.0000  1.2500 -0.001
+## 10 0.1670   hgt   wfh wfh_z   nl_2012_wfh_female_ 43.5000  2.1000  0.326
+## 11 0.0000   age   wgt wgt_z nl_2012_wgt_female_27  0.0000  0.9900  0.190
+```
+
+The resources produced by JAMES results will remain available for two hours under the session key. The session key is your entrance to the resource and can be retrieved from the `james_post` class from the `session` element. For example, if we want to see the result of the last session in markdown: 
+
+
+```r
+(session <- r1$session)
+```
+
+```
+## [1] "x0f8815497ceb60"
+```
+
+```r
+resp <- james_get(host = host, path = file.path(session, "md"))
+cat(resp$parsed, "\n")
+```
+
+```
+## 
+## 
+##   * **psn**:
+## 
+##     ------------------------------------------------------------------------------
+##      id   name       dob          dobf         dobm      src   dnr    sex     gad
+##     ---- ------- ------------ ------------ ------------ ----- ----- -------- -----
+##      -1   Maria   2018-10-11   1995-07-04   1990-12-02    0    NA    female   189
+##     ------------------------------------------------------------------------------
+## 
+##     Table: Table continues below
+## 
+## 
+##     -------------------------------------------
+##      ga   smo   bw    hgtm   hgtf   agem   etn
+##     ---- ----- ----- ------ ------ ------ -----
+##      27    1    990   167    190     27    NL
+##     -------------------------------------------
+## 
+##   * **xyz**:
+## 
+##     ----------------------------------------------------------------------------------
+##       age     xname   yname   zname           zref              x        y       z
+##     -------- ------- ------- ------- ----------------------- -------- ------- --------
+##      0.0849    age     hgt    hgt_z   nl_2012_hgt_female_27   0.0849    38     -0.158
+## 
+##      0.167     age     hgt    hgt_z   nl_2012_hgt_female_27   0.167    43.5    0.047
+## 
+##      0.0849    age     wgt    wgt_z   nl_2012_wgt_female_27   0.0849   1.25    -0.203
+## 
+##      0.167     age     wgt    wgt_z   nl_2012_wgt_female_27   0.167     2.1    0.015
+## 
+##      0.0849    age     hdc    hdc_z   nl_2012_hdc_female_27   0.0849    27     -0.709
+## 
+##      0.167     age     hdc    hdc_z   nl_2012_hdc_female_27   0.167    30.5    -0.913
+## 
+##      0.0849    age     bmi    bmi_z   nl_1997_bmi_female_nl   0.0849   8.657   -5.719
+## 
+##      0.167     age     bmi    bmi_z   nl_1997_bmi_female_nl   0.167    11.1    -3.767
+## 
+##      0.0849    hgt     wfh    wfh_z    nl_2012_wfh_female_      38     1.25    -0.001
+## 
+##      0.167     hgt     wfh    wfh_z    nl_2012_wfh_female_     43.5     2.1    0.326
+## 
+##        0       age     wgt    wgt_z   nl_2012_wgt_female_27     0      0.99     0.19
+##     ----------------------------------------------------------------------------------
+## 
+## 
+## <!-- end of list -->
+## 
+## 
+## 
+```
+
+##### **bash**
+
+We start from child data in the file `maria.json` that we wish to process with JAMES. For testing purposes, you may change the values, but keep the general structure intact. The following `curl` commands uploads the file and processes the data.
+
+
+```bash
+curl -sF 'txt=@maria.json' -D headers $(cat .host)/data/upload/json > content
+head content
+```
+
+```
+## {
+##   "psn": [
+##     {
+##       "id": -1,
+##       "name": "Maria",
+##       "dob": "2018-10-11",
+##       "dobf": "1995-07-04",
+##       "dobm": "1990-12-02",
+##       "src": "0",
+##       "sex": "female",
+```
+
+Alternatively, we may read the file into a JSON string, and upload as follows:
+
+
+```bash
+JS=$(jq '.' maria.json | jq -sR '.')
+curl -s $(cat .host)/data/upload/json -d "txt=$JS" > content
+```
+
+Finally, if the data are located at a URL, use
+
+
+```bash
+URL=$(cat .host)/ocpu/library/bdsreader/examples/maria.json
+curl -s $(cat .host)/data/upload/json -d "txt='$URL'" > content
+```
+
+
+
+
+#### {-}
+
+### **`/charts/draw`**: Draw child data on growth chart
+
+#### {.tabset}
+
+##### **R**
+
+Maria is a preterm born at 27 weeks of gestational age. We already uploaded her data. We may now plot her growth data on the A4 chart for preterms as follows:
+
+
+```r
+r5 <- james_post(host = host, 
+                 path = "/charts/draw/svglite", 
+                 session = r1$session,
+                 chartcode = "PMAAN27", selector = "chartcode",
+                 query = list(height = 29.7/2.54, width = 21/2.54))
+mysvg <- tempfile(pattern = "chart", fileext = rep(".svg", 3))
+writeLines(r5$parsed, con = mysvg[1])
+```
+
+<div class="figure" style="text-align: center">
+<img src="/var/folders/py/58s36gjn5kn9zw6rfr7mnx680000gn/T//RtmpyTVJIM/chart42be4ebbe1d2.svg" alt="Maria's growth plotted on preterm chart, 0-15 months"  />
+<p class="caption">Maria's growth plotted on preterm chart, 0-15 months</p>
+</div>
+
+Alternatively, we may upload data for a new child Laura and plot the data in one step:
+
+
+```r
+fn <- system.file("extdata/bds_v2.0/smocc/Laura_S.json", package = "jamesdemodata")
+r6 <- james_post(host = host,
+                 path = "/charts/draw/svglite", txt = fn, 
+                 chartcode = "NMBA", selector = "chartcode",
+                 query = list(height = 29.7/2.54, width = 21/2.54))
+writeLines(r6$parsed, con = mysvg[2])
+```
+
+For A4 sized charts, we recommend to generate the plot with query arguments `list(height = 29.7/2.54, width = 21/2.54)`, as illustrated above. If you want to change the chart's size in your HTML, use the `out.width` knitr chunk option, e.g. set `out.width="500px"`. This gives the following output.
+
+<div class="figure" style="text-align: center">
+<img src="/var/folders/py/58s36gjn5kn9zw6rfr7mnx680000gn/T//RtmpyTVJIM/chart42be10e6ca60.svg" alt="Laura's growth plotted on chart for Dutch girls, 0-4 years" width="500px" />
+<p class="caption">Laura's growth plotted on chart for Dutch girls, 0-4 years</p>
+</div>
+
+JAMES features a built-in prediction module based on curve matching. Suppose we want to predict Laura's height at the 3y9m when Laura is 2 years old. The following chart plots 25 matches to Laura as grey curves. The variation between the grey curves at age 3y9m indicates the likely variation in the prediction. The blue line indicates Laura's predicted height at age 3y9m. 
+
+
+```r
+r7 <- james_post(host = host, 
+                 path = "/charts/draw/svglite", txt = fn, 
+                 chartcode = "NMBH", dnr = "2-4",
+                 lo = 2.0, hi = 3.75, nmatch = 25,
+                 show_future = TRUE, show_realized = TRUE,
+                 query = list(height = 18/2.54, width = 18/2.54))
+writeLines(r7$parsed, con = mysvg[3])
+```
+
+For square charts, use query arguments `list(height = 18/2.54, width = 18/2.54)` to generate the plot. In order to get the same age units as the previous chart, calculate `out.width` as `500/21*18 = "429px"`.
+
+<div class="figure" style="text-align: center">
+<img src="/var/folders/py/58s36gjn5kn9zw6rfr7mnx680000gn/T//RtmpyTVJIM/chart42be1ff06d4b.svg" alt="Predict Laura's future height at the age of 3y9m." width="429px" />
+<p class="caption">Predict Laura's future height at the age of 3y9m.</p>
+</div>
+
+##### **bash**
+
+Upload `maria.json` and draw the height data on the default chart to produce an SVG file. Specify the proper `width` and `height` query parameters.
+
+
+```bash
+curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=7.09&height=7.09' \
+  -H 'accept: image/*' \
+  -F 'txt=@maria.json;type=application/json' > maria1.svg
+```
+
+We need to set `chartcode` and `selector` parameters to choose a different chart.
+
+
+```bash
+curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
+  -H 'accept: image/*' \
+  -F "chartcode='PMAAN27'" \
+  -F "selector='chartcode'" \
+  -F 'txt=@maria.json;type=application/json' > maria2.svg
+```
+
+An alternative is to read the data from a URL, and use the `application/json` protocol to specify parameters.
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
+  -H 'accept: image/*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "txt": "'$(cat .host)'/ocpu/library/jamesdemodata/extdata/bds_v2.0/smocc/Laura_S.json",
+  "chartcode" : "NMBA", 
+  "selector" : "chartcode"}' > laura.svg
+```
+
+#### {-}
+
+### **`/charts/list`**: List available growth charts
+
+#### {.tabset}
+
+##### **R**
+
+JAMES contains a wide variety of built-in growth charts. Each chart has a unique `chartcode`. We obtain the full list of chart codes as
+
+
+```r
+r <- james_post(host = host, path = "charts/list/json")
+charts <- r$parsed
+with(charts, table(population, side))
+```
+
+```
+##           side
+## population -hdc back bmi dsc front hdc hgt wfh wgt
+##    DS         0    6   2   0     6   6   6   4   2
+##    HS         4    2   2   0     6   2   6   4   2
+##    MA         0    6   2   0     6   6   6   4   2
+##    NL         2    8   2   4     8   8   8   4   4
+##    PT         0   24   0  48    48  24  48   0  48
+##    TU         0    6   2   0     6   6   6   4   2
+##    WHOblue    0    0   0   0     2   1   2   1   1
+##    WHOpink    0    0   0   0     2   1   2   1   1
+```
+
+JAMES contains charts for various child populations: Down syndrome (DS), Hindustan (HS), Moroccan (MA), Dutch (NL)), preterm (PT) and Turkish (TU) children living in the Netherlands and the WHO Growth Standards (WHOblue, WHOpink). These charts contain references for height (hgt), weight (wgt), head circumference (hdc), weight-for-height (wfh), body mass index (bmi) and D-score (dsc), as well as combined charts with multiple references on A4 format (front, back, -hdc).
+
+The interactive [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) provides the actual chart code used for each display.
+
+##### **bash**
+
+Restrict the listing to the WHO references:
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/charts/list/json' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "chartgrp": "who"
+}'
+```
+
+#### {-}
+
+### **`/charts/validate`**: Validate chart codes
+
+#### {.tabset}
+
+##### **R**
+
+Check five chart codes:
+
+
+```r
+r <- james_post(host = host, 
+                path = "charts/validate/json", 
+                chartcode = c("NMAW", "NJAb", "PJAAN23", "PJAAN25", "dummy"))
+r$parsed
+```
+
+```
+## [1]  TRUE FALSE FALSE  TRUE FALSE
+```
+
+##### **bash**
+
+Check five chart codes:
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/charts/validate/json' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "chartcode": [
+    "NMAW",
+    "NJAB",
+    "PJAAN23",
+    "PJAAN25", 
+    "dummy"
+  ]
+}'
+```
+
+```
+## [true, true, false, true, false]
+```
+
+### **`/screeners/apply`**: Apply growth screeners to child data
+
+#### {.tabset}
+
+##### **R**
+
+The `/screeners/apply` end point applies standard screeners to the child data. Invocation of the screeners may be done by
+
+
+```r
+r <- james_post(host = host, path = "/screeners/apply/json", 
+                session = r1$session)
+r$parsed
+```
+
+```
+##   Categorie CategorieOmschrijving Code
+## 1      1000                Lengte 1031
+## 2      2000               Gewicht 2031
+## 3      2000               Gewicht 2013
+## 4      3000           Hoofdomtrek 3031
+##                                                                                                                CodeOmschrijving
+## 1 Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
+## 2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
+## 3                                                  Het advies kan niet worden bepaald. Voer de lengte bij de eerdere meting in.
+## 4                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.
+##   Versie Leeftijd0 Leeftijd1
+## 1 1.14.0  20181111  20181211
+## 2 1.14.0  20181111  20181211
+## 3 1.14.0  20181011  20181211
+## 4 1.14.0  20181111  20181211
+```
+
+The procedure calculates the intervals between the most recent measurement (at date 20181211) and earlier measurements (at dates 20181111 and 20181011 (birth)), and assesses whether the measurements at the start (Leeftijd0) and at the end (Leeftijd1) of the interval give rise to a signal that may indicate abnormal growth. For example, there is only one pair for height, and the result is 1031 (normal height). For weight, there are two pairs. The interval 1 - 2 months gives code 2031 (normal weight), while the interval birth - 2 month yields code 2013, which means that the advice for this interval could not be calculated because height at birth was not measured.
+
+There are several possibilities to visualise and integrate the multiple results per category into one advice, especially at higher ages when the growth curve consists of many points. These options are currently under investigation and not yet available in JAMES.
+
+##### **bash**
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/screeners/apply/json' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'txt=@maria.json;type=application/json'
+```
+
+```
+## [
+##   {
+##     "Categorie": 1000,
+##     "CategorieOmschrijving": "Lengte",
+##     "Code": 1031,
+##     "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+##     "Versie": "1.14.0",
+##     "Leeftijd0": "20181111",
+##     "Leeftijd1": "20181211"
+##   },
+##   {
+##     "Categorie": 2000,
+##     "CategorieOmschrijving": "Gewicht",
+##     "Code": 2031,
+##     "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+##     "Versie": "1.14.0",
+##     "Leeftijd0": "20181111",
+##     "Leeftijd1": "20181211"
+##   },
+##   {
+##     "Categorie": 2000,
+##     "CategorieOmschrijving": "Gewicht",
+##     "Code": 2013,
+##     "CodeOmschrijving": "Het advies kan niet worden bepaald. Voer de lengte bij de eerdere meting in.",
+##     "Versie": "1.14.0",
+##     "Leeftijd0": "20181011",
+##     "Leeftijd1": "20181211"
+##   },
+##   {
+##     "Categorie": 3000,
+##     "CategorieOmschrijving": "Hoofdomtrek",
+##     "Code": 3031,
+##     "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+##     "Versie": "1.14.0",
+##     "Leeftijd0": "20181111",
+##     "Leeftijd1": "20181211"
+##   }
+## ]
+```
+
+#### {-}
+
+
+### **`/screeners/list`**: List available growth screeners
+
+#### {.tabset}
+
+##### **R**
+
+JAMES implements several screening algorithms. The `/screeners/list` end point provides detailed information on each of these.
+
+
+```r
+r <- james_post(host = host, path = "/screeners/list/json", 
+                session = r1$session)
+names(r$parsed)
+```
+
+```
+## [1] "Versie"                "yname"                 "Categorie"            
+## [4] "CategorieOmschrijving" "JGZRichtlijn"          "Code"                 
+## [7] "CodeOmschrijving"
+```
+
+```r
+with(r$parsed, table(yname, Code))
+```
+
+```
+##      Code
+## yname 1010 1011 1012 1013 1014 1015 1016 1017 1018 1019 1020 1021 1022 1024
+##   hdc    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   hgt    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+##   wgt    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##      Code
+## yname 1025 1031 1041 1042 1043 1044 1045 1046 1047 1048 1049 1050 1051 1052
+##   hdc    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   hgt    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+##   wgt    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##      Code
+## yname 1053 1054 1055 1061 1062 1071 1072 1073 1074 1075 1076 1077 1078 1079
+##   hdc    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   hgt    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+##   wgt    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##      Code
+## yname 1080 1081 1082 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021
+##   hdc    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   hgt    1    1    1    0    0    0    0    0    0    0    0    0    0    0
+##   wgt    0    0    0    1    1    1    1    1    1    1    1    1    1    1
+##      Code
+## yname 2022 2023 2024 2025 2031 2042 2044 2045 2046 2071 2072 2073 2074 2075
+##   hdc    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   hgt    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   wgt    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+##      Code
+## yname 2076 3015 3016 3017 3018 3019 3020 3021 3022 3023 3024 3025 3031 3041
+##   hdc    0    1    1    1    1    1    1    1    1    1    1    1    1    1
+##   hgt    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+##   wgt    1    0    0    0    0    0    0    0    0    0    0    0    0    0
+##      Code
+## yname 3042 3043 3044 3045
+##   hdc    1    1    1    1
+##   hgt    0    0    0    0
+##   wgt    0    0    0    0
+```
+
+There are currently 88 different codes. Codes ending in `31`, e.g., `1031` or `2031` indicate normal growth, whereas code ending in `41`, `42` and so on, signal that - according to the guidelines - the child should be referred for further investigation. 
+
+##### **bash**
+
+We get the details for the guidelines for head circumference as
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/screeners/list/json' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{"ynames": "hdc"}'
+```
+
+#### {-}
+
+### **`/site/request`**: Request personalised site
+
+#### {.tabset}
+
+##### **R**
+
+The `/site/request` end point creates an URL to a personalised, interactive site containing all charts. 
+
+
+```r
+r <- james_post(host = host, path = "/site/request/json", 
+                sitehost = host, txt = js)
+r$parsed
+```
+
+```
+## [1] "https://james.groeidiagrammen.nl/site?session=x008aadfecbb5f9"
+```
+
+Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.
+
+Alteratively, we may start from the `session` created by `/data/upload`: 
+
+
+```r
+r <- james_post(host = host, path = "/site/request/json", 
+                sitehost = host, session = r1$session)
+r$parsed
+```
+
+```
+## [1] "https://james.groeidiagrammen.nl/site?session=x0f8815497ceb60"
+```
+
+Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.
+
+
+##### **bash**
+
+The following command uploads the data specified in `txt` and creates an URL to the site of charts:
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/site/request/json' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "txt": "'$(cat .host)'/ocpu/library/bdsreader/examples/maria.json",
+  "sitehost": "'$(cat .host)'"
+}'
+```
+
+```
+## ["https://james.groeidiagrammen.nl/site?session=x0f46bd20bea95d"]
+```
+
+One way to create the site URL from a previous session id is
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/site/request/json' \
+  -d "sitehost='$(cat .host)'&session='x0b93cbb19ff68b'"
+```
+
+```
+## ["https://james.groeidiagrammen.nl/site?session=x0b93cbb19ff68b"]
+```
+
+But it is probably easier to construct the URL locally, and then paste that URL into the browser.
+
+#### {-}
+
+### **`/blend/request`**: Obtain a blend from multiple end points 
+
+#### {.tabset}
+
+##### **R**
+
+The `/blend/request` end point returns the results of multiple end points, and thus functions as a one-stop shop. However, currently it does not support graphics output, so use `/{session}/{info}/svglite` or `/charts/draw/svglite` for the charts.
+
+
+```r
+fn <- "maria.json"
+r <- james_post(host = host, path = "/blend/request/json", 
+                sitehost = host, txt = fn)
+r$parsed
+```
+
+```
+## $txt
+## [1] "{\"Format\": \"2.0\",\"OrganisatieCode\": 0,\"Referentie\": \"Maria\",\"ClientGegevens\": [{\"ElementNummer\": 19,\"Waarde\": \"2\"},{\"ElementNummer\": 20,\"Waarde\": \"20181011\"},{\"ElementNummer\": 82,\"Waarde\": 189},{\"ElementNummer\": 91,\"Waarde\": \"1\"},{\"ElementNummer\": 110,\"Waarde\": 990},{\"ElementNummer\": 238,\"Waarde\": 1670},{\"ElementNummer\": 240,\"Waarde\": 1900},{\"GenesteElementen\": [{\"ElementNummer\": 63,\"Waarde\": \"19950704\"},{\"ElementNummer\": 71},{\"ElementNummer\": 62,\"Waarde\": \"01\"}]},{\"GenesteElementen\": [{\"ElementNummer\": 63,\"Waarde\": \"19901202\"},{\"ElementNummer\": 71},{\"ElementNummer\": 62,\"Waarde\": \"02\"}]}],\"ContactMomenten\": [{\"Tijdstip\": \"20181111\",\"Elementen\": [{\"ElementNummer\": 235,\"Waarde\": 380},{\"ElementNummer\": 245,\"Waarde\": 1250},{\"ElementNummer\": 252,\"Waarde\": 270}]},{\"Tijdstip\": \"20181211\",\"Elementen\": [{\"ElementNummer\": 235,\"Waarde\": 435},{\"ElementNummer\": 245,\"Waarde\": 2100},{\"ElementNummer\": 252,\"Waarde\": 305}]}]}"
+## 
+## $session
+## [1] "x0e316ad6eeac98"
+## 
+## $site
+## [1] "https://james.groeidiagrammen.nl/site?session=x0e316ad6eeac98"
+## 
+## $child
+##   id  name        dob       dobf       dobm src    sex gad ga smo  bw hgtm hgtf
+## 1 -1 Maria 2018-10-11 1995-07-04 1990-12-02   0 female 189 27   1 990  167  190
+##   agem etn
+## 1   27  NL
+## 
+## $time
+##       age xname yname zname                  zref       x       y      z
+## 1  0.0849   age   hgt hgt_z nl_2012_hgt_female_27  0.0849 38.0000 -0.158
+## 2  0.1670   age   hgt hgt_z nl_2012_hgt_female_27  0.1670 43.5000  0.047
+## 3  0.0849   age   wgt wgt_z nl_2012_wgt_female_27  0.0849  1.2500 -0.203
+## 4  0.1670   age   wgt wgt_z nl_2012_wgt_female_27  0.1670  2.1000  0.015
+## 5  0.0849   age   hdc hdc_z nl_2012_hdc_female_27  0.0849 27.0000 -0.709
+## 6  0.1670   age   hdc hdc_z nl_2012_hdc_female_27  0.1670 30.5000 -0.913
+## 7  0.0849   age   bmi bmi_z nl_1997_bmi_female_nl  0.0849  8.6565 -5.719
+## 8  0.1670   age   bmi bmi_z nl_1997_bmi_female_nl  0.1670 11.0979 -3.767
+## 9  0.0849   hgt   wfh wfh_z   nl_2012_wfh_female_ 38.0000  1.2500 -0.001
+## 10 0.1670   hgt   wfh wfh_z   nl_2012_wfh_female_ 43.5000  2.1000  0.326
+## 11 0.0000   age   wgt wgt_z nl_2012_wgt_female_27  0.0000  0.9900  0.190
+## 
+## $screeners
+##   Categorie CategorieOmschrijving Code
+## 1      1000                Lengte 1031
+## 2      2000               Gewicht 2031
+## 3      2000               Gewicht 2013
+## 4      3000           Hoofdomtrek 3031
+##                                                                                                                CodeOmschrijving
+## 1 Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
+## 2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
+## 3                                                  Het advies kan niet worden bepaald. Voer de lengte bij de eerdere meting in.
+## 4                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.
+##   Versie Leeftijd0 Leeftijd1
+## 1 1.14.0  20181111  20181211
+## 2 1.14.0  20181111  20181211
+## 3 1.14.0  20181011  20181211
+## 4 1.14.0  20181111  20181211
+```
+
+
+
+
+
+##### **bash**
+
+Obtain the standard blend of multiple end points as
+
+
+```bash
+curl -sX 'POST' \
+  $(cat .host)'/blend/request/json' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "txt": "'$(cat .host)'/ocpu/library/bdsreader/examples/maria.json",
+  "blend": "standard",
+  "sitehost": "'$(cat .host)'"
+}'
+```
+
+```
+## {
+##   "txt": ["https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/maria.json"],
+##   "session": ["x00030ae6208969"],
+##   "site": ["https://james.groeidiagrammen.nl/site?session=x00030ae6208969"],
+##   "child": [
+##     {
+##       "id": -1,
+##       "name": "Maria",
+##       "dob": "2018-10-11",
+##       "dobf": "1995-07-04",
+##       "dobm": "1990-12-02",
+##       "src": "1234",
+##       "sex": "female",
+##       "gad": 189,
+##       "ga": 27,
+##       "smo": 1,
+##       "bw": 990,
+##       "hgtm": 167,
+##       "hgtf": 190,
+##       "agem": 27,
+##       "etn": "NL"
+##     }
+##   ],
+##   "time": [
+##     {
+##       "age": 0.0849,
+##       "xname": "age",
+##       "yname": "hgt",
+##       "zname": "hgt_z",
+##       "zref": "nl_2012_hgt_female_27",
+##       "x": 0.0849,
+##       "y": 38,
+##       "z": -0.158
+##     },
+##     {
+##       "age": 0.167,
+##       "xname": "age",
+##       "yname": "hgt",
+##       "zname": "hgt_z",
+##       "zref": "nl_2012_hgt_female_27",
+##       "x": 0.167,
+##       "y": 43.5,
+##       "z": 0.047
+##     },
+##     {
+##       "age": 0.0849,
+##       "xname": "age",
+##       "yname": "wgt",
+##       "zname": "wgt_z",
+##       "zref": "nl_2012_wgt_female_27",
+##       "x": 0.0849,
+##       "y": 1.25,
+##       "z": -0.203
+##     },
+##     {
+##       "age": 0.167,
+##       "xname": "age",
+##       "yname": "wgt",
+##       "zname": "wgt_z",
+##       "zref": "nl_2012_wgt_female_27",
+##       "x": 0.167,
+##       "y": 2.1,
+##       "z": 0.015
+##     },
+##     {
+##       "age": 0.0849,
+##       "xname": "age",
+##       "yname": "hdc",
+##       "zname": "hdc_z",
+##       "zref": "nl_2012_hdc_female_27",
+##       "x": 0.0849,
+##       "y": 27,
+##       "z": -0.709
+##     },
+##     {
+##       "age": 0.167,
+##       "xname": "age",
+##       "yname": "hdc",
+##       "zname": "hdc_z",
+##       "zref": "nl_2012_hdc_female_27",
+##       "x": 0.167,
+##       "y": 30.5,
+##       "z": -0.913
+##     },
+##     {
+##       "age": 0.0849,
+##       "xname": "age",
+##       "yname": "bmi",
+##       "zname": "bmi_z",
+##       "zref": "nl_1997_bmi_female_nl",
+##       "x": 0.0849,
+##       "y": 8.6565,
+##       "z": -5.719
+##     },
+##     {
+##       "age": 0.167,
+##       "xname": "age",
+##       "yname": "bmi",
+##       "zname": "bmi_z",
+##       "zref": "nl_1997_bmi_female_nl",
+##       "x": 0.167,
+##       "y": 11.0979,
+##       "z": -3.767
+##     },
+##     {
+##       "age": 0.0849,
+##       "xname": "hgt",
+##       "yname": "wfh",
+##       "zname": "wfh_z",
+##       "zref": "nl_2012_wfh_female_",
+##       "x": 38,
+##       "y": 1.25,
+##       "z": -0.001
+##     },
+##     {
+##       "age": 0.167,
+##       "xname": "hgt",
+##       "yname": "wfh",
+##       "zname": "wfh_z",
+##       "zref": "nl_2012_wfh_female_",
+##       "x": 43.5,
+##       "y": 2.1,
+##       "z": 0.326
+##     },
+##     {
+##       "age": 0,
+##       "xname": "age",
+##       "yname": "wgt",
+##       "zname": "wgt_z",
+##       "zref": "nl_2012_wgt_female_27",
+##       "x": 0,
+##       "y": 0.99,
+##       "z": 0.19
+##     }
+##   ],
+##   "screeners": [
+##     {
+##       "Categorie": 1000,
+##       "CategorieOmschrijving": "Lengte",
+##       "Code": 1031,
+##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+##       "Versie": "1.14.0",
+##       "Leeftijd0": "20181111",
+##       "Leeftijd1": "20181211"
+##     },
+##     {
+##       "Categorie": 2000,
+##       "CategorieOmschrijving": "Gewicht",
+##       "Code": 2031,
+##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+##       "Versie": "1.14.0",
+##       "Leeftijd0": "20181111",
+##       "Leeftijd1": "20181211"
+##     },
+##     {
+##       "Categorie": 2000,
+##       "CategorieOmschrijving": "Gewicht",
+##       "Code": 2013,
+##       "CodeOmschrijving": "Het advies kan niet worden bepaald. Voer de lengte bij de eerdere meting in.",
+##       "Versie": "1.14.0",
+##       "Leeftijd0": "20181011",
+##       "Leeftijd1": "20181211"
+##     },
+##     {
+##       "Categorie": 3000,
+##       "CategorieOmschrijving": "Hoofdomtrek",
+##       "Code": 3031,
+##       "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+##       "Versie": "1.14.0",
+##       "Leeftijd0": "20181111",
+##       "Leeftijd1": "20181211"
+##     }
+##   ]
+## }
+```
+
+#### {-}
 
 ## Resources
 
--   [JAMES Internals](https://stefvanbuuren.name/jamesdocs/)
--   [OpenCPU system](https://www.opencpu.org)
--   [OpenCPU API](https://www.opencpu.org/api.html)
--   <https://www.w3schools.com/js/>
--   <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
+### Internal
 
-## About
+| Description                                           | Status                                  |
+|:------------------------------------------------------|:----------------------------------------|
+| [Download JAMES docker](https://github.com/growthcharts/jamesdocker/pkgs/container/james) | restricted |
+| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | current     |
+| [Source files](https://github.com/growthcharts) | current |
+| [JSON data schema 2.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json) | current |
+| [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |
 
-**Work in progress**. Direct suggestions and inquiries to Stef van
-Buuren (stef.vanbuuren at tno.nl), <https://stefvanbuuren.name>,
-<https://github.com/stefvanbuuren>.
+### External
 
-## Literature
-
-<div id="refs" class="references csl-bib-body hanging-indent">
-
-<div id="ref-bocca-tjeertes2012" class="csl-entry">
-
-Bocca-Tjeertes, I. F. A., S. van Buuren, A. F. Bos, J. M. Kerstens, E.
-M. ten Vergert, and Reijneveld.S. A. 2012. “Growth of Preterm and
-Fullterm Children Aged 0-4 Years: Integrating Median Growth and
-Variability in Growth Charts.” *Journal of Pediatrics* 161 (3): 460–65.
-
-</div>
-
-<div id="ref-talma2010" class="csl-entry">
-
-Talma, H., Y. Schonbeck, B. Bakker, R. A. Hirasing, and S. van Buuren.
-2010. *Groeidiagrammen 2010: Handleiding Bij Het Meten En Wegen van
-Kinderen En Het Invullen van Groeidiagrammen*. Leiden: TNO Kwaliteit van
-Leven.
-
-</div>
-
-<div id="ref-who2006" class="csl-entry">
-
-WHO, Multicentre Growth Reference Study Group. 2006. “WHO Child Growth
-Standards Based on Length/Height, Weight and Age.” *Acta Paediatrica* 95
-(Supplement 450): 76–85.
-
-</div>
-
-</div>
+| Description                                           | Status                                  |
+|:------------------------------------------------------|:----------------------------------------|
+| [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | current |
+| [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13) | current |
+| [OpenCPU API](https://www.opencpu.org/api.html) | current |
