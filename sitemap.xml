@@ -1,81 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://growthcharts.org/james/404.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://growthcharts.org/james/articles/getting_started.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://growthcharts.org/james/articles/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://growthcharts.org/james/articles/oldfriends.html</loc>
   </url>
   <url>
-    <loc>/reference/apply_screeners.html</loc>
+    <loc>https://growthcharts.org/james/authors.html</loc>
   </url>
   <url>
-    <loc>/reference/authenticate.html</loc>
+    <loc>https://growthcharts.org/james/index.html</loc>
   </url>
   <url>
-    <loc>/reference/calculate_dscore.html</loc>
+    <loc>https://growthcharts.org/james/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/convert_bds_ind-deprecated.html</loc>
+    <loc>https://growthcharts.org/james/reference/apply_screeners.html</loc>
   </url>
   <url>
-    <loc>/reference/convert_tgt_chartadvice.html</loc>
+    <loc>https://growthcharts.org/james/reference/authenticate.html</loc>
   </url>
   <url>
-    <loc>/reference/custom_list.html</loc>
+    <loc>https://growthcharts.org/james/reference/calculate_dscore.html</loc>
   </url>
   <url>
-    <loc>/reference/draw_chart.html</loc>
+    <loc>https://growthcharts.org/james/reference/convert_bds_ind-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/draw_chart_bds-deprecated.html</loc>
+    <loc>https://growthcharts.org/james/reference/convert_tgt_chartadvice.html</loc>
   </url>
   <url>
-    <loc>/reference/draw_chart_ind-deprecated.html</loc>
+    <loc>https://growthcharts.org/james/reference/custom_list.html</loc>
   </url>
   <url>
-    <loc>/reference/fetch_loc-deprecated.html</loc>
+    <loc>https://growthcharts.org/james/reference/draw_chart.html</loc>
   </url>
   <url>
-    <loc>/reference/get_session_object.html</loc>
+    <loc>https://growthcharts.org/james/reference/draw_chart_bds-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://growthcharts.org/james/reference/draw_chart_ind-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/list_charts.html</loc>
+    <loc>https://growthcharts.org/james/reference/fetch_loc-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/list_screeners.html</loc>
+    <loc>https://growthcharts.org/james/reference/get_session_object.html</loc>
   </url>
   <url>
-    <loc>/reference/request_blend.html</loc>
+    <loc>https://growthcharts.org/james/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/request_site.html</loc>
+    <loc>https://growthcharts.org/james/reference/list_charts.html</loc>
   </url>
   <url>
-    <loc>/reference/screen_curves-deprecated.html</loc>
+    <loc>https://growthcharts.org/james/reference/list_screeners.html</loc>
   </url>
   <url>
-    <loc>/reference/screen_growth-deprecated.html</loc>
+    <loc>https://growthcharts.org/james/reference/request_blend.html</loc>
   </url>
   <url>
-    <loc>/reference/select_chart.html</loc>
+    <loc>https://growthcharts.org/james/reference/request_site.html</loc>
   </url>
   <url>
-    <loc>/reference/upload_data.html</loc>
+    <loc>https://growthcharts.org/james/reference/screen_curves-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/validate_chartcode.html</loc>
+    <loc>https://growthcharts.org/james/reference/screen_growth-deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/version.html</loc>
+    <loc>https://growthcharts.org/james/reference/select_chart.html</loc>
+  </url>
+  <url>
+    <loc>https://growthcharts.org/james/reference/upload_data.html</loc>
+  </url>
+  <url>
+    <loc>https://growthcharts.org/james/reference/validate_chartcode.html</loc>
+  </url>
+  <url>
+    <loc>https://growthcharts.org/james/reference/version.html</loc>
   </url>
 </urlset>
