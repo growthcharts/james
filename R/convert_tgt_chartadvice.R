@@ -1,3 +1,9 @@
+# JAMES - A program to monitor and interpret child growth and development.
+# Copyright (C) 2022 Stef van Buuren (stef.vanbuuren@tno.nl)
+# Arjan Huizing (arjan.huizing@tno.nl)
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #' Derive advice on chart choice from data
 #'
 #' The function loads individual data from an url,
