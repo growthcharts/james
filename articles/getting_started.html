@@ -146,7 +146,7 @@
 <li>
 <code>r$messages</code> contain any messages, e.g. data reading errors;</li>
 <li>
-<code>r$session</code> (like x0bbc71d5698254) is a unique session code.</li>
+<code>r$session</code> (like x0bc59e43461865) is a unique session code.</li>
 </ul>
 <p>The <code><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">jamesclient::james_post()</a></code> function wraps the basis workhorse <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -177,13 +177,13 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">curl</span> -sX POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version <span class="op">&gt;</span> resp</span></code></pre></div>
 <p>The response to the request consists of a set of URLs created on the server, each of which contains details on the response.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">cat</span> resp</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/R/.val</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/R/version</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/stdout</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/source</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/console</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/info</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; /ocpu/tmp/x01a7b505675f30/files/DESCRIPTION</span></span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/R/.val</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/R/version</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/stdout</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/source</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/console</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/info</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; /ocpu/tmp/x05095b85656082/files/DESCRIPTION</span></span></code></pre></div>
 <p>The path element following <code>tmp/</code> is a unique session key. See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for the interpretation of the OpenCPU API.</p>
 <p>The next snippet constructs the URL of a JSON representation of the result and downloads the contents of the URL as a file <code>value1</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">curl</span> -s <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)$(</span><span class="fu">head</span> -1 resp<span class="va">)</span>/json?auto_unbox=true <span class="op">&gt;</span> value1</span>
@@ -406,7 +406,7 @@
 <p>The resources produced by JAMES results will remain available for two hours under the session key. The session key is your entrance to the resource and can be retrieved from the <code>james_post</code> class from the <code>session</code> element. For example, if we want to see the result of the last session in markdown:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">session</span> <span class="op">&lt;-</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span>
-<span class="co">#&gt; [1] "x055dcb08757415"</span>
+<span class="co">#&gt; [1] "x0d1950ac1139c9"</span>
 <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"md"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">parsed</span>, <span class="st">"\n"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -858,14 +858,14 @@ Predict Laura’s future height at the age of 3y9m.
 <code class="sourceCode R"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, 
                 sitehost <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span>
 <span class="va">r</span><span class="op">$</span><span class="va">parsed</span>
-<span class="co">#&gt; [1] "https://james.groeidiagrammen.nl/site?session=x0893b1dcae6b2b"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://james.groeidiagrammen.nl/site?session=x0f4aa251f94ea1"</span></code></pre></div>
 <p>Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.</p>
 <p>Alteratively, we may start from the <code>session</code> created by <code>/data/upload</code>:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, 
                 sitehost <span class="op">=</span> <span class="va">host</span>, session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span>
 <span class="va">r</span><span class="op">$</span><span class="va">parsed</span>
-<span class="co">#&gt; [1] "https://james.groeidiagrammen.nl/site?session=x055dcb08757415"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://james.groeidiagrammen.nl/site?session=x0d1950ac1139c9"</span></code></pre></div>
 <p>Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.</p>
 </div>
 <div class="tab-pane" id="bash-7" role="tabpanel" aria-labelledby="bash-7-tab">
@@ -879,7 +879,7 @@ Predict Laura’s future height at the age of 3y9m.
 <span id="cb37-6"><a href="#cb37-6"></a><span class="st">  "txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/bdsreader/examples/maria.json",</span></span>
 <span id="cb37-7"><a href="#cb37-7"></a><span class="st">  "sitehost": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span></span>
 <span id="cb37-8"><a href="#cb37-8"></a><span class="st">}'</span></span>
-<span id="cb37-9"><a href="#cb37-9"></a><span class="co">#&gt; ["https://james.groeidiagrammen.nl/site?session=x0fd2a94ab6db80"]</span></span></code></pre></div>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="co">#&gt; ["https://james.groeidiagrammen.nl/site?session=x0041a072d4da1e"]</span></span></code></pre></div>
 <p>One way to create the site URL from a previous session id is</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1"></a><span class="ex">curl</span> -sX <span class="st">'POST'</span> \</span>
 <span id="cb38-2"><a href="#cb38-2"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/site/request/json'</span> \</span>
@@ -918,10 +918,10 @@ Predict Laura’s future height at the age of 3y9m.
 <span class="co">#&gt; [1] "{\"Format\": \"2.0\",\"OrganisatieCode\": 0,\"Referentie\": \"Maria\",\"ClientGegevens\": [{\"ElementNummer\": 19,\"Waarde\": \"2\"},{\"ElementNummer\": 20,\"Waarde\": \"20181011\"},{\"ElementNummer\": 82,\"Waarde\": 189},{\"ElementNummer\": 91,\"Waarde\": \"1\"},{\"ElementNummer\": 110,\"Waarde\": 990},{\"ElementNummer\": 238,\"Waarde\": 1670},{\"ElementNummer\": 240,\"Waarde\": 1900},{\"GenesteElementen\": [{\"ElementNummer\": 63,\"Waarde\": \"19950704\"},{\"ElementNummer\": 71},{\"ElementNummer\": 62,\"Waarde\": \"01\"}]},{\"GenesteElementen\": [{\"ElementNummer\": 63,\"Waarde\": \"19901202\"},{\"ElementNummer\": 71},{\"ElementNummer\": 62,\"Waarde\": \"02\"}]}],\"ContactMomenten\": [{\"Tijdstip\": \"20181111\",\"Elementen\": [{\"ElementNummer\": 235,\"Waarde\": 380},{\"ElementNummer\": 245,\"Waarde\": 1250},{\"ElementNummer\": 252,\"Waarde\": 270}]},{\"Tijdstip\": \"20181211\",\"Elementen\": [{\"ElementNummer\": 235,\"Waarde\": 435},{\"ElementNummer\": 245,\"Waarde\": 2100},{\"ElementNummer\": 252,\"Waarde\": 305}]}]}"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $session</span>
-<span class="co">#&gt; [1] "x096473a445cf42"</span>
+<span class="co">#&gt; [1] "x013579efc2b9a4"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $site</span>
-<span class="co">#&gt; [1] "https://james.groeidiagrammen.nl/site?session=x096473a445cf42"</span>
+<span class="co">#&gt; [1] "https://james.groeidiagrammen.nl/site?session=x013579efc2b9a4"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $child</span>
 <span class="co">#&gt;   id  name        dob       dobf       dobm src    sex gad ga smo  bw hgtm hgtf</span>
