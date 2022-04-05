@@ -10,3 +10,4 @@ README.Rmd
 ^vignettes/articles$
 ^docs$
 ^_pkgdown.yaml$
+^LICENSE\.md$

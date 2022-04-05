@@ -10,7 +10,7 @@ Description: Server-sided functions for the
     System (JAMES). JAMES deploys advanced analytic functionality 
     to analyze, monitor and predict individual child growth and 
     development.
-License: AGPL-3
+License: AGPL (>= 3)
 Encoding: UTF-8
 Depends: 
     R (>= 2.10),
