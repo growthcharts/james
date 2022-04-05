@@ -715,20 +715,12 @@ In general, the user can specify the desired format by appending the format name
 
 ## Resources
 
-### Internal
-
-| Description                                           | Status                                  |
-|:------------------------------------------------------|:----------------------------------------|
-| [Download JAMES docker](https://github.com/growthcharts/jamesdocker/pkgs/container/james) | restricted |
-| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | current     |
-| [Source files](https://github.com/growthcharts) | current |
-| [JSON data schema 2.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json) | current |
+| Description                                           | Version                                  |
+|:------------------------------------------------------|:-----------------------------------------|
+| [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | 1.2.0 |
+| [Example requests]() | 1.2.0 |
+| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | 1.2.0     |
+| [JSON data schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json) | 2.0 |
+| [Source files](https://github.com/growthcharts/james) | current |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |
-
-### External
-
-| Description                                           | Status                                  |
-|:------------------------------------------------------|:----------------------------------------|
-| [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | current |
 | [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13) | current |
-| [OpenCPU API](https://www.opencpu.org/api.html) | current |
