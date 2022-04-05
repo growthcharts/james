@@ -2,8 +2,8 @@ Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
 Version: 0.58.0
-Authors@R: person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl",
-    role = c("aut", "cre"))
+Authors@R: c(person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl", role = c("cre", "aut")), 
+             person("Arjan", "Huizing", email = "arjan.huizing@tno.nl", role = "aut"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
 Description: Server-sided functions for the 
     API of the Joint Automatic Measurement and Evaluation 

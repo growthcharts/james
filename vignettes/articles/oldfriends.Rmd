@@ -1,10 +1,18 @@
 ---
-title: "Help for old friends"
+title: Help for old friends
+subtitle: JAMES - Old version up to Dec 2021
+author: Stef van Buuren, Arjan Huizing (TNO Child Health)
+output:
+  html_document:
+    number_sections: false
+    code_dowload: false
 bibliography: [README.bib]
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -14,19 +22,9 @@ knitr::opts_chunk$set(
 library(james)
 ```
 
-**This document is the README of the first JAMES version supported up to December 2021. The version will not be further developed but remain operational until Sept 2022 on <groeidiagrammen.nl>. Use <james.groeidiagrammen.nl> for the current version.**
-
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
-```
+>> This document is the README of the first JAMES version supported up to December 2021. The version will not be further developed but remain operational until Sept 2022 on <groeidiagrammen.nl>. Use <james.groeidiagrammen.nl> for the current version.
 
 ## Joint Automatic Measurement and Evaluation System (JAMES)
-
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/growthcharts/james/workflows/R-CMD-check/badge.svg)](https://github.com/growthcharts/james/actions)
-<!-- badges: end -->
 
 JAMES is an experimental web service for creating and interpreting charts of child growth and
 development. The current version
@@ -46,11 +44,12 @@ information.
 
 We will be offering Docker containers running JAMES from January 2022 onwards, 
 and phase out the functionality described below. Work in progress is at 
-<https://app.swaggerhub.com/apis/ArjanHuizing/JAMES/1.0>.
+<https://app.swaggerhub.com/apis/stefvanbuuren/james>.
 
 ## Check whether JAMES is running
 
-JAMES is currently located at url `groeidiagrammen.nl`. The sections below use
+JAMES is currently located at url `groeidiagrammen.nl`. [NOTE: From April 2022 
+onwards, use `james.groeidiagrammen.nl`] The sections below use
 `curl` for illustration, but any `HTTP` client will work.
 
 In order to check whether the JAMES server is running, try generating some
@@ -354,7 +353,7 @@ We obtain the screening results as
 
 ```{bash}
 curl https://groeidiagrammen.nl/ocpu/tmp/x04fc43cfd709b7/R/.val/json
-````
+```
 
 ```{json}
 [

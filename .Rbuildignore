@@ -8,3 +8,5 @@ README.Rmd
 ^\.github$
 ^data-raw$
 ^vignettes/articles$
+^docs$
+^_pkgdown.yaml$

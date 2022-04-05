@@ -1,0 +1,50 @@
+url: https://growthcharts.org/james
+template:
+  bootstrap: 5
+  params:
+    bootswatch: lumen
+authors:
+  Stef van Buuren:
+    href: https://stefvanbuuren.name
+  Arjan Huizing:
+    href: https://nl.linkedin.com/in/arjanhjhuizing
+development:
+  mode: auto
+
+reference:
+  - title: JAMES end points
+    desc: Main commands to communicate with JAMES
+    contents:
+    - apply_screeners
+    - draw_chart
+    - list_charts
+    - list_screeners
+    - request_blend
+    - request_site
+    - upload_data
+    - validate_chartcode
+    - version
+  - title: Helper functions
+    desc: Auxiliary functions for JAMES
+    contents:
+    - authenticate
+    - calculate_dscore
+    - convert_tgt_chartadvice
+    - get_session_object
+    - select_chart
+  - title: Deprecated functions
+    desc: Superseeded functionality
+    contents:
+    - convert_bds_ind
+    - custom_list
+    - draw_chart_bds
+    - draw_chart_ind
+    - fetch_loc
+    - screen_curves
+    - screen_growth
+articles:
+- title: Main verbs
+  navbar: ~
+  contents:
+  - articles/getting_started
+  - articles/oldfriends
