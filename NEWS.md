@@ -1,3 +1,7 @@
+# james 0.58.1
+
+- Update README and documentation to JAMES API 1.2.0
+
 # james 0.58.0
 
 - Changes to make an isolated `http` API
