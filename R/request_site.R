@@ -99,7 +99,7 @@ request_site <- function(txt = "",
 
   # no data
   if (is.empty(txt) && is.empty(session)) {
-    return(modify_url(url, path = "site"))
+    return(modify_url(url, path = file.path(url$path, "site")))
   }
 
   # return session query, possibly after upload of txt
@@ -108,12 +108,16 @@ request_site <- function(txt = "",
   }
 
   if (!is.empty(session)) {
-    return(modify_url(url, path = "site", query = paste0("session=", session)))
+    return(modify_url(url,
+                      path = file.path(url$path, "site"),
+                      query = paste0("session=", session)))
   }
 
   # return ?txt= query parameter if we don't upload
   if (!is.empty(txt) && !upload && validate(txt)) {
-    return(modify_url(url, path = "site", query = paste0("txt=", minify(txt))))
+    return(modify_url(url,
+                      path = file.path(url$path, "site"),
+                      query = paste0("txt=", minify(txt))))
   }
 
   # check for data url - not supported
@@ -143,5 +147,7 @@ request_site <- function(txt = "",
   # }
 
   # site without data
-  return(modify_url(url, path = "site"))
+  return(modify_url(url,
+                    path = file.path(url$path, "site"))
+         )
 }
