@@ -1,3 +1,7 @@
+# james 0.58.2
+
+- Make `sitehost` in `request_site()` work with URL path
+
 # james 0.58.1
 
 - Update README and documentation to JAMES API 1.2.0

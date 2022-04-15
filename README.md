@@ -54,7 +54,7 @@ point to the corresponding R function.
 |:-------------------------------------------------------------------------------------------------------|:--------|
 | [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/)                              | 1.2.0   |
 | [Example requests]()                                                                                   | 1.2.0   |
-| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james)                      | 1.2.0   |
+| [JAMES Swagger](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james)                              | 1.2.0   |
 | [JSON data schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json)   | 2.0     |
 | [Source files](https://github.com/growthcharts/james)                                                  | current |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues)                                    | current |
