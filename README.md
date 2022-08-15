@@ -26,7 +26,7 @@ The JAMES R package defines the end points of the JAMES REST API.
 
 JAMES is created and maintained by TNO, the Netherlands Organisation for
 Applied Scientific Research. Please contact Stef van Buuren
-\<stef.vanbuuren at tno.nl> for further information.
+\<stef.vanbuuren at tno.nl\> for further information.
 
 ## Primary JAMES user functionality
 
@@ -53,7 +53,7 @@ point to the corresponding R function.
 | Description                                                                                            | Version |
 |:-------------------------------------------------------------------------------------------------------|:--------|
 | [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/)                              | 1.2.0   |
-| [Example requests]()                                                                                   | 1.2.0   |
+| [Example requests](https://james.groeidiagrammen.nl)                                                   | 1.2.0   |
 | [JAMES Swagger](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james)                              | 1.2.0   |
 | [JSON data schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json)   | 2.0     |
 | [Source files](https://github.com/growthcharts/james)                                                  | current |
