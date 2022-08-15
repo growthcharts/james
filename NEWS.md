@@ -1,3 +1,8 @@
+# james 0.59.0
+
+- Update all packages
+- Make new library snapshot
+
 # james 0.58.2
 
 - Make `sitehost` in `request_site()` work with URL path
