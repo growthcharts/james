@@ -56,14 +56,14 @@ convert_tgt_chartadvice <- function(txt = "",
   authenticate(...)
 
   if (!missing(ind_loc) && missing(session)) {
-    warning("Argument ind_loc is deprecated and will disappear in Sept 2022; please use session instead.",
+    warning("Argument ind_loc is deprecated and will disappear in Nov 2022; please use session instead.",
             call. = FALSE
     )
     session <- loc2session(ind_loc)
   }
 
   if (!missing(loc) && missing(session)) {
-    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
             call. = FALSE
     )
     session <- loc2session(loc)

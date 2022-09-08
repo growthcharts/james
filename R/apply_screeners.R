@@ -35,7 +35,7 @@ apply_screeners <- function(txt = "",
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
             call. = FALSE
     )
     session <- loc2session(loc)

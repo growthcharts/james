@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 library(james)
 ```
 
->> This document is the README of the first JAMES version supported up to December 2021. The version will not be further developed but remain operational until Sept 2022 on <groeidiagrammen.nl>. Use <james.groeidiagrammen.nl> for the current version.
+>> This document is the README of the first JAMES version supported up to December 2021. The version will not be further developed but remain operational until Nov 2022 on <groeidiagrammen.nl>. Use <james.groeidiagrammen.nl> for the current version.
 
 ## Joint Automatic Measurement and Evaluation System (JAMES)
 

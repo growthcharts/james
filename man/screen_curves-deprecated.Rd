@@ -21,7 +21,7 @@ format. The input data adhere to specification
 and are converted to JSON according to \code{schema}.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
 \item{location}{Legacy for \code{loc}}

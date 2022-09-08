@@ -24,7 +24,7 @@
 #' Setting (`FALSE`) just appends `?txt=` to the site url, thus
 #' deferring validation and conversion to internal representation to the site.
 #' @param loc Alternative to `txt`. Location where input data is uploaded.
-#' Argument `loc` is deprecated and will disappear in Sept 2022; please
+#' Argument `loc` is deprecated and will disappear in Nov 2022; please
 #' use `session` instead.
 #' @inheritParams draw_chart
 #' @return URL composed of JAMES server, possibly appended by query string starting
@@ -81,7 +81,7 @@ request_site <- function(txt = "",
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
             call. = FALSE
     )
     session <- loc2session(loc)

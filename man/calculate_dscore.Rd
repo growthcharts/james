@@ -36,7 +36,7 @@ function returns only the last row. If \code{output} equals
 \code{"last_dscore"} the function returns only the D-score from the last row.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
 \item{...}{Ignored}

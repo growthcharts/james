@@ -39,7 +39,7 @@ Setting (\code{FALSE}) just appends \verb{?txt=} to the site url, thus
 deferring validation and conversion to internal representation to the site.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
 \item{...}{Ignored}

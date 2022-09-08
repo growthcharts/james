@@ -33,7 +33,7 @@ screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
 \code{TRUE}.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
 \item{...}{Ignored}

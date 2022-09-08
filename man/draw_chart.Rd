@@ -122,12 +122,12 @@ growth of the target child should be drawn}
 Default is \code{TRUE}. For internal use only.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
-\item{bds_data}{Legacy. Will disappear in Sept 2022. Use \code{txt} instead.}
+\item{bds_data}{Legacy. Will disappear in Nov 2022. Use \code{txt} instead.}
 
-\item{ind_loc}{Legacy. Will disappear in Sept 2022. Use \code{loc} instead.}
+\item{ind_loc}{Legacy. Will disappear in Nov 2022. Use \code{loc} instead.}
 
 \item{...}{Ignored}
 }

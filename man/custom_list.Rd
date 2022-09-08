@@ -21,7 +21,7 @@ three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \c
 for new applications.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
 \item{...}{Ignored}

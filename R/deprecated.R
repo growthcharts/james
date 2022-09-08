@@ -19,7 +19,7 @@
 convert_bds_ind <- function(txt = "", format = "1.0", ...) {
   authenticate(...)
   .Deprecated("upload_data",
-              msg = "convert_bds_ind() is deprecated and will disappear in Sept 2022. Please use upload_data() instead."
+              msg = "convert_bds_ind() is deprecated and will disappear in Nov 2022. Please use upload_data() instead."
   )
   upload_data(txt = txt, format = format, ...)
 }
@@ -52,7 +52,7 @@ custom_list <- function(txt = "", session = "", format = "1.0", loc = "", ...) {
               msg = "custom_list() is deprecated. Please use request_blend(..., blend = 'allegro') instead.")
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Sept 2022; please use session instead.",
+    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
             call. = FALSE
     )
     session <- loc2session(loc)
@@ -93,7 +93,7 @@ draw_chart_bds <- function(txt = "", format = "1.0",
 
   # legacy
   .Deprecated("draw_chart",
-              msg = "draw_chart_bds() is deprecated and will disappear in Sept 2022. Please use draw_chart() instead."
+              msg = "draw_chart_bds() is deprecated and will disappear in Nov 2022. Please use draw_chart() instead."
   )
 
   draw_chart(
@@ -122,7 +122,7 @@ draw_chart_ind <- function(loc = "", chartcode = "",
                            curve_interpolation = TRUE, ...) {
   authenticate(...)
   .Deprecated("draw_chart",
-              msg = "draw_chart_ind() is deprecated and will disappear in Sept 2022. Please use draw_chart() instead."
+              msg = "draw_chart_ind() is deprecated and will disappear in Nov 2022. Please use draw_chart() instead."
   )
 
   # legacy
@@ -156,7 +156,7 @@ fetch_loc <- function(txt = "",
                       ...) {
   authenticate(...)
   .Deprecated("upload_data",
-              msg = "fetch_loc() is deprecated and will disappear in Sept 2022. Please use upload_data() instead.")
+              msg = "fetch_loc() is deprecated and will disappear in Nov 2022. Please use upload_data() instead.")
   upload_data(txt = txt, ...)
 }
 
@@ -191,7 +191,7 @@ screen_curves <- function(txt = "", loc = "", location = "", format = "1.0",
                           legacy = TRUE, ...) {
   authenticate(...)
   .Deprecated("apply_screeners",
-              msg = "screen_curves() is deprecated and will disappear in Sept 2022. Please use apply_screeners() instead."
+              msg = "screen_curves() is deprecated and will disappear in Nov 2022. Please use apply_screeners() instead."
   )
   # legacy
   if (!is.empty(location)) loc <- location

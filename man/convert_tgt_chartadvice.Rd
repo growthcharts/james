@@ -49,10 +49,10 @@ the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
-\item{ind_loc}{Legacy. Will disappear in Sept 2022. Use \code{loc} instead.}
+\item{ind_loc}{Legacy. Will disappear in Nov 2022. Use \code{loc} instead.}
 
 \item{...}{Ignored}
 }

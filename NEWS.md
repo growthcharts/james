@@ -1,3 +1,7 @@
+# james 0.60.0
+
+- Extends support for deprecated arguments to Nov 2022 (was Sept 2022)
+
 # james 0.59.1
 
 - Update all packages

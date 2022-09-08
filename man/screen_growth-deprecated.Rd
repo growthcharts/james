@@ -18,7 +18,7 @@ screen_growth(
 \item{txt}{A JSON string, URL or file}
 
 \item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Sept 2022; please
+Argument \code{loc} is deprecated and will disappear in Nov 2022; please
 use \code{session} instead.}
 
 \item{format}{String. JSON data schema version number. There are currently
