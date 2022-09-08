@@ -45,10 +45,10 @@
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "0.11.2.0.0",
+      "Version": "0.11.2.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "1d3c02a90401734e893954c7f8f92f3e",
+      "Hash": "8370a82b0c508599f2fa5a40a36b8102",
       "Requirements": [
         "Rcpp"
       ]
@@ -96,16 +96,16 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.17.0",
+      "Version": "0.17.1",
       "Source": "GitHub",
+      "Remotes": "growthcharts/centile, d-score/dscore,\n        growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteType": "github",
-      "Remotes": "growthcharts/centile, growthcharts/nlreferences,\n    growthcharts/jamesdemodata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "ecc344799ace9eadef08c85ec96ac317c403790b",
-      "Hash": "b4546112c7c2f07a65aa2b4a270713d9",
+      "RemoteSha": "486bfdea81b821101a95938aa26d945cf00a2ed5",
+      "Hash": "0e984219ddedd9d873e5453c1f2f73ef",
       "Requirements": [
         "centile",
         "curl",
@@ -234,16 +234,16 @@
     },
     "chartbox": {
       "Package": "chartbox",
-      "Version": "1.10.0",
+      "Version": "1.11.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "growthcharts/chartcatalog",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartbox",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "652a74ab653e7c178f370381bad71a2e5fcdca32",
-      "Hash": "7440dfa4339679a3c60e641bf888ca8e",
+      "RemoteSha": "cc1037fb6f475f34c6ca25c0987280bbbea3ea5e",
+      "Hash": "a09a69d93b0c1810af046aa05118192b",
       "Requirements": [
         "chartcatalog"
       ]
@@ -265,14 +265,14 @@
       "Package": "chartplotter",
       "Version": "0.29.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile,\n        growthcharts/chartbox, growthcharts/chartcatalog,\n        growthcharts/curvematching, growthcharts/jamesdemodata,\n        growthcharts/nlreferences, growthcharts/donorloader",
       "RemoteType": "github",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox,\n    growthcharts/chartcatalog, growthcharts/curvematching,\n    growthcharts/jamesdemodata, growthcharts/nlreferences,\n    growthcharts/donorloader",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartplotter",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
       "RemoteSha": "3b155d177e50e8bfeeb65f2a17c8578954e2d224",
-      "Hash": "eeaa9b885683de793d6f93c89cbe84be",
+      "Hash": "e39c055964bad0aa0dd5217ac11919f5",
       "Requirements": [
         "brokenstick",
         "centile",
@@ -288,13 +288,11 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.3.0",
+      "Version": "3.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "23abf173c2b783dcc43379ab9bba00ee",
-      "Requirements": [
-        "glue"
-      ]
+      "Hash": "78003c09d258968a4d28107e779edb10",
+      "Requirements": []
     },
     "clipr": {
       "Package": "clipr",
@@ -402,16 +400,16 @@
     },
     "donorloader": {
       "Package": "donorloader",
-      "Version": "0.33.0",
+      "Version": "0.34.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "donorloader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "c90f97ea5658a263d8487186b6606f17c23d9fbe",
-      "Hash": "f8dff79fd10444f290a8215028024b2a",
+      "RemoteSha": "5233e877f638da78706846bb5a610c734c200606",
+      "Hash": "abe8d9c6906480dcf29ae41030d39b0a",
       "Requirements": [
         "bdsreader",
         "dplyr",
@@ -422,10 +420,10 @@
     },
     "dplyr": {
       "Package": "dplyr",
-      "Version": "1.0.9",
+      "Version": "1.0.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f0bda1627a7f5d3f9a0b5add931596ac",
+      "Hash": "539412282059f7f0c07295723d23f987",
       "Requirements": [
         "R6",
         "generics",
@@ -441,15 +439,15 @@
     },
     "dscore": {
       "Package": "dscore",
-      "Version": "1.6.1",
+      "Version": "1.6.5",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "dscore",
       "RemoteUsername": "d-score",
       "RemoteRef": "HEAD",
-      "RemoteSha": "3d56d9f1474e45a89218a7fcbcacc06331fc7ed8",
-      "Hash": "c6e37e334170b1fdf46d4caedbf0a1f5",
+      "RemoteSha": "a5d6f335fb8990d35592fc2c2f3a08cbb842b0cc",
+      "Hash": "40c8f8cb376a8b80d0f71ccfcd39a8e4",
       "Requirements": [
         "Rcpp",
         "RcppArmadillo",
@@ -566,16 +564,16 @@
     },
     "growthscreener": {
       "Package": "growthscreener",
-      "Version": "1.14.0",
+      "Version": "1.15.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile,\n        growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteType": "github",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile,\n    growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "growthscreener",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "31b35d7a13d0cc52b41f9ca0c8af01de81d58724",
-      "Hash": "977fe03cdf723486f9c21a30fedb8177",
+      "RemoteSha": "8c8e9291bffa0ff451caf2ac7e0b4201a4929386",
+      "Hash": "81389fda9d1806a4dabe6f961345abea",
       "Requirements": [
         "bdsreader",
         "centile",
@@ -662,14 +660,14 @@
       "Package": "jamesclient",
       "Version": "0.30.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "growthcharts/jamesdemodata",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
       "RemoteSha": "103829700d29d14e4d8db367c2b021aaca13c8f2",
-      "Hash": "915100b776c4033894410678545510bf",
+      "Hash": "ff5d32c9ebe4d8a12dd0ad39f81df1cb",
       "Requirements": [
         "curl",
         "httr",
@@ -888,14 +886,14 @@
       "Package": "nlreferences",
       "Version": "0.14.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "growthcharts/centile",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "nlreferences",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
       "RemoteSha": "6e2661a3ffb1a20402c034bea991ba7c185572ae",
-      "Hash": "732e7143316169a72a9a76ee4dba11a1",
+      "Hash": "e27cf1a89a0fcc7cfb0df88e61d29d0a",
       "Requirements": [
         "centile",
         "dplyr",
@@ -938,10 +936,10 @@
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.8.0",
+      "Version": "1.8.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f95cf85794546c4ac2b9a6ca42e671ff",
+      "Hash": "f2316df30902c81729ae9de95ad5a608",
       "Requirements": [
         "cli",
         "fansi",
@@ -1117,10 +1115,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.4",
+      "Version": "1.0.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6539dd8c651e67e3b55b5ffea106362b",
+      "Hash": "971c3d698fc06dabdac6bc4bcda72dc4",
       "Requirements": []
     },
     "rmarkdown": {
@@ -1182,10 +1180,10 @@
     },
     "stringr": {
       "Package": "stringr",
-      "Version": "1.4.0",
+      "Version": "1.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0759e6b6c0957edb1311028a49a35e76",
+      "Hash": "a66ad12140cd34d4f9dfcc19e84fc2a5",
       "Requirements": [
         "glue",
         "magrittr",
@@ -1267,10 +1265,10 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.2.0",
+      "Version": "1.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d8b95b7fee945d7da6888cf7eb71a49c",
+      "Hash": "cdb403db0de33ccd1b6f53b83736efa8",
       "Requirements": [
         "cpp11",
         "dplyr",

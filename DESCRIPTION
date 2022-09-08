@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 0.59.0
+Version: 0.59.1
 Authors@R: c(person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl", role = c("cre", "aut")), 
              person("Arjan", "Huizing", email = "arjan.huizing@tno.nl", role = "aut"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -16,15 +16,15 @@ Depends:
     R (>= 2.10),
     svglite
 Imports: 
-    bdsreader (>= 0.17.0),
-    chartbox (>= 1.10.0),
+    bdsreader (>= 0.17.1),
+    chartbox (>= 1.11.0),
     chartcatalog (>= 1.10.0),
     chartplotter (>= 0.29.0),
     dplyr,
     curl,
     grDevices,
     grid (>= 4.1.0),
-    growthscreener (>= 1.14.0),
+    growthscreener (>= 1.15.0),
     httr,
     jamesclient (>= 0.30.0),
     jose,
@@ -47,3 +47,4 @@ Remotes:
     growthcharts/jamesdemodata
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
