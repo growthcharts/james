@@ -1,6 +1,7 @@
-# james 0.60.0
+# james 0.59.2
 
-- Extends support for deprecated arguments to Nov 2022 (was Sept 2022)
+- Update packages
+- Make library snapshot, update `renv.lock`
 
 # james 0.59.1
 
