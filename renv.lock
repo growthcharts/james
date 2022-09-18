@@ -11,18 +11,18 @@
   "Packages": {
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-57",
+      "Version": "7.3-58.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "71476c1d88d1ebdf31580e5a257d5d31",
+      "Hash": "762e1804143a332333c054759f89a706",
       "Requirements": []
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.4-1",
+      "Version": "1.5-1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "699c47c606293bdfbc9fd78a93c9c8fe",
+      "Hash": "539dc0c0c05636812f1080f473d2c177",
       "Requirements": [
         "lattice"
       ]
@@ -98,14 +98,14 @@
       "Package": "bdsreader",
       "Version": "0.17.1",
       "Source": "GitHub",
+      "Remotes": "growthcharts/centile, d-score/dscore,\n        growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteType": "github",
-      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences,\n    growthcharts/jamesdemodata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
       "RemoteSha": "486bfdea81b821101a95938aa26d945cf00a2ed5",
-      "Hash": "77e7fba78401877094c28c16328c18cf",
+      "Hash": "0e984219ddedd9d873e5453c1f2f73ef",
       "Requirements": [
         "centile",
         "curl",
@@ -519,10 +519,10 @@
     },
     "gert": {
       "Package": "gert",
-      "Version": "1.8.0",
+      "Version": "1.9.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4bdd6588a3cbde071c7de6d07b66f1d3",
+      "Hash": "56dc795889978f759ea0b0de06dcd5b4",
       "Requirements": [
         "askpass",
         "credentials",
@@ -566,14 +566,14 @@
       "Package": "growthscreener",
       "Version": "1.15.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile,\n        growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteType": "github",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile,\n    growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "growthscreener",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
       "RemoteSha": "8c8e9291bffa0ff451caf2ac7e0b4201a4929386",
-      "Hash": "e184d09416888e463bf12661ef4d1506",
+      "Hash": "81389fda9d1806a4dabe6f961345abea",
       "Requirements": [
         "bdsreader",
         "centile",
@@ -658,7 +658,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.31.0",
+      "Version": "0.30.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -666,8 +666,8 @@
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "8aefb3f6f581934400c5bcfb52645cd84b154936",
-      "Hash": "399b48f5b2cb4f4cb54aa0c9fd9dc414",
+      "RemoteSha": "103829700d29d14e4d8db367c2b021aaca13c8f2",
+      "Hash": "ff5d32c9ebe4d8a12dd0ad39f81df1cb",
       "Requirements": [
         "curl",
         "httr",
@@ -864,10 +864,10 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-157",
+      "Version": "3.1-159",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "dbca60742be0c9eddc5205e5c7ca1f44",
+      "Hash": "4a0b3a68f846cb999ff0e8e519524fbb",
       "Requirements": [
         "lattice"
       ]
@@ -886,14 +886,14 @@
       "Package": "nlreferences",
       "Version": "0.14.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "growthcharts/centile",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "nlreferences",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
       "RemoteSha": "6e2661a3ffb1a20402c034bea991ba7c185572ae",
-      "Hash": "732e7143316169a72a9a76ee4dba11a1",
+      "Hash": "e27cf1a89a0fcc7cfb0df88e61d29d0a",
       "Requirements": [
         "centile",
         "dplyr",
@@ -926,10 +926,10 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.0.2",
+      "Version": "2.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6d3bef2e305f55c705c674653c7d7d3d",
+      "Hash": "b9621e75c0652041002a19609fb23c5a",
       "Requirements": [
         "askpass"
       ]
