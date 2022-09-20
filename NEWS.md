@@ -1,3 +1,8 @@
+# james 0.60.0
+
+- Refreshes `renv.lock` by starting from fresh library
+- Tweak test to pass windows conf
+
 # james 0.59.2
 
 - Version used to build james docker 1.3.0
