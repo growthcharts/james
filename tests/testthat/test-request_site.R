@@ -12,7 +12,7 @@ host <- "http://localhost"
 if (jamesclient::valid_url(host)) {
   test_that(
     "creates site_laura",
-    expect_silent(site_laura <- request_site(laura, sitehost = host))
+    expect_true(jamesclient::valid_url(request_site(txt = laura, sitehost = host)))
   )
 
   #site_laura_gro <- request_site(laura_gro, sitehost = host)
@@ -21,7 +21,7 @@ if (jamesclient::valid_url(host)) {
 
   test_that(
     "creates site_kevin",
-    expect_silent(site_kevin <- request_site(kevin, sitehost = host))
+    expect_true(jamesclient::valid_url(request_site(txt = kevin, sitehost = host)))
   )
 
   # site_kevin_gro <- request_site(kevin_gro, sitehost = host)
