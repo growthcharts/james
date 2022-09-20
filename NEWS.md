@@ -1,5 +1,6 @@
 # james 0.59.2
 
+- Version used to build james docker 1.3.0
 - Update packages
 - Make library snapshot, update `renv.lock`
 
