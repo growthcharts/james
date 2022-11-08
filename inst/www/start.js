@@ -8,11 +8,9 @@ const protocol = window.location.protocol;
 const hostname = window.location.hostname;
 const host = protocol + '//' + hostname;
 
-//hardcode path
-// ocpu.seturl("/ocpu/library/james/R");
-
-//default, use for apps
-ocpu.seturl("../R")
+// This path is used by javascript calls into OpenCPU
+// Use double // to support CORS
+ocpu.seturl('//' + hostname + '/ocpu/library/james/R');
 
 // internal constants
 const slider_values = {
