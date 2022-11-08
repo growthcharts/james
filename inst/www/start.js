@@ -9,7 +9,10 @@ const hostname = window.location.hostname;
 const host = protocol + '//' + hostname;
 
 //hardcode path
-ocpu.seturl("/ocpu/library/james/R");
+// ocpu.seturl("/ocpu/library/james/R");
+
+//default, use for apps
+ocpu.seturl("../R")
 
 // internal constants
 const slider_values = {
