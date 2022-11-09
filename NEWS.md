@@ -1,3 +1,9 @@
+# james 0.60.0, branch urls
+
+## A few changes intended to support external hosting of JS functionality:
+- Make the href locations of index.html, css and js relative to /var/www/html. The directory james/www should be copied into /var/www/html/app to make JAMES work.
+- Support CORS with hostname in ocpu.seturl()
+
 # james 0.60.0
 
 - Refreshes `renv.lock` by starting from fresh library
