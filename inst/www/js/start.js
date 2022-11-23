@@ -136,8 +136,8 @@ for(var i = 0, max = radios.length; i < max; i++) {
 
 // if user_session is specified, report any warnings and messages
 if (user_session) {
-  var warn = host + '/' + user_session + "/warnings/text";
-  var mess = host + '/' + user_session + "/messages/text";
+  var warn = host + pathname + '/' + user_session + "/warnings/text";
+  var mess = host + pathname + '/' + user_session + "/messages/text";
   $("#session").text(user_session);
   $("#warnings").load(warn);
   $("#messages").load(mess);
