@@ -1,6 +1,11 @@
+# james 0.62.0
+
+- Add pathname in URL construction to make JAMES browsers requests reachable when URL is something like htpps://site/path/request.
+
 # james 0.61.0
 
 ## A few changes intended to support external hosting of JS functionality:
+
 - Make the href locations of index.html, css and js relative to /var/www/html. The directory james/www should be copied into /var/www/html/app to make JAMES work.
 - Support CORS with hostname in ocpu.seturl()
 

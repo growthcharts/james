@@ -56,7 +56,7 @@ The table lists the defined API end points and the mapping to each end point to 
 |:------------------------------------------------------|:-----------------------------------------|
 | [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | 1.2.0 |
 | [Example requests](https://james.groeidiagrammen.nl) | 1.2.0 |
-| [JAMES Swagger](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | 1.2.0     |
+| [JAMES Swagger](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | 1.4.0     |
 | [JSON data schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v2.0.json) | 2.0 |
 | [Source files](https://github.com/growthcharts/james) | current |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |
