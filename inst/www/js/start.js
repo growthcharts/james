@@ -7,10 +7,11 @@ const user_chartcode = urlParams.get('chartcode');
 const protocol = window.location.protocol;
 const hostname = window.location.hostname;
 const host = protocol + '//' + hostname;
+const pathname = window.location.pathname.slice(0,-5);
 
 // This path is used by javascript calls into OpenCPU
 // Use double // to support CORS
-ocpu.seturl('//' + hostname + '/ocpu/library/james/R');
+ocpu.seturl('//' + hostname + pathname + '/ocpu/library/james/R');
 
 // internal constants
 const slider_values = {
