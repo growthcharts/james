@@ -1,3 +1,8 @@
+# james 0.63.0
+
+- Resolves a problem with the weight-for-age references for 0-15 months
+- Updates JAMES to latest R packages
+
 # james 0.62.0
 
 - Add pathname in URL construction to make JAMES browsers requests reachable when URL is something like htpps://site/path/request.
