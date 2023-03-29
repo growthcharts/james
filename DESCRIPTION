@@ -17,16 +17,16 @@ Depends:
     svglite
 Imports: 
     bdsreader (>= 0.17.1),
-    chartbox (>= 1.11.0),
+    chartbox (>= 1.12.0),
     chartcatalog (>= 1.10.0),
-    chartplotter (>= 0.30.0),
+    chartplotter (>= 0.31.0),
     dplyr,
     curl,
     grDevices,
     grid (>= 4.1.0),
     growthscreener (>= 1.15.0),
     httr,
-    jamesclient (>= 0.30.0),
+    jamesclient (>= 0.31.0),
     jose,
     jsonlite,
     rlang,
@@ -47,4 +47,4 @@ Remotes:
     growthcharts/jamesdemodata
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
