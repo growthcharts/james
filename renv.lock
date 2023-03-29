@@ -228,16 +228,16 @@
     },
     "chartbox": {
       "Package": "chartbox",
-      "Version": "1.11.0",
+      "Version": "1.12.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/chartcatalog",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "chartbox",
-      "RemoteRef": "master",
-      "RemoteSha": "cc1037fb6f475f34c6ca25c0987280bbbea3ea5e",
-      "Remotes": "growthcharts/chartcatalog",
-      "Hash": "968731fd0155ca89af0802d631ee279f",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "5ee50ac3ba3f5514fc095a46a1d880f33346882c",
+      "Hash": "8cc20e498481828749168894d864c114",
       "Requirements": [
         "chartcatalog"
       ]

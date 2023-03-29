@@ -17,7 +17,7 @@ Depends:
     svglite
 Imports: 
     bdsreader (>= 0.17.1),
-    chartbox (>= 1.11.0),
+    chartbox (>= 1.12.0),
     chartcatalog (>= 1.10.0),
     chartplotter (>= 0.31.0),
     dplyr,
