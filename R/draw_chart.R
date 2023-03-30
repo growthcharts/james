@@ -33,7 +33,6 @@
 #' the `selector` setting. If no valid `tgt` object is found,
 #' the `"chartcode"` argument is taken. However, if the `"chartcode"`
 #' is empty, then the function selects method `"derive"`.
-#' @param dmodel A string indicating the D-score model (either `"gsed"` or `"dutch"`)
 #' @param lo Value of the left visit coded as string, e.g. `"4w"`
 #'   or `"7.5m"`
 #' @param hi Value of the right visit coded as string, e.g. `"4w"`
@@ -61,7 +60,6 @@ draw_chart <- function(txt = "",
                        etn = NULL,
                        ga = NULL,
                        side = "hgt",
-                       dmodel = c("gsed", "dutch"),
                        curve_interpolation = TRUE,
                        quiet = FALSE,
                        dnr = "0-2",
@@ -100,7 +98,6 @@ draw_chart <- function(txt = "",
   }
 
   selector <- match.arg(selector)
-  dmodel <- match.arg(dmodel)
   dnr <- match.arg(dnr,
     choices = c(
       "0-2", "2-4", "4-18", "smocc", "lollypop",

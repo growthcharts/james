@@ -14,7 +14,6 @@ function update() {
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active == "ontwikkeling"){
     var msr = "dsc";
-    var dmodel = document.getElementById("dmodel").value;
     var chartgrp = document.getElementById("chartgrp_dsc").value;
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
     var population = "nl";
@@ -164,14 +163,14 @@ function update() {
     sr('msr_back', 'none');
   }
   if (dmodel == 'gsed') {
-    sr('phase1', 'block');
-    sr('phase1pt', 'block');
+    sr('who', 'block');
+    sr('whopreterm', 'block');
     sr('nl2010', 'none');
     sr('preterm', 'none');
   }
   if (dmodel == 'dutch') {
-    sr('phase1', 'none');
-    sr('phase1pt', 'none');
+    sr('who', 'none');
+    sr('whopreterm', 'none');
     sr('nl2010', 'block');
     sr('preterm', 'block');
   }
