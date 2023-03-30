@@ -16,6 +16,7 @@ draw_chart(
   etn = NULL,
   ga = NULL,
   side = "hgt",
+  dmodel = c("gsed", "dutch"),
   curve_interpolation = TRUE,
   quiet = FALSE,
   dnr = "0-2",
@@ -83,6 +84,8 @@ provides the 0-4 chart with weight for age (design E).}
 
 \item{side}{Either \code{'front'}, \code{'back'}, \code{'-hdc'} or
 \code{'both'}}
+
+\item{dmodel}{A string indicating the D-score model (either \code{"gsed"} or \code{"dutch"})}
 
 \item{curve_interpolation}{A logical indicating whether curve
 interpolation shoud be applied.}
