@@ -107,10 +107,21 @@
               <div class="card-body">
 
                 <div class="form-group">
+                  <label for="exampleSelect1"><strong>D-score model</strong></label>
+                  <select class="form-control" id="dmodel">
+                    <option value="gsed" selected>GSED</option>
+                    <option value="dutch">NL</option>
+                  </select>
+                  <br>
+                </div>
+
+                <div class="form-group">
                   <label for="exampleSelect1"><strong>Kaartserie</strong></label>
                   <select class="form-control" id="chartgrp_dsc">
-                    <option value="nl2010" selected>Nederland 2010</option>
-                    <option value="preterm">Prematuren</option>
+                    <option id="phase1", value="phase1" selected>Phase 1</option>
+                    <option id = "phase1pt", value="phase1pt">Phase 1 preterm</option>
+                    <option id = "nl2010", value="nl2010" >Nederland 2010</option>
+                    <option id = "preterm", value="preterm">Prematuren 2010</option>
                   </select>
                   <br>
                 </div>
