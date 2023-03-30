@@ -1,5 +1,5 @@
 // update.js
-// Author: Stef van Buuren, 2019
+// Author: Stef van Buuren, 2019-2023
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
@@ -162,19 +162,6 @@ function update() {
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
-  if (dmodel == 'gsed') {
-    sr('who', 'block');
-    sr('whopreterm', 'block');
-    sr('nl2010', 'none');
-    sr('preterm', 'none');
-  }
-  if (dmodel == 'dutch') {
-    sr('who', 'none');
-    sr('whopreterm', 'none');
-    sr('nl2010', 'block');
-    sr('preterm', 'block');
-  }
-
 
   // handle null user inputs
   var utxt = '';
@@ -196,7 +183,6 @@ function update() {
       etn      : population,
       ga       : ga,
       side     : msr,
-      dmodel   : dmodel,
       curve_interpolation : cm,
       quiet    : false,
       dnr      : dnr,
