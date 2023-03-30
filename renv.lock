@@ -678,15 +678,15 @@
     },
     "growthscreener": {
       "Package": "growthscreener",
-      "Version": "1.15.0",
+      "Version": "1.16.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "growthscreener",
-      "RemoteRef": "master",
-      "RemoteSha": "8c8e9291bffa0ff451caf2ac7e0b4201a4929386",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "1ba6b1632d76579b936b6b8b2c6dfea179f1a4c7",
       "Requirements": [
         "R",
         "bdsreader",
@@ -696,9 +696,10 @@
         "methods",
         "nlreferences",
         "rlang",
+        "tidyr",
         "tidyselect"
       ],
-      "Hash": "d8bcebf8e2bd5db5c6a700c6f64f1757"
+      "Hash": "d1fa3a4e50cfca69f1e9409ee0696790"
     },
     "highr": {
       "Package": "highr",
@@ -1038,7 +1039,7 @@
     },
     "nlreferences": {
       "Package": "nlreferences",
-      "Version": "0.14.1",
+      "Version": "0.15.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/centile",
       "RemoteType": "github",
@@ -1046,7 +1047,7 @@
       "RemoteRepo": "nlreferences",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "d2f9b39cbb773e55d34e552274c2aa9e1f8cbe41",
+      "RemoteSha": "66ff99de7dccfa73cc9cf59d811942c8d426792a",
       "Requirements": [
         "R",
         "centile",
@@ -1055,7 +1056,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "8d048ece2f8e7ceb9bbcee061e092725"
+      "Hash": "1dbfa16600688a2ecdf13fdd295ff881"
     },
     "openssl": {
       "Package": "openssl",
