@@ -153,7 +153,7 @@ if (user_txt || user_session || user_chartcode) {
   initialize_chart_controls();
   } else {
 // no user arguments: update visibility, draw chart
-  else update();
+  update();
 }
 
 function initialize_chart_controls() {
