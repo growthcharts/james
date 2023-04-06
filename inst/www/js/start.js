@@ -21,9 +21,6 @@ const slider_values = {
   "0_29": ["0w","3m","6m","14m","24m","48m","10y","18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]};
 
-// read starting policy
-var init = document.querySelector('input[name="option_init"]:checked').value;
-
 // starting defaults for initialisation per child
 var slider_list = "0_2";
 var chartcode = "NJAH";
@@ -146,19 +143,18 @@ if (user_session) {
 // updating logic to select charts
 // 1. use "derive" based on user interaction
 var selector  = "derive";
-
-if (init == 'perchild') {
-  // 2. use "data" if we can calculate or load child data
-  if (user_txt || user_session) selector = "data";
-  // 3. use hard chartcode if user specified one
-  if (user_chartcode) selector = "chartcode";
-}
+// 2. use "data" if we can calculate or load child data
+if (user_txt || user_session) selector = "data";
+// 3. use hard chartcode if user specified one
+if (user_chartcode) selector = "chartcode";
 
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || user_session || user_chartcode) initialize_chart_controls();
-
+if (user_txt || user_session || user_chartcode) {
+  initialize_chart_controls();
+  } else {
 // no user arguments: update visibility, draw chart
-else update();
+  else update();
+}
 
 function initialize_chart_controls() {
   // function executes at initialization
