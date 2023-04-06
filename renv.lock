@@ -294,18 +294,18 @@
     },
     "chartcatalog": {
       "Package": "chartcatalog",
-      "Version": "1.13.0",
+      "Version": "1.13.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartcatalog",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "71cf71e1b25f4e53519c7ccec11faab6ce6dba11",
+      "RemoteSha": "3ad972df42b3385a78b0a1bf91f2048969698edd",
       "Requirements": [
         "R"
       ],
-      "Hash": "535460b6f2ba4453e1dc6e525ef12a56"
+      "Hash": "2c01802ccd45ec4a2572b68dbd31cd55"
     },
     "chartplotter": {
       "Package": "chartplotter",
