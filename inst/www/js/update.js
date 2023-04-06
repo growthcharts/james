@@ -43,13 +43,11 @@ function update() {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
     sr('etnicity', 'block');
-    sr('weekmenu_dsc', 'none');
   }
   if (chartgrp == 'preterm') {
     sr('agegrp_1-21y', 'none');
     sr('weekmenu', 'block');
     sr('etnicity', 'none');
-    sr('weekmenu_dsc', 'block');
   }
   if (chartgrp == 'who' & active == 'groei') {
     sr('agegrp_1-21y', 'none');
@@ -57,14 +55,10 @@ function update() {
     sr('etnicity', 'none');
   }
   if (active == 'ontwikkeling' & ga == '40') {
-    sr('agegrp_1-21y', 'none');
-    sr('weekmenu', 'none');
-    sr('etnicity', 'none');
+    sr('weekmenu_dsc', 'none');
   }
-  if (active == 'ontwikkeling' & ga !== '40') {
-    sr('agegrp_1-21y', 'none');
-    sr('weekmenu', 'block');
-    sr('etnicity', 'none');
+  if (active == 'ontwikkeling' & ga != '40') {
+    sr('weekmenu_dsc', 'block');
   }
 
   if (agegrp == '0-15m' & chartgrp == 'nl2010' & population == 'nl') {
