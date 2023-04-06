@@ -13,7 +13,7 @@ function update() {
     var ga = Number($("#weekslider").data().from);
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active == "ontwikkeling"){
-    var population = "who";
+    var population = "nl";
     var chartgrp = "who";
     var msr = "dsc";
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
