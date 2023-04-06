@@ -195,15 +195,20 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp").value = String(output.chartgrp);
     document.forms.agegrp[String(output.agegrp)].checked=true;
 
-    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
+    // Set UI for D-score
+    var week = String(output.week);
+    var weeknum = Math.trunc(Number(week));
+    if (weeknum == 40) {
+      document.getElementById("chartgrp_dsc").value = String(output.chartgrp);
+    } else {
+      document.getElementById("chartgrp_dsc").value = "whopreterm";
+    }
     if (String(output.agegrp) !== "1-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
 
     // there is no msr for dsc anymore.
     if (String(output.side) !== "dsc") {document.forms.msr[String(output.side)].checked=true;}
 
-    // set week slider
-    var week = String(output.week);
-    var weeknum = Math.trunc(Number(week));
+    // set week slider for both growth and development
     if (week && weeknum >= 25 && weeknum <= 36)
       $("#weekslider").data("ionRangeSlider").update({
         from: week
