@@ -21,11 +21,13 @@ const slider_values = {
   "0_29": ["0w","3m","6m","14m","24m","48m","10y","18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]};
 
-// starting defaults
+// read starting policy
+var init = document.querySelector('input[name="option_init"]:checked').value;
+
+// starting defaults for initialisation per child
 var slider_list = "0_2";
 var chartcode = "NJAH";
-
-// Set donordata entry
+var active = "groei";
 document.getElementById("donordata").value = "0-2";
 
 // Fire up sliders
@@ -76,8 +78,6 @@ $("#weekslider_dsc").ionRangeSlider({
 });
 
 // set active accordion page
-var active = "groei";
-
 $('#groei').click(function (){
         if (active != "groei"){
           active = "groei";
@@ -146,10 +146,13 @@ if (user_session) {
 // updating logic to select charts
 // 1. use "derive" based on user interaction
 var selector  = "derive";
-// 2. use "data" if we can calculate or load child data
-if (user_txt || user_session) selector = "data";
-// 3. use hard chartcode if user specified one
-if (user_chartcode) selector = "chartcode";
+
+if (init == 'perchild') {
+  // 2. use "data" if we can calculate or load child data
+  if (user_txt || user_session) selector = "data";
+  // 3. use hard chartcode if user specified one
+  if (user_chartcode) selector = "chartcode";
+}
 
 // calculate chartcode, set chart controls, update visibility, draw chart
 if (user_txt || user_session || user_chartcode) initialize_chart_controls();
