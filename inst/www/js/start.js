@@ -196,26 +196,26 @@ function initialize_chart_controls() {
     document.forms.agegrp[String(output.agegrp)].checked=true;
 
     // Set UI for D-score
-    var week = String(output.week);
-    var weeknum = Math.trunc(Number(week));
-    if (weeknum == 40) {
-      document.getElementById("chartgrp_dsc").value = String(output.chartgrp);
-    } else {
-      document.getElementById("chartgrp_dsc").value = "whopreterm";
-    }
     if (String(output.agegrp) !== "1-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
-
     // there is no msr for dsc anymore.
     if (String(output.side) !== "dsc") {document.forms.msr[String(output.side)].checked=true;}
 
+    document.getElementById("chartgrp_dsc").value = "who";
+    var week = String(output.week);
+    var weeknum = Math.trunc(Number(week));
+    if (week && weeknum >= 25 && weeknum <= 36) {
+      document.getElementById("chartgrp_dsc").value = "whopreterm";
+    }
+
     // set week slider for both growth and development
-    if (week && weeknum >= 25 && weeknum <= 36)
+    if (week && weeknum >= 25 && weeknum <= 36) {
       $("#weekslider").data("ionRangeSlider").update({
         from: week
       });
       $("#weekslider_dsc").data("ionRangeSlider").update({
         from: week
       });
+    }
 
     // set etnicity
     var pop = String(output.population).toLowerCase();
