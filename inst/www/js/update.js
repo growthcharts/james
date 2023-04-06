@@ -16,8 +16,10 @@ function update() {
     var msr = "dsc";
     var chartgrp = document.getElementById("chartgrp_dsc").value;
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
-    var population = "nl";
-    var ga = Number($("#weekslider_dsc").data().from);
+    var ga = 40;
+    if (chartgrp !== "phase1") ga = Number($("#weekslider_dsc").data().from);
+    var population = "who";
+    if (document.getElementById("phase1").checked)
     document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
 

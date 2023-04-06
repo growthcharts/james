@@ -1,3 +1,6 @@
+
+- Replaces Dutch D-score charts by GSED Phase 1 references and charts
+
 # james 0.63.0
 
 - Resolves a problem with the weight-for-age references for 0-15 months
