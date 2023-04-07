@@ -1,5 +1,5 @@
 // update.js
-// Author: Stef van Buuren, 2019
+// Author: Stef van Buuren, 2019-2023
 // Netherlands Organisation for Applied Scientific Research TNO, Leiden
 
 function update() {
@@ -13,11 +13,13 @@ function update() {
     var ga = Number($("#weekslider").data().from);
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active == "ontwikkeling"){
-    var msr = "dsc";
     var population = "nl";
-    var chartgrp = document.getElementById("chartgrp_dsc").value;
+    var chartgrp = "who";
+    var msr = "dsc";
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
-    var ga = Number($("#weekslider_dsc").data().from);
+    var ga = 40;
+    var dsc_select = document.getElementById("chartgrp_dsc").value;
+    if (dsc_select == "whopreterm") ga = Number($("#weekslider_dsc").data().from);
     document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
 
@@ -41,19 +43,24 @@ function update() {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
     sr('etnicity', 'block');
-    sr('weekmenu_dsc', 'none');
   }
   if (chartgrp == 'preterm') {
     sr('agegrp_1-21y', 'none');
     sr('weekmenu', 'block');
     sr('etnicity', 'none');
-    sr('weekmenu_dsc', 'block');
   }
-  if (chartgrp == 'who') {
+  if (chartgrp == 'who' & active == 'groei') {
     sr('agegrp_1-21y', 'none');
     sr('weekmenu', 'none');
     sr('etnicity', 'none');
   }
+  if (active == 'ontwikkeling' & ga == '40') {
+    sr('weekmenu_dsc', 'none');
+  }
+  if (active == 'ontwikkeling' & ga != '40') {
+    sr('weekmenu_dsc', 'block');
+  }
+
   if (agegrp == '0-15m' & chartgrp == 'nl2010' & population == 'nl') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'block');
@@ -90,7 +97,7 @@ function update() {
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
-  if (agegrp == '0-15m' & chartgrp == 'who') {
+  if (active == 'groei' & agegrp == '0-15m' & chartgrp == 'who') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'block');
     sr('msr_wfh', 'none');
@@ -135,7 +142,7 @@ function update() {
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
-  if (agegrp == '0-4y' & chartgrp == 'who') {
+  if (active == 'groei' & agegrp == '0-4y' & chartgrp == 'who') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'none');
     sr('msr_wfh', 'block');

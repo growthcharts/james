@@ -21,11 +21,10 @@ const slider_values = {
   "0_29": ["0w","3m","6m","14m","24m","48m","10y","18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]};
 
-// starting defaults
+// starting defaults for initialisation per child
 var slider_list = "0_2";
 var chartcode = "NJAH";
-
-// Set donordata entry
+var active = "groei";
 document.getElementById("donordata").value = "0-2";
 
 // Fire up sliders
@@ -76,8 +75,6 @@ $("#weekslider_dsc").ionRangeSlider({
 });
 
 // set active accordion page
-var active = "groei";
-
 $('#groei').click(function (){
         if (active != "groei"){
           active = "groei";
@@ -152,10 +149,12 @@ if (user_txt || user_session) selector = "data";
 if (user_chartcode) selector = "chartcode";
 
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || user_session || user_chartcode) initialize_chart_controls();
-
+if (user_txt || user_session || user_chartcode) {
+  initialize_chart_controls();
+  } else {
 // no user arguments: update visibility, draw chart
-else update();
+  update();
+}
 
 function initialize_chart_controls() {
   // function executes at initialization
@@ -195,22 +194,27 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp").value = String(output.chartgrp);
     document.forms.agegrp[String(output.agegrp)].checked=true;
 
-    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
+    // Set UI for D-score
     if (String(output.agegrp) !== "1-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
-
     // there is no msr for dsc anymore.
     if (String(output.side) !== "dsc") {document.forms.msr[String(output.side)].checked=true;}
 
-    // set week slider
+    document.getElementById("chartgrp_dsc").value = "who";
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
-    if (week && weeknum >= 25 && weeknum <= 36)
+    if (week && weeknum >= 25 && weeknum <= 36) {
+      document.getElementById("chartgrp_dsc").value = "whopreterm";
+    }
+
+    // set week slider for both growth and development
+    if (week && weeknum >= 25 && weeknum <= 36) {
       $("#weekslider").data("ionRangeSlider").update({
         from: week
       });
       $("#weekslider_dsc").data("ionRangeSlider").update({
         from: week
       });
+    }
 
     // set etnicity
     var pop = String(output.population).toLowerCase();

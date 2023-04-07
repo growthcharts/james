@@ -124,15 +124,15 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.17.1",
+      "Version": "0.17.2",
       "Source": "GitHub",
+      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "bdsreader",
-      "RemoteRef": "master",
-      "RemoteSha": "486bfdea81b821101a95938aa26d945cf00a2ed5",
-      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "10d8cbcc917a760416b7fefc0c4ed1c3bc93be01",
       "Requirements": [
         "R",
         "centile",
@@ -146,7 +146,7 @@
         "rlang",
         "tidyr"
       ],
-      "Hash": "63197a719659683d7b9c77cacdae9c7a"
+      "Hash": "09d61d4065252d52ecfa26f818d4e116"
     },
     "bit": {
       "Package": "bit",
@@ -276,7 +276,7 @@
     },
     "chartbox": {
       "Package": "chartbox",
-      "Version": "1.13.0",
+      "Version": "1.15.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/chartcatalog",
       "RemoteType": "github",
@@ -284,32 +284,32 @@
       "RemoteRepo": "chartbox",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "c91a27baf29f8156a68d02e3037a8fa7f446fe7b",
+      "RemoteSha": "8bac2efe7cdc02d978bdad596f6dd304b88dafc1",
       "Requirements": [
         "R",
         "chartcatalog",
         "grDevices"
       ],
-      "Hash": "611bf8b3ee51c4f8376e20a420a48d5d"
+      "Hash": "6e27da8b09b7f4413d6c3056e4e27daa"
     },
     "chartcatalog": {
       "Package": "chartcatalog",
-      "Version": "1.10.0",
+      "Version": "1.13.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "chartcatalog",
-      "RemoteRef": "master",
-      "RemoteSha": "0db82b374aebdaa335b60bd021ab1f81b8560186",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "3ad972df42b3385a78b0a1bf91f2048969698edd",
       "Requirements": [
         "R"
       ],
-      "Hash": "f7741a5574f3abe9b6f2ea84301ed136"
+      "Hash": "2c01802ccd45ec4a2572b68dbd31cd55"
     },
     "chartplotter": {
       "Package": "chartplotter",
-      "Version": "0.31.1",
+      "Version": "0.31.2",
       "Source": "GitHub",
       "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/curvematching, growthcharts/jamesdemodata, growthcharts/nlreferences, growthcharts/donorloader",
       "RemoteType": "github",
@@ -317,7 +317,7 @@
       "RemoteRepo": "chartplotter",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "6c733c075085f231d66fc927d23662b100f335f8",
+      "RemoteSha": "a385ccb95757c0c9ed84e701e076b3061318a2d3",
       "Requirements": [
         "R",
         "brokenstick",
@@ -335,7 +335,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "2a65c7b6b4faf6a2750a237f77a683f1"
+      "Hash": "1227b55b54c2b0917ffd5de5c0044231"
     },
     "cli": {
       "Package": "cli",
@@ -475,15 +475,15 @@
     },
     "donorloader": {
       "Package": "donorloader",
-      "Version": "0.34.0",
+      "Version": "0.35.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "donorloader",
-      "RemoteRef": "master",
-      "RemoteSha": "77bc8b0fd4c5c402953370ed5f1fbc0cd66a26aa",
-      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "b88fae50c351cce0c21b1f5b875e3dccbe77a22b",
       "Requirements": [
         "R",
         "bdsreader",
@@ -492,7 +492,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "2e130d5778845a4809711e26b54af47a"
+      "Hash": "867dbc6aea63117135558858037f6286"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -519,9 +519,14 @@
     },
     "dscore": {
       "Package": "dscore",
-      "Version": "1.8.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "1.8.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "dscore",
+      "RemoteUsername": "d-score",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "97264c021d945c9a2501af6bc4504c8a4b50b36f",
       "Requirements": [
         "R",
         "Rcpp",
@@ -532,7 +537,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "679dc4339f48c9c2326c961e87338be0"
+      "Hash": "4483de88194cbe6457d8ba907d08815a"
     },
     "ellipsis": {
       "Package": "ellipsis",
@@ -1157,14 +1162,14 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.7.3",
+      "Version": "1.7.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "ebaacc87f539b1100e285e9e5d6496ad"
+      "Hash": "d88be14c6790aa6fd7b27a2079a45a85"
     },
     "purrr": {
       "Package": "purrr",
