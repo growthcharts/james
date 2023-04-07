@@ -32,7 +32,6 @@ Imports:
     rlang,
     utils
 Suggests: 
-    credentials,
     jamesdemodata (>= 0.7.1),
     openssl,
     rmarkdown,
