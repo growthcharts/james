@@ -61,8 +61,19 @@ draw_multichart <- function(txt = "",
     target = tgt,
     chartcode = chartcode,
     ...)
-  if (draw_grob) grid.draw(g)
+  if (draw_grob) print(g)
   invisible(g)
 }
 
-process_multichart <- function(target, chartcode, ...){}
+process_multichart <- function(target, chartcode, ...){
+
+  x <- c(1:15)
+  y <- c(10, 20, NA, 15, 10, 5, 15, NA, 20, 10, 10, 15, 25, 20, 10)
+
+  data <- data.frame(x, y)
+
+  fig <- plot_ly(data, x = ~x, y = ~y, name = "Gaps", type = 'scatter', mode = 'lines')
+  fig <- fig %>%
+    add_trace(y = ~y - 5, name = "<b>No</b> Gaps", connectgaps = TRUE)
+  fig
+}

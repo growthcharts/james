@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html>
-
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="#" />
-  <link rel="stylesheet" type="text/css" href="app/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="app/css/ion.rangeSlider.min.css" />
-  <link rel="stylesheet" type="text/css" href="app/css/main.css" />
-  <script type="text/javascript" src="app/js/jquery-3.5.1.min.js"></script>
-  <script type="text/javascript" src="app/js/popper.min.js"></script>
-  <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="app/js/ion.rangeSlider.min.js"></script>
-  <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
-  <script type="text/javascript" src="app/js/update.js"></script>
+  <link href="#" rel="shortcut icon" />
+  <link href="app/lib/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+  <link href="app/lib/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+  <link href="app/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="app/css/ion.rangeSlider.min.css" rel="stylesheet" />
+  <link href="app/css/main.css" rel="stylesheet" />
+  <script src="app/lib/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+  <script src="app/lib/plotly-binding-4.10.1/plotly.js"></script>
+  <script src="app/lib/typedarray-0.1/typedarray.min.js"></script>
+  <script src="app/js/jquery-3.5.1.min.js"></script>
+  <script src="app/lib/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <script src="app/lib/plotly-main-2.11.1/plotly-latest.min.js"></script>
+  <script src="app/js/popper.min.js"></script>
+  <script src="app/js/bootstrap.min.js"></script>
+  <script src="app/js/ion.rangeSlider.min.js"></script>
+  <script src="app/js/opencpu-0.5-james-0.1.js"></script>
+  <script src="app/js/update.js"></script>
 </head>
 
 <body>
@@ -25,6 +30,7 @@
 
         <br>
         <div id="accordion">
+
           <!-- Groei card  -->
           <div class="card" id = "groeicard">
             <div class="card-header">
@@ -63,6 +69,16 @@
                   <div id="msr_front"><input type="radio" name="msr" id="front" value="front"> - A -<br></div>
                   <div id="msr_back"><input type="radio" name="msr" id="back" value="back"> - B -<br></div>
                 <br>
+
+                </form>
+                <form class="hide" action="" name="mul">
+                  <strong>Maat</strong><br>
+                  <input type="checkbox" id="mul1" name="mul1" value="hgt"> Lengte<br>
+                  <input type="checkbox" id="mul2" name="mul2" value="wgt"> Gewicht - Leeftijd<br>
+                  <input type="checkbox" id="mul3" name="mul3" value="wfh"> Gewicht - Lengte<br>
+                  <input type="checkbox" id="mul4" name="mul4" value="hdc"> Hoofdomtrek<br>
+                  <input type="checkbox" id="mul5" name="mul5" value="bmi"> BMI<br>
+                  <input type="checkbox" id="mul6" name="mul6" value="dsc"> D-score<br><br>
                 </form>
 
                 <div class="form-group" id="weekmenu">
@@ -84,6 +100,13 @@
                   <strong>Geslacht</strong><br>
                   <input type="radio" name="sex" id="male" value="male" checked="checked"> Jongen<br>
                   <input type="radio" name="sex" id="female" value="female"> Meisje<br>
+                  <br>
+                </form>
+
+                <form action="" id="scale">
+                  <strong>Schaal</strong><br>
+                  <input type="radio" name="scale" id="scale_raw" value="raw" checked="checked"> Meting<br>
+                  <input type="radio" name="scale" id="scale_sds" value="sds"> SDS<br>
                   <br>
                 </form>
 
@@ -136,6 +159,7 @@
               </div>
             </div>
           </div>
+
           <!-- Voorspeller card  -->
           <div class="card">
             <div class="card-header">
@@ -216,7 +240,7 @@
                 <strong onclick="showTextdiv()">Meldingen</strong>
               </a>
             </div>
-            <div id="collapseFour" class="collapse" data-parent="#accordion">
+            <div id="collapseFive" class="collapse" data-parent="#accordion">
               <div class="card-body">
               <form action="" name="messagegrp">
                   <strong>Berichtklasse</strong><br>
@@ -229,7 +253,7 @@
               </div>
             </div>
           </div>
-          </div>  <!-- end accordion -->
+        </div>  <!-- end accordion -->
 
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">

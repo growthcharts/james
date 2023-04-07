@@ -24,6 +24,7 @@ function update() {
   }
 
   var sex = document.querySelector('input[name="sex"]:checked').value;
+  var scale = document.querySelector('input[name="scale"]:checked').value;
   var cm = document.getElementById("interpolation").checked;
   var dnr = document.getElementById("donordata").value;
   var lo = $("#visitslider").data().from;
@@ -39,6 +40,14 @@ function update() {
   var nmatch = slider_values[["matches"]][match];
 
   // set active UI elements
+  if (scale == 'raw') {
+    sr('msr', 'block');
+    sr('mul', 'none');
+  } else {
+    sr('msr', 'none');
+    sr('mul', 'block');
+  }
+
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');

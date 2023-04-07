@@ -83,3 +83,6 @@ h3 {
 .irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before {
     border-top-color: #18BC9C;
 }
+
+.hide{display:none!important}
+.show{display:block!important}

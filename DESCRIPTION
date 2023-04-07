@@ -29,6 +29,7 @@ Imports:
     jamesclient (>= 0.31.0),
     jose,
     jsonlite,
+    plotly,
     rlang,
     utils
 Suggests: 

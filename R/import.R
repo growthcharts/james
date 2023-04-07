@@ -16,6 +16,7 @@
 #' @importFrom jsonlite        fromJSON minify toJSON unbox validate
 #' @importFrom jose            jwt_decode_sig
 #' @importFrom rlang           .data
+#' @importFrom plotly          add_trace plot_ly
 #' @importFrom svglite         svgstring
 #' @importFrom utils           hasName packageDate packageVersion
 NULL
