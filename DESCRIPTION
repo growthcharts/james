@@ -32,9 +32,10 @@ Imports:
     rlang,
     utils
 Suggests: 
-    rmarkdown,
+    credentials,
     jamesdemodata (>= 0.7.1),
     openssl,
+    rmarkdown,
     testthat,
     usethis
 Remotes: 
