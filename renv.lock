@@ -475,15 +475,15 @@
     },
     "donorloader": {
       "Package": "donorloader",
-      "Version": "0.34.0",
+      "Version": "0.35.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "donorloader",
-      "RemoteRef": "master",
-      "RemoteSha": "77bc8b0fd4c5c402953370ed5f1fbc0cd66a26aa",
-      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "b88fae50c351cce0c21b1f5b875e3dccbe77a22b",
       "Requirements": [
         "R",
         "bdsreader",
@@ -492,7 +492,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "2e130d5778845a4809711e26b54af47a"
+      "Hash": "867dbc6aea63117135558858037f6286"
     },
     "dplyr": {
       "Package": "dplyr",
