@@ -8,6 +8,7 @@ draw_chart(
   txt = "",
   session = "",
   format = "1.0",
+  scale = c("raw", "sds"),
   chartcode = "",
   selector = c("data", "derive", "chartcode"),
   chartgrp = NULL,
@@ -46,6 +47,8 @@ and are converted to JSON according to \code{schema}.}
 three schemas supported: \code{"1.0"}, \code{"1.1"} and \code{"2.0"}. Formats \code{"1.0"} and
 \code{"1.1"} are included for backward compatibility only. Use \code{format = "2.0"}
 for new applications.}
+
+\item{scale}{Either \code{"raw"} or \code{"sds"}}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

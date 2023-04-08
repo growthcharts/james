@@ -41,14 +41,15 @@ function update() {
 
   // set active UI elements
 
-  if (scale == 'raw') {
-    sr('msr', 'block');
-    sr('mul', 'none');
-  }
-  if (scale == "sds") {
-    sr('msr', 'none');
-    sr('mul', 'block');
-  }
+  //if (scale == 'raw') {
+  //  sr('msr', 'block');
+  //  sr('mul', 'none');
+  //}
+  //if (scale == "sds") {
+  //  sr('msr', 'none');
+  //  sr('mul', 'block');
+  // }
+
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
@@ -189,9 +190,11 @@ function update() {
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   // trigger chart drawing
-  var rq2 = $("#plotdiv").rplot("draw_chart", {
+  var thediv = ifelse(scale == "raw", "#plotdiv", "#plotlydiv")
+  var rq2 = $(thediv).rplot("draw_chart", {
       txt      : utxt,
       session  : uses,
+      scale    : scale,
       chartcode: ucode,
       selector : selector,
       chartgrp : chartgrp,
@@ -216,6 +219,20 @@ function update() {
   rq2.fail(function() {
     alert("Server error (rq2 - draw_chart): " + rq2.responseText);
   });
+
+  // some show-hide logic
+  if (scale == 'raw') {
+    sr('msr', 'block');
+    sr('mul', 'none');
+    sr('plotdiv', 'block');
+    sr('plotlydiv', 'none');
+  }
+  if (scale == "sds") {
+    sr('msr', 'none');
+    sr('mul', 'block');
+    sr('plotdiv', 'none');
+    sr('plotlydiv', 'block');
+  }
 }
 
 function sr(id, display) {
