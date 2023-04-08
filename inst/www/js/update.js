@@ -240,3 +240,21 @@ function sr(id, display) {
   // set UI element display
   document.getElementById(id).style.display = display;
 }
+
+$(function(){
+  $("#sdssubmit").click(function(e){
+    e.preventDefault();
+    var btn = $(this).attr("disabled", "disabled");
+    var req = ocpu.call("make_sds_chart", {
+      title : $("#mytitle").val(),
+      lat: $("#mylat").val(),
+      lng: $("#mylng").val()
+    }, function(session){
+      $("iframe").attr('src', session.getFileURL("mychart.html"));
+    }).fail(function(text){
+      alert("Error: " + req.responseText);
+    }).always(function(){
+      btn.removeAttr("disabled");
+    });
+  });
+});

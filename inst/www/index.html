@@ -115,6 +115,7 @@
 
                 <input type="checkbox" id="interpolation" checked='true' onchange="update()">
                 Curve interpolation<br>
+                <button type="submit" id="sdssubmit" class="btn btn-default">Update SDS!</button>
               </div>
             </div>
           </div>
@@ -259,6 +260,7 @@
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotdiv"></div>
         <div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="plotlydiv" style="width:100%;height:400px;display:none;"></div>
+        <iframe src="about:blank"></iframe>
         <div id="textdiv" style="display: none;">
           <p id="session"></p>
           <p id="console" style="white-space: pre-wrap;"></p>

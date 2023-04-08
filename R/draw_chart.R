@@ -11,7 +11,6 @@
 #' @inheritParams select_chart
 #' @inheritParams chartplotter::process_chart
 #' @inheritParams bdsreader::read_bds
-#' @param scale Either `"raw"` or `"sds"`
 #' @param session OpenCPU session key with the uploaded data
 #' @param dnr Donor data, Prediction horizon: `"0-2"`, `"2-4"`
 #' or `"4-18"`. May also be `"smocc"`, `"lollypop"`,
@@ -53,7 +52,6 @@
 draw_chart <- function(txt = "",
                        session = "",
                        format = "1.0",
-                       scale = c("raw", "sds"),
                        chartcode = "",
                        selector = c("data", "derive", "chartcode"),
                        chartgrp = NULL,
@@ -99,7 +97,6 @@ draw_chart <- function(txt = "",
     session <- loc2session(loc)
   }
 
-  scale <- match.arg(scale)
   selector <- match.arg(selector)
   dnr <- match.arg(dnr,
                    choices = c(
@@ -147,38 +144,21 @@ draw_chart <- function(txt = "",
   period <- convert_str_age(c(lo, hi))
 
   # there we go..
-  if (scale == "raw") {
-    g <- process_chart(
-      target = tgt,
-      chartcode = chartcode,
-      curve_interpolation = curve_interpolation,
-      quiet = quiet,
-      dnr = dnr,
-      period = period,
-      nmatch = nmatch,
-      exact_sex = exact_sex,
-      exact_ga = exact_ga,
-      break_ties = break_ties,
-      show_realized = show_realized,
-      show_future = show_future,
-      ...
-    )
-    if (draw_grob) grid.draw(g)
-    invisible(g)
-  }
-
-  if (scale == "sds") {
-    trace_0 <- stats::rnorm(100, mean = 5)
-    trace_1 <- stats::rnorm(100, mean = 0)
-    trace_2 <- stats::rnorm(100, mean = -5)
-    x <- c(1:100)
-
-    data <- data.frame(x, trace_0, trace_1, trace_2)
-
-    fig <- plot_ly(data, x = ~x, y = ~trace_0, name = 'trace 0', type = 'scatter', mode = 'lines')
-    fig <- fig %>% add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers')
-    fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
-
-    fig
-  }
+  g <- process_chart(
+    target = tgt,
+    chartcode = chartcode,
+    curve_interpolation = curve_interpolation,
+    quiet = quiet,
+    dnr = dnr,
+    period = period,
+    nmatch = nmatch,
+    exact_sex = exact_sex,
+    exact_ga = exact_ga,
+    break_ties = break_ties,
+    show_realized = show_realized,
+    show_future = show_future,
+    ...
+  )
+  if (draw_grob) grid.draw(g)
+  invisible(g)
 }
