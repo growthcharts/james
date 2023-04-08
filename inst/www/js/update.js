@@ -41,14 +41,14 @@ function update() {
 
   // set active UI elements
 
-  //if (scale == 'raw') {
-  //  sr('msr', 'block');
-  //  sr('mul', 'none');
-  //} else {
-  //  sr('msr', 'none');
-  //  sr('mul', 'block');
-  //}
-
+  if (scale == 'raw') {
+    sr('msr', 'block');
+    sr('mul', 'none');
+  }
+  if (scale == "sds") {
+    sr('msr', 'none');
+    sr('mul', 'block');
+  }
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
