@@ -190,7 +190,8 @@ function update() {
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
   // trigger chart drawing
-  var thediv = ifelse(scale == "raw", "#plotdiv", "#plotlydiv")
+  var thediv = "#plotdiv";
+  if (scale == "sds") thediv = "plotlydiv";
   var rq2 = $(thediv).rplot("draw_chart", {
       txt      : utxt,
       session  : uses,
