@@ -195,7 +195,6 @@ function update() {
   var rq2 = $(thediv).rplot("draw_chart", {
       txt      : utxt,
       session  : uses,
-      scale    : scale,
       chartcode: ucode,
       selector : selector,
       chartgrp : chartgrp,
@@ -246,9 +245,9 @@ $(function(){
     e.preventDefault();
     var btn = $(this).attr("disabled", "disabled");
     var req = ocpu.call("make_sds_chart", {
-      title : $("#mytitle").val(),
-      lat: $("#mylat").val(),
-      lng: $("#mylng").val()
+      title : 'Place title here',
+      lat: 0,
+      lng: 0
     }, function(session){
       $("iframe").attr('src', session.getFileURL("mychart.html"));
     }).fail(function(text){
