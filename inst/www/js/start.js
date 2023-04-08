@@ -124,6 +124,13 @@ var radios = document.forms.sex.elements.sex;
   };
 }
 
+var radios = document.forms.scale.elements.scale;
+  for(var i = 0, max = radios.length; i < max; i++) {
+    radios[i].onclick = function() {
+      update();
+  };
+}
+
 var radios = document.forms.agegrp_dsc.elements.agegrp_dsc;
 for(var i = 0, max = radios.length; i < max; i++) {
   radios[i].onclick = function() {
