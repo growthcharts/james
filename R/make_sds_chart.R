@@ -16,5 +16,6 @@ make_sds_chart <- function(title = "This is a test", lat = NULL, lng = NULL) {
   fig <- fig %>% add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers')
   fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
 
-  htmlwidgets::saveWidget(fig, "mychart.html", selfcontained = FALSE)
+  fig <- plotly::partial_bundle(fig)
+  htmlwidgets::saveWidget(fig, "mychart.html", selfcontained = TRUE)
 }

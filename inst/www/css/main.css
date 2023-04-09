@@ -42,11 +42,11 @@ h3 {
 
 iframe {
   border: 0;
-  position: relative;
+  position: absolute;
   left: 0px;
   top: 0px;
-  width: 785px;
-  height: 100%;
+  width: 800px;
+  height: 800px;
   z-index: -999;
 }
 
