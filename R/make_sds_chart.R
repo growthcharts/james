@@ -8,7 +8,7 @@ make_sds_chart <- function(title = "SDS plot") {
   trace_1 <- stats::rnorm(100, mean = 0)
   x <- c(1:100)
 
-  data <- data.frame(x, trace_0, trace_1, trace_2)
+  data <- data.frame(x, trace_0, trace_1)
 
   fig <- plot_ly(data, x = ~x, y = ~trace_0, name = 'trace 0',
                  type = 'scatter', mode = 'lines')
