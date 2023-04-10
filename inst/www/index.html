@@ -3,17 +3,10 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="#" rel="shortcut icon" />
-  <link href="app/lib/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-  <link href="app/lib/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
   <link href="app/css/bootstrap.min.css" rel="stylesheet" />
   <link href="app/css/ion.rangeSlider.min.css" rel="stylesheet" />
   <link href="app/css/main.css" rel="stylesheet" />
-  <script src="app/lib/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-  <script src="app/lib/plotly-binding-4.10.1/plotly.js"></script>
-  <script src="app/lib/typedarray-0.1/typedarray.min.js"></script>
   <script src="app/js/jquery-3.5.1.min.js"></script>
-  <script src="app/lib/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-  <script src="app/lib/plotly-main-2.11.1/plotly-latest.min.js"></script>
   <script src="app/js/popper.min.js"></script>
   <script src="app/js/bootstrap.min.js"></script>
   <script src="app/js/ion.rangeSlider.min.js"></script>
@@ -259,8 +252,7 @@
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotdiv"></div>
-        <div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="plotlydiv" style="width:100%;height:400px;display:none;"></div>
-        <iframe src="about:blank" scrolling="no" seamless="seamless" frameborder="0"></iframe>
+        <iframe src="about:blank" id = "sdsframe" scrolling="no" seamless="seamless" frameborder="0" style="display:none"></iframe>
         <div id="textdiv" style="display: none;">
           <p id="session"></p>
           <p id="console" style="white-space: pre-wrap;"></p>

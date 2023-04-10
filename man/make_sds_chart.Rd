@@ -2,17 +2,15 @@
 % Please edit documentation in R/make_sds_chart.R
 \name{make_sds_chart}
 \alias{make_sds_chart}
-\title{Make SDS charts}
+\title{Make SDS chart and save as HTML widget}
 \usage{
-make_sds_chart(title = "This is a test", lat = NULL, lng = NULL)
+make_sds_chart(title = "SDS plot", background = "#F7F7F7")
 }
 \arguments{
-\item{title}{label for the marker}
+\item{title}{Widget title}
 
-\item{lat}{lattitude coordinate}
-
-\item{lng}{longintude coordinate}
+\item{background}{Widget background}
 }
 \description{
-Make SDS charts
+Save the plot as \code{sds.html} and an external library \code{lib2}
 }

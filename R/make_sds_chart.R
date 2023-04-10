@@ -1,10 +1,10 @@
-#' Make SDS charts
+#' Make SDS chart and save as HTML widget
 #'
-#' @param title label for the marker
-#' @param lat lattitude coordinate
-#' @param lng longintude coordinate
+#' Save the plot as `sds.html` and an external library `lib2`
+#' @param title Widget title
+#' @param background Widget background
 #' @export
-make_sds_chart <- function(title = "This is a test", lat = NULL, lng = NULL) {
+make_sds_chart <- function(title = "SDS plot", background = "#F7F7F7") {
   trace_0 <- stats::rnorm(100, mean = 5)
   trace_1 <- stats::rnorm(100, mean = 0)
   trace_2 <- stats::rnorm(100, mean = -5)
@@ -16,6 +16,8 @@ make_sds_chart <- function(title = "This is a test", lat = NULL, lng = NULL) {
   fig <- fig %>% add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers')
   fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
 
-  htmlwidgets::saveWidget(widget = fig, "mychart.html", selfcontained = FALSE, libdir = "lib")
-  return()
+  htmlwidgets::saveWidget(widget = fig, file = "sds.html",
+                          selfcontained = FALSE, libdir = "lib2",
+                          background = background, title = title)
+  invisible(NULL)
 }

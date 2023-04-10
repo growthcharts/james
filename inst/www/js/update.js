@@ -225,13 +225,13 @@ function update() {
     sr('msr', 'block');
     sr('mul', 'none');
     sr('plotdiv', 'block');
-    sr('plotlydiv', 'none');
+    sr('sdsframe', 'none');
   }
   if (scale == "sds") {
     sr('msr', 'none');
     sr('mul', 'block');
     sr('plotdiv', 'none');
-    sr('plotlydiv', 'block');
+    sr('sdsframe', 'block');
   }
 }
 
@@ -245,11 +245,8 @@ $(function(){
     e.preventDefault();
     var btn = $(this).attr("disabled", "disabled");
     var req = ocpu.call("make_sds_chart", {
-      title : 'Place title here',
-      lat: 0,
-      lng: 0
     }, function(session){
-      $("iframe").attr('src', session.getFileURL("mychart.html"));
+      $("iframe").attr('src', session.getFileURL("sds.html"));
     }).fail(function(text){
       alert("Error: " + req.responseText);
     }).always(function(){
