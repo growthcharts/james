@@ -39,17 +39,6 @@ function update() {
   var lo_str = slider_values[[slider_list]][lo];
   var nmatch = slider_values[["matches"]][match];
 
-  // set active UI elements
-
-  //if (scale == 'raw') {
-  //  sr('msr', 'block');
-  //  sr('mul', 'none');
-  //}
-  //if (scale == "sds") {
-  //  sr('msr', 'none');
-  //  sr('mul', 'block');
-  // }
-
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
@@ -189,10 +178,9 @@ function update() {
   if (typeof user_session !== "undefined" && user_session !== null)  uses = user_session;
   if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
 
-  // trigger chart drawing
-  var thediv = "#plotdiv";
-  if (scale == "sds") thediv = "plotlydiv";
-  var rq2 = $(thediv).rplot("draw_chart", {
+  // trigger chart drawing in Y-scale
+  if (scale == "raw") {
+  var rq2 = $(#plotdiv).rplot("draw_chart", {
       txt      : utxt,
       session  : uses,
       chartcode: ucode,
@@ -214,11 +202,24 @@ function update() {
       show_future : show_future,
       show_realized : show_realized
     }, function(session) {
-
     });
   rq2.fail(function() {
-    alert("Server error (rq2 - draw_chart): " + rq2.responseText);
+    alert("Server error rq2, draw_chart: " + rq2.responseText);
   });
+  }
+
+  //trigger chart drawing in Z-scale
+  if (scale == 'sds') {
+    var title = '';
+    var req3 = ocpu.call("make_sds_chart", {
+      title: title
+    }, function(session) {
+      $("iframe").attr('src', session.getFileURL("sds.html"));
+    }).fail(function(text) {
+      alert("Server error rq3, make_sds_chart: " + req3.responseText);
+    });
+  }
+
 
   // some show-hide logic
   if (scale == 'raw') {
@@ -239,18 +240,3 @@ function sr(id, display) {
   // set UI element display
   document.getElementById(id).style.display = display;
 }
-
-$(function(){
-  $("#sdssubmit").click(function(e){
-    e.preventDefault();
-    var btn = $(this).attr("disabled", "disabled");
-    var req = ocpu.call("make_sds_chart", {
-    }, function(session){
-      $("iframe").attr('src', session.getFileURL("sds.html"));
-    }).fail(function(text){
-      alert("Error: " + req.responseText);
-    }).always(function(){
-      btn.removeAttr("disabled");
-    });
-  });
-});
