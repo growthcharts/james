@@ -4,12 +4,10 @@
 \alias{make_sds_chart}
 \title{Make SDS chart and save as HTML widget}
 \usage{
-make_sds_chart(title = "SDS plot", background = "#F7F7F7")
+make_sds_chart(title = "SDS plot")
 }
 \arguments{
 \item{title}{Widget title}
-
-\item{background}{Widget background}
 }
 \description{
 Save the plot as \code{sds.html} and an external library \code{lib2}
