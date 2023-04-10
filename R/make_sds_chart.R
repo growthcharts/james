@@ -14,7 +14,7 @@ make_sds_chart <- function(title = "SDS plot") {
                  type = 'scatter', mode = 'lines')
   fig <- fig %>%
     add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers') %>%
-    layout(title = "Standard Deviation Scores Chart",
+    layout(title = title,
            plot_bgcolor = "rgba(0,0,0,0)",
            paper_bgcolor = "rgba(0,0,0,0)")
 
