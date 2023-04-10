@@ -180,7 +180,7 @@ function update() {
 
   // trigger chart drawing in Y-scale
   if (scale == "raw") {
-  var rq2 = $(#plotdiv).rplot("draw_chart", {
+  var rq2 = $("#plotdiv").rplot("draw_chart", {
       txt      : utxt,
       session  : uses,
       chartcode: ucode,
@@ -212,7 +212,6 @@ function update() {
   if (scale == 'sds') {
     var title = '';
     var req3 = ocpu.call("make_sds_chart", {
-      title: title
     }, function(session) {
       $("iframe").attr('src', session.getFileURL("sds.html"));
     }).fail(function(text) {
