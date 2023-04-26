@@ -810,18 +810,18 @@
     },
     "jamesdemodata": {
       "Package": "jamesdemodata",
-      "Version": "0.7.1",
+      "Version": "0.8.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "jamesdemodata",
-      "RemoteRef": "master",
-      "RemoteSha": "78689813f12d658ade335063e96be8fbbd1c7264",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "67accaf3ea8fe93052e690b3258a889cdaa97984",
       "Requirements": [
         "R"
       ],
-      "Hash": "04402ca1e2eef15670ed20bfbd74d58f"
+      "Hash": "b313fa84211c4c1433d1ddc105684f5a"
     },
     "jose": {
       "Package": "jose",

@@ -1,4 +1,8 @@
+# james 0.64.0
 
+## Two major enhancements
+
+- Adds support for JSON schema V3.0 by updating to `bdsreader 0.18.0`
 - Replaces Dutch D-score charts by GSED Phase 1 references and charts
 
 # james 0.63.0
