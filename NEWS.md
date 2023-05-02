@@ -1,3 +1,7 @@
+# james 0.65.0
+
+- Repairs some error in the JSON schema V2.0 and V3.0 by an update to `bdsreader 0.19.0`
+
 # james 0.64.0
 
 ## Two major enhancements
