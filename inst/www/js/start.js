@@ -201,9 +201,6 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp_dsc").value = "who";
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
-    if (week && weeknum >= 25 && weeknum <= 36) {
-      document.getElementById("chartgrp_dsc").value = "whopreterm";
-    }
 
     // set week slider for both growth and development
     if (week && weeknum >= 25 && weeknum <= 36) {

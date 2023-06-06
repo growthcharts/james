@@ -13,8 +13,7 @@
 #' maximum age found in the data.
 #' @aliases select_chart
 #' @param target A list with elements `psn` (persondata) and `xyz` (timedata).
-#' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'`
-#' `'whopreterm'` or `character(0)`
+#' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'` or `character(0)`
 #' @param agegrp Either `'0-15m'`, `'0-4y'`, `'1-21y'`,
 #'   `'0-21y'` or `'0-4ya'`. Age group `'0-4ya'`
 #'   provides the 0-4 chart with weight for age (design E).
