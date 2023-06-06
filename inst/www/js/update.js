@@ -13,13 +13,11 @@ function update() {
     var ga = Number($("#weekslider").data().from);
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active == "ontwikkeling"){
-    var population = "nl";
-    var chartgrp = "who";
     var msr = "dsc";
+    var population = "nl";
+    var chartgrp = document.getElementById("chartgrp_dsc").value;
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
-    var ga = 40;
-    var dsc_select = document.getElementById("chartgrp_dsc").value;
-    if (dsc_select == "whopreterm") ga = Number($("#weekslider_dsc").data().from);
+    var ga = Number($("#weekslider_dsc").data().from);
     document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
 
@@ -54,10 +52,10 @@ function update() {
     sr('weekmenu', 'none');
     sr('etnicity', 'none');
   }
-  if (active == 'ontwikkeling' & ga == '40') {
+  if (chartgrp == 'who' & active == 'ontwikkeling' & ga == '40') {
     sr('weekmenu_dsc', 'none');
   }
-  if (active == 'ontwikkeling' & ga != '40') {
+  if (chartgrp == 'who' & active == 'ontwikkeling' & ga != '40') {
     sr('weekmenu_dsc', 'block');
   }
 

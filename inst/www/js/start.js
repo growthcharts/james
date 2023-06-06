@@ -24,7 +24,6 @@ const slider_values = {
 // starting defaults for initialisation per child
 var slider_list = "0_2";
 var chartcode = "NJAH";
-var active = "groei";
 document.getElementById("donordata").value = "0-2";
 
 // Fire up sliders
@@ -75,6 +74,7 @@ $("#weekslider_dsc").ionRangeSlider({
 });
 
 // set active accordion page
+var active = "groei";
 $('#groei').click(function (){
         if (active != "groei"){
           active = "groei";
@@ -149,12 +149,10 @@ if (user_txt || user_session) selector = "data";
 if (user_chartcode) selector = "chartcode";
 
 // calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || user_session || user_chartcode) {
-  initialize_chart_controls();
-  } else {
+if (user_txt || user_session || user_chartcode) initialize_chart_controls();
 // no user arguments: update visibility, draw chart
-  update();
-}
+else update();
+
 
 function initialize_chart_controls() {
   // function executes at initialization
@@ -194,7 +192,8 @@ function initialize_chart_controls() {
     document.getElementById("chartgrp").value = String(output.chartgrp);
     document.forms.agegrp[String(output.agegrp)].checked=true;
 
-    // Set UI for D-score
+
+    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
     if (String(output.agegrp) !== "1-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
     // there is no msr for dsc anymore.
     if (String(output.side) !== "dsc") {document.forms.msr[String(output.side)].checked=true;}
