@@ -11,7 +11,10 @@ const pathname = window.location.pathname.slice(0,-5);
 
 // This path is used by javascript calls into OpenCPU
 // Use double // to support CORS
-ocpu.seturl('//' + hostname + pathname + '/ocpu/library/james/R');
+// ocpu.seturl('//' + hostname + pathname + '/ocpu/library/james/R');
+
+//default, use for apps
+ocpu.seturl("../R")
 
 // internal constants
 const slider_values = {
