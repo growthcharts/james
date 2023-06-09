@@ -1,5 +1,5 @@
 // start.js
-
+const localapp = true;
 const urlParams = new URLSearchParams(window.location.search);
 const user_txt = urlParams.get('txt');
 const user_session =  urlParams.get('session');
@@ -11,7 +11,12 @@ const pathname = window.location.pathname.slice(0,-5);
 
 // This path is used by javascript calls into OpenCPU
 // Use double // to support CORS
-ocpu.seturl('//' + hostname + pathname + '/ocpu/library/james/R');
+if (localapp)
+{
+  ocpu.seturl("../R");
+} else {
+  ocpu.seturl('//' + hostname + pathname + '/ocpu/library/james/R');
+}
 
 // internal constants
 const slider_values = {
