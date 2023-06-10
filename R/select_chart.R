@@ -80,7 +80,7 @@ select_side <- function(tgt) {
 select_ga <- function(tgt) {
   ga <- persondata(tgt)$ga
   if (is.na(ga)) {
-    return(NA)
+    return(40)
   }
   if (ga < 25) {
     return(25)
