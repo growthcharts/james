@@ -13,7 +13,8 @@
 #' maximum age found in the data.
 #' @aliases select_chart
 #' @param target A list with elements `psn` (persondata) and `xyz` (timedata).
-#' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'` or `character(0)`
+#' @param chartgrp  The chart group: `'nl2010'`, `'preterm'`, `'who'`, `'gsed1'`,
+#' `'gsed1pt'` or `character(0)`
 #' @param agegrp Either `'0-15m'`, `'0-4y'`, `'1-21y'`,
 #'   `'0-21y'` or `'0-4ya'`. Age group `'0-4ya'`
 #'   provides the 0-4 chart with weight for age (design E).
@@ -42,12 +43,14 @@ select_chart <- function(target = NULL,
 
   # choose defaults depending on individual
   if (!is.null(target)) {
-    if (is.null(agegrp)) agegrp <- select_agegrp(target)
-    if (is.null(chartgrp)) chartgrp <- select_chartgrp(target)
-    if (is.null(ga)) ga <- select_ga(target)
-    if (is.null(sex)) sex <- select_sex(target)
-    if (is.null(etn)) etn <- "nl"
     if (is.null(side)) side <- select_side(target)
+    if (is.null(ga)) ga <- select_ga(target)
+    if (is.null(chartgrp)) chartgrp <- select_chartgrp(target, side, ga)
+    if (is.null(agegrp)) agegrp <- select_agegrp(target)
+    if (is.null(sex)) sex <- select_sex(target)
+    # NOTE: Dutch Child Health Care always starts by comparing to Dutch references
+    # irrespective of ethnic background of child
+    if (is.null(etn)) etn <- "nl"
   }
 
   # now get the chartcode
@@ -63,14 +66,38 @@ select_chart <- function(target = NULL,
   ))
 }
 
-select_chartgrp <- function(tgt) {
-  # automatic chartgrp setting based on ga
+select_side <- function(tgt) {
+  yname <- timedata(tgt)[["yname"]]
+  if (any(c("hgt", "wgt", "hdc") %in% yname)) {
+    return("hgt")
+  }
+  if (any(c("dsc") %in% yname)) {
+    return("dsc")
+  }
+  "hgt"
+}
+
+select_ga <- function(tgt) {
   ga <- persondata(tgt)$ga
   if (is.na(ga)) {
-    return("nl2010")
+    return(NA)
+  }
+  if (ga < 25) {
+    return(25)
+  }
+  ga
+}
+
+select_chartgrp <- function(tgt, side, ga) {
+  if (is.na(ga)) {
+    return(ifelse(side == "dsc", "gsed1", "nl2010"))
+  }
+  if (side == "dsc") {
+    return(ifelse(ga <= 36, "gsed1pt", "gsed1"))
   }
   ifelse(ga <= 36, "preterm", "nl2010")
 }
+
 
 select_agegrp <- function(tgt) {
   # automatic agegrp setting based on last age
@@ -90,16 +117,6 @@ select_agegrp <- function(tgt) {
   agegrp
 }
 
-select_ga <- function(tgt) {
-  ga <- persondata(tgt)$ga
-  if (is.na(ga)) {
-    return(32)
-  }
-  if (ga < 25) {
-    return(25)
-  }
-  ga
-}
 
 select_sex <- function(tgt) {
   sex <- persondata(tgt)$sex
@@ -109,13 +126,3 @@ select_sex <- function(tgt) {
   "male"
 }
 
-select_side <- function(tgt) {
-  yname <- timedata(tgt)[["yname"]]
-  if (any(c("hgt", "wgt", "hdc") %in% yname)) {
-    return("hgt")
-  }
-  if (any(c("dsc") %in% yname)) {
-    return("dsc")
-  }
-  "hgt"
-}

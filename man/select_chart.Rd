@@ -18,7 +18,8 @@ select_chart(
 \arguments{
 \item{target}{A list with elements \code{psn} (persondata) and \code{xyz} (timedata).}
 
-\item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'} or \code{character(0)}}
+\item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}, \code{'gsed1'},
+\code{'gsed1pt'} or \code{character(0)}}
 
 \item{agegrp}{Either \code{'0-15m'}, \code{'0-4y'}, \code{'1-21y'},
 \code{'0-21y'} or \code{'0-4ya'}. Age group \code{'0-4ya'}

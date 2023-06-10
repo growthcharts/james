@@ -52,12 +52,12 @@ function update() {
     sr('weekmenu', 'none');
     sr('etnicity', 'none');
   }
-//  if (chartgrp == 'who' & active == 'ontwikkeling' & ga == '40') {
-//    sr('weekmenu_dsc', 'none');
-//  }
-//  if (chartgrp == 'who' & active == 'ontwikkeling' & ga != '40') {
-//    sr('weekmenu_dsc', 'block');
-//  }
+  if (chartgrp == 'gsed1') {
+    sr('weekmenu_dsc', 'none');
+  }
+  if (chartgrp == 'gsed1pt') {
+    sr('weekmenu_dsc', 'block');
+  }
 
   if (agegrp == '0-15m' & chartgrp == 'nl2010' & population == 'nl') {
     sr('msr_hgt', 'block');
@@ -95,7 +95,7 @@ function update() {
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
-  if (active == 'groei' & agegrp == '0-15m' & chartgrp == 'who') {
+  if (agegrp == '0-15m' & chartgrp == 'who') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'block');
     sr('msr_wfh', 'none');
@@ -140,7 +140,7 @@ function update() {
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
-  if (active == 'groei' & agegrp == '0-4y' & chartgrp == 'who') {
+  if (agegrp == '0-4y' & chartgrp == 'who') {
     sr('msr_hgt', 'block');
     sr('msr_wgt', 'none');
     sr('msr_wfh', 'block');

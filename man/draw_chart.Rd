@@ -67,7 +67,8 @@ the \code{selector} setting. If no valid \code{tgt} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
-\item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'} or \code{character(0)}}
+\item{chartgrp}{The chart group: \code{'nl2010'}, \code{'preterm'}, \code{'who'}, \code{'gsed1'},
+\code{'gsed1pt'} or \code{character(0)}}
 
 \item{agegrp}{Either \code{'0-15m'}, \code{'0-4y'}, \code{'1-21y'},
 \code{'0-21y'} or \code{'0-4ya'}. Age group \code{'0-4ya'}

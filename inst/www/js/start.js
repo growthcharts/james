@@ -194,16 +194,15 @@ function initialize_chart_controls() {
     showCards(String(output.accordion));
 
     // set UI elements according to return vector
-    document.getElementById("chartgrp").value = String(output.chartgrp);
+    if (String(output.side) === "dsc") {
+      document.getElementById("chartgrp_dsc").value = String(output.chartgrp);
+    } else {
+      document.getElementById("chartgrp").value = String(output.chartgrp);
+      document.forms.msr[String(output.side)].checked=true;
+    }
     document.forms.agegrp[String(output.agegrp)].checked=true;
-
-
-    if (String(output.chartgrp) !== "who") {document.getElementById("chartgrp_dsc").value = String(output.chartgrp);}
     if (String(output.agegrp) !== "1-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
-    // there is no msr for dsc anymore.
-    if (String(output.side) !== "dsc") {document.forms.msr[String(output.side)].checked=true;}
 
-    document.getElementById("chartgrp_dsc").value = "who";
     var week = String(output.week);
     var weeknum = Math.trunc(Number(week));
 

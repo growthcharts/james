@@ -76,7 +76,7 @@ may also have \code{"english"}.}
 Only used if \code{population == "PT"}.}
 \item{\code{chartcode}}{A string indicating the chart code.}
 \item{\code{chartgrp}}{A string indicating the chart group, either \code{"nl2010"},
-\code{"preterm"} or \code{"who"}.}
+\code{"preterm"}, \code{"who"}, \code{"gsed1"}, \code{"gsed1pt"}.}
 \item{\code{agegrp}}{A string indicating the age group, either \code{"0-15m"},
 \code{"0-4y"}, \code{"1-21y"} or \code{"0-21y"}.}
 \item{\code{dnr}}{A string indicating the donor dataset for matching, either \code{"smocc"},

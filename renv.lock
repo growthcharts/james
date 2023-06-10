@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.3",
+    "Version": "4.3.0",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -126,8 +126,8 @@
       "Package": "bdsreader",
       "Version": "0.19.0",
       "Source": "GitHub",
-      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteType": "github",
+      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
@@ -279,8 +279,8 @@
       "Package": "chartbox",
       "Version": "1.15.0",
       "Source": "GitHub",
-      "Remotes": "growthcharts/chartcatalog",
       "RemoteType": "github",
+      "Remotes": "growthcharts/chartcatalog",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartbox",
       "RemoteUsername": "growthcharts",
@@ -295,25 +295,25 @@
     },
     "chartcatalog": {
       "Package": "chartcatalog",
-      "Version": "1.13.1",
+      "Version": "1.14.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartcatalog",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "3ad972df42b3385a78b0a1bf91f2048969698edd",
+      "RemoteSha": "2965c368995d1aba5ec60876715fe0cacc2f6e66",
       "Requirements": [
         "R"
       ],
-      "Hash": "2c01802ccd45ec4a2572b68dbd31cd55"
+      "Hash": "aa77d65fe39b7b0c48945665d7965494"
     },
     "chartplotter": {
       "Package": "chartplotter",
       "Version": "0.31.2",
       "Source": "GitHub",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/curvematching, growthcharts/jamesdemodata, growthcharts/nlreferences, growthcharts/donorloader",
       "RemoteType": "github",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/curvematching, growthcharts/jamesdemodata, growthcharts/nlreferences, growthcharts/donorloader",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartplotter",
       "RemoteUsername": "growthcharts",
@@ -478,8 +478,8 @@
       "Package": "donorloader",
       "Version": "0.35.0",
       "Source": "GitHub",
-      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "RemoteType": "github",
+      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "donorloader",
       "RemoteUsername": "growthcharts",
@@ -686,8 +686,8 @@
       "Package": "growthscreener",
       "Version": "1.16.0",
       "Source": "GitHub",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteType": "github",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "growthscreener",
       "RemoteUsername": "growthcharts",
@@ -1047,8 +1047,8 @@
       "Package": "nlreferences",
       "Version": "0.15.2",
       "Source": "GitHub",
-      "Remotes": "growthcharts/centile",
       "RemoteType": "github",
+      "Remotes": "growthcharts/centile",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "nlreferences",
       "RemoteUsername": "growthcharts",

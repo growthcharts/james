@@ -31,7 +31,7 @@
 #'    Only used if `population == "PT"`.}
 #'    \item{`chartcode`}{A string indicating the chart code.}
 #'    \item{`chartgrp`}{A string indicating the chart group, either `"nl2010"`,
-#'    `"preterm"` or `"who"`.}
+#'    `"preterm"`, `"who"`, `"gsed1"`, `"gsed1pt"`.}
 #'    \item{`agegrp`}{A string indicating the age group, either `"0-15m"`,
 #'    `"0-4y"`, `"1-21y"` or `"0-21y"`.}
 #'    \item{`dnr`}{A string indicating the donor dataset for matching, either `"smocc"`,
