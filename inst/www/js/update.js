@@ -47,17 +47,17 @@ function update() {
     sr('weekmenu', 'block');
     sr('etnicity', 'none');
   }
-  if (chartgrp == 'who' & active == 'groei') {
+  if (chartgrp == 'who') {
     sr('agegrp_1-21y', 'none');
     sr('weekmenu', 'none');
     sr('etnicity', 'none');
   }
-  if (chartgrp == 'who' & active == 'ontwikkeling' & ga == '40') {
-    sr('weekmenu_dsc', 'none');
-  }
-  if (chartgrp == 'who' & active == 'ontwikkeling' & ga != '40') {
-    sr('weekmenu_dsc', 'block');
-  }
+//  if (chartgrp == 'who' & active == 'ontwikkeling' & ga == '40') {
+//    sr('weekmenu_dsc', 'none');
+//  }
+//  if (chartgrp == 'who' & active == 'ontwikkeling' & ga != '40') {
+//    sr('weekmenu_dsc', 'block');
+//  }
 
   if (agegrp == '0-15m' & chartgrp == 'nl2010' & population == 'nl') {
     sr('msr_hgt', 'block');
