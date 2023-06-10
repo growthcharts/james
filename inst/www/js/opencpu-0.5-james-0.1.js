@@ -166,7 +166,7 @@ if(!window.jQuery) {
       var key = jqxhr.getResponseHeader('X-ocpu-session') || console.log("X-ocpu-session response header missing.");
       if (localapp)
       {
-        var loc = host + ':5656/ocpu/tmp/' + key + '/';
+        var loc = host + ':80/ocpu/tmp/' + key + '/';
       } else {
         var loc = host + pathname + '/' + key + '/';
       }
