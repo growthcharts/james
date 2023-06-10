@@ -1,5 +1,5 @@
 // start.js
-const localapp = true;
+const localapp = false;
 const urlParams = new URLSearchParams(window.location.search);
 const user_txt = urlParams.get('txt');
 const user_session =  urlParams.get('session');
