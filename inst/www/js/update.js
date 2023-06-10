@@ -14,9 +14,9 @@ function update() {
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active == "ontwikkeling"){
     var msr = "dsc";
-    var population = "nl";
     var chartgrp = document.getElementById("chartgrp_dsc").value;
     var agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
+    var population = "nl";
     var ga = Number($("#weekslider_dsc").data().from);
     document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
@@ -53,6 +53,7 @@ function update() {
     sr('etnicity', 'none');
   }
   if (chartgrp == 'gsed1') {
+    ga = 40;
     sr('weekmenu_dsc', 'none');
   }
   if (chartgrp == 'gsed1pt') {
