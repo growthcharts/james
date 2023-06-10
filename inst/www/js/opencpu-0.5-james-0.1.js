@@ -360,7 +360,7 @@ if(!window.jQuery) {
         img_tag.src = img_url;
 
         // update the chartcode field
-        var url = Location + "R/.val";
+        var url = Location + "R/.val/print";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
