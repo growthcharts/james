@@ -16,7 +16,7 @@ Depends:
     R (>= 2.10),
     svglite
 Imports: 
-    bdsreader (>= 0.19.0),
+    bdsreader (>= 0.21.0),
     chartbox (>= 1.15.0),
     chartcatalog (>= 1.14.0),
     chartplotter (>= 0.31.2),
@@ -26,13 +26,13 @@ Imports:
     grid (>= 4.1.0),
     growthscreener (>= 1.16.0),
     httr,
-    jamesclient (>= 0.31.0),
+    jamesclient (>= 0.32.0),
     jose,
     jsonlite,
     rlang,
     utils
 Suggests: 
-    jamesdemodata (>= 0.8.0),
+    jamesdemodata (>= 0.10.0),
     openssl,
     rmarkdown,
     testthat,
