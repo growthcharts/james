@@ -1,3 +1,4 @@
+#' @import     credentials
 #' @import     svglite
 #' @importFrom bdsreader       read_bds persondata timedata
 #' @importFrom chartbox        list_charts
