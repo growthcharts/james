@@ -253,7 +253,7 @@ See `../notes/debug-javascript.qmd` for details.
 
 - Adds full stack of Down Syndrome charts to javascript site
 
-# james 0.37.0
+## james 0.37.0
 
 ### Major changes
 
