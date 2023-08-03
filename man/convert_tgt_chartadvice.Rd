@@ -24,9 +24,9 @@ and are converted to JSON according to \code{schema}.}
 \item{session}{OpenCPU session key with the uploaded data}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}. Formats \code{"1.0"} and
-\code{"1.1"} are included for backward compatibility only. Use \code{format = "3.0"}
-for new applications.}
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
+Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
+Use \code{format = "3.0"} for new applications.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

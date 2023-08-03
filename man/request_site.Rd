@@ -28,9 +28,9 @@ and sets \code{sitehost} to \code{"http://localhost"}.}
 on \code{sitehost}.}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}. Formats \code{"1.0"} and
-\code{"1.1"} are included for backward compatibility only. Use \code{format = "3.0"}
-for new applications.}
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
+Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
+Use \code{format = "3.0"} for new applications.}
 
 \item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
 the data in \code{txt} to \code{sitehost} and return a site address with

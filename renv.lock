@@ -52,18 +52,18 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.10",
+      "Version": "1.0.11",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods",
         "utils"
       ],
-      "Hash": "e749cae40fa9ef469b6050959517453c"
+      "Hash": "ae6cbbe1492f4de79c45fce06f967ce8"
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "0.12.4.0.0",
+      "Version": "0.12.4.1.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -73,7 +73,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "5402c9d935b45fe528538703b5edf680"
+      "Hash": "44b6ca3a6d22b4c87cdd6140e6f15245"
     },
     "RcppEigen": {
       "Package": "RcppEigen",
@@ -91,7 +91,7 @@
     },
     "V8": {
       "Package": "V8",
-      "Version": "4.3.0",
+      "Version": "4.3.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -100,7 +100,7 @@
         "jsonlite",
         "utils"
       ],
-      "Hash": "d1fa8fae6a47e88bb46d5152312bd8bd"
+      "Hash": "20d81ec18bde233d8cc3265761fe8c93"
     },
     "askpass": {
       "Package": "askpass",
@@ -124,7 +124,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.21.0",
+      "Version": "0.23.0",
       "Source": "GitHub",
       "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteType": "github",
@@ -132,22 +132,22 @@
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "f615eb20efe56076092aa3b3e655bd7a5e9b1345",
+      "RemoteSha": "af8d7a8bd896ffdf10e40b40ba883b57856cf45b",
       "Requirements": [
         "R",
         "centile",
-        "curl",
         "dplyr",
         "dscore",
         "jsonlite",
         "jsonvalidate",
         "lubridate",
         "nlreferences",
+        "readr",
         "rlang",
         "tibble",
         "tidyr"
       ],
-      "Hash": "4c1d0420f4a49ede418ea4252b03cef3"
+      "Hash": "596b67f4265172eff3ace937ca61a5d6"
     },
     "bit": {
       "Package": "bit",
@@ -372,10 +372,10 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.4.3",
+      "Version": "0.4.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ed588261931ee3be2c700d22e94a29ab"
+      "Hash": "f07821e9b0aada6c999d4692e22a2ea7"
     },
     "crayon": {
       "Package": "crayon",
@@ -846,13 +846,13 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.8.5",
+      "Version": "1.8.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods"
       ],
-      "Hash": "3ee4d9899e4db3e976fc82b98d24a31a"
+      "Hash": "266a20443ca13c65688b2116d5220f76"
     },
     "jsonvalidate": {
       "Package": "jsonvalidate",
@@ -1529,7 +1529,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.6.2",
+      "Version": "0.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1539,7 +1539,7 @@
         "lifecycle",
         "rlang"
       ],
-      "Hash": "a745bda7aff4734c17294bb41d4e4607"
+      "Hash": "d0ef2856b83dc33ea6e255caf6229ee2"
     },
     "vroom": {
       "Package": "vroom",

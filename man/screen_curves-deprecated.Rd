@@ -27,9 +27,9 @@ use \code{session} instead.}
 \item{location}{Legacy for \code{loc}}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}. Formats \code{"1.0"} and
-\code{"1.1"} are included for backward compatibility only. Use \code{format = "3.0"}
-for new applications.}
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
+Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
+Use \code{format = "3.0"} for new applications.}
 
 \item{legacy}{Logical indicating whether legacy should be done.}
 
