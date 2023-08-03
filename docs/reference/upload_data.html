@@ -22,7 +22,7 @@ cached data after 2 hours."><!-- mathjax --><script src="https://cdnjs.cloudflar
     
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.66.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.67.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,9 @@ cached data after 2 hours.</p>
 <span>  auto_format <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"1.0"</span>,</span>
 <span>  schema <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  append_ddi <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  intermediate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -94,14 +96,15 @@ cached data after 2 hours.</p>
 
 
 <dt>auto_format</dt>
-<dd><p>Logical. Should the format be read from the data? Default is <code>TRUE</code>.</p></dd>
+<dd><p>Logical. Should the format be read from the data? Default
+is <code>TRUE</code>.</p></dd>
 
 
 <dt>format</dt>
 <dd><p>String. JSON data schema version number. There are currently
-three schemas supported: <code>"1.0"</code>, <code>"1.1"</code>, <code>"2.0"</code> and <code>"3.0"</code>. Formats <code>"1.0"</code> and
-<code>"1.1"</code> are included for backward compatibility only. Use <code>format = "3.0"</code>
-for new applications.</p></dd>
+three schemas supported: <code>"1.0"</code>, <code>"1.1"</code>, <code>"2.0"</code> and <code>"3.0"</code>.
+Formats <code>"1.0"</code> and <code>"1.1"</code> are included for backward compatibility only.
+Use <code>format = "3.0"</code> for new applications.</p></dd>
 
 
 <dt>schema</dt>
@@ -112,8 +115,26 @@ version number for the basename, and overwrites the
 <code>format</code> argument by version number.</p></dd>
 
 
+<dt>validate</dt>
+<dd><p>Logical. Should the JSON-input be validated against the
+JSON-schema? The default (<code>FALSE</code>) bypasses checking. Set <code>validate = TRUE</code>
+to obtain diagnostic information from the <code><a href="https://docs.ropensci.org/jsonvalidate/reference/json_validate.html" class="external-link">jsonvalidate::json_validate()</a></code>
+function.</p></dd>
+
+
 <dt>append_ddi</dt>
-<dd><p>Should the DDI responses be appended?</p></dd>
+<dd><p>Should the DDI responses be appended? (only used for
+JSON schema V1.0 and V2.0)</p></dd>
+
+
+<dt>intermediate</dt>
+<dd><p>Logical. If <code>TRUE</code> the function writes JSON files
+with intermediate result to the working directory.</p><ol><li><p><code>data.json</code>: the JSON input data;</p></li>
+<li><p><code>bds.json</code>: a data frame with info per BDS;</p></li>
+<li><p><code>ddi.json</code>: result of recoding BDS into GSED item names;</p></li>
+<li><p><code>psn.json</code>: known fixed child covariates;</p></li>
+<li><p><code>xy.json</code>: time-varying variables.</p></li>
+</ol></dd>
 
 
 <dt>verbose</dt>

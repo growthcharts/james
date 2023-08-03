@@ -1,0 +1,20 @@
+{
+  "Format": "3.0",
+  "organisationCode": 12345,
+  "reference": "Maria's mangled data",
+  "clientMeasurements": [
+    {
+      "bdsNumber": 235,
+      "values": [
+        {
+          "date": "20181111",
+          "value": 380
+        },
+        {
+          "date": "20181211",
+          "value": 435
+        }
+      ]
+    }
+  ]
+}
