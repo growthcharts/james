@@ -9,7 +9,9 @@ upload_data(
   auto_format = TRUE,
   format = "1.0",
   schema = NULL,
+  validate = FALSE,
   append_ddi = FALSE,
+  intermediate = FALSE,
   verbose = FALSE,
   ...
 )
@@ -31,8 +33,23 @@ The \code{schema} argument overrides \code{format}. The function extracts the
 version number for the basename, and overwrites the
 \code{format} argument by version number.}
 
+\item{validate}{Logical. Should the JSON-input be validated against the
+JSON-schema? The default (\code{FALSE}) bypasses checking. Set \code{validate = TRUE}
+to obtain diagnostic information from the \code{jsonvalidate::json_validate()}
+function.}
+
 \item{append_ddi}{Should the DDI responses be appended? (only used for
 JSON schema V1.0 and V2.0)}
+
+\item{intermediate}{Logical. If \code{TRUE} the function writes JSON files
+with intermediate result to the working directory.
+\enumerate{
+\item \code{data.json}: the JSON input data;
+\item \code{bds.json}: a data frame with info per BDS;
+\item \code{ddi.json}: result of recoding BDS into GSED item names;
+\item \code{psn.json}: known fixed child covariates;
+\item \code{xy.json}: time-varying variables.
+}}
 
 \item{verbose}{Show verbose output for \code{\link[centile:y2z]{centile::y2z()}}}
 

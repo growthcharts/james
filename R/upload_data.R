@@ -28,7 +28,9 @@ upload_data <- function(txt = "",
                         auto_format = TRUE,
                         format = "1.0",
                         schema = NULL,
+                        validate = FALSE,
                         append_ddi = FALSE,
+                        intermediate = FALSE,
                         verbose = FALSE,
                         ...) {
   authenticate(...)
@@ -36,7 +38,9 @@ upload_data <- function(txt = "",
            auto_format = auto_format,
            format = format,
            schema = schema,
+           validate = validate,
            append_ddi = append_ddi,
+           intermediate = intermediate,
            verbose = verbose,
            ...)
 }
