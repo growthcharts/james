@@ -1,17 +1,14 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.5.2 (June 2023)
+subtitle: JAMES 1.5.3 (August 2023)
 author: Stef van Buuren, Arjan Huizing (TNO Child Health)
 output:
   html_document:
     number_sections: false
-    code_dowload: true
-    keep_md: true
     theme: united
 editor_options: 
   chunk_output_type: console
 ---
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include=FALSE}
@@ -364,13 +361,61 @@ If the status is 201, the data are uploaded to JAMES and processed. For example,
 r1$parsed
 ```
 
-The resources produced by JAMES results will remain available for two hours under the session key. The session key is your entrance to the resource and can be retrieved from the `james_post` class from the `session` element. For example, if we want to see the result of the last session in markdown: 
+The resources produced by JAMES results will remain available for 30 minutes under the session key. The session key is your entrance to the resource and can be retrieved from the `james_post` class from the `session` element. For example, if we want to see the result of the last session in markdown: 
 
 ```{r}
 (session <- r1$session)
 resp <- james_get(host = host, path = file.path(session, "md"))
 cat(resp$parsed, "\n")
 ```
+
+**Troubleshooting data upload**: JAMES executes basic checks on the conversion and ranges of the data. To gain efficiency, it does not automatically validate the input data against the specified JSON schema. JAMES writes diagnostic, sometimes cryptic, messages to the directory `{session}/messages` if it finds a problem. The user can rerun the data upload with two additional flags that request extra diagnostic output.
+
+Example: Suppose we compromise the data by removing the required `"clientDetails"` and the optional `"nestedDetails"` sections. The mangled input data look like:
+
+```
+{"Format":"3.0","organisationCode":12345,"reference":"Maria's mangled data","clientMeasurements":[{"bdsNumber":235,"values":[{"date":"20181111","value":380},{"date":"20181211","value":435}]}]}
+```
+
+```{r}
+fn <- "maria-mangled.json"
+r5 <- james_post(host = host, path = "data/upload/json", txt = fn)
+```
+
+The contents of `{session}/messages` contains
+
+```{r}
+mess <- james_get(host = host, path = file.path(r5$session, "messages"))
+cat(mess$parsed, "\n")
+```
+
+which signals a problem, but is hardly informative. If we upload with the `validate = TRUE` flag, JAMES runs the validation against the JSON schema:
+
+```{r}
+r6 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE)
+mess <- james_get(host = host, path = file.path(r6$session, "messages"))
+cat(mess$parsed, "\n")
+```
+
+which now indicates that the required JSON element `"clientDetails"` is missing. We drill down by setting the `intermediate = TRUE` flag. This writes five JSON files that document the data flow into `{session}/files/{*}.json`.
+
+```{r}
+r7 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE, intermediate = TRUE)
+url <- file.path(host, r7$session, "files/input.json")
+url
+```
+
+This `url` contains the child data of the request as read by JAMES. The directory contains five JSON files:
+
+1. `files/input.json`: the JSON input data;
+2. `files/bds.json`: a data frame with info per BDS number;
+3. `files/ddi.json`: result of recoding BDS into GSED item names;
+4. `files/psn.json`: known fixed child covariates;
+5. `files/xy.json`: time-varying variables.
+
+Inspection of these files may uncover any problems with JAMES's understanding of the data. For the gory details, study the underlying R source code at <https://raw.githubusercontent.com/growthcharts/bdsreader/master/R/read_bds.R>.
+
+In production, we recommend leaving `validate` and `intermediate` at their default value (`FALSE`) and monitor `{session}/messages`.
 
 ##### **bash**
 

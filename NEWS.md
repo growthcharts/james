@@ -1,3 +1,8 @@
+## james 0.67.0
+
+- Adds support for the `validate` and `intermediate` flags to `upload_data()`
+- Updates to faster and cleaner `bdsreader` 0.23.0 package
+
 ## james 0.66.0
 
 ### Solves problems with the javascript interface
