@@ -44,7 +44,7 @@ JSON schema V1.0 and V2.0)}
 \item{intermediate}{Logical. If \code{TRUE} the function writes JSON files
 with intermediate result to the working directory.
 \enumerate{
-\item \code{data.json}: the JSON input data;
+\item \code{input.json}: the JSON input data;
 \item \code{bds.json}: a data frame with info per BDS;
 \item \code{ddi.json}: result of recoding BDS into GSED item names;
 \item \code{psn.json}: known fixed child covariates;
