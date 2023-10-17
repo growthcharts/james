@@ -1,3 +1,8 @@
+## james 0.68.0
+
+- Updates all packages, includes `growthscreener 1.20.0`, which include language development guideline
+- Version meant to test and solve various implementation issues reported by K Nienhuis, okt 2023
+
 ## james 0.67.0
 
 - Adds support for the `validate` and `intermediate` flags to `upload_data()`
