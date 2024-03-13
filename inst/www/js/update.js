@@ -233,9 +233,10 @@ function update() {
     console.log("rq2 selector: " + selector);
     console.log("rq2 error: " + rq2.responseText);
   });
+}
 
-  function sr(id, display) {
+function sr(id, display) {
   // set UI element display
   document.getElementById(id).style.display = display;
-  }
 }
+
