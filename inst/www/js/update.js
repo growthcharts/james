@@ -218,6 +218,7 @@ function update() {
         //data is the object returned by the R function
         alert("Array of length " + data.length + ".\nFirst few values:" + data.slice(0,3));
     });
+  });
   rq2.fail(function() {
     alert("Server error rq2 - cannot read data for plotting\n" +
           "txt: " + utxt + "\n" +
@@ -231,7 +232,6 @@ function update() {
     console.log("rq2 selector: " + selector);
     console.log("rq2 error: " + rq2.responseText);
   });
-}
 
 function sr(id, display) {
   // set UI element display
