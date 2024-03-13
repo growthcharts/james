@@ -254,7 +254,12 @@ function initialize_chart_controls() {
     });
 });
   rq1.fail(function() {
-    alert("Server error (rq1, convert_tgt_chartadvice): " + rq1.responseText);
+    alert("Server error (rq1, convert_tgt_chartadvice): \n " +
+          "txt: " + utxt + "\n" +
+          "session: " + uses + "\n" +
+          "chartcode: " + ucode + "\n" +
+          "selector: " + selector + "\n" +
+          "error" + rq1.responseText);
   });
 }
 
