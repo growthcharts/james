@@ -27,30 +27,6 @@ convert_str_age <- function(s) {
   round(z, 4)
 }
 
-# return the (likely) base URL of the ocpu server
-get_host <- function() {
-  hostname <- system("hostname", intern = TRUE)
-  if (hostname == "opa") hostname <- "vps.stefvanbuuren.nl"
-  scheme <- ifelse(hostname == "localhost", "http:", "https:")
-  host <- paste0(scheme, "//", hostname)
-  return(host)
-}
-
-# returns url of uploaded data
-get_loc <- function(txt, host, format) {
-  resp <- james_post(host = host, path = "data/upload", txt = txt, format = format)
-  if (status_code(resp) != 201L) {
-    message_for_status(resp,
-                       task = paste0(
-                         "upload data", "\n",
-                         content(resp, "text", encoding = "utf-8")
-                       )
-    )
-    return("")
-  }
-  get_url(resp, "location")
-}
-
 # uploads data and returns session
 get_session <- function(txt, sitehost, format) {
   resp <- james_post(sitehost = sitehost, path = "data/upload", txt = txt, format = format)
