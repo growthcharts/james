@@ -5,8 +5,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 initializer <- function(selector, target, chartcode = "") {
+
+  # Fall back to NJAH if there is a problem
   if (is.empty(chartcode) || is.null(target)) {
-    return(NULL)
+    chartcode <- "NJAH"
+    selector <- "chartcode"
   }
 
   parsed <- parse_chartcode(chartcode)
