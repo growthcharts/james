@@ -102,52 +102,45 @@ request_site <- function(txt = "",
     return(modify_url(url, path = file.path(url$path, "site")))
   }
 
-  # return session query, possibly after upload of txt
+  # perform implicit upload
+  # if we have txt and no session, upload the data in txt in a separate request
+  # return the URL with site?session=...
   if (!is.empty(txt) && is.empty(session) && upload) {
     session <- get_session(txt, sitehost, format = format)
-  }
-
-  if (!is.empty(session)) {
     return(modify_url(url,
                       path = file.path(url$path, "site"),
                       query = paste0("session=", session)))
   }
 
-  # return ?txt= query parameter if we don't upload
+  # if session was specified explicitly as argument
+  # we need to check for its validity
+  # and return empty site if invalid
+  if (!is.empty(session)) {
+    data <- get_session_object(session)
+    if (is.null(data)) {
+      return(
+        modify_url(url,
+                   path = file.path(url$path, "site"))
+      )
+    } else {
+      return(
+        modify_url(url,
+                   path = file.path(url$path, "site"),
+                   query = paste0("session=", session))
+      )
+    }
+  }
+
+  # return ?txt=... query parameter if we don't upload
+  # not recommended
   if (!is.empty(txt) && !upload && validate(txt)) {
     return(modify_url(url,
                       path = file.path(url$path, "site"),
                       query = paste0("txt=", minify(txt))))
   }
 
-  # check for data url - not supported
-  # if (startsWith(txt, "http")) {
-  #   req <- curl::curl_fetch_memory(txt)
-  #   if (req$status_code != 200L) {
-  #     message("txt = ", txt, ", - status code", req$status_code, ".")
-  #     return(site)
-  #   }
-  #   js <- rawToChar(req$content)
-  #   if (!validate(js)) {
-  #     message("txt = ", txt, " - URL does not contain valid JSON.")
-  #     return(site)
-  #   }
-  #   return(paste0(site, "?txt=", minify(js)))
-  # }
-
-  # file
-  # when run as server - not supported
-  # if (file.exists(txt)) {
-  #   js <- jsonlite::toJSON(jsonlite::fromJSON(txt), auto_unbox = TRUE)
-  #   if (!validate(js)) {
-  #     message("txt = ", txt, " - File does not contain valid JSON.")
-  #     return(site)
-  #   }
-  #   return(paste0(site, "?txt=", minify(js)))
-  # }
-
   # site without data
   return(modify_url(url,
                     path = file.path(url$path, "site"))
-         )
+  )
 }

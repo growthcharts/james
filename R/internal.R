@@ -46,12 +46,12 @@ get_session <- function(txt, sitehost, format) {
 # returns targetl or NULL
 get_tgt <- function(txt = "", session = "", ...) {
 
-  # no ind
+  # no data
   if (is.empty(txt) && is.empty(session)) {
     return(NULL)
   }
 
-  # create target data on-the-fly
+  # create target data on-the-fly (without data storage)
   if (!is.empty(txt)) {
     return(read_bds(txt, ...))
   }
@@ -59,6 +59,13 @@ get_tgt <- function(txt = "", session = "", ...) {
   # download data from session
   # data <- eval(parse(text = paste0(session, ":.val")))
   data <- get_session_object(session)
+
+  # check for a tgt object
+  if (!(is.list(data) && all(c("psn", "xyz") %in% names(data)))) {
+    warning(paste("session contains no data: ", session), call. = FALSE)
+    return(NULL)
+  }
+
   return(data)
 }
 
@@ -85,7 +92,7 @@ get_session_object = function(session, object = ".val") {
     load(sessionfile, envir = sessionenv)
     return(sessionenv[[object]])
   }
-  warning("session not found: ", session)
+  warning("session not found: ", session, call. = FALSE)
   return(NULL)
 }
 
