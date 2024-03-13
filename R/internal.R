@@ -62,7 +62,7 @@ get_tgt <- function(txt = "", session = "", ...) {
 
   # check for a tgt object
   if (!(is.list(data) && all(c("psn", "xyz") %in% names(data)))) {
-    warning(paste("session contains no data: ", session), call. = FALSE)
+    warning(paste("session contains no data:", session), call. = FALSE)
     return(NULL)
   }
 

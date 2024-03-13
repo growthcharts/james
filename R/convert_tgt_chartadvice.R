@@ -72,6 +72,7 @@ convert_tgt_chartadvice <- function(txt = "",
   tgt <- get_tgt(txt = txt,
                  session = session,
                  format = format)
+  if (is.null(tgt)) chartcode <- "NJAH"
 
   selector <- match.arg(selector)
   if (chartcode != "") selector <- "chartcode"
