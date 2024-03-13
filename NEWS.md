@@ -1,3 +1,11 @@
+## james 0.68.2
+
+- Adds a check and warning if the stored OpenCPU session does not contain data created by read_bds()
+
+## james 0.68.1
+
+- Updates all packages and renv to CRAN version March 2024
+
 ## james 0.68.0
 
 - Updates all packages, includes `growthscreener 1.20.0`, which include language development guideline
