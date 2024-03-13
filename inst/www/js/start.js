@@ -137,13 +137,13 @@ for(var i = 0, max = radios.length; i < max; i++) {
 }
 
 // if user_session is specified, report any warnings and messages
-if (user_session) {
-  var warn = host + pathname + '/' + user_session + "/warnings/text";
-  var mess = host + pathname + '/' + user_session + "/messages/text";
-  $("#session").text(user_session);
-  $("#warnings").load(warn);
-  $("#messages").load(mess);
-}
+//if (user_session) {
+//  var warn = host + pathname + '/' + user_session + "/warnings/text";
+//  var mess = host + pathname + '/' + user_session + "/messages/text";
+//  $("#session").text(user_session);
+//  $("#warnings").load(warn);
+//  $("#messages").load(mess);
+//}
 
 // updating logic to select charts
 // 1. use "derive" based on user interaction
@@ -254,7 +254,7 @@ function initialize_chart_controls() {
     });
 });
   rq1.fail(function() {
-    alert("Server error rq1 - cannot read data: \n" +
+    alert("Server error rq1 - cannot read data for initialization\n" +
           "txt: " + utxt + "\n" +
           "session: " + uses + "\n" +
           "chartcode: " + ucode + "\n" +

@@ -200,10 +200,36 @@ function update() {
       show_future : show_future,
       show_realized : show_realized
     }, function(session) {
+      var rq2_key = session;
 
+    //read the session properties
+    $("#session").text(session.getKey());
+
+    //retrieve session warnings async
+    session.getWarnings(function(outtxt){
+        $("#warnings").text(outtxt);
+    });
+    //retrieve session warnings async
+    session.getMessages(function(outtxt){
+        $("#messages").text(outtxt);
+    });
+    //retrieve the returned object async
+    session.getObject(function(data){
+        //data is the object returned by the R function
+        alert("Array of length " + data.length + ".\nFirst few values:" + data.slice(0,3));
     });
   rq2.fail(function() {
-    alert("Server error (rq2 - draw_chart): " + rq2.responseText);
+    alert("Server error rq2 - cannot read data for plotting\n" +
+          "txt: " + utxt + "\n" +
+          "session: " + uses + "\n" +
+          "chartcode: " + ucode + "\n" +
+          "selector: " + selector + "\n" +
+          "error: " + rq2.responseText);
+    console.log("rq2 txt: " + utxt);
+    console.log("rq2 session: " + uses);
+    console.log("rq2 chartcode: " + ucode);
+    console.log("rq2 selector: " + selector);
+    console.log("rq2 error: " + rq2.responseText);
   });
 }
 
