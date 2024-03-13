@@ -254,17 +254,17 @@ function initialize_chart_controls() {
     });
 });
   rq1.fail(function() {
-    alert("Server error rq1 - cannot read data): \n" +
+    alert("Server error rq1 - cannot read data: \n" +
           "txt: " + utxt + "\n" +
           "session: " + uses + "\n" +
           "chartcode: " + ucode + "\n" +
           "selector: " + selector + "\n" +
           "error: " + rq1.responseText);
-    console.log(utxt);
-    console.log(uses);
-    console.log(ucode);
-    console.log(selector);
-    console.log(rq1.responseText);
+    console.log("rq1 txt: " + utxt);
+    console.log("rq1 session: " + uses);
+    console.log("rq1 chartcode: " + ucode);
+    console.log("rq1 selector: " + selector);
+    console.log("rq1 error: " + rq1.responseText);
   });
 }
 
