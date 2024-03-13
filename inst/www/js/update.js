@@ -200,24 +200,17 @@ function update() {
       show_future : show_future,
       show_realized : show_realized
     }, function(session) {
-      var rq2_key = session;
-
     //read the session properties
-    $("#session").text(session.getKey());
+    $("#rq2-session").text(session.getKey());
 
     //retrieve session warnings async
     session.getWarnings(function(outtxt){
-        $("#warnings").text(outtxt);
+        $("#rq2-warnings").text(outtxt);
     });
     //retrieve session warnings async
     session.getMessages(function(outtxt){
-        $("#messages").text(outtxt);
+        $("#rq2-messages").text(outtxt);
     });
-    //retrieve the returned object async
-    session.getObject(function(data){
-        //data is the object returned by the R function
-        alert("Array of length " + data.length + ".\nFirst few values:" + data.slice(0,3));
-  });
   });
 
   rq2.fail(function() {

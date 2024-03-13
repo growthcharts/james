@@ -245,6 +245,18 @@ function initialize_chart_controls() {
       from: from,
       to: to});
 
+    //read the session properties
+    $("#rq1-session").text(session.getKey());
+
+    //retrieve session warnings async
+    session.getWarnings(function(outtxt){
+        $("#rq1-warnings").text(outtxt);
+    });
+    //retrieve session warnings async
+    session.getMessages(function(outtxt){
+        $("#rq1-messages").text(outtxt);
+    });
+
     // set UI controls and chart
     update();
 
