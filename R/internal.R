@@ -98,3 +98,12 @@ get_session_object = function(session, object = ".val") {
 
 
 is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
+
+get_max_age <- function(target) {
+  max_age <- NA_real_
+  if (!is.null(target)) {
+    x <- timedata(target)[["age"]]
+    max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
+  }
+  return(max_age)
+}
