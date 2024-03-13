@@ -5,7 +5,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 initializer <- function(selector, target, chartcode = "") {
-  if (is.empty(chartcode)) {
+  if (is.empty(chartcode) || is.null(target)) {
     return(NULL)
   }
 
