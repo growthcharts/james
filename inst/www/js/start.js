@@ -248,6 +248,10 @@ function initialize_chart_controls() {
     //read the session properties
     $("#rq1-session").text(session.getKey());
 
+    //retrieve console async
+    session.getConsole(function(outtxt){
+        $("#rq1-console").text(outtxt);
+    });
     //retrieve session warnings async
     session.getWarnings(function(outtxt){
         $("#rq1-warnings").text(outtxt);

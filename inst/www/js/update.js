@@ -203,6 +203,10 @@ function update() {
     //read the session properties
     $("#rq2-session").text(session.getKey());
 
+    //retrieve console async
+    session.getConsole(function(outtxt){
+        $("#rq2-console").text(outtxt);
+    });
     //retrieve session warnings async
     session.getWarnings(function(outtxt){
         $("#rq2-warnings").text(outtxt);
