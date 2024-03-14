@@ -202,7 +202,7 @@ function update() {
     }, function(session) {
     update_notice_panel(rq = 2, session = session);
   });
-  rq2.fail(function(jqXHR) {
+  rq2.fail(function(session) {
     alert("Server error rq2 - cannot read data for plotting\n" +
           "txt: " + utxt + "\n" +
           "session: " + uses + "\n" +
@@ -213,8 +213,9 @@ function update() {
     console.log("rq2 session: " + uses);
     console.log("rq2 chartcode: " + ucode);
     console.log("rq2 selector: " + selector);
-    console.log("rq2 error: " + jqXHR.responseText);
-    update_notice_panel(rq = 2, session = jqXHR);
+    console.log("rq2 error: " + rq2.responseText);
+    // note: the following update does not work SvB March 2024
+    update_notice_panel(rq = 2, session = session);
   });
 }
 
