@@ -245,21 +245,7 @@ function initialize_chart_controls() {
       from: from,
       to: to});
 
-    //read the session properties
-    $("#rq1-session").text(session.getKey());
-
-    //retrieve console async
-    session.getConsole(function(outtxt){
-        $("#rq1-console").text(outtxt);
-    });
-    //retrieve session warnings async
-    session.getWarnings(function(outtxt){
-        $("#rq1-warnings").text(outtxt);
-    });
-    //retrieve session warnings async
-    session.getMessages(function(outtxt){
-        $("#rq1-messages").text(outtxt);
-    });
+    update_notice_panel(rq = 1, session = session)
 
     // set UI controls and chart
     // update();
@@ -270,6 +256,7 @@ function initialize_chart_controls() {
     });
 });
   rq1.fail(function() {
+    update_notice_panel(rq = 1, session = session)
     alert("Server error rq1 - cannot read data for initialization\n" +
           "txt: " + utxt + "\n" +
           "session: " + uses + "\n" +
@@ -332,5 +319,33 @@ function showCards(show = "all") {
     sr('groeicard', 'none');
     $('#collapseTwo').collapse('show');
     active = "ontwikkeling";
+  }
+}
+
+function update_notice_panel(rq, session) {
+
+  if (rq == 1) {
+    $("#rq1-session").text(session.getKey());
+    session.getConsole(function(outtxt){
+        $("#rq1-console").text(outtxt);
+    });
+    session.getWarnings(function(outtxt){
+        $("#rq1-warnings").text(outtxt);
+    });
+    session.getMessages(function(outtxt){
+        $("#rq1-messages").text(outtxt);
+    });
+  }
+  if (rq == 2) {
+    $("#rq2-session").text(session.getKey());
+    session.getConsole(function(outtxt){
+        $("#rq2-console").text(outtxt);
+    });
+    session.getWarnings(function(outtxt){
+        $("#rq2-warnings").text(outtxt);
+    });
+    session.getMessages(function(outtxt){
+        $("#rq2-messages").text(outtxt);
+    });
   }
 }

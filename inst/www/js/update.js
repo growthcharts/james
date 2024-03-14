@@ -200,24 +200,11 @@ function update() {
       show_future : show_future,
       show_realized : show_realized
     }, function(session) {
-    //read the session properties
-    $("#rq2-session").text(session.getKey());
-
-    //retrieve console async
-    session.getConsole(function(outtxt){
-        $("#rq2-console").text(outtxt);
-    });
-    //retrieve session warnings async
-    session.getWarnings(function(outtxt){
-        $("#rq2-warnings").text(outtxt);
-    });
-    //retrieve session warnings async
-    session.getMessages(function(outtxt){
-        $("#rq2-messages").text(outtxt);
-    });
+    update_notice_panel(rq = 2, session = session);
   });
 
   rq2.fail(function() {
+    update_notice_panel(rq = 2, session = session);
     alert("Server error rq2 - cannot read data for plotting\n" +
           "txt: " + utxt + "\n" +
           "session: " + uses + "\n" +
