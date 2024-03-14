@@ -156,8 +156,8 @@ if (user_chartcode) selector = "chartcode";
 // calculate chartcode, set chart controls, update visibility, draw chart
 if (user_txt || user_session || user_chartcode) initialize_chart_controls();
 // no user arguments: update visibility, draw chart
-else update();
-
+// else update();
+update();
 
 function initialize_chart_controls() {
   // function executes at initialization
@@ -262,7 +262,7 @@ function initialize_chart_controls() {
     });
 
     // set UI controls and chart
-    update();
+    // update();
 
     // for all subsequent calls, use derive
     // this allows user to change charts interactively
