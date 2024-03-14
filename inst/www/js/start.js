@@ -255,7 +255,7 @@ function initialize_chart_controls() {
     selector = "derive";
     });
 });
-  rq1.fail(function() {
+  rq1.fail(function(session) {
     update_notice_panel(rq = 1, session = session)
     alert("Server error rq1 - cannot read data for initialization\n" +
           "txt: " + utxt + "\n" +
