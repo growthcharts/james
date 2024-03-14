@@ -62,7 +62,7 @@ get_tgt <- function(txt = "", session = "", ...) {
 
   # check for a tgt object
   if (!(is.list(data) && all(c("psn", "xyz") %in% names(data)))) {
-    warning(paste("session contains no data: ", session), call. = FALSE)
+    warning(paste("session contains no data:", session), call. = FALSE)
     return(NULL)
   }
 
@@ -98,3 +98,12 @@ get_session_object = function(session, object = ".val") {
 
 
 is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
+
+get_max_age <- function(target) {
+  max_age <- NA_real_
+  if (!is.null(target)) {
+    x <- timedata(target)[["age"]]
+    max_age <- ifelse(sum(!is.na(x)), max(x, na.rm = TRUE), NA_real_)
+  }
+  return(max_age)
+}

@@ -47,3 +47,4 @@ Remotes:
     growthcharts/jamesdemodata
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1

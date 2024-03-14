@@ -36,10 +36,8 @@ select_chart <- function(target = NULL,
                          sex = NULL,
                          etn = NULL,
                          ga = NULL,
-                         side = NULL,
+                         side = "hgt",
                          language = "dutch") {
-
-
 
   # choose defaults depending on individual
   if (!is.null(target)) {

@@ -137,13 +137,13 @@ for(var i = 0, max = radios.length; i < max; i++) {
 }
 
 // if user_session is specified, report any warnings and messages
-if (user_session) {
-  var warn = host + pathname + '/' + user_session + "/warnings/text";
-  var mess = host + pathname + '/' + user_session + "/messages/text";
-  $("#session").text(user_session);
-  $("#warnings").load(warn);
-  $("#messages").load(mess);
-}
+//if (user_session) {
+//  var warn = host + pathname + '/' + user_session + "/warnings/text";
+//  var mess = host + pathname + '/' + user_session + "/messages/text";
+//  $("#session").text(user_session);
+//  $("#warnings").load(warn);
+//  $("#messages").load(mess);
+//}
 
 // updating logic to select charts
 // 1. use "derive" based on user interaction
@@ -156,8 +156,8 @@ if (user_chartcode) selector = "chartcode";
 // calculate chartcode, set chart controls, update visibility, draw chart
 if (user_txt || user_session || user_chartcode) initialize_chart_controls();
 // no user arguments: update visibility, draw chart
-else update();
-
+// else update();
+update();
 
 function initialize_chart_controls() {
   // function executes at initialization
@@ -245,16 +245,30 @@ function initialize_chart_controls() {
       from: from,
       to: to});
 
+    update_notice_panel(rq = 1, session = session);
+
     // set UI controls and chart
-    update();
+    // update();
 
     // for all subsequent calls, use derive
     // this allows user to change charts interactively
     selector = "derive";
     });
 });
-  rq1.fail(function() {
-    alert("Server error (rq1, convert_tgt_chartadvice): " + rq1.responseText);
+  rq1.fail(function(session) {
+    alert("Server error rq1 - cannot read data for initialization\n" +
+          "txt: " + utxt + "\n" +
+          "session: " + uses + "\n" +
+          "chartcode: " + ucode + "\n" +
+          "selector: " + selector + "\n" +
+          "error: " + rq1.responseText);
+    console.log("rq1 txt: " + utxt);
+    console.log("rq1 session: " + uses);
+    console.log("rq1 chartcode: " + ucode);
+    console.log("rq1 selector: " + selector);
+    console.log("rq1 error: " + rq1.responseText);
+    // note: the following update does not work SvB March 2024
+    update_notice_panel(rq = 1, session = session);
   });
 }
 
@@ -306,5 +320,33 @@ function showCards(show = "all") {
     sr('groeicard', 'none');
     $('#collapseTwo').collapse('show');
     active = "ontwikkeling";
+  }
+}
+
+function update_notice_panel(rq, session) {
+
+  if (rq == 1) {
+    $("#rq1-session").text(session.getKey());
+    session.getConsole(function(outtxt){
+        $("#rq1-console").text(outtxt);
+    });
+    session.getWarnings(function(outtxt){
+        $("#rq1-warnings").text(outtxt);
+    });
+    session.getMessages(function(outtxt){
+        $("#rq1-messages").text(outtxt);
+    });
+  }
+  if (rq == 2) {
+    $("#rq2-session").text(session.getKey());
+    session.getConsole(function(outtxt){
+        $("#rq2-console").text(outtxt);
+    });
+    session.getWarnings(function(outtxt){
+        $("#rq2-warnings").text(outtxt);
+    });
+    session.getMessages(function(outtxt){
+        $("#rq2-messages").text(outtxt);
+    });
   }
 }

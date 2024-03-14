@@ -200,10 +200,22 @@ function update() {
       show_future : show_future,
       show_realized : show_realized
     }, function(session) {
-
-    });
-  rq2.fail(function() {
-    alert("Server error (rq2 - draw_chart): " + rq2.responseText);
+    update_notice_panel(rq = 2, session = session);
+  });
+  rq2.fail(function(session) {
+    alert("Server error rq2 - cannot read data for plotting\n" +
+          "txt: " + utxt + "\n" +
+          "session: " + uses + "\n" +
+          "chartcode: " + ucode + "\n" +
+          "selector: " + selector + "\n" +
+          "error: " + rq2.responseText);
+    console.log("rq2 txt: " + utxt);
+    console.log("rq2 session: " + uses);
+    console.log("rq2 chartcode: " + ucode);
+    console.log("rq2 selector: " + selector);
+    console.log("rq2 error: " + rq2.responseText);
+    // note: the following update does not work SvB March 2024
+    update_notice_panel(rq = 2, session = session);
   });
 }
 
@@ -211,3 +223,4 @@ function sr(id, display) {
   // set UI element display
   document.getElementById(id).style.display = display;
 }
+

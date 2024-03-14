@@ -39,8 +39,6 @@
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-3 sidenav" id="navcontainer">
-        <br>
-        <h3>GROEIDIAGRAMMEN</h3>
 
         <br>
         <div id="accordion">
@@ -239,9 +237,10 @@
               <div class="card-body">
               <form action="" name="messagegrp">
                   <strong>Berichtklasse</strong><br>
-                  <input type="radio" id="messdata" value="data" name="messagegrp" checked="checked"> Gegevens<br>
-<!--                  <input type="radio" id="messscreen" value="screen" name="messagegrp"> Richtlijnen<br>
-                  <input type="radio" id="messanal" value="analysis" name="messagegrp"> Analyse<br>  -->
+                  <input type="radio" id="messproc" value="exec" name="messagegrp" checked="checked"> Sessie<br>
+<!--                 <input type="radio" id="messdata" value="data" name="messagegrp"> Data<br>
+                     <input type="radio" id="messscreen" value="screen" name="messagegrp"> Richtlijnen<br>
+                     <input type="radio" id="messanal" value="analysis" name="messagegrp"> Analyse<br>  -->
                 <br>
                 </form>
 
@@ -254,10 +253,15 @@
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotdiv"></div>
         <div id="textdiv" style="display: none;">
-          <p id="session"></p>
-          <p id="console" style="white-space: pre-wrap;"></p>
-          <p id="warnings" style="white-space: pre-wrap;"></p>
-          <p id="messages" style="white-space: pre-wrap;"></p>
+          <h4 id="version", style="background-color:lightgreen;">JAMES 1.5.5 (20240314), &copy; TNO 2024</h4>
+          <p id="rq1-session" style="background-color:lightgreen;"></p>
+          <p id="rq1-console" style="white-space: pre-wrap;"></p>
+          <p id="rq1-warnings" style="white-space: pre-wrap;"></p>
+          <p id="rq1-messages" style="white-space: pre-wrap;"></p>
+          <p id="rq2-session" style="background-color:lightgreen;"></p>
+          <p id="rq2-console" style="white-space: pre-wrap;"></p>
+          <p id="rq2-warnings" style="white-space: pre-wrap;"></p>
+          <p id="rq2-messages" style="white-space: pre-wrap;"></p>
         </div>
       </div>
     </div>

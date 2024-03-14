@@ -69,17 +69,23 @@ convert_tgt_chartadvice <- function(txt = "",
     session <- loc2session(loc)
   }
 
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format)
-
   selector <- match.arg(selector)
+
+  # give priority of specified chartcode
   if (chartcode != "") selector <- "chartcode"
-  chartcode <- switch(
-    selector,
-    "data" = select_chart(target = tgt)$chartcode,
-    "chartcode" = chartcode
-  )
+
+  # read data if needed, set emergency chartcode in case of no data
+  if (selector == "data") {
+    tgt <- get_tgt(txt = txt,
+                   session = session,
+                   format = format)
+    if (!is.null(tgt)) {
+      chartcode <- select_chart(target = tgt)$chartcode
+    } else {
+      chartcode <- "NJAH"
+      warning("No data found. chartcode set to NJAH.")
+    }
+  }
 
   initializer(selector, tgt, chartcode)
 }
