@@ -203,7 +203,6 @@ function update() {
     update_notice_panel(rq = 2, session = session);
   });
   rq2.fail(function(session) {
-    update_notice_panel(rq = 2, session = session);
     alert("Server error rq2 - cannot read data for plotting\n" +
           "txt: " + utxt + "\n" +
           "session: " + uses + "\n" +
@@ -215,6 +214,7 @@ function update() {
     console.log("rq2 chartcode: " + ucode);
     console.log("rq2 selector: " + selector);
     console.log("rq2 error: " + rq2.responseText);
+    update_notice_panel(rq = 2, session = session);
   });
 }
 
