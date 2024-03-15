@@ -1,3 +1,7 @@
+# james 0.70.0
+
+- Resolves `Error in eval(predvars, data, env) : object 'hgt_z_0' not found` (#23)
+
 # james 0.69.0
 
 ## More informative `Meldingen` panel
