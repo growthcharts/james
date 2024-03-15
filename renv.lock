@@ -314,15 +314,15 @@
     },
     "chartplotter": {
       "Package": "chartplotter",
-      "Version": "0.31.2",
+      "Version": "0.32.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/curvematching, growthcharts/jamesdemodata, growthcharts/nlreferences, growthcharts/donorloader",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartplotter",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "a385ccb95757c0c9ed84e701e076b3061318a2d3",
+      "RemoteSha": "cc5b0118b065f82b07529d613a83c274806ab623",
       "Requirements": [
         "R",
         "brokenstick",
@@ -340,7 +340,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "1227b55b54c2b0917ffd5de5c0044231"
+      "Hash": "505abf6bd969065c3ffdd3276d659439"
     },
     "cli": {
       "Package": "cli",
