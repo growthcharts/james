@@ -1,3 +1,7 @@
+# james 0.70.1
+
+- Resolves the WFH sequence problem when later height is shorter (#24) 
+
 # james 0.70.0
 
 - Resolves `Error in eval(predvars, data, env) : object 'hgt_z_0' not found` (#23)
