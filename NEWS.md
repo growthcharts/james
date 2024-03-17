@@ -1,3 +1,7 @@
+# james 1.5.6
+
+- Changes the version update so that the JAMES package has the same version as the JAMES docker
+
 # james 0.70.1
 
 - Resolves the WFH sequence problem when later height is shorter (#24) 
@@ -26,7 +30,7 @@ Solves issue #19 which appears when JAMES cannot find the child data.
 
 ## Simplified update logic
 
-The JS call to `update()` (which draws the chart) is now removed from the call-back function of `rq1`. Thus, initialization of controls and drawing of charts are now done independently and in parallel. This removes a nested `ocpu.call()` call, thereby improveing performance.
+The JS call to `update()` (which draws the chart) is now removed from the call-back function of `rq1`. Thus, initialization of controls and drawing of charts are now done independently and in parallel. This removes a nested `ocpu.call()` call, thereby improveing performance. This change was undone in 1.5.6 because controls were not properly updated.
 
 ## Cosmetic changes
 
