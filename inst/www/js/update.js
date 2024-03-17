@@ -36,60 +36,7 @@ function update() {
   var lo_str = slider_values[[slider_list]][lo];
   var nmatch = slider_values[["matches"]][match];
 
-  set_controls();
-
-  // handle null user inputs
-  var utxt = '';
-  var uses = '';
-  var ucode  = '';
-  if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-  if (typeof user_session !== "undefined" && user_session !== null)  uses = user_session;
-  if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
-
-  // trigger chart drawing
-  var rq2 = $("#plotdiv").rplot("draw_chart", {
-      txt      : utxt,
-      session  : uses,
-      chartcode: ucode,
-      selector : selector,
-      chartgrp : chartgrp,
-      agegrp   : agegrp,
-      sex      : sex,
-      etn      : population,
-      ga       : ga,
-      side     : msr,
-      curve_interpolation : cm,
-      quiet    : false,
-      dnr      : dnr,
-      lo       : lo_str,
-      hi       : hi_str,
-      nmatch   : nmatch,
-      exact_sex: exact_sex,
-      exact_ga : exact_ga,
-      show_future : show_future,
-      show_realized : show_realized
-    }, function(session) {
-    update_notice_panel(rq = 2, session = session);
-  });
-  rq2.fail(function(session) {
-    alert("Server error rq2 - cannot read data for plotting\n" +
-          "txt: " + utxt + "\n" +
-          "session: " + uses + "\n" +
-          "chartcode: " + ucode + "\n" +
-          "selector: " + selector + "\n" +
-          "error: " + rq2.responseText);
-    console.log("rq2 txt: " + utxt);
-    console.log("rq2 session: " + uses);
-    console.log("rq2 chartcode: " + ucode);
-    console.log("rq2 selector: " + selector);
-    console.log("rq2 error: " + rq2.responseText);
-    // note: the following update does not work SvB March 2024
-    update_notice_panel(rq = 2, session = session);
-  });
-}
-
-function set_controls() {
-    // set active UI elements
+  // set active UI elements
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
     sr('weekmenu', 'none');
@@ -221,10 +168,46 @@ function set_controls() {
     sr('msr_front', 'block');
     sr('msr_back', 'none');
   }
+
+  // handle null user inputs
+  var utxt = '';
+  var uses = '';
+  var ucode  = '';
+  if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
+  if (typeof user_session !== "undefined" && user_session !== null)  uses = user_session;
+  if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
+
+  // trigger chart drawing
+  var rq2 = $("#plotdiv").rplot("draw_chart", {
+      txt      : utxt,
+      session  : uses,
+      chartcode: ucode,
+      selector : selector,
+      chartgrp : chartgrp,
+      agegrp   : agegrp,
+      sex      : sex,
+      etn      : population,
+      ga       : ga,
+      side     : msr,
+      curve_interpolation : cm,
+      quiet    : false,
+      dnr      : dnr,
+      lo       : lo_str,
+      hi       : hi_str,
+      nmatch   : nmatch,
+      exact_sex: exact_sex,
+      exact_ga : exact_ga,
+      show_future : show_future,
+      show_realized : show_realized
+    }, function(session) {
+
+    });
+  rq2.fail(function() {
+    alert("Server error (rq2 - draw_chart): " + rq2.responseText);
+  });
 }
 
 function sr(id, display) {
   // set UI element display
   document.getElementById(id).style.display = display;
 }
-
