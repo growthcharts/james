@@ -245,6 +245,7 @@ function initialize_chart_controls() {
       from: from,
       to: to});
 
+    set_controls();
     update_notice_panel(rq = 1, session = session);
 
     // set UI controls and chart
