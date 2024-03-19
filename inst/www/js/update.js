@@ -46,7 +46,7 @@ function update() {
   drawChart({
     txt: userText,
     session: userSession,
-    chartcode: userChartCode,
+    chartcode: userChartcode,
     selector,
     chartgrp,
     agegrp,
