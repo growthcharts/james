@@ -164,11 +164,11 @@ if(!window.jQuery) {
     //ajax call
     var jqxhr = $.ajax(settings).done(function(){
       var key = jqxhr.getResponseHeader('X-ocpu-session') || console.log("X-ocpu-session response header missing.");
-      if (localapp)
+      if (isSingleUser)
       {
         var loc = host + ':80/ocpu/tmp/' + key + '/';
       } else {
-        var loc = host + pathname + '/' + key + '/';
+        var loc = host + basePath + '/' + key + '/';
       }
       var txt = jqxhr.responseText;
 
@@ -477,7 +477,7 @@ if(!window.jQuery) {
                 /* take out user:pass from target url */
                 var target = document.createElement('a');
                 target.href = settings.url;
-                settings.url = target.protocol + "//" + target.host + target.pathname
+                settings.url = target.protocol + "//" + target.host + target.basePath
 
                 /* set basic auth header */
                 settings.xhrFields = settings.xhrFields || {};
