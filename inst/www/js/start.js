@@ -247,10 +247,6 @@ function showCards(show = "all") {
   }
 }
 
-  // Execute the relevant function based on the 'option' parameter
-  if(displayMap[option]) displayMap[option]();
-}
-
 function updateNoticePanel(rq, session) {
   // Handle multiple requests
   const rqKey = `#rq${rq}-session`;
