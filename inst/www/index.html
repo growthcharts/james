@@ -47,7 +47,7 @@
           <div class="card" id = "groeicard">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseOne" id = "groei">
-                <strong onclick="toggleDisplay('plotDiv', textDiv')">Groei</strong>
+                <strong onclick="toggleDisplay('plotDiv', 'textDiv')">Groei</strong>
               </a>
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -118,7 +118,7 @@
           <div class="card" id = "ontwikkelingcard">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseTwo" id = "ontwikkeling">
-                <strong onclick="toggleDisplay('plotDiv', textDiv')">Ontwikkeling</strong>
+                <strong onclick="toggleDisplay('plotDiv', 'textDiv')">Ontwikkeling</strong>
               </a>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -252,8 +252,8 @@
 
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
-        <div id="plotdiv"></div>
-        <div id="textdiv" style="display: none;">
+        <div id="plotDiv"></div>
+        <div id="textDiv" style="display: none;">
           <h5 id="version", style="background-color:lightgreen;">JAMES 1.5.6 (20240317), &copy; TNO 2024</h5>
           <p id="rq1-session" style="background-color:lightgreen;"></p>
           <p id="rq1-console" style="white-space: pre-wrap;"></p>
