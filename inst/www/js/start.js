@@ -104,7 +104,7 @@ addChangeListener('chartgrp_dsc');
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
   const radios = document.forms[formName].elements[formName];
   for (let radio of radios) {
-    radio.onclick = update;
+    radio.onclick = throttledUpdate;
   }
 });
 

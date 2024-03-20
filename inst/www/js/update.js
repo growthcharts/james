@@ -67,6 +67,42 @@ function update() {
   });
 }
 
+/**
+ * Creates a throttled version of a function that only invokes the original
+ * function at most once per every wait milliseconds.
+ *
+ * @param {Function} func The function to throttle.
+ * @param {number} wait The number of milliseconds to throttle invocations to.
+ * @return {Function} A throttled version of the function.
+ */
+function throttle(func, wait) {
+  let isThrottling = false;
+  let lastArgs;
+  let lastThis;
+
+  const invokeFunc = () => {
+    isThrottling = true;
+    setTimeout(() => {
+      isThrottling = false;
+      if (lastArgs) {
+        invokeFunc.apply(lastThis, lastArgs);
+        lastArgs = lastThis = null;
+      }
+    }, wait);
+
+    func.apply(lastThis, lastArgs);
+  };
+
+  return function() {
+    if (!isThrottling) {
+      invokeFunc.apply(this, arguments);
+    } else {
+      lastArgs = arguments;
+      lastThis = this;
+    }
+  };
+}
+
 function drawChart(params) {
   const rq = $("#plotDiv").rplot("draw_chart", params, session => {
     updateNoticePanel(2, session);
@@ -81,3 +117,6 @@ function drawChart(params) {
     // Logging or user notification
   });
 }
+
+// Create a throttled version of update that can only be called once every 1000 milliseconds (1 second)
+const throttledUpdate = throttle(update, 1000);
