@@ -16,65 +16,12 @@ const userChartcode = urlParams.get('chartcode') || '';
 ocpu.seturl(isSingleUser ? "../R" : `//${hostname}${basePath}/ocpu/library/james/R`);
 
 // Slider values configuration
-const sliderValues = {
-  "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
-  "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
-  "0_19": ["0w", "3m", "6m", "12m", "24m", "5y", "9y", "10y", "11y", "14y", "19y"],
-  "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
-  "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
-};
+
 
 // Defaults
 let sliderList = "0_2";
 let chartcode = "NJAH";
 $("#donordata").val("0-2");
-
-// Fire up sliders
-$("#weekslider").ionRangeSlider({
-  type: "single",
-  skin: "round",
-  grid_snap: true,
-  min: 25,
-  max: 36,
-  from: 36,
-  step: 1,
-  onFinish: function (data) {
-            throttledUpdate();
-  }
-});
-$("#matchslider").ionRangeSlider({
-  type: "single",
-  skin: "round",
-  grid_snap: true,
-  from: 0,
-  values: sliderValues[["matches"]],
-  onFinish: function (data) {
-            throttledUpdate();
-  }
-});
-$("#visitslider").ionRangeSlider({
-  type: "double",
-  skin: "round",
-  grid_snap: true,
-  min_interval: 0,
-  drag_interval: true,
-  values: sliderValues[[sliderList]],
-  onFinish: function (data) {
-            throttledUpdate();
-  }
-});
-$("#weekslider_dsc").ionRangeSlider({
-  type: "single",
-  skin: "round",
-  grid_snap: true,
-  min: 25,
-  max: 36,
-  from: 36,
-  step: 1,
-  onFinish: function (data) {
-            throttledUpdate();
-  }
-});
 
 // Event attachment for UI controls
 const addChangeListenerUpdate = (elementId) => {
@@ -130,6 +77,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// Event attachment for UI controls: sliders
+function initializeSlider(selector, options) {
+  const commonOptions = {
+    type: "single",
+    skin: "round",
+    grid_snap: true,
+    onFinish: throttledUpdate
+  };
+
+  // Merge common options with specific options provided for each slider
+  $(selector).ionRangeSlider($.extend({}, commonOptions, options));
+}
+
+// Slider values, assuming sliderValues and sliderList are defined elsewhere
+const sliderValues = {
+  "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
+  "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
+  "0_19": ["0w", "3m", "6m", "12m", "24m", "5y", "9y", "10y", "11y", "14y", "19y"],
+  "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
+  "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
+};
+
+// Initialize the sliders with both common and specific options
+initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
+initializeSlider("#matchslider", { from: 0, values: sliderValues["matches"] });
+initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues[sliderList] });
+initializeSlider("#weekslider_dsc", { min: 25, max: 36, from: 36, step: 1 });
 
 // Set active accordion page
 let active = "groei";
