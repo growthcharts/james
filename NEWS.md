@@ -1,3 +1,8 @@
+# james 1.5.8
+
+- Introduces throttling of 3 sec for checkbox, sliders and radio buttons
+- Moves all event binding functionality into `start.js`
+
 # james 1.5.7
 
 - Refactors JS code <https://github.com/growthcharts/james/pull/26/#issue-2197694510>
