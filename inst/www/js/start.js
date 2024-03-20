@@ -65,7 +65,8 @@ addChangeListener('chartgrp_dsc');
 
 // Simplified event attachment for radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
-  const radios = document.forms[formName].elements[formName]; // Assuming 'elements[formName]' is correct; might need adjustment based on actual HTML structure
+  const radios = document.forms[formName].elements[formName];
+  // Assuming 'elements[formName]' is correct; might need adjustment based on actual HTML structure
   for (let radio of radios) {
     radio.onclick = update;
   }
@@ -162,9 +163,9 @@ function setEthnicity(population) {
   }
 }
 
-function updateDonorData() {
+function updateDonordata() {
   // Update slider values and graph based on the donor data selection
-  const donorData = document.getElementById("donordata").value;
+  const donordata = document.getElementById("donordata").value;
 
   // Define a mapping from donor data to slider lists
   const donorToSliderMap = {
@@ -174,7 +175,7 @@ function updateDonorData() {
   };
 
   // Use the mapping to find the slider list, defaulting to "0_2" if not found
-  const sliderList = donorToSliderMap[donorData] || "0_2";
+  const sliderList = donorToSliderMap[donordata] || "0_2";
 
   // Update the slider with the new values
   const values = slider_values[sliderList];
