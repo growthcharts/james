@@ -15,7 +15,6 @@ function handleUIVisibility(chartgrp, agegrp, population) {
     sr('etnicity', 'none');
   }
   if (chartgrp == 'gsed1') {
-    ga = 40;
     sr('weekmenu_dsc', 'none');
   }
   if (chartgrp == 'gsed1pt') {

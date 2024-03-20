@@ -19,7 +19,7 @@ function update() {
     chartgrp = document.getElementById("chartgrp_dsc").value;
     agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
     population = "nl"; // Assume default population
-    ga = Number($("#weekslider_dsc").data().from);
+    ga = (chartgrp === 'gsed1') ? 40 : Number($("#weekslider_dsc").data().from);
     document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
 
