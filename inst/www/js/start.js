@@ -194,7 +194,7 @@ function updateWeekSlider(selector, week) {
 }
 
 function setEthnicity(population) {
-  const pop = population.toLowerCase();
+  const pop = String(population).toLowerCase();
   if (["nl", "tu", "ma", "hs", "ds"].includes(pop)) {
     document.forms.etnicity[pop].checked = true;
   }
