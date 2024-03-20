@@ -177,8 +177,8 @@ function initializeChartControls() {
 function updateSliders(output) {
   const weekNum = Math.trunc(Number(output.week));
   if (weekNum >= 25 && weekNum <= 36) {
-    updateWeekSlider("#weekslider", output.week);
-    updateWeekSlider("#weekslider_dsc", output.week);
+    updateWeekSlider("#weekslider", String(output.week));
+    updateWeekSlider("#weekslider_dsc", String(output.week));
   }
 
   document.getElementById("donordata").value = output.dnr;
