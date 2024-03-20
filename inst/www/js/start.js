@@ -131,7 +131,7 @@ function initializeChartControls() {
       }
 
       // Set UI elements based on returned data
-      showCards(output.accordion.toString());
+      showCards(String(output.accordion));
 
       // Conditional UI adjustments
       const chartGroupElementId = output.side === "dsc" ? "chartgrp_dsc" : "chartgrp";
@@ -237,11 +237,9 @@ function showCards(show = "all") {
     sr('ontwikkelingcard', 'block');
     sr('ontwikkelingcard', 'block');
     $('#collapseOne').collapse('show');
-
   } else if (show == "groei") {
     sr('ontwikkelingcard', 'none');
     $('#collapseOne').collapse('show');
-
   } else if (show == "ontwikkeling") {
     sr('groeicard', 'none');
     $('#collapseTwo').collapse('show');
