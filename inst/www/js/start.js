@@ -29,33 +29,70 @@ let sliderList = "0_2";
 let chartcode = "NJAH";
 $("#donordata").val("0-2");
 
-// Slider initialization with shared settings
-const initializeSlider = (selector, settings) => {
-  $(selector).ionRangeSlider({
-    type: settings.type || "single", // Default type if not specified
-    skin: "round",
-    grid_snap: true,
-    ...settings,
-    onFinish: update
-  });
-};
-
-initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
-initializeSlider("#matchslider", { values: sliderValues.matches });
-initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues[sliderList] });
-
-// Accordion page activation
-let active = "groei";
-["#groei", "#ontwikkeling"].forEach(id => {
-  $(id).click(() => {
-    if (active !== id.substring(1)) {
-      active = id.substring(1);
-      update();
-    }
-  });
+// Fire up sliders
+$("#weekslider").ionRangeSlider({
+  type: "single",
+  skin: "round",
+  grid_snap: true,
+  min: 25,
+  max: 36,
+  from: 36,
+  step: 1,
+  onFinish: function (data) {
+            update();
+  }
+});
+$("#matchslider").ionRangeSlider({
+  type: "single",
+  skin: "round",
+  grid_snap: true,
+  from: 0,
+  values: slider_values[["matches"]],
+  onFinish: function (data) {
+            update();
+  }
+});
+$("#visitslider").ionRangeSlider({
+  type: "double",
+  skin: "round",
+  grid_snap: true,
+  min_interval: 0,
+  drag_interval: true,
+  values: slider_values[[slider_list]],
+  onFinish: function (data) {
+            update();
+  }
+});
+$("#weekslider_dsc").ionRangeSlider({
+  type: "single",
+  skin: "round",
+  grid_snap: true,
+  min: 25,
+  max: 36,
+  from: 36,
+  step: 1,
+  onFinish: function (data) {
+            update();
+  }
 });
 
-// Change listeners for UI controls
+// set active accordion page
+let active = "groei";
+$('#groei').click(function (){
+        if (active != "groei"){
+          active = "groei";
+          update();
+        }
+    });
+
+$('#ontwikkeling').click(function (){
+        if (active != "ontwikkeling"){
+          active = "ontwikkeling";
+          update();
+        }
+    });
+
+// Listeners for UI controls
 const addChangeListener = (elementId) => {
   document.getElementById(elementId).addEventListener('change', update, false);
 };
@@ -63,7 +100,7 @@ const addChangeListener = (elementId) => {
 addChangeListener('chartgrp');
 addChangeListener('chartgrp_dsc');
 
-// Simplified event attachment for radio buttons
+// Event attachment for radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
   const radios = document.forms[formName].elements[formName];
   // Assuming 'elements[formName]' is correct; might need adjustment based on actual HTML structure
