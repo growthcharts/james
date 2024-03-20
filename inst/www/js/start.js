@@ -1,4 +1,8 @@
 // start.js
+// Author: Stef van Buuren
+// (c) 2024 Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Part of the JAMES package
+// Licence: AGPL
 
 // Constants for OpenCPU server configuration based on environment
 const isSingleUser = false;
@@ -15,11 +19,7 @@ const userChartcode = urlParams.get('chartcode') || '';
 // Set the OpenCPU server URL
 ocpu.seturl(isSingleUser ? "../R" : `//${hostname}${basePath}/ocpu/library/james/R`);
 
-// Slider values configuration
-
-
 // Defaults
-let sliderList = "0_2";
 let chartcode = "NJAH";
 $("#donordata").val("0-2");
 
@@ -91,7 +91,7 @@ function initializeSlider(selector, options) {
   $(selector).ionRangeSlider($.extend({}, commonOptions, options));
 }
 
-// Slider values, assuming sliderValues and sliderList are defined elsewhere
+// Slider values
 const sliderValues = {
   "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
   "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
@@ -99,6 +99,7 @@ const sliderValues = {
   "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
 };
+let sliderList = "0_2";
 
 // Initialize the sliders with both common and specific options
 initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });

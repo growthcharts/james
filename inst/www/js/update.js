@@ -1,6 +1,8 @@
 // update.js
-// Author: Stef van Buuren, 2019-2023
-// Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Author: Stef van Buuren
+// (c) 2024 Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Part of the JAMES package
+// Licence: AGPL
 
 function update() {
   // Use let for variables that may change within the function

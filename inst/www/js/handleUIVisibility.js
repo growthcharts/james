@@ -1,3 +1,9 @@
+// handleUIvisibility.js
+// Author: Stef van Buuren
+// (c) 2024 Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Part of the JAMES package
+// Licence: AGPL
+
 function handleUIVisibility(chartgrp, agegrp, population) {
   if (chartgrp == 'nl2010') {
     sr('agegrp_1-21y', 'block');
