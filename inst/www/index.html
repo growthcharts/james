@@ -47,7 +47,7 @@
           <div class="card" id = "groeicard">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseOne" id = "groei">
-                <strong onclick="showPlotdiv()">Groei</strong>
+                <strong onclick="toggleDisplay('plotDiv', textDiv')">Groei</strong>
               </a>
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -118,7 +118,7 @@
           <div class="card" id = "ontwikkelingcard">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseTwo" id = "ontwikkeling">
-                <strong onclick="showPlotdiv()">Ontwikkeling</strong>
+                <strong onclick="toggleDisplay('plotDiv', textDiv')">Ontwikkeling</strong>
               </a>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -158,7 +158,7 @@
           <div class="card">
             <div class="card-header">
               <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" id = "voorspeller">
-              <strong onclick="showPlotdiv()">Voorspeller</strong>
+              <strong onclick="toggleDisplay('plotDiv','textDiv')"">Voorspeller</strong>
             </a>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
@@ -231,7 +231,7 @@
           <div class="card">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseFour" id = "meldingen">
-                <strong onclick="showTextdiv()">Meldingen</strong>
+                <strong onclick="toggleDisplay('textDiv', 'plotDiv')">Meldingen</strong>
               </a>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
