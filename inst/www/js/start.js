@@ -196,6 +196,7 @@ function initialize_chart_controls() {
     // set UI elements according to return vector
     if (String(output.side) === "dsc") {
       document.getElementById("chartgrp_dsc").value = String(output.chartgrp);
+      active = "ontwikkeling";
     } else {
       document.getElementById("chartgrp").value = String(output.chartgrp);
       document.forms.msr[String(output.side)].checked=true;
