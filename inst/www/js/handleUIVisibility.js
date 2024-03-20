@@ -1,121 +1,135 @@
-function handleUIVisibility(chartGroup, ageGroup, population) {
-  // Define a mapping for chart group visibility settings
-  const chartGroupVisibility = {
-    'nl2010': {
-      'agegrp_1-21y': 'block',
-      'weekmenu': 'none',
-      'etnicity': 'block',
-    },
-    'preterm': {
-      'agegrp_1-21y': 'none',
-      'weekmenu': 'block',
-      'etnicity': 'none',
-    },
-    'who': {
-      'agegrp_1-21y': 'none',
-      'weekmenu': 'none',
-      'etnicity': 'none',
-    },
-    'gsed1': {
-      'weekmenu_dsc': 'none',
-    },
-    'gsed1pt': {
-      'weekmenu_dsc': 'block',
-    }
-  };
+function handleUIVisibility(chartgrp, agegrp, population) {
+  if (chartgrp == 'nl2010') {
+    sr('agegrp_1-21y', 'block');
+    sr('weekmenu', 'none');
+    sr('etnicity', 'block');
+  }
+  if (chartgrp == 'preterm') {
+    sr('agegrp_1-21y', 'none');
+    sr('weekmenu', 'block');
+    sr('etnicity', 'none');
+  }
+  if (chartgrp == 'who') {
+    sr('agegrp_1-21y', 'none');
+    sr('weekmenu', 'none');
+    sr('etnicity', 'none');
+  }
+  if (chartgrp == 'gsed1') {
+    ga = 40;
+    sr('weekmenu_dsc', 'none');
+  }
+  if (chartgrp == 'gsed1pt') {
+    sr('weekmenu_dsc', 'block');
+  }
 
-  // Mapping for age group and population visibility settings
-  const ageGroupPopulationVisibility = {
-    '0-15m': {
-      'nl': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'block',
-        'msr_wfh': 'none',
-        'msr_hdc': 'block',
-        'msr_bmi': 'none',
-        'msr_front': 'block',
-        'msr_back': 'block',
-      },
-      'default': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'block',
-        'msr_wfh': 'none',
-        'msr_hdc': 'block',
-        'msr_bmi': 'none',
-        'msr_front': 'block',
-        'msr_back': 'none',
-      }
-    },
-    '0-4y': {
-      'nl': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'block',
-        'msr_wfh': 'block',
-        'msr_hdc': 'block',
-        'msr_bmi': 'none',
-        'msr_front': 'block',
-        'msr_back': 'block',
-      },
-      'hs': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'none',
-        'msr_wfh': 'block',
-        'msr_hdc': 'none',
-        'msr_bmi': 'none',
-        'msr_front': 'block',
-        'msr_back': 'block',
-      },
-      'default': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'none',
-        'msr_wfh': 'block',
-        'msr_hdc': 'none',
-        'msr_bmi': 'none',
-        'msr_front': 'block',
-        'msr_back': 'none',
-      }
-    },
-    '1-21y': {
-      'nl': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'block',
-        'msr_wfh': 'block',
-        'msr_hdc': 'block',
-        'msr_bmi': 'block',
-        'msr_front': 'block',
-        'msr_back': 'block',
-      },
-      'hs': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'none',
-        'msr_wfh': 'block',
-        'msr_hdc': 'none',
-        'msr_bmi': 'block',
-        'msr_front': 'block',
-        'msr_back': 'none',
-      },
-      'default': {
-        'msr_hgt': 'block',
-        'msr_wgt': 'none',
-        'msr_wfh': 'block',
-        'msr_hdc': 'block',
-        'msr_bmi': 'block',
-        'msr_front': 'block',
-        'msr_back': 'block',
-      }
-    }
-  };
-
-  // Apply visibility settings for chart group
-  Object.entries(chartGroupVisibility[chartGroup] || {}).forEach(([id, display]) => {
-    sr(id, display);
-  });
-
-  // Apply visibility settings for age group and population
-  const agePopSettings = ageGroupPopulationVisibility[ageGroup][population] || ageGroupPopulationVisibility[ageGroup]['default'];
-  Object.entries(agePopSettings || {}).forEach(([id, display]) => {
-    sr(id, display);
-  });
+  if (agegrp == '0-15m' & chartgrp == 'nl2010' & population == 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '0-15m' & chartgrp == 'nl2010' & population != 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '0-15m' & chartgrp == 'preterm' & population == 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
+  }
+  if (agegrp == '0-15m' & chartgrp == 'preterm' & population != 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
+  }
+  if (agegrp == '0-15m' & chartgrp == 'who') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
+  }
+  if (agegrp == '0-4y' & chartgrp == 'nl2010' & population == 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '0-4y' & chartgrp == 'nl2010' & population != 'nl') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '0-4y' & chartgrp == 'nl2010' & population == 'hs') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '0-4y' & chartgrp == 'preterm') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'block');
+    sr('msr_wfh', 'none');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
+  }
+  if (agegrp == '0-4y' & chartgrp == 'who') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'none');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
+  }
+  if (agegrp == '1-21y' & population != 'hs') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'block');
+    sr('msr_bmi', 'block');
+    sr('msr_front', 'block');
+    sr('msr_back', 'block');
+  }
+  if (agegrp == '1-21y' & population == 'hs') {
+    sr('msr_hgt', 'block');
+    sr('msr_wgt', 'none');
+    sr('msr_wfh', 'block');
+    sr('msr_hdc', 'none');
+    sr('msr_bmi', 'block');
+    sr('msr_front', 'block');
+    sr('msr_back', 'none');
+  }
 }
 
 // Auxiliary function to modify UI element display property

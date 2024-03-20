@@ -39,7 +39,7 @@ function update() {
   const loStr = sliderValues[sliderList][lo];
   const nmatch = sliderValues.matches[match];
 
-  // Simplify the logic of showing/hiding elements based on `chartgrp` and `agegrp`
+  // Show/hide elements based on `chartgrp` and `agegrp` and `population`
   handleUIVisibility(chartgrp, agegrp, population);
 
   // Trigger chart drawing, simplified error handling
