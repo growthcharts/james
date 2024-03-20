@@ -118,5 +118,5 @@ function drawChart(params) {
   });
 }
 
-// Create a throttled version of update that can only be called once every 5000 milliseconds (5 seconds)
-const throttledUpdate = throttle(update, 5000);
+// Set throttleUpdate to 3 seconds
+const throttledUpdate = throttle(update, 3000);

@@ -39,7 +39,7 @@ $("#weekslider").ionRangeSlider({
   from: 36,
   step: 1,
   onFinish: function (data) {
-            update();
+            throttledUpdate();
   }
 });
 $("#matchslider").ionRangeSlider({
@@ -49,7 +49,7 @@ $("#matchslider").ionRangeSlider({
   from: 0,
   values: sliderValues[["matches"]],
   onFinish: function (data) {
-            update();
+            throttledUpdate();
   }
 });
 $("#visitslider").ionRangeSlider({
@@ -60,7 +60,7 @@ $("#visitslider").ionRangeSlider({
   drag_interval: true,
   values: sliderValues[[sliderList]],
   onFinish: function (data) {
-            update();
+            throttledUpdate();
   }
 });
 $("#weekslider_dsc").ionRangeSlider({
@@ -72,7 +72,7 @@ $("#weekslider_dsc").ionRangeSlider({
   from: 36,
   step: 1,
   onFinish: function (data) {
-            update();
+            throttledUpdate();
   }
 });
 
@@ -93,12 +93,25 @@ $('#ontwikkeling').click(function (){
     });
 
 // Listeners for UI controls
-const addChangeListener = (elementId) => {
+const addChangeListenerUpdate = (elementId) => {
   document.getElementById(elementId).addEventListener('change', update, false);
 };
+const addChangeListenerThrottledUpdate = (elementId) => {
+  document.getElementById(elementId).addEventListener('change', throttledUpdate, false);
+};
 
-addChangeListener('chartgrp');
-addChangeListener('chartgrp_dsc');
+// Event attachment for menus
+addChangeListenerUpdate('chartgrp');
+addChangeListenerUpdate('chartgrp_dsc');
+
+// Event attachment for check boxes
+addChangeListenerThrottledUpdateUpdate('interpolation');
+addChangeListenerThrottledUpdateUpdate('interpolation_dsc');
+addChangeListenerThrottledUpdateUpdate('exact_sex');
+addChangeListenerThrottledUpdateUpdate('exact_ga');
+addChangeListenerThrottledUpdateUpdate('show_future');
+addChangeListenerThrottledUpdateUpdate('show_realized');
+addChangeListenerThrottledUpdateUpdate('exact_ga');
 
 // Event attachment for radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
@@ -106,6 +119,31 @@ addChangeListener('chartgrp_dsc');
   for (let radio of radios) {
     radio.onclick = throttledUpdate;
   }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var link = document.getElementById('groei');
+  link.addEventListener('click', function(event) {
+    toggleDisplay('plotDiv', 'textDiv');
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+  var link = document.getElementById('ontwikkeling');
+  link.addEventListener('click', function(event) {
+    toggleDisplay('plotDiv', 'textDiv');
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+  var link = document.getElementById('voorspeller');
+  link.addEventListener('click', function(event) {
+    toggleDisplay('plotDiv', 'textDiv');
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+  var link = document.getElementById('meldingen');
+  link.addEventListener('click', function(event) {
+    toggleDisplay('textDiv', 'plotDiv');
+  });
 });
 
 // Selector logic
