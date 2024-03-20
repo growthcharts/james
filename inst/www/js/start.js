@@ -105,13 +105,13 @@ addChangeListenerUpdate('chartgrp');
 addChangeListenerUpdate('chartgrp_dsc');
 
 // Event attachment for check boxes
-addChangeListenerThrottledUpdateUpdate('interpolation');
-addChangeListenerThrottledUpdateUpdate('interpolation_dsc');
-addChangeListenerThrottledUpdateUpdate('exact_sex');
-addChangeListenerThrottledUpdateUpdate('exact_ga');
-addChangeListenerThrottledUpdateUpdate('show_future');
-addChangeListenerThrottledUpdateUpdate('show_realized');
-addChangeListenerThrottledUpdateUpdate('exact_ga');
+addChangeListenerThrottledUpdate('interpolation');
+addChangeListenerThrottledUpdate('interpolation_dsc');
+addChangeListenerThrottledUpdate('exact_sex');
+addChangeListenerThrottledUpdate('exact_ga');
+addChangeListenerThrottledUpdate('show_future');
+addChangeListenerThrottledUpdate('show_realized');
+addChangeListenerThrottledUpdate('exact_ga');
 
 // Event attachment for radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
