@@ -24,6 +24,7 @@ const sliderValues = {
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
 };
 
+// Defaults for initialisation per child
 let sliderList = "0_2";
 let chartcode = "NJAH";
 $("#donordata").val("0-2");
