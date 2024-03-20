@@ -1,6 +1,8 @@
 // update.js
-// Author: Stef van Buuren, 2019-2023
-// Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Author: Stef van Buuren
+// (c) 2024 Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Part of the JAMES package
+// Licence: AGPL
 
 function update() {
   // Use let for variables that may change within the function
@@ -67,6 +69,42 @@ function update() {
   });
 }
 
+/**
+ * Creates a throttled version of a function that only invokes the original
+ * function at most once per every wait milliseconds.
+ *
+ * @param {Function} func The function to throttle.
+ * @param {number} wait The number of milliseconds to throttle invocations to.
+ * @return {Function} A throttled version of the function.
+ */
+function throttle(func, wait) {
+  let isThrottling = false;
+  let lastArgs;
+  let lastThis;
+
+  const invokeFunc = () => {
+    isThrottling = true;
+    setTimeout(() => {
+      isThrottling = false;
+      if (lastArgs) {
+        invokeFunc.apply(lastThis, lastArgs);
+        lastArgs = lastThis = null;
+      }
+    }, wait);
+
+    func.apply(lastThis, lastArgs);
+  };
+
+  return function() {
+    if (!isThrottling) {
+      invokeFunc.apply(this, arguments);
+    } else {
+      lastArgs = arguments;
+      lastThis = this;
+    }
+  };
+}
+
 function drawChart(params) {
   const rq = $("#plotDiv").rplot("draw_chart", params, session => {
     updateNoticePanel(2, session);
@@ -81,3 +119,6 @@ function drawChart(params) {
     // Logging or user notification
   });
 }
+
+// Set throttleUpdate to 3 seconds
+const throttledUpdate = throttle(update, 3000);

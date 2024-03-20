@@ -1,4 +1,8 @@
 // start.js
+// Author: Stef van Buuren
+// (c) 2024 Netherlands Organisation for Applied Scientific Research TNO, Leiden
+// Part of the JAMES package
+// Licence: AGPL
 
 // Constants for OpenCPU server configuration based on environment
 const isSingleUser = false;
@@ -15,7 +19,79 @@ const userChartcode = urlParams.get('chartcode') || '';
 // Set the OpenCPU server URL
 ocpu.seturl(isSingleUser ? "../R" : `//${hostname}${basePath}/ocpu/library/james/R`);
 
-// Slider values configuration
+// Defaults
+let chartcode = "NJAH";
+$("#donordata").val("0-2");
+
+// Event attachment for UI controls
+const addChangeListenerUpdate = (elementId) => {
+  document.getElementById(elementId).addEventListener('change', update, false);
+};
+const addChangeListenerThrottledUpdate = (elementId) => {
+  document.getElementById(elementId).addEventListener('change', throttledUpdate, false);
+};
+
+// Event attachment for UI controls: menus
+addChangeListenerUpdate('chartgrp');
+addChangeListenerUpdate('chartgrp_dsc');
+
+// Event attachment for UI controls: check boxes
+addChangeListenerThrottledUpdate('interpolation');
+addChangeListenerThrottledUpdate('interpolation_dsc');
+addChangeListenerThrottledUpdate('exact_sex');
+addChangeListenerThrottledUpdate('exact_ga');
+addChangeListenerThrottledUpdate('show_future');
+addChangeListenerThrottledUpdate('show_realized');
+addChangeListenerThrottledUpdate('exact_ga');
+
+// Event attachment for UI controls: radio buttons
+["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
+  const radios = document.forms[formName].elements[formName];
+  for (let radio of radios) {
+    radio.onclick = throttledUpdate;
+  }
+});
+
+// Event attachment for UI controls: accordion
+document.addEventListener('DOMContentLoaded', function() {
+  // Create a mapping of element IDs to the function arguments they correspond to.
+  // This assumes toggleDisplay accepts two arguments for divs to show/hide.
+  const linksToToggle = {
+    'groei': ['plotDiv', 'textDiv'],
+    'ontwikkeling': ['plotDiv', 'textDiv'],
+    'voorspeller': ['plotDiv', 'textDiv'],
+    'meldingen': ['textDiv', 'plotDiv']
+  };
+
+  // Iterate over the entries in the mapping object.
+  Object.entries(linksToToggle).forEach(([id, divs]) => {
+    const link = document.getElementById(id);
+    if (link) { // Check if the element exists to avoid null reference errors
+      link.addEventListener('click', function(event) {
+        // Prevent the default action if it's a link or a button inside a form
+        event.preventDefault();
+
+        // Call toggleDisplay with the div IDs specific to this link
+        toggleDisplay(...divs);
+      });
+    }
+  });
+});
+
+// Event attachment for UI controls: sliders
+function initializeSlider(selector, options) {
+  const commonOptions = {
+    type: "single",
+    skin: "round",
+    grid_snap: true,
+    onFinish: throttledUpdate
+  };
+
+  // Merge common options with specific options provided for each slider
+  $(selector).ionRangeSlider($.extend({}, commonOptions, options));
+}
+
+// Slider values
 const sliderValues = {
   "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
   "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
@@ -23,60 +99,15 @@ const sliderValues = {
   "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
 };
-
-// Defaults
 let sliderList = "0_2";
-let chartcode = "NJAH";
-$("#donordata").val("0-2");
 
-// Fire up sliders
-$("#weekslider").ionRangeSlider({
-  type: "single",
-  skin: "round",
-  grid_snap: true,
-  min: 25,
-  max: 36,
-  from: 36,
-  step: 1,
-  onFinish: function (data) {
-            update();
-  }
-});
-$("#matchslider").ionRangeSlider({
-  type: "single",
-  skin: "round",
-  grid_snap: true,
-  from: 0,
-  values: sliderValues[["matches"]],
-  onFinish: function (data) {
-            update();
-  }
-});
-$("#visitslider").ionRangeSlider({
-  type: "double",
-  skin: "round",
-  grid_snap: true,
-  min_interval: 0,
-  drag_interval: true,
-  values: sliderValues[[sliderList]],
-  onFinish: function (data) {
-            update();
-  }
-});
-$("#weekslider_dsc").ionRangeSlider({
-  type: "single",
-  skin: "round",
-  grid_snap: true,
-  min: 25,
-  max: 36,
-  from: 36,
-  step: 1,
-  onFinish: function (data) {
-            update();
-  }
-});
+// Initialize the sliders with both common and specific options
+initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
+initializeSlider("#matchslider", { from: 0, values: sliderValues["matches"] });
+initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues[sliderList] });
+initializeSlider("#weekslider_dsc", { min: 25, max: 36, from: 36, step: 1 });
 
-// set active accordion page
+// Set active accordion page
 let active = "groei";
 $('#groei').click(function (){
         if (active != "groei"){
@@ -91,22 +122,6 @@ $('#ontwikkeling').click(function (){
           update();
         }
     });
-
-// Listeners for UI controls
-const addChangeListener = (elementId) => {
-  document.getElementById(elementId).addEventListener('change', update, false);
-};
-
-addChangeListener('chartgrp');
-addChangeListener('chartgrp_dsc');
-
-// Event attachment for radio buttons
-["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
-  const radios = document.forms[formName].elements[formName];
-  for (let radio of radios) {
-    radio.onclick = update;
-  }
-});
 
 // Selector logic
 let selector = userChartcode ? "chartcode" : (userText || userSession) ? "data" : "derive";

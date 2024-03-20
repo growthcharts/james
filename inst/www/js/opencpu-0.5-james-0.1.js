@@ -2,7 +2,7 @@
  * File: opencpu-0.5-james-x.y.js
  * Javascript client library for OpenCPU
  * Version 0.5.0
- * -- Adapted for JAMES by Stef van Buuren --- May 2019
+ * -- Adapted for JAMES by Stef van Buuren
  * Depends: jQuery
  * Requires HTML5 FormData support for file uploads
  * http://github.com/jeroenooms/opencpu.js
