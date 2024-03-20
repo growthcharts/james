@@ -24,7 +24,7 @@ const sliderValues = {
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
 };
 
-// Defaults for initialisation per child
+// Defaults
 let sliderList = "0_2";
 let chartcode = "NJAH";
 $("#donordata").val("0-2");
@@ -103,7 +103,6 @@ addChangeListener('chartgrp_dsc');
 // Event attachment for radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
   const radios = document.forms[formName].elements[formName];
-  // Assuming 'elements[formName]' is correct; might need adjustment based on actual HTML structure
   for (let radio of radios) {
     radio.onclick = update;
   }
@@ -153,7 +152,7 @@ function initializeChartControls() {
       document.forms.sex[output.sex].checked = true;
 
       // Final UI updates
-      updateNoticePanel(true, session);
+      updateNoticePanel(1, session);
       update();
 
       // Prep for subsequent calls
@@ -170,7 +169,7 @@ function initializeChartControls() {
       error: request.responseText
     });
     alert(`Server error rq1 - cannot read data for initialization\nDetails logged to console.`);
-    updateNoticePanel(true, session);
+    updateNoticePanel(1, session);
   });
 }
 
