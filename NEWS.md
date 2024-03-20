@@ -1,3 +1,7 @@
+# james 1.5.7
+
+- Refactors JS code <https://github.com/growthcharts/james/pull/26/#issue-2197694510>
+
 # james 1.5.6
 
 - Changes the version update so that the JAMES package has the same version as the JAMES docker
