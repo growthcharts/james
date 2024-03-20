@@ -232,25 +232,22 @@ function toggleDisplay(divToShow, divToHide) {
   $(`#${divToShow}`).show(500);
 }
 
-function showCards(option = "all") {
-  const displayMap = {
-    all: () => {
-      sr('ontwikkelingcard', 'block');
-      sr('groeicard', 'block');
-      $('#collapseOne, #collapseTwo').collapse('show');
-    },
-    groei: () => {
-      sr('ontwikkelingcard', 'none');
-      sr('groeicard', 'block');
-      $('#collapseOne').collapse('show');
-    },
-    ontwikkeling: () => {
-      sr('groeicard', 'none');
-      sr('ontwikkelingcard', 'block');
-      $('#collapseTwo').collapse('show');
-      active = "ontwikkeling";
-    }
-  };
+function showCards(show = "all") {
+  if (show == "all") {
+    sr('ontwikkelingcard', 'block');
+    sr('ontwikkelingcard', 'block');
+    $('#collapseOne').collapse('show');
+
+  } else if (show == "groei") {
+    sr('ontwikkelingcard', 'none');
+    $('#collapseOne').collapse('show');
+
+  } else if (show == "ontwikkeling") {
+    sr('groeicard', 'none');
+    $('#collapseTwo').collapse('show');
+    active = "ontwikkeling";
+  }
+}
 
   // Execute the relevant function based on the 'option' parameter
   if(displayMap[option]) displayMap[option]();
