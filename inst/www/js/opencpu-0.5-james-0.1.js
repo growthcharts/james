@@ -164,11 +164,11 @@ if(!window.jQuery) {
     //ajax call
     var jqxhr = $.ajax(settings).done(function(){
       var key = jqxhr.getResponseHeader('X-ocpu-session') || console.log("X-ocpu-session response header missing.");
-      if (localapp)
+      if (isSingleUser)
       {
         var loc = host + ':80/ocpu/tmp/' + key + '/';
       } else {
-        var loc = host + pathname + '/' + key + '/';
+        var loc = host + basePath + '/' + key + '/';
       }
       var txt = jqxhr.responseText;
 
@@ -295,37 +295,37 @@ if(!window.jQuery) {
       var svgwidth;
       var svgheight;
 
-      var plotdiv = $('<div />').attr({
+      var plotDiv = $('<div />').attr({
         style: "width: 100%; height:100%; min-width: 100px; min-height: 100px; position:relative; background-repeat:no-repeat; background-size: 100% 100%;"
       }).appendTo(targetdiv).css("background-image", "none");
 
       var spinner = $('<span />').attr({
         style : "position: absolute; top: 20px; left: 20px; z-index:1000; font-family: monospace;"
-      }).text("loading...").appendTo(plotdiv).hide();
+      }).text("loading...").appendTo(plotDiv).hide();
 
 
 /*
       var pdf = $('<a />').attr({
         target: "_blank",
         style: "position: absolute; top: 10px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
-      }).text("pdf").appendTo(plotdiv);
+      }).text("pdf").appendTo(plotDiv);
 
       var svg = $('<a />').attr({
         target: "_blank",
         style: "position: absolute; top: 30px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
-      }).text("svg").appendTo(plotdiv);
+      }).text("svg").appendTo(plotDiv);
 
       var png = $('<a />').attr({
         target: "_blank",
         style: "position: absolute; top: 50px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
-      }).text("png").appendTo(plotdiv);
+      }).text("png").appendTo(plotDiv);
 */
 /*
       function updatepng(){
         if(!Location) return;
-        pngwidth = plotdiv.width();
-        pngheight = plotdiv.height();
-        plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/png?width=" + pngwidth + "&height=" + pngheight + ")");
+        pngwidth = plotDiv.width();
+        pngheight = plotDiv.height();
+        plotDiv.css("background-image", "url(" + Location + "graphics/" + n + "/png?width=" + pngwidth + "&height=" + pngheight + ")");
       }
  */
       function updatesvg(){
@@ -337,25 +337,25 @@ if(!window.jQuery) {
             msr === "back" & active !== "ontwikkeling" ) {
           svgwidth = 8.27;
           svgheight = 11.69;
-          plotdiv_width = 927;
-          plotdiv_height = 1311;
+          plotDiv_width = 927;
+          plotDiv_height = 1311;
         } else {
           svgwidth = 7.09;
           svgheight = 7.09;
-          plotdiv_width = 785;
-          plotdiv_height = 785;
+          plotDiv_width = 785;
+          plotDiv_height = 785;
         }
 
         // now plot it, prevent flicker
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
-        var img_tag = new Image(plotdiv_width, plotdiv_height);
+        var img_tag = new Image(plotDiv_width, plotDiv_height);
         var img_url = Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function() {
-          plotdiv.css("background-image", "url(" + Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight + ")");
-          // $("#navcontainer").css("height", plotdiv_height + 15);
-          // $("#plotcontainer").css("height", plotdiv_height + 15);
-          $("#plotdiv").css("width", plotdiv_width);
-          $("#plotdiv").css("height", plotdiv_height);
+          plotDiv.css("background-image", "url(" + Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight + ")");
+          // $("#navcontainer").css("height", plotDiv_height + 15);
+          // $("#plotcontainer").css("height", plotDiv_height + 15);
+          $("#plotDiv").css("width", plotDiv_width);
+          $("#plotDiv").css("height", plotDiv_height);
         };
         img_tag.src = img_url;
 
@@ -383,7 +383,7 @@ if(!window.jQuery) {
 //          pdf.hide();
 //          svg.hide();
 //          png.hide();
-          plotdiv.css("background-image", "");
+          plotDiv.css("background-image", "");
         } else {
           // pdf.attr("href", Location + "graphics/" + n + "/pdf?width=8.27&height=11.69&paper=a4").show();
           // svg.attr("href", Location + "graphics/" + n + "/svg?width=7&height=7").show();
@@ -395,18 +395,18 @@ if(!window.jQuery) {
 
       // function to update the png image
       var onresize = debounce(function(e) {
-      //  if(pngwidth == plotdiv.width() && pngheight == plotdiv.height()){
-        if(svgwidth == plotdiv.width()/96 && svgheight == plotdiv.height()/96){
+      //  if(pngwidth == plotDiv.width() && pngheight == plotDiv.height()){
+        if(svgwidth == plotDiv.width()/96 && svgheight == plotDiv.height()/96){
           return;
         }
-        if(plotdiv.is(":visible")){
+        if(plotDiv.is(":visible")){
           // updatepng();
           updatesvg();
         }
       }, 500);
 
       // register update handlers
-      plotdiv.on("resize", onresize);
+      plotDiv.on("resize", onresize);
       $(window).on("resize", onresize);
 
       //return objects
@@ -477,7 +477,7 @@ if(!window.jQuery) {
                 /* take out user:pass from target url */
                 var target = document.createElement('a');
                 target.href = settings.url;
-                settings.url = target.protocol + "//" + target.host + target.pathname
+                settings.url = target.protocol + "//" + target.host + target.basePath
 
                 /* set basic auth header */
                 settings.xhrFields = settings.xhrFields || {};

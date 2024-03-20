@@ -1,35 +1,33 @@
 // start.js
-const localapp = false;
+
+// Constants for OpenCPU server configuration based on environment
+const isSingleUser = false;
 const urlParams = new URLSearchParams(window.location.search);
-const user_txt = urlParams.get('txt');
-const user_session =  urlParams.get('session');
-const user_chartcode = urlParams.get('chartcode');
-const protocol = window.location.protocol;
-const hostname = window.location.hostname;
-const host = protocol + '//' + hostname;
-const pathname = window.location.pathname.slice(0,-5);
+const { protocol, hostname, pathname } = window.location;
+const host = `${protocol}//${hostname}`;
+const basePath = pathname.slice(0, -5); // Assuming removal of ".html"
 
-// This path is used by javascript calls into OpenCPU
-// Use double // to support CORS
-if (localapp)
-{
-  ocpu.seturl("../R");
-} else {
-  ocpu.seturl('//' + hostname + pathname + '/ocpu/library/james/R');
-}
+// Extract URL parameters with fallbacks to handle null or undefined
+const userText = urlParams.get('txt') || '';
+const userSession = urlParams.get('session') || '';
+const userChartcode = urlParams.get('chartcode') || '';
 
-// internal constants
-const slider_values = {
-  "0_2":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m"],
-  "0_4":  ["0w","4w","8w","3m","4m","6m","7.5m","9m","11m","14m","18m","24m","36m","45m"],
-  "0_19": ["0w","3m","6m","12m","24m","5y","9y","10y","11y","14y","19y"],
-  "0_29": ["0w","3m","6m","14m","24m","48m","10y","18y"],
-  "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]};
+// Set the OpenCPU server URL
+ocpu.seturl(isSingleUser ? "../R" : `//${hostname}${basePath}/ocpu/library/james/R`);
 
-// starting defaults for initialisation per child
-var slider_list = "0_2";
-var chartcode = "NJAH";
-document.getElementById("donordata").value = "0-2";
+// Slider values configuration
+const sliderValues = {
+  "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
+  "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
+  "0_19": ["0w", "3m", "6m", "12m", "24m", "5y", "9y", "10y", "11y", "14y", "19y"],
+  "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
+  "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
+};
+
+// Defaults
+let sliderList = "0_2";
+let chartcode = "NJAH";
+$("#donordata").val("0-2");
 
 // Fire up sliders
 $("#weekslider").ionRangeSlider({
@@ -49,7 +47,7 @@ $("#matchslider").ionRangeSlider({
   skin: "round",
   grid_snap: true,
   from: 0,
-  values: slider_values[["matches"]],
+  values: sliderValues[["matches"]],
   onFinish: function (data) {
             update();
   }
@@ -60,7 +58,7 @@ $("#visitslider").ionRangeSlider({
   grid_snap: true,
   min_interval: 0,
   drag_interval: true,
-  values: slider_values[[slider_list]],
+  values: sliderValues[[sliderList]],
   onFinish: function (data) {
             update();
   }
@@ -79,7 +77,7 @@ $("#weekslider_dsc").ionRangeSlider({
 });
 
 // set active accordion page
-var active = "groei";
+let active = "groei";
 $('#groei').click(function (){
         if (active != "groei"){
           active = "groei";
@@ -94,217 +92,144 @@ $('#ontwikkeling').click(function (){
         }
     });
 
-// set onchange triggers
-var chartgrplist = document.getElementById('chartgrp');
-chartgrplist.addEventListener('change', update, false);
+// Listeners for UI controls
+const addChangeListener = (elementId) => {
+  document.getElementById(elementId).addEventListener('change', update, false);
+};
 
-var chartgrplist_dsc = document.getElementById('chartgrp_dsc');
-chartgrplist_dsc.addEventListener('change', update, false);
+addChangeListener('chartgrp');
+addChangeListener('chartgrp_dsc');
 
-var radios = document.forms.agegrp.elements.agegrp;
-for(var i = 0, max = radios.length; i < max; i++) {
-  radios[i].onclick = function() {
-      update();
-  };
-}
-
-var radios = document.forms.msr.elements.msr;
-for(var i = 0, max = radios.length; i < max; i++) {
-  radios[i].onclick = function() {
-      update();
-  };
-}
-
-var radios = document.forms.etnicity.elements.etnicity;
-  for(var i = 0, max = radios.length; i < max; i++) {
-    radios[i].onclick = function() {
-      update();
-  };
-}
-
-var radios = document.forms.sex.elements.sex;
-  for(var i = 0, max = radios.length; i < max; i++) {
-    radios[i].onclick = function() {
-      update();
-  };
-}
-
-var radios = document.forms.agegrp_dsc.elements.agegrp_dsc;
-for(var i = 0, max = radios.length; i < max; i++) {
-  radios[i].onclick = function() {
-      update();
-  };
-}
-
-// if user_session is specified, report any warnings and messages
-//if (user_session) {
-//  var warn = host + pathname + '/' + user_session + "/warnings/text";
-//  var mess = host + pathname + '/' + user_session + "/messages/text";
-//  $("#session").text(user_session);
-//  $("#warnings").load(warn);
-//  $("#messages").load(mess);
-//}
-
-// updating logic to select charts
-// 1. use "derive" based on user interaction
-var selector  = "derive";
-// 2. use "data" if we can calculate or load child data
-if (user_txt || user_session) selector = "data";
-// 3. use hard chartcode if user specified one
-if (user_chartcode) selector = "chartcode";
-
-// calculate chartcode, set chart controls, update visibility, draw chart
-if (user_txt || user_session || user_chartcode) initialize_chart_controls();
-// no user arguments: update visibility, draw chart
-else update();
-// update();
-
-function initialize_chart_controls() {
-  // function executes at initialization
-  // convert_tgt_chartadvice() obtains useful statistics from
-  // the uploaded individual data (R) from user_loc and
-  // from user_chartcode
-
-  // handle null user inputs
-  var utxt = '';
-  var uses = '';
-  var ucode  = '';
-  if (typeof user_txt !== "undefined" && user_txt !== null)  utxt = user_txt;
-  if (typeof user_session !== "undefined" && user_session !== null)  uses = user_session;
-  if (typeof user_chartcode !== "undefined" && user_chartcode !== null)  ucode = user_chartcode;
-
-  var rq1 = ocpu.call("convert_tgt_chartadvice", {
-    txt       : utxt,
-    session   : uses,
-    chartcode : ucode,
-    selector  : selector
-  }, function(session) {
-
-    //retrieve the returned object async
-    session.getObject(function(output){
-        //output is the object returned by the R function
-
-    // alert user to invalid chartcode
-    if (!output.chartcode) {
-       alert("Unknown chartcode: " + user_chartcode);
-       return;
-    }
-
-    // set accordion menus according to return vector
-    showCards(String(output.accordion));
-
-    // set UI elements according to return vector
-    if (String(output.side) === "dsc") {
-      document.getElementById("chartgrp_dsc").value = String(output.chartgrp);
-      active = "ontwikkeling";
-    } else {
-      document.getElementById("chartgrp").value = String(output.chartgrp);
-      document.forms.msr[String(output.side)].checked=true;
-    }
-    document.forms.agegrp[String(output.agegrp)].checked=true;
-    if (String(output.agegrp) !== "1-21y") {document.forms.agegrp_dsc[String(output.agegrp)].checked=true;}
-
-    var week = String(output.week);
-    var weeknum = Math.trunc(Number(week));
-
-    // set week slider for both growth and development
-    if (week && weeknum >= 25 && weeknum <= 36) {
-      $("#weekslider").data("ionRangeSlider").update({
-        from: week
-      });
-      $("#weekslider_dsc").data("ionRangeSlider").update({
-        from: week
-      });
-    }
-
-    // set etnicity
-    var pop = String(output.population).toLowerCase();
-    switch(pop) {
-	      case "nl":
-	      case "tu":
-	      case "ma":
-	      case "hs":
-	      case "ds":
-	        document.forms.etnicity[pop].checked=true;
-	        break;
-	      default:
-	    }
-
-    //set sex UI element
-    document.forms.sex[String(output.sex)].checked=true;
-
-    // Set donordata and visit slider
-    var dnr = String(output.dnr);
-    document.getElementById("donordata").value = dnr;
-    slider_list = String(output.slider_list);
-    var values = slider_values[[slider_list]];
-    var from = values.indexOf(String(output.period[0]));
-    var to   = values.indexOf(String(output.period[1]));
-    var slider_instance = $("#visitslider").data("ionRangeSlider");
-    slider_instance.update({
-      values: values,
-      from: from,
-      to: to});
-
-    update_notice_panel(rq = 1, session = session);
-
-    // set UI controls and chart
-    update();
-
-    // for all subsequent calls, use derive
-    // this allows user to change charts interactively
-    selector = "derive";
-    });
+// Event attachment for radio buttons
+["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
+  const radios = document.forms[formName].elements[formName];
+  for (let radio of radios) {
+    radio.onclick = update;
+  }
 });
-  rq1.fail(function(session) {
-    alert("Server error rq1 - cannot read data for initialization\n" +
-          "txt: " + utxt + "\n" +
-          "session: " + uses + "\n" +
-          "chartcode: " + ucode + "\n" +
-          "selector: " + selector + "\n" +
-          "error: " + rq1.responseText);
-    console.log("rq1 txt: " + utxt);
-    console.log("rq1 session: " + uses);
-    console.log("rq1 chartcode: " + ucode);
-    console.log("rq1 selector: " + selector);
-    console.log("rq1 error: " + rq1.responseText);
-    // note: the following update does not work SvB March 2024
-    update_notice_panel(rq = 1, session = session);
+
+// Selector logic
+let selector = userChartcode ? "chartcode" : (userText || userSession) ? "data" : "derive";
+
+// Initialize chart controls or update based on user input
+(userText || userSession || userChartcode) ? initializeChartControls() : update();
+
+function initializeChartControls() {
+  // Executes at initialization to get settings from uploaded data
+  const request = ocpu.call("convert_tgt_chartadvice", {
+    txt: userText,
+    session: userSession,
+    chartcode: userChartcode,
+    selector: selector
+  }, session => {
+    // Retrieve the returned object asynchronously
+    session.getObject(output => {
+      // Handle invalid chartcode
+      if (!output.chartcode) {
+        alert(`Unknown chartcode: ${userChartcode}`);
+        return;
+      }
+
+      // Set UI elements based on returned data
+      showCards(String(output.accordion));
+
+      // Conditional UI adjustments
+      const chartGroupElementId = output.side === "dsc" ? "chartgrp_dsc" : "chartgrp";
+      document.getElementById(chartGroupElementId).value = output.chartgrp.toString();
+      if (output.side === "dsc") {
+        // Signal to update() to use D-score UI controls
+        active = "ontwikkeling";
+      }
+      if (output.side !== "dsc") {
+        document.forms.msr[output.side].checked = true;
+      }
+      document.forms.agegrp[output.agegrp].checked = true;
+      if (output.agegrp !== "1-21y") {
+        document.forms.agegrp_dsc[output.agegrp].checked = true;
+      }
+
+      // Update sliders
+      updateSliders(output);
+
+      // Set ethnicity and sex
+      setEthnicity(output.population);
+      document.forms.sex[output.sex].checked = true;
+
+      // Final UI updates
+      updateNoticePanel(1, session);
+      update();
+
+      // Prep for subsequent calls
+      selector = "derive";
+    });
+  });
+
+  request.fail(session => {
+    console.error("Server error rq1 - cannot read data for initialization", {
+      txt: userText,
+      session: userSession,
+      chartcode: userChartcode,
+      selector: selector,
+      error: request.responseText
+    });
+    alert(`Server error rq1 - cannot read data for initialization\nDetails logged to console.`);
+    updateNoticePanel(1, session);
   });
 }
 
-function update_donordata() {
-  // update slider values and graph if user changes dnr
-  var dnr = document.getElementById("donordata").value;
-  switch (dnr){
-    case "0-2":
-      slider_list = "0_2";
-      break;
-    case "2-4":
-      slider_list = "0_4";
-      break;
-    case "4-18":
-      slider_list = "0_29";
-      break;
-    default:
-      slider_list = "0_2";
+function updateSliders(output) {
+  const weekNum = Math.trunc(Number(output.week));
+  if (weekNum >= 25 && weekNum <= 36) {
+    updateWeekSlider("#weekslider", String(output.week));
+    updateWeekSlider("#weekslider_dsc", String(output.week));
   }
-  var values = slider_values[[slider_list]];
-  var slider_instance = $("#visitslider").data("ionRangeSlider");
-  slider_instance.update({
-      values: values});
 
+  document.getElementById("donordata").value = output.dnr;
+  sliderList = output.slider_list.toString();
+  const values = sliderValues[sliderList];
+  const from = values.indexOf(output.period[0].toString());
+  const to = values.indexOf(output.period[1].toString());
+  $("#visitslider").data("ionRangeSlider").update({ values, from, to });
+}
+
+function updateWeekSlider(selector, week) {
+  $(selector).data("ionRangeSlider").update({ from: week });
+}
+
+function setEthnicity(population) {
+  const pop = String(population).toLowerCase();
+  if (["nl", "tu", "ma", "hs", "ds"].includes(pop)) {
+    document.forms.etnicity[pop].checked = true;
+  }
+}
+
+function updateDonordata() {
+  // Update slider values and graph based on the donor data selection
+  const donordata = document.getElementById("donordata").value;
+
+  // Define a mapping from donor data to slider lists
+  const donorToSliderMap = {
+    "0-2": "0_2",
+    "2-4": "0_4",
+    "4-18": "0_29"
+  };
+
+  // Use the mapping to find the slider list, defaulting to "0_2" if not found
+  const sliderList = donorToSliderMap[donordata] || "0_2";
+
+  // Update the slider with the new values
+  const values = sliderValues[sliderList];
+  $("#visitslider").data("ionRangeSlider").update({
+    values: values
+  });
+
+  // Refresh UI elements as necessary
   update();
 }
 
-function showTextdiv() {
-  $("#plotdiv").hide(500);
-  $("#textdiv").show(500);
-}
-
-function showPlotdiv() {
-  $("#plotdiv").show(500);
-  $("#textdiv").hide(500);
+function toggleDisplay(divToShow, divToHide) {
+  $(`#${divToHide}`).hide(500);
+  $(`#${divToShow}`).show(500);
 }
 
 function showCards(show = "all") {
@@ -312,11 +237,9 @@ function showCards(show = "all") {
     sr('ontwikkelingcard', 'block');
     sr('ontwikkelingcard', 'block');
     $('#collapseOne').collapse('show');
-
   } else if (show == "groei") {
     sr('ontwikkelingcard', 'none');
     $('#collapseOne').collapse('show');
-
   } else if (show == "ontwikkeling") {
     sr('groeicard', 'none');
     $('#collapseTwo').collapse('show');
@@ -324,30 +247,23 @@ function showCards(show = "all") {
   }
 }
 
-function update_notice_panel(rq, session) {
+function updateNoticePanel(rq, session) {
+  // Handle multiple requests
+  const rqKey = `#rq${rq}-session`;
+  const consoleOutput = `#rq${rq}-console`;
+  const warningsOutput = `#rq${rq}-warnings`;
+  const messagesOutput = `#rq${rq}-messages`;
 
-  if (rq == 1) {
-    $("#rq1-session").text(session.getKey());
-    session.getConsole(function(outtxt){
-        $("#rq1-console").text(outtxt);
+  $(rqKey).text(session.getKey());
+
+  // Helper function to set session info
+  const setSessionInfo = (selector, method) => {
+    session[method](outtxt => {
+      $(selector).text(outtxt);
     });
-    session.getWarnings(function(outtxt){
-        $("#rq1-warnings").text(outtxt);
-    });
-    session.getMessages(function(outtxt){
-        $("#rq1-messages").text(outtxt);
-    });
-  }
-  if (rq == 2) {
-    $("#rq2-session").text(session.getKey());
-    session.getConsole(function(outtxt){
-        $("#rq2-console").text(outtxt);
-    });
-    session.getWarnings(function(outtxt){
-        $("#rq2-warnings").text(outtxt);
-    });
-    session.getMessages(function(outtxt){
-        $("#rq2-messages").text(outtxt);
-    });
-  }
+  };
+
+  setSessionInfo(consoleOutput, 'getConsole');
+  setSessionInfo(warningsOutput, 'getWarnings');
+  setSessionInfo(messagesOutput, 'getMessages');
 }

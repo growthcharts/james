@@ -14,6 +14,7 @@
   <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="app/js/ion.rangeSlider.min.js"></script>
   <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
+  <script type="text/javascript" src="app/js/handleUIVisibility.js"></script>
   <script type="text/javascript" src="app/js/update.js"></script>
 </head>
 <!---->
@@ -46,7 +47,7 @@
           <div class="card" id = "groeicard">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseOne" id = "groei">
-                <strong onclick="showPlotdiv()">Groei</strong>
+                <strong onclick="toggleDisplay('plotDiv', 'textDiv')">Groei</strong>
               </a>
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -117,7 +118,7 @@
           <div class="card" id = "ontwikkelingcard">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseTwo" id = "ontwikkeling">
-                <strong onclick="showPlotdiv()">Ontwikkeling</strong>
+                <strong onclick="toggleDisplay('plotDiv', 'textDiv')">Ontwikkeling</strong>
               </a>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -157,7 +158,7 @@
           <div class="card">
             <div class="card-header">
               <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" id = "voorspeller">
-              <strong onclick="showPlotdiv()">Voorspeller</strong>
+              <strong onclick="toggleDisplay('plotDiv','textDiv')">Voorspeller</strong>
             </a>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
@@ -172,7 +173,7 @@
                 <div class="form-group" id="donordatagroup">
                   <label for="donordatagroup"><strong>Voorspel horizon</strong></label>
                   <div>
-                    <select class="form-control" id="donordata" onchange = "update_donordata()">
+                    <select class="form-control" id="donordata" onchange = "updateDonordata()">
                       <option value="0-2" selected>Tussen 0-2 jaar</option>
                       <option value="2-4">Tussen 2-4 jaar</option>
                       <option value="4-18">Tussen 4-18 jaar</option>
@@ -230,7 +231,7 @@
           <div class="card">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#collapseFour" id = "meldingen">
-                <strong onclick="showTextdiv()">Meldingen</strong>
+                <strong onclick="toggleDisplay('textDiv', 'plotDiv')">Meldingen</strong>
               </a>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
@@ -251,9 +252,9 @@
 
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
-        <div id="plotdiv"></div>
-        <div id="textdiv" style="display: none;">
-          <h5 id="version", style="background-color:lightgreen;">JAMES 1.5.6 (20240317), &copy; TNO 2024</h5>
+        <div id="plotDiv"></div>
+        <div id="textDiv" style="display: none;">
+          <h5 id="version", style="background-color:lightgreen;">JAMES 1.5.7 (20240320), &copy; TNO 2024</h5>
           <p id="rq1-session" style="background-color:lightgreen;"></p>
           <p id="rq1-console" style="white-space: pre-wrap;"></p>
           <p id="rq1-warnings" style="white-space: pre-wrap;"></p>
