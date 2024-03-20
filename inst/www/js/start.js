@@ -47,7 +47,7 @@ $("#matchslider").ionRangeSlider({
   skin: "round",
   grid_snap: true,
   from: 0,
-  values: slider_values[["matches"]],
+  values: sliderValues[["matches"]],
   onFinish: function (data) {
             update();
   }
@@ -58,7 +58,7 @@ $("#visitslider").ionRangeSlider({
   grid_snap: true,
   min_interval: 0,
   drag_interval: true,
-  values: slider_values[[slider_list]],
+  values: sliderValues[[sliderList]],
   onFinish: function (data) {
             update();
   }
@@ -182,8 +182,8 @@ function updateSliders(output) {
   }
 
   document.getElementById("donordata").value = output.dnr;
-  slider_list = output.slider_list.toString();
-  const values = slider_values[slider_list];
+  sliderList = output.sliderList.toString();
+  const values = sliderValues[sliderList];
   const from = values.indexOf(output.period[0].toString());
   const to = values.indexOf(output.period[1].toString());
   $("#visitslider").data("ionRangeSlider").update({ values, from, to });
@@ -215,7 +215,7 @@ function updateDonordata() {
   const sliderList = donorToSliderMap[donordata] || "0_2";
 
   // Update the slider with the new values
-  const values = slider_values[sliderList];
+  const values = sliderValues[sliderList];
   $("#visitslider").data("ionRangeSlider").update({
     values: values
   });
