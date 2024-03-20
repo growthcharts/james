@@ -136,6 +136,10 @@ function initializeChartControls() {
       // Conditional UI adjustments
       const chartGroupElementId = output.side === "dsc" ? "chartgrp_dsc" : "chartgrp";
       document.getElementById(chartGroupElementId).value = output.chartgrp.toString();
+      if (output.side === "dsc") {
+        // Signal to update() to use D-score UI controls
+        active = "ontwikkeling";
+      }
       if (output.side !== "dsc") {
         document.forms.msr[output.side].checked = true;
       }
