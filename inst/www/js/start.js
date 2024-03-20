@@ -76,7 +76,62 @@ $("#weekslider_dsc").ionRangeSlider({
   }
 });
 
-// set active accordion page
+// Event attachment for UI controls
+const addChangeListenerUpdate = (elementId) => {
+  document.getElementById(elementId).addEventListener('change', update, false);
+};
+const addChangeListenerThrottledUpdate = (elementId) => {
+  document.getElementById(elementId).addEventListener('change', throttledUpdate, false);
+};
+
+// Event attachment for UI controls: menus
+addChangeListenerUpdate('chartgrp');
+addChangeListenerUpdate('chartgrp_dsc');
+
+// Event attachment for UI controls: check boxes
+addChangeListenerThrottledUpdate('interpolation');
+addChangeListenerThrottledUpdate('interpolation_dsc');
+addChangeListenerThrottledUpdate('exact_sex');
+addChangeListenerThrottledUpdate('exact_ga');
+addChangeListenerThrottledUpdate('show_future');
+addChangeListenerThrottledUpdate('show_realized');
+addChangeListenerThrottledUpdate('exact_ga');
+
+// Event attachment for UI controls: radio buttons
+["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
+  const radios = document.forms[formName].elements[formName];
+  for (let radio of radios) {
+    radio.onclick = throttledUpdate;
+  }
+});
+
+// Event attachment for UI controls: accordion
+document.addEventListener('DOMContentLoaded', function() {
+  // Create a mapping of element IDs to the function arguments they correspond to.
+  // This assumes toggleDisplay accepts two arguments for divs to show/hide.
+  const linksToToggle = {
+    'groei': ['plotDiv', 'textDiv'],
+    'ontwikkeling': ['plotDiv', 'textDiv'],
+    'voorspeller': ['plotDiv', 'textDiv'],
+    'meldingen': ['textDiv', 'plotDiv']
+  };
+
+  // Iterate over the entries in the mapping object.
+  Object.entries(linksToToggle).forEach(([id, divs]) => {
+    const link = document.getElementById(id);
+    if (link) { // Check if the element exists to avoid null reference errors
+      link.addEventListener('click', function(event) {
+        // Prevent the default action if it's a link or a button inside a form
+        event.preventDefault();
+
+        // Call toggleDisplay with the div IDs specific to this link
+        toggleDisplay(...divs);
+      });
+    }
+  });
+});
+
+// Set active accordion page
 let active = "groei";
 $('#groei').click(function (){
         if (active != "groei"){
@@ -91,60 +146,6 @@ $('#ontwikkeling').click(function (){
           update();
         }
     });
-
-// Listeners for UI controls
-const addChangeListenerUpdate = (elementId) => {
-  document.getElementById(elementId).addEventListener('change', update, false);
-};
-const addChangeListenerThrottledUpdate = (elementId) => {
-  document.getElementById(elementId).addEventListener('change', throttledUpdate, false);
-};
-
-// Event attachment for menus
-addChangeListenerUpdate('chartgrp');
-addChangeListenerUpdate('chartgrp_dsc');
-
-// Event attachment for check boxes
-addChangeListenerThrottledUpdate('interpolation');
-addChangeListenerThrottledUpdate('interpolation_dsc');
-addChangeListenerThrottledUpdate('exact_sex');
-addChangeListenerThrottledUpdate('exact_ga');
-addChangeListenerThrottledUpdate('show_future');
-addChangeListenerThrottledUpdate('show_realized');
-addChangeListenerThrottledUpdate('exact_ga');
-
-// Event attachment for radio buttons
-["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
-  const radios = document.forms[formName].elements[formName];
-  for (let radio of radios) {
-    radio.onclick = throttledUpdate;
-  }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var link = document.getElementById('groei');
-  link.addEventListener('click', function(event) {
-    toggleDisplay('plotDiv', 'textDiv');
-  });
-});
-document.addEventListener('DOMContentLoaded', function() {
-  var link = document.getElementById('ontwikkeling');
-  link.addEventListener('click', function(event) {
-    toggleDisplay('plotDiv', 'textDiv');
-  });
-});
-document.addEventListener('DOMContentLoaded', function() {
-  var link = document.getElementById('voorspeller');
-  link.addEventListener('click', function(event) {
-    toggleDisplay('plotDiv', 'textDiv');
-  });
-});
-document.addEventListener('DOMContentLoaded', function() {
-  var link = document.getElementById('meldingen');
-  link.addEventListener('click', function(event) {
-    toggleDisplay('textDiv', 'plotDiv');
-  });
-});
 
 // Selector logic
 let selector = userChartcode ? "chartcode" : (userText || userSession) ? "data" : "derive";
