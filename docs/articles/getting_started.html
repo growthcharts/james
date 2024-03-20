@@ -8,8 +8,8 @@
 <meta name="description" content="james">
 <title>JAMES - Joint Automatic Measurement and Evaluation System • james</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="JAMES - Joint Automatic Measurement and Evaluation System">
 <meta property="og:description" content="james">
@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.67.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -385,7 +385,7 @@ execution;</li>
 <code>r$messages</code> contain any messages, e.g. data reading
 errors;</li>
 <li>
-<code>r$session</code> (like x06f3db72e683dd) is a unique session
+<code>r$session</code> (like x05295278a9c136) is a unique session
 code.</li>
 </ul>
 <p>The <code><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">jamesclient::james_post()</a></code> function wraps the basis
@@ -402,13 +402,13 @@ directly.</p>
 <span><span class="co">## [1] "james"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $packageVersion</span></span>
-<span><span class="co">## [1] "0.66.1"</span></span>
+<span><span class="co">## [1] "1.5.6"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $packageDate</span></span>
-<span><span class="co">## [1] "2023-08-03"</span></span>
+<span><span class="co">## [1] "2024-03-20"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $Rversion</span></span>
-<span><span class="co">## [1] "4.2.2"</span></span></code></pre>
+<span><span class="co">## [1] "4.3.2"</span></span></code></pre>
 </div>
 <div class="tab-pane" id="bash" role="tabpanel" aria-labelledby="bash-tab">
 
@@ -424,13 +424,13 @@ that makes two requests to the server.</p>
 <p>The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">cat</span> resp</span></code></pre></div>
-<pre><code><span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/R/.val</span></span>
-<span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/R/version</span></span>
-<span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/stdout</span></span>
-<span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/source</span></span>
-<span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/console</span></span>
-<span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/info</span></span>
-<span><span class="co">## /ocpu/tmp/x09c6a1dca228c9/files/DESCRIPTION</span></span></code></pre>
+<pre><code><span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/R/.val</span></span>
+<span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/R/version</span></span>
+<span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/stdout</span></span>
+<span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/source</span></span>
+<span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/console</span></span>
+<span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/info</span></span>
+<span><span class="co">## /ocpu/tmp/x0e43d45ba7578b/files/DESCRIPTION</span></span></code></pre>
 <p>The path element following <code>tmp/</code> is a unique session key.
 See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for the interpretation
 of the OpenCPU API.</p>
@@ -441,9 +441,9 @@ result and downloads the contents of the URL as a file
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">cat</span> value1</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
-<span><span class="co">##   "packageVersion": "0.66.1",</span></span>
-<span><span class="co">##   "packageDate": "2023-08-03",</span></span>
-<span><span class="co">##   "Rversion": "4.2.2"</span></span>
+<span><span class="co">##   "packageVersion": "1.5.6",</span></span>
+<span><span class="co">##   "packageDate": "2024-03-20",</span></span>
+<span><span class="co">##   "Rversion": "4.3.2"</span></span>
 <span><span class="co">## }</span></span></code></pre>
 <p>The above sequence makes two requests to the server. The following
 code compacts both steps into one.</p>
@@ -451,9 +451,9 @@ code compacts both steps into one.</p>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">cat</span> value2</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
-<span><span class="co">##   "packageVersion": "0.66.1",</span></span>
-<span><span class="co">##   "packageDate": "2023-08-03",</span></span>
-<span><span class="co">##   "Rversion": "4.2.2"</span></span>
+<span><span class="co">##   "packageVersion": "1.5.6",</span></span>
+<span><span class="co">##   "packageDate": "2024-03-20",</span></span>
+<span><span class="co">##   "Rversion": "4.3.2"</span></span>
 <span><span class="co">## }</span></span></code></pre>
 </div>
 </div>
@@ -660,8 +660,6 @@ data frame under element <code>r1$parsed</code>.</p>
 <pre><code><span><span class="co">## $psn</span></span>
 <span><span class="co">##   id  name        dob       dobm       dobf src    sex gad ga smo  bw hgtm hgtf</span></span>
 <span><span class="co">## 1 -1 Maria 2018-10-11 1990-12-02 1995-07-04   0 female 189 27   1 990  167  190</span></span>
-<span><span class="co">##   agem etn</span></span>
-<span><span class="co">## 1   27  NL</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $xyz</span></span>
 <span><span class="co">##       age xname yname zname                  zref       x       y      z</span></span>
@@ -685,7 +683,7 @@ from the <code>session</code> element. For example, if we want to see
 the result of the last session in markdown:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">session</span> <span class="op">&lt;-</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "x0a887d8cfab52d"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "x01b80e825c9550"</span></span></code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"md"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">parsed</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -702,11 +700,11 @@ the result of the last session in markdown:</p>
 <span><span class="co">##     Table: Table continues below</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##     -------------------------------------------</span></span>
-<span><span class="co">##      ga   smo   bw    hgtm   hgtf   agem   etn</span></span>
-<span><span class="co">##     ---- ----- ----- ------ ------ ------ -----</span></span>
-<span><span class="co">##      27    1    990   167    190     27    NL</span></span>
-<span><span class="co">##     -------------------------------------------</span></span>
+<span><span class="co">##     -----------------------------------------------------------------------------------</span></span>
+<span><span class="co">##      ga   smo   bw    hgtm   hgtf   agem   etn   pc4   blbf   blbm   eduf   edum   par</span></span>
+<span><span class="co">##     ---- ----- ----- ------ ------ ------ ----- ----- ------ ------ ------ ------ -----</span></span>
+<span><span class="co">##      27    1    990   167    190     NA    NA    NA     NA     NA     NA     NA    NA</span></span>
+<span><span class="co">##     -----------------------------------------------------------------------------------</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   * **xyz**:</span></span>
 <span><span class="co">## </span></span>
@@ -764,28 +762,24 @@ like:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">r5</span><span class="op">$</span><span class="va">session</span>, <span class="st">"messages"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">mess</span><span class="op">$</span><span class="va">parsed</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Category conversion error.</span></span>
-<span><span class="co">## </span></span></code></pre>
 <p>which signals a problem, but is hardly informative. If we upload with
 the <code>validate = TRUE</code> flag, JAMES runs the validation against
 the JSON schema:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span>, validate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">mess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">r6</span><span class="op">$</span><span class="va">session</span>, <span class="st">"messages"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">mess</span><span class="op">$</span><span class="va">parsed</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## must have required property 'clientDetails'</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Category conversion error.</span></span>
 <span><span class="co">## </span></span></code></pre>
 <p>which now indicates that the required JSON element
 <code>"clientDetails"</code> is missing. We drill down by setting the
 <code>intermediate = TRUE</code> flag. This writes five JSON files that
 document the data flow into <code>{session}/files/{*}.json</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span>, validate <span class="op">=</span> <span class="cn">TRUE</span>, intermediate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">host</span>, <span class="va">r7</span><span class="op">$</span><span class="va">session</span>, <span class="st">"files/input.json"</span><span class="op">)</span></span>
 <span><span class="va">url</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "http://localhost/x029af6c9a28a77/files/input.json"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost/x0c5d23f17a3b7a/files/input.json"</span></span></code></pre>
 <p>This <code>url</code> contains the child data of the request as read
 by JAMES. The directory contains five JSON files:</p>
 <ol style="list-style-type: decimal">
@@ -815,8 +809,8 @@ and monitor <code>{session}/messages</code>.</p>
 wish to process with JAMES. For testing purposes, you may change the
 values, but keep the general structure intact. The following
 <code>curl</code> commands uploads the file and processes the data.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sF</span> <span class="st">'txt=@maria.json'</span> <span class="at">-D</span> headers <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="op">&gt;</span> content</span>
-<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="fu">head</span> content</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sF</span> <span class="st">'txt=@maria.json'</span> <span class="at">-D</span> headers <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="op">&gt;</span> content</span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="fu">head</span> content</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "psn": [</span></span>
 <span><span class="co">##     {</span></span>
@@ -829,11 +823,11 @@ values, but keep the general structure intact. The following
 <span><span class="co">##       "sex": "female",</span></span></code></pre>
 <p>Alternatively, we may read the file into a JSON string, and upload as
 follows:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="va">JS</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="st">'.'</span> maria.json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-sR</span> <span class="st">'.'</span><span class="va">)</span></span>
-<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt=</span><span class="va">$JS</span><span class="st">"</span> <span class="op">&gt;</span> content</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="va">JS</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="st">'.'</span> maria.json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-sR</span> <span class="st">'.'</span><span class="va">)</span></span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt=</span><span class="va">$JS</span><span class="st">"</span> <span class="op">&gt;</span> content</span></code></pre></div>
 <p>Finally, if the data are located at a URL, use</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="va">URL</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/ocpu/library/bdsreader/examples/maria.json</span>
-<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt='</span><span class="va">$URL</span><span class="st">'"</span> <span class="op">&gt;</span> content</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="va">URL</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/ocpu/library/bdsreader/examples/maria.json</span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt='</span><span class="va">$URL</span><span class="st">'"</span> <span class="op">&gt;</span> content</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -860,7 +854,7 @@ growth chart<a class="anchor" aria-label="anchor" href="#chartsdraw-draw-child-d
 <p>Maria is a preterm born at 27 weeks of gestational age. We already
 uploaded her data. We may now plot her growth data on the A4 chart for
 preterms as follows:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, </span>
 <span>                 path <span class="op">=</span> <span class="st">"/charts/draw/svglite"</span>, </span>
 <span>                 session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span>,</span>
@@ -869,13 +863,13 @@ preterms as follows:</p>
 <span><span class="va">mysvg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"chart"</span>, fileext <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">".svg"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="va">r5</span><span class="op">$</span><span class="va">parsed</span>, con <span class="op">=</span> <span class="va">mysvg</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/Rtmpol12bn/chart3f5e658c6fb0.svg" alt="Maria's growth plotted on preterm chart, 0-15 months"><p class="caption">
+<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpQagbB6/chartc32a49b51ff8.svg" alt="Maria's growth plotted on preterm chart, 0-15 months"><p class="caption">
 Maria’s growth plotted on preterm chart, 0-15 months
 </p>
 </div>
 <p>Alternatively, we may upload data for a new child Laura and plot the
 data in one step:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/bds_v3.0/smocc/Laura_S.json"</span>, package <span class="op">=</span> <span class="st">"jamesdemodata"</span><span class="op">)</span></span>
 <span><span class="va">r6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>,</span>
 <span>                 path <span class="op">=</span> <span class="st">"/charts/draw/svglite"</span>, txt <span class="op">=</span> <span class="va">fn</span>, </span>
@@ -888,7 +882,7 @@ illustrated above. If you want to change the chart’s size in your HTML,
 use the <code>out.width</code> knitr chunk option, e.g. set
 <code>out.width="500px"</code>. This gives the following output.</p>
 <div class="figure" style="text-align: center">
-<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/Rtmpol12bn/chart3f5e66f8bfe5.svg" alt="Laura's growth plotted on chart for Dutch girls, 0-4 years" width="500px"><p class="caption">
+<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpQagbB6/chartc32a1245f896.svg" alt="Laura's growth plotted on chart for Dutch girls, 0-4 years" width="500px"><p class="caption">
 Laura’s growth plotted on chart for Dutch girls, 0-4 years
 </p>
 </div>
@@ -898,7 +892,7 @@ years old. The following chart plots 25 matches to Laura as grey curves.
 The variation between the grey curves at age 3y9m indicates the likely
 variation in the prediction. The blue line indicates Laura’s predicted
 height at age 3y9m.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, </span>
 <span>                 path <span class="op">=</span> <span class="st">"/charts/draw/svglite"</span>, txt <span class="op">=</span> <span class="va">fn</span>, </span>
 <span>                 chartcode <span class="op">=</span> <span class="st">"NMBH"</span>, dnr <span class="op">=</span> <span class="st">"2-4"</span>,</span>
@@ -912,7 +906,7 @@ plot. In order to get the same age units as the previous chart,
 calculate <code>out.width</code> as
 <code>500/21*18 = "429px"</code>.</p>
 <div class="figure" style="text-align: center">
-<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/Rtmpol12bn/chart3f5e54fe8833.svg" alt="Predict Laura's future height at the age of 3y9m." width="429px"><p class="caption">
+<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpQagbB6/chartc32a2fc34939.svg" alt="Predict Laura's future height at the age of 3y9m." width="429px"><p class="caption">
 Predict Laura’s future height at the age of 3y9m.
 </p>
 </div>
@@ -922,26 +916,26 @@ Predict Laura’s future height at the age of 3y9m.
 <p>Upload <code>maria.json</code> and draw the height data on the
 default chart to produce an SVG file. Specify the proper
 <code>width</code> and <code>height</code> query parameters.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=7.09&amp;height=7.09'</span> <span class="dt">\</span></span>
-<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
-<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria1.svg</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=7.09&amp;height=7.09'</span> <span class="dt">\</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria1.svg</span></code></pre></div>
 <p>We need to set <code>chartcode</code> and <code>selector</code>
 parameters to choose a different chart.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
-<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
-<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">"chartcode='PMAAN27'"</span> <span class="dt">\</span></span>
-<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">"selector='chartcode'"</span> <span class="dt">\</span></span>
-<span id="cb54-5"><a href="#cb54-5" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria2.svg</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
+<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">"chartcode='PMAAN27'"</span> <span class="dt">\</span></span>
+<span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">"selector='chartcode'"</span> <span class="dt">\</span></span>
+<span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria2.svg</span></code></pre></div>
 <p>An alternative is to read the data from a URL, and use the
 <code>application/json</code> protocol to specify parameters.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
-<span id="cb55-3"><a href="#cb55-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
-<span id="cb55-4"><a href="#cb55-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb55-5"><a href="#cb55-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
-<span id="cb55-6"><a href="#cb55-6" tabindex="-1"></a><span class="st">  "txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",</span></span>
-<span id="cb55-7"><a href="#cb55-7" tabindex="-1"></a><span class="st">  "chartcode" : "NMBA", </span></span>
-<span id="cb55-8"><a href="#cb55-8" tabindex="-1"></a><span class="st">  "selector" : "chartcode"}'</span> <span class="op">&gt;</span> laura.svg</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
+<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb54-5"><a href="#cb54-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
+<span id="cb54-6"><a href="#cb54-6" tabindex="-1"></a><span class="st">  "txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",</span></span>
+<span id="cb54-7"><a href="#cb54-7" tabindex="-1"></a><span class="st">  "chartcode" : "NMBA", </span></span>
+<span id="cb54-8"><a href="#cb54-8" tabindex="-1"></a><span class="st">  "selector" : "chartcode"}'</span> <span class="op">&gt;</span> laura.svg</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -968,7 +962,7 @@ charts<a class="anchor" aria-label="anchor" href="#chartslist-list-available-gro
 <p>JAMES contains a wide variety of built-in growth charts. Each chart
 has a unique <code>chartcode</code>. We obtain the full list of chart
 codes as</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"charts/list/json"</span><span class="op">)</span></span>
 <span><span class="va">charts</span> <span class="op">&lt;-</span> <span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">charts</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">side</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -995,13 +989,13 @@ demo</a> provides the actual chart code used for each display.</p>
 <div class="tab-pane" id="bash-3" role="tabpanel" aria-labelledby="bash-3-tab">
 
 <p>Restrict the listing to the WHO references:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/list/json'</span> <span class="dt">\</span></span>
-<span id="cb58-3"><a href="#cb58-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb58-4"><a href="#cb58-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb58-5"><a href="#cb58-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
-<span id="cb58-6"><a href="#cb58-6" tabindex="-1"></a><span class="st">  "chartgrp": "who"</span></span>
-<span id="cb58-7"><a href="#cb58-7" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/list/json'</span> <span class="dt">\</span></span>
+<span id="cb57-3"><a href="#cb57-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb57-4"><a href="#cb57-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb57-5"><a href="#cb57-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
+<span id="cb57-6"><a href="#cb57-6" tabindex="-1"></a><span class="st">  "chartgrp": "who"</span></span>
+<span id="cb57-7"><a href="#cb57-7" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1026,7 +1020,7 @@ codes<a class="anchor" aria-label="anchor" href="#chartsvalidate-validate-chart-
 <div class="active  tab-pane" id="r-4" role="tabpanel" aria-labelledby="r-4-tab">
 
 <p>Check five chart codes:</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, </span>
 <span>                path <span class="op">=</span> <span class="st">"charts/validate/json"</span>, </span>
 <span>                chartcode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMAW"</span>, <span class="st">"NJAb"</span>, <span class="st">"PJAAN23"</span>, <span class="st">"PJAAN25"</span>, <span class="st">"dummy"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1036,19 +1030,19 @@ codes<a class="anchor" aria-label="anchor" href="#chartsvalidate-validate-chart-
 <div class="tab-pane" id="bash-4" role="tabpanel" aria-labelledby="bash-4-tab">
 
 <p>Check five chart codes:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/validate/json'</span> <span class="dt">\</span></span>
-<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb61-4"><a href="#cb61-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb61-5"><a href="#cb61-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
-<span id="cb61-6"><a href="#cb61-6" tabindex="-1"></a><span class="st">  "chartcode": [</span></span>
-<span id="cb61-7"><a href="#cb61-7" tabindex="-1"></a><span class="st">    "NMAW",</span></span>
-<span id="cb61-8"><a href="#cb61-8" tabindex="-1"></a><span class="st">    "NJAB",</span></span>
-<span id="cb61-9"><a href="#cb61-9" tabindex="-1"></a><span class="st">    "PJAAN23",</span></span>
-<span id="cb61-10"><a href="#cb61-10" tabindex="-1"></a><span class="st">    "PJAAN25", </span></span>
-<span id="cb61-11"><a href="#cb61-11" tabindex="-1"></a><span class="st">    "dummy"</span></span>
-<span id="cb61-12"><a href="#cb61-12" tabindex="-1"></a><span class="st">  ]</span></span>
-<span id="cb61-13"><a href="#cb61-13" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/validate/json'</span> <span class="dt">\</span></span>
+<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb60-4"><a href="#cb60-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb60-5"><a href="#cb60-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
+<span id="cb60-6"><a href="#cb60-6" tabindex="-1"></a><span class="st">  "chartcode": [</span></span>
+<span id="cb60-7"><a href="#cb60-7" tabindex="-1"></a><span class="st">    "NMAW",</span></span>
+<span id="cb60-8"><a href="#cb60-8" tabindex="-1"></a><span class="st">    "NJAB",</span></span>
+<span id="cb60-9"><a href="#cb60-9" tabindex="-1"></a><span class="st">    "PJAAN23",</span></span>
+<span id="cb60-10"><a href="#cb60-10" tabindex="-1"></a><span class="st">    "PJAAN25", </span></span>
+<span id="cb60-11"><a href="#cb60-11" tabindex="-1"></a><span class="st">    "dummy"</span></span>
+<span id="cb60-12"><a href="#cb60-12" tabindex="-1"></a><span class="st">  ]</span></span>
+<span id="cb60-13"><a href="#cb60-13" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 <pre><code><span><span class="co">## [true, true, false, true, false]</span></span></code></pre>
 </div>
 </div>
@@ -1073,7 +1067,7 @@ screeners to child data<a class="anchor" aria-label="anchor" href="#screenersapp
 <p>The <code>/screeners/apply</code> end point applies standard
 screeners to the child data. Invocation of the screeners may be done
 by</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/screeners/apply/json"</span>, </span>
 <span>                session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
@@ -1085,10 +1079,10 @@ by</p>
 <span><span class="co">## 1 Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.</span></span>
 <span><span class="co">## 2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.</span></span>
 <span><span class="co">## 3                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.</span></span>
-<span><span class="co">##   Versie Leeftijd</span></span>
-<span><span class="co">## 1 1.16.1    0.167</span></span>
-<span><span class="co">## 2 1.16.1    0.167</span></span>
-<span><span class="co">## 3 1.16.1    0.167</span></span></code></pre>
+<span><span class="co">##        Versie Leeftijd</span></span>
+<span><span class="co">## 1 1.20.0.9000    0.167</span></span>
+<span><span class="co">## 2 1.20.0.9000    0.167</span></span>
+<span><span class="co">## 3 1.20.0.9000    0.167</span></span></code></pre>
 <p>The procedure calculates the intervals between the most recent
 measurement (at date 20181211) and earlier measurements (at dates
 20181111 and 20181011 (birth)), and assesses whether the measurements at
@@ -1108,18 +1102,18 @@ weight and head circumference.</p>
 </div>
 <div class="tab-pane" id="bash-5" role="tabpanel" aria-labelledby="bash-5-tab">
 
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/apply/json'</span> <span class="dt">\</span></span>
-<span id="cb65-3"><a href="#cb65-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb65-4"><a href="#cb65-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
-<span id="cb65-5"><a href="#cb65-5" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb64-2"><a href="#cb64-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/apply/json'</span> <span class="dt">\</span></span>
+<span id="cb64-3"><a href="#cb64-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb64-4"><a href="#cb64-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
+<span id="cb64-5"><a href="#cb64-5" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
 <pre><code><span><span class="co">## [</span></span>
 <span><span class="co">##   {</span></span>
 <span><span class="co">##     "Categorie": 1000,</span></span>
 <span><span class="co">##     "CategorieOmschrijving": "Lengte",</span></span>
 <span><span class="co">##     "Code": 1031,</span></span>
 <span><span class="co">##     "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##     "Versie": "1.16.1",</span></span>
+<span><span class="co">##     "Versie": "1.20.0.9000",</span></span>
 <span><span class="co">##     "Leeftijd": 0.167</span></span>
 <span><span class="co">##   },</span></span>
 <span><span class="co">##   {</span></span>
@@ -1127,7 +1121,7 @@ weight and head circumference.</p>
 <span><span class="co">##     "CategorieOmschrijving": "Gewicht",</span></span>
 <span><span class="co">##     "Code": 2031,</span></span>
 <span><span class="co">##     "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##     "Versie": "1.16.1",</span></span>
+<span><span class="co">##     "Versie": "1.20.0.9000",</span></span>
 <span><span class="co">##     "Leeftijd": 0.167</span></span>
 <span><span class="co">##   },</span></span>
 <span><span class="co">##   {</span></span>
@@ -1135,7 +1129,7 @@ weight and head circumference.</p>
 <span><span class="co">##     "CategorieOmschrijving": "Hoofdomtrek",</span></span>
 <span><span class="co">##     "Code": 3031,</span></span>
 <span><span class="co">##     "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##     "Versie": "1.16.1",</span></span>
+<span><span class="co">##     "Versie": "1.20.0.9000",</span></span>
 <span><span class="co">##     "Leeftijd": 0.167</span></span>
 <span><span class="co">##   }</span></span>
 <span><span class="co">## ]</span></span></code></pre>
@@ -1165,14 +1159,14 @@ screeners<a class="anchor" aria-label="anchor" href="#screenerslist-list-availab
 <p>JAMES implements several screening algorithms. The
 <code>/screeners/list</code> end point provides detailed information on
 each of these.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/screeners/list/json"</span>, </span>
 <span>                session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Versie"                "yname"                 "Categorie"            </span></span>
 <span><span class="co">## [4] "CategorieOmschrijving" "JGZRichtlijn"          "Code"                 </span></span>
 <span><span class="co">## [7] "CodeOmschrijving"</span></span></code></pre>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">yname</span>, <span class="va">Code</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      Code</span></span>
 <span><span class="co">## yname 1010 1011 1012 1013 1014 1015 1016 1017 1018 1019 1020 1021 1022 1024</span></span>
@@ -1218,11 +1212,11 @@ be referred for further investigation.</p>
 <div class="tab-pane" id="bash-6" role="tabpanel" aria-labelledby="bash-6-tab">
 
 <p>We get the details for the guidelines for head circumference as</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/list/json'</span> <span class="dt">\</span></span>
-<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{"ynames": "hdc"}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/list/json'</span> <span class="dt">\</span></span>
+<span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb70-4"><a href="#cb70-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb70-5"><a href="#cb70-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{"ynames": "hdc"}'</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1248,33 +1242,33 @@ site<a class="anchor" aria-label="anchor" href="#siterequest-request-personalise
 
 <p>The <code>/site/request</code> end point creates an URL to a
 personalised, interactive site containing all charts.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "http://localhost/site?session=x043355dcd26efe"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost/site?session=x007f1db5d977fd"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
 <p>Alteratively, we may start from the <code>session</code> created by
 <code>/data/upload</code>:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "http://localhost/site?session=x0a887d8cfab52d"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost/site?session=x01b80e825c9550"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
 </div>
 <div class="tab-pane" id="bash-7" role="tabpanel" aria-labelledby="bash-7-tab">
 
-<div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/site/request/json'</span> <span class="dt">\</span></span>
-<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
-<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
-<pre><code><span><span class="co">## ["http://localhost/site?session=x0493b56a619324"]</span></span></code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/site/request/json'</span> <span class="dt">\</span></span>
+<span id="cb75-3"><a href="#cb75-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb75-4"><a href="#cb75-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
+<span id="cb75-5"><a href="#cb75-5" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
+<pre><code><span><span class="co">## ["http://localhost/site?session=x0a66e4d971d9a3"]</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1303,25 +1297,23 @@ multiple end points, and thus functions as a one-stop shop. However,
 currently it does not support graphics output, so use
 <code>/{session}/{info}/svglite</code> or
 <code>/charts/draw/svglite</code> for the charts.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="st">"maria.json"</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/blend/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
 <pre><code><span><span class="co">## $txt</span></span>
-<span><span class="co">## [1] "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Maria\",\"clientDetails\": [{\"bdsNumber\": 19,\"value\": \"2\"},{\"bdsNumber\": 20,\"value\": \"20181011\"},{\"bdsNumber\": 82,\"value\": 189},{\"bdsNumber\": 91,\"value\": \"1\"},{\"bdsNumber\": 110,\"value\": 990},{\"bdsNumber\": 238,\"value\": 1670},{\"bdsNumber\": 240,\"value\": 1900}],\"clientMeasurements\": [{\"bdsNumber\": 235,\"values\": [{\"date\": \"20181111\",\"value\": 380},{\"date\": \"20181211\",\"value\": 435}]},{\"bdsNumber\": 245,\"values\": [{\"date\": \"20181111\",\"value\": 1250},{\"date\": \"20181211\",\"value\": 2100}]},{\"bdsNumber\": 252,\"values\": [{\"date\": \"20181111\",\"value\": 270},{\"date\": \"20181211\",\"value\": 305}]}],\"nestedDetails\": [{\"nestingBdsNumber\": 62,\"nestingCode\": \"01\",\"clientDetails\": [{\"bdsNumber\": 63,\"value\": \"19950704\"}],\"clientMeasurements\": []},{\"nestingBdsNumber\": 62,\"nestingCode\": \"02\",\"clientDetails\": [{\"bdsNumber\": 63,\"value\": \"19901202\"}],\"clientMeasurements\": []}]}"</span></span>
+<span><span class="co">## [1] "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Maria\",\"clientDetails\": [{\"bdsNumber\": 19,\"value\": \"2\"},{\"bdsNumber\": 20,\"value\": \"20181011\"},{\"bdsNumber\": 82,\"value\": 189},{\"bdsNumber\": 91,\"value\": \"1\"},{\"bdsNumber\": 110,\"value\": 990},{\"bdsNumber\": 238,\"value\": 1670},{\"bdsNumber\": 240,\"value\": 1900}],\"clientMeasurements\": [{\"bdsNumber\": 235,\"values\": [{\"date\": \"20181111\",\"value\": 380},{\"date\": \"20181211\",\"value\": 435}]},{\"bdsNumber\": 245,\"values\": [{\"date\": \"20181111\",\"value\": 1250},{\"date\": \"20181211\",\"value\": 2100}]},{\"bdsNumber\": 252,\"values\": [{\"date\": \"20181111\",\"value\": 270},{\"date\": \"20181211\",\"value\": 305}]}],\"nestedDetails\": [{\"nestingBdsNumber\": 62,\"nestingCode\": \"01\",\"clientDetails\": [{\"bdsNumber\": 63,\"value\": \"19950704\"}]},{\"nestingBdsNumber\": 62,\"nestingCode\": \"02\",\"clientDetails\": [{\"bdsNumber\": 63,\"value\": \"19901202\"}]}]}"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $session</span></span>
-<span><span class="co">## [1] "x0fcfe3cb644834"</span></span>
+<span><span class="co">## [1] "x0f4580eecf9834"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $site</span></span>
-<span><span class="co">## [1] "http://localhost/site?session=x0fcfe3cb644834"</span></span>
+<span><span class="co">## [1] "http://localhost/site?session=x0f4580eecf9834"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $child</span></span>
 <span><span class="co">##   id  name        dob       dobm       dobf src    sex gad ga smo  bw hgtm hgtf</span></span>
 <span><span class="co">## 1 -1 Maria 2018-10-11 1990-12-02 1995-07-04   0 female 189 27   1 990  167  190</span></span>
-<span><span class="co">##   agem etn</span></span>
-<span><span class="co">## 1   27  NL</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $time</span></span>
 <span><span class="co">##       age xname yname zname                  zref       x       y      z</span></span>
@@ -1348,25 +1340,25 @@ currently it does not support graphics output, so use
 <span><span class="co">## 1 Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.</span></span>
 <span><span class="co">## 2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.</span></span>
 <span><span class="co">## 3                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.</span></span>
-<span><span class="co">##   Versie Leeftijd</span></span>
-<span><span class="co">## 1 1.16.1    0.167</span></span>
-<span><span class="co">## 2 1.16.1    0.167</span></span>
-<span><span class="co">## 3 1.16.1    0.167</span></span></code></pre>
+<span><span class="co">##        Versie Leeftijd</span></span>
+<span><span class="co">## 1 1.20.0.9000    0.167</span></span>
+<span><span class="co">## 2 1.20.0.9000    0.167</span></span>
+<span><span class="co">## 3 1.20.0.9000    0.167</span></span></code></pre>
 </div>
 <div class="tab-pane" id="bash-8" role="tabpanel" aria-labelledby="bash-8-tab">
 
-<div class="sourceCode" id="cb80"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/blend/request/json'</span> <span class="dt">\</span></span>
-<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb80-4"><a href="#cb80-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb80-5"><a href="#cb80-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
-<span id="cb80-6"><a href="#cb80-6" tabindex="-1"></a><span class="st">  "txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/bdsreader/examples/maria.json",</span></span>
-<span id="cb80-7"><a href="#cb80-7" tabindex="-1"></a><span class="st">  "blend": "standard"</span></span>
-<span id="cb80-8"><a href="#cb80-8" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a>  <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/blend/request/json'</span> <span class="dt">\</span></span>
+<span id="cb79-3"><a href="#cb79-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb79-4"><a href="#cb79-4" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb79-5"><a href="#cb79-5" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{</span></span>
+<span id="cb79-6"><a href="#cb79-6" tabindex="-1"></a><span class="st">  "txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/bdsreader/examples/maria.json",</span></span>
+<span id="cb79-7"><a href="#cb79-7" tabindex="-1"></a><span class="st">  "blend": "standard"</span></span>
+<span id="cb79-8"><a href="#cb79-8" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "txt": ["http://localhost/ocpu/library/bdsreader/examples/maria.json"],</span></span>
-<span><span class="co">##   "session": ["x078a97abcd9653"],</span></span>
-<span><span class="co">##   "site": ["http://localhost/site?session=x078a97abcd9653"],</span></span>
+<span><span class="co">##   "session": ["x0c32d1e144d2f2"],</span></span>
+<span><span class="co">##   "site": ["http://localhost/site?session=x0c32d1e144d2f2"],</span></span>
 <span><span class="co">##   "child": [</span></span>
 <span><span class="co">##     {</span></span>
 <span><span class="co">##       "id": -1,</span></span>
@@ -1381,9 +1373,7 @@ currently it does not support graphics output, so use
 <span><span class="co">##       "smo": 1,</span></span>
 <span><span class="co">##       "bw": 990,</span></span>
 <span><span class="co">##       "hgtm": 167,</span></span>
-<span><span class="co">##       "hgtf": 190,</span></span>
-<span><span class="co">##       "agem": 27,</span></span>
-<span><span class="co">##       "etn": "NL"</span></span>
+<span><span class="co">##       "hgtf": 190</span></span>
 <span><span class="co">##     }</span></span>
 <span><span class="co">##   ],</span></span>
 <span><span class="co">##   "time": [</span></span>
@@ -1520,7 +1510,7 @@ currently it does not support graphics output, so use
 <span><span class="co">##       "CategorieOmschrijving": "Lengte",</span></span>
 <span><span class="co">##       "Code": 1031,</span></span>
 <span><span class="co">##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##       "Versie": "1.16.1",</span></span>
+<span><span class="co">##       "Versie": "1.20.0.9000",</span></span>
 <span><span class="co">##       "Leeftijd": 0.167</span></span>
 <span><span class="co">##     },</span></span>
 <span><span class="co">##     {</span></span>
@@ -1528,7 +1518,7 @@ currently it does not support graphics output, so use
 <span><span class="co">##       "CategorieOmschrijving": "Gewicht",</span></span>
 <span><span class="co">##       "Code": 2031,</span></span>
 <span><span class="co">##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##       "Versie": "1.16.1",</span></span>
+<span><span class="co">##       "Versie": "1.20.0.9000",</span></span>
 <span><span class="co">##       "Leeftijd": 0.167</span></span>
 <span><span class="co">##     },</span></span>
 <span><span class="co">##     {</span></span>
@@ -1536,7 +1526,7 @@ currently it does not support graphics output, so use
 <span><span class="co">##       "CategorieOmschrijving": "Hoofdomtrek",</span></span>
 <span><span class="co">##       "Code": 3031,</span></span>
 <span><span class="co">##       "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##       "Versie": "1.16.1",</span></span>
+<span><span class="co">##       "Versie": "1.20.0.9000",</span></span>
 <span><span class="co">##       "Leeftijd": 0.167</span></span>
 <span><span class="co">##     }</span></span>
 <span><span class="co">##   ]</span></span>
