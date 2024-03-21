@@ -1,7 +1,13 @@
+# james 1.5.9
+
+- Removes unused code from `index.html`
+- Uses `defer` option for `start.js` and moves it into the head
+- Moves styling from `index.html` to `main.css`
+
 # james 1.5.8
 
 - Introduces throttling of 3 sec for checkbox, sliders and radio buttons
-- Moves all event binding functionality into `start.js`
+- Transfers all event binding functionality from `index.html` into `start.js`
 
 # james 1.5.7
 
