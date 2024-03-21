@@ -29,7 +29,7 @@ h3 {
   font-weight: bold;
 }
 
-#plotdiv {
+#plotDiv {
   position: relative;
   top: 15px;
   left: -15px;
@@ -82,4 +82,21 @@ h3 {
 }
 .irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before {
     border-top-color: #18BC9C;
+}
+
+#textDiv {
+  display: none;
+}
+
+.highlight-background {
+  background-color: lightgreen;
+}
+
+.preserve-whitespace {
+  white-space: pre-wrap;
+}
+
+/* CSS to hide elements */
+.hidden {
+  display: none;
 }

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Uncomment this for docker app -->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,31 +11,12 @@
   <script type="text/javascript" src="app/js/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="app/js/popper.min.js"></script>
   <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
-  <script defer type="text/javascript" src="app/js/ion.rangeSlider.min.js"></script>
-  <script defer type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
-  <script defer type="text/javascript" src="app/js/handleUIVisibility.js"></script>
-  <script defer type="text/javascript" src="app/js/update.js"></script>
+  <script type="text/javascript" src="app/js/ion.rangeSlider.min.js"></script>
+  <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
+  <script type="text/javascript" src="app/js/handleUIVisibility.js"></script>
+  <script type="text/javascript" src="app/js/update.js"></script>
   <script defer type="text/javascript" src="app/js/start.js"></script>
 </head>
-<!---->
-
-<!-- Uncomment this for local app
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="#" />
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/main.css" />
-  <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/ion.rangeSlider.min.js"></script>
-  <script type="text/javascript" src="js/opencpu-0.5-james-0.1.js"></script>
-  <script type="text/javascript" src="js/update.js"></script>
-  <script defer type="text/javascript" src="js/start.js"></script>
-</head>
-<!---->
 
 <body>
   <div class="container-fluid">
@@ -86,8 +66,8 @@
                 </form>
 
                 <div class="form-group" id="weekmenu">
-                  <label class="control-label" for="matchgroup"><strong>Zwangerschapsduur</strong></label>
-                  <input type="text" name="" value="" id="weekslider" />
+                  <label class="control-label" for="weekslider"><strong>Zwangerschapsduur</strong></label>
+                  <input type="text" name="weekslider" value="" id="weekslider" />
                 </div>
 
                 <form action="" id="etnicity">
@@ -143,7 +123,7 @@
                 </form>
 
                 <div class="form-group" id="weekmenu_dsc">
-                  <label class="control-label" for="matchgroup"><strong>Zwangerschapsduur</strong></label>
+                  <label class="control-label" for="weekslider_dsc"><strong>Zwangerschapsduur</strong></label>
                   <input type="text" name="" value="" id="weekslider_dsc" />
                 </div>
 
@@ -198,13 +178,13 @@
                   </div>
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group hidden">
                   <div class="checkbox">
                     <label>
                       <input id="exact_ga" type="checkbox">
                       <span>Zelfde zwangerschapsduur</span>
-                    </label>
-                  </div>
+                      </label>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -241,9 +221,6 @@
               <form action="" name="messagegrp">
                   <strong>Berichtklasse</strong><br>
                   <input type="radio" id="messproc" value="exec" name="messagegrp" checked="checked"> Sessie<br>
-<!--                 <input type="radio" id="messdata" value="data" name="messagegrp"> Data<br>
-                     <input type="radio" id="messscreen" value="screen" name="messagegrp"> Richtlijnen<br>
-                     <input type="radio" id="messanal" value="analysis" name="messagegrp"> Analyse<br>  -->
                 <br>
                 </form>
 
@@ -255,24 +232,20 @@
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotDiv"></div>
-        <div id="textDiv" style="display: none;">
-          <h5 id="version", style="background-color:lightgreen;">JAMES 1.5.7 (20240320), &copy; TNO 2024</h5>
-          <p id="rq1-session" style="background-color:lightgreen;"></p>
-          <p id="rq1-console" style="white-space: pre-wrap;"></p>
-          <p id="rq1-warnings" style="white-space: pre-wrap;"></p>
-          <p id="rq1-messages" style="white-space: pre-wrap;"></p>
-          <p id="rq2-session" style="background-color:lightgreen;"></p>
-          <p id="rq2-console" style="white-space: pre-wrap;"></p>
-          <p id="rq2-warnings" style="white-space: pre-wrap;"></p>
-          <p id="rq2-messages" style="white-space: pre-wrap;"></p>
-        </div>
+        <div id="textDiv">
+          <h5 id="version" class="highlight-background">JAMES 1.5.9 (20240321), &copy; TNO 2024</h5>
+          <p id="rq1-session" class="highlight-background"></p>
+          <p id="rq1-console" class="preserve-whitespace"></p>
+          <p id="rq1-warnings" class="preserve-whitespace"></p>
+          <p id="rq1-messages" class="preserve-whitespace"></p>
+          <p id="rq2-session" class="highlight-background"></p>
+          <p id="rq2-console" class="preserve-whitespace"></p>
+          <p id="rq2-warnings" class="preserve-whitespace"></p>
+          <p id="rq2-messages" class="preserve-whitespace"></p>
+          </div>
       </div>
     </div>
   </div> <!-- end container-fluid -->
-  <!-- Uncomment this for docker app -->
-  <!--->
-  <!-- Uncomment this for local app
-  <script type="text/javascript" src="js/start.js"></script>
-  <!---->
+
 </body>
 </html>
