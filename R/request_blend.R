@@ -74,9 +74,9 @@ request_blend_standard <- function(txt, sitehost, session, ...) {
   screeners <- apply_screeners(session = session, ...)
 
   result <- list(
-    txt = txt,
-    session = session,
-    site = site,
+    txt = unbox(txt),
+    session = unbox(session),
+    site = unbox(site),
     child = persondata(tgt),
     time = timedata(tgt),
 #    chart = s(),
