@@ -17,7 +17,7 @@
 
 - Changes the version update so that the JAMES package has the same version as the JAMES docker
 
-# james 0.70.1
+# james 0.70.1 (= james 1.5.5)
 
 - Resolves the WFH sequence problem when later height is shorter (#24) 
 
