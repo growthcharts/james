@@ -124,15 +124,15 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.24.2",
+      "Version": "0.25.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "bdsreader",
-      "RemoteRef": "master",
-      "RemoteSha": "885e25fbf47b39558edbb1d043d4d991a8f490f7",
-      "Remotes": "growthcharts/centile, d-score/dscore, growthcharts/nlreferences, growthcharts/jamesdemodata",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "089e14e7d1e235d5f17a7e9845c91a7e1220064a",
       "Requirements": [
         "R",
         "centile",
@@ -147,7 +147,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "9d52fed5c914ca92061fdbecb2c3fa1a"
+      "Hash": "54bf4896738004f35d5ae334640a5fa4"
     },
     "bit": {
       "Package": "bit",

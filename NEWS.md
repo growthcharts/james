@@ -3,6 +3,7 @@
 - Removes unused code from `index.html`
 - Uses `defer` option for `start.js` and moves it into the head
 - Moves styling from `index.html` to `main.css`
+- Changes the definition and processing of BDS 71 (parental birth land) to provide a string with 4 digits (was numeric and integer previously) to conform to alphanumeric typology in BDS (updates to `bdsreader 0.25.0`)
 
 # james 1.5.8
 
