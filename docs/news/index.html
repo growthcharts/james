@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +52,21 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.9" id="james-159">james 1.5.9<a class="anchor" aria-label="anchor" href="#james-159"></a></h2>
+<ul><li>Removes unused code from <code>index.html</code>
+</li>
+<li>Uses <code>defer</code> option for <code>start.js</code> and moves it into the head</li>
+<li>Moves styling from <code>index.html</code> to <code>main.css</code>
+</li>
+<li>Changes the definition and processing of BDS 71 (parental birth land) to provide a string with 4 digits (was numeric and integer previously) to conform to alphanumeric typology in BDS (updates to <code>bdsreader 0.25.0</code>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.8" id="james-158">james 1.5.8<a class="anchor" aria-label="anchor" href="#james-158"></a></h2>
+<ul><li>Introduces throttling of 3 sec for checkbox, sliders and radio buttons</li>
+<li>Transfers all event binding functionality from <code>index.html</code> into <code>start.js</code>
+</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.7" id="james-157">james 1.5.7<a class="anchor" aria-label="anchor" href="#james-157"></a></h2>
 <ul><li>Refactors JS code <a href="https://github.com/growthcharts/james/pull/26/#issue-2197694510" class="external-link uri">https://github.com/growthcharts/james/pull/26/#issue-2197694510</a>
 </li>
@@ -61,7 +76,7 @@
 <ul><li>Changes the version update so that the JAMES package has the same version as the JAMES docker</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.70.1" id="james-0701">james 0.70.1<a class="anchor" aria-label="anchor" href="#james-0701"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.70.1" id="james-0701--james-155">james 0.70.1 (= james 1.5.5)<a class="anchor" aria-label="anchor" href="#james-0701--james-155"></a></h2>
 <ul><li>Resolves the WFH sequence problem when later height is shorter (<a href="https://github.com/growthcharts/james/issues/24" class="external-link">#24</a>)</li>
 </ul></div>
     <div class="section level2">
@@ -259,7 +274,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.52.0" id="james-0520">james 0.52.0<a class="anchor" aria-label="anchor" href="#james-0520"></a></h2>
 <ul><li>Breaking change is data structure</li>
-<li>Change data structure of <code><a href="https://rdrr.io/pkg/bdsreader/man/read_bds.html" class="external-link">read_bds()</a></code> to a simple list to ease standard JSON representation</li>
+<li>Change data structure of <code>read_bds()</code> to a simple list to ease standard JSON representation</li>
 <li>Adapt various JAMES functions to work with change to simple list</li>
 <li>Update to <code>bdsreader 0.17.0</code>
 </li>
