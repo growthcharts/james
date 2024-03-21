@@ -48,10 +48,6 @@ request_blend <- function(txt = "",
     return(request_blend_standard(txt = txt, sitehost = sitehost, session = session, ...))
   }
 
-  if (blend == "allegro") {
-    return(request_blend_allegro(txt = txt, sitehost = sitehost, session = session, ...))
-  }
-
   stop("blend", blend, "not found.")
 }
 
@@ -87,39 +83,5 @@ request_blend_standard <- function(txt, sitehost, session, ...) {
     screeners = screeners
   )
   return(result)
-}
-
-request_blend_allegro <- function(txt, sitehost, session, format = "1.0", ...) {
-  site <- request_site(txt = txt, sitehost = sitehost, session = session, format = format, ...)
-  session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
-  if (is.na(session)) session <- ""
-  tgt <- get_tgt(session = session)
-
-  res <- growthscreener::screen_curves_ind(ind = tgt)
-
-  last_dscore <- NULL
-  if (!is.null(tgt)) {
-    time <- timedata(tgt)
-    idx <- time$yname == "dsc"
-    if (any(idx)) {
-      d <- time$y[idx][sum(idx)]
-      if (length(d) && !is.na(d)) last_dscore <- d
-    }
-  }
-
-  # list of two elements if nu D-score, else 3 elements
-  if (is.null(last_dscore)) {
-    ret <- list(
-      UrlGroeicurven = unbox(site),
-      Resultaten = res
-    )
-  } else {
-    ret <- list(
-      UrlGroeicurven = unbox(site),
-      Resultaten = res,
-      LaatsteDscore = unbox(last_dscore)
-    )
-  }
-  ret
 }
 
