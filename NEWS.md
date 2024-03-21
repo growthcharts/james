@@ -1,7 +1,13 @@
+# james 1.5.9
+
+- Removes unused code from `index.html`
+- Uses `defer` option for `start.js` and moves it into the head
+- Moves styling from `index.html` to `main.css`
+
 # james 1.5.8
 
 - Introduces throttling of 3 sec for checkbox, sliders and radio buttons
-- Moves all event binding functionality into `start.js`
+- Transfers all event binding functionality from `index.html` into `start.js`
 
 # james 1.5.7
 
@@ -11,7 +17,7 @@
 
 - Changes the version update so that the JAMES package has the same version as the JAMES docker
 
-# james 0.70.1
+# james 0.70.1 (= james 1.5.5)
 
 - Resolves the WFH sequence problem when later height is shorter (#24) 
 
