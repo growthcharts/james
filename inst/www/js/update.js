@@ -109,7 +109,7 @@ function drawChart(params) {
   const rq = $("#plotDiv").rplot("draw_chart", params, session => {
     updateNoticePanel(2, session);
   }).fail(session => {
-    console.error("Server error rq2 - cannot read data for plotting", {
+    console.error("Server error rq2 – unable to draw chart", {
       txt: params.txt,
       session: params.session,
       chartcode: params.chartcode,
