@@ -153,18 +153,18 @@ function initializeChartControls() {
       showCards(String(output.accordion));
 
       // Conditional UI adjustments
-      const chartGroupElementId = output.side === "dsc" ? "chartgrp_dsc" : "chartgrp";
+      const chartGroupElementId = output.side[0] === "dsc" ? "chartgrp_dsc" : "chartgrp";
       document.getElementById(chartGroupElementId).value = output.chartgrp.toString();
       if (output.side === "dsc") {
         // Signal to update() to use D-score UI controls
         active = "ontwikkeling";
       }
-      if (output.side !== "dsc") {
-        document.forms.msr[output.side].checked = true;
+      if (output.side[0] !== "dsc") {
+        document.forms.msr[output.side[0]].checked = true;
       }
-      document.forms.agegrp[output.agegrp].checked = true;
-      if (output.agegrp !== "1-21y") {
-        document.forms.agegrp_dsc[output.agegrp].checked = true;
+      document.forms.agegrp[output.agegrp[0]].checked = true;
+      if (output.agegrp[0] !== "1-21y") {
+        document.forms.agegrp_dsc[output.agegrp[0]].checked = true;
       }
 
       // Update sliders
@@ -172,7 +172,7 @@ function initializeChartControls() {
 
       // Set ethnicity and sex
       setEthnicity(output.population);
-      document.forms.sex[output.sex].checked = true;
+      document.forms.sex[output.sex[0]].checked = true;
 
       // Final UI updates
       updateNoticePanel(1, session);
@@ -197,7 +197,7 @@ function initializeChartControls() {
 }
 
 function updateSliders(output) {
-  const weekNum = Math.trunc(Number(output.week));
+  const weekNum = Math.trunc(Number(output.week[0]));
   if (weekNum >= 25 && weekNum <= 36) {
     updateWeekSlider("#weekslider", String(output.week));
     updateWeekSlider("#weekslider_dsc", String(output.week));
