@@ -1,3 +1,7 @@
+# james 1.5.10 
+
+- Fixes a bug during initialization of children > 4y (#29)
+
 # james 1.5.9
 
 - Removes unused code from `index.html`
