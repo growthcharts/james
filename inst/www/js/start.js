@@ -155,7 +155,7 @@ function initializeChartControls() {
       // Conditional UI adjustments
       const chartGroupElementId = output.side[0] === "dsc" ? "chartgrp_dsc" : "chartgrp";
       document.getElementById(chartGroupElementId).value = output.chartgrp.toString();
-      if (output.side === "dsc") {
+      if (output.side[0] === "dsc") {
         // Signal to update() to use D-score UI controls
         active = "ontwikkeling";
       }
@@ -171,7 +171,7 @@ function initializeChartControls() {
       updateSliders(output);
 
       // Set ethnicity and sex
-      setEthnicity(output.population);
+      setEthnicity(output.population[0]);
       document.forms.sex[output.sex[0]].checked = true;
 
       // Final UI updates
@@ -199,11 +199,11 @@ function initializeChartControls() {
 function updateSliders(output) {
   const weekNum = Math.trunc(Number(output.week[0]));
   if (weekNum >= 25 && weekNum <= 36) {
-    updateWeekSlider("#weekslider", String(output.week));
-    updateWeekSlider("#weekslider_dsc", String(output.week));
+    updateWeekSlider("#weekslider", String(output.week[0]));
+    updateWeekSlider("#weekslider_dsc", String(output.week[0]));
   }
 
-  document.getElementById("donordata").value = output.dnr;
+  document.getElementById("donordata").value = output.dnr[0];
   sliderList = output.slider_list.toString();
   const values = sliderValues[sliderList];
   const from = values.indexOf(output.period[0].toString());
