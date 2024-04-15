@@ -690,15 +690,15 @@
     },
     "growthscreener": {
       "Package": "growthscreener",
-      "Version": "1.20.0.9000",
+      "Version": "1.21.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "growthscreener",
+      "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "7860960913c907d28a32f3aea990597e4bcd7c45",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
+      "RemoteSha": "ee184ce32134ff196bebb709084ac09ed7889f73",
       "Requirements": [
         "R",
         "bdsreader",
@@ -710,7 +710,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "6920d3e954d0145c271cc6b46edf92de"
+      "Hash": "9b0613339d9055e97e897be69bbd14e2"
     },
     "highr": {
       "Package": "highr",

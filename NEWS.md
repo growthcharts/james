@@ -1,40 +1,17 @@
-# james 1.5.10 
+# james 1.6.0 (Apr 2024)
 
-- Fixes a bug during initialization of children > 4y (#29)
+### Visible changes
 
-# james 1.5.9
-
-- Removes unused code from `index.html`
-- Uses `defer` option for `start.js` and moves it into the head
-- Moves styling from `index.html` to `main.css`
+- Changes the version number so that the JAMES package has the same version as the JAMES docker
+- Updates to `growthscreener 1.21.0`, which changes weight for height criteria into weight-for-age
 - Changes the definition and processing of BDS 71 (parental birth land) to provide a string with 4 digits (was numeric and integer previously) to conform to alphanumeric typology in BDS (updates to `bdsreader 0.25.0`)
-- Removes allegro blend (#20)
-- Returns `txt`, `session` and `site` in blend response as strings (#21)
-
-# james 1.5.8
-
 - Introduces throttling of 3 sec for checkbox, sliders and radio buttons
-- Transfers all event binding functionality from `index.html` into `start.js`
-
-# james 1.5.7
-
-- Refactors JS code <https://github.com/growthcharts/james/pull/26/#issue-2197694510>
-
-# james 1.5.6
-
-- Changes the version update so that the JAMES package has the same version as the JAMES docker
-
-# james 0.70.1 (= james 1.5.5)
-
 - Resolves the WFH sequence problem when later height is shorter (#24) 
+- Added JAMES, version and copyright note to "Meldingen"
+- Removed the superfluous header "GROEIDIAGRAMMEN" from the left panel
+- Adds a check and warning if the stored OpenCPU session does not contain data created by read_bds()
 
-# james 0.70.0
-
-- Resolves `Error in eval(predvars, data, env) : object 'hgt_z_0' not found` (#23)
-
-# james 0.69.0
-
-## More informative `Meldingen` panel
+### More informative `Meldingen` panel
 
 JAMES now writes on `Meldingen` for `rq1` (`james::convert_tgt_chartadvice()`) and `rq2` (`james::draw_chart()`):
 
@@ -46,28 +23,24 @@ JAMES now writes on `Meldingen` for `rq1` (`james::convert_tgt_chartadvice()`) a
 
 Note: The update of "Meldingen" when the call failed does always work, so it may be that "Meldingen" displays the results from the last functional call instead of the failed call. If the request failed, there will be a pop-up window with a stack trace from R.
 
-## Resolves R error when there are no data 
-
-Solves issue #19 which appears when JAMES cannot find the child data. 
-
-## Simplified update logic
-
-The JS call to `update()` (which draws the chart) is now removed from the call-back function of `rq1`. Thus, initialization of controls and drawing of charts are now done independently and in parallel. This removes a nested `ocpu.call()` call, thereby improveing performance. This change was undone in 1.5.6 because controls were not properly updated.
-
-## Cosmetic changes
-
-- Added JAMES, version and copyright note to "Meldingen"
-- Removed the superfluous header "GROEIDIAGRAMMEN" from the left panel
-
-## More informative NEWS.md
-
-# james 0.68.2
-
-- Adds a check and warning if the stored OpenCPU session does not contain data created by read_bds()
-
-# james 0.68.1
-
+### Internal changes
+- Updates javascript, HTML and CSS for clarity and efficiency
+- Moves styling from `index.html` to `main.css`
+- Removes allegro blend (#20)
+- Returns `txt`, `session` and `site` in blend response as strings (#21)
+- Transfers all event binding functionality from `index.html` into `start.js`
+- Refactors JS code <https://github.com/growthcharts/james/pull/26/#issue-2197694510>
 - Updates all packages and renv to CRAN version March 2024
+
+### Bug fixes
+- Fixes a bug during initialization of children > 4y (#29)
+- Resolves `Error in eval(predvars, data, env) : object 'hgt_z_0' not found` (#23)
+- Solves issue #19 which appears when JAMES cannot find the child data. 
+
+### Simplified update logic
+
+- The JS call to `update()` (which draws the chart) is now removed from the call-back function of `rq1`. Thus, initialization of controls and drawing of charts are now done independently and in parallel. This removes a nested `ocpu.call()` call, thereby improveing performance. 
+- This change was undone in 1.5.6 because controls were not properly updated.
 
 # james 0.68.0
 
