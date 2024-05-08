@@ -14,8 +14,7 @@ License: AGPL (>= 3)
 Encoding: UTF-8
 Depends: 
     R (>= 2.10),
-    svglite,
-    credentials
+    svglite
 Imports: 
     bdsreader (>= 0.25.0),
     chartbox (>= 1.15.0),
