@@ -157,8 +157,8 @@ function initializeChartControls() {
       if (output.side[0] === "dsc") {
         // Signal to update() to use D-score UI controls
         active = "ontwikkeling";
-        if (output.ga <= 36) document.getElementById(chartGroupElementId).value = "GSED Fase 1 prematuren";
-        else document.getElementById(chartGroupElementId).value = "GSED Fase 1";
+        if (output.ga <= 36) document.getElementById(chartGroupElementId).value = "gsed1pt";
+        else document.getElementById(chartGroupElementId).value = "gsed1";
       }
       if (output.side[0] !== "dsc") {
         document.forms.msr[output.side[0]].checked = true;
