@@ -797,8 +797,6 @@ $(cat .host)'/blend/request/json' \
 
 | Description                                           | Status                                  |
 |:------------------------------------------------------|:----------------------------------------|
-| [Download JAMES docker](https://github.com/growthcharts/jamesdocker/pkgs/container/james) | restricted |
-| [Release notes](https://github.com/growthcharts/jamesdocker/blob/master/NEWS.md) | restricted |
 | [Changelog](https://growthcharts.org/james/news/index.html) | open |
 | [OpenAPI specification](https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4) | open     |
 | [Source files](https://github.com/growthcharts) | open  |
