@@ -52,5 +52,6 @@ james:::update_version_files("inst/www/index.html",
 -   Check `renv::status` and commit changes to `renv.lock`
 -   Commit issue solution
 -   Increase version
+-   Update site: `devtools::build_site()`
 -   Push changes to GitHub
 -   Go to `jamesdocker` repo for building app
