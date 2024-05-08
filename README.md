@@ -56,15 +56,13 @@ this definition may evolve over time.
 
 ### Internal
 
-| Description                                                                                              | Status     |
-|:---------------------------------------------------------------------------------------------------------|:-----------|
-| [Download JAMES docker](https://github.com/growthcharts/jamesdocker/pkgs/container/james)                | restricted |
-| [Release notes](https://github.com/growthcharts/jamesdocker/blob/master/NEWS.md)                         | restricted |
-| [Example requests](https://james.groeidiagrammen.nl)                                                     | current    |
-| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james)                        | current    |
-| [Source files](https://github.com/growthcharts)                                                          | current    |
-| [JSON data schema 3.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json) | current    |
-| [JAMES issue tracker](https://github.com/growthcharts/james/issues)                                      | current    |
+| Description                                                                                              | Status  |
+|:---------------------------------------------------------------------------------------------------------|:--------|
+| [Example requests](https://james.groeidiagrammen.nl)                                                     | current |
+| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james)                        | current |
+| [Source files](https://github.com/growthcharts)                                                          | current |
+| [JSON data schema 3.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json) | current |
+| [JAMES issue tracker](https://github.com/growthcharts/james/issues)                                      | current |
 
 ### External
 

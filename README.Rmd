@@ -57,8 +57,6 @@ The current OpenAPI definition of JAMES is at <https://app.swaggerhub.com/apis/s
 
 | Description                                           | Status                                  |
 |:------------------------------------------------------|:----------------------------------------|
-| [Download JAMES docker](https://github.com/growthcharts/jamesdocker/pkgs/container/james) | restricted |
-| [Release notes](https://github.com/growthcharts/jamesdocker/blob/master/NEWS.md) | restricted |
 | [Example requests](https://james.groeidiagrammen.nl) | current |
 | [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | current     |
 | [Source files](https://github.com/growthcharts) | current |
