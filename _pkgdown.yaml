@@ -30,7 +30,6 @@ reference:
     - authenticate
     - calculate_dscore
     - convert_tgt_chartadvice
-    - cp_renv.lock
     - get_session_object
     - select_chart
   - title: Deprecated functions
