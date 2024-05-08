@@ -1,3 +1,9 @@
+# james 1.6.2 (May 2024)
+
+## Better chart initialisation
+
+- When the data contain only developmental data, JAMES initialises to the D-score chart (#33)
+
 # james 1.6.1 (May 2024)
 
 ### Administrative updates and workflow improvements
