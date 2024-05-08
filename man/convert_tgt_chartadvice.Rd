@@ -94,6 +94,10 @@ and age range of the data.
 The function is called at initialization to automate setting
 of proper chart and analysis defaults according to the child data.
 }
+\examples{
+test25 <- system.file("extdata/bds_v3.0/test/test25.json", package = "jamesdemodata")
+james:::convert_tgt_chartadvice(txt = test25)
+}
 \seealso{
 \code{\link[chartcatalog:parse_chartcode]{chartcatalog::parse_chartcode()}}
 }

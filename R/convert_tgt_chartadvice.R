@@ -44,6 +44,9 @@
 #' @author Stef van Buuren 2020
 #' @seealso [chartcatalog::parse_chartcode()]
 #' @keywords server
+#' @examples
+#' test25 <- system.file("extdata/bds_v3.0/test/test25.json", package = "jamesdemodata")
+#' james:::convert_tgt_chartadvice(txt = test25)
 #' @export
 convert_tgt_chartadvice <- function(txt = "",
                                     session = "",

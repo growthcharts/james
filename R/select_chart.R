@@ -36,7 +36,7 @@ select_chart <- function(target = NULL,
                          sex = NULL,
                          etn = NULL,
                          ga = NULL,
-                         side = "hgt",
+                         side = NULL,
                          language = "dutch") {
 
   # choose defaults depending on individual
@@ -66,13 +66,11 @@ select_chart <- function(target = NULL,
 
 select_side <- function(tgt) {
   yname <- timedata(tgt)[["yname"]]
-  if (any(c("hgt", "wgt", "hdc") %in% yname)) {
-    return("hgt")
-  }
-  if (any(c("dsc") %in% yname)) {
-    return("dsc")
-  }
-  "hgt"
+  gro <- intersect(yname, c("hgt", "wgt", "hdc", "bmi", "wfh"))
+  dev <- intersect(yname, c("dsc"))
+  if (length(gro)) return(gro[1L])
+  if (length(dev)) return(dev[1L])
+  return("hgt")
 }
 
 select_ga <- function(tgt) {
