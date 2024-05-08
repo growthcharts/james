@@ -21,6 +21,12 @@ jobs:
         with:
           use-public-rspm: true
 
+     - name: Install system dependencies
+        run: sudo apt-get install -y libgit2-dev
+
+      - name: Restore R package cache
+        uses: r-lib/actions/setup-renv@v2
+
       - name: Custom install R package 'credentials'
         run: |
           Rscript -e "install.packages('credentials')"
