@@ -49,8 +49,8 @@ The table lists the defined API end points and the mapping to each end
 point to the corresponding R function.
 
 The current OpenAPI definition of JAMES is at
-<https://app.swaggerhub.com/apis-docs/stefvanbuuren/james/1.5.0s>
-(version 1.5.0). Note that this definition may evolve over time.
+<https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. Note that
+this definition may evolve over time.
 
 ## Resources
 
