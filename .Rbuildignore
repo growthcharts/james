@@ -11,3 +11,4 @@ README.Rmd
 ^docs$
 ^_pkgdown.yaml$
 ^LICENSE\.md$
+^qmd$

@@ -1,0 +1,56 @@
+---
+title: "JAMES issue resolution steps"
+author: "Stef van Buuren"
+format: html
+---
+
+```{r setup}
+#| include: false
+#| cache: false
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+## Objective
+
+This document contains the step to create and deploy a new JAMES version.
+
+## Local JAMES development
+
+### Update and lock packages
+
+Are all R packages up to data and complete?
+
+```{r}
+renv::status()
+```
+
+Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock file.
+
+### Open, work and close issues in GitHub
+
+-   Solve relevant issues in `james` package
+-   <https://github.com/growthcharts/james/issues>
+
+### Check the top level package `james`
+
+```{r}
+devtools::check()
+```
+
+### Update version files
+
+If DESCRIPTION version changes, update two files with new version numbers
+
+```{r}
+james:::update_version_files("inst/www/index.html", 
+                             "vignettes/articles/getting_started.Rmd", 
+                             "DESCRIPTION")
+```
+
+### Next steps
+
+-   Check `renv::status` and commit changes to `renv.lock`
+-   Commit issue solution
+-   Increase version
+-   Push changes to GitHub
+-   Go to `jamesdocker` repo for building app
