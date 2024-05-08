@@ -9,6 +9,11 @@
     ]
   },
   "Packages": {
+    "credentials": {
+        "Package": "credentials",
+        "Version": "2.0.1",
+        "Source": "CRAN"
+    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-60.2",
