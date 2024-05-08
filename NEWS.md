@@ -1,3 +1,12 @@
+# james 1.6.1 (May 2024)
+
+### Administrative updates and workflow improvements
+
+- Updates to `R 4.4.0` and associated libraries
+- Adds helper `james:::update_version_files()` to automate references to current version (#32)
+- Adds a description of package update actions: `qmd/deploy_JAMES.rmd`
+- Updates the GH workflow for package checking
+
 # james 1.6.0 (Apr 2024)
 
 ### Visible changes
