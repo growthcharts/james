@@ -205,7 +205,7 @@ function updateSliders(output) {
   }
 
   document.getElementById("donordata").value = output.dnr[0];
-  sliderList = output.sliderList.toString();
+  sliderList = output.slider_list.toString();
   const values = sliderValues[sliderList];
   const from = values.indexOf(output.period[0].toString());
   const to = values.indexOf(output.period[1].toString());
@@ -238,7 +238,7 @@ function updateDonordata() {
   const sliderList = donorToSliderMap[donordata] || "0_2";
 
   // Update the slider with the new values
-  const values = sliderValues[[sliderList]];
+  const values = sliderValues[sliderList];
   $("#visitslider").data("ionRangeSlider").update({
     values: values
   });
