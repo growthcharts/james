@@ -238,7 +238,7 @@ function updateDonordata() {
   const sliderList = donorToSliderMap[donordata] || "0_2";
 
   // Update the slider with the new values
-  const values = sliderValues[sliderList];
+  const values = sliderValues[[sliderList]];
   $("#visitslider").data("ionRangeSlider").update({
     values: values
   });
