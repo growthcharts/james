@@ -205,7 +205,7 @@ function updateSliders(output) {
   }
 
   document.getElementById("donordata").value = output.dnr[0];
-  sliderList = output.slider_list.toString();
+  sliderList = output.sliderList.toString();
   const values = sliderValues[sliderList];
   const from = values.indexOf(output.period[0].toString());
   const to = values.indexOf(output.period[1].toString());
