@@ -58,7 +58,7 @@ function update() {
     side: msr,
     curve_interpolation: cm,
     quiet: false,
-    dnr,
+    dnr: dnr,
     lo: loStr,
     hi: hiStr,
     nmatch,
