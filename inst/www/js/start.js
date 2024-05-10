@@ -38,6 +38,7 @@ const addChangeListenerThrottledUpdate = (elementId) => {
 // Event attachment for UI controls: menus
 addChangeListenerUpdate('chartgrp');
 addChangeListenerUpdate('chartgrp_dsc');
+addChangeListenerUpdate('donordata');
 
 // Event attachment for UI controls: check boxes
 addChangeListenerThrottledUpdate('interpolation');
