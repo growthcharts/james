@@ -1,3 +1,9 @@
+# james 1.6.3 (May 2024)
+
+## Automatic donordata selection
+
+- Simplifies individual prediction by means of curve matching. The user needs to specify "now" and "future" age and the number of desired matches, and JAMES automatically select appropriate donor data based on the "future" age. This update resolves two issues related to choice and updating of the donordata menu. (#5, #31)
+
 # james 1.6.2 (May 2024)
 
 ## Better chart initialisation

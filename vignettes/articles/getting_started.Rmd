@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.6.2 (May 2024)
+subtitle: JAMES 1.6.3 (May 2024)
 author: Stef van Buuren, Arjan Huizing (TNO Child Health)
 output:
   html_document:
