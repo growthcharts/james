@@ -23,6 +23,17 @@ const userText = urlParams.get('txt') || '';
 const userSession = urlParams.get('session') || '';
 const userChartcode = urlParams.get('chartcode') || '';
 
+// Slider values
+const sliderValues = {
+  "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
+  "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
+  "0_19": ["0w", "3m", "6m", "12m", "24m", "5y", "9y", "10y", "11y", "14y", "19y"],
+  "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
+  "0-18": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m", "10y", "18y"],
+  "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
+};
+const sliderList = "0_18";
+
 // Defaults
 let chartcode = "NJAH";
 
@@ -92,17 +103,6 @@ function initializeSlider(selector, options) {
   // Merge common options with specific options provided for each slider
   $(selector).ionRangeSlider($.extend({}, commonOptions, options));
 }
-
-// Slider values
-const sliderValues = {
-  "0_2": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m"],
-  "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
-  "0_19": ["0w", "3m", "6m", "12m", "24m", "5y", "9y", "10y", "11y", "14y", "19y"],
-  "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
-  "0-18": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m", "10y", "18y"],
-  "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
-};
-let sliderList = "0_18";
 
 // Initialize the sliders with both common and specific options
 initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
