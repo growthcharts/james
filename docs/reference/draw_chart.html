@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@
 <span>  side <span class="op">=</span> <span class="st">"hgt"</span>,</span>
 <span>  curve_interpolation <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  dnr <span class="op">=</span> <span class="st">"0-2"</span>,</span>
+<span>  dnr <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lo <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  nmatch <span class="op">=</span> <span class="fl">0L</span>,</span>
@@ -179,7 +179,8 @@ written to standard output. Default is <code>quiet = TRUE</code>.</p></dd>
 <dt>dnr</dt>
 <dd><p>Donor data, Prediction horizon: <code>"0-2"</code>, <code>"2-4"</code>
 or <code>"4-18"</code>. May also be <code>"smocc"</code>, <code>"lollypop"</code>,
-<code>"terneuzen"</code> or <code>"pops"</code>.</p></dd>
+<code>"terneuzen"</code> or <code>"pops"</code>. If not specified, then the choice
+is made internally.</p></dd>
 
 
 <dt>lo</dt>
