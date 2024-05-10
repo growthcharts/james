@@ -36,8 +36,8 @@ function update() {
   const show_realized = document.getElementById("show_realized").checked;
 
   // Simplify retrieval of string values
-  const hiStr = sliderValues[sliderList][hi];
-  const loStr = sliderValues[sliderList][lo];
+  const hiStr = sliderValues["0-18"][hi];
+  const loStr = sliderValues["0-18"][lo];
   const nmatch = sliderValues.matches[match];
 
   // Show/hide elements based on `chartgrp` and `agegrp` and `population`

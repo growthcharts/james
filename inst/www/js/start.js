@@ -32,7 +32,6 @@ const sliderValues = {
   "0-18": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m", "10y", "18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
 };
-const sliderList = "0_18";
 
 // Defaults
 let chartcode = "NJAH";
@@ -107,7 +106,7 @@ function initializeSlider(selector, options) {
 // Initialize the sliders with both common and specific options
 initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
 initializeSlider("#matchslider", { from: 0, values: sliderValues["matches"] });
-initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues[sliderList] });
+initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues["0-18"] });
 initializeSlider("#weekslider_dsc", { min: 25, max: 36, from: 36, step: 1 });
 
 // Set active accordion page
