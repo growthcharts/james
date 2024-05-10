@@ -272,15 +272,15 @@
     },
     "chartplotter": {
       "Package": "chartplotter",
-      "Version": "0.33.1",
+      "Version": "0.34.0",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/curvematching, growthcharts/jamesdemodata, growthcharts/nlreferences, growthcharts/donorloader",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "chartplotter",
-      "RemoteRef": "master",
-      "RemoteSha": "601e11226361e71819de4b9e79bf9255a3b4fd0a",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/curvematching, growthcharts/jamesdemodata, growthcharts/nlreferences, growthcharts/donorloader",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "ef531056ae0309bde2615a08388aa86d09e1e9a6",
       "Requirements": [
         "R",
         "brokenstick",
@@ -298,7 +298,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "fe6bae41c32fac33c73a5f45fdb51069"
+      "Hash": "4b9c5011ee805afb9415249964ae21f9"
     },
     "cli": {
       "Package": "cli",
@@ -426,15 +426,15 @@
     },
     "donorloader": {
       "Package": "donorloader",
-      "Version": "0.36.1",
+      "Version": "0.37.1",
       "Source": "GitHub",
+      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "donorloader",
-      "RemoteRef": "master",
-      "RemoteSha": "0cac26138806268e15f769af6176338554fe40bc",
-      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "95b157def8e68c70de17482fb297b78d896916d1",
       "Requirements": [
         "R",
         "bdsreader",
@@ -443,7 +443,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "96625910f9ec660b4ab7f9c8cef4afbe"
+      "Hash": "503704dd61e356a2c7b9bed8ad8a28c8"
     },
     "dplyr": {
       "Package": "dplyr",

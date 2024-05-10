@@ -14,7 +14,8 @@
 #' @param session OpenCPU session key with the uploaded data
 #' @param dnr Donor data, Prediction horizon: `"0-2"`, `"2-4"`
 #' or `"4-18"`. May also be `"smocc"`, `"lollypop"`,
-#' `"terneuzen"` or `"pops"`.
+#' `"terneuzen"` or `"pops"`. If not specified, then the choice
+#' is made internally.
 #' @param chartcode Optional. The code of the requested growth chart.
 #' @param selector Either `"chartcode"`, `"data"` or `"derive"`.
 #' The function can calculate the chart code by looking at the child
@@ -62,7 +63,7 @@ draw_chart <- function(txt = "",
                        side = "hgt",
                        curve_interpolation = TRUE,
                        quiet = FALSE,
-                       dnr = "0-2",
+                       dnr = NULL,
                        lo = NULL,
                        hi = NULL,
                        nmatch = 0L,
@@ -98,13 +99,6 @@ draw_chart <- function(txt = "",
   }
 
   selector <- match.arg(selector)
-  dnr <- match.arg(dnr,
-    choices = c(
-      "0-2", "2-4", "4-18", "smocc", "lollypop",
-      "terneuzen", "pops"
-    )
-  )
-
   tgt <- get_tgt(txt = txt,
                  session = session,
                  format = format)

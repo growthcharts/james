@@ -18,7 +18,7 @@ draw_chart(
   side = "hgt",
   curve_interpolation = TRUE,
   quiet = FALSE,
-  dnr = "0-2",
+  dnr = NULL,
   lo = NULL,
   hi = NULL,
   nmatch = 0L,
@@ -92,7 +92,8 @@ written to standard output. Default is \code{quiet = TRUE}.}
 
 \item{dnr}{Donor data, Prediction horizon: \code{"0-2"}, \code{"2-4"}
 or \code{"4-18"}. May also be \code{"smocc"}, \code{"lollypop"},
-\code{"terneuzen"} or \code{"pops"}.}
+\code{"terneuzen"} or \code{"pops"}. If not specified, then the choice
+is made internally.}
 
 \item{lo}{Value of the left visit coded as string, e.g. \code{"4w"}
 or \code{"7.5m"}}
