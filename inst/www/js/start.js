@@ -25,7 +25,6 @@ const userChartcode = urlParams.get('chartcode') || '';
 
 // Defaults
 let chartcode = "NJAH";
-$("#donordata").val("0-2");
 
 // Event attachment for UI controls
 const addChangeListenerUpdate = (elementId) => {
@@ -100,9 +99,10 @@ const sliderValues = {
   "0_4": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m"],
   "0_19": ["0w", "3m", "6m", "12m", "24m", "5y", "9y", "10y", "11y", "14y", "19y"],
   "0_29": ["0w", "3m", "6m", "14m", "24m", "48m", "10y", "18y"],
+  "0-18": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m", "10y", "18y"],
   "matches": ["0", "1", "2", "5", "10", "25", "50", "100"]
 };
-let sliderList = "0_2";
+let sliderList = "0_18";
 
 // Initialize the sliders with both common and specific options
 initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
@@ -203,13 +203,6 @@ function updateSliders(output) {
     updateWeekSlider("#weekslider", String(output.week[0]));
     updateWeekSlider("#weekslider_dsc", String(output.week[0]));
   }
-
-  document.getElementById("donordata").value = output.dnr[0];
-  sliderList = output.slider_list.toString();
-  const values = sliderValues[sliderList];
-  const from = values.indexOf(output.period[0].toString());
-  const to = values.indexOf(output.period[1].toString());
-  $("#visitslider").data("ionRangeSlider").update({ values, from, to });
 }
 
 function updateWeekSlider(selector, week) {
@@ -221,30 +214,6 @@ function setEthnicity(population) {
   if (["nl", "tu", "ma", "hs", "ds"].includes(pop)) {
     document.forms.etnicity[pop].checked = true;
   }
-}
-
-function updateDonordata() {
-  // Update slider values and graph based on the donor data selection
-  const donordata = document.getElementById("donordata").value;
-
-  // Define a mapping from donor data to slider lists
-  const donorToSliderMap = {
-    "0-2": "0_2",
-    "2-4": "0_4",
-    "4-18": "0_29"
-  };
-
-  // Use the mapping to find the slider list, defaulting to "0_2" if not found
-  const sliderList = donorToSliderMap[donordata] || "0_2";
-
-  // Update the slider with the new values
-  const values = sliderValues[sliderList];
-  $("#visitslider").data("ionRangeSlider").update({
-    values: values
-  });
-
-  // Refresh UI elements as necessary
-  update();
 }
 
 function toggleDisplay(divToShow, divToHide) {

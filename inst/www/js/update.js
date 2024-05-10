@@ -27,7 +27,6 @@ function update() {
 
   const sex = document.querySelector('input[name="sex"]:checked').value;
   const cm = document.getElementById("interpolation").checked;
-  const dnr = document.getElementById("donordata").value;
   const lo = $("#visitslider").data().from;
   const hi = $("#visitslider").data().to;
   const match = Number($("#matchslider").data().from);
