@@ -1,3 +1,7 @@
+# james 1.6.4 (May 2024)
+
+- Solves an issue where the week sliders for pre-terms were not properly initialized in the case that the child has no data for the first four years (#6)
+
 # james 1.6.3 (May 2024)
 
 ## Automatic donordata selection
