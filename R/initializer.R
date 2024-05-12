@@ -33,6 +33,7 @@ initializer <- function(selector, target, chartcode = "") {
     choices$agegrp
   )
   choices$accordion <- initialize_accordion(target)
+  choices$week <- target$psn$ga
 
   choices
 }
