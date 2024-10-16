@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -351,27 +351,28 @@ illustrate both requests in <code>R</code> and in <code>bash</code>.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/growthcharts/jamesclient" class="external-link">jamesclient</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/" class="external-link">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite" class="external-link">jsonlite</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'jsonlite' was built under R version 4.4.1</span></span></code></pre>
 <p>Let’s find out the JAMES version number. In this document, we define
 the server that hosts JAMES as follows.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># host &lt;- "http://localhost"</span></span>
 <span><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"https://james.groeidiagrammen.nl"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"echo "</span>, <span class="va">host</span>, <span class="st">" &gt; .host"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We first illustrate a method that makes two requests to the server.
 The following commands call the <code>/version/json</code> end point in
 the JAMES API.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"version/json"</span><span class="op">)</span></span></code></pre></div>
 <p>We added the <code>/json</code> to the pathname to extract the JSON
 representation of the result of the <code>R</code> function
 <code><a href="../reference/version.html">james::version()</a></code>. The function result is an object of class
 <code>james_post</code> and consists of various components.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "url"          "status_code"  "headers"      "all_headers"  "cookies"     </span></span>
 <span><span class="co">##  [6] "content"      "date"         "times"        "request"      "handle"      </span></span>
 <span><span class="co">## [11] "request_path" "parsed"       "warnings"     "messages"     "session"</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span><span class="op">$</span><span class="va">url</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/version/json"</span></span></code></pre>
 <p>Most of the element are documented in the <code>response</code>
@@ -394,14 +395,14 @@ execution;</li>
 <code>r$messages</code> contain any messages, e.g. data reading
 errors;</li>
 <li>
-<code>r$session</code> (like x0ab7872897e988) is a unique session
+<code>r$session</code> (like x0aa6bb25d51a4d) is a unique session
 code.</li>
 </ul>
 <p>The <code><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">jamesclient::james_post()</a></code> function wraps the basis
 workhorse <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> that does the actual server request.
 For illustration, we may obtain equivalent content by the POST function
 directly.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="st">"version/json"</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/parse_url.html" class="external-link">parse_url</a></span><span class="op">(</span><span class="va">host</span><span class="op">)</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/modify_url.html" class="external-link">modify_url</a></span><span class="op">(</span><span class="va">url</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">url</span><span class="op">$</span><span class="va">path</span>, <span class="va">path</span><span class="op">)</span>, query <span class="op">=</span> <span class="st">"auto_unbox=true"</span><span class="op">)</span></span>
@@ -423,35 +424,35 @@ directly.</p>
 
 <p>We use the <code>curl</code> Linux command. If needed, on Ubuntu
 install <code>curl</code> as</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">sudo</span> apt <span class="at">-y</span> install curl</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">sudo</span> apt <span class="at">-y</span> install curl</span></code></pre></div>
 <p>Let’s find out the JAMES version number. We first illustrate a method
 that makes two requests to the server.</p>
 <p>The following <code>bash</code> commands call the
 <code>/version</code> API end point</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'GET'</span> <span class="dt">\</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="st">'http://localhost:8080/version'</span> <span class="dt">\</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: text/json'</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  </span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version <span class="op">&gt;</span> resp</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'GET'</span> <span class="dt">\</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="st">'http://localhost:8080/version'</span> <span class="dt">\</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: text/json'</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version <span class="op">&gt;</span> resp</span></code></pre></div>
 <p>The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">cat</span> resp</span></code></pre></div>
-<pre><code><span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/R/.val</span></span>
-<span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/R/version</span></span>
-<span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/stdout</span></span>
-<span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/source</span></span>
-<span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/console</span></span>
-<span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/info</span></span>
-<span><span class="co">## /ocpu/tmp/x0ac8adf9b6b44e/files/DESCRIPTION</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">cat</span> resp</span></code></pre></div>
+<pre><code><span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/R/.val</span></span>
+<span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/R/version</span></span>
+<span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/stdout</span></span>
+<span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/source</span></span>
+<span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/console</span></span>
+<span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/info</span></span>
+<span><span class="co">## /ocpu/tmp/x0a1dd67c237e74/files/DESCRIPTION</span></span></code></pre>
 <p>The path element following <code>tmp/</code> is a unique session key.
 See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for the interpretation
 of the OpenCPU API.</p>
 <p>The next snippet constructs the URL of a JSON representation of the
 result and downloads the contents of the URL as a file
 <code>value1</code>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)$(</span><span class="fu">head</span> <span class="at">-1</span> resp<span class="va">)</span>/json<span class="pp">?</span>auto_unbox=true <span class="op">&gt;</span> value1</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">cat</span> value1</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)$(</span><span class="fu">head</span> <span class="at">-1</span> resp<span class="va">)</span>/json<span class="pp">?</span>auto_unbox=true <span class="op">&gt;</span> value1</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">cat</span> value1</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
 <span><span class="co">##   "packageVersion": "1.6.4",</span></span>
@@ -460,8 +461,8 @@ result and downloads the contents of the URL as a file
 <span><span class="co">## }</span></span></code></pre>
 <p>The above sequence makes two requests to the server. The following
 code compacts both steps into one.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version/json<span class="pp">?</span>auto_unbox=true <span class="op">&gt;</span> value2</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">cat</span> value2</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version/json<span class="pp">?</span>auto_unbox=true <span class="op">&gt;</span> value2</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">cat</span> value2</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
 <span><span class="co">##   "packageVersion": "1.6.4",</span></span>
@@ -498,124 +499,124 @@ child data to JAMES.</p>
 stored as a <code>data.frame</code> or <code>tibble</code>. Here we copy
 the longitudinal demo data <code>maria.json</code> from the
 <code>bdsreader</code> package into the working directory.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">success</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples/maria.json"</span>, package <span class="op">=</span> <span class="st">"bdsreader"</span><span class="op">)</span>, </span>
 <span>                     <span class="st">"maria.json"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The contents of the file is <code>json</code> format, ready for
 upload:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>{</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="st">"OrganisatieCode"</span><span class="sc">:</span> <span class="dv">1234</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="st">"Referentie"</span><span class="sc">:</span> <span class="st">"fa308134-069e-49ce-9847-ccdae380ed6f"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>  <span class="st">"ClientGegevens"</span><span class="sc">:</span> {</span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>    <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>      {</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">19</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"2"</span></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>      },</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>      {</span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">20</span>,</span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"20181011"</span></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>      },</span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>      {</span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">82</span>,</span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"189"</span></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a>      },</span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a>      {</span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">91</span>,</span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"2"</span></span>
-<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a>      },</span>
-<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a>      {</span>
-<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">110</span>,</span>
-<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"990"</span></span>
-<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a>      },</span>
-<span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a>      {</span>
-<span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">238</span>,</span>
-<span id="cb20-28"><a href="#cb20-28" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"1670"</span></span>
-<span id="cb20-29"><a href="#cb20-29" tabindex="-1"></a>      },</span>
-<span id="cb20-30"><a href="#cb20-30" tabindex="-1"></a>      {</span>
-<span id="cb20-31"><a href="#cb20-31" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">240</span>,</span>
-<span id="cb20-32"><a href="#cb20-32" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"1900"</span></span>
-<span id="cb20-33"><a href="#cb20-33" tabindex="-1"></a>      }</span>
-<span id="cb20-34"><a href="#cb20-34" tabindex="-1"></a>    ],</span>
-<span id="cb20-35"><a href="#cb20-35" tabindex="-1"></a>    <span class="st">"Groepen"</span><span class="sc">:</span> [</span>
-<span id="cb20-36"><a href="#cb20-36" tabindex="-1"></a>      {</span>
-<span id="cb20-37"><a href="#cb20-37" tabindex="-1"></a>        <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
-<span id="cb20-38"><a href="#cb20-38" tabindex="-1"></a>          {</span>
-<span id="cb20-39"><a href="#cb20-39" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">63</span>,</span>
-<span id="cb20-40"><a href="#cb20-40" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"19950704"</span></span>
-<span id="cb20-41"><a href="#cb20-41" tabindex="-1"></a>          },</span>
-<span id="cb20-42"><a href="#cb20-42" tabindex="-1"></a>          {</span>
-<span id="cb20-43"><a href="#cb20-43" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">71</span></span>
-<span id="cb20-44"><a href="#cb20-44" tabindex="-1"></a>          },</span>
-<span id="cb20-45"><a href="#cb20-45" tabindex="-1"></a>          {</span>
-<span id="cb20-46"><a href="#cb20-46" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">62</span>,</span>
-<span id="cb20-47"><a href="#cb20-47" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"01"</span></span>
-<span id="cb20-48"><a href="#cb20-48" tabindex="-1"></a>          }</span>
-<span id="cb20-49"><a href="#cb20-49" tabindex="-1"></a>        ]</span>
-<span id="cb20-50"><a href="#cb20-50" tabindex="-1"></a>      },</span>
-<span id="cb20-51"><a href="#cb20-51" tabindex="-1"></a>      {</span>
-<span id="cb20-52"><a href="#cb20-52" tabindex="-1"></a>        <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
-<span id="cb20-53"><a href="#cb20-53" tabindex="-1"></a>          {</span>
-<span id="cb20-54"><a href="#cb20-54" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">63</span>,</span>
-<span id="cb20-55"><a href="#cb20-55" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"19901202"</span></span>
-<span id="cb20-56"><a href="#cb20-56" tabindex="-1"></a>          },</span>
-<span id="cb20-57"><a href="#cb20-57" tabindex="-1"></a>          {</span>
-<span id="cb20-58"><a href="#cb20-58" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">71</span></span>
-<span id="cb20-59"><a href="#cb20-59" tabindex="-1"></a>          },</span>
-<span id="cb20-60"><a href="#cb20-60" tabindex="-1"></a>          {</span>
-<span id="cb20-61"><a href="#cb20-61" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">62</span>,</span>
-<span id="cb20-62"><a href="#cb20-62" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"02"</span></span>
-<span id="cb20-63"><a href="#cb20-63" tabindex="-1"></a>          }</span>
-<span id="cb20-64"><a href="#cb20-64" tabindex="-1"></a>        ]</span>
-<span id="cb20-65"><a href="#cb20-65" tabindex="-1"></a>      }</span>
-<span id="cb20-66"><a href="#cb20-66" tabindex="-1"></a>    ]</span>
-<span id="cb20-67"><a href="#cb20-67" tabindex="-1"></a>  },</span>
-<span id="cb20-68"><a href="#cb20-68" tabindex="-1"></a>  <span class="st">"Contactmomenten"</span><span class="sc">:</span> [</span>
-<span id="cb20-69"><a href="#cb20-69" tabindex="-1"></a>    {</span>
-<span id="cb20-70"><a href="#cb20-70" tabindex="-1"></a>      <span class="st">"Tijdstip"</span><span class="sc">:</span> <span class="st">"20181011"</span>,</span>
-<span id="cb20-71"><a href="#cb20-71" tabindex="-1"></a>      <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
-<span id="cb20-72"><a href="#cb20-72" tabindex="-1"></a>        {</span>
-<span id="cb20-73"><a href="#cb20-73" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">245</span>,</span>
-<span id="cb20-74"><a href="#cb20-74" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"990"</span></span>
-<span id="cb20-75"><a href="#cb20-75" tabindex="-1"></a>        }</span>
-<span id="cb20-76"><a href="#cb20-76" tabindex="-1"></a>      ]</span>
-<span id="cb20-77"><a href="#cb20-77" tabindex="-1"></a>    },</span>
-<span id="cb20-78"><a href="#cb20-78" tabindex="-1"></a>    {</span>
-<span id="cb20-79"><a href="#cb20-79" tabindex="-1"></a>      <span class="st">"Tijdstip"</span><span class="sc">:</span> <span class="st">"20181111"</span>,</span>
-<span id="cb20-80"><a href="#cb20-80" tabindex="-1"></a>      <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
-<span id="cb20-81"><a href="#cb20-81" tabindex="-1"></a>        {</span>
-<span id="cb20-82"><a href="#cb20-82" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">235</span>,</span>
-<span id="cb20-83"><a href="#cb20-83" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"380"</span></span>
-<span id="cb20-84"><a href="#cb20-84" tabindex="-1"></a>        },</span>
-<span id="cb20-85"><a href="#cb20-85" tabindex="-1"></a>        {</span>
-<span id="cb20-86"><a href="#cb20-86" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">245</span>,</span>
-<span id="cb20-87"><a href="#cb20-87" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"1250"</span></span>
-<span id="cb20-88"><a href="#cb20-88" tabindex="-1"></a>        },</span>
-<span id="cb20-89"><a href="#cb20-89" tabindex="-1"></a>        {</span>
-<span id="cb20-90"><a href="#cb20-90" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">252</span>,</span>
-<span id="cb20-91"><a href="#cb20-91" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"270"</span></span>
-<span id="cb20-92"><a href="#cb20-92" tabindex="-1"></a>        }</span>
-<span id="cb20-93"><a href="#cb20-93" tabindex="-1"></a>      ]</span>
-<span id="cb20-94"><a href="#cb20-94" tabindex="-1"></a>    },</span>
-<span id="cb20-95"><a href="#cb20-95" tabindex="-1"></a>    {</span>
-<span id="cb20-96"><a href="#cb20-96" tabindex="-1"></a>      <span class="st">"Tijdstip"</span><span class="sc">:</span> <span class="st">"20181211"</span>,</span>
-<span id="cb20-97"><a href="#cb20-97" tabindex="-1"></a>      <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
-<span id="cb20-98"><a href="#cb20-98" tabindex="-1"></a>        {</span>
-<span id="cb20-99"><a href="#cb20-99" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">235</span>,</span>
-<span id="cb20-100"><a href="#cb20-100" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"435"</span></span>
-<span id="cb20-101"><a href="#cb20-101" tabindex="-1"></a>        },</span>
-<span id="cb20-102"><a href="#cb20-102" tabindex="-1"></a>        {</span>
-<span id="cb20-103"><a href="#cb20-103" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">245</span>,</span>
-<span id="cb20-104"><a href="#cb20-104" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"2100"</span></span>
-<span id="cb20-105"><a href="#cb20-105" tabindex="-1"></a>        },</span>
-<span id="cb20-106"><a href="#cb20-106" tabindex="-1"></a>        {</span>
-<span id="cb20-107"><a href="#cb20-107" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">252</span>,</span>
-<span id="cb20-108"><a href="#cb20-108" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"305"</span></span>
-<span id="cb20-109"><a href="#cb20-109" tabindex="-1"></a>        }</span>
-<span id="cb20-110"><a href="#cb20-110" tabindex="-1"></a>      ]</span>
-<span id="cb20-111"><a href="#cb20-111" tabindex="-1"></a>    }</span>
-<span id="cb20-112"><a href="#cb20-112" tabindex="-1"></a>  ]</span>
-<span id="cb20-113"><a href="#cb20-113" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>{</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="st">"OrganisatieCode"</span><span class="sc">:</span> <span class="dv">1234</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="st">"Referentie"</span><span class="sc">:</span> <span class="st">"fa308134-069e-49ce-9847-ccdae380ed6f"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="st">"ClientGegevens"</span><span class="sc">:</span> {</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>    <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>      {</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">19</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"2"</span></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>      },</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>      {</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">20</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"20181011"</span></span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>      },</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>      {</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">82</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"189"</span></span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a>      },</span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>      {</span>
+<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">91</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"2"</span></span>
+<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a>      },</span>
+<span id="cb21-22"><a href="#cb21-22" tabindex="-1"></a>      {</span>
+<span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">110</span>,</span>
+<span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"990"</span></span>
+<span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a>      },</span>
+<span id="cb21-26"><a href="#cb21-26" tabindex="-1"></a>      {</span>
+<span id="cb21-27"><a href="#cb21-27" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">238</span>,</span>
+<span id="cb21-28"><a href="#cb21-28" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"1670"</span></span>
+<span id="cb21-29"><a href="#cb21-29" tabindex="-1"></a>      },</span>
+<span id="cb21-30"><a href="#cb21-30" tabindex="-1"></a>      {</span>
+<span id="cb21-31"><a href="#cb21-31" tabindex="-1"></a>        <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">240</span>,</span>
+<span id="cb21-32"><a href="#cb21-32" tabindex="-1"></a>        <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"1900"</span></span>
+<span id="cb21-33"><a href="#cb21-33" tabindex="-1"></a>      }</span>
+<span id="cb21-34"><a href="#cb21-34" tabindex="-1"></a>    ],</span>
+<span id="cb21-35"><a href="#cb21-35" tabindex="-1"></a>    <span class="st">"Groepen"</span><span class="sc">:</span> [</span>
+<span id="cb21-36"><a href="#cb21-36" tabindex="-1"></a>      {</span>
+<span id="cb21-37"><a href="#cb21-37" tabindex="-1"></a>        <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
+<span id="cb21-38"><a href="#cb21-38" tabindex="-1"></a>          {</span>
+<span id="cb21-39"><a href="#cb21-39" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">63</span>,</span>
+<span id="cb21-40"><a href="#cb21-40" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"19950704"</span></span>
+<span id="cb21-41"><a href="#cb21-41" tabindex="-1"></a>          },</span>
+<span id="cb21-42"><a href="#cb21-42" tabindex="-1"></a>          {</span>
+<span id="cb21-43"><a href="#cb21-43" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">71</span></span>
+<span id="cb21-44"><a href="#cb21-44" tabindex="-1"></a>          },</span>
+<span id="cb21-45"><a href="#cb21-45" tabindex="-1"></a>          {</span>
+<span id="cb21-46"><a href="#cb21-46" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">62</span>,</span>
+<span id="cb21-47"><a href="#cb21-47" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"01"</span></span>
+<span id="cb21-48"><a href="#cb21-48" tabindex="-1"></a>          }</span>
+<span id="cb21-49"><a href="#cb21-49" tabindex="-1"></a>        ]</span>
+<span id="cb21-50"><a href="#cb21-50" tabindex="-1"></a>      },</span>
+<span id="cb21-51"><a href="#cb21-51" tabindex="-1"></a>      {</span>
+<span id="cb21-52"><a href="#cb21-52" tabindex="-1"></a>        <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
+<span id="cb21-53"><a href="#cb21-53" tabindex="-1"></a>          {</span>
+<span id="cb21-54"><a href="#cb21-54" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">63</span>,</span>
+<span id="cb21-55"><a href="#cb21-55" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"19901202"</span></span>
+<span id="cb21-56"><a href="#cb21-56" tabindex="-1"></a>          },</span>
+<span id="cb21-57"><a href="#cb21-57" tabindex="-1"></a>          {</span>
+<span id="cb21-58"><a href="#cb21-58" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">71</span></span>
+<span id="cb21-59"><a href="#cb21-59" tabindex="-1"></a>          },</span>
+<span id="cb21-60"><a href="#cb21-60" tabindex="-1"></a>          {</span>
+<span id="cb21-61"><a href="#cb21-61" tabindex="-1"></a>            <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">62</span>,</span>
+<span id="cb21-62"><a href="#cb21-62" tabindex="-1"></a>            <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"02"</span></span>
+<span id="cb21-63"><a href="#cb21-63" tabindex="-1"></a>          }</span>
+<span id="cb21-64"><a href="#cb21-64" tabindex="-1"></a>        ]</span>
+<span id="cb21-65"><a href="#cb21-65" tabindex="-1"></a>      }</span>
+<span id="cb21-66"><a href="#cb21-66" tabindex="-1"></a>    ]</span>
+<span id="cb21-67"><a href="#cb21-67" tabindex="-1"></a>  },</span>
+<span id="cb21-68"><a href="#cb21-68" tabindex="-1"></a>  <span class="st">"Contactmomenten"</span><span class="sc">:</span> [</span>
+<span id="cb21-69"><a href="#cb21-69" tabindex="-1"></a>    {</span>
+<span id="cb21-70"><a href="#cb21-70" tabindex="-1"></a>      <span class="st">"Tijdstip"</span><span class="sc">:</span> <span class="st">"20181011"</span>,</span>
+<span id="cb21-71"><a href="#cb21-71" tabindex="-1"></a>      <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
+<span id="cb21-72"><a href="#cb21-72" tabindex="-1"></a>        {</span>
+<span id="cb21-73"><a href="#cb21-73" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">245</span>,</span>
+<span id="cb21-74"><a href="#cb21-74" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"990"</span></span>
+<span id="cb21-75"><a href="#cb21-75" tabindex="-1"></a>        }</span>
+<span id="cb21-76"><a href="#cb21-76" tabindex="-1"></a>      ]</span>
+<span id="cb21-77"><a href="#cb21-77" tabindex="-1"></a>    },</span>
+<span id="cb21-78"><a href="#cb21-78" tabindex="-1"></a>    {</span>
+<span id="cb21-79"><a href="#cb21-79" tabindex="-1"></a>      <span class="st">"Tijdstip"</span><span class="sc">:</span> <span class="st">"20181111"</span>,</span>
+<span id="cb21-80"><a href="#cb21-80" tabindex="-1"></a>      <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
+<span id="cb21-81"><a href="#cb21-81" tabindex="-1"></a>        {</span>
+<span id="cb21-82"><a href="#cb21-82" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">235</span>,</span>
+<span id="cb21-83"><a href="#cb21-83" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"380"</span></span>
+<span id="cb21-84"><a href="#cb21-84" tabindex="-1"></a>        },</span>
+<span id="cb21-85"><a href="#cb21-85" tabindex="-1"></a>        {</span>
+<span id="cb21-86"><a href="#cb21-86" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">245</span>,</span>
+<span id="cb21-87"><a href="#cb21-87" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"1250"</span></span>
+<span id="cb21-88"><a href="#cb21-88" tabindex="-1"></a>        },</span>
+<span id="cb21-89"><a href="#cb21-89" tabindex="-1"></a>        {</span>
+<span id="cb21-90"><a href="#cb21-90" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">252</span>,</span>
+<span id="cb21-91"><a href="#cb21-91" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"270"</span></span>
+<span id="cb21-92"><a href="#cb21-92" tabindex="-1"></a>        }</span>
+<span id="cb21-93"><a href="#cb21-93" tabindex="-1"></a>      ]</span>
+<span id="cb21-94"><a href="#cb21-94" tabindex="-1"></a>    },</span>
+<span id="cb21-95"><a href="#cb21-95" tabindex="-1"></a>    {</span>
+<span id="cb21-96"><a href="#cb21-96" tabindex="-1"></a>      <span class="st">"Tijdstip"</span><span class="sc">:</span> <span class="st">"20181211"</span>,</span>
+<span id="cb21-97"><a href="#cb21-97" tabindex="-1"></a>      <span class="st">"Elementen"</span><span class="sc">:</span> [</span>
+<span id="cb21-98"><a href="#cb21-98" tabindex="-1"></a>        {</span>
+<span id="cb21-99"><a href="#cb21-99" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">235</span>,</span>
+<span id="cb21-100"><a href="#cb21-100" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"435"</span></span>
+<span id="cb21-101"><a href="#cb21-101" tabindex="-1"></a>        },</span>
+<span id="cb21-102"><a href="#cb21-102" tabindex="-1"></a>        {</span>
+<span id="cb21-103"><a href="#cb21-103" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">245</span>,</span>
+<span id="cb21-104"><a href="#cb21-104" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"2100"</span></span>
+<span id="cb21-105"><a href="#cb21-105" tabindex="-1"></a>        },</span>
+<span id="cb21-106"><a href="#cb21-106" tabindex="-1"></a>        {</span>
+<span id="cb21-107"><a href="#cb21-107" tabindex="-1"></a>          <span class="st">"Bdsnummer"</span><span class="sc">:</span> <span class="dv">252</span>,</span>
+<span id="cb21-108"><a href="#cb21-108" tabindex="-1"></a>          <span class="st">"Waarde"</span><span class="sc">:</span> <span class="st">"305"</span></span>
+<span id="cb21-109"><a href="#cb21-109" tabindex="-1"></a>        }</span>
+<span id="cb21-110"><a href="#cb21-110" tabindex="-1"></a>      ]</span>
+<span id="cb21-111"><a href="#cb21-111" tabindex="-1"></a>    }</span>
+<span id="cb21-112"><a href="#cb21-112" tabindex="-1"></a>  ]</span>
+<span id="cb21-113"><a href="#cb21-113" tabindex="-1"></a>}</span></code></pre></div>
 <p>There are four ways to upload the data to JAMES:</p>
 <ol style="list-style-type: decimal">
 <li>Upload the file <code>"maria.json"</code>;</li>
@@ -625,25 +626,25 @@ upload:</p>
 </ol>
 <p>The <code>/data/upload</code> API end point handles these cases as
 follows:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># upload as file</span></span>
 <span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="st">"maria.json"</span></span>
 <span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://httr.r-lib.org/reference/status_code.html" class="external-link">status_code</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 201</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># upload as string</span></span>
 <span><span class="va">js</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/read_json_js.html" class="external-link">read_json_js</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span>
 <span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://httr.r-lib.org/reference/status_code.html" class="external-link">status_code</a></span><span class="op">(</span><span class="va">r2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 201</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># upload as JSON object</span></span>
 <span><span class="va">jo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/read_json_js.html" class="external-link">read_json_jo</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span>
 <span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">jo</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://httr.r-lib.org/reference/status_code.html" class="external-link">status_code</a></span><span class="op">(</span><span class="va">r3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 201</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># upload as URL</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">host</span>, <span class="st">"ocpu/library/bdsreader/examples/maria.json"</span><span class="op">)</span></span>
 <span><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">url</span><span class="op">)</span></span>
@@ -652,7 +653,7 @@ follows:</p>
 <p>If the status is 201, the data are uploaded to JAMES and processed.
 For example, the processed data after file upload is available as an R
 data frame under element <code>r1$parsed</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r1</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
 <pre><code><span><span class="co">## $psn</span></span>
 <span><span class="co">##   id  name        dob       dobm       dobf  src    sex gad ga smo  bw hgtm</span></span>
@@ -681,10 +682,10 @@ session key is your entrance to the resource within the 30-minute
 window. The key can be retrieved as <code>r1$session</code>. For
 example, to see the result of the file upload session in markdown
 use</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">session</span> <span class="op">&lt;-</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "x061a5793f3bc92"</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] "x0d6eeacb29e4c1"</span></span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"md"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -753,7 +754,7 @@ extra diagnostic output.</p>
 like:</p>
 <pre><code>{"Format":"3.0","organisationCode":12345,"reference":"Maria's mangled data","clientMeasurements":[{"bdsNumber":235,"values":[{"date":"20181111","value":380},{"date":"20181211","value":435}]}]}</code></pre>
 <p>Everything appears normal if we read this data by the default:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="st">"maria-mangled.json"</span></span>
 <span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span>
 <span><span class="va">r5</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
@@ -767,7 +768,7 @@ like:</p>
 <p>If we upload with the additional <code>validate = TRUE</code> flag,
 JAMES runs the validation of the uploaded JSON against the JSON
 schema:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span>, validate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">mess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">r6</span><span class="op">$</span><span class="va">session</span>, <span class="st">"messages"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">mess</span><span class="op">$</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
@@ -778,11 +779,11 @@ schema:</p>
 <code>intermediate = TRUE</code> flag. This writes five JSON files that
 document the data flow into <code>{session}/files/{*}.json</code>.</p>
 <p>For example, we can ask for the input data as read by JAMES by</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span>, validate <span class="op">=</span> <span class="cn">TRUE</span>, intermediate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">host</span>, <span class="va">r7</span><span class="op">$</span><span class="va">session</span>, <span class="st">"files/input.json"</span><span class="op">)</span></span>
 <span><span class="va">url</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/x08a7414b6ffc92/files/input.json"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/x0fddb11214431f/files/input.json"</span></span></code></pre>
 <p>With <code>browseURL(url)</code> we may view the file contents in the
 browser. The <code>files</code> directory contains five JSON files:</p>
 <ol style="list-style-type: decimal">
@@ -813,8 +814,8 @@ messages written to <code>{session}/messages</code>.</p>
 wish to process with JAMES. For testing purposes, you may change the
 values, but keep the general structure intact. The following
 <code>curl</code> commands uploads the file and processes the data.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sF</span> <span class="st">'txt=@maria.json'</span> <span class="at">-D</span> headers <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="op">&gt;</span> content</span>
-<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="fu">head</span> content</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sF</span> <span class="st">'txt=@maria.json'</span> <span class="at">-D</span> headers <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="op">&gt;</span> content</span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="fu">head</span> content</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "psn": [</span></span>
 <span><span class="co">##     {</span></span>
@@ -827,11 +828,11 @@ values, but keep the general structure intact. The following
 <span><span class="co">##       "sex": "female",</span></span></code></pre>
 <p>Alternatively, we may read the file into a JSON string, and upload as
 follows:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="va">JS</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="st">'.'</span> maria.json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-sR</span> <span class="st">'.'</span><span class="va">)</span></span>
-<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt=</span><span class="va">$JS</span><span class="st">"</span> <span class="op">&gt;</span> content</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="va">JS</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="st">'.'</span> maria.json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-sR</span> <span class="st">'.'</span><span class="va">)</span></span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt=</span><span class="va">$JS</span><span class="st">"</span> <span class="op">&gt;</span> content</span></code></pre></div>
 <p>Finally, if the data are located at a URL, use</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="va">URL</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/ocpu/library/bdsreader/examples/maria.json</span>
-<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt='</span><span class="va">$URL</span><span class="st">'"</span> <span class="op">&gt;</span> content</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="va">URL</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/ocpu/library/bdsreader/examples/maria.json</span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/data/upload/json <span class="at">-d</span> <span class="st">"txt='</span><span class="va">$URL</span><span class="st">'"</span> <span class="op">&gt;</span> content</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -858,7 +859,7 @@ growth chart<a class="anchor" aria-label="anchor" href="#chartsdraw-draw-child-d
 <p>Maria is a preterm born at 27 weeks of gestational age. We already
 uploaded her data. We may now plot her growth data on the A4 chart for
 preterms as follows:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, </span>
 <span>                 path <span class="op">=</span> <span class="st">"/charts/draw/svglite"</span>, </span>
 <span>                 session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span>,</span>
@@ -867,13 +868,13 @@ preterms as follows:</p>
 <span><span class="va">mysvg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"chart"</span>, fileext <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">".svg"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="va">r5</span><span class="op">$</span><span class="va">parsed</span>, con <span class="op">=</span> <span class="va">mysvg</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpJAdnym/chart39d17261683d.svg" alt="Maria's growth plotted on preterm chart, 0-15 months"><p class="caption">
+<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpzTBTBj/chart5bcd1f145bf7.svg" alt="Maria's growth plotted on preterm chart, 0-15 months"><p class="caption">
 Maria’s growth plotted on preterm chart, 0-15 months
 </p>
 </div>
 <p>Alternatively, we may upload data for a new child Laura and plot the
 data in one step:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/bds_v3.0/smocc/Laura_S.json"</span>, package <span class="op">=</span> <span class="st">"jamesdemodata"</span><span class="op">)</span></span>
 <span><span class="va">r6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>,</span>
 <span>                 path <span class="op">=</span> <span class="st">"/charts/draw/svglite"</span>, txt <span class="op">=</span> <span class="va">fn</span>, </span>
@@ -886,7 +887,7 @@ illustrated above. If you want to change the chart’s size in your HTML,
 use the <code>out.width</code> knitr chunk option, e.g. set
 <code>out.width="500px"</code>. This gives the following output.</p>
 <div class="figure" style="text-align: center">
-<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpJAdnym/chart39d15902b775.svg" alt="Laura's growth plotted on chart for Dutch girls, 0-4 years" width="500px"><p class="caption">
+<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpzTBTBj/chart5bcd71a1c511.svg" alt="Laura's growth plotted on chart for Dutch girls, 0-4 years" width="500px"><p class="caption">
 Laura’s growth plotted on chart for Dutch girls, 0-4 years
 </p>
 </div>
@@ -896,7 +897,7 @@ years old. The following chart plots 25 matches to Laura as grey curves.
 The variation between the grey curves at age 3y9m indicates the likely
 variation in the prediction. The blue line indicates Laura’s predicted
 height at age 3y9m.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, </span>
 <span>                 path <span class="op">=</span> <span class="st">"/charts/draw/svglite"</span>, txt <span class="op">=</span> <span class="va">fn</span>, </span>
 <span>                 chartcode <span class="op">=</span> <span class="st">"NMBH"</span>, dnr <span class="op">=</span> <span class="st">"2-4"</span>,</span>
@@ -910,7 +911,7 @@ plot. In order to get the same age units as the previous chart,
 calculate <code>out.width</code> as
 <code>500/21*18 = "429px"</code>.</p>
 <div class="figure" style="text-align: center">
-<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpJAdnym/chart39d1415a8ffa.svg" alt="Predict Laura's future height at the age of 3y9m." width="429px"><p class="caption">
+<img src="../../../../../../../../private/var/folders/5_/g85d42yj50b6lrjq4rzjzg8w0000gn/T/RtmpzTBTBj/chart5bcd3391195f.svg" alt="Predict Laura's future height at the age of 3y9m." width="429px"><p class="caption">
 Predict Laura’s future height at the age of 3y9m.
 </p>
 </div>
@@ -920,26 +921,26 @@ Predict Laura’s future height at the age of 3y9m.
 <p>Upload <code>maria.json</code> and draw the height data on the
 default chart to produce an SVG file. Specify the proper
 <code>width</code> and <code>height</code> query parameters.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=7.09&amp;height=7.09'</span> <span class="dt">\</span></span>
-<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a>-H <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
-<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria1.svg</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=7.09&amp;height=7.09'</span> <span class="dt">\</span></span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a>-H <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria1.svg</span></code></pre></div>
 <p>We need to set <code>chartcode</code> and <code>selector</code>
 parameters to choose a different chart.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
-<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a>-H <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
-<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a>-F <span class="st">"chartcode='PMAAN27'"</span> <span class="dt">\</span></span>
-<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a>-F <span class="st">"selector='chartcode'"</span> <span class="dt">\</span></span>
-<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria2.svg</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a>-H <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>-F <span class="st">"chartcode='PMAAN27'"</span> <span class="dt">\</span></span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>-F <span class="st">"selector='chartcode'"</span> <span class="dt">\</span></span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span> <span class="op">&gt;</span> maria2.svg</span></code></pre></div>
 <p>An alternative is to read the data from a URL, and use the
 <code>application/json</code> protocol to specify parameters.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
-<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>-H <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
-<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
-<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a><span class="st">"txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",</span></span>
-<span id="cb51-7"><a href="#cb51-7" tabindex="-1"></a><span class="st">"chartcode" : "NMBA", </span></span>
-<span id="cb51-8"><a href="#cb51-8" tabindex="-1"></a><span class="st">"selector" : "chartcode"}'</span> <span class="op">&gt;</span> laura.svg</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/draw/svglite?width=8.27&amp;height=11.69'</span> <span class="dt">\</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>-H <span class="st">'accept: image/*'</span> <span class="dt">\</span></span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
+<span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a><span class="st">"txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",</span></span>
+<span id="cb52-7"><a href="#cb52-7" tabindex="-1"></a><span class="st">"chartcode" : "NMBA", </span></span>
+<span id="cb52-8"><a href="#cb52-8" tabindex="-1"></a><span class="st">"selector" : "chartcode"}'</span> <span class="op">&gt;</span> laura.svg</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -966,12 +967,12 @@ charts<a class="anchor" aria-label="anchor" href="#chartslist-list-available-gro
 <p>JAMES contains a wide variety of built-in growth charts. Each chart
 has a unique <code>chartcode</code>. A typical chart code looks like
 <code>NJAA</code>. We obtain the full list of chart codes as</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"charts/list/json"</span><span class="op">)</span></span>
 <span><span class="va">charts</span> <span class="op">&lt;-</span> <span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
 <p>The <code>charts</code> object is a data frame with 478 rows (charts)
 and the following variables:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">charts</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "chartgrp"   "chartcode"  "population" "sex"        "design"    </span></span>
 <span><span class="co">## [6] "side"       "language"   "week"</span></span></code></pre>
@@ -985,7 +986,7 @@ well as combined charts with multiple references on A4 format (front,
 back, -hdc).</p>
 <p>The most important index variables are <code>population</code> and
 <code>side</code>:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">charts</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">side</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##           side</span></span>
 <span><span class="co">## population -hdc back bmi dsc front hdc hgt wfh wgt</span></span>
@@ -1003,13 +1004,13 @@ active chart code as a field in the left sidebar.</p>
 <div class="tab-pane" id="bash-3" role="tabpanel" aria-labelledby="bash-3-tab">
 
 <p>Restrict the listing to the WHO references:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/list/json'</span> <span class="dt">\</span></span>
-<span id="cb57-3"><a href="#cb57-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb57-4"><a href="#cb57-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb57-5"><a href="#cb57-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
-<span id="cb57-6"><a href="#cb57-6" tabindex="-1"></a><span class="st">"chartgrp": "who"</span></span>
-<span id="cb57-7"><a href="#cb57-7" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/list/json'</span> <span class="dt">\</span></span>
+<span id="cb58-3"><a href="#cb58-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb58-4"><a href="#cb58-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb58-5"><a href="#cb58-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
+<span id="cb58-6"><a href="#cb58-6" tabindex="-1"></a><span class="st">"chartgrp": "who"</span></span>
+<span id="cb58-7"><a href="#cb58-7" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1036,7 +1037,7 @@ codes<a class="anchor" aria-label="anchor" href="#chartsvalidate-validate-chart-
 <p>The <code>/charts/validate</code> end point attempt to find one or
 more user-specified chart codes. For example, the following cocde checkc
 five chart codes:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, </span>
 <span>                path <span class="op">=</span> <span class="st">"charts/validate/json"</span>, </span>
 <span>                chartcode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMAW"</span>, <span class="st">"NJAb"</span>, <span class="st">"PJAAN23"</span>, <span class="st">"PJAAN25"</span>, <span class="st">"dummy"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1046,19 +1047,19 @@ five chart codes:</p>
 <div class="tab-pane" id="bash-4" role="tabpanel" aria-labelledby="bash-4-tab">
 
 <p>Check five chart codes:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/validate/json'</span> <span class="dt">\</span></span>
-<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb60-4"><a href="#cb60-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb60-5"><a href="#cb60-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
-<span id="cb60-6"><a href="#cb60-6" tabindex="-1"></a><span class="st">"chartcode": [</span></span>
-<span id="cb60-7"><a href="#cb60-7" tabindex="-1"></a><span class="st">"NMAW",</span></span>
-<span id="cb60-8"><a href="#cb60-8" tabindex="-1"></a><span class="st">"NJAB",</span></span>
-<span id="cb60-9"><a href="#cb60-9" tabindex="-1"></a><span class="st">"PJAAN23",</span></span>
-<span id="cb60-10"><a href="#cb60-10" tabindex="-1"></a><span class="st">"PJAAN25", </span></span>
-<span id="cb60-11"><a href="#cb60-11" tabindex="-1"></a><span class="st">"dummy"</span></span>
-<span id="cb60-12"><a href="#cb60-12" tabindex="-1"></a><span class="st">]</span></span>
-<span id="cb60-13"><a href="#cb60-13" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/charts/validate/json'</span> <span class="dt">\</span></span>
+<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb61-4"><a href="#cb61-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb61-5"><a href="#cb61-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
+<span id="cb61-6"><a href="#cb61-6" tabindex="-1"></a><span class="st">"chartcode": [</span></span>
+<span id="cb61-7"><a href="#cb61-7" tabindex="-1"></a><span class="st">"NMAW",</span></span>
+<span id="cb61-8"><a href="#cb61-8" tabindex="-1"></a><span class="st">"NJAB",</span></span>
+<span id="cb61-9"><a href="#cb61-9" tabindex="-1"></a><span class="st">"PJAAN23",</span></span>
+<span id="cb61-10"><a href="#cb61-10" tabindex="-1"></a><span class="st">"PJAAN25", </span></span>
+<span id="cb61-11"><a href="#cb61-11" tabindex="-1"></a><span class="st">"dummy"</span></span>
+<span id="cb61-12"><a href="#cb61-12" tabindex="-1"></a><span class="st">]</span></span>
+<span id="cb61-13"><a href="#cb61-13" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 <pre><code><span><span class="co">## [true, true, false, true, false]</span></span></code></pre>
 </div>
 </div>
@@ -1083,14 +1084,14 @@ screeners<a class="anchor" aria-label="anchor" href="#screenerslist-list-availab
 <p>JAMES implements several screening algorithms. The
 <code>/screeners/list</code> end point provides detailed information on
 each of these.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/screeners/list/json"</span>, </span>
 <span>                session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Versie"                "yname"                 "Categorie"            </span></span>
 <span><span class="co">## [4] "CategorieOmschrijving" "JGZRichtlijn"          "Code"                 </span></span>
 <span><span class="co">## [7] "CodeOmschrijving"</span></span></code></pre>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">yname</span>, <span class="va">Categorie</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      Categorie</span></span>
 <span><span class="co">## yname 1000 2000 3000</span></span>
@@ -1106,11 +1107,11 @@ be referred for further investigation.</p>
 <div class="tab-pane" id="bash-5" role="tabpanel" aria-labelledby="bash-5-tab">
 
 <p>We get the details for the guidelines for head circumference as</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb66-2"><a href="#cb66-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/list/json'</span> <span class="dt">\</span></span>
-<span id="cb66-3"><a href="#cb66-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb66-4"><a href="#cb66-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb66-5"><a href="#cb66-5" tabindex="-1"></a>-d <span class="st">'{"ynames": "hdc"}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/list/json'</span> <span class="dt">\</span></span>
+<span id="cb67-3"><a href="#cb67-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb67-4"><a href="#cb67-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb67-5"><a href="#cb67-5" tabindex="-1"></a>-d <span class="st">'{"ynames": "hdc"}'</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1136,7 +1137,7 @@ screeners to child data<a class="anchor" aria-label="anchor" href="#screenersapp
 
 <p>The <code>/screeners/apply</code> end point applies standard
 screeners to the child data. Invoke the screeners by</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/screeners/apply/json"</span>, </span>
 <span>                session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
@@ -1173,11 +1174,11 @@ act one. Since May 2023, JAMES reports only one signal per curve.</p>
 </div>
 <div class="tab-pane" id="bash-6" role="tabpanel" aria-labelledby="bash-6-tab">
 
-<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb69-2"><a href="#cb69-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/apply/json'</span> <span class="dt">\</span></span>
-<span id="cb69-3"><a href="#cb69-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb69-4"><a href="#cb69-4" tabindex="-1"></a>-H <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
-<span id="cb69-5"><a href="#cb69-5" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/screeners/apply/json'</span> <span class="dt">\</span></span>
+<span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb70-4"><a href="#cb70-4" tabindex="-1"></a>-H <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
+<span id="cb70-5"><a href="#cb70-5" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
 <pre><code><span><span class="co">## [</span></span>
 <span><span class="co">##   {</span></span>
 <span><span class="co">##     "Categorie": 1000,</span></span>
@@ -1229,7 +1230,7 @@ act one. Since May 2023, JAMES reports only one signal per curve.</p>
 <p>The <code>/site</code> end point provides interactive site containing
 all charts, but without child data. This end point is primarily useful
 to obtain a quick overview of the available charts.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">host</span>, <span class="st">"site"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="tab-pane" id="bash-7" role="tabpanel" aria-labelledby="bash-7-tab">
@@ -1259,21 +1260,21 @@ site<a class="anchor" aria-label="anchor" href="#siterequest-request-personalise
 
 <p>The <code>/site/request</code> end point creates an URL to a
 personalised, interactive site containing all charts.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0d1defc19120bf"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x03ab47e3624748"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
 <p>Alteratively, we may start from the <code>session</code> created by
 <code>/data/upload</code>:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x061a5793f3bc92"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0d6eeacb29e4c1"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
@@ -1281,13 +1282,13 @@ age of the child.</p>
 </div>
 <div class="tab-pane" id="bash-8" role="tabpanel" aria-labelledby="bash-8-tab">
 
-<div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/site/request/json'</span> <span class="dt">\</span></span>
-<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a>-H <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
-<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
-<span id="cb76-6"><a href="#cb76-6" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
-<pre><code><span><span class="co">## ["https://james.groeidiagrammen.nl/site?session=x0469f1e29ac457"]</span></span></code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/site/request/json'</span> <span class="dt">\</span></span>
+<span id="cb77-3"><a href="#cb77-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb77-4"><a href="#cb77-4" tabindex="-1"></a>-H <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
+<span id="cb77-5"><a href="#cb77-5" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
+<span id="cb77-6"><a href="#cb77-6" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
+<pre><code><span><span class="co">## ["https://james.groeidiagrammen.nl/site?session=x0fe680d34479cc"]</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1316,7 +1317,7 @@ multiple end points, and thus functions as a one-stop shop. However,
 currently it does not support graphics output, so use
 <code>/{session}/{info}/svglite</code> or
 <code>/charts/draw/svglite</code> for the charts.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"bds_v3.0"</span>, <span class="st">"smocc"</span>, <span class="st">"Laura_S.json"</span>,</span>
 <span>                 package <span class="op">=</span> <span class="st">"jamesdemodata"</span>, mustWork <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/blend/request/json"</span>, </span>
@@ -1326,10 +1327,10 @@ currently it does not support graphics output, so use
 <span><span class="co">## [1] "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,\"value\": \"2\"},{\"bdsNumber\": 20,\"value\": \"19890121\"},{\"bdsNumber\": 82,\"value\": 276},{\"bdsNumber\": 91,\"value\": \"2\"},{\"bdsNumber\": 110,\"value\": 2950},{\"bdsNumber\": 238,\"value\": 1640},{\"bdsNumber\": 240,\"value\": 1790}],\"clientMeasurements\": [{\"bdsNumber\": 235,\"values\": [{\"date\": \"19890121\",\"value\": 480},{\"date\": \"19890227\",\"value\": 535},{\"date\": \"19890320\",\"value\": 560},{\"date\": \"19890417\",\"value\": 595},{\"date\": \"19890717\",\"value\": 655},{\"date\": \"19891023\",\"value\": 715},{\"date\": \"19900129\",\"value\": 750},{\"date\": \"19900423\",\"value\": 800},{\"date\": \"19900806\",\"value\": 840},{\"date\": \"19910205\",\"value\": 900}]},{\"bdsNumber\": 245,\"values\": [{\"date\": \"19890121\",\"value\": 2950},{\"date\": \"19890227\",\"value\": 4180},{\"date\": \"19890320\",\"value\": 5000},{\"date\": \"19890417\",\"value\": 5900},{\"date\": \"19890717\",\"value\": 8240},{\"date\": \"19891023\",\"value\": 9650},{\"date\": \"19900129\",\"value\": 10950},{\"date\": \"19900423\",\"value\": 11900},{\"date\": \"19900806\",\"value\": 12800},{\"date\": \"19910205\",\"value\": 13900}]},{\"bdsNumber\": 252,\"values\": [{\"date\": \"19890227\",\"value\": 376},{\"date\": \"19890320\",\"value\": 390},{\"date\": \"19890417\",\"value\": 405},{\"date\": \"19890717\",\"value\": 441},{\"date\": \"19891023\",\"value\": 466},{\"date\": \"19900129\",\"value\": 478},{\"date\": \"19900423\",\"value\": 487},{\"date\": \"19900806\",\"value\": 492},{\"date\": \"19910205\",\"value\": 500}]},{\"bdsNumber\": 879,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 881,\"values\": [{\"date\": \"19890227\",\"value\": \"2\"},{\"date\": \"19890320\",\"value\": \"1\"}]},{\"bdsNumber\": 883,\"values\": [{\"date\": \"19890227\",\"value\": \"2\"},{\"date\": \"19890320\",\"value\": \"1\"}]},{\"bdsNumber\": 884,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 885,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 886,\"values\": [{\"date\": \"19890320\",\"value\": \"2\"},{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"3\"}]},{\"bdsNumber\": 887,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 888,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 889,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 890,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 891,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 892,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 893,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 894,\"values\": [{\"date\": \"19891023\",\"value\": \"1\"},{\"date\": \"19900129\",\"value\": \"1\"}]},{\"bdsNumber\": 896,\"values\": [{\"date\": \"19891023\",\"value\": \"1\"},{\"date\": \"19900129\",\"value\": \"1\"}]},{\"bdsNumber\": 897,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 898,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 900,\"values\": [{\"date\": \"19900129\",\"value\": \"3\"},{\"date\": \"19900423\",\"value\": \"3\"}]},{\"bdsNumber\": 902,\"values\": [{\"date\": \"19900423\",\"value\": \"2\"},{\"date\": \"19900806\",\"value\": \"1\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 903,\"values\": [{\"date\": \"19900423\",\"value\": \"2\"},{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 905,\"values\": [{\"date\": \"19900423\",\"value\": \"1\"},{\"date\": \"19900806\",\"value\": \"1\"}]},{\"bdsNumber\": 906,\"values\": [{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 907,\"values\": [{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 909,\"values\": [{\"date\": \"19900806\",\"value\": \"3\"},{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 910,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 912,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 921,\"values\": [{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 927,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 928,\"values\": [{\"date\": \"19890227\",\"value\": \"2\"}]},{\"bdsNumber\": 930,\"values\": [{\"date\": \"19890320\",\"value\": \"3\"},{\"date\": \"19890417\",\"value\": \"3\"}]},{\"bdsNumber\": 932,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 933,\"values\": [{\"date\": \"19891023\",\"value\": \"3\"},{\"date\": \"19900129\",\"value\": \"3\"}]},{\"bdsNumber\": 935,\"values\": [{\"date\": \"19891023\",\"value\": \"2\"},{\"date\": \"19900129\",\"value\": \"3\"}]},{\"bdsNumber\": 936,\"values\": [{\"date\": \"19900129\",\"value\": \"2\"},{\"date\": \"19900423\",\"value\": \"3\"}]},{\"bdsNumber\": 937,\"values\": [{\"date\": \"19900129\",\"value\": \"2\"},{\"date\": \"19900423\",\"value\": \"3\"}]},{\"bdsNumber\": 938,\"values\": [{\"date\": \"19900423\",\"value\": \"3\"},{\"date\": \"19900806\",\"value\": \"3\"}]},{\"bdsNumber\": 940,\"values\": [{\"date\": \"19900806\",\"value\": \"3\"},{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 943,\"values\": [{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 945,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 955,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 956,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 958,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 959,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 961,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 962,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 964,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 966,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 968,\"values\": [{\"date\": \"19890417\",\"value\": \"1\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 969,\"values\": [{\"date\": \"19890417\",\"value\": \"1\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 970,\"values\": [{\"date\": \"19890417\",\"value\": \"1\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 973,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 975,\"values\": [{\"date\": \"19890717\",\"value\": \"1\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 976,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 978,\"values\": [{\"date\": \"19891023\",\"value\": \"1\"},{\"date\": \"19900129\",\"value\": \"1\"}]},{\"bdsNumber\": 980,\"values\": [{\"date\": \"19891023\",\"value\": \"3\"},{\"date\": \"19900129\",\"value\": \"3\"}]},{\"bdsNumber\": 982,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 984,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 986,\"values\": [{\"date\": \"19900423\",\"value\": \"1\"},{\"date\": \"19900806\",\"value\": \"1\"}]},{\"bdsNumber\": 989,\"values\": [{\"date\": \"19900423\",\"value\": \"2\"},{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 991,\"values\": [{\"date\": \"19900806\",\"value\": \"1\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 993,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 1278,\"values\": [{\"date\": \"19891023\",\"value\": \"3\"},{\"date\": \"19900129\",\"value\": \"3\"}]}],\"nestedDetails\": [{\"nestingBdsNumber\": 62,\"nestingCode\": \"02\",\"clientDetails\": [{\"bdsNumber\": 63,\"value\": \"19610722\"}]}]}"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $session</span></span>
-<span><span class="co">## [1] "x0e5d5434724990"</span></span>
+<span><span class="co">## [1] "x04699a8da21737"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $site</span></span>
-<span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0e5d5434724990"</span></span>
+<span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x04699a8da21737"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $child</span></span>
 <span><span class="co">##   id    name        dob       dobm src    sex gad ga smo   bw hgtm hgtf</span></span>
@@ -1412,19 +1413,19 @@ currently it does not support graphics output, so use
 </div>
 <div class="tab-pane" id="bash-9" role="tabpanel" aria-labelledby="bash-9-tab">
 
-<div class="sourceCode" id="cb80"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
-<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/blend/request/json'</span> <span class="dt">\</span></span>
-<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
-<span id="cb80-4"><a href="#cb80-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
-<span id="cb80-5"><a href="#cb80-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
-<span id="cb80-6"><a href="#cb80-6" tabindex="-1"></a><span class="st">"txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/bdsreader/examples/Laura_S.json",</span></span>
-<span id="cb80-7"><a href="#cb80-7" tabindex="-1"></a><span class="st">"sitehost": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'",</span></span>
-<span id="cb80-8"><a href="#cb80-8" tabindex="-1"></a><span class="st">"blend": "standard"</span></span>
-<span id="cb80-9"><a href="#cb80-9" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> <span class="st">'POST'</span> <span class="dt">\</span></span>
+<span id="cb81-2"><a href="#cb81-2" tabindex="-1"></a><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/blend/request/json'</span> <span class="dt">\</span></span>
+<span id="cb81-3"><a href="#cb81-3" tabindex="-1"></a>-H <span class="st">'accept: application/json'</span> <span class="dt">\</span></span>
+<span id="cb81-4"><a href="#cb81-4" tabindex="-1"></a>-H <span class="st">'Content-Type: application/json'</span> <span class="dt">\</span></span>
+<span id="cb81-5"><a href="#cb81-5" tabindex="-1"></a>-d <span class="st">'{</span></span>
+<span id="cb81-6"><a href="#cb81-6" tabindex="-1"></a><span class="st">"txt": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'/ocpu/library/bdsreader/examples/Laura_S.json",</span></span>
+<span id="cb81-7"><a href="#cb81-7" tabindex="-1"></a><span class="st">"sitehost": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'",</span></span>
+<span id="cb81-8"><a href="#cb81-8" tabindex="-1"></a><span class="st">"blend": "standard"</span></span>
+<span id="cb81-9"><a href="#cb81-9" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",</span></span>
-<span><span class="co">##   "session": "x0b1b7bc83985b1",</span></span>
-<span><span class="co">##   "site": "https://james.groeidiagrammen.nl/site?session=x0b1b7bc83985b1",</span></span>
+<span><span class="co">##   "session": "x001e1360813813",</span></span>
+<span><span class="co">##   "site": "https://james.groeidiagrammen.nl/site?session=x001e1360813813",</span></span>
 <span><span class="co">##   "child": [</span></span>
 <span><span class="co">##     {</span></span>
 <span><span class="co">##       "id": -1,</span></span>

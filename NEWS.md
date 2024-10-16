@@ -1,6 +1,8 @@
 # james 1.6.5 (Oct 2024)
 
 - Solves an issue for same-sex couples with two mothers or two fathers in BDS 63 field . The `bdsreader 0.27.0` package returns the correct data for these cases. See <https://github.com/growthcharts/bdsreader/issues/10>.
+- Adds a `inst/CITATION` file for suggestion a citation to JAMES
+- Changes the return value of `version` to conform to swagger documentation
 
 # james 1.6.4 (May 2024)
 
