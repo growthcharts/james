@@ -18,10 +18,12 @@
 #' @export
 version <- function(package = "james") {
   pkg <- package[1L]
-  list(
-    package = pkg,
-    packageVersion = as.character(packageVersion(pkg)),
-    packageDate = as.character(packageDate(pkg)),
-    Rversion = as.character(getRversion())
+  as.list(
+    c(
+      package = pkg,
+      packageVersion = as.character(packageVersion(pkg)),
+      packageDate = as.character(packageDate(pkg)),
+      Rversion = as.character(getRversion())
+    )
   )
 }
