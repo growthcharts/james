@@ -888,15 +888,19 @@
     },
     "svglite": {
       "Package": "svglite",
-      "Version": "2.1.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "2.1.3.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "svglite",
+      "RemoteUsername": "r-lib",
+      "RemoteSha": "bac2af836e479a68e4ce9abaf04d1f428daf1c3d",
       "Requirements": [
         "R",
         "cpp11",
         "systemfonts"
       ],
-      "Hash": "124a41fdfa23e8691cb744c762f10516"
+      "Hash": "cc316aa3ae822cf74dcb7dd28dbe5f2a"
     },
     "sys": {
       "Package": "sys",
