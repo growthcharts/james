@@ -38,6 +38,7 @@ Suggests:
     testthat,
     usethis
 Remotes: 
+    r-lib/svglite,
     growthcharts/bdsreader,
     growthcharts/chartbox,
     growthcharts/chartcatalog,
