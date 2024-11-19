@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.1",
+    "Version": "4.4.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -53,18 +53,18 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.13",
+      "Version": "1.0.13-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods",
         "utils"
       ],
-      "Hash": "f27411eb6d9c3dada5edd444b8416675"
+      "Hash": "6b868847b365672d6c1677b1608da9ed"
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "14.0.2-1",
+      "Version": "14.2.0-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -74,7 +74,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "edff747eebfb8f2e18eed194e000caa1"
+      "Hash": "ce9c35ab9ea9c6ef4e27a08868cdb32b"
     },
     "RcppEigen": {
       "Package": "RcppEigen",
@@ -194,14 +194,13 @@
     },
     "centile": {
       "Package": "centile",
-      "Version": "0.14.2",
+      "Version": "0.15.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "centile",
-      "RemoteRef": "master",
-      "RemoteSha": "42296778314eba19fe4977b54fb170046b798c8f",
+      "RemoteUsername": "growthcharts",
+      "RemoteSha": "882a8875aeabc156d37ebfbe6cb202f2ea43c45e",
       "Requirements": [
         "R",
         "dplyr",
@@ -210,48 +209,47 @@
         "rlang",
         "stats"
       ],
-      "Hash": "e153de3fb15ebec5602f2ecc356ea545"
+      "Hash": "55b1286555aecb30e3bbd8f358f03827"
     },
     "chartbox": {
       "Package": "chartbox",
-      "Version": "1.15.0",
+      "Version": "1.16.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "chartbox",
-      "RemoteRef": "master",
-      "RemoteSha": "8bac2efe7cdc02d978bdad596f6dd304b88dafc1",
+      "RemoteUsername": "growthcharts",
+      "RemoteSha": "147de20967e1aa6d446cc9d17cc8e7248981eca8",
       "Requirements": [
         "R",
         "chartcatalog",
         "grDevices"
       ],
-      "Hash": "3556a8a96f3d7b6612acd4451af2fa3f"
+      "Hash": "7fa19665c957394c2e256e46f1f49f50"
     },
     "chartcatalog": {
       "Package": "chartcatalog",
-      "Version": "1.15.0",
+      "Version": "1.16.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartcatalog",
       "RemoteUsername": "growthcharts",
-      "RemoteSha": "7d70397852be5b632568929de9ade3c7e8d5aa30",
+      "RemoteSha": "d2e49983e73d331fbbcf77d91fef0bf5a19c523a",
       "Requirements": [
         "R"
       ],
-      "Hash": "0a92495cbade86de4bf83bedbd785e2e"
+      "Hash": "447851fc436200d71e29cb43b9b4cda9"
     },
     "chartplotter": {
       "Package": "chartplotter",
-      "Version": "0.34.0",
+      "Version": "0.35.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chartplotter",
       "RemoteUsername": "growthcharts",
-      "RemoteSha": "ef531056ae0309bde2615a08388aa86d09e1e9a6",
+      "RemoteSha": "64b48bb67b2a5f11c672b67eb0798f99b0cd87aa",
       "Requirements": [
         "R",
         "brokenstick",
@@ -263,13 +261,14 @@
         "dplyr",
         "grDevices",
         "grid",
+        "growthscreener",
         "nlreferences",
         "rlang",
         "stats",
         "tidyr",
         "utils"
       ],
-      "Hash": "4b9c5011ee805afb9415249964ae21f9"
+      "Hash": "b5452e4bed3e83f68e85e3bfcc86576b"
     },
     "cli": {
       "Package": "cli",
@@ -327,13 +326,13 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "5.2.3",
+      "Version": "6.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "d91263322a58af798f6cf3b13fd56dde"
+      "Hash": "e8ba62486230951fcd2b881c5be23f96"
     },
     "curvematching": {
       "Package": "curvematching",
@@ -469,14 +468,13 @@
     },
     "growthscreener": {
       "Package": "growthscreener",
-      "Version": "1.21.0",
+      "Version": "1.23.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "growthscreener",
-      "RemoteRef": "master",
-      "RemoteSha": "ee184ce32134ff196bebb709084ac09ed7889f73",
+      "RemoteUsername": "growthcharts",
+      "RemoteSha": "a48cba0471e1b1252022810e4a991825d3925a23",
       "Requirements": [
         "R",
         "bdsreader",
@@ -488,7 +486,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "8b4bdc14b98b9e7557258ad68c1259d4"
+      "Hash": "a2cdec830fb65389baf346e1abca3c22"
     },
     "hms": {
       "Package": "hms",
@@ -894,13 +892,16 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "svglite",
       "RemoteUsername": "r-lib",
-      "RemoteSha": "bac2af836e479a68e4ce9abaf04d1f428daf1c3d",
+      "RemoteSha": "ec2ef7f1f8ddedbd16e0d745cddabae463d7ad5c",
       "Requirements": [
         "R",
+        "cli",
         "cpp11",
+        "lifecycle",
+        "rlang",
         "systemfonts"
       ],
-      "Hash": "cc316aa3ae822cf74dcb7dd28dbe5f2a"
+      "Hash": "30d61b1c821549fcd29805fa07ea9170"
     },
     "sys": {
       "Package": "sys",
@@ -1053,7 +1054,7 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "3.0.1",
+      "Version": "3.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1061,7 +1062,7 @@
         "grDevices",
         "graphics"
       ],
-      "Hash": "07909200e8bbe90426fbfeb73e1e27aa"
+      "Hash": "cc2d62c76458d425210d1eb1478b30b4"
     }
   }
 }
