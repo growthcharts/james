@@ -31,19 +31,19 @@ at tno.nl\> for further information.
 
 ### Primary JAMES user functionality
 
-| Verb | API Endpoint stem        | Description                             | Maps to `james` function |
-|:-----|:-------------------------|:----------------------------------------|:-------------------------|
-| POST | `/data/upload/{dfm}`     | Upload child data                       | `upload_data()`          |
-| POST | `/charts/draw/{ffm}`     | Draw child data on growth chart         | `draw_chart()`           |
-| POST | `/charts/list/{dfm}`     | List available growth charts            | `list_charts()`          |
-| POST | `/charts/validate/{dfm}` | Validate a chart code                   | `validate_chartcode()`   |
-| POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data    | `apply_screeners()`      |
-| POST | `/screeners/list/{dfm}`  | List available growth screeners         | `list_screeners()`       |
-| POST | `/site/request/{dfm}`    | Request personalised site               | `request_site()`         |
-| POST | `/blend/request/{sfm}`   | Obtain a blend from multiple end points | `request_blend()`        |
-| POST | `/version/{dfm}`         | Obtain version information              | `version()`              |
-| GET  | `/{session}/{info}`      | Extract session details                 |                          |
-| GET  | `/{2}/{1}/man`           | Consult R help                          | `help({1}_{2})`          |
+| Verb | API Endpoint stem | Description | Maps to `james` function |
+|:---|:---|:---|:---|
+| POST | `/data/upload/{dfm}` | Upload child data | `upload_data()` |
+| POST | `/charts/draw/{ffm}` | Draw child data on growth chart | `draw_chart()` |
+| POST | `/charts/list/{dfm}` | List available growth charts | `list_charts()` |
+| POST | `/charts/validate/{dfm}` | Validate a chart code | `validate_chartcode()` |
+| POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data | `apply_screeners()` |
+| POST | `/screeners/list/{dfm}` | List available growth screeners | `list_screeners()` |
+| POST | `/site/request/{dfm}` | Request personalised site | `request_site()` |
+| POST | `/blend/request/{sfm}` | Obtain a blend from multiple end points | `request_blend()` |
+| POST | `/version/{dfm}` | Obtain version information | `version()` |
+| GET | `/{session}/{info}` | Extract session details |  |
+| GET | `/{2}/{1}/man` | Consult R help | `help({1}_{2})` |
 
 The table lists the defined API end points and the mapping to each end
 point to the corresponding R function.
@@ -56,18 +56,18 @@ this definition may evolve over time.
 
 ### Internal
 
-| Description                                                                                              | Status  |
-|:---------------------------------------------------------------------------------------------------------|:--------|
-| [Example requests](https://james.groeidiagrammen.nl)                                                     | current |
-| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james)                        | current |
-| [Source files](https://github.com/growthcharts)                                                          | current |
+| Description | Status |
+|:---|:---|
+| [Example requests](https://james.groeidiagrammen.nl) | current |
+| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | current |
+| [Source files](https://github.com/growthcharts) | current |
 | [JSON data schema 3.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json) | current |
-| [JAMES issue tracker](https://github.com/growthcharts/james/issues)                                      | current |
+| [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |
 
 ### External
 
-| Description                                                                                            | Status  |
-|:-------------------------------------------------------------------------------------------------------|:--------|
-| [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/)                              | current |
+| Description | Status |
+|:---|:---|
+| [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | current |
 | [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13) | current |
-| [OpenCPU API](https://www.opencpu.org/api.html)                                                        | current |
+| [OpenCPU API](https://www.opencpu.org/api.html) | current |

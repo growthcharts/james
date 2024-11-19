@@ -1,3 +1,7 @@
+# james 1.7.0 (Nov 2024)
+
+- Adds target height indicator to height chart for ages 1-21y and 0-21y
+
 # james 1.6.5 (Oct 2024)
 
 - Solves an issue for same-sex couples with two mothers or two fathers in BDS 63 field . The `bdsreader 0.27.0` package returns the correct data for these cases. See <https://github.com/growthcharts/bdsreader/issues/10>.

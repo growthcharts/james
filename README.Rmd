@@ -27,7 +27,7 @@ JAMES is a web service for creating and interpreting charts of child growth and 
 4. converts developmental data into the D-score;
 5. predicts future growth and development.
 
-JAMES is a RESTful API that runs on a remote host. The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information.
+JAMES is a RESTful API that runs on a remote host. The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information. 
 
 The service aids in monitoring and evaluating childhood growth. JAMES is created and maintained by the Netherlands Organisation for Applied Scientific Research TNO. Please contact Stef van Buuren <stef.vanbuuren at tno.nl> for further information.
 
