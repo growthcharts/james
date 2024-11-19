@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.6.5 (Oct 2024)
+subtitle: JAMES 1.7.0 (Nov 2024)
 author: Stef van Buuren, Arjan Huizing (TNO Child Health)
 output:
   html_document:
@@ -13,6 +13,10 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
+if (!dir.exists("man/figures")) dir.create("man/figures", recursive = TRUE)
+filename_chart1 <- file.path("man/figures", "chart1.svg")
+filename_chart2 <- file.path("man/figures", "chart2.svg")
+filename_chart3 <- file.path("man/figures", "chart3.svg")
 ```
 
 ## Overview
@@ -468,12 +472,11 @@ r5 <- james_post(host = host,
                  session = r1$session,
                  chartcode = "PMAAN27", selector = "chartcode",
                  query = list(height = 29.7/2.54, width = 21/2.54))
-mysvg <- tempfile(pattern = "chart", fileext = rep(".svg", 3))
-writeLines(r5$parsed, con = mysvg[1])
+writeLines(r5$parsed, con = filename_chart1)
 ```
 
 ```{r displaysvg1, echo=FALSE, fig.align="center", fig.cap="Maria's growth plotted on preterm chart, 0-15 months"}
-knitr::include_graphics(mysvg[1])
+knitr::include_graphics(filename_chart1)
 ```
 
 Alternatively, we may upload data for a new child Laura and plot the data in one step:
@@ -484,13 +487,13 @@ r6 <- james_post(host = host,
                  path = "/charts/draw/svglite", txt = fn, 
                  chartcode = "NMBA", selector = "chartcode",
                  query = list(height = 29.7/2.54, width = 21/2.54))
-writeLines(r6$parsed, con = mysvg[2])
+writeLines(r6$parsed, con = filename_chart2)
 ```
 
 For A4 sized charts, we recommend to generate the plot with query arguments `list(height = 29.7/2.54, width = 21/2.54)`, as illustrated above. If you want to change the chart's size in your HTML, use the `out.width` knitr chunk option, e.g. set `out.width="500px"`. This gives the following output.
 
 ```{r displaysvg2, echo=FALSE, out.width="500px", fig.align="center", fig.cap="Laura's growth plotted on chart for Dutch girls, 0-4 years"}
-knitr::include_graphics(mysvg[2])
+knitr::include_graphics(filename_chart2)
 ```
 
 JAMES features a built-in prediction module based on curve matching. Suppose we want to predict Laura's height at the 3y9m when Laura is 2 years old. The following chart plots 25 matches to Laura as grey curves. The variation between the grey curves at age 3y9m indicates the likely variation in the prediction. The blue line indicates Laura's predicted height at age 3y9m. 
@@ -502,13 +505,13 @@ r7 <- james_post(host = host,
                  lo = 2.0, hi = 3.75, nmatch = 25,
                  show_future = TRUE, show_realized = TRUE,
                  query = list(height = 18/2.54, width = 18/2.54))
-writeLines(r7$parsed, con = mysvg[3])
+writeLines(r7$parsed, con = filename_chart3)
 ```
 
 For square charts, use query arguments `list(height = 18/2.54, width = 18/2.54)` to generate the plot. In order to get the same age units as the previous chart, calculate `out.width` as `500/21*18 = "429px"`.
 
 ```{r displaysvg3, echo=FALSE, out.width="429px", fig.align="center", fig.cap="Predict Laura's future height at the age of 3y9m."}
-knitr::include_graphics(mysvg[3])
+knitr::include_graphics(filename_chart3)
 ```
 
 ##### **bash**
