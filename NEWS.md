@@ -1,6 +1,6 @@
 # james 1.7.0 (Nov 2024)
 
-- Adds target height indicator to height chart for ages 1-21y and 0-21y
+- Adds target height indicator to height chart for ages 1-21y and 0-21y. The target height is calculated based on the mid-parental height using the method of Hermanussen and Cole (2004). The target height indicator is plotted at the age of 20.5 years on height charts for ages 1-21 years, including the 95% target height range. The method requires the height of both biological parents (preferred), but also works if the height of the only the mother is known. The target height depends on the sex of the child and the population to which the child is compared. In the JAMES interface, the target height recalculates when the user selects another population.
 
 # james 1.6.5 (Oct 2024)
 
