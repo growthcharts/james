@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.7.0 (Nov 2024)
+subtitle: JAMES 1.7.1 (February 2025)
 author: Stef van Buuren, Arjan Huizing (TNO Child Health)
 output:
   html_document:
@@ -52,7 +52,7 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 
 The table lists the defined API end points and the mapping to each end point to the corresponding R function. 
 
-The current OpenAPI definition of JAMES is at <https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. Note that this definition may evolve over time.
+The OpenAPI definition of JAMES is at <https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. The API is currently frozen at version 1.5.4. The API is subject to change in future versions.
 
 ### Output formats
 
@@ -168,7 +168,7 @@ The following `bash` commands call the `/version` API end point
 
 ```{bash}
 curl -sX 'GET' \
-  'http://localhost:8080/version' \
+   $(cat .host)/version \
   -H 'accept: text/json'
   
 curl -sX POST $(cat .host)/version > resp

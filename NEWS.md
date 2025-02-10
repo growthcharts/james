@@ -1,3 +1,7 @@
+# james 1.7.1 (Feb 2025)
+
+- Resolves a bug in the de-duplication of parental data in BDS field 63. The `bdsreader 0.28.0` package now returns the correct data for these cases. See <https://github.com/growthcharts/bdsreader/issues/10>.
+
 # james 1.7.0 (Nov 2024)
 
 - Adds a target height indicator to height charts for ages 1–21 years and 0–21 years. The target height is calculated using the mid-parental height method described by Hermanussen and Cole (2004). This indicator is plotted at the age of 20.5 years and includes the 95% target height range. The calculation requires the heights of both biological parents (preferred) but can also be performed using only the mother’s height. The target height is adjusted based on the child’s sex and the population standard used for comparison. In the JAMES interface, the target height is automatically recalculated when the user selects a different population.

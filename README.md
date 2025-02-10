@@ -1,9 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- badges: start -->
-
-[![R-CMD-check](https://github.com/growthcharts/james/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/growthcharts/james/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
 
 ## Overview
 
@@ -48,9 +44,10 @@ at tno.nl\> for further information.
 The table lists the defined API end points and the mapping to each end
 point to the corresponding R function.
 
-The current OpenAPI definition of JAMES is at
-<https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. Note that
-this definition may evolve over time.
+The OpenAPI definition of JAMES is at
+<https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. The API is
+currently frozen at version 1.5.4. The API is subject to change in
+future versions.
 
 ## Resources
 
@@ -59,7 +56,7 @@ this definition may evolve over time.
 | Description | Status |
 |:---|:---|
 | [Example requests](https://james.groeidiagrammen.nl) | current |
-| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james) | current |
+| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james/1.5.4) | current |
 | [Source files](https://github.com/growthcharts) | current |
 | [JSON data schema 3.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json) | current |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |

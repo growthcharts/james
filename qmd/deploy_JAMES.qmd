@@ -47,6 +47,10 @@ james:::update_version_files("inst/www/index.html",
                              "DESCRIPTION")
 ```
 
+### Update swaggerhub
+
+- Free accounts no longer exist at SwaggerHub, but the last published version 1.5.4 is still current
+
 ### Next steps
 
 -   Check `renv::status` and commit changes to `renv.lock`

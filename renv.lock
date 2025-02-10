@@ -114,13 +114,13 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.27.0",
+      "Version": "0.28.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
-      "RemoteSha": "1922fe4de7d0c88510c5c816ad95e0421d41e912",
+      "RemoteSha": "66c2f7681c1f0d541e96420d0e706b96f759d2d8",
       "Requirements": [
         "R",
         "centile",
@@ -135,7 +135,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "7db20a6b4fcfccbcf2755308b104b596"
+      "Hash": "83cc76563eb26c8f28d9394037f8863b"
     },
     "bit": {
       "Package": "bit",
@@ -209,7 +209,7 @@
         "rlang",
         "stats"
       ],
-      "Hash": "55b1286555aecb30e3bbd8f358f03827"
+      "Hash": "463edb6f808b2ca61e1e796f0caead9e"
     },
     "chartbox": {
       "Package": "chartbox",
@@ -225,7 +225,7 @@
         "chartcatalog",
         "grDevices"
       ],
-      "Hash": "7fa19665c957394c2e256e46f1f49f50"
+      "Hash": "d42a83a50e03a07964f9bc9ead383690"
     },
     "chartcatalog": {
       "Package": "chartcatalog",
@@ -239,7 +239,7 @@
       "Requirements": [
         "R"
       ],
-      "Hash": "447851fc436200d71e29cb43b9b4cda9"
+      "Hash": "356e61513f0978f6d542aeffb4099771"
     },
     "chartplotter": {
       "Package": "chartplotter",
@@ -268,7 +268,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "b5452e4bed3e83f68e85e3bfcc86576b"
+      "Hash": "01759a339519a213005eb57ce6f51324"
     },
     "cli": {
       "Package": "cli",
@@ -326,13 +326,13 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "6.0.1",
+      "Version": "6.1.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "e8ba62486230951fcd2b881c5be23f96"
+      "Hash": "8dd23d308c751efdf675124aad4bf5d7"
     },
     "curvematching": {
       "Package": "curvematching",
@@ -372,7 +372,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "503704dd61e356a2c7b9bed8ad8a28c8"
+      "Hash": "f5f5bf5564d87a169ceec57d8db835da"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -415,7 +415,7 @@
         "stringi",
         "tidyr"
       ],
-      "Hash": "dd4d21b799b1d3e9ec61cd3fb377acc8"
+      "Hash": "10e0509fd9221f34974c7d18e552bdcd"
     },
     "fansi": {
       "Package": "fansi",
@@ -486,7 +486,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "a2cdec830fb65389baf346e1abca3c22"
+      "Hash": "f47ae4c1a545c9f76dcbcbd2112d4bc2"
     },
     "hms": {
       "Package": "hms",
@@ -736,13 +736,13 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.2.2",
+      "Version": "2.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "askpass"
       ],
-      "Hash": "d413e0fef796c9401a4419485f709ca1"
+      "Hash": "37a7f0abce0349f5950ce49f38c7626b"
     },
     "pillar": {
       "Package": "pillar",
@@ -845,14 +845,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.4",
+      "Version": "1.1.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "3eec01f8b1dee337674b2e34ab1f9bc1"
+      "Hash": "724dcc1490cd7071ee75ca2994a5446e"
     },
     "stringi": {
       "Package": "stringi",
@@ -901,7 +901,7 @@
         "rlang",
         "systemfonts"
       ],
-      "Hash": "30d61b1c821549fcd29805fa07ea9170"
+      "Hash": "47571abc37c9bfc3120f1ec20e8f38cd"
     },
     "sys": {
       "Package": "sys",
