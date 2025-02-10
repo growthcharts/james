@@ -1,3 +1,8 @@
+# james 1.7.2 (Feb 2025)
+
+- Updates to the latest R packages
+- Evades a problem in `vignettes/articles/getting_started.Rmd` that occasionally occurs when the `validate = TRUE` flag is active
+
 # james 1.7.1 (Feb 2025)
 
 - Resolves a bug in the de-duplication of parental data in BDS field 63. The `bdsreader 0.28.0` package now returns the correct data for these cases. See <https://github.com/growthcharts/bdsreader/issues/10>.

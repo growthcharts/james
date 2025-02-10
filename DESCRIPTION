@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 1.7.1
+Version: 1.7.2
 Authors@R: c(person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl", role = c("cre", "aut")), 
              person("Arjan", "Huizing", email = "arjan.huizing@tno.nl", role = "aut"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -17,9 +17,9 @@ Depends:
     svglite (>= 2.1.3.9000)
 Imports: 
     bdsreader (>= 0.28.0),
-    chartbox (>= 1.16.0),
-    chartcatalog (>= 1.16.0),
-    chartplotter (>= 0.35.0),
+    chartbox (>= 1.17.0),
+    chartcatalog (>= 1.18.2),
+    chartplotter (>= 0.35.1),
     dplyr,
     curl,
     grDevices,
