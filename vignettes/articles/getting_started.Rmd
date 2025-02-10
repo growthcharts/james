@@ -398,13 +398,13 @@ r5$parsed
 
 If we upload with the additional `validate = TRUE` flag, JAMES runs the validation of the uploaded JSON against the JSON schema:
 
-```{r}
+```{r eval=FALSE}
 r6 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE)
 mess <- james_get(host = host, path = file.path(r6$session, "messages"))
 cat(mess$parsed)
 ```
 
-which now indicates that the required JSON element `"clientDetails"` is missing. 
+which indicates that the required JSON element `"clientDetails"` is missing. We inactivated the code chunk above because it may occasionally give the error "JAMES API request failed [400] child process has died In call: tryCatch()" when `validate = TRUE`. This is a known, not yet resolved issue.
 
 We may drill down further by setting the `intermediate = TRUE` flag. This writes five JSON files that document the data flow into `{session}/files/{*}.json`.
 
