@@ -30,7 +30,8 @@ Imports:
     jose,
     jsonlite,
     rlang,
-    utils
+    utils,
+    vwc
 Suggests: 
     jamesdemodata (>= 0.11.0),
     openssl,

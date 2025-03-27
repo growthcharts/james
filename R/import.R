@@ -18,6 +18,7 @@
 #' @importFrom rlang           .data
 #' @importFrom svglite         svgstring
 #' @importFrom utils           hasName packageDate packageVersion
+#' @importFrom vwc             select_vwc
 NULL
 
 globalVariables(".val")
