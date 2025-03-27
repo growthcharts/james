@@ -1,3 +1,7 @@
+# james 1.7.3 (March 2025)
+
+- Added `select_vwc` function to calculate Van Wiechen milestones based on age and previously completed milestones.
+
 # james 1.7.2 (Feb 2025)
 
 - Updates to the latest R packages

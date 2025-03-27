@@ -51,7 +51,7 @@ select_vwc <- function(txt = "",
   }
   time <- timedata(tgt)
 
-  vwc <- select_vwc(age = max(time$age),
+  vwc <- vwc::select_vwc(age = max(time$age),
                     refperc = refperc,
                     nsuggest = nsuggest,
                     passed_items = time)
