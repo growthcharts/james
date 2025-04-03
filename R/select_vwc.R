@@ -54,7 +54,7 @@ select_vwc <- function(txt = "",
   vwc <- vwc::select_vwc(age = max(time$age),
                     refperc = refperc,
                     nsuggest = nsuggest,
-                    passed_items = time)
+                    passed_items = time[time$y == 1.00, ]$yname)
 
   if (percentiles) return(vwc::vwc_percentiles(vwc))
   return(unique(vwc))
