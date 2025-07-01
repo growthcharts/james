@@ -8,10 +8,14 @@
 #' milestones
 #'
 #' @inheritParams calculate_dscore
-#' @param refperc Reference percentile indicating the expected probability of a
+#' @param p Reference percentile indicating the expected probability of a
 #'   positive van Wiechen outcome given child age. Higher values correspond with
 #'   easier items.
-#' @param nsuggest Number of van Wiechen items to suggest.
+#' @param d D-score of the child
+#' @param daz Development standardized Z-score
+#' @param n Number of van Wiechen items to suggest. By default returns all items
+#'   within set probability limits.
+#' @param plimits Probability limits for selected items.
 #' @param percentiles When `FALSE` (default), return a string vector containing
 #'   recommended van Wiechen items. When `TRUE`, returns a table with columns
 #'   `"item"` and `"D"` (D-score) and `"A"` (Age in months) columns for the
@@ -21,11 +25,13 @@
 #' @author Arjan Huizing 2025
 #' @examples
 #' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-#' vwc <- select_vwc(txt = fn, refperc = 50)
+#' vwc <- select_vwc(txt = fn, p = 50)
 #' @export
 select_vwc <- function(txt = "",
-                       refperc = 90,
-                       nsuggest = 6,
+                       p = 90,
+                       d = NULL,
+                       daz = NULL,
+                       n = 6,
                        session = "",
                        format = "1.0",
                        loc = "",
@@ -52,8 +58,10 @@ select_vwc <- function(txt = "",
   time <- timedata(tgt)
 
   vwc <- vwc::select_vwc(age = max(time$age),
-                    refperc = refperc,
-                    nsuggest = nsuggest,
+                    p = p,
+                    d = d,
+                    daz = daz,
+                    n = n,
                     passed_items = time[time$y == 1.00, ]$yname)
 
   if (percentiles) return(vwc::vwc_percentiles(vwc))

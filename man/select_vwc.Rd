@@ -7,8 +7,10 @@ milestones}
 \usage{
 select_vwc(
   txt = "",
-  refperc = 90,
-  nsuggest = 6,
+  p = 90,
+  d = NULL,
+  daz = NULL,
+  n = 6,
   session = "",
   format = "1.0",
   loc = "",
@@ -22,11 +24,16 @@ format. The input data adhere to specification
 \href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
 and are converted to JSON according to \code{schema}.}
 
-\item{refperc}{Reference percentile indicating the expected probability of a
+\item{p}{Reference percentile indicating the expected probability of a
 positive van Wiechen outcome given child age. Higher values correspond with
 easier items.}
 
-\item{nsuggest}{Number of van Wiechen items to suggest.}
+\item{d}{D-score of the child}
+
+\item{daz}{Development standardized Z-score}
+
+\item{n}{Number of van Wiechen items to suggest. By default returns all items
+within set probability limits.}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded
 on \code{sitehost}.}
@@ -46,6 +53,8 @@ recommended van Wiechen items. When \code{TRUE}, returns a table with columns
 percentiles 2, 10, 50, 90 and 98.}
 
 \item{...}{Ignored}
+
+\item{plimits}{Probability limits for selected items.}
 }
 \value{
 A vector or table.
@@ -56,7 +65,7 @@ milestones
 }
 \examples{
 fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-vwc <- select_vwc(txt = fn, refperc = 50)
+vwc <- select_vwc(txt = fn, p = 50)
 }
 \author{
 Arjan Huizing 2025
