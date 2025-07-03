@@ -11,8 +11,6 @@
 #' @param p Reference percentile indicating the expected probability of a
 #'   positive van Wiechen outcome given child age. Higher values correspond with
 #'   easier items.
-#' @param d D-score of the child
-#' @param daz Development standardized Z-score
 #' @param n Number of van Wiechen items to suggest. By default returns all items
 #'   within set probability limits.
 #' @param plimits Probability limits for selected items.
@@ -29,8 +27,6 @@
 #' @export
 select_vwc <- function(txt = "",
                        p = 90,
-                       d = NULL,
-                       daz = NULL,
                        n = 6,
                        session = "",
                        format = "1.0",
@@ -38,6 +34,7 @@ select_vwc <- function(txt = "",
                        percentiles = FALSE,
                        ...) {
   authenticate(...)
+  daz <- d <- NULL
 
   if (!missing(loc)) {
     warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
@@ -56,6 +53,12 @@ select_vwc <- function(txt = "",
     return(NULL)
   }
   time <- timedata(tgt)
+
+if ("dsc" %in% time[time$age == max(time$age), "yname"]) {
+  d <- unlist(time[time$age == max(time$age) & time$yname == "dsc", "y"])
+  # Confirm with Iris if this adds anything:
+  # daz <- unlist(time[time$age == max(time$age) & time$yname == "dsc", "z"])
+}
 
   vwc <- vwc::select_vwc(age = max(time$age),
                     p = p,

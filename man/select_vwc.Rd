@@ -8,8 +8,6 @@ milestones}
 select_vwc(
   txt = "",
   p = 90,
-  d = NULL,
-  daz = NULL,
   n = 6,
   session = "",
   format = "1.0",
@@ -27,10 +25,6 @@ and are converted to JSON according to \code{schema}.}
 \item{p}{Reference percentile indicating the expected probability of a
 positive van Wiechen outcome given child age. Higher values correspond with
 easier items.}
-
-\item{d}{D-score of the child}
-
-\item{daz}{Development standardized Z-score}
 
 \item{n}{Number of van Wiechen items to suggest. By default returns all items
 within set probability limits.}
