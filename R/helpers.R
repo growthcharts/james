@@ -49,22 +49,24 @@ update_version_files <- function(html_filepath, rmd_filepath, description_filepa
 
 # 'update_openapi_spec' updates the OpenAPI specification file
 # james::update_openapi_spec()
-update_openapi_spec <- function(template = "inst/spec/openapi.in.yaml",
-                                output = "inst/www/openapi.yaml",
-                                desc_path = "DESCRIPTION") {
-  desc <- read.dcf(desc_path)[1, ]
+update_openapi_spec <- function(
+    template = "inst/spec/openapi.in.yaml",
+    output = "inst/www/openapi.yaml",
+    desc_path = "DESCRIPTION"
+) {
+  desc <- read.dcf(desc_path)
   content <- readLines(template)
 
   for (field in colnames(desc)) {
     pattern <- paste0("@@", field, "@@")
-    content <- gsub(pattern, desc[[field]], content, fixed = TRUE)
+    replacement <- desc[1, field]
+    content <- gsub(pattern, replacement, content, fixed = TRUE)
   }
 
   dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
   writeLines(content, con = output)
   message("inst/www/openapi.yaml updated: ", output)
 }
-
 
 # Install development packages
 # Example, run once:
