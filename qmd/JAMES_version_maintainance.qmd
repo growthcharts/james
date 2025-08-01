@@ -1,0 +1,75 @@
+---
+title: "JAMES version maintaince"
+author: "Stef van Buuren"
+format: html
+---
+
+```{r setup}
+#| include: false
+#| cache: false
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+## Objective
+
+- This document contains the step to create a new JAMES version. 
+- You can also `Render` this document to check and update the JAMES version in the package and documentation files.
+
+## Local JAMES development
+
+### Update and lock packages
+
+Are all R packages up to data and complete?
+
+```{r}
+renv::status()
+```
+
+Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock file.
+
+### Open, work and close issues in GitHub
+
+-   Solve relevant issues in `james` package
+-   <https://github.com/growthcharts/james/issues>
+
+### Check the top level package `james`
+
+```{r}
+devtools::check()
+```
+
+### Update the package version
+
+-   Increase version number in DESCRIPTION file
+
+### Update version in HTML and Rmd files
+
+If DESCRIPTION version changes, update two files with new version numbers
+
+```{r}
+james:::update_version_files(
+  "inst/www/index.html", 
+  "vignettes/articles/getting_started.Rmd", 
+  "DESCRIPTION")
+```
+
+### Update `openapi.yaml`
+
+The source text of the OpenAPI specification is in `inst/spec/openapi.in.yaml`. Before building the package, this file needs updating with the current JAMES version from the `DESCRIPTION` file. This ensures that the two remain in sync.
+
+```{r}
+james:::update_openapi_spec()
+```
+
+### Keep `renv.lock` in shape
+
+- Check `renv::status` and commit changes to `renv.lock`. 
+- Only include packages that are relevant to the JAMES package, not the development packages in the project
+- Use the function `james::install_dev_packages()` to install the development packages (like roxygen2) when starting fresh
+- If needed, clean out the development packages by `renv::clean(prompt = TRUE)` from the library before using `renv::snapshot()` to update the lock file.
+
+### Next steps
+
+-   Update site: `devtools::build_site()`
+-   Push changes to GitHub
+-   Go to `jamesdocker` repo for building app
