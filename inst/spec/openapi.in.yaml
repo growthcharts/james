@@ -1,0 +1,1562 @@
+openapi: 3.0.3
+info:
+  version: "@@Version@@"
+  title: JAMES
+  description: >-
+    The **Joint Automatic Measurement and Evaluation System (JAMES)** is a web
+    service by TNO for creating and interpreting charts of child growth and
+    development. The current version
+
+    - provides access to high-quality growth charts used by Dutch youth
+    healthcare;
+
+    - interchanges data coded according the Basisdataset JGZ;
+
+    - screens for abnormal height, weight and head circumference;
+
+    - converts developmental data into a D-score;
+
+    - predicts future growth and development;
+
+    - creates personalised sites with all of the above.
+  contact:
+    name: JAMES
+    url: https://james.groeidiagrammen.nl
+    email: stef.vanbuuren@tno.nl
+  license:
+    name: GNU Affero General Public License
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+externalDocs:
+  description: JSON BDS schema V3.0 for data communication
+  url: >-
+    https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/schemas/bds_v3.0.json
+servers:
+  - url: https://james.groeidiagrammen.nl
+    description: Open JAMES server
+  - url: http://localhost
+    description: Test and develop
+paths:
+  /data/upload/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Upload child data
+      description: >-
+        Functionality
+
+        - Uploads, parses, converts and stores child data on the JAMES server
+
+        - Returns Z-scores
+
+        - Produces a session key
+
+
+        The uploaded data on the JAMES server are automatically removed after
+        30 minutes.
+      tags:
+        - data
+      requestBody:
+        description: Body parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/upload_data_arguments'
+            examples:
+              txtasfile:
+                value:
+                  txt: >-
+                    http://localhost/ocpu/library/bdsreader/examples/maria.json
+                summary: txt is a file name or URL
+              txtasstring:
+                value:
+                  txt: >-
+                    {"Format": "3.0","organisationCode": 1234,"reference": "Maria","clientDetails": [{"bdsNumber": 19,"value": "2"},{"bdsNumber": 20,"value": "20181011"},{"bdsNumber": 82,"value": 189},{"bdsNumber": 91,"value": "1"},{"bdsNumber": 110,"value": 990},{"bdsNumber": 238,"value": 1670},{"bdsNumber": 240,"value": 1900}],"clientMeasurements": [{"bdsNumber": 235,"values": [{"date": "20181111","value": 380},{"date": "20181211","value": 435}]},{"bdsNumber": 245,"values": [{"date": "20181011","value": 990},{"date": "20181111","value": 1250},{"date": "20181211","value": 2100}]},{"bdsNumber": 252,"values": [{"date": "20181111","value": 270},{"date": "20181211","value": 305}]}],"nestedDetails": [{"nestingBdsNumber": 62,"nestingCode": "01","clientDetails": [{"bdsNumber": 63,"value": "19950704"}]},{"nestingBdsNumber": 62,"nestingCode": "02","clientDetails": [{"bdsNumber": 63,"value": "19901202"}]}]}
+                summary: txt is a JSON string
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/upload_data_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+          links:
+            session:
+              operationId: set_session
+              parameters:
+                header.session: $response.header.x-ocpu-session
+                info: json
+              description: >-
+                The `x-ocpu-session` value returned in the response header can
+                be used as the `session` path parameter in
+
+                - **/{session}/{info}**
+                
+                The {session} value produced by **data/upload** can be use as the `session` bodyrequest parameter in
+
+                - **/chart/draw/{ffm}**
+
+                - **/screeners/apply/{dfm}**
+
+                - **/site/request/{dfm}**
+
+                - **/blend/request/{sfm}**
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '503':
+          description: Server error
+  /data/upload/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::upload_data()
+      tags:
+        - data
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/draw/{ffm}:
+    summary: Draw chart
+    parameters:
+      - $ref: '#/components/parameters/ffm'
+      - $ref: '#/components/parameters/width2'
+      - $ref: '#/components/parameters/height2'
+    post:
+      summary: Draw child data on growth chart
+      description: Produces a graphical representation of child growth and development
+      operationId: set_location
+      tags:
+        - charts
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/draw_chart_arguments'
+            examples:
+              plot1:
+                summary: Create empty chart NMAW
+                value:
+                  chartcode: NMAW
+                  selector: chartcode
+              plot2:
+                summary: Create empty chart NMBA
+                value:
+                  chartcode: NMBA
+                  selector: chartcode
+              plot4:
+                value:
+                  txt: >-
+                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                summary: Draw child data on automatic chart
+              plot5:
+                value:
+                  session: "{session}"
+                  chartcode: NMAB
+                  selector: chartcode
+                summary: >-
+                  Read data from previous session (manually supply session from
+                  **data/upload**)
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+            Content-Disposition:
+              $ref: '#/components/headers/Content-Disposition'
+          content:
+            image/*:
+              schema:
+                $ref: '#/components/schemas/draw_chart_return'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/list/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: List available growth charts
+      description: Provides an overview of the built-in growth charts
+      tags:
+        - charts
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/list_charts_arguments'
+            examples:
+              all:
+                value: null
+                summary: All charts
+              some:
+                value:
+                  chartgrp: who
+                summary: Restrict to charts based on WHO growth standards
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list_charts_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/validate/{dfm}:
+    summary: Validate a chart code
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Validate a chart code
+      description: Tests whether the specified chart code is part of JAMES.
+      tags:
+        - charts
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/validate_chartcode_arguments'
+            examples:
+              validate1:
+                summary: Validate chartcodes
+                value:
+                  chartcode:
+                    - NMAW
+                    - NJAB
+                    - PJAAN27
+                    - null
+                    - dummy
+      responses:
+        '201':
+          description: Created
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+            Content-Disposition:
+              $ref: '#/components/headers/Content-Disposition'
+          content:
+            image/*:
+              schema:
+                $ref: '#/components/schemas/validate_chartcode_return'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/draw/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::draw_chart()
+      tags:
+        - charts
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/list/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::list_charts()
+      tags:
+        - charts
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/validate/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::validate_chartcode()
+      tags:
+        - charts
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /screeners/apply/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Apply growth screeners to child data
+      description: >-
+        Screen a child for possible referral based on JGZ guidelines for growth.
+        JAMES can identify children according to the following guidelines
+
+        - **height**, JGZ-Richtlijn Lengtegroei 2019
+        <https://www.ncj.nl/richtlijnen/alle-richtlijnen/richtlijn/lengtegroei-2019>
+
+        - **weight**, JGZ-Richtlijn Overgewicht 2012
+        <https://www.ncj.nl/richtlijnen/alle-richtlijnen/richtlijn/overgewicht>
+
+        - **weight**, JGZ-Richtlijn Ondergewicht 2019
+        <https://www.ncj.nl/richtlijnen/alle-richtlijnen/richtlijn/ondergewicht-2019>
+
+        - **head circumference**, A decision tree for head circumference for
+        children below the age of 1 year.
+      tags:
+        - screeners
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/apply_screeners_arguments'
+            examples:
+              screen1:
+                summary: Apply all screeners to child data
+                value:
+                  txt: >-
+                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+              screen2:
+                summary: Apply only head circumference to child data
+                value:
+                  txt: >-
+                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                  ynames: hdc
+              screen3:
+                value:
+                  session: {session}
+                summary: >-
+                  Read data from previous session (manually supply session from
+                  **data/upload**)
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apply_screeners_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '503':
+          description: Server error
+  /screeners/list/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: List available growth screeners
+      description: Provides an overview of the built-in screeners
+      tags:
+        - screeners
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/list_screeners_arguments'
+            examples:
+              some:
+                value:
+                  ynames:
+                    - hdc
+                summary: Restrict to screeners for head circumference
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list_screeners_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /screeners/apply/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::apply_screeners()
+      tags:
+        - screeners
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /screeners/list/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::list_screeners()
+      tags:
+        - screeners
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /site/request/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Request personalised site
+      description: Produces a personalised site for evaluating child growth and development
+      tags:
+        - site
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/request_site_arguments'
+            examples:
+              site1:
+                value: 
+                  sitehost: https://james.groeidiagrammen.nl
+                summary: Generic site without data
+              site2:
+                value:
+                  sitehost: https://james.groeidiagrammen.nl
+                  txt: >-
+                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                summary: Upload child data and create personalised site URL
+              site3:
+                value:
+                  sitehost: https://james.groeidiagrammen.nl
+                  txt: >-
+                    {"Format": "3.0","organisationCode": 1234,"reference": "Maria","clientDetails": [{"bdsNumber": 19,"value": "2"},{"bdsNumber": 20,"value": "20181011"},{"bdsNumber": 82,"value": 189},{"bdsNumber": 91,"value": "1"},{"bdsNumber": 110,"value": 990},{"bdsNumber": 238,"value": 1670},{"bdsNumber": 240,"value": 1900}],"clientMeasurements": [{"bdsNumber": 235,"values": [{"date": "20181111","value": 380},{"date": "20181211","value": 435}]},{"bdsNumber": 245,"values": [{"date": "20181011","value": 990},{"date": "20181111","value": 1250},{"date": "20181211","value": 2100}]},{"bdsNumber": 252,"values": [{"date": "20181111","value": 270},{"date": "20181211","value": 305}]}],"nestedDetails": [{"nestingBdsNumber": 62,"nestingCode": "01","clientDetails": [{"bdsNumber": 63,"value": "19950704"}]},{"nestingBdsNumber": 62,"nestingCode": "02","clientDetails": [{"bdsNumber": 63,"value": "19901202"}]}]}
+                summary: Parse child data from a JSON string
+              site4:
+                value:
+                  sitehost: https://james.groeidiagrammen.nl
+                  session: x0123456789abcd
+                summary: >-
+                  Read data from previous session (manually supply session from
+                  **data/upload**)
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/request_site_return'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /site/request/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::request_site()
+      tags:
+        - site
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /blend/request/{sfm}:
+    parameters:
+      - $ref: '#/components/parameters/sfm'
+    post:
+      summary: Obtain a blend from multiple end points
+      description: >-
+        Produces a list of end point results as a one-stop-shop. Graphs are not
+        supported.
+      tags:
+        - blend
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/request_blend_arguments'
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/request_blend_return'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /blend/request/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::request_blend()
+      tags:
+        - blend
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /{session}/{info}:
+    get:
+      summary: Extract session details
+      description: >-
+        The **/{session}/{info}** end point extracts details of a session. Such
+        details concern
+
+        - Representation of return values in **json** or **print** format
+
+        - Representation of tables in **csv**, **tab** and **md** format
+
+        - Representation of figures in **svglite** format
+
+        - Access to **warnings**, **messages**, **console**, **stdout** and
+        **info** for debugging
+
+        - Access to all components of session **parent** directory
+
+
+        Use of the end point requires you to create a session first by one of
+        the POST end points below. Locate the session in the header, and then
+        manually copy the session key from the response into the field `Session
+        key` below.
+
+
+        Details on the structure of a session are on
+        <https://www.opencpu.org/api.html>.
+      operationId: set_session
+      parameters:
+        - $ref: '#/components/parameters/session'
+        - $ref: '#/components/parameters/info'
+        - $ref: '#/components/parameters/width'
+        - $ref: '#/components/parameters/height'
+      tags:
+        - session
+      responses:
+        '200':
+          description: Created
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+          content:
+            text/*:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            image/svg+xml:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '503':
+          description: Server error
+
+  /version/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Obtain version information
+      description: Provides version information on R packages
+      tags:
+        - utility
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package:
+                  type: string
+                  description: package name
+              example:
+                package: james
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /version/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::version()
+      tags:
+        - utility
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/convert_bds_ind:
+    post:
+      summary: Upload data and convert to class individual
+      description: >-
+        Convert json BSD data for single individual to class individual.
+        This function is deprecated. Use **/data/upload** instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/custom_list:
+    post:
+      summary: Returns a mix of end points
+      description: >-
+        Provides a Screen growth curves according to JGZ guidelines.
+
+
+        This function is deprecated and will be removed in Sept 2022. Use
+        **/blend/request** with "allegro" blend parameter instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/draw_chart_ind:
+    post:
+      summary: Draw growth chart with individual data
+      description: >-
+        Draw growth chart with individual data.
+
+
+        This function is deprecated. Use **/charts/draw** instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/draw_chart_bds:
+    post:
+      summary: Draw growth chart from uploaded data
+      description: >-
+        Convert bds-format data to individual and return growth chart.
+
+
+        This function is deprecated. Use **/charts/draw** instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/fetch_loc:
+    post:
+      summary: Stores data on the server for further processing
+      description: >-
+        Uploads, parses, converts and stores data on the server for further
+        processing.
+
+
+        This function is deprecated. Use **/upload/data** instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/screen_curves:
+    post:
+      summary: Screen growth curves according to JGZ guidelines
+      description: >-
+        Screen growth curves according to JGZ guidelines.
+
+
+        This function is deprecated. Use **/screeners/apply** instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ocpu/library/james/R/screen_growth:
+    post:
+      summary: Screen growth curves according to JGZ guidelines
+      description: >-
+        Screen growth curves according to JGZ guidelines.
+        This function is deprecated. Use **/screeners/apply** instead.
+      tags:
+        - deprecated
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+components:
+  schemas:
+    upload_data_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: >-
+            URL, file name or JSON string with child data coded according to
+            schema
+            <https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/schemas/bds_v3.0.json>
+        auto_format:
+          type: boolean
+          description: Should the format be read from the data? Default is `true`.
+        format:
+          type: string
+          description: >-
+            Advanced. JSON data schema version number. Currently supported are
+            "1.0", "1.1", "2.0" and "3.0". Formats "1.0", "1.1" and "2.0" are 
+            included for backward compatibility only and will be deprecated in 
+            the future. Use format "3.0" for new applications.
+            If not specified, the `auto_format` setting takes priority.
+          enum:
+            - '3.0'
+            - '2.0'
+            - '1.1'
+            - '1.0'
+          example: '3.0'
+        schema: 
+          type: string
+          description: >- 
+            Advanced. A file name (optionally including the path) or URL with the 
+            JSON validation schema for the input data. The schema argument 
+            overrides format.
+          default: null
+        append_ddi:
+          type: boolean
+          description: >-
+            Advanced. Should the separate DDI responses be appended? Default is
+            `false`.
+        validate: 
+          type: boolean
+          description: >-
+            Should the JSON-input be validated against the JSON-schema? The 
+            default `false` bypasses checking. Set validate to `true` to obtain 
+            diagnostic information as messages.
+        intermediate: 
+          type: boolean
+          description: |-
+            If `true` JAMES writes five JSON files with intermediate results 
+            from the data reading process to the `{session}/files` directory.
+            For details on the data reading steps, see 
+            <https://github.com/growthcharts/bdsreader/blob/master/R/read_bds.R>
+            - `input.json`: the JSON input data;
+            - `bds.json`: a data frame with info per BDS;
+            - `ddi.json`: result of recoding BDS into GSED item names;
+            - `psn.json`: known fixed child covariates;
+            - `xy.json`: time-varying variables.
+        verbose:
+          type: boolean
+          description: >-
+            Advanced. Show verbose output when calculating the Z-scores? The
+            default is `false`.
+    upload_data_return:
+      type: object
+      description: >- 
+        An array with two elements, named `psn` and `xyz`. 
+        The `psn` element contains a dataset at the person level with one row with fixed covariates. 
+        The `xyz` element contains a  dataset at the measurement level of time-varying covariates with eight columns and an arbitrary number of rows.
+        The list is the child data stored in JAMES internal format.
+        The following properties document the `xyz` element.
+      properties:
+        age:
+          type: number
+          description: Decimal age of child at measurement
+          example: 0.0849
+        xname:
+          type: string
+          description: Name of conditioning variable (usually "age" or "hgt")
+          example: age
+        yname:
+          type: string
+          description: |-
+            Name of the measurement
+            - hgt = body height (cm)
+            - wgt = body weight (kg)
+            - hdc = head circumference (cm)
+            - bmi = body mass index (kg/m^2)
+            - wfh = weight for height (kg)
+            - dsc = D-score - gsed2212 key (D)
+          enum:
+            - hgt
+            - wgt
+            - hdc
+            - bmi
+            - wfh
+            - dsc
+          example: hgt
+        zname:
+          type: string
+          description: Name of the standardised deviation score (SDS) or `Z`-score
+          enum:
+            - hgt_z
+            - wgt_z
+            - hdc_z
+            - bmi_z
+            - wfh_z
+            - dsc_z
+          example: hgt_z
+        zref:
+          type: string
+          description: >-
+            Name of the reference used to calculate the `Z`-score. See
+            <https://github.com/growthcharts/nlreferences>.
+          example: nl_2012_hgt_female_27
+        x:
+          type: number
+          description: Value of the conditioning variable
+          example: 0.0849
+        'y':
+          type: number
+          description: Value of the measurement
+          example: 38
+        z:
+          type: number
+          description: Value of the `Z`-score
+          example: -0.158
+    list_charts_arguments:
+      type: object
+      properties:
+        chartgrp:
+          type: string
+          description: The chart group
+          enum:
+            - nl2010
+            - preterm
+            - who
+          example: who
+    list_charts_return:
+      type: object
+      properties:
+        chartgrp:
+          type: string
+          description: Chart group code
+          enum:
+            - nl2010
+            - preterm
+            - who
+          example: nl2010
+        chartcode:
+          type: string
+          description: Unique chart code
+          example: NJCA
+        population:
+          type: string
+          description: |-
+            Population code (determines the chart palette)
+            - DS = Down Syndrome
+            - HS = Hindostanic
+            - MA = Morrocan
+            - NL = Dutch
+            - PT = Preterm
+            - TU = Turkish
+            - WHOblue = WHO male
+            - WHOpink = WHO female
+          example: NL
+        sex:
+          type: string
+          description: Sex for chart.
+          enum:
+            - male
+            - female
+          example: male
+        design:
+          type: string
+          description: |-
+            Chart design
+            - A = 0-15m
+            - B - 0-4y (weight for height)
+            - C = 1-21y
+            - D = 0-21y
+            - E = 0-4y (weight for age)
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+          example: C
+        side:
+          type: string
+          description: |-
+            Outcome measure
+            - hgt = height
+            - wgt = weight
+            - hdc = head circumference
+            - wfh = weight for height
+            - bmi = body mass index
+            - dsc = D-score
+            - front = multiple outcomes (A4)
+            - back = multiple outcomes (A4)
+            - -hdc = same as back, but without head circumference (A4)
+          example: front
+        language:
+          type: string
+          description: Chart language
+          enum:
+            - dutch
+          example: dutch
+        week:
+          type: integer
+          description: Weeks of gestation 25-36, or missing (>= 37 weeks)
+          minimum: 25
+          maximum: 36
+          example: null
+    draw_chart_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session. 
+            Use {session} produced by **/data/upload**.
+          default: ''
+          example: {session}
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '1.0'
+            - '1.1'
+            - '2.0'
+          example: '2.0'
+        chartcode:
+          type: string
+          description: The chart code
+          default: ''
+        selector:
+          type: string
+          description: >-
+            Method to select growth chart for given data. If no child data is
+            available, the *chartcode* argument is taken. If *chartcode* is
+            missing, then the function selects method *derive*. If you specify a
+            *chartcode*, then also set *selector* to "chartcode". Values "data"
+            (Calculate chart code from the individual data. This setting chooses
+            an optimal chart for a given individual set of data.), "derive"
+            (Calculate chart code from a combination of user data like
+            *chartgrp*, *agegrp*, *side*, *sex*, *etn* and *ga*. The method does
+            not use individual data. Use this setting when chart choice needs to
+            be reactive on user input.), "chartcode" (Take chart specified in
+            the *chartcode* parameter.)
+          enum:
+            - data
+            - derive
+            - chartcode
+          default: data
+        chartgrp:
+          type: string
+          description: The chart group
+          nullable: true
+          enum:
+            - null
+            - nl2010
+            - preterm
+            - who
+          default: null
+        agegrp:
+          type: string
+          description: Age group, chart setting parameter
+          nullable: true
+          enum:
+            - null
+            - 0-15m
+            - 0-4y
+            - 1-21y
+            - 0-21y
+            - 0-4ya
+          default: null
+        sex:
+          type: string
+          description: Sex, chart setting parameter
+          nullable: true
+          enum:
+            - null
+            - male
+            - female
+          default: null
+        etn:
+          type: string
+          description: Etnicity, chart setting parameter
+          nullable: true
+          enum:
+            - null
+            - netherlands
+            - turkish
+            - moroccan
+            - hindustani
+            - down
+          default: null
+        ga:
+          type: string
+          description: Gestational age (in completed weeks), chart setting parameter
+          default: null
+        side:
+          type: string
+          description: Side, chart setting parameter
+          enum:
+            - front
+            - back
+            - '-hdc'
+            - both
+        curve_interpolation:
+          type: boolean
+          description: A logical indicating whether curve interpolation shoud be applied.
+          default: true
+        quiet:
+          type: boolean
+          description: >-
+            Logical indicating whether chart code should be written to standard
+            output.
+          default: true
+        dnr:
+          type: string
+          description: Donor data, Prediction horizon
+          enum:
+            - 0-2
+            - 2-4
+            - 4-18
+            - smocc
+            - lollypop
+            - terneuzen
+            - pops
+        nmatch:
+          type: integer
+          description: Number of matches needed. No matches are sought for nmatch == 0
+          default: 0
+        exact_sex:
+          type: boolean
+          description: A logical indicating whether sex should be matched exactly
+          default: true
+        exact_ga:
+          type: boolean
+          description: >-
+            A logical indicating whether gestational age should be matched
+            exactly.
+          default: false
+        break_ties:
+          type: boolean
+          description: A logical indicating whether ties should broken randomly
+          default: false
+        show_realized:
+          type: boolean
+          description: >-
+            A logical indicating whether the realized growth of the target child
+            should be drawn
+          default: false
+        show_future:
+          type: boolean
+          description: >-
+            A logical indicating whether the predicted growth of the target
+            child should be drawn
+          default: false
+        draw_grob:
+          type: boolean
+          description: Advanced. Should chart be plotted on current device?
+          default: true
+    draw_chart_return:
+      type: string
+      description: >-
+        For path is `svglite`, an xml+svg object. The image file does not
+        preview in Swagger. Download .xml file and view in your browser to
+        render. For optimal size, use **/{session}/svglite** (with session
+        produced by **charts/draw**) with the suggested width and height
+        settings.
+    validate_chartcode_arguments:
+      type: object
+      properties:
+        chartcode:
+          type: string
+          description: The chart code
+          default: ''
+          example: NJAA
+    validate_chartcode_return:
+      type: boolean
+      description: Is chartcode recognised by JAMES?
+    list_screeners_arguments:
+      type: object
+      properties:
+        ynames:
+          type: string
+          description: The measurement
+          enum:
+            - hgt
+            - wgt
+            - hdc
+    list_screeners_return:
+      type: object
+      properties:
+        Versie:
+          type: string
+          description: >-
+            Version of `growthscreener` package
+            <https://github.com/growthcharts/growthscreener>
+          example: 1.12.0
+        yname:
+          type: string
+          description: JAMES name of outcome measure
+          enum:
+            - hgt
+            - wgt
+            - hdc
+        Categorie:
+          type: integer
+          description: Category of the screening guidelines
+          enum:
+            - 1000
+            - 2000
+            - 3000
+        CategorieOmschrijving:
+          type: string
+          description: Measure of growth
+          enum:
+            - Lengte
+            - Gewicht
+            - Hoofdomtrek
+        JGZRichtlijn:
+          type: string
+          description: Name of JGZ Richtlijn
+          enum:
+            - JGZ-Richtlijn Lengtegroei 2019
+            - JGZ-Richtlijn overgewicht 2012 en JGZ-Richtlijn Ondergewicht 2019
+            - Informele richtlijn
+        Code:
+          type: integer
+          description: Result message code
+          example: 1031
+        CodeOmschrijving:
+          type: string
+          description: Result message string
+          example: >-
+            Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In
+            principe geen verwijzing nodig, naar eigen inzicht handelen.
+    apply_screeners_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session. 
+            Use {session} produced by **/data/upload**.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '2.0'
+            - '1.1'
+            - '1.0'
+        ynames:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          minItems: 1
+          maxItems: 3
+          description: Character vector identifying the measures to be screened.
+          default:
+            - hgt
+            - wgt
+            - hdc
+        na.omit:
+          type: boolean
+          description: >-
+            A logical indicating whether records with a missing x or y should be
+            removed.
+    apply_screeners_return:
+      type: object
+      properties:
+        Categorie:
+          type: integer
+          description: Category of the screening guidelines
+          enum:
+            - 1000
+            - 2000
+            - 3000
+        CategorieOmschrijving:
+          type: string
+          description: Measure of growth
+          enum:
+            - Lengte
+            - Gewicht
+            - Hoofdomtrek
+        Code:
+          type: integer
+          description: Result message code
+          example: 1031
+        CodeOmschrijving:
+          type: string
+          description: Result message string
+          example: >-
+            Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In
+            principe geen verwijzing nodig, naar eigen inzicht handelen.
+        Versie:
+          type: string
+          description: >-
+            Version of `growthscreener` package
+            <https://github.com/growthcharts/growthscreener>
+          example: 1.20.0
+        Leeftijd:
+          type: string
+          description: Date of last measurement (YYYYMMDD)
+          example: 20181211
+    request_site_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session. 
+            Use {session} produced by **/data/upload**.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '2.0'
+            - '1.1'
+            - '1.0'
+        upload:
+          type: boolean
+          description: >-
+            If `true` then the procedure will upload the data in txt and return
+            a site address with the ?session= query appended. Setting to `false`
+            just appends ?txt= to the site url, thus deferring validation and
+            conversion to internal representation to the site (not recommended).
+        sitehost:
+          type: string
+          description: >-
+            The host that renders the site. Normally, that would be equal
+            to the host on which JAMES runs. If not specified, the function
+            throws a warning and uses the default `"http://localhost"`.
+            Remove the `"sitehost" : "https://james.groeidiagrammen.nl"` parameter
+            from the examples if your server is set to `"http://localhost"`.
+          default: http://localhost
+    request_site_return:
+      type: string
+      format: uri
+      description: URL of personalised site
+      example: >-
+        http://localhost/ocpu/lib/james/www/?session=x0e395f91a339c2
+    request_blend_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session. 
+            Use {session} produced by **/data/upload**.
+          default: ''
+        sitehost:
+          type: string
+          description: >-
+            The host that renders the site. Normally, that would be equal
+            to the host on which JAMES runs. If not specified, the function
+            throws a warning and uses the default `"http://localhost"`.
+            Remove the `"sitehost" : "https://james.groeidiagrammen.nl"` parameter
+            from the examples if your server is set to `"http://localhost"`.
+          default: https://james.groeidiagrammen.nl
+        blend:
+          type: string
+          description: >-
+            A string indicating the requested blend. The default returns the
+            results of the standard end points that produces tables. Graphs are
+            not supported.
+          default: standard
+          enum:
+            - standard
+            - allegro
+    request_blend_return:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: String, file or URL with child data
+        session:
+          type: string
+          description: Session with uploaded child data
+        child:
+          type: object
+          description: Processed child level data
+        time:
+          type: object
+          description: Processed time level data. See `upload_data_return`
+        screeners:
+          type: object
+          description: >-
+            Results from application of screeners to child data. See
+            `apply_screeners_return`
+        site:
+          type: string
+          format: uri
+          description: URL with personalised child data
+  parameters:
+    session:
+      in: path
+      name: session
+      schema:
+        type: string
+      required: true
+      example: x0123456789abcd
+      description: Session key (removed after 30 minutes)
+    info:
+      in: path
+      name: info
+      description: Session detail
+      required: true
+      schema:
+        type: string
+        enum:
+          - json
+          - print
+          - csv
+          - tab
+          - md
+          - svglite
+          - warnings
+          - messages
+          - console
+          - stdout
+          - info
+          - parent
+    dfm:
+      in: path
+      name: dfm
+      description: Data output format
+      required: true
+      schema:
+        type: string
+        enum:
+          - json
+          - csv
+          - tab
+          - md
+          - print
+          - parent
+        example: json
+    ffm:
+      in: path
+      name: ffm
+      description: Figure output format
+      required: true
+      schema:
+        type: string
+        enum:
+          - svglite
+          - print
+          - parent
+        example: svglite
+    sfm:
+      in: path
+      name: sfm
+      description: System output format
+      required: true
+      schema:
+        type: string
+        enum:
+          - json
+          - print
+          - parent
+        example: json
+    width:
+      in: query
+      name: width
+      description: |-
+        Width of graphic device (inches). Use with svglite.
+        - Square chart (18cm x 18cm) - 7.09
+        - Portrait chart (21cm X 29.7cm) - 8.27
+      schema:
+        type: string
+      example: null
+    height:
+      in: query
+      name: height
+      description: |-
+        Height of graphic device (inches). Use with svglite.
+        - Square chart (18cm x 18cm) - 7.09
+        - Portrait chart (21cm x 29.7cm) - 11.69
+      schema:
+        type: string
+      example: null
+    width2:
+      in: query
+      name: width
+      description: |-
+        Width of graphic device (inches). Use with svglite.
+        - Square chart (18cm x 18cm) - 7.09
+        - Portrait chart (21cm X 29.7cm) - 8.27
+      schema:
+        type: string
+      example: 7.09
+    height2:
+      in: query
+      name: height
+      description: |-
+        Height of graphic device (inches). Use with svglite.
+        - Square chart (18cm x 18cm) - 7.09
+        - Portrait chart (21cm x 29.7cm) - 11.69
+      schema:
+        type: string
+      example: 7.09
+    scaling:
+      in: query
+      name: scaling
+      description: >-
+        A scaling factor to apply to the rendered line width and text size.
+        Useful for getting the right sizing at the dimension that you need.
+      schema:
+        type: number
+      example: 1
+    filename:
+      in: query
+      name: filename
+      description: The file where output will appear.
+      schema:
+        type: string
+  headers:
+    x-ocpu-session:
+      description: Session key (removed after 30 minutes)
+      schema:
+        type: string
+        example: x0123456789abcd
+    Content-Disposition:
+      description: Response content
+      schema:
+        type: string
+  responses:
+    400ScriptError:
+      description: R script error
+      headers:
+        x-ocpu-session:
+          description: session
+          style: simple
+          explode: false
+          schema:
+            type: string
+      content:
+        text/plain:
+          schema:
+            type: string
+            default: ''
+            description: See error messages at URL `/{session}/console`
+    403Forbidden:
+      description: No access to the specified resource
+    404NotFound:
+      description: The specified resource was not found.
