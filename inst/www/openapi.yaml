@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: "1.7.2"
+  version: "1.8.0.9000"
   title: JAMES
   description: >-
     The **Joint Automatic Measurement and Evaluation System (JAMES)** is a web

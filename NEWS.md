@@ -1,3 +1,8 @@
+# james 1.8.0.9000 (Aug 2025)
+
+- Includes the OpenAPI specification yaml file of the JAMES endpoint into the package
+- Adds helpers to update the OpenAPI specification with the version number
+- Creates the JAMES version maintainance document
 - Updates `renv` infrastructure to work with `R 4.5.0`
 
 # james 1.7.2 (Feb 2025)
