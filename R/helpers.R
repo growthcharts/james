@@ -46,3 +46,36 @@ update_version_files <- function(html_filepath, rmd_filepath, description_filepa
   cat("Updated the version in Rmd:", rmd_filepath, "to", rmd_replacement, "\n")
 }
 
+
+# 'update_openapi_spec' updates the OpenAPI specification file
+# james::update_openapi_spec()
+update_openapi_spec <- function(template = "inst/spec/openapi.in.yaml",
+                                output = "inst/www/openapi.yaml",
+                                desc_path = "DESCRIPTION") {
+  desc <- read.dcf(desc_path)[1, ]
+  content <- readLines(template)
+
+  for (field in colnames(desc)) {
+    pattern <- paste0("@@", field, "@@")
+    content <- gsub(pattern, desc[[field]], content, fixed = TRUE)
+  }
+
+  dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
+  writeLines(content, con = output)
+  message("inst/www/openapi.yaml updated: ", output)
+}
+
+
+# Install development packages
+# Example, run once:
+# james:::install_dev_packages()
+install_dev_packages <- function(pkgs = c("roxygen2", "devtools", "desc", "evaluate", "jamesdemodata", "pkgload")) {
+  missing <- pkgs[!pkgs %in% rownames(installed.packages())]
+  if (length(missing) == 0) {
+    message("All development packages are already installed.")
+  } else {
+    message("Installing missing development packages: ", paste(missing, collapse = ", "))
+    install.packages(missing)
+  }
+}
+

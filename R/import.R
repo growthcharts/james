@@ -17,7 +17,8 @@
 #' @importFrom jose            jwt_decode_sig
 #' @importFrom rlang           .data
 #' @importFrom svglite         svgstring
-#' @importFrom utils           hasName packageDate packageVersion
+#' @importFrom utils           hasName install.packages installed.packages
+#'                             packageDate packageVersion
 NULL
 
 globalVariables(".val")
