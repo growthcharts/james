@@ -1,3 +1,5 @@
+- Updates `renv` infrastructure to work with `R 4.5.0`
+
 # james 1.7.2 (Feb 2025)
 
 - Updates to the latest R packages
