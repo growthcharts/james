@@ -33,9 +33,48 @@ externalDocs:
 servers:
   - url: https://james.groeidiagrammen.nl
     description: Open JAMES server
-  - url: http://localhost
+  - url: http://localhost:8080
     description: Test and develop
 paths:
+  /version/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Obtain version information
+      description: Provides version information on R packages
+      tags:
+        - version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package:
+                  type: string
+                  description: package name
+              example:
+                package: james
+      responses:
+        '201':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /version/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::version()
+      tags:
+        - version
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /data/upload/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -102,7 +141,7 @@ paths:
                 be used as the `session` path parameter in
 
                 - **/{session}/{info}**
-                
+
                 The {session} value produced by **data/upload** can be use as the `session` bodyrequest parameter in
 
                 - **/chart/draw/{ffm}**
@@ -459,7 +498,7 @@ paths:
               $ref: '#/components/schemas/request_site_arguments'
             examples:
               site1:
-                value: 
+                value:
                   sitehost: https://james.groeidiagrammen.nl
                 summary: Generic site without data
               site2:
@@ -624,45 +663,6 @@ paths:
         '503':
           description: Server error
 
-  /version/{dfm}:
-    parameters:
-      - $ref: '#/components/parameters/dfm'
-    post:
-      summary: Obtain version information
-      description: Provides version information on R packages
-      tags:
-        - utility
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                package:
-                  type: string
-                  description: package name
-              example:
-                package: james
-      responses:
-        '201':
-          description: Success
-        '400':
-          $ref: '#/components/responses/400ScriptError'
-        '503':
-          description: Server error
-  /version/man:
-    get:
-      summary: Consult R help
-      description: Consult R function documentation of james::version()
-      tags:
-        - utility
-      responses:
-        '200':
-          description: Success
-        '400':
-          $ref: '#/components/responses/400ScriptError'
-        '503':
-          description: Server error
   /ocpu/library/james/R/convert_bds_ind:
     post:
       summary: Upload data and convert to class individual
@@ -798,8 +798,8 @@ components:
           type: string
           description: >-
             Advanced. JSON data schema version number. Currently supported are
-            "1.0", "1.1", "2.0" and "3.0". Formats "1.0", "1.1" and "2.0" are 
-            included for backward compatibility only and will be deprecated in 
+            "1.0", "1.1", "2.0" and "3.0". Formats "1.0", "1.1" and "2.0" are
+            included for backward compatibility only and will be deprecated in
             the future. Use format "3.0" for new applications.
             If not specified, the `auto_format` setting takes priority.
           enum:
@@ -808,11 +808,11 @@ components:
             - '1.1'
             - '1.0'
           example: '3.0'
-        schema: 
+        schema:
           type: string
-          description: >- 
-            Advanced. A file name (optionally including the path) or URL with the 
-            JSON validation schema for the input data. The schema argument 
+          description: >-
+            Advanced. A file name (optionally including the path) or URL with the
+            JSON validation schema for the input data. The schema argument
             overrides format.
           default: null
         append_ddi:
@@ -820,18 +820,18 @@ components:
           description: >-
             Advanced. Should the separate DDI responses be appended? Default is
             `false`.
-        validate: 
+        validate:
           type: boolean
           description: >-
-            Should the JSON-input be validated against the JSON-schema? The 
-            default `false` bypasses checking. Set validate to `true` to obtain 
+            Should the JSON-input be validated against the JSON-schema? The
+            default `false` bypasses checking. Set validate to `true` to obtain
             diagnostic information as messages.
-        intermediate: 
+        intermediate:
           type: boolean
           description: |-
-            If `true` JAMES writes five JSON files with intermediate results 
+            If `true` JAMES writes five JSON files with intermediate results
             from the data reading process to the `{session}/files` directory.
-            For details on the data reading steps, see 
+            For details on the data reading steps, see
             <https://github.com/growthcharts/bdsreader/blob/master/R/read_bds.R>
             - `input.json`: the JSON input data;
             - `bds.json`: a data frame with info per BDS;
@@ -845,9 +845,9 @@ components:
             default is `false`.
     upload_data_return:
       type: object
-      description: >- 
-        An array with two elements, named `psn` and `xyz`. 
-        The `psn` element contains a dataset at the person level with one row with fixed covariates. 
+      description: >-
+        An array with two elements, named `psn` and `xyz`.
+        The `psn` element contains a dataset at the person level with one row with fixed covariates.
         The `xyz` element contains a  dataset at the measurement level of time-varying covariates with eight columns and an arbitrary number of rows.
         The list is the child data stored in JAMES internal format.
         The following properties document the `xyz` element.
@@ -1005,7 +1005,7 @@ components:
           type: string
           description: >-
             Session with uploaded child data. Faster alternative to
-            txt parameter. Parameter txt takes priority over session. 
+            txt parameter. Parameter txt takes priority over session.
             Use {session} produced by **/data/upload**.
           default: ''
           example: {session}
@@ -1239,7 +1239,7 @@ components:
           type: string
           description: >-
             Session with uploaded child data. Faster alternative to
-            txt parameter. Parameter txt takes priority over session. 
+            txt parameter. Parameter txt takes priority over session.
             Use {session} produced by **/data/upload**.
           default: ''
         format:
@@ -1316,7 +1316,7 @@ components:
           type: string
           description: >-
             Session with uploaded child data. Faster alternative to
-            txt parameter. Parameter txt takes priority over session. 
+            txt parameter. Parameter txt takes priority over session.
             Use {session} produced by **/data/upload**.
           default: ''
         format:
@@ -1361,7 +1361,7 @@ components:
           type: string
           description: >-
             Session with uploaded child data. Faster alternative to
-            txt parameter. Parameter txt takes priority over session. 
+            txt parameter. Parameter txt takes priority over session.
             Use {session} produced by **/data/upload**.
           default: ''
         sitehost:
