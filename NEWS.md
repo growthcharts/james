@@ -1,3 +1,4 @@
+# james 1.8.0.9002 (Aug 2025)
 
 - Redefines `request_site()` for clarity and port support
 - Uses the updated jamesclient package for creating URLs
