@@ -1,5 +1,6 @@
 # james 1.8.0.9000 (Aug 2025)
 
+- Depends on `jamesclient 0.34.0`, which changes localhost from port 80 to 8080
 - Includes the OpenAPI specification yaml file of the JAMES endpoint into the package
 - Adds helpers to update the OpenAPI specification with the version number
 - Creates the JAMES version maintainance document
