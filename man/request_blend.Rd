@@ -14,25 +14,19 @@ request_blend(
 )
 }
 \arguments{
-\item{txt}{A JSON string, URL or file with the data in JSON
-format. The input data adhere to specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
-and are converted to JSON according to \code{schema}.}
+\item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
+should conform to the BDS JGZ 3.2.5 specification.}
 
-\item{sitehost}{The host that renders the site. Normally, that would be equal
-to the host on which JAMES runs. If not specified, the function throws a warning
-and sets \code{sitehost} to \code{"http://localhost:8080"}.}
+\item{sitehost}{The server that renders the site. Defaults to
+\code{"http://localhost:8080"} if not specified.}
 
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded
-on \code{sitehost}.}
+\item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
 \item{blend}{A string indicating the requested blend. The default (\code{"standard"})
 returns the results of the standard end points that produces tables. Graphs
 are currently not supported.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Nov 2022; please
-use \code{session} instead.}
+\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{...}{Ignored}
 }

@@ -8,9 +8,7 @@
 draw_chart_ind(loc = "", chartcode = "", curve_interpolation = TRUE, ...)
 }
 \arguments{
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Nov 2022; please
-use \code{session} instead.}
+\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 

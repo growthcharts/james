@@ -17,9 +17,7 @@ screen_growth(
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Nov 2022; please
-use \code{session} instead.}
+\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.

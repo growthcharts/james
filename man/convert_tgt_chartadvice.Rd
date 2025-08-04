@@ -16,17 +16,12 @@ convert_tgt_chartadvice(
 )
 }
 \arguments{
-\item{txt}{A JSON string, URL or file with the data in JSON
-format. The input data adhere to specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
-and are converted to JSON according to \code{schema}.}
+\item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
+should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{session}{OpenCPU session key with the uploaded data}
 
-\item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
-Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
-Use \code{format = "3.0"} for new applications.}
+\item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
 
 \item{chartcode}{Optional. The code of the requested growth chart.}
 
@@ -48,9 +43,7 @@ the \code{selector} setting. If no valid \code{tgt} object is found,
 the \code{"chartcode"} argument is taken. However, if the \code{"chartcode"}
 is empty, then the function selects method \code{"derive"}.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Nov 2022; please
-use \code{session} instead.}
+\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{ind_loc}{Legacy. Will disappear in Nov 2022. Use \code{loc} instead.}
 

@@ -17,8 +17,7 @@ apply_screeners(
 \arguments{
 \item{txt}{A JSON string, URL or file}
 
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded
-on \code{sitehost}.}
+\item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
 \item{format}{String. JSON data schema version number. There are currently
 three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
@@ -32,9 +31,7 @@ screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
 \code{x} (age) or \code{y} (yname) should be removed. Defaults to
 \code{TRUE}.}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Nov 2022; please
-use \code{session} instead.}
+\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{...}{Ignored}
 }

@@ -1,4 +1,5 @@
 
+- Redefines `request_site()` for clarity and port support
 - Uses the updated jamesclient package for creating URLs
 - Adds the port to the the OpenCPU server URL in `inst\www\start.js`
 

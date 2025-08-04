@@ -8,61 +8,43 @@ request_site(
   txt = "",
   sitehost = "",
   session = "",
-  format = "1.0",
+  format = "3.0",
   upload = TRUE,
   loc = "",
   ...
 )
 }
 \arguments{
-\item{txt}{A JSON string, URL or file with the data in JSON
-format. The input data adhere to specification
-\href{https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12}{BDS JGZ 3.2.5},
-and are converted to JSON according to \code{schema}.}
+\item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
+should conform to the BDS JGZ 3.2.5 specification.}
 
-\item{sitehost}{The host that renders the site. Normally, that would be equal
-to the host on which JAMES runs. If not specified, the function throws a warning
-and sets \code{sitehost} to \code{"http://localhost:8080"}.}
+\item{sitehost}{The server that renders the site. Defaults to
+\code{"http://localhost:8080"} if not specified.}
 
-\item{session}{Alternative to \code{txt}. Session key where input data is uploaded
-on \code{sitehost}.}
+\item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
-\item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
-Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
-Use \code{format = "3.0"} for new applications.}
+\item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
 
-\item{upload}{Logical. If \code{TRUE} then \code{request_site()} will upload
-the data in \code{txt} to \code{sitehost} and return a site address with
-the \verb{?session=} query appended.
-Setting (\code{FALSE}) just appends \verb{?txt=} to the site url, thus
-deferring validation and conversion to internal representation to the site.}
+\item{upload}{Logical. If \code{TRUE}, uploads \code{txt} and returns URL with
+\verb{?session=}. If \code{FALSE}, appends \verb{?txt=} directly (not recommended).}
 
-\item{loc}{Alternative to \code{txt}. Location where input data is uploaded.
-Argument \code{loc} is deprecated and will disappear in Nov 2022; please
-use \code{session} instead.}
+\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{...}{Ignored}
 }
 \value{
-URL composed of JAMES server, possibly appended by query string starting
-with \verb{?txt=} or \verb{?session=}.
+A character string URL pointing to the personalised JAMES site.
 }
 \description{
-Server-side function to construct a URL to a site that shows a personalised
-growth chart. The site includes a navigation bar so that the end
-user can interact to chart choices.
-}
-\details{
-One of \code{txt} or \code{session} needs to be specified. If both are given,
-\code{txt} takes precedence. If neither is given, then the function returns
-the base site without any data.
+Constructs a URL to a JAMES site showing a personalised growth chart.
+Optionally uploads the data to the server and returns a session-based URL.
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 host <- "http://localhost:8080"
+host <- "https://james.groeidiagrammen.nl"
 
 # solutions that upload the data and create a URL with the `?session=` query parameter
 \dontrun{
