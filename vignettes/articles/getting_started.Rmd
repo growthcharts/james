@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.8.0.9000 (August 2025)
+subtitle: JAMES 1.8.0.9001 (August 2025)
 author: Stef van Buuren, Arjan Huizing (TNO Child Health)
 output:
   html_document:
@@ -21,15 +21,17 @@ filename_chart3 <- file.path("man/figures", "chart3.svg")
 
 ## Overview
 
-JAMES is a web service for creating and interpreting charts of child growth and development. The current version
+JAMES is a web service for creating and interpreting charts of child growth and development. The current version of JAMES
 
 1. provides access to high-quality growth charts used by the Dutch youth health care;
-2. interchanges data coded according to the [Basisdataset JGZ 4.0.1](https://www.ncj.nl/onderwerp/digitaal-dossier-jgz/bds-jgz-versiebeheer/);
-3. screens for abnormal height, weight and head circumference;
-4. converts developmental data into the D-score;
-5. predicts future growth and development.
+2. screens for abnormal height, weight and head circumference;
+3. converts developmental data into the D-score;
+4. predicts future growth and development.
 
-JAMES is a RESTful API that runs on a remote host. The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information.
+JAMES is a RESTful API that runs on a remote host. The system accepts requests from the Dutch Digital Child Health Record System [DD-JGZ](https://www.ddjgz.nl) and other clients using a 
+the [Basisdataset JGZ 4.0.0](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html) protocol. Child data are coded according to the [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json).
+
+The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information.
 
 The service aids in monitoring and evaluating childhood growth. JAMES is created and maintained by the Netherlands Organisation for Applied Scientific Research TNO. Please contact Stef van Buuren <stef.vanbuuren at tno.nl> for further information.
 
@@ -52,7 +54,7 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 
 The table lists the defined API end points and the mapping to each end point to the corresponding R function. 
 
-The OpenAPI definition of JAMES is at <https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. The API is currently frozen at version 1.5.4. The API is subject to change in future versions.
+The definition of the JAMES endpoints can be found at [OpenAPI specification](https://james.groeidiagrammen.nl/docs/).
 
 ### Output formats
 
@@ -117,8 +119,8 @@ library(jsonlite)
 Let's find out the JAMES version number. In this document, we define the server that hosts JAMES as follows.
 
 ```{r host}
-# host <- "http://localhost"
-host <- "https://james.groeidiagrammen.nl"
+host <- "http://localhost:8080"
+# host <- "https://james.groeidiagrammen.nl"
 system(paste0("echo ", host, " > .host"))
 ```
 
@@ -801,9 +803,9 @@ $(cat .host)'/blend/request/json' \
 | Description                                           | Status                                  |
 |:------------------------------------------------------|:----------------------------------------|
 | [Changelog](https://growthcharts.org/james/news/index.html) | open |
-| [OpenAPI specification](https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4) | open     |
+| [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | open     |
+| [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | open |
 | [Source files](https://github.com/growthcharts) | open  |
-| [JSON data schema 3.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json) | open |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues) | open |
 
 ### External
@@ -811,5 +813,5 @@ $(cat .host)'/blend/request/json' \
 | Description                                           | Status                                  |
 |:------------------------------------------------------|:----------------------------------------|
 | [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | current |
-| [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13) | current |
+| [Basisdataset JGZ](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html) | current |
 | [OpenCPU API](https://www.opencpu.org/api.html) | current |
