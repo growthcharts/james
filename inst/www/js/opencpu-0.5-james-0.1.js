@@ -148,40 +148,45 @@ if(!window.jQuery) {
     }
   }
 
-  //low level call
-  function r_fun_ajax(fun, settings, handler){
-    //validate input
-    if(!fun) throw "r_fun_call called without fun";
-    settings = settings || {};
-    handler = handler || function(){};
+  function r_fun_ajax(fun, settings, handler) {
+    // Validate input
+    if (!fun) throw new Error("r_fun_ajax called without function name (fun)");
 
-    //set global settings
-    settings.url = settings.url || (r_path.href + "/" + fun);
+    settings = settings || {};
+    handler = handler || function () {};
+
+    // Build safe default URL
+    settings.url = settings.url || `${r_path.href.replace(/\/$/, "")}/${fun}`;
     settings.type = settings.type || "POST";
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
 
-    //ajax call
-    var jqxhr = $.ajax(settings).done(function(){
-      var key = jqxhr.getResponseHeader('X-ocpu-session') || console.log("X-ocpu-session response header missing.");
-      if (isSingleUser)
-      {
-        var loc = host + ':80/ocpu/tmp/' + key + '/';
-      } else {
-        var loc = host + basePath + '/' + key + '/';
+    // AJAX call
+    let jqxhr = $.ajax(settings)
+    .done(function (data, textStatus, jqxhr) {
+      let key = jqxhr.getResponseHeader('X-ocpu-session');
+      if (!key) {
+        console.warn("X-ocpu-session response header missing.");
+        return;
       }
-      var txt = jqxhr.responseText;
 
-      //in case of cors we translate relative paths to the target domain
-      if(r_cors && loc.match("^/[^/]")){
-        loc = r_path.protocol + "//" + r_path.host + loc;
+      let loc = isSingleUser
+      ? `${host}/ocpu/tmp/${key}/`
+      : `${host}${basePath}/${key}/`;
+
+      let txt = jqxhr.responseText;
+
+      // Optional: Handle relative path in CORS
+      if (r_cors && loc.startsWith("/")) {
+        loc = `${r_path.protocol}//${r_path.host}${loc}`;
       }
+
       handler(new Session(loc, key, txt));
-    }).fail(function(){
-      console.log("OpenCPU error HTTP " + jqxhr.status + "\n" + jqxhr.responseText);
+    })
+    .fail(function (jqxhr) {
+      console.error(`OpenCPU error HTTP ${jqxhr.status}\n${jqxhr.responseText}`);
     });
-
-    //function chaining
+    // Return jqxhr for chaining
     return jqxhr;
   }
 

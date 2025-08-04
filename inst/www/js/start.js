@@ -12,6 +12,9 @@ var appBase = isSingleUser ? '' : 'app/';
 // Constants for OpenCPU server configuration based on environment
 const { protocol, hostname, port, pathname } = window.location;
 const fullHost = port ? `${hostname}:${port}` : hostname;
+const host = `${protocol}//${fullHost}`;
+
+// Determine the base path for the OpenCPU server
 const basePath = pathname.slice(0, -5);  // Assuming removal of ".html"
 
 // Set the OpenCPU server URL
