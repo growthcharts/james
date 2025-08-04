@@ -161,6 +161,8 @@ if(!window.jQuery) {
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
 
+    console.log("Data sent to OpenCPU:", settings.data);
+
     // AJAX call
     let jqxhr = $.ajax(settings)
     .done(function (data, textStatus, jqxhr) {
