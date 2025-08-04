@@ -10,12 +10,16 @@ const isSingleUser = false;
 var appBase = isSingleUser ? '' : 'app/';
 
 // Constants for OpenCPU server configuration based on environment
-const { protocol, hostname, pathname } = window.location;
-const host = `${protocol}//${hostname}`;
-const basePath = pathname.slice(0, -5); // Assuming removal of ".html"
+const { protocol, hostname, port, pathname } = window.location;
+const fullHost = port ? `${hostname}:${port}` : hostname;
+const basePath = pathname.slice(0, -5);  // Assuming removal of ".html"
 
 // Set the OpenCPU server URL
-ocpu.seturl(isSingleUser ? "../R" : `//${hostname}${basePath}/ocpu/library/james/R`);
+ocpu.seturl(
+  isSingleUser
+    ? "../R"
+    : `${protocol}//${fullHost}${basePath}/ocpu/library/james/R`
+);
 
 // Extract URL parameters with fallbacks to handle null or undefined
 const urlParams = new URLSearchParams(window.location.search);

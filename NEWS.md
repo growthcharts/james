@@ -1,3 +1,6 @@
+
+- Adds the port to the the OpenCPU server URL in `inst\www\start.js`
+
 # james 1.8.0.9001 (Aug 2025)
 
 - Updates port of localhost to 8080
