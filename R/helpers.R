@@ -14,7 +14,7 @@ update_version_files <- function(html_filepath, rmd_filepath, description_filepa
   current_date_text <- format(Sys.Date(), "%B %Y")
 
   # Pattern to match the existing version and date in HTML
-  html_pattern <- "JAMES [0-9]+\\.[0-9]+\\.[0-9]+ \\([0-9]+\\)"
+  html_pattern <- "JAMES [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9]{8}\\)"
 
   # Replacement string with new version and current date for HTML
   html_replacement <- sprintf("JAMES %s (%s)", version, current_date_numeric)
@@ -22,15 +22,20 @@ update_version_files <- function(html_filepath, rmd_filepath, description_filepa
   # Read the HTML file content
   html_content <- readLines(html_filepath, warn = FALSE)
 
-  # Replace the version and date in the HTML content
-  html_content <- gsub(html_pattern, html_replacement, html_content, perl = TRUE)
+  # Replace version + date inside the HTML content line-by-line
+  html_content <- gsub(
+    pattern = html_pattern,
+    replacement = html_replacement,
+    x = html_content,
+    perl = TRUE
+  )
 
   # Write the updated content back to the HTML file
   writeLines(html_content, html_filepath)
   cat("Updated the version in HTML:", html_filepath, "to", html_replacement, "\n")
 
   # Pattern to match the existing version and date in Rmd
-  rmd_pattern <- "subtitle: JAMES [0-9]+\\.[0-9]+\\.[0-9]+ \\([A-Za-z]+ [0-9]{4}\\)"
+  rmd_pattern <- "subtitle: JAMES [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)? \\([A-Za-z]+ [0-9]{4}\\)"
 
   # Replacement string with new version and current date for Rmd
   rmd_replacement <- sprintf("subtitle: JAMES %s (%s)", version, current_date_text)
@@ -65,7 +70,7 @@ update_openapi_spec <- function(
 
   dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
   writeLines(content, con = output)
-  message("inst/www/openapi.yaml updated: ", output)
+  message("inst/spec/openapi.in.yaml updated: ", output)
 }
 
 # Install development packages
