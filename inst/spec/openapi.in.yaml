@@ -33,7 +33,7 @@ externalDocs:
 servers:
   - url: https://james.groeidiagrammen.nl
     description: Open JAMES server
-  - url: http://localhost
+  - url: http://localhost:8080
     description: Test and develop
 paths:
   /data/upload/{dfm}:
@@ -66,7 +66,7 @@ paths:
               txtasfile:
                 value:
                   txt: >-
-                    http://localhost/ocpu/library/bdsreader/examples/maria.json
+                    http://localhost:8080/ocpu/library/bdsreader/examples/maria.json
                 summary: txt is a file name or URL
               txtasstring:
                 value:
@@ -163,7 +163,7 @@ paths:
               plot4:
                 value:
                   txt: >-
-                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
                 summary: Draw child data on automatic chart
               plot5:
                 value:
@@ -346,12 +346,12 @@ paths:
                 summary: Apply all screeners to child data
                 value:
                   txt: >-
-                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
               screen2:
                 summary: Apply only head circumference to child data
                 value:
                   txt: >-
-                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
                   ynames: hdc
               screen3:
                 value:
@@ -466,7 +466,7 @@ paths:
                 value:
                   sitehost: https://james.groeidiagrammen.nl
                   txt: >-
-                    http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
                 summary: Upload child data and create personalised site URL
               site3:
                 value:
@@ -1234,7 +1234,7 @@ components:
           description: URL or file or string
           default: ''
           example: >-
-            http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
         session:
           type: string
           description: >-
@@ -1311,7 +1311,7 @@ components:
           description: URL or file or string
           default: ''
           example: >-
-            http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
         session:
           type: string
           description: >-
@@ -1338,16 +1338,16 @@ components:
           description: >-
             The host that renders the site. Normally, that would be equal
             to the host on which JAMES runs. If not specified, the function
-            throws a warning and uses the default `"http://localhost"`.
+            throws a warning and uses the default `"http://localhost:8080"`.
             Remove the `"sitehost" : "https://james.groeidiagrammen.nl"` parameter
-            from the examples if your server is set to `"http://localhost"`.
-          default: http://localhost
+            from the examples if your server is set to `"http://localhost:8080"`.
+          default: http://localhost:8080
     request_site_return:
       type: string
       format: uri
       description: URL of personalised site
       example: >-
-        http://localhost/ocpu/lib/james/www/?session=x0e395f91a339c2
+        http://localhost:8080/ocpu/lib/james/www/?session=x0e395f91a339c2
     request_blend_arguments:
       type: object
       properties:
@@ -1356,7 +1356,7 @@ components:
           description: URL or file or string
           default: ''
           example: >-
-            http://localhost/ocpu/library/bdsreader/examples/Laura_S.json
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
         session:
           type: string
           description: >-
@@ -1369,9 +1369,9 @@ components:
           description: >-
             The host that renders the site. Normally, that would be equal
             to the host on which JAMES runs. If not specified, the function
-            throws a warning and uses the default `"http://localhost"`.
+            throws a warning and uses the default `"http://localhost:8080"`.
             Remove the `"sitehost" : "https://james.groeidiagrammen.nl"` parameter
-            from the examples if your server is set to `"http://localhost"`.
+            from the examples if your server is set to `"http://localhost:8080"`.
           default: https://james.groeidiagrammen.nl
         blend:
           type: string

@@ -33,7 +33,7 @@ convert_bds_ind <- function(txt = "", format = "1.0", ...) {
 #' @return A list with custom parts
 #' @examples
 #' fn <- system.file("extdata", "bds_v2.0", "smocc", "Laura_S.json", package = "jamesdemodata")
-#' host <- "http://localhost"
+#' host <- "http://localhost:8080"
 #' \dontrun{
 #' # first upload, then create custom list
 #' r1 <- jamesclient::james_post(host = host, path = "data/upload", txt = fn)
@@ -214,7 +214,7 @@ screen_curves <- function(txt = "", loc = "", location = "", format = "1.0",
 #' `x` (age) or `y` (yname) should be removed. Defaults to
 #' `TRUE`.
 #' @examples
-#' host <- "http://localhost"
+#' host <- "http://localhost:8080"
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #'
 #' \dontrun{

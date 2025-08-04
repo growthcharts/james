@@ -5,7 +5,7 @@ library(jamesclient)
 # client3.json
 fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesdemodata")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
-host <- "http://localhost"
+host <- "http://localhost:8080"
 
 if (jamesclient::valid_url(host)) {
   path <- "ocpu/library/james/R/upload_data"

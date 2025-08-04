@@ -54,7 +54,7 @@ test_that(
 
 # test_that("screen_curves() on http400.json has messages",
 #          expect_silent(y <- screen_curves(js,
-#                                            host = "http://localhost:5656",
+#                                            host = "http://localhost:8080:5656",
 #                                            path = "ocpu/library/james/R/convert_bds_ind")))
 test_that(
   "draw_chart() on http400.json has messages",

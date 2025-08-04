@@ -21,7 +21,7 @@ and are converted to JSON according to \code{schema}.}
 
 \item{sitehost}{The host that renders the site. Normally, that would be equal
 to the host on which JAMES runs. If not specified, the function throws a warning
-and sets \code{sitehost} to \code{"http://localhost"}.}
+and sets \code{sitehost} to \code{"http://localhost:8080"}.}
 
 \item{session}{Alternative to \code{txt}. Session key where input data is uploaded
 on \code{sitehost}.}

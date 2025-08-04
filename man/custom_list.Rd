@@ -36,7 +36,7 @@ Provides a Screen growth curves according to JGZ guidelines
 }
 \examples{
 fn <- system.file("extdata", "bds_v2.0", "smocc", "Laura_S.json", package = "jamesdemodata")
-host <- "http://localhost"
+host <- "http://localhost:8080"
 \dontrun{
 # first upload, then create custom list
 r1 <- jamesclient::james_post(host = host, path = "data/upload", txt = fn)

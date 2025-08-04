@@ -7,7 +7,7 @@ kevin <- system.file("testdata", "Kevin_S.json", package = "james")
 kevin_gro <- system.file("testdata", "Kevin_S_gro.json", package = "james")
 kevin_dev <- system.file("testdata", "Kevin_S_dev.json", package = "james")
 
-host <- "http://localhost"
+host <- "http://localhost:8080"
 
 if (jamesclient::valid_url(host)) {
   test_that(

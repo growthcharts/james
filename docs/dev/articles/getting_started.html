@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.8.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.8.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>JAMES - Joint Automatic Measurement and Evaluation System</h1>
-            <h3 data-toc-skip class="subtitle">JAMES 1.8.0.9000 (August
+            <h3 data-toc-skip class="subtitle">JAMES 1.8.0.9001 (August
 2025)</h3>
                         <h4 data-toc-skip class="author">Stef van
 Buuren, Arjan Huizing (TNO Child Health)</h4>
@@ -76,21 +76,23 @@ Buuren, Arjan Huizing (TNO Child Health)</h4>
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>JAMES is a web service for creating and interpreting charts of child
-growth and development. The current version</p>
+growth and development. The current version of JAMES</p>
 <ol style="list-style-type: decimal">
 <li>provides access to high-quality growth charts used by the Dutch
 youth health care;</li>
-<li>interchanges data coded according to the <a href="https://www.ncj.nl/onderwerp/digitaal-dossier-jgz/bds-jgz-versiebeheer/" class="external-link">Basisdataset
-JGZ 4.0.1</a>;</li>
 <li>screens for abnormal height, weight and head circumference;</li>
 <li>converts developmental data into the D-score;</li>
 <li>predicts future growth and development.</li>
 </ol>
-<p>JAMES is a RESTful API that runs on a remote host. The following
-sections illustrate how a client can make requests to JAMES using
-various client languages. In principle, any <code>HTTP</code> client
-will work with JAMES. The document highlights some applications of the
-service and provides pointers to relevant background information.</p>
+<p>JAMES is a RESTful API that runs on a remote host. The system accepts
+requests from the Dutch Digital Child Health Record System <a href="https://www.ddjgz.nl" class="external-link">DD-JGZ</a> and other clients using a the <a href="https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html" class="external-link">Basisdataset
+JGZ 4.0.0</a> protocol. Child data are coded according to the <a href="https://james.groeidiagrammen.nl/schemas/bds_v3.0.json" class="external-link">JSON data
+schema 3.0</a>.</p>
+<p>The following sections illustrate how a client can make requests to
+JAMES using various client languages. In principle, any
+<code>HTTP</code> client will work with JAMES. The document highlights
+some applications of the service and provides pointers to relevant
+background information.</p>
 <p>The service aids in monitoring and evaluating childhood growth. JAMES
 is created and maintained by the Netherlands Organisation for Applied
 Scientific Research TNO. Please contact Stef van Buuren
@@ -188,9 +190,8 @@ Scientific Research TNO. Please contact Stef van Buuren
 </table>
 <p>The table lists the defined API end points and the mapping to each
 end point to the corresponding R function.</p>
-<p>The OpenAPI definition of JAMES is at <a href="https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4" class="external-link uri">https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4</a>.
-The API is currently frozen at version 1.5.4. The API is subject to
-change in future versions.</p>
+<p>The definition of the JAMES endpoints can be found at <a href="https://james.groeidiagrammen.nl/docs/" class="external-link">OpenAPI
+specification</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="output-formats">Output formats<a class="anchor" aria-label="anchor" href="#output-formats"></a>
@@ -341,8 +342,8 @@ illustrate both requests in <code>R</code> and in <code>bash</code>.</p>
 <p>Let’s find out the JAMES version number. In this document, we define
 the server that hosts JAMES as follows.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># host &lt;- "http://localhost"</span></span>
-<span><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"https://james.groeidiagrammen.nl"</span></span>
+<code class="sourceCode R"><span><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"http://localhost:8080"</span></span>
+<span><span class="co"># host &lt;- "https://james.groeidiagrammen.nl"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"echo "</span>, <span class="va">host</span>, <span class="st">" &gt; .host"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We first illustrate a method that makes two requests to the server.
 The following commands call the <code>/version/json</code> end point in
@@ -360,7 +361,7 @@ representation of the result of the <code>R</code> function
 <span><span class="co">## [11] "request_path" "parsed"       "warnings"     "messages"     "session"</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span><span class="op">$</span><span class="va">url</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/version/json"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost:8080/version/json"</span></span></code></pre>
 <p>Most of the element are documented in the <code>response</code>
 object in the <code>httr</code> package. For example, we could use the
 call <code>httr::status_code(r)</code> to obtain the status code. The
@@ -381,7 +382,7 @@ execution;</li>
 <code>r$messages</code> contain any messages, e.g. data reading
 errors;</li>
 <li>
-<code>r$session</code> (like x052f68af9a338b) is a unique session
+<code>r$session</code> (like x0b77cc2385d549) is a unique session
 code.</li>
 </ul>
 <p>The <code><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">jamesclient::james_post()</a></code> function wraps the basis
@@ -398,13 +399,13 @@ directly.</p>
 <span><span class="co">## [1] "james"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $packageVersion</span></span>
-<span><span class="co">## [1] "1.7.2"</span></span>
+<span><span class="co">## [1] "1.8.0.9000"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $packageDate</span></span>
-<span><span class="co">## [1] "2025-02-10"</span></span>
+<span><span class="co">## [1] "2025-08-02"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $Rversion</span></span>
-<span><span class="co">## [1] "4.4.1"</span></span></code></pre>
+<span><span class="co">## [1] "4.5.0"</span></span></code></pre>
 </div>
 <div class="tab-pane" id="bash" role="tabpanel" aria-labelledby="bash-tab">
 
@@ -421,17 +422,17 @@ that makes two requests to the server.</p>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'accept: text/json'</span></span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  </span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version <span class="op">&gt;</span> resp</span></code></pre></div>
-<pre><code><span><span class="co">## Redirect to http://james.groeidiagrammen.nl/ocpu/library/james/R/version/print</span></span></code></pre>
+<pre><code><span><span class="co">## Redirect to http://localhost:8080/ocpu/library/james/R/version/print</span></span></code></pre>
 <p>The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">cat</span> resp</span></code></pre></div>
-<pre><code><span><span class="co">## /ocpu/tmp/x0076719bccd85d/R/.val</span></span>
-<span><span class="co">## /ocpu/tmp/x0076719bccd85d/R/version</span></span>
-<span><span class="co">## /ocpu/tmp/x0076719bccd85d/stdout</span></span>
-<span><span class="co">## /ocpu/tmp/x0076719bccd85d/source</span></span>
-<span><span class="co">## /ocpu/tmp/x0076719bccd85d/console</span></span>
-<span><span class="co">## /ocpu/tmp/x0076719bccd85d/info</span></span>
-<span><span class="co">## /ocpu/tmp/x0076719bccd85d/files/DESCRIPTION</span></span></code></pre>
+<pre><code><span><span class="co">## /ocpu/tmp/x02555253bfe999/R/.val</span></span>
+<span><span class="co">## /ocpu/tmp/x02555253bfe999/R/version</span></span>
+<span><span class="co">## /ocpu/tmp/x02555253bfe999/stdout</span></span>
+<span><span class="co">## /ocpu/tmp/x02555253bfe999/source</span></span>
+<span><span class="co">## /ocpu/tmp/x02555253bfe999/console</span></span>
+<span><span class="co">## /ocpu/tmp/x02555253bfe999/info</span></span>
+<span><span class="co">## /ocpu/tmp/x02555253bfe999/files/DESCRIPTION</span></span></code></pre>
 <p>The path element following <code>tmp/</code> is a unique session key.
 See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for the interpretation
 of the OpenCPU API.</p>
@@ -442,9 +443,9 @@ result and downloads the contents of the URL as a file
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">cat</span> value1</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
-<span><span class="co">##   "packageVersion": "1.7.2",</span></span>
-<span><span class="co">##   "packageDate": "2025-02-10",</span></span>
-<span><span class="co">##   "Rversion": "4.4.1"</span></span>
+<span><span class="co">##   "packageVersion": "1.8.0.9000",</span></span>
+<span><span class="co">##   "packageDate": "2025-08-02",</span></span>
+<span><span class="co">##   "Rversion": "4.5.0"</span></span>
 <span><span class="co">## }</span></span></code></pre>
 <p>The above sequence makes two requests to the server. The following
 code compacts both steps into one.</p>
@@ -452,9 +453,9 @@ code compacts both steps into one.</p>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">cat</span> value2</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
-<span><span class="co">##   "packageVersion": "1.7.2",</span></span>
-<span><span class="co">##   "packageDate": "2025-02-10",</span></span>
-<span><span class="co">##   "Rversion": "4.4.1"</span></span>
+<span><span class="co">##   "packageVersion": "1.8.0.9000",</span></span>
+<span><span class="co">##   "packageDate": "2025-08-02",</span></span>
+<span><span class="co">##   "Rversion": "4.5.0"</span></span>
 <span><span class="co">## }</span></span></code></pre>
 </div>
 </div>
@@ -671,7 +672,7 @@ example, to see the result of the file upload session in markdown
 use</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">session</span> <span class="op">&lt;-</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "x04c3c51798af00"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "x0244cc8a012755"</span></span></code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"md"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
@@ -773,7 +774,7 @@ document the data flow into <code>{session}/files/{*}.json</code>.</p>
 <code class="sourceCode R"><span><span class="va">r7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span>, validate <span class="op">=</span> <span class="cn">TRUE</span>, intermediate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">host</span>, <span class="va">r7</span><span class="op">$</span><span class="va">session</span>, <span class="st">"files/input.json"</span><span class="op">)</span></span>
 <span><span class="va">url</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/x0a3667b0848967/files/input.json"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost:8080/x028b558c84d2bf/files/input.json"</span></span></code></pre>
 <p>With <code>browseURL(url)</code> we may view the file contents in the
 browser. The <code>files</code> directory contains five JSON files:</p>
 <ol style="list-style-type: decimal">
@@ -1253,7 +1254,7 @@ personalised, interactive site containing all charts.</p>
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0b9ff27061f7fa"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost:8080/site?session=x023bdb0828da0a"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
@@ -1263,7 +1264,7 @@ age of the child.</p>
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, session <span class="op">=</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x04c3c51798af00"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "http://localhost:8080/site?session=x0244cc8a012755"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
@@ -1277,7 +1278,7 @@ age of the child.</p>
 <span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a>-H <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
 <span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
 <span id="cb76-6"><a href="#cb76-6" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
-<pre><code><span><span class="co">## ["https://james.groeidiagrammen.nl/site?session=x056aa64f67340f"]</span></span></code></pre>
+<pre><code><span><span class="co">## ["http://localhost:8080/site?session=x0e127120d99423"]</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1316,10 +1317,10 @@ currently it does not support graphics output, so use
 <span><span class="co">## [1] "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,\"value\": \"2\"},{\"bdsNumber\": 20,\"value\": \"19890121\"},{\"bdsNumber\": 82,\"value\": 276},{\"bdsNumber\": 91,\"value\": \"2\"},{\"bdsNumber\": 110,\"value\": 2950},{\"bdsNumber\": 238,\"value\": 1640},{\"bdsNumber\": 240,\"value\": 1790}],\"clientMeasurements\": [{\"bdsNumber\": 235,\"values\": [{\"date\": \"19890121\",\"value\": 480},{\"date\": \"19890227\",\"value\": 535},{\"date\": \"19890320\",\"value\": 560},{\"date\": \"19890417\",\"value\": 595},{\"date\": \"19890717\",\"value\": 655},{\"date\": \"19891023\",\"value\": 715},{\"date\": \"19900129\",\"value\": 750},{\"date\": \"19900423\",\"value\": 800},{\"date\": \"19900806\",\"value\": 840},{\"date\": \"19910205\",\"value\": 900}]},{\"bdsNumber\": 245,\"values\": [{\"date\": \"19890121\",\"value\": 2950},{\"date\": \"19890227\",\"value\": 4180},{\"date\": \"19890320\",\"value\": 5000},{\"date\": \"19890417\",\"value\": 5900},{\"date\": \"19890717\",\"value\": 8240},{\"date\": \"19891023\",\"value\": 9650},{\"date\": \"19900129\",\"value\": 10950},{\"date\": \"19900423\",\"value\": 11900},{\"date\": \"19900806\",\"value\": 12800},{\"date\": \"19910205\",\"value\": 13900}]},{\"bdsNumber\": 252,\"values\": [{\"date\": \"19890227\",\"value\": 376},{\"date\": \"19890320\",\"value\": 390},{\"date\": \"19890417\",\"value\": 405},{\"date\": \"19890717\",\"value\": 441},{\"date\": \"19891023\",\"value\": 466},{\"date\": \"19900129\",\"value\": 478},{\"date\": \"19900423\",\"value\": 487},{\"date\": \"19900806\",\"value\": 492},{\"date\": \"19910205\",\"value\": 500}]},{\"bdsNumber\": 879,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 881,\"values\": [{\"date\": \"19890227\",\"value\": \"2\"},{\"date\": \"19890320\",\"value\": \"1\"}]},{\"bdsNumber\": 883,\"values\": [{\"date\": \"19890227\",\"value\": \"2\"},{\"date\": \"19890320\",\"value\": \"1\"}]},{\"bdsNumber\": 884,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 885,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 886,\"values\": [{\"date\": \"19890320\",\"value\": \"2\"},{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"3\"}]},{\"bdsNumber\": 887,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 888,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 889,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 890,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 891,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 892,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 893,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 894,\"values\": [{\"date\": \"19891023\",\"value\": \"1\"},{\"date\": \"19900129\",\"value\": \"1\"}]},{\"bdsNumber\": 896,\"values\": [{\"date\": \"19891023\",\"value\": \"1\"},{\"date\": \"19900129\",\"value\": \"1\"}]},{\"bdsNumber\": 897,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 898,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 900,\"values\": [{\"date\": \"19900129\",\"value\": \"3\"},{\"date\": \"19900423\",\"value\": \"3\"}]},{\"bdsNumber\": 902,\"values\": [{\"date\": \"19900423\",\"value\": \"2\"},{\"date\": \"19900806\",\"value\": \"1\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 903,\"values\": [{\"date\": \"19900423\",\"value\": \"2\"},{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 905,\"values\": [{\"date\": \"19900423\",\"value\": \"1\"},{\"date\": \"19900806\",\"value\": \"1\"}]},{\"bdsNumber\": 906,\"values\": [{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 907,\"values\": [{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 909,\"values\": [{\"date\": \"19900806\",\"value\": \"3\"},{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 910,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 912,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 921,\"values\": [{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 927,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 928,\"values\": [{\"date\": \"19890227\",\"value\": \"2\"}]},{\"bdsNumber\": 930,\"values\": [{\"date\": \"19890320\",\"value\": \"3\"},{\"date\": \"19890417\",\"value\": \"3\"}]},{\"bdsNumber\": 932,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 933,\"values\": [{\"date\": \"19891023\",\"value\": \"3\"},{\"date\": \"19900129\",\"value\": \"3\"}]},{\"bdsNumber\": 935,\"values\": [{\"date\": \"19891023\",\"value\": \"2\"},{\"date\": \"19900129\",\"value\": \"3\"}]},{\"bdsNumber\": 936,\"values\": [{\"date\": \"19900129\",\"value\": \"2\"},{\"date\": \"19900423\",\"value\": \"3\"}]},{\"bdsNumber\": 937,\"values\": [{\"date\": \"19900129\",\"value\": \"2\"},{\"date\": \"19900423\",\"value\": \"3\"}]},{\"bdsNumber\": 938,\"values\": [{\"date\": \"19900423\",\"value\": \"3\"},{\"date\": \"19900806\",\"value\": \"3\"}]},{\"bdsNumber\": 940,\"values\": [{\"date\": \"19900806\",\"value\": \"3\"},{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 943,\"values\": [{\"date\": \"19910205\",\"value\": \"3\"}]},{\"bdsNumber\": 945,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 955,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 956,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 958,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 959,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 961,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 962,\"values\": [{\"date\": \"19890417\",\"value\": \"2\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 964,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"}]},{\"bdsNumber\": 966,\"values\": [{\"date\": \"19890227\",\"value\": \"1\"},{\"date\": \"19890417\",\"value\": \"1\"}]},{\"bdsNumber\": 968,\"values\": [{\"date\": \"19890417\",\"value\": \"1\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 969,\"values\": [{\"date\": \"19890417\",\"value\": \"1\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 970,\"values\": [{\"date\": \"19890417\",\"value\": \"1\"},{\"date\": \"19890717\",\"value\": \"1\"}]},{\"bdsNumber\": 973,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"3\"}]},{\"bdsNumber\": 975,\"values\": [{\"date\": \"19890717\",\"value\": \"1\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 976,\"values\": [{\"date\": \"19890717\",\"value\": \"2\"},{\"date\": \"19891023\",\"value\": \"1\"}]},{\"bdsNumber\": 978,\"values\": [{\"date\": \"19891023\",\"value\": \"1\"},{\"date\": \"19900129\",\"value\": \"1\"}]},{\"bdsNumber\": 980,\"values\": [{\"date\": \"19891023\",\"value\": \"3\"},{\"date\": \"19900129\",\"value\": \"3\"}]},{\"bdsNumber\": 982,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 984,\"values\": [{\"date\": \"19900129\",\"value\": \"1\"},{\"date\": \"19900423\",\"value\": \"1\"}]},{\"bdsNumber\": 986,\"values\": [{\"date\": \"19900423\",\"value\": \"1\"},{\"date\": \"19900806\",\"value\": \"1\"}]},{\"bdsNumber\": 989,\"values\": [{\"date\": \"19900423\",\"value\": \"2\"},{\"date\": \"19900806\",\"value\": \"2\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 991,\"values\": [{\"date\": \"19900806\",\"value\": \"1\"},{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 993,\"values\": [{\"date\": \"19910205\",\"value\": \"1\"}]},{\"bdsNumber\": 1278,\"values\": [{\"date\": \"19891023\",\"value\": \"3\"},{\"date\": \"19900129\",\"value\": \"3\"}]}],\"nestedDetails\": [{\"nestingBdsNumber\": 62,\"nestingCode\": \"02\",\"clientDetails\": [{\"bdsNumber\": 63,\"value\": \"19610722\"}]}]}"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $session</span></span>
-<span><span class="co">## [1] "x0ff48da232a435"</span></span>
+<span><span class="co">## [1] "x005294f8a1f7d5"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $site</span></span>
-<span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0ff48da232a435"</span></span>
+<span><span class="co">## [1] "http://localhost:8080/site?session=x005294f8a1f7d5"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $child</span></span>
 <span><span class="co">##   id    name        dob       dobm src    sex gad ga smo   bw hgtm hgtf</span></span>
@@ -1411,634 +1412,26 @@ currently it does not support graphics output, so use
 <span id="cb80-7"><a href="#cb80-7" tabindex="-1"></a><span class="st">"sitehost": "'</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'",</span></span>
 <span id="cb80-8"><a href="#cb80-8" tabindex="-1"></a><span class="st">"blend": "standard"</span></span>
 <span id="cb80-9"><a href="#cb80-9" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
-<pre><code><span><span class="co">## {</span></span>
-<span><span class="co">##   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",</span></span>
-<span><span class="co">##   "session": "x07b620a1283646",</span></span>
-<span><span class="co">##   "site": "https://james.groeidiagrammen.nl/site?session=x07b620a1283646",</span></span>
-<span><span class="co">##   "child": [</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "id": -1,</span></span>
-<span><span class="co">##       "name": "Laura S",</span></span>
-<span><span class="co">##       "dob": "1989-01-21",</span></span>
-<span><span class="co">##       "dobm": "1961-07-22",</span></span>
-<span><span class="co">##       "src": "0",</span></span>
-<span><span class="co">##       "sex": "female",</span></span>
-<span><span class="co">##       "gad": 276,</span></span>
-<span><span class="co">##       "ga": 39,</span></span>
-<span><span class="co">##       "smo": 0,</span></span>
-<span><span class="co">##       "bw": 2950,</span></span>
-<span><span class="co">##       "hgtm": 164,</span></span>
-<span><span class="co">##       "hgtf": 179</span></span>
-<span><span class="co">##     }</span></span>
-<span><span class="co">##   ],</span></span>
-<span><span class="co">##   "time": [</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0,</span></span>
-<span><span class="co">##       "y": 48,</span></span>
-<span><span class="co">##       "z": -1.515</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1013,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1013,</span></span>
-<span><span class="co">##       "y": 53.5,</span></span>
-<span><span class="co">##       "z": -0.499</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1588,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1588,</span></span>
-<span><span class="co">##       "y": 56,</span></span>
-<span><span class="co">##       "z": -0.261</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.2355,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.2355,</span></span>
-<span><span class="co">##       "y": 59.5,</span></span>
-<span><span class="co">##       "z": 0.163</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.4846,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.4846,</span></span>
-<span><span class="co">##       "y": 65.5,</span></span>
-<span><span class="co">##       "z": -0.259</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.7529,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.7529,</span></span>
-<span><span class="co">##       "y": 71.5,</span></span>
-<span><span class="co">##       "z": 0.131</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.0212,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 1.0212,</span></span>
-<span><span class="co">##       "y": 75,</span></span>
-<span><span class="co">##       "z": -0.18</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.2512,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 1.2512,</span></span>
-<span><span class="co">##       "y": 80,</span></span>
-<span><span class="co">##       "z": 0.421</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.5387,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 1.5387,</span></span>
-<span><span class="co">##       "y": 84,</span></span>
-<span><span class="co">##       "z": 0.527</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 2.0397,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hgt",</span></span>
-<span><span class="co">##       "zname": "hgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hgt_female_nl",</span></span>
-<span><span class="co">##       "x": 2.0397,</span></span>
-<span><span class="co">##       "y": 90,</span></span>
-<span><span class="co">##       "z": 0.67</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0,</span></span>
-<span><span class="co">##       "y": 2.95,</span></span>
-<span><span class="co">##       "z": -1.055</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1013,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1013,</span></span>
-<span><span class="co">##       "y": 4.18,</span></span>
-<span><span class="co">##       "z": -0.162</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1588,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1588,</span></span>
-<span><span class="co">##       "y": 5,</span></span>
-<span><span class="co">##       "z": 0.401</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.2355,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.2355,</span></span>
-<span><span class="co">##       "y": 5.9,</span></span>
-<span><span class="co">##       "z": 0.717</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.4846,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.4846,</span></span>
-<span><span class="co">##       "y": 8.24,</span></span>
-<span><span class="co">##       "z": 1.173</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.7529,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 0.7529,</span></span>
-<span><span class="co">##       "y": 9.65,</span></span>
-<span><span class="co">##       "z": 1.052</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.0212,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 1.0212,</span></span>
-<span><span class="co">##       "y": 10.95,</span></span>
-<span><span class="co">##       "z": 1.164</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.2512,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 1.2512,</span></span>
-<span><span class="co">##       "y": 11.9,</span></span>
-<span><span class="co">##       "z": 1.247</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.5387,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 1.5387,</span></span>
-<span><span class="co">##       "y": 12.8,</span></span>
-<span><span class="co">##       "z": 1.228</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 2.0397,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "wgt",</span></span>
-<span><span class="co">##       "zname": "wgt_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wgt_female_nl",</span></span>
-<span><span class="co">##       "x": 2.0397,</span></span>
-<span><span class="co">##       "y": 13.9,</span></span>
-<span><span class="co">##       "z": 0.989</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1013,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1013,</span></span>
-<span><span class="co">##       "y": 37.6,</span></span>
-<span><span class="co">##       "z": 0.418</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1588,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1588,</span></span>
-<span><span class="co">##       "y": 39,</span></span>
-<span><span class="co">##       "z": 0.605</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.2355,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 0.2355,</span></span>
-<span><span class="co">##       "y": 40.5,</span></span>
-<span><span class="co">##       "z": 0.696</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.4846,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 0.4846,</span></span>
-<span><span class="co">##       "y": 44.1,</span></span>
-<span><span class="co">##       "z": 1.021</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.7529,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 0.7529,</span></span>
-<span><span class="co">##       "y": 46.6,</span></span>
-<span><span class="co">##       "z": 1.418</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.0212,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 1.0212,</span></span>
-<span><span class="co">##       "y": 47.8,</span></span>
-<span><span class="co">##       "z": 1.307</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.2512,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 1.2512,</span></span>
-<span><span class="co">##       "y": 48.7,</span></span>
-<span><span class="co">##       "z": 1.373</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.5387,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 1.5387,</span></span>
-<span><span class="co">##       "y": 49.2,</span></span>
-<span><span class="co">##       "z": 1.246</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 2.0397,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "hdc",</span></span>
-<span><span class="co">##       "zname": "hdc_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_hdc_female_nl",</span></span>
-<span><span class="co">##       "x": 2.0397,</span></span>
-<span><span class="co">##       "y": 50,</span></span>
-<span><span class="co">##       "z": 1.224</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 0,</span></span>
-<span><span class="co">##       "y": 12.8038,</span></span>
-<span><span class="co">##       "z": 0.259</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1013,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1013,</span></span>
-<span><span class="co">##       "y": 14.6039,</span></span>
-<span><span class="co">##       "z": 0.231</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1588,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 0.1588,</span></span>
-<span><span class="co">##       "y": 15.9439,</span></span>
-<span><span class="co">##       "z": 0.701</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.2355,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 0.2355,</span></span>
-<span><span class="co">##       "y": 16.6655,</span></span>
-<span><span class="co">##       "z": 0.734</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.4846,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 0.4846,</span></span>
-<span><span class="co">##       "y": 19.2063,</span></span>
-<span><span class="co">##       "z": 1.688</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.7529,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 0.7529,</span></span>
-<span><span class="co">##       "y": 18.8762,</span></span>
-<span><span class="co">##       "z": 1.325</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.0212,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 1.0212,</span></span>
-<span><span class="co">##       "y": 19.4667,</span></span>
-<span><span class="co">##       "z": 1.78</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.2512,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 1.2512,</span></span>
-<span><span class="co">##       "y": 18.5937,</span></span>
-<span><span class="co">##       "z": 1.394</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.5387,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 1.5387,</span></span>
-<span><span class="co">##       "y": 18.1406,</span></span>
-<span><span class="co">##       "z": 1.277</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 2.0397,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "bmi",</span></span>
-<span><span class="co">##       "zname": "bmi_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_bmi_female_nl",</span></span>
-<span><span class="co">##       "x": 2.0397,</span></span>
-<span><span class="co">##       "y": 17.1605,</span></span>
-<span><span class="co">##       "z": 0.825</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1013,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 0.1013,</span></span>
-<span><span class="co">##       "y": 15.56,</span></span>
-<span><span class="co">##       "z": -0.094</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1588,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 0.1588,</span></span>
-<span><span class="co">##       "y": 17.69,</span></span>
-<span><span class="co">##       "z": -0.075</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.2355,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 0.2355,</span></span>
-<span><span class="co">##       "y": 20.57,</span></span>
-<span><span class="co">##       "z": -0.125</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.4846,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 0.4846,</span></span>
-<span><span class="co">##       "y": 25.55,</span></span>
-<span><span class="co">##       "z": -1.553</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.7529,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 0.7529,</span></span>
-<span><span class="co">##       "y": 43.75,</span></span>
-<span><span class="co">##       "z": 0.672</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.0212,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 1.0212,</span></span>
-<span><span class="co">##       "y": 50.92,</span></span>
-<span><span class="co">##       "z": 0.708</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.2512,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 1.2512,</span></span>
-<span><span class="co">##       "y": 54.34,</span></span>
-<span><span class="co">##       "z": 0.319</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.5387,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 1.5387,</span></span>
-<span><span class="co">##       "y": 56.65,</span></span>
-<span><span class="co">##       "z": -0.385</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 2.0397,</span></span>
-<span><span class="co">##       "xname": "age",</span></span>
-<span><span class="co">##       "yname": "dsc",</span></span>
-<span><span class="co">##       "zname": "dsc_z",</span></span>
-<span><span class="co">##       "zref": "ph_2023_dsc_female_40",</span></span>
-<span><span class="co">##       "x": 2.0397,</span></span>
-<span><span class="co">##       "y": 70.05,</span></span>
-<span><span class="co">##       "z": 1.536</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 48,</span></span>
-<span><span class="co">##       "y": 2.95</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1013,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 53.5,</span></span>
-<span><span class="co">##       "y": 4.18,</span></span>
-<span><span class="co">##       "z": 0.215</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.1588,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 56,</span></span>
-<span><span class="co">##       "y": 5,</span></span>
-<span><span class="co">##       "z": 0.764</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.2355,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 59.5,</span></span>
-<span><span class="co">##       "y": 5.9,</span></span>
-<span><span class="co">##       "z": 0.744</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.4846,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 65.5,</span></span>
-<span><span class="co">##       "y": 8.24,</span></span>
-<span><span class="co">##       "z": 1.728</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 0.7529,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 71.5,</span></span>
-<span><span class="co">##       "y": 9.65,</span></span>
-<span><span class="co">##       "z": 1.342</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.0212,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 75,</span></span>
-<span><span class="co">##       "y": 10.95,</span></span>
-<span><span class="co">##       "z": 1.726</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.2512,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 80,</span></span>
-<span><span class="co">##       "y": 11.9,</span></span>
-<span><span class="co">##       "z": 1.379</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 1.5387,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 84,</span></span>
-<span><span class="co">##       "y": 12.8,</span></span>
-<span><span class="co">##       "z": 1.242</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "age": 2.0397,</span></span>
-<span><span class="co">##       "xname": "hgt",</span></span>
-<span><span class="co">##       "yname": "wfh",</span></span>
-<span><span class="co">##       "zname": "wfh_z",</span></span>
-<span><span class="co">##       "zref": "nl_1997_wfh_female_nla",</span></span>
-<span><span class="co">##       "x": 90,</span></span>
-<span><span class="co">##       "y": 13.9,</span></span>
-<span><span class="co">##       "z": 0.82</span></span>
-<span><span class="co">##     }</span></span>
-<span><span class="co">##   ],</span></span>
-<span><span class="co">##   "screeners": [</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "Categorie": 1000,</span></span>
-<span><span class="co">##       "CategorieOmschrijving": "Lengte",</span></span>
-<span><span class="co">##       "Code": 1031,</span></span>
-<span><span class="co">##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##       "Versie": "1.23.0",</span></span>
-<span><span class="co">##       "Leeftijd": 2.0397</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "Categorie": 2000,</span></span>
-<span><span class="co">##       "CategorieOmschrijving": "Gewicht",</span></span>
-<span><span class="co">##       "Code": 2075,</span></span>
-<span><span class="co">##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn ondergewicht is als volgt: Sterke gewichtsafname (-1 SD), advies: Is er sprake van een afwijkende voedingstoestand en/of klachten of symptomen die kunnen wijzen op onderliggende ziekte of problemen? Indien ja, Verwijzen naar kinderarts. Indien nee, dan is er in principe geen verwijzing nodig. Naar eigen inzicht handelen.",</span></span>
-<span><span class="co">##       "Versie": "1.23.0",</span></span>
-<span><span class="co">##       "Leeftijd": 2.0397</span></span>
-<span><span class="co">##     },</span></span>
-<span><span class="co">##     {</span></span>
-<span><span class="co">##       "Categorie": 3000,</span></span>
-<span><span class="co">##       "CategorieOmschrijving": "Hoofdomtrek",</span></span>
-<span><span class="co">##       "Code": 3021,</span></span>
-<span><span class="co">##       "CodeOmschrijving": "De richtlijn hoofdomtrek is bedoeld voor kinderen tot 1 jaar.",</span></span>
-<span><span class="co">##       "Versie": "1.23.0",</span></span>
-<span><span class="co">##       "Leeftijd": 2.0397</span></span>
-<span><span class="co">##     }</span></span>
-<span><span class="co">##   ]</span></span>
-<span><span class="co">## }</span></span></code></pre>
+<pre><code><span><span class="co">## cannot open the connection to 'http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json'</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## In call:</span></span>
+<span><span class="co">## file(description = txt, open = "rt")</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Backtrace:</span></span>
+<span><span class="co">##      ▆</span></span>
+<span><span class="co">##   1. ├─base::eval(call)</span></span>
+<span><span class="co">##   2. │ └─base::eval(call)</span></span>
+<span><span class="co">##   3. ├─base::withCallingHandlers(...)</span></span>
+<span><span class="co">##   4. ├─base::withVisible(eval(expr, envir))</span></span>
+<span><span class="co">##   5. └─base::eval(expr, envir)</span></span>
+<span><span class="co">##   6.   └─base::eval(expr, envir)</span></span>
+<span><span class="co">##   7.     └─james::request_blend(...)</span></span>
+<span><span class="co">##   8.       └─james:::request_blend_standard(...)</span></span>
+<span><span class="co">##   9.         └─james::request_site(...)</span></span>
+<span><span class="co">##  10.           └─james:::get_session(txt, sitehost, format = format)</span></span>
+<span><span class="co">##  11.             └─jamesclient::james_post(...)</span></span>
+<span><span class="co">##  12.               └─jamesclient::read_json_js(txt = txt) at jamesclient/R/james_post.R:54:3</span></span>
+<span><span class="co">##  13.                 └─base::file(description = txt, open = "rt") at jamesclient/R/read_json.R:26:5</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -2068,18 +1461,18 @@ currently it does not support graphics output, so use
 <td align="left">open</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4" class="external-link">OpenAPI
+<td align="left"><a href="https://james.groeidiagrammen.nl/docs/" class="external-link">OpenAPI
 specification</a></td>
 <td align="left">open</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://github.com/growthcharts" class="external-link">Source
-files</a></td>
+<td align="left"><a href="https://james.groeidiagrammen.nl/schemas/bds_v3.0.json" class="external-link">JSON data
+schema 3.0</a></td>
 <td align="left">open</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json" class="external-link">JSON
-data schema 3.0</a></td>
+<td align="left"><a href="https://github.com/growthcharts" class="external-link">Source
+files</a></td>
 <td align="left">open</td>
 </tr>
 <tr class="odd">
@@ -2109,7 +1502,7 @@ demo</a></td>
 <td align="left">current</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13" class="external-link">Basisdataset
+<td align="left"><a href="https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html" class="external-link">Basisdataset
 JGZ</a></td>
 <td align="left">current</td>
 </tr>

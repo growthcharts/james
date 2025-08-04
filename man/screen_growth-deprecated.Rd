@@ -39,7 +39,7 @@ screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
 Screen growth curves according to JGZ guidelines
 }
 \examples{
-host <- "http://localhost"
+host <- "http://localhost:8080"
 fn <- system.file("testdata", "client3.json", package = "james")
 
 \dontrun{

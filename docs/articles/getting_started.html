@@ -340,7 +340,7 @@ illustrate both requests in <code>R</code> and in <code>bash</code>.</p>
 <p>Let’s find out the JAMES version number. In this document, we define
 the server that hosts JAMES as follows.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># host &lt;- "http://localhost"</span></span>
+<code class="sourceCode R"><span><span class="co"># host &lt;- "http://localhost:8080"</span></span>
 <span><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"https://james.groeidiagrammen.nl"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"echo "</span>, <span class="va">host</span>, <span class="st">" &gt; .host"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We first illustrate a method that makes two requests to the server.

@@ -15,7 +15,7 @@
 #' and are converted to JSON according to `schema`.
 #' @param sitehost The host that renders the site. Normally, that would be equal
 #' to the host on which JAMES runs. If not specified, the function throws a warning
-#' and sets `sitehost` to `"http://localhost"`.
+#' and sets `sitehost` to `"http://localhost:8080"`.
 #' @param session Alternative to `txt`. Session key where input data is uploaded
 #' on `sitehost`.
 #' @param upload Logical. If `TRUE` then `request_site()` will upload
@@ -39,7 +39,7 @@
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 #' url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
-#' host <- "http://localhost"
+#' host <- "http://localhost:8080"
 #'
 #' # solutions that upload the data and create a URL with the `?session=` query parameter
 #' \dontrun{
@@ -88,9 +88,9 @@ request_site <- function(txt = "",
   }
 
   if (is.empty(sitehost)) {
-    warning("Argument sitehost not found. Defaulting to http://localhost.",
+    warning("Argument sitehost not found. Defaulting to http://localhost:8080.",
             call. = FALSE)
-    sitehost <- "http://localhost"
+    sitehost <- "http://localhost:8080"
   }
 
   txt <- txt[1L]
