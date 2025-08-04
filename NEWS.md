@@ -1,4 +1,5 @@
 
+- Uses the updated jamesclient package for creating URLs
 - Adds the port to the the OpenCPU server URL in `inst\www\start.js`
 
 # james 1.8.0.9001 (Aug 2025)

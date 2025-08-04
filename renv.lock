@@ -1288,7 +1288,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.34.0",
+      "Version": "0.35.0",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Client-side R Functions for JAMES",
@@ -1317,7 +1317,7 @@
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "3ac8c5027a1cbabb1f1455ffd542f78523cd14d8",
+      "RemoteSha": "31368e6fa29173900eb3ef7d0de5211e53185c33",
       "NeedsCompilation": "no",
       "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)"
     },
