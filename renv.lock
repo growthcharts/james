@@ -1288,7 +1288,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.33.0",
+      "Version": "0.34.0",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Client-side R Functions for JAMES",
@@ -1307,18 +1307,19 @@
         "pkgdown",
         "testthat (>= 2.1.0)"
       ],
+      "Remotes": "growthcharts/jamesdemodata",
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://github.com/growthcharts/jamesclient",
       "BugReports": "https://github.com/growthcharts/jamesclient/issues",
       "RoxygenNote": "7.3.2",
-      "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)",
       "RemoteType": "github",
-      "RemoteUsername": "growthcharts",
-      "RemoteRepo": "jamesclient",
-      "RemoteRef": "master",
-      "RemoteSha": "2c2ebb89e2fc611105b5c8b41043de6d95a6185a",
       "RemoteHost": "api.github.com",
-      "Remotes": "growthcharts/jamesdemodata"
+      "RemoteRepo": "jamesclient",
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "3ac8c5027a1cbabb1f1455ffd542f78523cd14d8",
+      "NeedsCompilation": "no",
+      "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)"
     },
     "jose": {
       "Package": "jose",
