@@ -161,7 +161,10 @@ if(!window.jQuery) {
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
 
+    console.log("URL sent to OpenCPU:", settings.url);
+    console.log("type sent to OpenCPU:", settings.type);
     console.log("Data sent to OpenCPU:", settings.data);
+    console.log("dataType sent to OpenCPU:", settings.dataType);
 
     // AJAX call
     let jqxhr = $.ajax(settings)
@@ -176,12 +179,18 @@ if(!window.jQuery) {
       ? `${host}/ocpu/tmp/${key}/`
       : `${host}${basePath}/${key}/`;
 
+      console.log("After isSingleUser, loc:", loc);
+
       let txt = jqxhr.responseText;
 
       // Optional: Handle relative path in CORS
       if (r_cors && loc.startsWith("/")) {
         loc = `${r_path.protocol}//${r_path.host}${loc}`;
       }
+
+      console.log("Before handler, loc:", loc);
+      console.log("Before handler, key:", key);
+      console.log("Before handler, txt:", txt);
 
       handler(new Session(loc, key, txt));
     })
