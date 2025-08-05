@@ -167,11 +167,8 @@ if(!window.jQuery) {
     console.log("dataType sent to OpenCPU:", settings.dataType);
 
     // Auto-detect environment and set host appropriately
-    let host;
-
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
-
     let host, basePath;
 
     if (hostname === "localhost" || hostname === "127.0.0.1") {
