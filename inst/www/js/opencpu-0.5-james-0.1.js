@@ -179,7 +179,7 @@ if(!window.jQuery) {
       ? `${host}/ocpu/tmp/${key}/`
       : `${host}${basePath}/${key}/`;
 
-      console.log("After isSingleUser, loc:", loc);
+      console.log(loc);
 
       let txt = jqxhr.responseText;
 
