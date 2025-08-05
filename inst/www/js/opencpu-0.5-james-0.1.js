@@ -138,58 +138,65 @@ if(!window.jQuery) {
     }
   }
 
-  function r_fun_ajax(fun, settings, handler) {
-    if (!fun) throw new Error("r_fun_ajax called without function name (fun)");
+  function r_fun_ajax(fun, settings = {}, handler = () => {}) {
+    if (!fun) {
+      throw new Error("r_fun_ajax: Missing function name (fun)");
+    }
 
-    settings = settings || {};
-    handler = handler || function () {};
-
-    // Construct full request URL based on ocpu.url
+    // Build request URL from ocpu.url
     const baseUrl = ocpu.url.replace(/\/$/, "");
     settings.url = settings.url || `${baseUrl}/${fun}`;
     settings.type = settings.type || "POST";
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
 
-    console.log("Sending request to:", settings.url);
+    console.log(`[r_fun_ajax] Requesting: ${settings.url}`);
+    console.log("[r_fun_ajax] Settings:", settings);
 
-    // Parse the base URL to derive protocol://hostname[:port]
-    const ocpuUrl = new URL(ocpu.url);
-    const derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;  // Includes port if specified
+    // Parse ocpu.url to derive host for session URL
+    let derivedHost;
+    try {
+      const ocpuUrl = new URL(ocpu.url);
+      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;  // host includes port
+    } catch (err) {
+      console.warn("[r_fun_ajax] Invalid ocpu.url, using window.location as fallback");
+      derivedHost = `${window.location.protocol}//${window.location.host}`;
+    }
 
-    let jqxhr = $.ajax(settings)
-      .done(function (data, textStatus, jqxhr) {
+    // Perform AJAX call
+    const jqxhr = $.ajax(settings)
+      .done((data, textStatus, jqxhr) => {
         const key = jqxhr.getResponseHeader('X-ocpu-session');
+        const txt = jqxhr.responseText;
+
         if (!key) {
-          console.warn("X-ocpu-session response header missing.");
+          console.warn("[r_fun_ajax] Missing X-ocpu-session header");
           return;
         }
 
-        const sessionPath = `/ocpu/tmp/${key}/`;  // Relative path to session
-        const loc = `${derivedHost}${sessionPath}`;  // Fully qualified session URL
+        const sessionPath = `/ocpu/tmp/${key}/`;
+        const loc = `${derivedHost}${sessionPath}`;
 
-        const txt = jqxhr.responseText;
+        console.log("[r_fun_ajax] Session key:", key);
+        console.log("[r_fun_ajax] Session URL:", loc);
 
-        console.log("Session key:", key);
-        console.log("Session URL:", loc);
-
+        // Call handler with Session object
         handler(new Session(loc, key, txt));
       })
-      .fail(function (jqxhr, textStatus, errorThrown) {
-        console.error("OpenCPU error in r_fun_ajax", {
+      .fail((jqxhr, textStatus, errorThrown) => {
+        const errorInfo = {
           function: fun,
           url: settings.url,
           status: jqxhr.status,
           statusText: jqxhr.statusText,
-          responseText: jqxhr.responseText,
           textStatus: textStatus,
-          errorThrown: errorThrown});
-
-          // Optional: display user-friendly error
-          alert(`Failed to call OpenCPU function ${fun}.\nStatus: ${jqxhr.status} ${jqxhr.statusText}`);
-
+          errorThrown: errorThrown,
+          responseText: jqxhr.responseText
+        };
+        console.error("[r_fun_ajax] OpenCPU error:", errorInfo);
       });
-    return jqxhr;
+
+    return jqxhr;  // For chaining or advanced handling
   }
 
   //call a function using json arguments
