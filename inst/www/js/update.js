@@ -105,17 +105,19 @@ function throttle(func, wait) {
 }
 
 function drawChart(params) {
-  let rq = $("#plotDiv").rplot("draw_chart", params, session => {
+  const rq = $("#plotDiv").rplot("draw_chart", params, session => {
     updateNoticePanel(2, session);
   });
 
-  rq.fail(jqxhr => {
+  console.log("rplot() return value:", rq);
+
+  rq.fail((jqxhr, textStatus, errorThrown) => {
     console.error("Server error rq2 – unable to draw chart", {
       txt: params.txt,
       session: params.session,
       chartcode: params.chartcode,
       selector: params.selector,
-      error: jqxhr.responseText
+      error: jqxhr.responseText || errorThrown || textStatus
     });
   });
 }
