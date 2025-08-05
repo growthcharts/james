@@ -149,46 +149,51 @@ if(!window.jQuery) {
   }
 
   function r_fun_ajax(fun, settings, handler) {
-    // Validate input
     if (!fun) throw new Error("r_fun_ajax called without function name (fun)");
 
     settings = settings || {};
     handler = handler || function () {};
 
-    // Build safe default URL
-    settings.url = settings.url || `${r_path.href.replace(/\/$/, "")}/${fun}`;
+    // Construct full request URL based on seturl() path
+    settings.url = settings.url || `${ocpu.url.replace(/\/$/, "")}/${fun}`;
     settings.type = settings.type || "POST";
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
 
-    // AJAX call
+    console.log("Sending request to:", settings.url);
+
     let jqxhr = $.ajax(settings)
-    .done(function (data, textStatus, jqxhr) {
-      let key = jqxhr.getResponseHeader('X-ocpu-session');
-      if (!key) {
-        console.warn("X-ocpu-session response header missing.");
-        return;
-      }
+      .done(function (data, textStatus, jqxhr) {
+        const key = jqxhr.getResponseHeader('X-ocpu-session');
+        if (!key) {
+          console.warn("X-ocpu-session response header missing.");
+          return;
+        }
 
-      let loc = isSingleUser
-      ? `${host}/ocpu/tmp/${key}/`
-      : `${host}${basePath}/${key}/`;
+        // The response contains relative paths (txt), including session root
+        const txt = jqxhr.responseText;
+        const sessionPath = `/ocpu/tmp/${key}/`; // Relative path to session
 
-      let txt = jqxhr.responseText;
+        // Use current host (auto-detected earlier) if you need full URL
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        const port = window.location.port ? `:${window.location.port}` : "";
+        const host = `${protocol}//${hostname}${port}`;
 
-      // Optional: Handle relative path in CORS
-      if (r_cors && loc.startsWith("/")) {
-        loc = `${r_path.protocol}//${r_path.host}${loc}`;
-      }
+        const loc = `${host}${sessionPath}`;  // Absolute session URL
 
-      handler(new Session(loc, key, txt));
-    })
-    .fail(function (jqxhr) {
-      console.error(`OpenCPU error HTTP ${jqxhr.status}\n${jqxhr.responseText}`);
-    });
-    // Return jqxhr for chaining
+        console.log("Session key:", key);
+        console.log("Session path (relative):", sessionPath);
+        console.log("Session URL (absolute):", loc);
+
+        handler(new Session(loc, key, txt));
+      })
+      .fail(function (jqxhr) {
+        console.error(`OpenCPU error HTTP ${jqxhr.status}\n${jqxhr.responseText}`);
+      });
     return jqxhr;
   }
+
 
   //call a function using uson arguments
   function r_fun_call_json(fun, args, handler){

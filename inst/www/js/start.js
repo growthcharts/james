@@ -9,20 +9,32 @@
 const isSingleUser = false;
 var appBase = isSingleUser ? '' : 'app/';
 
-// Constants for OpenCPU server configuration based on environment
+// Determine if running in development or production
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+const isDocker = !window.location.hostname;  // inside Docker container (headless)
+
+// Construct host URL
 const { protocol, hostname, port, pathname } = window.location;
 const fullHost = port ? `${hostname}:${port}` : hostname;
-const host = `${protocol}//${fullHost}`;
+const host = isDocker
+  ? "http://127.0.0.1:8004"        // Inside Docker, direct to OpenCPU
+  : isLocalhost
+    ? "http://127.0.0.1:8080"      // Local dev Apache port
+    : `${protocol}//${fullHost}`;  // Production or remote host
 
-// Determine the base path for the OpenCPU server
-const basePath = pathname.slice(0, -5);  // Assuming removal of ".html"
+// Determine OpenCPU base path
+// In dev/Docker, we use the full OpenCPU path; in prod, rewrites handle clean URLs
+const ocpuBaseURL = isDocker || isLocalhost
+  ? `${host}/ocpu/library/james/R`
+  : `${host}/ocpu/library/james/R`;  // Use full path even in prod to avoid surprises
 
 // Set the OpenCPU server URL
-ocpu.seturl(
-  isSingleUser
-    ? "../R"
-    : `${protocol}//${fullHost}${basePath}/ocpu/library/james/R`
-);
+if (!window.ocpu) window.ocpu = {};
+ocpu.seturl(ocpuBaseURL);
+
+// Optional: log info for debugging
+console.log("OpenCPU host:", host);
+console.log("OpenCPU base URL:", ocpuBaseURL);
 
 // Extract URL parameters with fallbacks to handle null or undefined
 const urlParams = new URLSearchParams(window.location.search);
