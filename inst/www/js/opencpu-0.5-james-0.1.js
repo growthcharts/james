@@ -175,10 +175,20 @@ if(!window.jQuery) {
 
         handler(new Session(loc, key, txt));
       })
-      .fail(function (jqxhr) {
-        console.error(`OpenCPU error HTTP ${jqxhr.status}\n${jqxhr.responseText}`);
-      });
+      .fail(function (jqxhr, textStatus, errorThrown) {
+        console.error("OpenCPU error in r_fun_ajax", {
+          function: fun,
+          url: settings.url,
+          status: jqxhr.status,
+          statusText: jqxhr.statusText,
+          responseText: jqxhr.responseText,
+          textStatus: textStatus,
+          errorThrown: errorThrown});
 
+          // Optional: display user-friendly error
+          alert(`Failed to call OpenCPU function ${fun}.\nStatus: ${jqxhr.status} ${jqxhr.statusText}`);
+
+      });
     return jqxhr;
   }
 
