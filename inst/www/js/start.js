@@ -4,37 +4,9 @@
 // Part of the JAMES package
 // Licence: AGPL
 
-// Do we run as a single-user server OCPU app. If so, set to true:
-// Not yet implemented
+// Flag for single-user mode; not yet implemented
 const isSingleUser = false;
-var appBase = isSingleUser ? '' : 'app/';
-
-// Determine if running in development or production
-const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-const isDocker = !window.location.hostname;  // inside Docker container (headless)
-
-// Construct host URL
-const { protocol, hostname, port, pathname } = window.location;
-const fullHost = port ? `${hostname}:${port}` : hostname;
-const host = isDocker
-  ? "http://127.0.0.1:8004"        // Inside Docker, direct to OpenCPU
-  : isLocalhost
-    ? "http://127.0.0.1:8080"      // Local dev Apache port
-    : `${protocol}//${fullHost}`;  // Production or remote host
-
-// Determine OpenCPU base path
-// In dev/Docker, we use the full OpenCPU path; in prod, rewrites handle clean URLs
-const ocpuBaseURL = isDocker || isLocalhost
-  ? `${host}/ocpu/library/james/R`
-  : `${host}/ocpu/library/james/R`;  // Use full path even in prod to avoid surprises
-
-// Set the OpenCPU server URL
-if (!window.ocpu) window.ocpu = {};
-ocpu.seturl(ocpuBaseURL);
-
-// Optional: log info for debugging
-console.log("OpenCPU host:", host);
-console.log("OpenCPU base URL:", ocpuBaseURL);
+const appBase = isSingleUser ? '' : 'app/';
 
 // Extract URL parameters with fallbacks to handle null or undefined
 const urlParams = new URLSearchParams(window.location.search);

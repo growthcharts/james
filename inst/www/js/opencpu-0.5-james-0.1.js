@@ -23,12 +23,6 @@ if(!window.jQuery) {
 
 (function ( $ ) {
 
-  //global variable
-  var r_cors = false;
-  var r_path = document.createElement('a');
-  r_path.href = "../R";
-
-
   //new Session()
   function Session(loc, key, txt){
     this.loc = loc;
@@ -44,17 +38,13 @@ if(!window.jQuery) {
       return loc;
     };
 
-    this.getFileURL = function(path){
-      var new_url = document.createElement('a');
-      new_url.href = this.getLoc() + "files/" + path;
-      new_url.username = r_path.username;
-      new_url.password = r_path.password;
-      return new_url.href;
-    };
-
     this.getFile = function(path, success){
       var url = this.getFileURL(path);
       return $.get(url, success);
+    };
+
+    this.getFileURL = function(path){
+      return this.loc + "files/" + path;
     };
 
     this.getObject = function(name, data, success){
@@ -154,13 +144,18 @@ if(!window.jQuery) {
     settings = settings || {};
     handler = handler || function () {};
 
-    // Construct full request URL based on seturl() path
-    settings.url = settings.url || `${ocpu.url.replace(/\/$/, "")}/${fun}`;
+    // Construct full request URL based on ocpu.url
+    const baseUrl = ocpu.url.replace(/\/$/, "");
+    settings.url = settings.url || `${baseUrl}/${fun}`;
     settings.type = settings.type || "POST";
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
 
     console.log("Sending request to:", settings.url);
+
+    // Parse the base URL to derive protocol://hostname[:port]
+    const ocpuUrl = new URL(ocpu.url);
+    const derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;  // Includes port if specified
 
     let jqxhr = $.ajax(settings)
       .done(function (data, textStatus, jqxhr) {
@@ -170,32 +165,24 @@ if(!window.jQuery) {
           return;
         }
 
-        // The response contains relative paths (txt), including session root
+        const sessionPath = `/ocpu/tmp/${key}/`;  // Relative path to session
+        const loc = `${derivedHost}${sessionPath}`;  // Fully qualified session URL
+
         const txt = jqxhr.responseText;
-        const sessionPath = `/ocpu/tmp/${key}/`; // Relative path to session
-
-        // Use current host (auto-detected earlier) if you need full URL
-        const protocol = window.location.protocol;
-        const hostname = window.location.hostname;
-        const port = window.location.port ? `:${window.location.port}` : "";
-        const host = `${protocol}//${hostname}${port}`;
-
-        const loc = `${host}${sessionPath}`;  // Absolute session URL
 
         console.log("Session key:", key);
-        console.log("Session path (relative):", sessionPath);
-        console.log("Session URL (absolute):", loc);
+        console.log("Session URL:", loc);
 
         handler(new Session(loc, key, txt));
       })
       .fail(function (jqxhr) {
         console.error(`OpenCPU error HTTP ${jqxhr.status}\n${jqxhr.responseText}`);
       });
+
     return jqxhr;
   }
 
-
-  //call a function using uson arguments
+  //call a function using json arguments
   function r_fun_call_json(fun, args, handler){
     return r_fun_ajax(fun, {
       data: JSON.stringify(args || {}),
@@ -457,85 +444,45 @@ if(!window.jQuery) {
     }
   }
 
-  //export
-  window.ocpu = window.ocpu || {};
-  var ocpu = window.ocpu;
+  // Define or reuse global ocpu object
+  var ocpu = window.ocpu = window.ocpu || {};
 
-  //global settings
-  function seturl(newpath){
-    if(!newpath.match("/R$")){
-      alert("ERROR! Trying to set R url to: " + newpath +". Path to an OpenCPU R package must end with '/R'");
-    } else {
-      r_path = document.createElement('a');
-      r_path.href = newpath;
-      r_path.href = r_path.href; //IE needs this
-
-      if(location.protocol != r_path.protocol || location.host != r_path.host){
-        r_cors = true;
-        if (!('withCredentials' in new XMLHttpRequest())) {
-          alert("This browser does not support CORS. Try using Firefox or Chrome.");
-        } else if(r_path.username && r_path.password) {
-          //should only do this for calls to opencpu maybe
-          var regex = new RegExp(r_path.host);
-          $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-              //only use auth for ajax requests to ocpu
-              if(regex.test(settings.url)){
-                //settings.username = r_path.username;
-                //settings.password = r_path.password;
-
-                /* take out user:pass from target url */
-                var target = document.createElement('a');
-                target.href = settings.url;
-                settings.url = target.protocol + "//" + target.host + target.basePath
-
-                /* set basic auth header */
-                settings.xhrFields = settings.xhrFields || {};
-                settings.xhrFields.withCredentials = true;
-                settings.crossDomain = true;
-                xhr.setRequestHeader("Authorization", "Basic " + btoa(r_path.username + ":" + r_path.password));
-
-                /* debug */
-                console.log("Authenticated request to: " + settings.url + " (" + r_path.username + ", " + r_path.password + ")")
-              }
-            }
-          });
-        }
-      }
-
-      if(location.protocol == "https:" && r_path.protocol != "https:"){
-        alert("Page is hosted on HTTPS but using a (non-SSL) HTTP OpenCPU server. This is insecure and most browsers will not allow this.")
-      }
-
-      if(r_cors){
-        console.log("Setting path to CORS server " + r_path.href);
-      } else {
-        console.log("Setting path to local (non-CORS) server " + r_path.href);
-      }
-
-      //CORS disallows redirects.
-      return $.get(r_path.href + "/", function(resdata){
-        console.log("Path updated. Available objects/functions:\n" + resdata);
-
-      }).fail(function(xhr, textStatus, errorThrown){
-        alert("Connection to OpenCPU failed:\n" + textStatus + "\n" + xhr.responseText + "\n" + errorThrown);
-      });
+  // Define seturl function with validation
+  ocpu.seturl = function(path) {
+    if (typeof path !== "string" || !path.match(/\/R\/?$/)) {
+      console.error("Invalid OpenCPU URL. Must be a string ending in '/R'. Got:", path);
+      return;
     }
-  }
+    // Normalize to a single trailing slash
+    ocpu.url = path.replace(/\/+$/, "") + "/";
+    console.log("OpenCPU base URL set to:", ocpu.url);
+  };
 
-  //exported functions
+  // Auto-detect and set ocpu.url
+  (function initOcpuUrl() {
+    const { protocol, hostname, port } = window.location;
+
+    let ocpuBaseURL;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      ocpuBaseURL = "http://127.0.0.1:8080/ocpu/library/james/R";
+    } else if (hostname === "") {
+      ocpuBaseURL = "http://127.0.0.1:8004/ocpu/library/james/R";
+    } else {
+      ocpuBaseURL = `${protocol}//${hostname}/ocpu/library/james/R`;
+    }
+    // Set the OpenCPU server URL
+    ocpu.seturl(ocpuBaseURL);
+  })();
+
+  // Export remaining functions
   ocpu.call = r_fun_call;
   ocpu.rpc = rpc;
-  ocpu.seturl = seturl;
-
-  //exported constructors
   ocpu.Snippet = Snippet;
   ocpu.Upload = Upload;
 
-  //for innernetz exploder
+  // For older browsers
   if (typeof console == "undefined") {
-    this.console = {log: function() {}};
+    this.console = { log: function() {} };
   }
 
-}( jQuery ));
-
+}(jQuery));
