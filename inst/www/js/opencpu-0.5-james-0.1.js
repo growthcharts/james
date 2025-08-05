@@ -480,14 +480,11 @@ if(!window.jQuery) {
     const { protocol, hostname, port } = window.location;
 
     let ocpuBaseURL;
-    if (hostname === "localhost" || hostname === "127.0.0.1") {
-      ocpuBaseURL = "http://127.0.0.1:8080/ocpu/library/james/R";
-    } else if (hostname === "") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       ocpuBaseURL = "http://127.0.0.1:8004/ocpu/library/james/R";
     } else {
-      ocpuBaseURL = `${protocol}//${hostname}/ocpu/library/james/R`;
+      ocpuBaseURL = `${window.location.protocol}//${window.location.hostname}/ocpu/library/james/R`;
     }
-    // Set the OpenCPU server URL
     ocpu.seturl(ocpuBaseURL);
   })();
 
