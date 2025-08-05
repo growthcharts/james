@@ -156,34 +156,10 @@ if(!window.jQuery) {
     handler = handler || function () {};
 
     // Build safe default URL
-    settings.url = settings.url || `${host}${basePath}/${fun}`;
+    settings.url = settings.url || `${r_path.href.replace(/\/$/, "")}/${fun}`;
     settings.type = settings.type || "POST";
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
-
-    console.log("URL sent to OpenCPU:", settings.url);
-    console.log("type sent to OpenCPU:", settings.type);
-    console.log("Data sent to OpenCPU:", settings.data);
-    console.log("dataType sent to OpenCPU:", settings.dataType);
-
-    // Auto-detect environment and set host appropriately
-    const hostname = window.location.hostname;
-    const protocol = window.location.protocol;
-    let host, basePath;
-
-    if (hostname === "localhost" || hostname === "127.0.0.1") {
-      host = "http://127.0.0.1:8080";  // Apache with rewrites
-      basePath = "";                   // Short paths, e.g., /site/request
-    } else if (hostname === "") {
-      host = "http://127.0.0.1:8004";  // Direct OpenCPU port
-      basePath = "/ocpu/library/james/R";  // Full path needed
-    } else {
-      host = `${protocol}//${hostname}`;  // Production
-      basePath = "";                      // Short paths
-    }
-
-    console.log("Auto-detected host:", host);
-    console.log("Auto-detected basePath:", basePath);
 
     // AJAX call
     let jqxhr = $.ajax(settings)
@@ -198,18 +174,12 @@ if(!window.jQuery) {
       ? `${host}/ocpu/tmp/${key}/`
       : `${host}${basePath}/${key}/`;
 
-      console.log(loc);
-
       let txt = jqxhr.responseText;
 
       // Optional: Handle relative path in CORS
       if (r_cors && loc.startsWith("/")) {
         loc = `${r_path.protocol}//${r_path.host}${loc}`;
       }
-
-      console.log("Before handler, loc:", loc);
-      console.log("Before handler, key:", key);
-      console.log("Before handler, txt:", txt);
 
       handler(new Session(loc, key, txt));
     })
