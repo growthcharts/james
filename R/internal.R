@@ -29,7 +29,7 @@ convert_str_age <- function(s) {
 
 # uploads data and returns session
 get_session <- function(txt, sitehost, format) {
-  resp <- james_post(sitehost = sitehost, path = "data/upload", txt = txt, format = format)
+  resp <- james_post(host = sitehost, path = "data/upload", txt = txt, format = format)
   if (status_code(resp) != 201L) {
     message_for_status(resp,
                        task = paste0(

@@ -67,8 +67,8 @@ request_site <- function(txt = "",
   }
 
   if (is.empty(sitehost)) {
-    warning("Argument `sitehost` not provided. Defaulting to http://localhost.", call. = FALSE)
-    sitehost <- "http://localhost:8004/ocpu/library/james/R"
+    warning("Argument `sitehost` not provided. Defaulting to http://localhost:8080.", call. = FALSE)
+    sitehost <- "http://localhost:8080"
   }
 
   txt <- txt[1L]
