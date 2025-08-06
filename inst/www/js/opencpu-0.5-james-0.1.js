@@ -485,7 +485,7 @@ if(!window.jQuery) {
     } else {
       ocpuBaseURL = `${window.location.protocol}//${window.location.hostname}/ocpu/library/james/R`;
     }
-    ocpu.seturl(ocpuBaseURL);
+    # ocpu.seturl(ocpuBaseURL);
   })();
 
   // Export remaining functions
