@@ -1,3 +1,7 @@
+# james 1.8.0.9003 (Aug 2025)
+
+- Adds tests on nested data upload for local vs remote sites
+
 # james 1.8.0.9002 (Aug 2025)
 
 - Redefines `request_site()` for clarity and port support
