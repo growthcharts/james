@@ -35,7 +35,7 @@ Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock 
 ### Check the top level package `james`
 
 ```{r}
-devtools::check()
+# devtools::check()
 ```
 
 ### Update the package version

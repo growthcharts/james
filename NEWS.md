@@ -1,28 +1,39 @@
-# james 1.8.0.9003 (Aug 2025)
+# james 1.7.3 (August 2025)
 
-- Adds tests on nested data upload for local vs remote sites
+This is a maintenance release that includes various infrastructure updates, enhancements to the OpenAPI specification, and minor bug fixes.
 
-# james 1.8.0.9002 (Aug 2025)
+## New features
 
-- Redefines `request_site()` for clarity and port support
-- Uses the updated jamesclient package for creating URLs
-- Adds the port to the the OpenCPU server URL in `inst\www\start.js`
+- Adds the template `inst/spec/openapi.in.yaml` and the function `james:::update_openapi_spec()`, which updates the OpenAPI template to the current JAMES version and saves it as `inst/spec/openapi.yaml`. This enables:  
+  1. Easy maintenance of the OpenAPI specification.  
+  2. Serving API documentation directly from the JAMES server at `https://<host>/docs`, removing the dependency on SwaggerHub.
 
-# james 1.8.0.9001 (Aug 2025)
+- Includes versioned JSON schemas (`bds_vx.y.json`) for data exchange, now bundled with the package and downloadable from `https://<host>/schemas`.
 
-- Updates port of localhost to 8080
-- Depends on `jamesclient 0.34.0`, which changes localhost from port 80 to 8080
+- Updates all `R` and JavaScript code to default to `localhost:8080` as the OpenCPU server URL (previously `localhost:80`). Port 8080 is used to prevent confusion with Docker or system-level port 80.
 
-# james 1.8.0.9000 (Aug 2025)
+- Adds `qmd/JAMES_version_maintaince.qmd`, a Quarto file to be run after each version change. This script updates version numbers across the package, including the OpenAPI spec, `index.html`, and the `getting_started.Rmd` vignette.
 
-- Includes the OpenAPI specification yaml file of the JAMES endpoint into the package
-- Adds helpers to update the OpenAPI specification with the version number
-- Creates the JAMES version maintainance document
-- Updates `renv` infrastructure to work with `R 4.5.0`
+## Infrastructure and development changes
+
+- Updates the package to use **R 4.5.0**.
+
+- Cleans `renv.lock` by removing all development-only packages (e.g., `"roxygen2"`, `"devtools"`, `"desc"`, `"evaluate"`, `"jamesdemodata"`, `"pkgload"`) and their dependencies. This reduces the package’s footprint in production environments.
+
+  After running `renv::restore()` to install production dependencies, call `james:::install_dev_packages()` once to install development tools. Do not include development packages in `renv.lock`. Only snapshot production dependencies defined in the `DESCRIPTION` file using `renv::snapshot()`.
+
+- Adds a test to `test-request_site()` that demonstrates:  
+  - How `request_site()` fails on nested data uploads when using `localhost`.  
+  - A working alternative solution.
+
+  This change ensures that the `jamesdemo` Shiny app can now also demonstrate a fully functioning localhost server.
+
+- Adapts links to reflect the change of BDS-maintenance from NCJ TO NICTIZ
+
+- Updates `getting_started.Rmd` to work with localhost:8080 and show two-step data upload
 
 # james 1.7.2 (Feb 2025)
 
-- Updates to the latest R packages
 - Evades a problem in `vignettes/articles/getting_started.Rmd` that occasionally occurs when the `validate = TRUE` flag is active
 
 # james 1.7.1 (Feb 2025)
