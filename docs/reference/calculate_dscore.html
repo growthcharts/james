@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,22 +59,16 @@
 
 
 <dl><dt id="arg-txt">txt<a class="anchor" aria-label="anchor" href="#arg-txt"></a></dt>
-<dd><p>A JSON string, URL or file with the data in JSON
-format. The input data adhere to specification
-<a href="https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=12" class="external-link">BDS JGZ 3.2.5</a>,
-and are converted to JSON according to <code>schema</code>.</p></dd>
+<dd><p>A JSON string, URL, or file with BDS data in JSON format. Data
+should conform to the BDS JGZ 3.2.5 specification.</p></dd>
 
 
 <dt id="arg-session">session<a class="anchor" aria-label="anchor" href="#arg-session"></a></dt>
-<dd><p>Alternative to <code>txt</code>. Session key where input data is uploaded
-on <code>sitehost</code>.</p></dd>
+<dd><p>Optional session key if data is already uploaded to <code>sitehost</code>.</p></dd>
 
 
 <dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
-<dd><p>String. JSON data schema version number. There are currently
-three schemas supported: <code>"1.0"</code>, <code>"1.1"</code>, <code>"2.0"</code> and <code>"3.0"</code>.
-Formats <code>"1.0"</code> and <code>"1.1"</code> are included for backward compatibility only.
-Use <code>format = "3.0"</code> for new applications.</p></dd>
+<dd><p>JSON schema version, e.g., <code>"3.0"</code>. Used when uploading.</p></dd>
 
 
 <dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
@@ -88,9 +82,7 @@ function returns only the last row. If <code>output</code> equals
 
 
 <dt id="arg-loc">loc<a class="anchor" aria-label="anchor" href="#arg-loc"></a></dt>
-<dd><p>Alternative to <code>txt</code>. Location where input data is uploaded.
-Argument <code>loc</code> is deprecated and will disappear in Nov 2022; please
-use <code>session</code> instead.</p></dd>
+<dd><p>Deprecated. Use <code>session</code> instead.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -124,7 +116,7 @@ use <code>session</code> instead.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
