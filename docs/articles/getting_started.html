@@ -381,7 +381,7 @@ execution;</li>
 <code>r$messages</code> contain any messages, e.g. data reading
 errors;</li>
 <li>
-<code>r$session</code> (like x0e42f9f4449674) is a unique session
+<code>r$session</code> (like x0039bee5499e14) is a unique session
 code.</li>
 </ul>
 <p>The <code><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">jamesclient::james_post()</a></code> function wraps the basis
@@ -398,13 +398,13 @@ directly.</p>
 <span><span class="co">## [1] "james"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $packageVersion</span></span>
-<span><span class="co">## [1] "1.7.2"</span></span>
+<span><span class="co">## [1] "1.7.3"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $packageDate</span></span>
-<span><span class="co">## [1] "2025-02-10"</span></span>
+<span><span class="co">## [1] "2025-08-07"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $Rversion</span></span>
-<span><span class="co">## [1] "4.4.1"</span></span></code></pre>
+<span><span class="co">## [1] "4.5.0"</span></span></code></pre>
 </div>
 <div class="tab-pane" id="bash" role="tabpanel" aria-labelledby="bash-tab">
 
@@ -425,13 +425,13 @@ that makes two requests to the server.</p>
 <p>The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">cat</span> resp</span></code></pre></div>
-<pre><code><span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/R/.val</span></span>
-<span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/R/version</span></span>
-<span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/stdout</span></span>
-<span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/source</span></span>
-<span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/console</span></span>
-<span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/info</span></span>
-<span><span class="co">## /ocpu/tmp/x033bf21cfc6cc1/files/DESCRIPTION</span></span></code></pre>
+<pre><code><span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/R/.val</span></span>
+<span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/R/version</span></span>
+<span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/stdout</span></span>
+<span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/source</span></span>
+<span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/console</span></span>
+<span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/info</span></span>
+<span><span class="co">## /ocpu/tmp/x0f19e0fddb8c07/files/DESCRIPTION</span></span></code></pre>
 <p>The path element following <code>tmp/</code> is a unique session key.
 See <a href="https://www.opencpu.org/api.html" class="external-link uri">https://www.opencpu.org/api.html</a> for the interpretation
 of the OpenCPU API.</p>
@@ -442,9 +442,9 @@ result and downloads the contents of the URL as a file
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">cat</span> value1</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
-<span><span class="co">##   "packageVersion": "1.7.2",</span></span>
-<span><span class="co">##   "packageDate": "2025-02-10",</span></span>
-<span><span class="co">##   "Rversion": "4.4.1"</span></span>
+<span><span class="co">##   "packageVersion": "1.7.3",</span></span>
+<span><span class="co">##   "packageDate": "2025-08-07",</span></span>
+<span><span class="co">##   "Rversion": "4.5.0"</span></span>
 <span><span class="co">## }</span></span></code></pre>
 <p>The above sequence makes two requests to the server. The following
 code compacts both steps into one.</p>
@@ -452,9 +452,9 @@ code compacts both steps into one.</p>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">cat</span> value2</span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "package": "james",</span></span>
-<span><span class="co">##   "packageVersion": "1.7.2",</span></span>
-<span><span class="co">##   "packageDate": "2025-02-10",</span></span>
-<span><span class="co">##   "Rversion": "4.4.1"</span></span>
+<span><span class="co">##   "packageVersion": "1.7.3",</span></span>
+<span><span class="co">##   "packageDate": "2025-08-07",</span></span>
+<span><span class="co">##   "Rversion": "4.5.0"</span></span>
 <span><span class="co">## }</span></span></code></pre>
 </div>
 </div>
@@ -671,7 +671,7 @@ example, to see the result of the file upload session in markdown
 use</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">session</span> <span class="op">&lt;-</span> <span class="va">r1</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "x09ace9c4601589"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "x0f515334fe50b7"</span></span></code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_get.html" class="external-link">james_get</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"md"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
@@ -773,7 +773,7 @@ document the data flow into <code>{session}/files/{*}.json</code>.</p>
 <code class="sourceCode R"><span><span class="va">r7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"data/upload/json"</span>, txt <span class="op">=</span> <span class="va">fn</span>, validate <span class="op">=</span> <span class="cn">TRUE</span>, intermediate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">host</span>, <span class="va">r7</span><span class="op">$</span><span class="va">session</span>, <span class="st">"files/input.json"</span><span class="op">)</span></span>
 <span><span class="va">url</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/x0ae7ec83997eb5/files/input.json"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/x00206a41a87111/files/input.json"</span></span></code></pre>
 <p>With <code>browseURL(url)</code> we may view the file contents in the
 browser. The <code>files</code> directory contains five JSON files:</p>
 <ol style="list-style-type: decimal">
@@ -1253,7 +1253,7 @@ personalised, interactive site containing all charts.</p>
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jamesclient/man/james_post.html" class="external-link">james_post</a></span><span class="op">(</span>host <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"/site/request/json"</span>, </span>
 <span>                sitehost <span class="op">=</span> <span class="va">host</span>, txt <span class="op">=</span> <span class="va">js</span><span class="op">)</span></span>
 <span><span class="va">r</span><span class="op">$</span><span class="va">parsed</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0c3483a5023157"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x090ef5f09e7778"</span></span></code></pre>
 <p>Run the command and paste the generated URL in the address field of
 your browser. The starting chart is chosen by JAMES and depends on the
 age of the child.</p>
@@ -1278,15 +1278,15 @@ URL to the site:</p>
 <pre><code><span><span class="co">## JAMES request:</span></span>
 <span><span class="co">##   Path    : site/request/json</span></span>
 <span><span class="co">##   Status  : 201</span></span>
-<span><span class="co">##   Session : x046404e528242a</span></span>
+<span><span class="co">##   Session : x0a93d211cda1a0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parsed response:</span></span>
-<span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0fa159988cc348"</span></span></code></pre>
+<span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x073b9fcf8b8cf6"</span></span></code></pre>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Or manual URL construction (faster) </span></span>
 <span><span class="va">site2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/modify_url.html" class="external-link">modify_url</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">host</span>, path <span class="op">=</span> <span class="st">"site"</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>session <span class="op">=</span> <span class="va">r</span><span class="op">$</span><span class="va">session</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">site2</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x0fa159988cc348"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "https://james.groeidiagrammen.nl/site?session=x073b9fcf8b8cf6"</span></span></code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># browseURL(site1)</span></span></code></pre></div>
 <p>Paste the generated URL in the address field of your browser. The
@@ -1302,7 +1302,7 @@ stabler and more reliable.</p>
 <span id="cb79-4"><a href="#cb79-4" tabindex="-1"></a>-H <span class="st">'Content-Type: multipart/form-data'</span> <span class="dt">\</span></span>
 <span id="cb79-5"><a href="#cb79-5" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
 <span id="cb79-6"><a href="#cb79-6" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div>
-<pre><code><span><span class="co">## ["https://james.groeidiagrammen.nl/site?session=x0bab156d87f5cf"]</span></span></code></pre>
+<pre><code><span><span class="co">## ["https://james.groeidiagrammen.nl/site?session=x00950eb2fadf55"]</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1342,13 +1342,13 @@ currently it does not support graphics output, so use
 <pre><code><span><span class="co">## JAMES request:</span></span>
 <span><span class="co">##   Path    : /blend/request/json</span></span>
 <span><span class="co">##   Status  : 201</span></span>
-<span><span class="co">##   Session : x0f38743a974b96</span></span>
+<span><span class="co">##   Session : x0e27760996d030</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parsed response:</span></span>
 <span><span class="co">## List of 6</span></span>
 <span><span class="co">##  $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__</span></span>
-<span><span class="co">##  $ session  : chr "x0a54037f0517c9"</span></span>
-<span><span class="co">##  $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0a54037f0517c9"</span></span>
+<span><span class="co">##  $ session  : chr "x09fa90bcd34b29"</span></span>
+<span><span class="co">##  $ site     : chr "https://james.groeidiagrammen.nl/site?session=x09fa90bcd34b29"</span></span>
 <span><span class="co">##  $ child    :'data.frame':   1 obs. of  12 variables:</span></span>
 <span><span class="co">##   ..$ id  : int -1</span></span>
 <span><span class="co">##   ..$ name: chr "Laura S"</span></span>
@@ -1404,8 +1404,8 @@ steps:</p>
 <span id="cb88-9"><a href="#cb88-9" tabindex="-1"></a><span class="st">}'</span></span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",</span></span>
-<span><span class="co">##   "session": "x0fba9c1af6d600",</span></span>
-<span><span class="co">##   "site": "https://james.groeidiagrammen.nl/site?session=x0fba9c1af6d600",</span></span>
+<span><span class="co">##   "session": "x070f435c7c8692",</span></span>
+<span><span class="co">##   "site": "https://james.groeidiagrammen.nl/site?session=x070f435c7c8692",</span></span>
 <span><span class="co">##   "child": [</span></span>
 <span><span class="co">##     {</span></span>
 <span><span class="co">##       "id": -1,</span></span>
