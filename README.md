@@ -8,8 +8,8 @@ growth and development. The current version
 
 1.  provides access to high-quality growth charts used by the Dutch
     youth health care;
-2.  interchanges data coded according to the [Basisdataset JGZ
-    4.0.1](https://www.ncj.nl/onderwerp/digitaal-dossier-jgz/bds-jgz-versiebeheer/);
+2.  interchanges data coded according to the [Basisdataset
+    JGZ](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html);
 3.  screens for abnormal height, weight and head circumference;
 4.  converts developmental data into the D-score;
 5.  predicts future growth and development.
@@ -45,9 +45,7 @@ The table lists the defined API end points and the mapping to each end
 point to the corresponding R function.
 
 The OpenAPI definition of JAMES is at
-<https://app.swaggerhub.com/apis/stefvanbuuren/james/1.5.4>. The API is
-currently frozen at version 1.5.4. The API is subject to change in
-future versions.
+<https://james.groeidiagrammen.nl/docs>. \[Note: Not yet available\]
 
 ## Resources
 
@@ -57,14 +55,15 @@ future versions.
 |:---|:---|
 | [Example requests](https://james.groeidiagrammen.nl) | current |
 | [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james/1.5.4) | current |
-| [Source files](https://github.com/growthcharts) | current |
-| [JSON data schema 3.0](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json) | current |
+| [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | not yet available |
+| [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | not yet available |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |
+| [GitHub Organization](https://github.com/growthcharts) | current |
 
 ### External
 
 | Description | Status |
 |:---|:---|
 | [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | current |
-| [Basisdataset JGZ](https://www.ncj.nl/themadossiers/informatisering/basisdataset/documentatie/?cat=13) | current |
+| [Basisdataset JGZ](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html) | current |
 | [OpenCPU API](https://www.opencpu.org/api.html) | current |
