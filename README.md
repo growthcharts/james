@@ -45,7 +45,7 @@ The table lists the defined API end points and the mapping to each end
 point to the corresponding R function.
 
 The OpenAPI definition of JAMES is at
-<https://james.groeidiagrammen.nl/docs>. \[Note: Not yet available\]
+<https://james.groeidiagrammen.nl/docs>.
 
 ## Resources
 
@@ -54,9 +54,8 @@ The OpenAPI definition of JAMES is at
 | Description | Status |
 |:---|:---|
 | [Example requests](https://james.groeidiagrammen.nl) | current |
-| [OpenAPI specification](https://app.swaggerhub.com/apis-docs/stefvanbuuren/james/1.5.4) | current |
-| [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | not yet available |
-| [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | not yet available |
+| [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | current |
+| [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | current |
 | [JAMES issue tracker](https://github.com/growthcharts/james/issues) | current |
 | [GitHub Organization](https://github.com/growthcharts) | current |
 
