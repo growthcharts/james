@@ -10,8 +10,8 @@
 #' @inheritParams request_site
 #' @param output A string, either `"table"`, `"last_visit"` or
 #' '`"last_dscore"` specifying the result. The default `"table"`
-#' returns a table with four columns: `"date"`, `"x"` (age),
-#' `"y"` (D-score) and `"z"` (DAZ). The number of rows equals to
+#' returns with columns: `"date"` (date), `"x"` (age), `"y"` (D-score)
+#' and `"z"` (DAZ). The number of rows equals to
 #' the number of visits. If `output` equals `"last_visit"` the
 #' function returns only the last row. If `output` equals
 #' `"last_dscore"` the function returns only the D-score from the last row.
@@ -61,5 +61,5 @@ calculate_dscore <- function(txt = "",
   if (output == "last_dscore") {
     return(pull(df[nrow(df), "y"]))
   }
-  as.data.frame(df)
+  df
 }

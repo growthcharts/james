@@ -23,8 +23,8 @@ should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{output}{A string, either \code{"table"}, \code{"last_visit"} or
 '\code{"last_dscore"} specifying the result. The default \code{"table"}
-returns a table with four columns: \code{"date"}, \code{"x"} (age),
-\code{"y"} (D-score) and \code{"z"} (DAZ). The number of rows equals to
+returns with columns: \code{"date"} (date), \code{"x"} (age), \code{"y"} (D-score)
+and \code{"z"} (DAZ). The number of rows equals to
 the number of visits. If \code{output} equals \code{"last_visit"} the
 function returns only the last row. If \code{output} equals
 \code{"last_dscore"} the function returns only the D-score from the last row.}
