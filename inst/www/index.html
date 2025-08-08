@@ -15,20 +15,25 @@
   <script type="text/javascript" src="app/js/handleUIVisibility.js"></script>
   <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
   <script>
-  // Ensure global ocpu object exists
+  // Ensure global ocpu exists
   var ocpu = window.ocpu = window.ocpu || {};
 
   (function initOcpuUrl() {
-    const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+    const host = window.location.hostname;
+    const isLocal = (host === "localhost" || host === "127.0.0.1");
+
+    // Prod: same-origin & HTTPS; Dev: localhost:8004
     const ocpuOrigin = isLocal
-      ? `http://${window.location.hostname}:8004`
+      ? `http://${host}:8004`
       : window.location.origin;
 
     if (typeof ocpu.seturl === "function") {
+      // If you call functions as "james::fun", set base to /ocpu:
       ocpu.seturl(`${ocpuOrigin}/ocpu`);
-      console.log(`OpenCPU base URL set to: ${ocpuOrigin}/ocpu`);
+      // If you call plain "draw_chart" (no package), use:
+      // ocpu.seturl(`${ocpuOrigin}/ocpu/library/james/R`);
     } else {
-      console.error("ocpu.seturl() not found. Is opencpu.js loaded?");
+      console.error("opencpu.js not loaded: ocpu.seturl() unavailable.");
     }
   })();
   </script>
