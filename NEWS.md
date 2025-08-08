@@ -1,3 +1,6 @@
+
+- Added `select_vwc` function to calculate Van Wiechen milestones based on age and previously completed milestones.
+
 # james 1.7.3 (August 2025)
 
 This is a maintenance release that includes various infrastructure updates, enhancements to the OpenAPI specification, and minor bug fixes.

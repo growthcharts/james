@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 1.7.3.9000
+Version: 1.7.3.9001
 Authors@R: c(person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl", role = c("cre", "aut")), 
              person("Arjan", "Huizing", email = "arjan.huizing@tno.nl", role = "aut"))
 Maintainer: Stef van Buuren <stef.vanbuuren@tno.nl>
@@ -30,7 +30,8 @@ Imports:
     jose,
     jsonlite,
     rlang,
-    utils
+    utils,
+    vwc
 Suggests: 
     jamesdemodata (>= 0.11.0),
     openssl,
@@ -45,7 +46,9 @@ Remotes:
     growthcharts/chartplotter,
     growthcharts/growthscreener,
     growthcharts/jamesclient,
-    growthcharts/jamesdemodata
+    growthcharts/jamesdemodata,
+    D-score/vwc,
+    D-score/dscoreddi
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

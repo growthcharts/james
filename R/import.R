@@ -19,6 +19,7 @@
 #' @importFrom svglite         svgstring
 #' @importFrom utils           hasName install.packages installed.packages
 #'                             packageDate packageVersion
+#' @importFrom vwc             select_vwc
 NULL
 
 globalVariables(".val")
