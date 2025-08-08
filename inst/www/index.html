@@ -13,11 +13,25 @@
   <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="app/js/ion.rangeSlider.min.js"></script>
   <script type="text/javascript" src="app/js/handleUIVisibility.js"></script>
-  <script>
-    window.ocpu = window.ocpu || {};
-    window.ocpu.url = "http://127.0.0.1:8004/ocpu/library/james/R";
-  </script>
   <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
+  <script>
+  // Ensure global ocpu object exists
+  var ocpu = window.ocpu = window.ocpu || {};
+
+  (function initOcpuUrl() {
+    const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+    const ocpuOrigin = isLocal
+      ? `http://${window.location.hostname}:8004`
+      : window.location.origin;
+
+    if (typeof ocpu.seturl === "function") {
+      ocpu.seturl(`${ocpuOrigin}/ocpu`);
+      console.log(`OpenCPU base URL set to: ${ocpuOrigin}/ocpu`);
+    } else {
+      console.error("ocpu.seturl() not found. Is opencpu.js loaded?");
+    }
+  })();
+  </script>
   <script defer type="text/javascript" src="app/js/update.js"></script>
   <script defer type="text/javascript" src="app/js/start.js"></script>
 </head>
@@ -225,7 +239,7 @@
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotDiv"></div>
         <div id="textDiv">
-          <h5 id="version" class="highlight-background">JAMES 1.7.3 (20250807), &copy; TNO 2025</h5>
+          <h5 id="version" class="highlight-background">JAMES 1.7.3.9001 (20250808), &copy; TNO 2025</h5>
           <p id="rq1-session" class="highlight-background"></p>
           <p id="rq1-console" class="preserve-whitespace"></p>
           <p id="rq1-warnings" class="preserve-whitespace"></p>

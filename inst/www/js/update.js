@@ -77,35 +77,41 @@ function update() {
  * @return {Function} A throttled version of the function.
  */
 function throttle(func, wait) {
-  let isThrottling = false;
-  let lastArgs;
-  let lastThis;
+  let inThrottle = false;
+  let lastArgs = null;
+  let lastThis = null;
+  let timeout = null;
 
-  const invokeFunc = () => {
-    isThrottling = true;
-    setTimeout(() => {
-      isThrottling = false;
-      if (lastArgs) {
-        invokeFunc.apply(lastThis, lastArgs);
-        lastArgs = lastThis = null;
-      }
-    }, wait);
-
-    func.apply(lastThis, lastArgs);
+  const later = () => {
+    if (lastArgs) {
+      // Run once with the latest args captured during the throttle window
+      func.apply(lastThis, lastArgs);
+      lastArgs = lastThis = null;
+      // Keep throttling if more calls arrive during this run
+      timeout = setTimeout(later, wait);
+    } else {
+      // No pending call; clear throttle
+      inThrottle = false;
+      timeout = null;
+    }
   };
 
-  return function() {
-    if (!isThrottling) {
-      invokeFunc.apply(this, arguments);
+  return function (...args) {
+    if (!inThrottle) {
+      // Leading call fires immediately
+      func.apply(this, args);
+      inThrottle = true;
+      timeout = setTimeout(later, wait);
     } else {
-      lastArgs = arguments;
+      // Save the latest call to run once at the trailing edge
+      lastArgs = args;
       lastThis = this;
     }
   };
 }
 
 function drawChart(params) {
-  const rq = $("#plotDiv").rplot("draw_chart", params, session => {
+  const rq = $("#plotDiv").rplot("james::draw_chart", params, session => {
     updateNoticePanel(2, session);
   });
 

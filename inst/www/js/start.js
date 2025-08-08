@@ -120,7 +120,7 @@ let selector = userChartcode ? "chartcode" : (userText || userSession) ? "data" 
 
 function initializeChartControls() {
   // Executes at initialization to get settings from uploaded data
-  const request = ocpu.call("convert_tgt_chartadvice", {
+  const request = ocpu.call("james::convert_tgt_chartadvice", {
     txt: userText,
     session: userSession,
     chartcode: userChartcode,
@@ -209,7 +209,6 @@ function toggleDisplay(divToShow, divToHide) {
 
 function showCards(show = "all") {
   if (show == "all") {
-    sr('ontwikkelingcard', 'block');
     sr('ontwikkelingcard', 'block');
     $('#collapseOne').collapse('show');
   } else if (show == "groei") {

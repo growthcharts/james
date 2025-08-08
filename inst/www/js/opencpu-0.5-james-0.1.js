@@ -139,13 +139,27 @@ if(!window.jQuery) {
   }
 
   function r_fun_ajax(fun, settings = {}, handler = () => {}) {
-    if (!fun) {
-      throw new Error("r_fun_ajax: Missing function name (fun)");
+    if (!fun) throw new Error("r_fun_ajax: Missing function name (fun)");
+
+    // Build request URL from ocpu.url (support both /ocpu and /ocpu/library/.../R)
+    const base = (ocpu.url || "").replace(/\/+$/, ""); // strip trailing slash
+    let url;
+
+    if (fun.includes("::")) {
+      const [pkg, fname] = fun.split("::");
+      if (/\/ocpu$/.test(base)) {
+        // Base is /ocpu → expand to /ocpu/library/pkg/R/fname
+        url = `${base}/library/${pkg}/R/${fname}`;
+      } else {
+        // Base already points at .../R → append function name only
+        url = `${base}/${fname}`;
+      }
+    } else {
+      // No namespace given → append directly (works when base ends with .../R)
+      url = `${base}/${fun}`;
     }
 
-    // Build request URL from ocpu.url
-    const baseUrl = ocpu.url.replace(/\/$/, "");
-    settings.url = settings.url || `${baseUrl}/${fun}`;
+    settings.url = settings.url || url;
     settings.type = settings.type || "POST";
     settings.data = settings.data || {};
     settings.dataType = settings.dataType || "text";
@@ -463,30 +477,6 @@ if(!window.jQuery) {
 
   // Define or reuse global ocpu object
   var ocpu = window.ocpu = window.ocpu || {};
-
-  // Define seturl function with validation
-  ocpu.seturl = function(path) {
-    if (typeof path !== "string" || !path.match(/\/R\/?$/)) {
-      console.error("Invalid OpenCPU URL. Must be a string ending in '/R'. Got:", path);
-      return;
-    }
-    // Normalize to a single trailing slash
-    ocpu.url = path.replace(/\/+$/, "") + "/";
-    console.log("OpenCPU base URL set to:", ocpu.url);
-  };
-
-  // Auto-detect and set ocpu.url
-  (function initOcpuUrl() {
-    const { protocol, hostname, port } = window.location;
-
-    let ocpuBaseURL;
-    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-      ocpuBaseURL = "http://127.0.0.1:8004/ocpu/library/james/R";
-    } else {
-      ocpuBaseURL = `${window.location.protocol}//${window.location.hostname}/ocpu/library/james/R`;
-    }
-    // ocpu.seturl(ocpuBaseURL);
-  })();
 
   // Export remaining functions
   ocpu.call = r_fun_call;
