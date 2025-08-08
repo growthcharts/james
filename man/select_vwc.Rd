@@ -48,8 +48,8 @@ Calculates the recommended van Wiechen milestones based on age and past
 milestones
 }
 \examples{
-fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-vwc <- select_vwc(txt = fn, p = 50)
+fn <- system.file("testdata", "Laura_S.json", package = "james")
+select_vwc(txt = fn, p = 50, n = 10)
 }
 \author{
 Arjan Huizing 2025

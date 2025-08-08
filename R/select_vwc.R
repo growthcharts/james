@@ -21,8 +21,8 @@
 #' @return A vector or table.
 #' @author Arjan Huizing 2025
 #' @examples
-#' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-#' vwc <- select_vwc(txt = fn, p = 50)
+#' fn <- system.file("testdata", "Laura_S.json", package = "james")
+#' select_vwc(txt = fn, p = 50, n = 10)
 #' @export
 select_vwc <- function(txt = "",
                        p = 90,

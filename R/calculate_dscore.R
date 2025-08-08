@@ -20,8 +20,9 @@
 #' @author Stef van Buuren 2020
 #' @keywords server
 #' @examples
-#' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-#' d <- calculate_dscore(txt = fn)
+#' fn <- system.file("testdata", "Laura_S.json", package = "james")
+#' df <- calculate_dscore(txt = fn)
+#' head(df, 4)
 #' @export
 calculate_dscore <- function(txt = "",
                              session = "",
@@ -60,5 +61,5 @@ calculate_dscore <- function(txt = "",
   if (output == "last_dscore") {
     return(pull(df[nrow(df), "y"]))
   }
-  df
+  as.data.frame(df)
 }

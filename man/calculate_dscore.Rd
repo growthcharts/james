@@ -40,8 +40,9 @@ A table, row or scalar.
 The function \code{draw_chart()} plots individual data on the growth chart.
 }
 \examples{
-fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-d <- calculate_dscore(txt = fn)
+fn <- system.file("testdata", "Laura_S.json", package = "james")
+df <- calculate_dscore(txt = fn)
+head(df, 4)
 }
 \author{
 Stef van Buuren 2020
