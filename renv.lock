@@ -4117,7 +4117,7 @@
       "License": "MIT + file LICENSE",
       "Encoding": "UTF-8",
       "Roxygen": "list(markdown = TRUE)",
-      "RoxygenNote": "7.3.2",
+      "RoxygenNote": "7.3.3",
       "Depends": [
         "R (>= 2.10)"
       ],
@@ -4144,7 +4144,7 @@
       "RemoteUsername": "d-score",
       "RemoteRepo": "vwc",
       "RemoteRef": "main",
-      "RemoteSha": "7282fdf06d688826834c67f35760c395a462dd79"
+      "RemoteSha": "b1d0946f314218d5604f6446ea723aca615ff9fe"
     },
     "withr": {
       "Package": "withr",
