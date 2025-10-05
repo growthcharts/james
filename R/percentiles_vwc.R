@@ -31,7 +31,6 @@ percentiles_vwc <- function(txt = "",
                        session = "",
                        format = "1.0",
                        loc = "",
-                       percentiles = FALSE,
                        ...) {
   authenticate(...)
   daz <- d <- NULL

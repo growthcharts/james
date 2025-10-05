@@ -12,7 +12,6 @@ select_vwc(
   session = "",
   format = "1.0",
   loc = "",
-  percentiles = FALSE,
   ...
 )
 }
