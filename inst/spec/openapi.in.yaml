@@ -313,6 +313,170 @@ paths:
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
+  /dscore/calculate/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Calculate D-score
+      description: Provides D-scores for all supplied measurement times
+      tags:
+        - dscore
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/calculate_dscore_arguments'
+            examples:
+              screen1:
+                summary: Get all D-score outcomes
+                value:
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+              screen2:
+                summary: Get only latest D-score outcome as number
+                value:
+                  output: 'last_dscore'
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calculate_dscore_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /dscore/calculate/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::calculate_dscore()
+      tags:
+        - dscore
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /vwc/select/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Suggest van Wiechen milestones
+      description:  >-
+        Provide van Wiechen milestones based on child data.
+        Milestones that have already been passed will be used to determine most appropriate milestones to ask.
+      tags:
+        - vwc
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/select_vwc_arguments'
+            examples:
+              screen1:
+                summary: Get 6 milestones closest to the 90th percentile (default)
+                value:
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+              screen2:
+                summary: Suggest 3 milestones closest to the 50th percentile
+                value:
+                  p: 50
+                  n: 3
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/select_vwc_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /vwc/percentiles/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Return percentiles for van Wiechen items
+      description:  >-
+        Provides the 2nd, 10th, 50th, 90th and 98th percentiles for age and D-score.
+        Either based directly on provided van Wiechen item names, or from uploaded data
+      tags:
+        - vwc
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/percentiles_vwc_arguments'
+            examples:
+              screen1:
+                summary: Get percentiles for provided van Wiechen milestone
+                value:
+                  vwc: 'ddigmd072'
+              screen2:
+                summary: Get percentiles for 3 milestones closest to the 50th percentile given the uploaded data
+                value:
+                  p: 50
+                  n: 3
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/percentiles_vwc_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /vwc/select/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::select_vwc()
+      tags:
+        - vwc
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /vwc/percentiles/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::percentiles_vwc()
+      tags:
+        - vwc
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /screeners/apply/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -1169,6 +1333,183 @@ components:
     validate_chartcode_return:
       type: boolean
       description: Is chartcode recognised by JAMES?
+    calculate_dscore_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '2.0'
+            - '1.1'
+            - '1.0'
+        output:
+          type: string
+          description: Requested output type
+          default: 'table'
+          enum:
+            - 'table'
+            - 'last_visit'
+            - 'last_dscore'
+    calculate_dscore_return:
+      type: object
+      properties:
+        age:
+          type: number
+          description: Age at which measurement was taken in decimal years
+          example: 1.15
+        xname:
+          type: string
+          description: X outcome of measurement time
+        yname:
+          type: string
+          description: Y outcome of measurement time
+        zname:
+          type: string
+          description: Z outcome of measurement time
+        zref:
+          type: string
+          description: Reference used to calculate Z-score
+        x:
+          type: number
+          description: Value for X measurement
+        y:
+          type: number
+          description: Value for X measurement
+        z:
+          type: number
+          description: Value for X measurement
+        date:
+          type: date
+          description: Date of time when measurement was taken in yyyymmdd format
+          example: 20250101
+    select_vwc_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+        p:
+          type: string
+          description: Reference percentile indicating the expected probability of a positive van Wiechen outcome given child age. Higher values correspond with easier items
+          default: '90'
+          example: 50
+        n:
+          type: string
+          description: Number of items to select
+          default: '6'
+          example: 1
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '2.0'
+            - '1.1'
+            - '1.0'
+    select_vwc_return:
+      type: string
+      description: A string of van Wiechen items delimited by newline characters (`\n`).
+      example: 'ddigmd072\nddicmm043\nddigmd268'
+    percentiles_vwc_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+        p:
+          type: string
+          description: Reference percentile indicating the expected probability of a positive van Wiechen outcome given child age. Higher values correspond with easier items
+          default: '90'
+          example: 50
+        n:
+          type: string
+          description: Number of items to select
+          default: '6'
+          example: 1
+        vwc:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          minItems: 1
+          description: Character vector of van Wiechen milestones.
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '2.0'
+            - '1.1'
+            - '1.0'
+    percentiles_vwc_return:
+      type: object
+      properties:
+        item:
+          type: string
+          description: van Wiechen milestone name
+          example: 'ddicmm043'
+        D2:
+          type: number
+          description: D-score value at the 2nd percentile
+        D10:
+          type: number
+          description: D-score value at the 10th percentile
+        D50:
+          type: number
+          description: D-score value at the 50th percentile
+        D90:
+          type: number
+          description: D-score value at the 90th percentile
+        D98:
+          type: number
+          description: D-score value at the 98th percentile
+        A2:
+          type: number
+          description: Age in decimal years at the 2nd percentile
+        A10:
+          type: number
+          description: Age in decimal years at the 10th percentile
+        A50:
+          type: number
+          description: Age in decimal years at the 50th percentile
+        A90:
+          type: number
+          description: Age in decimal years at the 90th percentile
+        A98:
+          type: number
+          description: Age in decimal years at the 98th percentile
     list_screeners_arguments:
       type: object
       properties:
