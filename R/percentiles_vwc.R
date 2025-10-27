@@ -56,10 +56,9 @@ percentiles_vwc <- function(txt = "",
   }
   time <- timedata(tgt)
 
-  if ("dsc" %in% time[time$age == max(time$age), "yname"]) {
-    d <- unlist(time[time$age == max(time$age) & time$yname == "dsc", "y"])
-    # Confirm with Iris if this adds anything:
-    # daz <- unlist(time[time$age == max(time$age) & time$yname == "dsc", "z"])
+  if ("dsc" %in% time$yname) {
+    # get last observed DAZ score
+    daz <- unlist(time[which.max(ifelse(time$yname == "dsc", time$age, NA)), "z"])
   }
 
   vwc <- vwc::select_vwc(age = max(time$age),
