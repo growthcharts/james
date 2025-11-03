@@ -436,8 +436,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "growthcharts",
       "RemoteRepo": "bdsreader",
-      "RemoteRef": "master",
-      "RemoteSha": "ff817a656a0abcd915c89d2ececf935a7b8facff",
+      "RemoteRef": "dev",
+      "RemoteSha": "4075f8cb6dfaf5b1dda86fd114efefaad3c2e2f2",
       "Remotes": "growthcharts/centile, growthcharts/nlreferences, growthcharts/jamesdemodata"
     },
     "bit": {
@@ -1122,6 +1122,35 @@
       "Author": "Tyson Barrett [aut, cre] (ORCID: <https://orcid.org/0000-0002-2137-1391>), Matt Dowle [aut], Arun Srinivasan [aut], Jan Gorecki [aut], Michael Chirico [aut] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Toby Hocking [aut] (ORCID: <https://orcid.org/0000-0002-3146-0865>), Benjamin Schwendinger [aut] (ORCID: <https://orcid.org/0000-0003-3315-8114>), Ivan Krylov [aut] (ORCID: <https://orcid.org/0000-0002-0172-3812>), Pasha Stetsenko [ctb], Tom Short [ctb], Steve Lianoglou [ctb], Eduard Antonyan [ctb], Markus Bonsch [ctb], Hugh Parsonage [ctb], Scott Ritchie [ctb], Kun Ren [ctb], Xianying Tan [ctb], Rick Saporta [ctb], Otto Seiskari [ctb], Xianghui Dong [ctb], Michel Lang [ctb], Watal Iwasaki [ctb], Seth Wenchel [ctb], Karl Broman [ctb], Tobias Schmidt [ctb], David Arenburg [ctb], Ethan Smith [ctb], Francois Cocquemas [ctb], Matthieu Gomez [ctb], Philippe Chataignon [ctb], Nello Blaser [ctb], Dmitry Selivanov [ctb], Andrey Riabushenko [ctb], Cheng Lee [ctb], Declan Groves [ctb], Daniel Possenriede [ctb], Felipe Parages [ctb], Denes Toth [ctb], Mus Yaramaz-David [ctb], Ayappan Perumal [ctb], James Sams [ctb], Martin Morgan [ctb], Michael Quinn [ctb], @javrucebo [ctb], @marc-outins [ctb], Roy Storey [ctb], Manish Saraswat [ctb], Morgan Jacob [ctb], Michael Schubmehl [ctb], Davis Vaughan [ctb], Leonardo Silvestri [ctb], Jim Hester [ctb], Anthony Damico [ctb], Sebastian Freundt [ctb], David Simons [ctb], Elliott Sales de Andrade [ctb], Cole Miller [ctb], Jens Peder Meldgaard [ctb], Vaclav Tlapak [ctb], Kevin Ushey [ctb], Dirk Eddelbuettel [ctb], Tony Fischetti [ctb], Ofek Shilon [ctb], Vadim Khotilovich [ctb], Hadley Wickham [ctb], Bennet Becker [ctb], Kyle Haynes [ctb], Boniface Christian Kamgang [ctb], Olivier Delmarcell [ctb], Josh O'Brien [ctb], Dereck de Mezquita [ctb], Michael Czekanski [ctb], Dmitry Shemetov [ctb], Nitish Jha [ctb], Joshua Wu [ctb], Iago Giné-Vázquez [ctb], Anirban Chetia [ctb], Doris Amoakohene [ctb], Angel Feliz [ctb], Michael Young [ctb], Mark Seeto [ctb], Philippe Grosjean [ctb], Vincent Runge [ctb], Christian Wia [ctb], Elise Maigné [ctb], Vincent Rocher [ctb], Vijay Lulla [ctb], Aljaž Sluga [ctb], Bill Evans [ctb]",
       "Maintainer": "Tyson Barrett <t.barrett88@gmail.com>",
       "Repository": "CRAN"
+    },
+    "dcat": {
+      "Package": "dcat",
+      "Version": "0.0.2",
+      "Source": "GitHub",
+      "Title": "Computer Adaptive Test for the D-score",
+      "Authors@R": "person(\"Iris\", \"Eekhout\", , \"iris.eekhout@tno.nl\", role = c(\"aut\", \"cre\"))",
+      "Description": "Admininister a computer adaptive test to measure the D-score.  The functions assume a Rasch model and use parameter and Rasch estimation  functions from the `dscore` package to assist in the assessment.",
+      "License": "AGPL (>= 3)",
+      "Encoding": "UTF-8",
+      "Roxygen": "list(markdown = TRUE)",
+      "RoxygenNote": "7.3.2",
+      "Imports": [
+        "dscore",
+        "dplyr",
+        "tidyr"
+      ],
+      "Suggests": [
+        "testthat (>= 3.0.0)"
+      ],
+      "Config/testthat/edition": "3",
+      "Author": "Iris Eekhout [aut, cre]",
+      "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "D-score",
+      "RemoteRepo": "dcat",
+      "RemoteRef": "main",
+      "RemoteSha": "4ec9b8518ed6eb274cf62d9ced7e980702dd6ac6"
     },
     "digest": {
       "Package": "digest",
@@ -4141,10 +4170,10 @@
       "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "d-score",
+      "RemoteUsername": "D-score",
       "RemoteRepo": "vwc",
       "RemoteRef": "main",
-      "RemoteSha": "b1d0946f314218d5604f6446ea723aca615ff9fe"
+      "RemoteSha": "1eff57aa4c558cbd1629a04bb72ae6210368db67"
     },
     "withr": {
       "Package": "withr",
