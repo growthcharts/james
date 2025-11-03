@@ -1123,6 +1123,35 @@
       "Maintainer": "Tyson Barrett <t.barrett88@gmail.com>",
       "Repository": "CRAN"
     },
+    "dcat": {
+      "Package": "dcat",
+      "Version": "0.0.2",
+      "Source": "GitHub",
+      "Title": "Computer Adaptive Test for the D-score",
+      "Authors@R": "person(\"Iris\", \"Eekhout\", , \"iris.eekhout@tno.nl\", role = c(\"aut\", \"cre\"))",
+      "Description": "Admininister a computer adaptive test to measure the D-score.  The functions assume a Rasch model and use parameter and Rasch estimation  functions from the `dscore` package to assist in the assessment.",
+      "License": "AGPL (>= 3)",
+      "Encoding": "UTF-8",
+      "Roxygen": "list(markdown = TRUE)",
+      "RoxygenNote": "7.3.2",
+      "Imports": [
+        "dscore",
+        "dplyr",
+        "tidyr"
+      ],
+      "Suggests": [
+        "testthat (>= 3.0.0)"
+      ],
+      "Config/testthat/edition": "3",
+      "Author": "Iris Eekhout [aut, cre]",
+      "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "D-score",
+      "RemoteRepo": "dcat",
+      "RemoteRef": "main",
+      "RemoteSha": "4ec9b8518ed6eb274cf62d9ced7e980702dd6ac6"
+    },
     "digest": {
       "Package": "digest",
       "Version": "0.6.37",
@@ -4141,10 +4170,10 @@
       "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "d-score",
+      "RemoteUsername": "D-score",
       "RemoteRepo": "vwc",
       "RemoteRef": "main",
-      "RemoteSha": "b1d0946f314218d5604f6446ea723aca615ff9fe"
+      "RemoteSha": "1eff57aa4c558cbd1629a04bb72ae6210368db67"
     },
     "withr": {
       "Package": "withr",
