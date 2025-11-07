@@ -72,5 +72,5 @@ dcat_start <- function(txt = "",
     items = items_instrument
   )
 
-  return(nexti)
+  return(starti)
 }
