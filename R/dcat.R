@@ -72,6 +72,7 @@ dcat <- function(txt = "",
   # extract most recent administered items
   if (nrow(time) > 0){
     dat <- time[time$age == max(time$age),]
+    colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
   }
 
   dcat_result <- dcat::dcat(
