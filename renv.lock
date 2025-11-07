@@ -1147,10 +1147,10 @@
       "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "D-score",
+      "RemoteUsername": "d-score",
       "RemoteRepo": "dcat",
       "RemoteRef": "main",
-      "RemoteSha": "4ec9b8518ed6eb274cf62d9ced7e980702dd6ac6"
+      "RemoteSha": "206b453cab1fe95a18bea4befe13031c8a13a37b"
     },
     "digest": {
       "Package": "digest",
@@ -1281,12 +1281,12 @@
     },
     "dscore": {
       "Package": "dscore",
-      "Version": "1.10.7",
+      "Version": "2.0.5",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "D-Score for Child Development",
       "Authors@R": "c(person(\"Stef\", \"van Buuren\", email = \"stef.vanbuuren@tno.nl\", role = c(\"cre\", \"aut\")),  person(\"Iris\", \"Eekhout\", email = \"iris.eekhout@tno.nl\", role = \"aut\"), person(\"Arjan\", \"Huizing\", email = \"arjan.huizing@tno.nl\", role = \"aut\"), person(\"Jonathan\", \"Seiden\", email = \"jseiden@g.harvard.edu\", role = \"aut\"))",
-      "Description": "The D-score summarizes the child's performance on a set of  milestones into a single number. The package implements four Rasch model keys to convert milestone scores into a D-score. It provides tools to  calculate the D-score and its precision from the child's milestone scores,  to convert the D-score into the Development-for-Age Z-score (DAZ)  using age-conditional references, and to map milestone names into a  generic 9-position item naming convention.",
+      "Description": "The D-score summarizes a child's performance on developmental milestones into a single number. Its key feature is its generic nature. The method does not depend on a specific measurement instrument. The statistical method underlying the D-score is described in van Buuren et al. (2025) <doi:10.1177/01650254241294033>. This package implements model keys to convert milestone scores to D-scores; maps instrument-specific item names to a generic 9-position naming convention; computes D-scores and their precision from a child's milestone scores; and converts D-scores to Development-for-Age Z-scores (DAZ) using age-conditional reference standards.",
       "Depends": [
         "R (>= 4.1.0)"
       ],
@@ -1306,28 +1306,28 @@
         "kableExtra",
         "knitr",
         "lme4",
+        "Matrix",
         "patchwork",
         "rmarkdown",
         "testthat"
       ],
       "Encoding": "UTF-8",
-      "License": "AGPL-3",
+      "License": "Apache License (>= 2)",
       "LazyData": "TRUE",
       "VignetteBuilder": "knitr",
       "NeedsCompilation": "yes",
       "URL": "https://github.com/d-score/dscore, https://d-score.org/dscore/, https://d-score.org/dbook1/",
       "BugReports": "https://github.com/d-score/dscore/issues",
-      "Copyright": "Stef van Buuren, Iris Eekhout, Arjan Huizing",
       "Roxygen": "list(markdown = TRUE)",
-      "RoxygenNote": "7.3.2",
+      "RoxygenNote": "7.3.3",
       "Author": "Stef van Buuren [cre, aut], Iris Eekhout [aut], Arjan Huizing [aut], Jonathan Seiden [aut]",
       "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "d-score",
       "RemoteRepo": "dscore",
-      "RemoteUsername": "D-score",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "355992836ad510bf535ebea15b4ae03a36876bcd"
+      "RemoteRef": "master",
+      "RemoteSha": "da00387ad833f067816b17f546954a970dc2e2aa"
     },
     "dscoreddi": {
       "Package": "dscoreddi",
