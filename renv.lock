@@ -1150,7 +1150,7 @@
       "RemoteUsername": "d-score",
       "RemoteRepo": "dcat",
       "RemoteRef": "main",
-      "RemoteSha": "206b453cab1fe95a18bea4befe13031c8a13a37b"
+      "RemoteSha": "282d911ca3462173ce122c11ceb94661a98b418d"
     },
     "digest": {
       "Package": "digest",
