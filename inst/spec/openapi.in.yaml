@@ -477,6 +477,53 @@ paths:
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
+  /dcat/calculate/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Return next milestone for adaptive testing
+      tags:
+        - dcat
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dcat_arguments'
+            examples:
+              screen:
+                summary: Get next item based on gs1 items in json
+                value:
+                  instrument: 'gs1'
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/example_v3.1.json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dcat_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /dcat/calculate/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::dcat()
+      tags:
+        - dcat
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /screeners/apply/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -1510,6 +1557,44 @@ components:
         A98:
           type: number
           description: Age in decimal years at the 98th percentile
+    dcat_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost:8080/ocpu/library/bdsreader/examples/example_v3.1.json
+        instrument:
+          type: string
+          description: Which development milestone instrument is being used
+          default: 'gs1'
+          example: 'ddi'
+        key:
+          type: string
+          description: Key which is used to calculate D-scores
+          default: 'gsed2510'
+          example: 'gsed2406'
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+        p:
+          type: integer
+          description: percentage to pass the item, difficulty in percentile units.
+          default: 50
+        sem_rule:
+          type: number
+          description: numeric target for sem can be estimated based on Cohen's d
+          default: 1.726
+    dcat_return:
+      type: string
+      description: A string containing the next milestone item, or upon completion the child D-score.
+      example: 'gs1lic116'
     list_screeners_arguments:
       type: object
       properties:
