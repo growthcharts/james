@@ -23,9 +23,9 @@ upload_data(
 is \code{TRUE}.}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"}, \code{"3.0"} and \code{"3.1"}.
 Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
-Use \code{format = "3.0"} for new applications.}
+Use \code{format = "3.1"} for new applications.}
 
 \item{schema}{A file name (optionally including the path) with the JSON
 validation schema.
@@ -38,18 +38,14 @@ JSON-schema? The default (\code{FALSE}) bypasses checking. Set \code{validate = 
 to obtain diagnostic information from the \code{jsonvalidate::json_validate()}
 function.}
 
-\item{append_ddi}{Should the DDI responses be appended? (only used for
-JSON schema V1.0 and V2.0)}
+\item{append_ddi}{Should the DDI responses be appended? (only used for JSON
+schema V1.0 and V2.0)}
 
-\item{intermediate}{Logical. If \code{TRUE} the function writes JSON files
-with intermediate result to the working directory.
-\enumerate{
-\item \code{input.json}: the JSON input data;
-\item \code{bds.json}: a data frame with info per BDS;
-\item \code{ddi.json}: result of recoding BDS into GSED item names;
-\item \code{psn.json}: known fixed child covariates;
-\item \code{xy.json}: time-varying variables.
-}}
+\item{intermediate}{Logical. If \code{TRUE} the function writes JSON files with
+intermediate result to the working directory. 1. \code{input.json}: the JSON
+input data; 2. \code{bds.json}: a data frame with info per BDS; 3. \code{ddi.json}:
+result of recoding BDS into GSED item names; 4. \code{psn.json}: known fixed
+child covariates; 5. \code{xy.json}: time-varying variables.}
 
 \item{verbose}{Show verbose output for \code{\link[centile:y2z]{centile::y2z()}}}
 

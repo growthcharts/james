@@ -20,9 +20,9 @@ apply_screeners(
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"}, \code{"3.0"} and \code{"3.1"}.
 Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
-Use \code{format = "3.0"} for new applications.}
+Use \code{format = "3.1"} for new applications.}
 
 \item{ynames}{Character vector identifying the measures to be
 screened. By default, \code{ynames = c("hgt", "wgt", "hdc")}.}
