@@ -26,22 +26,25 @@
 #' txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 #' dcat(txt = txt, p = 50)
 #' @export
-dcat <- function(txt = "",
-                      instrument = "gs1",
-                      key = "gsed2510",
-                      population = NULL,
-                      p = 50,
-                      sem_rule = 1.726,
-                      session = "",
-                      format = "3.1",
-                      loc = "",
-                      ...) {
+dcat <- function(
+  txt = "",
+  instrument = "gs1",
+  key = "gsed2510",
+  population = NULL,
+  p = 50,
+  sem_rule = 1.726,
+  session = "",
+  format = "3.1",
+  loc = "",
+  ...
+) {
   authenticate(...)
   dat <- NULL
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
@@ -49,15 +52,17 @@ dcat <- function(txt = "",
   # default is most recent gsed key; if no tau for new key, fall back to previous key
   if (is.null(key) || key == "gsed") {
     key <- "gsed2510"
-    if(all(is.na(get_tau(get_itemnames(instrument), key = key)))){
+    if (all(is.na(get_tau(get_itemnames(instrument), key = key)))) {
       key <- "gsed2406"
     }
   }
 
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format,
-                 append = instrument)
+  tgt <- get_tgt(
+    txt = txt,
+    session = session,
+    format = format,
+    append = instrument
+  )
 
   psn <- persondata(tgt)
   # extract the current age from the data
@@ -70,8 +75,8 @@ dcat <- function(txt = "",
 
   time <- timedata(tgt)
   # extract most recent administered items
-  if (nrow(time) > 0){
-    dat <- time[time$age == max(time$age),]
+  if (nrow(time) > 0) {
+    dat <- time[time$age == max(time$age), ]
     colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
   }
 

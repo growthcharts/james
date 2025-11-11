@@ -1,4 +1,3 @@
-
 # create local jwt and pubkey
 key <- openssl::rsa_keygen(bits = 2048)
 pubkey <- as.list(key)$pubkey

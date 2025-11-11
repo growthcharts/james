@@ -3,7 +3,12 @@ library(httr)
 library(jamesclient)
 
 # client3.json
-fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesdemodata")
+fn <- system.file(
+  "extdata",
+  "allegrosultum",
+  "client3.json",
+  package = "jamesdemodata"
+)
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 host <- "http://localhost:8080"
 

@@ -23,28 +23,33 @@
 #' txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 #' dcat_next(txt = txt, p = 50)
 #' @export
-dcat_next <- function(txt = "",
-                       instrument = "gs1",
-                       key = "gsed2510",
-                       p = 50,
-                       session = "",
-                       format = "3.1",
-                       loc = "",
-                       ...) {
+dcat_next <- function(
+  txt = "",
+  instrument = "gs1",
+  key = "gsed2510",
+  p = 50,
+  session = "",
+  format = "3.1",
+  loc = "",
+  ...
+) {
   authenticate(...)
   daz <- d <- NULL
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format,
-                 append = instrument)
+  tgt <- get_tgt(
+    txt = txt,
+    session = session,
+    format = format,
+    append = instrument
+  )
 
   if (!is.list(tgt)) {
     message("Cannot calculate next item")
@@ -66,10 +71,10 @@ dcat_next <- function(txt = "",
   items_candidate <- setdiff(items_instrument, items_assessed)
 
   nexti <- dcat::dcat_next(
-                         p = p,
-                         d = d,
-                         items = items_candidate
-                        )$item
+    p = p,
+    d = d,
+    items = items_candidate
+  )$item
 
   return(nexti)
 }

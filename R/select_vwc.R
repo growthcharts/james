@@ -20,27 +20,32 @@
 #' fn <- system.file("testdata", "Laura_S.json", package = "james")
 #' select_vwc(txt = fn, p = 50, n = 10)
 #' @export
-select_vwc <- function(txt = "",
-                       p = 90,
-                       n = 6,
-                       session = "",
-                       format = "1.0",
-                       loc = "",
-                       ...) {
+select_vwc <- function(
+  txt = "",
+  p = 90,
+  n = 6,
+  session = "",
+  format = "1.0",
+  loc = "",
+  ...
+) {
   authenticate(...)
   daz <- d <- NULL
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format,
-                 append_ddi = TRUE)
+  tgt <- get_tgt(
+    txt = txt,
+    session = session,
+    format = format,
+    append_ddi = TRUE
+  )
 
   if (!is.list(tgt)) {
     message("Cannot calculate VWC items")
@@ -50,15 +55,20 @@ select_vwc <- function(txt = "",
 
   if ("dsc" %in% time$yname) {
     # get last observed DAZ score
-    daz <- unlist(time[which.max(ifelse(time$yname == "dsc", time$age, NA)), "z"])
+    daz <- unlist(time[
+      which.max(ifelse(time$yname == "dsc", time$age, NA)),
+      "z"
+    ])
   }
 
-  vwc <- vwc::select_vwc(age = max(time$age),
-                    p = p,
-                    d = d,
-                    daz = daz,
-                    n = n,
-                    passed_items = time[time$y == 1.00, ]$yname)
+  vwc <- vwc::select_vwc(
+    age = max(time$age),
+    p = p,
+    d = d,
+    daz = daz,
+    n = n,
+    passed_items = time[time$y == 1.00, ]$yname
+  )
 
   return(paste(unique(vwc), collapse = "\n"))
 }

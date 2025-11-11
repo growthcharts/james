@@ -6,7 +6,6 @@ library(httr)
 host <- "https://groeidiagrammen.nl"
 
 if (jamesclient::valid_url(host)) {
-
   path <- "ocpu/library/james/R/list_charts"
   url <- modify_url(url = host, path = path)
   resp <- POST(url = url)
@@ -16,7 +15,12 @@ if (jamesclient::valid_url(host)) {
   )
 
   # client3.json
-  fn <- system.file("extdata", "allegrosultum", "client3.json", package = "jamesdemodata")
+  fn <- system.file(
+    "extdata",
+    "allegrosultum",
+    "client3.json",
+    package = "jamesdemodata"
+  )
   js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
   path <- "ocpu/library/james/R/convert_bds_ind"
@@ -45,7 +49,6 @@ if (jamesclient::valid_url(host)) {
     expect_equal(status_code(resp), 201)
   )
 
-
   path <- "ocpu/library/james/R/screen_growth"
   url <- modify_url(url = host, path = path)
   resp <- POST(
@@ -72,9 +75,14 @@ if (jamesclient::valid_url(host)) {
     expect_equal(status_code(resp), 201)
   )
 
-
   # problematic json file not_a_vector.json identified by Allegro Sultum - Feb 2020
-  fn <- system.file("extdata", "bds_v1.0", "test", "not_a_vector.json", package = "jamesdemodata")
+  fn <- system.file(
+    "extdata",
+    "bds_v1.0",
+    "test",
+    "not_a_vector.json",
+    package = "jamesdemodata"
+  )
   js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
   path <- "ocpu/library/james/R/convert_bds_ind"
@@ -116,9 +124,14 @@ if (jamesclient::valid_url(host)) {
     expect_equal(status_code(resp), 201)
   )
 
-
   # problematic json file http400.json identified by Allegro Sultum - Feb 2020
-  fn <- system.file("extdata", "bds_v1.0", "test", "http400.json", package = "jamesdemodata")
+  fn <- system.file(
+    "extdata",
+    "bds_v1.0",
+    "test",
+    "http400.json",
+    package = "jamesdemodata"
+  )
   js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
   path <- "ocpu/library/james/R/convert_bds_ind"
@@ -164,4 +177,3 @@ if (jamesclient::valid_url(host)) {
 # browseURL(paste0(headers(resp)$location, "R/.val"))
 # browseURL(paste0(headers(resp)$location, "R/convert_bds_ind"))
 # browseURL(paste0(headers(resp)$location, "messages"))
-

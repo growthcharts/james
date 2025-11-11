@@ -12,7 +12,10 @@ host <- "http://localhost:8080"
 if (jamesclient::valid_url(host)) {
   test_that(
     "creates site_laura",
-    expect_true(jamesclient::valid_url(request_site(txt = laura, sitehost = host)))
+    expect_true(jamesclient::valid_url(request_site(
+      txt = laura,
+      sitehost = host
+    )))
   )
 
   #site_laura_gro <- request_site(laura_gro, sitehost = host)
@@ -21,7 +24,10 @@ if (jamesclient::valid_url(host)) {
 
   test_that(
     "creates site_kevin",
-    expect_true(jamesclient::valid_url(request_site(txt = kevin, sitehost = host)))
+    expect_true(jamesclient::valid_url(request_site(
+      txt = kevin,
+      sitehost = host
+    )))
   )
 
   # site_kevin_gro <- request_site(kevin_gro, sitehost = host)
@@ -44,8 +50,12 @@ js <- read_json_js(fn)
 
 test_that("request_site WORKS with nested upload for proper domains", {
   host <- "https://james.groeidiagrammen.nl"
-  r <- james_post(host = host, path = "/site/request/json", txt = js,
-                  sitehost = host)
+  r <- james_post(
+    host = host,
+    path = "/site/request/json",
+    txt = js,
+    sitehost = host
+  )
   expect_equal(status_code(r), 201L)
   site <- r$parsed
   # browseURL(site)
@@ -53,8 +63,12 @@ test_that("request_site WORKS with nested upload for proper domains", {
 
 test_that("request_site FAILS with nested upload on localhost", {
   host <- "http://localhost:8080"
-  r <- james_post(host = host, path = "/site/request/json", txt = js,
-                  sitehost = host)
+  r <- james_post(
+    host = host,
+    path = "/site/request/json",
+    txt = js,
+    sitehost = host
+  )
   expect_equal(status_code(r), 400L)
 })
 

@@ -23,43 +23,47 @@
 #' fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 #' dcat_start(txt = fn, p = 50)
 #' @export
-dcat_start <- function(txt = "",
-                      instrument = "gs1",
-                      key = "gsed2510",
-                      population = "",
-                      p = 50,
-                      session = "",
-                      format = "3.0",
-                      loc = "",
-                      ...) {
+dcat_start <- function(
+  txt = "",
+  instrument = "gs1",
+  key = "gsed2510",
+  population = "",
+  p = 50,
+  session = "",
+  format = "3.0",
+  loc = "",
+  ...
+) {
   authenticate(...)
   daz <- d <- NULL
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format,
-                 append_ddi = TRUE)
+  tgt <- get_tgt(
+    txt = txt,
+    session = session,
+    format = format,
+    append_ddi = TRUE
+  )
 
   if (!is.list(tgt)) {
     message("Cannot calculate start item")
     return(NULL)
   }
 
-  if(population == ""){
+  if (population == "") {
     population <- NULL
   }
 
   psn <- persondata(tgt)
   # extract the age from the data
   age <- as.numeric(Sys.Date() - psn$dob) / 365.25
-
 
   # get items from instrument
   items_instrument <- dscore::get_itemnames(instrument = instrument)

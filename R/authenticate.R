@@ -34,12 +34,17 @@ authenticate_jwt <- function(jwt = NULL, pubkey = NULL) {
   if (!authenticate_status()) {
     return(TRUE)
   }
-  if (is.null(jwt)) stop("JAMES: No token found.", call. = FALSE)
+  if (is.null(jwt)) {
+    stop("JAMES: No token found.", call. = FALSE)
+  }
   if (is.null(pubkey)) {
     pubkey <- get0("pubkey", envir = asNamespace("james"))
   }
   parsed_claim <- jwt_decode_sig(jwt, pubkey)
-  apps <- tolower(strtrim(unlist(strsplit(parsed_claim$data$applications, split = ";")), 5L))
+  apps <- tolower(strtrim(
+    unlist(strsplit(parsed_claim$data$applications, split = ";")),
+    5L
+  ))
   return("james" %in% apps)
 }
 

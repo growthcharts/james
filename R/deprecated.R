@@ -18,8 +18,9 @@
 #' @export
 convert_bds_ind <- function(txt = "", format = "1.0", ...) {
   authenticate(...)
-  .Deprecated("upload_data",
-              msg = "convert_bds_ind() is deprecated and will disappear in Nov 2022. Please use upload_data() instead."
+  .Deprecated(
+    "upload_data",
+    msg = "convert_bds_ind() is deprecated and will disappear in Nov 2022. Please use upload_data() instead."
   )
   upload_data(txt = txt, format = format, ...)
 }
@@ -48,18 +49,20 @@ convert_bds_ind <- function(txt = "", format = "1.0", ...) {
 custom_list <- function(txt = "", session = "", format = "1.0", loc = "", ...) {
   authenticate(...)
 
-  .Deprecated("request_blend",
-              msg = "custom_list() is deprecated. Please use request_blend(..., blend = 'allegro') instead.")
+  .Deprecated(
+    "request_blend",
+    msg = "custom_list() is deprecated. Please use request_blend(..., blend = 'allegro') instead."
+  )
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
   return(list(session = session))
 }
-
 
 
 #' Convert bds-format data to individual and return growth chart
@@ -85,19 +88,26 @@ custom_list <- function(txt = "", session = "", format = "1.0", loc = "", ...) {
 #' g <- draw_chart_bds(txt = fn)
 #' @keywords server
 #' @export
-draw_chart_bds <- function(txt = "", format = "1.0",
-                           chartcode = "",
-                           curve_interpolation = TRUE,
-                           selector = "chartcode", ...) {
+draw_chart_bds <- function(
+  txt = "",
+  format = "1.0",
+  chartcode = "",
+  curve_interpolation = TRUE,
+  selector = "chartcode",
+  ...
+) {
   authenticate(...)
 
   # legacy
-  .Deprecated("draw_chart",
-              msg = "draw_chart_bds() is deprecated and will disappear in Nov 2022. Please use draw_chart() instead."
+  .Deprecated(
+    "draw_chart",
+    msg = "draw_chart_bds() is deprecated and will disappear in Nov 2022. Please use draw_chart() instead."
   )
 
   draw_chart(
-    txt = txt, format = format, chartcode = chartcode,
+    txt = txt,
+    format = format,
+    chartcode = chartcode,
     curve_interpolation = curve_interpolation,
     selector = selector,
     ...
@@ -118,16 +128,22 @@ draw_chart_bds <- function(txt = "", format = "1.0",
 #' [chartplotter::process_chart()]
 #' @keywords server
 #' @export
-draw_chart_ind <- function(loc = "", chartcode = "",
-                           curve_interpolation = TRUE, ...) {
+draw_chart_ind <- function(
+  loc = "",
+  chartcode = "",
+  curve_interpolation = TRUE,
+  ...
+) {
   authenticate(...)
-  .Deprecated("draw_chart",
-              msg = "draw_chart_ind() is deprecated and will disappear in Nov 2022. Please use draw_chart() instead."
+  .Deprecated(
+    "draw_chart",
+    msg = "draw_chart_ind() is deprecated and will disappear in Nov 2022. Please use draw_chart() instead."
   )
 
   # legacy
   draw_chart(
-    loc = loc, chartcode = chartcode,
+    loc = loc,
+    chartcode = chartcode,
     curve_interpolation = curve_interpolation,
     ...
   )
@@ -152,11 +168,12 @@ draw_chart_ind <- function(loc = "", chartcode = "",
 #' p <- fetch_loc(fn)
 #' @keywords server
 #' @export
-fetch_loc <- function(txt = "",
-                      ...) {
+fetch_loc <- function(txt = "", ...) {
   authenticate(...)
-  .Deprecated("upload_data",
-              msg = "fetch_loc() is deprecated and will disappear in Nov 2022. Please use upload_data() instead.")
+  .Deprecated(
+    "upload_data",
+    msg = "fetch_loc() is deprecated and will disappear in Nov 2022. Please use upload_data() instead."
+  )
   upload_data(txt = txt, ...)
 }
 
@@ -187,19 +204,30 @@ fetch_loc <- function(txt = "",
 #' # # upload & screen
 #' # screen_curves(fn)
 #' @export
-screen_curves <- function(txt = "", loc = "", location = "", format = "1.0",
-                          legacy = TRUE, ...) {
+screen_curves <- function(
+  txt = "",
+  loc = "",
+  location = "",
+  format = "1.0",
+  legacy = TRUE,
+  ...
+) {
   authenticate(...)
-  .Deprecated("apply_screeners",
-              msg = "screen_curves() is deprecated and will disappear in Nov 2022. Please use apply_screeners() instead."
+  .Deprecated(
+    "apply_screeners",
+    msg = "screen_curves() is deprecated and will disappear in Nov 2022. Please use apply_screeners() instead."
   )
   # legacy
-  if (!is.empty(location)) loc <- location
+  if (!is.empty(location)) {
+    loc <- location
+  }
   if (legacy) {
     toJSON(custom_list(txt = txt, loc = loc, ...))
   } else {
-    toJSON(screen_curves_ind(ind = get_tgt(txt = txt, loc = loc, format = format),
-                             ...))
+    toJSON(screen_curves_ind(
+      ind = get_tgt(txt = txt, loc = loc, format = format),
+      ...
+    ))
   }
 }
 
@@ -232,17 +260,23 @@ screen_curves <- function(txt = "", loc = "", location = "", format = "1.0",
 #' screen_growth(fn)
 #' }
 #' @export
-screen_growth <- function(txt = "",
-                          loc = "",
-                          format = "1.0",
-                          ynames = c("hgt", "wgt", "hdc"),
-                          na.omit = TRUE,
-                          ...) {
+screen_growth <- function(
+  txt = "",
+  loc = "",
+  format = "1.0",
+  ynames = c("hgt", "wgt", "hdc"),
+  na.omit = TRUE,
+  ...
+) {
   authenticate(...)
-  .Deprecated("apply_screeners",
-              msg = "screen_growth() is deprecated. Please use apply_screeners() instead.")
-  screen_curves_ind(ind = get_tgt(txt = txt, loc = loc, format = format),
-                    ynames = ynames,
-                    na.omit = na.omit,
-                    ...)
+  .Deprecated(
+    "apply_screeners",
+    msg = "screen_growth() is deprecated. Please use apply_screeners() instead."
+  )
+  screen_curves_ind(
+    ind = get_tgt(txt = txt, loc = loc, format = format),
+    ynames = ynames,
+    na.omit = na.omit,
+    ...
+  )
 }

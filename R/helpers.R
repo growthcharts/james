@@ -1,6 +1,10 @@
 # helpers
 
-update_version_files <- function(html_filepath, rmd_filepath, description_filepath) {
+update_version_files <- function(
+  html_filepath,
+  rmd_filepath,
+  description_filepath
+) {
   # Read the DESCRIPTION file and extract the version number
   description_content <- readLines(description_filepath, warn = FALSE)
   version_line <- grep("^Version:", description_content, value = TRUE)
@@ -32,13 +36,23 @@ update_version_files <- function(html_filepath, rmd_filepath, description_filepa
 
   # Write the updated content back to the HTML file
   writeLines(html_content, html_filepath)
-  cat("Updated the version in HTML:", html_filepath, "to", html_replacement, "\n")
+  cat(
+    "Updated the version in HTML:",
+    html_filepath,
+    "to",
+    html_replacement,
+    "\n"
+  )
 
   # Pattern to match the existing version and date in Rmd
   rmd_pattern <- "subtitle: JAMES [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)? \\([A-Za-z]+ [0-9]{4}\\)"
 
   # Replacement string with new version and current date for Rmd
-  rmd_replacement <- sprintf("subtitle: JAMES %s (%s)", version, current_date_text)
+  rmd_replacement <- sprintf(
+    "subtitle: JAMES %s (%s)",
+    version,
+    current_date_text
+  )
 
   # Read the Rmd file content
   rmd_content <- readLines(rmd_filepath, warn = FALSE)
@@ -55,9 +69,9 @@ update_version_files <- function(html_filepath, rmd_filepath, description_filepa
 # 'update_openapi_spec' updates the OpenAPI specification file
 # james::update_openapi_spec()
 update_openapi_spec <- function(
-    template = "inst/spec/openapi.in.yaml",
-    output = "inst/www/openapi.yaml",
-    desc_path = "DESCRIPTION"
+  template = "inst/spec/openapi.in.yaml",
+  output = "inst/www/openapi.yaml",
+  desc_path = "DESCRIPTION"
 ) {
   desc <- read.dcf(desc_path)
   content <- readLines(template)
@@ -76,13 +90,24 @@ update_openapi_spec <- function(
 # Install development packages
 # Example, run once:
 # james:::install_dev_packages()
-install_dev_packages <- function(pkgs = c("roxygen2", "devtools", "desc", "evaluate", "jamesdemodata", "pkgload")) {
+install_dev_packages <- function(
+  pkgs = c(
+    "roxygen2",
+    "devtools",
+    "desc",
+    "evaluate",
+    "jamesdemodata",
+    "pkgload"
+  )
+) {
   missing <- pkgs[!pkgs %in% rownames(installed.packages())]
   if (length(missing) == 0) {
     message("All development packages are already installed.")
   } else {
-    message("Installing missing development packages: ", paste(missing, collapse = ", "))
+    message(
+      "Installing missing development packages: ",
+      paste(missing, collapse = ", ")
+    )
     install.packages(missing)
   }
 }
-

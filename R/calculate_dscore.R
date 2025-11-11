@@ -24,25 +24,26 @@
 #' df <- calculate_dscore(txt = fn)
 #' head(df, 4)
 #' @export
-calculate_dscore <- function(txt = "",
-                             session = "",
-                             format = "1.0",
-                             output = c("table", "last_visit", "last_dscore"),
-                             loc = "",
-                             ...) {
+calculate_dscore <- function(
+  txt = "",
+  session = "",
+  format = "1.0",
+  output = c("table", "last_visit", "last_dscore"),
+  loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
   output <- match.arg(output)
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format)
 
   if (!is.list(tgt)) {
     message("Cannot calculate D-score")

@@ -50,58 +50,61 @@
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' g <- draw_chart(txt = fn)
 #' @export
-draw_chart <- function(txt = "",
-                       session = "",
-                       format = "1.0",
-                       chartcode = "",
-                       selector = c("data", "derive", "chartcode"),
-                       chartgrp = NULL,
-                       agegrp = NULL,
-                       sex = NULL,
-                       etn = NULL,
-                       ga = NULL,
-                       side = "hgt",
-                       curve_interpolation = TRUE,
-                       quiet = FALSE,
-                       dnr = NULL,
-                       lo = NULL,
-                       hi = NULL,
-                       nmatch = 0L,
-                       exact_sex = TRUE,
-                       exact_ga = FALSE,
-                       break_ties = FALSE,
-                       show_realized = FALSE,
-                       show_future = FALSE,
-                       draw_grob = TRUE,
-                       loc = "",
-                       bds_data = "",
-                       ind_loc = "",
-                       ...) {
+draw_chart <- function(
+  txt = "",
+  session = "",
+  format = "1.0",
+  chartcode = "",
+  selector = c("data", "derive", "chartcode"),
+  chartgrp = NULL,
+  agegrp = NULL,
+  sex = NULL,
+  etn = NULL,
+  ga = NULL,
+  side = "hgt",
+  curve_interpolation = TRUE,
+  quiet = FALSE,
+  dnr = NULL,
+  lo = NULL,
+  hi = NULL,
+  nmatch = 0L,
+  exact_sex = TRUE,
+  exact_ga = FALSE,
+  break_ties = FALSE,
+  show_realized = FALSE,
+  show_future = FALSE,
+  draw_grob = TRUE,
+  loc = "",
+  bds_data = "",
+  ind_loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(bds_data)) {
-    warning("Argument bds_data is deprecated and will disappear in Nov 2022; please use txt instead.",
+    warning(
+      "Argument bds_data is deprecated and will disappear in Nov 2022; please use txt instead.",
       call. = FALSE
     )
     txt <- bds_data
   }
   if (!missing(ind_loc)) {
-    warning("Argument ind_loc is deprecated and will disappear in Nov 2022; please use session instead.",
+    warning(
+      "Argument ind_loc is deprecated and will disappear in Nov 2022; please use session instead.",
       call. = FALSE
     )
     session <- loc2session(ind_loc)
   }
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
   selector <- match.arg(selector)
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format)
 
   # if we have no tgt, prioritise chartcode over derive
   # except when chartcode is empty
@@ -118,7 +121,8 @@ draw_chart <- function(txt = "",
     )$chartcode
   } else {
     # listen to selector
-    chartcode <- switch(selector,
+    chartcode <- switch(
+      selector,
       "data" = select_chart(target = tgt)$chartcode,
       "derive" = select_chart(
         target = NULL,
@@ -153,6 +157,8 @@ draw_chart <- function(txt = "",
     show_future = show_future,
     ...
   )
-  if (draw_grob) grid.draw(g)
+  if (draw_grob) {
+    grid.draw(g)
+  }
   invisible(g)
 }
