@@ -18,9 +18,9 @@ draw_chart_bds(
 \item{txt}{A JSON string, URL or file}
 
 \item{format}{String. JSON data schema version number. There are currently
-three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"} and \code{"3.0"}.
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"}, \code{"3.0"} and \code{"3.1"}.
 Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
-Use \code{format = "3.0"} for new applications.}
+Use \code{format = "3.1"} for new applications.}
 
 \item{chartcode}{A string with chart code}
 
