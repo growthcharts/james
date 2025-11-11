@@ -12,7 +12,7 @@ knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 
 ## Objective
 
-- This document contains the step to create a new JAMES version. 
+- This document contains the steps to create a new JAMES version. 
 - You can also `Render` this document to check and update the JAMES version in the package and documentation files.
 
 ## Local JAMES development
@@ -48,9 +48,10 @@ If DESCRIPTION version changes, update two files with new version numbers
 
 ```{r}
 james:::update_version_files(
-  "inst/www/index.html", 
-  "vignettes/articles/getting_started.Rmd", 
-  "DESCRIPTION")
+  "inst/www/index.html",
+  "vignettes/articles/getting_started.Rmd",
+  "DESCRIPTION"
+)
 ```
 
 ### Update `openapi.yaml`

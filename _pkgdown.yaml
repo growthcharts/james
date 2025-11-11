@@ -16,11 +16,16 @@ reference:
     desc: Main commands to communicate with JAMES
     contents:
     - apply_screeners
+    - dcat
+    - dcat_start
+    - dcat_next
     - draw_chart
     - list_charts
     - list_screeners
+    - percentiles_vwc
     - request_blend
     - request_site
+    - select_vwc
     - upload_data
     - validate_chartcode
     - version
@@ -46,5 +51,5 @@ articles:
 - title: Main verbs
   navbar: ~
   contents:
-  - articles/getting_started
+  # - articles/getting_started
   - articles/oldfriends
