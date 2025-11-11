@@ -13,13 +13,14 @@ Description: Server-sided functions for the
 License: AGPL (>= 3)
 Encoding: UTF-8
 Depends: 
-    R (>= 2.10),
+    R (>= 4.1.0),
     svglite (>= 2.1.3.9000)
 Imports: 
-    bdsreader (>= 0.28.0),
+    bdsreader (>= 0.31.0),
     chartbox (>= 1.17.0),
     chartcatalog (>= 1.18.2),
-    chartplotter (>= 0.35.1),
+    chartplotter (>= 0.36.0),
+    dcat,
     dplyr,
     curl,
     grDevices,
@@ -47,8 +48,9 @@ Remotes:
     growthcharts/growthscreener,
     growthcharts/jamesclient,
     growthcharts/jamesdemodata,
-    D-score/vwc,
-    D-score/dscoreddi
+    D-score/dcat,
+    D-score/dscoreddi,
+    D-score/vwc
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
