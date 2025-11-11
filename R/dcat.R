@@ -52,7 +52,9 @@ dcat <- function(
   # default is most recent gsed key; if no tau for new key, fall back to previous key
   if (is.null(key) || key == "gsed") {
     key <- "gsed2510"
-    if (all(is.na(get_tau(get_itemnames(instrument), key = key)))) {
+    if (
+      all(is.na(dscore::get_tau(dscore::get_itemnames(instrument), key = key)))
+    ) {
       key <- "gsed2406"
     }
   }

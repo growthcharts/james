@@ -58,8 +58,8 @@ dcat_next <- function(
   time <- timedata(tgt)
 
   # extract the D-score from the data
-
-  if ("dsc" %in% time[time$age == max(time$age), "yname"]) {
+  has_dsc <- "dsc" %in% unlist(time[time$age == max(time$age), "yname"])
+  if (has_dsc) {
     d <- unlist(time[time$age == max(time$age) & time$yname == "dsc", "y"])
   }
 
@@ -71,8 +71,8 @@ dcat_next <- function(
   items_candidate <- setdiff(items_instrument, items_assessed)
 
   nexti <- dcat::dcat_next(
+    dscore = d,
     p = p,
-    d = d,
     items = items_candidate
   )$item
 

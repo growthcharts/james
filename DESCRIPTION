@@ -22,6 +22,7 @@ Imports:
     chartplotter (>= 0.36.0),
     dcat,
     dplyr,
+    dscore (>= 2.0.0),
     curl,
     grDevices,
     grid (>= 4.1.0),
@@ -49,6 +50,7 @@ Remotes:
     growthcharts/jamesclient,
     growthcharts/jamesdemodata,
     D-score/dcat,
+    D-score/dscore,
     D-score/dscoreddi,
     D-score/vwc
 BugReports: https://github.com/growthcharts/james/issues
