@@ -16,7 +16,7 @@ Depends:
     R (>= 2.10),
     svglite (>= 2.1.3.9000)
 Imports: 
-    bdsreader (>= 0.28.0),
+    bdsreader (>= 0.31.0),
     chartbox (>= 1.17.0),
     chartcatalog (>= 1.18.2),
     chartplotter (>= 0.36.0),
@@ -48,4 +48,4 @@ Remotes:
     growthcharts/jamesdemodata
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
