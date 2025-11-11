@@ -36,6 +36,8 @@ at tno.nl\> for further information.
 | POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data | `apply_screeners()` |
 | POST | `/screeners/list/{dfm}` | List available growth screeners | `list_screeners()` |
 | POST | `/site/request/{dfm}` | Request personalised site | `request_site()` |
+| POST | `/dscore/calculate/{dfm}` | Obtain child development score (d-score) | `calculate_dscore()` |
+| POST | `/vwc/select/{dfm}` | Obtain recommended development milestones | `select_vwc()` |
 | POST | `/blend/request/{sfm}` | Obtain a blend from multiple end points | `request_blend()` |
 | POST | `/version/{dfm}` | Obtain version information | `version()` |
 | GET | `/{session}/{info}` | Extract session details |  |

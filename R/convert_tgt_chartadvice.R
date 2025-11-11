@@ -48,26 +48,30 @@
 #' test25 <- system.file("extdata/bds_v3.0/test/test25.json", package = "jamesdemodata")
 #' james:::convert_tgt_chartadvice(txt = test25)
 #' @export
-convert_tgt_chartadvice <- function(txt = "",
-                                    session = "",
-                                    format = "1.0",
-                                    chartcode = "",
-                                    selector = c("data", "chartcode"),
-                                    loc = "",
-                                    ind_loc = "",
-                                    ...) {
+convert_tgt_chartadvice <- function(
+  txt = "",
+  session = "",
+  format = "1.0",
+  chartcode = "",
+  selector = c("data", "chartcode"),
+  loc = "",
+  ind_loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(ind_loc) && missing(session)) {
-    warning("Argument ind_loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument ind_loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(ind_loc)
   }
 
   if (!missing(loc) && missing(session)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
@@ -75,13 +79,13 @@ convert_tgt_chartadvice <- function(txt = "",
   selector <- match.arg(selector)
 
   # give priority of specified chartcode
-  if (chartcode != "") selector <- "chartcode"
+  if (chartcode != "") {
+    selector <- "chartcode"
+  }
 
   # read data if needed, set emergency chartcode in case of no data
   if (selector == "data") {
-    tgt <- get_tgt(txt = txt,
-                   session = session,
-                   format = format)
+    tgt <- get_tgt(txt = txt, session = session, format = format)
     if (!is.null(tgt)) {
       chartcode <- select_chart(target = tgt)$chartcode
     } else {

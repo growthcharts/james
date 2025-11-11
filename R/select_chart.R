@@ -30,22 +30,33 @@
 #' and `ga`
 #' @seealso [chartcatalog::create_chartcode()]
 #' @export
-select_chart <- function(target = NULL,
-                         chartgrp = NULL,
-                         agegrp = NULL,
-                         sex = NULL,
-                         etn = NULL,
-                         ga = NULL,
-                         side = NULL,
-                         language = "dutch") {
-
+select_chart <- function(
+  target = NULL,
+  chartgrp = NULL,
+  agegrp = NULL,
+  sex = NULL,
+  etn = NULL,
+  ga = NULL,
+  side = NULL,
+  language = "dutch"
+) {
   # choose defaults depending on individual
   if (!is.null(target)) {
-    if (is.null(side)) side <- select_side(target)
-    if (is.null(ga)) ga <- select_ga(target)
-    if (is.null(chartgrp)) chartgrp <- select_chartgrp(target, side, ga)
-    if (is.null(agegrp)) agegrp <- select_agegrp(target)
-    if (is.null(sex)) sex <- select_sex(target)
+    if (is.null(side)) {
+      side <- select_side(target)
+    }
+    if (is.null(ga)) {
+      ga <- select_ga(target)
+    }
+    if (is.null(chartgrp)) {
+      chartgrp <- select_chartgrp(target, side, ga)
+    }
+    if (is.null(agegrp)) {
+      agegrp <- select_agegrp(target)
+    }
+    if (is.null(sex)) {
+      sex <- select_sex(target)
+    }
     # NOTE: Dutch Child Health Care always starts by comparing to Dutch references
     # irrespective of ethnic background of child
     if (is.null(etn)) etn <- "nl"
@@ -53,8 +64,14 @@ select_chart <- function(target = NULL,
 
   # now get the chartcode
   chartcode <- create_chartcode(
-    chartgrp = chartgrp, sex = sex, agegrp = agegrp, side = side,
-    week = ga, etn = etn, language = language, version = ""
+    chartgrp = chartgrp,
+    sex = sex,
+    agegrp = agegrp,
+    side = side,
+    week = ga,
+    etn = etn,
+    language = language,
+    version = ""
   )
 
   return(list(
@@ -68,8 +85,12 @@ select_side <- function(tgt) {
   yname <- timedata(tgt)[["yname"]]
   gro <- intersect(yname, c("hgt", "wgt", "hdc", "bmi", "wfh"))
   dev <- intersect(yname, c("dsc"))
-  if (length(gro)) return(gro[1L])
-  if (length(dev)) return(dev[1L])
+  if (length(gro)) {
+    return(gro[1L])
+  }
+  if (length(dev)) {
+    return(dev[1L])
+  }
   return("hgt")
 }
 
@@ -108,8 +129,12 @@ select_agegrp <- function(tgt) {
     return("0-15m")
   }
   agegrp <- "0-15m"
-  if (max_age > 1.25 & max_age <= 4.0) agegrp <- "0-4y"
-  if (max_age > 4.0) agegrp <- "1-21y"
+  if (max_age > 1.25 & max_age <= 4.0) {
+    agegrp <- "0-4y"
+  }
+  if (max_age > 4.0) {
+    agegrp <- "1-21y"
+  }
   agegrp
 }
 
@@ -121,4 +146,3 @@ select_sex <- function(tgt) {
   }
   "male"
 }
-

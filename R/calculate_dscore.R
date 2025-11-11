@@ -10,8 +10,8 @@
 #' @inheritParams request_site
 #' @param output A string, either `"table"`, `"last_visit"` or
 #' '`"last_dscore"` specifying the result. The default `"table"`
-#' returns a table with four columns: `"date"`, `"x"` (age),
-#' `"y"` (D-score) and `"z"` (DAZ). The number of rows equals to
+#' returns with columns: `"date"` (date), `"x"` (age), `"y"` (D-score)
+#' and `"z"` (DAZ). The number of rows equals to
 #' the number of visits. If `output` equals `"last_visit"` the
 #' function returns only the last row. If `output` equals
 #' `"last_dscore"` the function returns only the D-score from the last row.
@@ -20,28 +20,30 @@
 #' @author Stef van Buuren 2020
 #' @keywords server
 #' @examples
-#' fn <- system.file("testdata", "Laura_S_dev.json", package = "james")
-#' d <- calculate_dscore(txt = fn)
+#' fn <- system.file("testdata", "Laura_S.json", package = "james")
+#' df <- calculate_dscore(txt = fn)
+#' head(df, 4)
 #' @export
-calculate_dscore <- function(txt = "",
-                             session = "",
-                             format = "1.0",
-                             output = c("table", "last_visit", "last_dscore"),
-                             loc = "",
-                             ...) {
+calculate_dscore <- function(
+  txt = "",
+  session = "",
+  format = "1.0",
+  output = c("table", "last_visit", "last_dscore"),
+  loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
   output <- match.arg(output)
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format)
 
   if (!is.list(tgt)) {
     message("Cannot calculate D-score")

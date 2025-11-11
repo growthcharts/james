@@ -52,22 +52,30 @@
 #' # browseURL(site)
 #' }
 #' @export
-request_site <- function(txt = "",
-                         sitehost = "",
-                         session = "",
-                         format = "3.0",
-                         upload = TRUE,
-                         loc = "",
-                         ...) {
+request_site <- function(
+  txt = "",
+  sitehost = "",
+  session = "",
+  format = "3.0",
+  upload = TRUE,
+  loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument `loc` is deprecated and will be removed. Use `session` instead.", call. = FALSE)
+    warning(
+      "Argument `loc` is deprecated and will be removed. Use `session` instead.",
+      call. = FALSE
+    )
     session <- loc2session(loc)
   }
 
   if (is.empty(sitehost)) {
-    warning("Argument `sitehost` not provided. Defaulting to http://localhost:8080.", call. = FALSE)
+    warning(
+      "Argument `sitehost` not provided. Defaulting to http://localhost:8080.",
+      call. = FALSE
+    )
     sitehost <- "http://localhost:8080"
   }
 
@@ -82,7 +90,11 @@ request_site <- function(txt = "",
   # CASE 2: txt provided, no session, and upload = TRUE → upload data
   if (!is.empty(txt) && is.empty(session) && upload) {
     session <- get_session(txt, sitehost, format = format)
-    return(httr::modify_url(sitehost, path = "site", query = list(session = session)))
+    return(httr::modify_url(
+      sitehost,
+      path = "site",
+      query = list(session = session)
+    ))
   }
 
   # CASE 3: Valid session provided (or via loc), return site?session=...
@@ -92,13 +104,21 @@ request_site <- function(txt = "",
       # Invalid session – return base site
       return(httr::modify_url(sitehost, path = "site"))
     } else {
-      return(httr::modify_url(sitehost, path = "site", query = list(session = session)))
+      return(httr::modify_url(
+        sitehost,
+        path = "site",
+        query = list(session = session)
+      ))
     }
   }
 
   # CASE 4: txt provided and upload = FALSE – return site?txt=... (not recommended)
   if (!is.empty(txt) && !upload && validate(txt)) {
-    return(httr::modify_url(sitehost, path = "site", query = list(txt = minify(txt))))
+    return(httr::modify_url(
+      sitehost,
+      path = "site",
+      query = list(txt = minify(txt))
+    ))
   }
 
   # Default: return base site

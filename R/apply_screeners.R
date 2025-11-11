@@ -25,27 +25,30 @@
 #' r3 <- james_post(path = "screeners/apply/json", session = r1$session)
 #' }
 #' @export
-apply_screeners <- function(txt = "",
-                            session = "",
-                            format = "1.0",
-                            ynames = c("hgt", "wgt", "hdc"),
-                            na.omit = TRUE,
-                            loc = "",
-                            ...) {
+apply_screeners <- function(
+  txt = "",
+  session = "",
+  format = "1.0",
+  ynames = c("hgt", "wgt", "hdc"),
+  na.omit = TRUE,
+  loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
-  tgt <- get_tgt(txt = txt,
-                 session = session,
-                 format = format)
-  growthscreener::screen_curves_ind(ind = tgt,
-                                    ynames = ynames,
-                                    na.omit = na.omit,
-                                    ...)
+  tgt <- get_tgt(txt = txt, session = session, format = format)
+  growthscreener::screen_curves_ind(
+    ind = tgt,
+    ynames = ynames,
+    na.omit = na.omit,
+    ...
+  )
 }

@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.7.3 (August 2025)
+subtitle: JAMES 1.7.3.9001 (August 2025)
 author: Stef van Buuren, Arjan Huizing (TNO Child Health)
 output:
   html_document:
@@ -39,16 +39,26 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 
 | Verb  | API end point              | Description                                | Maps to `james` function |
 |:------|:-------------------------- |:------------------------------------------ |:-------------------------|
+| POST  | `/version/{dfm}`           | Obtain version information                 | `version()`              |
 | POST  | `/data/upload/{dfm}`       | Upload child data                          | `upload_data()`          |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/charts/draw/{ffm}`       | Draw child data on growth chart            | `draw_chart()`           |
 | POST  | `/charts/list/{dfm}`       | List available growth charts               | `list_charts()`          |
 | POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/dscore/calculate/{dfm}`  | Calculate developmental score (D-score)    | `calculate_dscore()`     |
+| POST  | `/vwc/select/{dfm}`        | Select developmental milestones for age    | `select_vwc()`           |
+| POST  | `/vwc/percentiles/{dfm}`   | Obtain developmental milestone percentiles | `percentiles_vwc()`      |
+| POST  | `/dcat/calculate/{dfm}`    | Adaptive testing of milestones             | `dcat()`                 |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/screeners/list/{dfm}`    | List available growth screeners            | `list_screeners()`       |
 | POST  | `/screeners/apply/{dfm}`   | Apply growth screeners to child data       | `apply_screeners()`      |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | GET   | `/site`                    | Request empty site                         | `request_site()`         |
 | POST  | `/site/request/{dfm}`      | Request personalised site                  | `request_site()`         |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/blend/request/{sfm}`     | Obtain a blend from multiple end points    | `request_blend()`        |
-| POST  | `/version/{dfm}`           | Obtain version information                 | `version()`              |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | GET   | `/{session}/{info}`        | Extract session details                    |                          |
 | GET   | `/{2}/{1}/man`             | Consult R help                             | `help({1}_{2})`          |
 
@@ -120,7 +130,7 @@ Let's find out the JAMES version number. In this document, we define the server 
 
 ```{r host}
 host <- "http://localhost:8080"
-host <- "https://james.groeidiagrammen.nl"
+# host <- "https://james.groeidiagrammen.nl"
 system(paste0("echo ", host, " > .host"))
 ```
 
@@ -630,6 +640,95 @@ $(cat .host)'/charts/validate/json' \
 ]
 }'
 ```
+
+### **`/dscore/calculate`**: Calculate D-score
+
+#### {.tabset}
+
+##### **R**
+
+The D-score is a developmental score that is used to assess the development of children. The `/dscore/calculate` end point calculates the D-score for a child based on the uploaded data. The D-score is a continuous measure of child development, and it is calculated based on the child's age and developmental milestones.
+
+```{r}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "dscore/calculate/json", output = "table", txt = fn)
+r
+head(r$parsed)
+```
+
+The D-score is found in column `y` and the DAZ is in column `z`.
+
+##### **bash**
+
+#### {-}
+
+
+### **`/vwc/select`**: Select Van Wiechen development milestones based on D-score and age
+
+#### {.tabset}
+
+##### **R**
+
+The Van Wiechenonderzoek is a Dutch screening tool used to track a child’s development from birth to age 4.5. It includes 75 milestones across three areas: fine motor skills, gross motor skills, and communication. The `/vwc/select` end point suggest the most fitting milestones for a child based on the uploaded data.
+
+```{r}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "vwc/select/json", output = "table", txt = fn, percentiles = TRUE)
+r
+head(r$parsed)
+```
+
+##### **bash**
+
+#### {-}
+
+
+### **`/vwc/percentiles`**: Select Van Wiechen development milestones with detailed cut-off information
+
+#### {.tabset}
+
+##### **R**
+
+It is also possible to obtain a table of age and D-score percentiles for a selection of milestones. This can be done either directly using the `vwc` argument, or indirectly from uploaded child data.
+
+```{r}
+r <- james_post(host = host, path = "vwc/percentiles/json", output = "table", vwc = "ddifmd018") 
+head(r$parsed)
+```
+
+##### **bash**
+
+#### {-}
+
+
+### **`/dcat/calculate`**: Calculate next milestone item
+
+#### {.tabset}
+
+##### **R**
+
+The DCAT allows users to performa adapative testing using either `ddi` or `gs1` items.
+
+```{r}
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
+r
+head(r$parsed)
+```
+
+By specifying the instrument we can specify whether we want to include `ddi`, `gs1` or items from both (default is `gs1`). We must additionally specify a key that supports both instruments.
+
+```{r}
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = c("ddi"), key = "gsed2406")
+r
+head(r$parsed)
+```
+
+##### **bash**
+
+#### {-}
+
 
 ### **`/screeners/list`**: List available growth screeners
 

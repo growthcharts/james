@@ -29,23 +29,31 @@
 #' results <- request_blend(txt = fn)
 #' }
 #' @export
-request_blend <- function(txt = "",
-                          sitehost = "",
-                          session = "",
-                          blend = "standard",
-                          loc = "",
-                          ...) {
+request_blend <- function(
+  txt = "",
+  sitehost = "",
+  session = "",
+  blend = "standard",
+  loc = "",
+  ...
+) {
   authenticate(...)
 
   if (!missing(loc)) {
-    warning("Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-            call. = FALSE
+    warning(
+      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
+      call. = FALSE
     )
     session <- loc2session(loc)
   }
 
   if (blend == "standard") {
-    return(request_blend_standard(txt = txt, sitehost = sitehost, session = session, ...))
+    return(request_blend_standard(
+      txt = txt,
+      sitehost = sitehost,
+      session = session,
+      ...
+    ))
   }
 
   stop("blend", blend, "not found.")
@@ -54,7 +62,9 @@ request_blend <- function(txt = "",
 request_blend_standard <- function(txt, sitehost, session, ...) {
   site <- request_site(txt = txt, sitehost = sitehost, session = session, ...)
   session <- strsplit(site, "?session=", fixed = TRUE)[[1]][2]
-  if (is.na(session)) session <- ""
+  if (is.na(session)) {
+    session <- ""
+  }
   tgt <- get_tgt(session = session)
 
   # render chart as svg
@@ -79,9 +89,8 @@ request_blend_standard <- function(txt, sitehost, session, ...) {
     site = unbox(site),
     child = persondata(tgt),
     time = timedata(tgt),
-#    chart = s(),
+    #    chart = s(),
     screeners = screeners
   )
   return(result)
 }
-
