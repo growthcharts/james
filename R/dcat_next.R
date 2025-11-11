@@ -8,14 +8,7 @@
 #' D-score. Uses the previously administered items and item scores as input.
 #'
 #' @inheritParams calculate_dscore
-#' @param instrument A character vector with 3-position codes of instruments
-#' that should match. The default is `instrument = gs1` for GSED SF;
-#' `instrument = NULL` allows for all instruments.
-#' @param key String. They key identifies 1) the difficulty estimates
-#' pertaining to a particular Rasch model, and 2) the prior mean and standard
-#' deviation of the prior distribution for calculating the D-score.
-#' The default key `key = "gsed2510"`.
-#' @param p percentage to pass the item, difficulty in percentile units.
+#' @inheritParams dcat_start
 #' @inheritParams bdsreader::read_bds
 #' @return A string of milestones
 #' @author Iris Eekhout 2025
@@ -30,19 +23,10 @@ dcat_next <- function(
   p = 50,
   session = "",
   format = "3.1",
-  loc = "",
   ...
 ) {
   authenticate(...)
   daz <- d <- NULL
-
-  if (!missing(loc)) {
-    warning(
-      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-      call. = FALSE
-    )
-    session <- loc2session(loc)
-  }
 
   tgt <- get_tgt(
     txt = txt,
@@ -72,6 +56,7 @@ dcat_next <- function(
 
   nexti <- dcat::dcat_next(
     dscore = d,
+    key = key,
     p = p,
     items = items_candidate
   )$item

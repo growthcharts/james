@@ -8,18 +8,10 @@
 #' the next item or stop test and return D-score.
 #'
 #' @inheritParams calculate_dscore
-#' @param instrument A character vector with 3-position codes of instruments
-#' that should match. The default is `instrument = gs1` for GSED SF;
-#' `instrument = NULL` allows for all instruments.
-#' @param key String. They key identifies 1) the difficulty estimates
-#' pertaining to a particular Rasch model, and 2) the prior mean and standard
-#' deviation of the prior distribution for calculating the D-score.
-#' The default key `key = "gsed2510"`.
-#' @param population String. Name of the reference population
-#' @param p percentage to pass the item, difficulty in percentile units.
+#' @inheritParams dcat_start
+#' @inheritParams bdsreader::read_bds
 #' @param sem_rule numeric target for sem can be estimated based on Cohen's d
 #' from `sem_rule()`.
-#' @inheritParams bdsreader::read_bds
 #' @return A string with an item name or a table.
 #' @author Iris Eekhout 2025
 #' @examples
@@ -35,19 +27,10 @@ dcat <- function(
   sem_rule = 1.726,
   session = "",
   format = "3.1",
-  loc = "",
   ...
 ) {
   authenticate(...)
   dat <- NULL
-
-  if (!missing(loc)) {
-    warning(
-      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-      call. = FALSE
-    )
-    session <- loc2session(loc)
-  }
 
   # default is most recent gsed key; if no tau for new key, fall back to previous key
   if (is.null(key) || key == "gsed") {

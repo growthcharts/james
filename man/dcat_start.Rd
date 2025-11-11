@@ -11,8 +11,7 @@ dcat_start(
   population = "",
   p = 50,
   session = "",
-  format = "3.0",
-  loc = "",
+  format = "3.1",
   ...
 )
 }
@@ -21,7 +20,7 @@ dcat_start(
 should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{instrument}{A character vector with 3-position codes of instruments
-that should match. The default is \code{instrument = gs1} for GSED SF;
+that should match. The default is \code{instrument = "gs1"} for GSED SF;
 \code{instrument = NULL} allows for all instruments.}
 
 \item{key}{String. They key identifies 1) the difficulty estimates
@@ -36,8 +35,6 @@ The default key \code{key = "gsed2510"}.}
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
 \item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
-
-\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{...}{Ignored}
 }

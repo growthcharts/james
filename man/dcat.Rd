@@ -14,7 +14,6 @@ dcat(
   sem_rule = 1.726,
   session = "",
   format = "3.1",
-  loc = "",
   ...
 )
 }
@@ -23,7 +22,7 @@ dcat(
 should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{instrument}{A character vector with 3-position codes of instruments
-that should match. The default is \code{instrument = gs1} for GSED SF;
+that should match. The default is \code{instrument = "gs1"} for GSED SF;
 \code{instrument = NULL} allows for all instruments.}
 
 \item{key}{String. They key identifies 1) the difficulty estimates
@@ -31,7 +30,7 @@ pertaining to a particular Rasch model, and 2) the prior mean and standard
 deviation of the prior distribution for calculating the D-score.
 The default key \code{key = "gsed2510"}.}
 
-\item{population}{String. Name of the reference population}
+\item{population}{String. Name of the reference population.}
 
 \item{p}{percentage to pass the item, difficulty in percentile units.}
 
@@ -41,8 +40,6 @@ from \code{sem_rule()}.}
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
 \item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
-
-\item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{...}{Ignored}
 }

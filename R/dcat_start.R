@@ -1,5 +1,5 @@
 # JAMES - A program to monitor and interpret child growth and development.
-# Copyright (C) 2022 Stef van Buuren (stef.vanbuuren@tno.nl)
+# Copyright (C) 2025 Stef van Buuren (stef.vanbuuren@tno.nl)
 # Arjan Huizing (arjan.huizing@tno.nl)
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
@@ -8,7 +8,7 @@
 #'
 #' @inheritParams calculate_dscore
 #' @param instrument A character vector with 3-position codes of instruments
-#' that should match. The default is `instrument = gs1` for GSED SF;
+#' that should match. The default is `instrument = "gs1"` for GSED SF;
 #' `instrument = NULL` allows for all instruments.
 #' @param key String. They key identifies 1) the difficulty estimates
 #' pertaining to a particular Rasch model, and 2) the prior mean and standard
@@ -30,20 +30,11 @@ dcat_start <- function(
   population = "",
   p = 50,
   session = "",
-  format = "3.0",
-  loc = "",
+  format = "3.1",
   ...
 ) {
   authenticate(...)
   daz <- d <- NULL
-
-  if (!missing(loc)) {
-    warning(
-      "Argument loc is deprecated and will disappear in Nov 2022; please use session instead.",
-      call. = FALSE
-    )
-    session <- loc2session(loc)
-  }
 
   tgt <- get_tgt(
     txt = txt,
