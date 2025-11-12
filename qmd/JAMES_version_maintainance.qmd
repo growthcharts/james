@@ -49,7 +49,7 @@ If DESCRIPTION version changes, update two files with new version numbers
 ```{r}
 james:::update_version_files(
   "inst/www/index.html",
-  "vignettes/articles/getting_started.Rmd",
+  "vignettes/articles/getting_started.qmd",
   "DESCRIPTION"
 )
 ```

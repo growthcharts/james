@@ -1,13 +1,12 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
 subtitle: JAMES 1.8.0 (November 2025)
-author: Stef van Buuren, Arjan Huizing (TNO Child Health)
-output:
-  html_document:
-    number_sections: false
+author: Stef van Buuren, Arjan Huizing, Iris Eekhout (TNO Child Health)
+format:
+  html:
+    number-sections: false
     theme: united
-editor_options: 
-  chunk_output_type: console
+    tabset: true
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -108,7 +107,7 @@ This document provides a quick introduction into the main JAMES features, and ho
 
 Let us first check whether JAMES is running. The following code makes a simple request to JAMES to see whether it is alive and to return the version number of the underlying `james` R package. We illustrate both requests in `R` and in `bash`.
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -120,6 +119,7 @@ remotes::install_github("growthcharts/jamesclient")
 remotes::install_github("growthcharts/jamesdemodata")
 remotes::install_github("growthcharts/bdsreader")
 ```
+
 ```{r load}
 library(jamesclient)
 library(httr)
@@ -212,13 +212,13 @@ cat value2
 rm resp value1 value2
 ```
 
-#### {-}
+:::
 
 ### **`/data/upload`**: Upload child data
 
 JAMES understands data that conform to the [Basisdataset JGZ 4.0.1](https://www.ncj.nl/onderwerp/digitaal-dossier-jgz/bds-jgz-versiebeheer/) coded as JSON according to a [JSON schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json). This section explains how we create, validate and upload child data to JAMES.
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -468,11 +468,11 @@ curl -s $(cat .host)/data/upload/json -d "txt='$URL'" > content
 rm content headers
 ```
 
-#### {-}
+:::
 
 ### **`/charts/draw`**: Draw child data on growth chart
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -559,11 +559,11 @@ $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
 "selector" : "chartcode"}' > laura.svg
 ```
 
-#### {-}
+:::
 
 ### **`/charts/list`**: List available growth charts
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -604,11 +604,11 @@ $(cat .host)'/charts/list/json' \
 }'
 ```
 
-#### {-}
+:::
 
 ### **`/charts/validate`**: Validate chart codes
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -641,9 +641,11 @@ $(cat .host)'/charts/validate/json' \
 }'
 ```
 
+:::
+
 ### **`/dscore/calculate`**: Calculate D-score
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -660,12 +662,12 @@ The D-score is found in column `y` and the DAZ is in column `z`.
 
 ##### **bash**
 
-#### {-}
+:::
 
 
 ### **`/vwc/select`**: Select Van Wiechen development milestones based on D-score and age
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -680,12 +682,14 @@ head(r$parsed)
 
 ##### **bash**
 
-#### {-}
+To be added
+
+:::
 
 
 ### **`/vwc/percentiles`**: Select Van Wiechen development milestones with detailed cut-off information
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -698,16 +702,20 @@ head(r$parsed)
 
 ##### **bash**
 
-#### {-}
+To be added
+
+:::
 
 
 ### **`/dcat/calculate`**: Calculate next milestone item
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
 The DCAT allows users to performa adapative testing using either `ddi` or `gs1` items.
+
+The following snippet uploads child data and requests the next item to be tested based on the `gs1` instrument, the default.
 
 ```{r}
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
@@ -716,23 +724,25 @@ r
 head(r$parsed)
 ```
 
-By specifying the instrument we can specify whether we want to include `ddi`, `gs1` or items from both (default is `gs1`). We must additionally specify a key that supports both instruments.
+By specifying the instrument we can specify whether we want to include `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must additionally specify a key that supports the `ddi` instrument.
 
 ```{r}
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
-r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = c("ddi"), key = "gsed2406")
+r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = "ddi", key = "gsed2406")
 r
 head(r$parsed)
 ```
 
 ##### **bash**
 
-#### {-}
+To be added
+
+:::
 
 
 ### **`/screeners/list`**: List available growth screeners
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -759,12 +769,12 @@ $(cat .host)'/screeners/list/json' \
 -d '{"ynames": "hdc"}'
 ```
 
-#### {-}
+:::
 
 
 ### **`/screeners/apply`**: Apply growth screeners to child data
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -796,11 +806,11 @@ $(cat .host)'/screeners/apply/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-#### {-}
+:::
 
 ### **`/site`**: Request an empty site
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -812,12 +822,12 @@ browseURL(file.path(host, "site"))
 
 ##### **bash**
 
-#### {-}
+:::
 
 
 ### **`/site/request`**: Request personalised site
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -865,11 +875,11 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-#### {-}
+:::
 
 ### **`/blend/request`**: Obtain a blend from multiple end points 
 
-#### {.tabset}
+::: panel-tabset
 
 ##### **R**
 
@@ -916,7 +926,7 @@ $(cat .host)'/blend/request/json' \
 }'
 ```
 
-#### {-}
+:::
 
 ## Resources
 

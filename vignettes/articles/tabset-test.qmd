@@ -1,0 +1,16 @@
+---
+title: "Tabset Test"
+format:
+  html:
+    theme: cosmo
+---
+
+## Example
+
+::: panel-tabset
+### R
+R text here.
+
+### Bash
+Bash text here.
+:::
