@@ -10,12 +10,21 @@ format:
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
-if (!dir.exists("man/figures")) dir.create("man/figures", recursive = TRUE)
-filename_chart1 <- file.path("man/figures", "chart1.svg")
-filename_chart2 <- file.path("man/figures", "chart2.svg")
-filename_chart3 <- file.path("man/figures", "chart3.svg")
+```{r setup}
+#| include: false
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+
+# Detect the name of the current Quarto source file (e.g. "getting_started.qmd")
+doc <- knitr::current_input()
+figdir <- file.path(dirname(doc),
+                    paste0(tools::file_path_sans_ext(basename(doc)), "_files"),
+                    "figures")
+dir.create(figdir, recursive = TRUE, showWarnings = FALSE)
+
+# Define file names within Quarto’s _files/figures/ folder
+filename_chart1 <- file.path(figdir, "chart1.svg")
+filename_chart2 <- file.path(figdir, "chart2.svg")
+filename_chart3 <- file.path(figdir, "chart3.svg")
 ```
 
 ## Overview
@@ -129,8 +138,8 @@ library(jsonlite)
 Let's find out the JAMES version number. In this document, we define the server that hosts JAMES as follows.
 
 ```{r host}
-host <- "http://localhost:8080"
-# host <- "https://james.groeidiagrammen.nl"
+# host <- "http://localhost:8080"
+host <- "https://james.groeidiagrammen.nl"
 system(paste0("echo ", host, " > .host"))
 ```
 
