@@ -468,32 +468,17 @@ if (!window.jQuery) {
   // Define seturl function with validation
   ocpu.seturl = function (path) {
     if (typeof path !== "string" || !path.match(/\/R\/?$/)) {
-      console.error("Invalid OpenCPU URL. Must be a string ending in '/R'. Got:", path);
+      console.error("Invalid OpenCPU URL. Must end in '/R'. Got:", path);
       return;
     }
-    // Normalize to a single trailing slash
     ocpu.url = path.replace(/\/+$/, "") + "/";
     console.log("OpenCPU base URL set to:", ocpu.url);
   };
 
-  // Auto-detect and set ocpu.url (safe for both local and production)
+  // Auto-detect and set ocpu.url (always relative — iframe safe)
   (function initOcpuUrl() {
-    window.ocpu = window.ocpu || {};
-    window.ocpu.url = `${window.location.origin}/ocpu/library/james/R`;
+    ocpu.seturl("/ocpu/library/james/R");
   })();
-
-  // // Auto-detect and set ocpu.url
-  // (function initOcpuUrl() {
-  //   const { protocol, hostname, port } = window.location;
-
-  //   let ocpuBaseURL;
-  //   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-  //     ocpuBaseURL = "http://127.0.0.1:8004/ocpu/library/james/R";
-  //   } else {
-  //     ocpuBaseURL = `${window.location.protocol}//${window.location.hostname}/ocpu/library/james/R`;
-  //   }
-  //   // ocpu.seturl(ocpuBaseURL);
-  // })();
 
   // Export remaining functions
   ocpu.call = r_fun_call;
