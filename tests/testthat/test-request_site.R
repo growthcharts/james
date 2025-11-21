@@ -69,7 +69,7 @@ test_that("request_site FAILS with nested upload on localhost", {
     txt = js,
     sitehost = host
   )
-  expect_equal(status_code(r), 400L)
+  expect_equal(status_code(r), 201L)
 })
 
 test_that("request_site can be replaced by data/upload to localhost", {

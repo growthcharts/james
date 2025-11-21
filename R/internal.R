@@ -28,27 +28,65 @@ convert_str_age <- function(s) {
 }
 
 # uploads data and returns session
-get_session <- function(txt, sitehost, format) {
-  resp <- james_post(
-    host = sitehost,
-    path = "data/upload",
-    txt = txt,
-    format = format
-  )
-  if (status_code(resp) != 201L) {
-    message_for_status(
-      resp,
-      task = paste0(
-        "upload data",
-        "\n",
-        content(resp, "text", encoding = "utf-8")
-      )
-    )
-    return("")
+get_session <- function(txt, sitehost, format = "3.0", ...) {
+  # Fix localhost → 8004
+  ocpu_host <- if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
+    "http://127.0.0.1:8004"
+  } else {
+    sitehost
   }
-  get_url(resp, "session")
-}
 
+  # Convert list/bdsreader to JSON
+  if (!is.character(txt)) {
+    txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
+  }
+
+  # Set OCPU upload endpoint
+  upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
+
+  # Perform upload to OpenCPU
+  h <- curl::new_handle()
+  curl::handle_setform(h, txt = txt, format = format)
+
+  res <- curl::curl_fetch_memory(upload_url, handle = h)
+
+  # Parse session key from OpenCPU headers
+  session <- rawToChar(res$headers) |>
+    (\(txt) {
+      # Find line starting with the header
+      lines <- strsplit(txt, "\r\n|\n|\r")[[1]]
+      match <- grep("^X-ocpu-session:", lines, value = TRUE)
+
+      if (length(match) == 0) {
+        return(NA_character_)
+      }
+
+      # Extract value after the colon
+      sub("^X-ocpu-session:\\s*", "", match)
+    })()
+
+  return(session)
+}
+# get_session <- function(txt, sitehost, format) {
+#   resp <- james_post(
+#     host = sitehost,
+#     path = "data/upload",
+#     txt = txt,
+#     format = format
+#   )
+#   if (status_code(resp) != 201L) {
+#     message_for_status(
+#       resp,
+#       task = paste0(
+#         "upload data",
+#         "\n",
+#         content(resp, "text", encoding = "utf-8")
+#       )
+#     )
+#     return("")
+#   }
+#   get_url(resp, "session")
+# }
 
 # returns targetl or NULL
 get_tgt <- function(txt = "", session = "", ...) {
