@@ -155,11 +155,13 @@ if (!window.jQuery) {
 
     // Parse ocpu.url to derive host for session URL
     let derivedHost;
-    try {
+
+    if (ocpu.url.startsWith("http://") || ocpu.url.startsWith("https://")) {
+      // absolute URL → safe to parse
       const ocpuUrl = new URL(ocpu.url);
-      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;  // host includes port
-    } catch (err) {
-      console.warn("[r_fun_ajax] Invalid ocpu.url, using window.location as fallback");
+      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;
+    } else {
+      // relative URL → use window.location origin
       derivedHost = `${window.location.protocol}//${window.location.host}`;
     }
 
