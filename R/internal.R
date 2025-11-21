@@ -27,46 +27,49 @@ convert_str_age <- function(s) {
   round(z, 4)
 }
 
-# uploads data and returns session
+# Uploads data to OpenCPU and returns session key
 get_session <- function(txt, sitehost, format = "3.0", ...) {
-  # Fix localhost → 8004
+  # Use port 8004 for local OpenCPU
   ocpu_host <- if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
     "http://127.0.0.1:8004"
   } else {
     sitehost
   }
 
-  # Convert list/bdsreader to JSON
+  # Ensure JSON string
   if (!is.character(txt)) {
     txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
   }
 
-  # Set OCPU upload endpoint
+  # Target endpoint
   upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
 
-  # Perform upload to OpenCPU
+  # Force correct MIME types
   h <- curl::new_handle()
-  curl::handle_setform(h, txt = txt, format = format)
+  curl::handle_setform(
+    h,
+    txt = curl::form_data(txt, type = "text/plain; charset=utf-8"),
+    format = curl::form_data(format, type = "text/plain")
+  )
 
+  # Perform POST
   res <- curl::curl_fetch_memory(upload_url, handle = h)
 
-  # Parse session key from OpenCPU headers
-  session <- rawToChar(res$headers) |>
-    (\(txt) {
-      # Find line starting with the header
-      lines <- strsplit(txt, "\r\n|\n|\r")[[1]]
-      match <- grep("^X-ocpu-session:", lines, value = TRUE)
+  # Extract session header
+  header_text <- rawToChar(res$headers)
+  lines <- strsplit(header_text, "\r\n|\n|\r")[[1]]
+  match <- grep("^X-ocpu-session:", lines, value = TRUE)
 
-      if (length(match) == 0) {
-        return(NA_character_)
-      }
+  if (length(match) == 0) {
+    return(NA_character_) # upload failed
+  }
 
-      # Extract value after the colon
-      sub("^X-ocpu-session:\\s*", "", match)
-    })()
+  # Extract the key
+  session <- sub("^X-ocpu-session:\\s*", "", match)
 
   return(session)
 }
+
 # get_session <- function(txt, sitehost, format) {
 #   resp <- james_post(
 #     host = sitehost,
