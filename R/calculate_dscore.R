@@ -53,12 +53,9 @@ calculate_dscore <- function(
     return(NULL)
   }
 
-  #how to select the items to use as default?
+  #select the items
   items <- dscore::get_itemnames(instrument = append)
 
-  if(is.null(length_rule)){
-    length_rule <- length(items)
-  }
   # check key - set default for gsed
     key <- "gsed2510"
     if(all(is.na(get_tau(items, key = key)))){
@@ -66,10 +63,8 @@ calculate_dscore <- function(
     }
     # get the defaults for key
     idx <- which(dscore::builtin_keys$key == key)
-    # check population
-    if (is.null(population)){
-      population = dscore::builtin_keys$base_population[idx]
-    }
+    # get population
+    population = dscore::builtin_keys$base_population[idx]
 
   time <- timedata(tgt)
 
@@ -82,7 +77,7 @@ calculate_dscore <- function(
     return(dsc[nrow(dsc), ])
   }
   if (output == "last_dscore") {
-    return(pull(dsc[nrow(dsc), "d"]))
+    return(dsc[nrow(dsc), "d"])
   }
   dsc
 }

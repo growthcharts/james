@@ -7,8 +7,8 @@
 calculate_dscore(
   txt = "",
   session = "",
-  format = "1.0",
-  append = NULL,
+  format = "3.1",
+  append = c("ddi", "gs1"),
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
