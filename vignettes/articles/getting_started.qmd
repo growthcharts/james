@@ -138,8 +138,8 @@ library(jsonlite)
 Let's find out the JAMES version number. In this document, we define the server that hosts JAMES as follows.
 
 ```{r host}
-# host <- "http://localhost:8080"
-host <- "https://james.groeidiagrammen.nl"
+host <- "http://localhost:8080"
+# host <- "https://james.groeidiagrammen.nl"
 system(paste0("echo ", host, " > .host"))
 ```
 
@@ -850,9 +850,8 @@ r$parsed
 
 Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.
 
-The above command fails for `localhost:8080`, and gives the error  `[400] Couldn't connect to server [localhost]`, because `localhost:8080` does not allow nested requests to itself.
+On some systems, the above command may fail with the browser error  `[400] Couldn't connect to server [localhost]`. An alternative is to break the request into two steps. First, we create a session by uploading the child data, and then we use that session to create the URL to the personalised site.
 
-The solution is the break the request into two steps. First, we create a session by uploading the child data, and then we use that session to create the URL to the personalised site.
 We start by uploading data to JAMES and het `r$session`. After that, we can use either `site\request` or manual construction of the URL to the site:
 
 ```{r}
@@ -894,8 +893,6 @@ $(cat .host)'/site/request/json' \
 
 The `/blend/request` end point returns the results of multiple end points, and thus functions as a one-stop shop. However, currently it does not support graphics output, so use `/{session}/{info}/svglite` or `/charts/draw/svglite` for the charts. 
 
-As before, the following command only works on remote servers, not on `localhost:8080`.
-
 ```{r}
 fn <- system.file("extdata", "bds_v3.0", "smocc", "Laura_S.json",
                  package = "jamesdemodata", mustWork = TRUE)
@@ -905,7 +902,7 @@ r
 names(r$parsed)
 ```
 
-Getting this to work on `localhost:8080`, use two steps: 
+The two-step approach is: 
 
 ```{r}
 resp1 <- james_post(host = host, path = "data/upload/json", txt = fn)
