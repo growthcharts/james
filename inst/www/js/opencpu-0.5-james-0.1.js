@@ -155,11 +155,13 @@ if (!window.jQuery) {
 
     // Parse ocpu.url to derive host for session URL
     let derivedHost;
-    try {
+
+    if (ocpu.url.startsWith("http://") || ocpu.url.startsWith("https://")) {
+      // absolute URL → safe to parse
       const ocpuUrl = new URL(ocpu.url);
-      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;  // host includes port
-    } catch (err) {
-      console.warn("[r_fun_ajax] Invalid ocpu.url, using window.location as fallback");
+      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;
+    } else {
+      // relative URL → use window.location origin
       derivedHost = `${window.location.protocol}//${window.location.host}`;
     }
 
@@ -468,32 +470,17 @@ if (!window.jQuery) {
   // Define seturl function with validation
   ocpu.seturl = function (path) {
     if (typeof path !== "string" || !path.match(/\/R\/?$/)) {
-      console.error("Invalid OpenCPU URL. Must be a string ending in '/R'. Got:", path);
+      console.error("Invalid OpenCPU URL. Must end in '/R'. Got:", path);
       return;
     }
-    // Normalize to a single trailing slash
     ocpu.url = path.replace(/\/+$/, "") + "/";
     console.log("OpenCPU base URL set to:", ocpu.url);
   };
 
-  // Auto-detect and set ocpu.url (safe for both local and production)
+  // Auto-detect and set ocpu.url (always relative — iframe safe)
   (function initOcpuUrl() {
-    window.ocpu = window.ocpu || {};
-    window.ocpu.url = `${window.location.origin}/ocpu/library/james/R`;
+    ocpu.seturl("/ocpu/library/james/R");
   })();
-
-  // // Auto-detect and set ocpu.url
-  // (function initOcpuUrl() {
-  //   const { protocol, hostname, port } = window.location;
-
-  //   let ocpuBaseURL;
-  //   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-  //     ocpuBaseURL = "http://127.0.0.1:8004/ocpu/library/james/R";
-  //   } else {
-  //     ocpuBaseURL = `${window.location.protocol}//${window.location.hostname}/ocpu/library/james/R`;
-  //   }
-  //   // ocpu.seturl(ocpuBaseURL);
-  // })();
 
   // Export remaining functions
   ocpu.call = r_fun_call;
