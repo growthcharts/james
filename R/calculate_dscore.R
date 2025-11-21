@@ -29,8 +29,8 @@
 calculate_dscore <- function(
   txt = "",
   session = "",
-  format = "1.0",
-  append = NULL,
+  format = "3.1",
+  append = c("ddi","gs1"),
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -53,17 +53,36 @@ calculate_dscore <- function(
     return(NULL)
   }
 
+  #how to select the items to use as default?
+  items <- dscore::get_itemnames(instrument = append)
+
+  if(is.null(length_rule)){
+    length_rule <- length(items)
+  }
+  # check key - set default for gsed
+    key <- "gsed2510"
+    if(all(is.na(get_tau(items, key = key)))){
+      key <- "gsed2406"
+    }
+    # get the defaults for key
+    idx <- which(dscore::builtin_keys$key == key)
+    # check population
+    if (is.null(population)){
+      population = dscore::builtin_keys$base_population[idx]
+    }
+
   time <- timedata(tgt)
-  child <- persondata(tgt)
-  df <- time %>%
-    filter(.data$yname == "dsc") %>%
-    mutate(date = format(child[["dob"]] + round(.data$age * 365.25), "%Y%m%d"))
+
+  dsc <- time %>%
+    dplyr::select(-zname, -z) |>
+    tidyr::pivot_wider(id_cols = c(age, xname), names_from = yname, values_from = y)|>
+    dscore::dscore(key = key, population = population)
 
   if (output == "last_visit") {
-    return(df[nrow(df), ])
+    return(dsc[nrow(dsc), ])
   }
   if (output == "last_dscore") {
-    return(pull(df[nrow(df), "y"]))
+    return(pull(dsc[nrow(dsc), "d"]))
   }
-  df
+  dsc
 }
