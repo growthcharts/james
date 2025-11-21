@@ -8,13 +8,15 @@
 #'
 #' The function `draw_chart()` plots individual data on the growth chart.
 #' @inheritParams request_site
-#' @param output A string, either `"table"`, `"last_visit"` or
-#' '`"last_dscore"` specifying the result. The default `"table"`
-#' returns with columns: `"date"` (date), `"x"` (age), `"y"` (D-score)
-#' and `"z"` (DAZ). The number of rows equals to
-#' the number of visits. If `output` equals `"last_visit"` the
-#' function returns only the last row. If `output` equals
-#' `"last_dscore"` the function returns only the D-score from the last row.
+#' @param append Optional vector of strings indicating which instrument to base
+#'   D-score calculations on. Currently supports `ddi` and `gs1`. Requires JSON
+#'   schema V3.0 or later.
+#' @param output A string, either `"table"`, `"last_visit"` or '`"last_dscore"`
+#'   specifying the result. The default `"table"` returns with columns: `"date"`
+#'   (date), `"x"` (age), `"y"` (D-score) and `"z"` (DAZ). The number of rows
+#'   equals to the number of visits. If `output` equals `"last_visit"` the
+#'   function returns only the last row. If `output` equals `"last_dscore"` the
+#'   function returns only the D-score from the last row.
 #' @inheritParams bdsreader::read_bds
 #' @return A table, row or scalar.
 #' @author Stef van Buuren 2020
@@ -28,6 +30,7 @@ calculate_dscore <- function(
   txt = "",
   session = "",
   format = "1.0",
+  append = NULL,
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -43,7 +46,7 @@ calculate_dscore <- function(
   }
 
   output <- match.arg(output)
-  tgt <- get_tgt(txt = txt, session = session, format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format, append = append)
 
   if (!is.list(tgt)) {
     message("Cannot calculate D-score")

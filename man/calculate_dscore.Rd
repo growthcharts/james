@@ -8,6 +8,7 @@ calculate_dscore(
   txt = "",
   session = "",
   format = "1.0",
+  append = NULL,
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -21,13 +22,16 @@ should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
 
-\item{output}{A string, either \code{"table"}, \code{"last_visit"} or
-'\code{"last_dscore"} specifying the result. The default \code{"table"}
-returns with columns: \code{"date"} (date), \code{"x"} (age), \code{"y"} (D-score)
-and \code{"z"} (DAZ). The number of rows equals to
-the number of visits. If \code{output} equals \code{"last_visit"} the
-function returns only the last row. If \code{output} equals
-\code{"last_dscore"} the function returns only the D-score from the last row.}
+\item{append}{Optional vector of strings indicating which instrument to base
+D-score calculations on. Currently supports \code{ddi} and \code{gs1}. Requires JSON
+schema V3.0 or later.}
+
+\item{output}{A string, either \code{"table"}, \code{"last_visit"} or '\code{"last_dscore"}
+specifying the result. The default \code{"table"} returns with columns: \code{"date"}
+(date), \code{"x"} (age), \code{"y"} (D-score) and \code{"z"} (DAZ). The number of rows
+equals to the number of visits. If \code{output} equals \code{"last_visit"} the
+function returns only the last row. If \code{output} equals \code{"last_dscore"} the
+function returns only the D-score from the last row.}
 
 \item{loc}{Deprecated. Use \code{session} instead.}
 
