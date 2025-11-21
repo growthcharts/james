@@ -1,3 +1,7 @@
+# james 1.8.1
+
+- Solves a problem with nested uploads on `localhost` with end points `site/request` and `blend/request`.
+
 # james 1.8.0 (November 2025)
 
 - Added the endpoints `/dcat/calculate`, `/dcat/start` and `/dcat/next`. These allow users to perform adaptive testing.
