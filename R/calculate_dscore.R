@@ -53,8 +53,11 @@ calculate_dscore <- function(
     return(NULL)
   }
 
-  #select the items
+  time <- timedata(tgt)
+
+  #select the items present in data
   items <- dscore::get_itemnames(instrument = append)
+  items <- items[items %in% time$yname]
 
   # check key - set default for gsed
     key <- "gsed2510"
@@ -65,8 +68,6 @@ calculate_dscore <- function(
     idx <- which(dscore::builtin_keys$key == key)
     # get population
     population = dscore::builtin_keys$base_population[idx]
-
-  time <- timedata(tgt)
 
   dsc <- time %>%
     dplyr::select(-zname, -z) |>
