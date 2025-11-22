@@ -477,22 +477,10 @@ if (!window.jQuery) {
     console.log("OpenCPU base URL set to:", ocpu.url);
   };
 
+  // Auto-detect and set ocpu.url (always relative — iframe safe)
   (function initOcpuUrl() {
-    const { protocol, hostname } = window.location;
-
-    if (hostname === "localhost" || hostname === "127.0.0.1") {
-      // Local Docker → direct access to OCPU daemon
-      ocpu.seturl("http://127.0.0.1:8004/ocpu/library/james/R");
-    } else {
-      // Production — Apache proxy handles this
-      ocpu.seturl("/ocpu/library/james/R");
-    }
+    ocpu.seturl("/ocpu/library/james/R");
   })();
-
-  // // Auto-detect and set ocpu.url (always relative — iframe safe)
-  // (function initOcpuUrl() {
-  //   ocpu.seturl("/ocpu/library/james/R");
-  // })();
 
   // Export remaining functions
   ocpu.call = r_fun_call;

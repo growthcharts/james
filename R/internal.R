@@ -14,17 +14,21 @@ loc2session <- function(url) {
 }
 
 # Detect OpenCPU host for dual-mode operation
+# detect_ocpu_host <- function(sitehost) {
+#   sitehost <- as.character(sitehost)[1]
+
+#   # Local Docker
+#   if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
+#     return("http://127.0.0.1:8004")
+#   }
+
+#   # Production (force https)
+#   sitehost <- sub("^http://", "https://", sitehost)
+#   return(sitehost)
+# }
+
 detect_ocpu_host <- function(sitehost) {
-  sitehost <- as.character(sitehost)[1]
-
-  # Local Docker
-  if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
-    return("http://127.0.0.1:8004")
-  }
-
-  # Production (force https)
-  sitehost <- sub("^http://", "https://", sitehost)
-  return(sitehost)
+  "http://127.0.0.1:8004"
 }
 
 convert_str_age <- function(s) {
