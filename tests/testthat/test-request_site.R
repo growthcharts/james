@@ -89,3 +89,38 @@ test_that("site creation by data/upload also works on proper domains", {
   site <- modify_url(host, path = "site", query = list(session = session))
   # browseURL(site)
 })
+
+test_that("detect_ocpu_host works", {
+  expect_identical(
+    detect_ocpu_host("http://localhost:8080"),
+    "http://127.0.0.1:8004"
+  )
+
+  expect_identical(
+    detect_ocpu_host("http://127.0.0.1:8080"),
+    "http://127.0.0.1:8004"
+  )
+
+  expect_identical(
+    detect_ocpu_host("http://james.groeidiagrammen.nl"),
+    "https://james.groeidiagrammen.nl"
+  )
+})
+
+test_that("request_site works in dual-mode", {
+  js <- "{\"Format\":\"3.0\",\"reference\":\"Test\"}"
+
+  local_host <- "http://localhost:8080"
+  prod_host <- "https://james.groeidiagrammen.nl"
+
+  # Local session URL begins with localhost
+  url_loc <- request_site(txt = js, sitehost = local_host)
+  expect_true(grepl("^http://localhost:8080/site\\?session=", url_loc))
+
+  # Production URL begins with https://james...
+  url_prod <- request_site(txt = js, sitehost = prod_host)
+  expect_true(grepl(
+    "^https://james.groeidiagrammen.nl/site\\?session=",
+    url_prod
+  ))
+})

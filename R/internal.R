@@ -13,6 +13,20 @@ loc2session <- function(url) {
   return("")
 }
 
+# Detect OpenCPU host for dual-mode operation
+detect_ocpu_host <- function(sitehost) {
+  sitehost <- as.character(sitehost)[1]
+
+  # Local Docker
+  if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
+    return("http://127.0.0.1:8004")
+  }
+
+  # Production (force https)
+  sitehost <- sub("^http://", "https://", sitehost)
+  return(sitehost)
+}
+
 convert_str_age <- function(s) {
   # converts s to decimal age
   # s is formatted as "number|unit", where unit
@@ -29,12 +43,8 @@ convert_str_age <- function(s) {
 
 # Uploads data to OpenCPU and returns session key
 get_session <- function(txt, sitehost, format = "3.0", ...) {
-  # Use port 8004 for local OpenCPU
-  ocpu_host <- if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
-    "http://127.0.0.1:8004"
-  } else {
-    sitehost
-  }
+  # Dual-mode: local localhost → 127.0.0.1:8004 ; production → https
+  ocpu_host <- detect_ocpu_host(sitehost)
 
   # Ensure JSON string
   if (!is.character(txt)) {
@@ -44,7 +54,7 @@ get_session <- function(txt, sitehost, format = "3.0", ...) {
   # Target endpoint
   upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
 
-  # Force correct MIME types
+  # Force correct MIME types (important!)
   h <- curl::new_handle()
   curl::handle_setform(
     h,
@@ -64,32 +74,10 @@ get_session <- function(txt, sitehost, format = "3.0", ...) {
     return(NA_character_) # upload failed
   }
 
-  # Extract the key
+  # Extract and return the key
   session <- sub("^X-ocpu-session:\\s*", "", match)
-
   return(session)
 }
-
-# get_session <- function(txt, sitehost, format) {
-#   resp <- james_post(
-#     host = sitehost,
-#     path = "data/upload",
-#     txt = txt,
-#     format = format
-#   )
-#   if (status_code(resp) != 201L) {
-#     message_for_status(
-#       resp,
-#       task = paste0(
-#         "upload data",
-#         "\n",
-#         content(resp, "text", encoding = "utf-8")
-#       )
-#     )
-#     return("")
-#   }
-#   get_url(resp, "session")
-# }
 
 # returns targetl or NULL
 get_tgt <- function(txt = "", session = "", ...) {
