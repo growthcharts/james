@@ -42,19 +42,16 @@ convert_str_age <- function(s) {
 }
 
 # Uploads data to OpenCPU and returns session key
+# Uploads data to OpenCPU and returns session key
 get_session <- function(txt, sitehost, format = "3.0", ...) {
-  # Dual-mode: local localhost → 127.0.0.1:8004 ; production → https
   ocpu_host <- detect_ocpu_host(sitehost)
 
-  # Ensure JSON string
   if (!is.character(txt)) {
     txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
   }
 
-  # Target endpoint
   upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
 
-  # Force correct MIME types (important!)
   h <- curl::new_handle()
   curl::handle_setform(
     h,
@@ -62,20 +59,19 @@ get_session <- function(txt, sitehost, format = "3.0", ...) {
     format = curl::form_data(format, type = "text/plain")
   )
 
-  # Perform POST
   res <- curl::curl_fetch_memory(upload_url, handle = h)
 
-  # Extract session header
   header_text <- rawToChar(res$headers)
   lines <- strsplit(header_text, "\r\n|\n|\r")[[1]]
-  match <- grep("^X-ocpu-session:", lines, value = TRUE)
+
+  # CASE-INSENSITIVE SEARCH
+  match <- grep("^x-ocpu-session:", lines, value = TRUE, ignore.case = TRUE)
 
   if (length(match) == 0) {
-    return(NA_character_) # upload failed
+    return(NA_character_)
   }
 
-  # Extract and return the key
-  session <- sub("^X-ocpu-session:\\s*", "", match)
+  session <- sub("^x-ocpu-session:\\s*", "", match, ignore.case = TRUE)
   return(session)
 }
 
