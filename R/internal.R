@@ -42,7 +42,7 @@ convert_str_age <- function(s) {
 # Uploads data to OpenCPU and returns session key
 get_session <- function(txt, sitehost, format = "3.0", ...) {
   # Note: ::: appears to be needed for OCPU host detection
-  ocpu_host <- detect_ocpu_host(sitehost)
+  ocpu_host <- james:::detect_ocpu_host(sitehost)
 
   if (!is.character(txt)) {
     txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
