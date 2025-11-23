@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.8.0 (November 2025)
+subtitle: JAMES 1.8.1 (November 2025)
 author: Stef van Buuren, Arjan Huizing, Iris Eekhout (TNO Child Health)
 format:
   html:
@@ -138,8 +138,8 @@ library(jsonlite)
 Let's find out the JAMES version number. In this document, we define the server that hosts JAMES as follows.
 
 ```{r host}
-host <- "http://localhost:8080"
-# host <- "https://james.groeidiagrammen.nl"
+# host <- "http://localhost:8080"
+host <- "https://james.groeidiagrammen.nl"
 system(paste0("echo ", host, " > .host"))
 ```
 

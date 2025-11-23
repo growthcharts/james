@@ -13,20 +13,6 @@ loc2session <- function(url) {
   return("")
 }
 
-# Detect OpenCPU host for dual-mode operation
-# detect_ocpu_host <- function(sitehost) {
-#   sitehost <- as.character(sitehost)[1]
-
-#   # Local Docker
-#   if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
-#     return("http://127.0.0.1:8004")
-#   }
-
-#   # Production (force https)
-#   sitehost <- sub("^http://", "https://", sitehost)
-#   return(sitehost)
-# }
-
 detect_ocpu_host <- function(sitehost) {
   "http://127.0.0.1:8004"
 }
@@ -48,6 +34,7 @@ convert_str_age <- function(s) {
 # Uploads data to OpenCPU and returns session key
 # Uploads data to OpenCPU and returns session key
 get_session <- function(txt, sitehost, format = "3.0", ...) {
+  # Note: ::: appears to be needed for OCPU host detection
   ocpu_host <- james:::detect_ocpu_host(sitehost)
 
   if (!is.character(txt)) {
