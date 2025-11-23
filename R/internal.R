@@ -14,7 +14,14 @@ loc2session <- function(url) {
 }
 
 detect_ocpu_host <- function(sitehost) {
-  "http://127.0.0.1:8004"
+  sitehost <- as.character(sitehost)[1]
+
+  if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
+    return("http://127.0.0.1:8004")
+  }
+
+  sitehost <- sub("^http://", "https://", sitehost)
+  return(sitehost)
 }
 
 convert_str_age <- function(s) {
