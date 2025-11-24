@@ -138,7 +138,7 @@ library(jsonlite)
 Let's find out the JAMES version number. In this document, we define the server that hosts JAMES as follows.
 
 ```{r host}
-# host <- "http://localhost:8080"
+host <- "http://localhost:8080"
 host <- "https://james.groeidiagrammen.nl"
 system(paste0("echo ", host, " > .host"))
 ```
