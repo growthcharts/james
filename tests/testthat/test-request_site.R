@@ -1,3 +1,6 @@
+# test-request_site.R
+skip("Integration tests skipped — require running server.")
+
 laura <- system.file("testdata", "Laura_S.json", package = "james")
 laura_gro <- system.file("testdata", "Laura_S_gro.json", package = "james")
 laura_dev <- system.file("testdata", "Laura_S_dev.json", package = "james")
@@ -70,23 +73,6 @@ test_that("request_site can be replaced by data/upload to localhost", {
 #   site <- modify_url(host, path = "site", query = list(session = session))
 #   # browseURL(site)
 # })
-
-test_that("detect_ocpu_host works", {
-  expect_identical(
-    detect_ocpu_host("http://localhost:8080"),
-    "http://127.0.0.1:8004"
-  )
-
-  expect_identical(
-    detect_ocpu_host("http://127.0.0.1:8080"),
-    "http://127.0.0.1:8004"
-  )
-
-  expect_identical(
-    detect_ocpu_host("http://james.groeidiagrammen.nl"),
-    "https://james.groeidiagrammen.nl"
-  )
-})
 
 # test_that("request_site works in dual-mode", {
 #   js <- "{\"Format\":\"3.0\",\"reference\":\"Test\"}"

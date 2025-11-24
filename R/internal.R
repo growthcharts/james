@@ -13,17 +13,6 @@ loc2session <- function(url) {
   return("")
 }
 
-detect_ocpu_host <- function(sitehost) {
-  sitehost <- as.character(sitehost)[1]
-
-  if (grepl("localhost|127\\.0\\.0\\.1", sitehost)) {
-    return("http://127.0.0.1:8004")
-  }
-
-  sitehost <- sub("^http://", "https://", sitehost)
-  return(sitehost)
-}
-
 convert_str_age <- function(s) {
   # converts s to decimal age
   # s is formatted as "number|unit", where unit
@@ -38,16 +27,18 @@ convert_str_age <- function(s) {
   round(z, 4)
 }
 
-# Uploads data to OpenCPU and returns session key
-# Uploads data to OpenCPU and returns session key
+# get_session uploads data to OpenCPU and returns the session key
 get_session <- function(txt, sitehost, format = "3.0", ...) {
-  # Note: ::: appears to be needed for OCPU host detection
-  ocpu_host <- james:::detect_ocpu_host(sitehost)
-
   if (!is.character(txt)) {
     txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
   }
 
+  ocpu_host <- as.character(sitehost)[1]
+  if (grepl("localhost|127\\.0\\.0\\.1", ocpu_host)) {
+    ocpu_host <- "http://127.0.0.1:8004"
+  } else {
+    ocpu_host <- sub("^http://", "https://", ocpu_host)
+  }
   upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
 
   h <- curl::new_handle()
@@ -62,7 +53,6 @@ get_session <- function(txt, sitehost, format = "3.0", ...) {
   header_text <- rawToChar(res$headers)
   lines <- strsplit(header_text, "\r\n|\n|\r")[[1]]
 
-  # CASE-INSENSITIVE SEARCH
   match <- grep("^x-ocpu-session:", lines, value = TRUE, ignore.case = TRUE)
 
   if (length(match) == 0) {
