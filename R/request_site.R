@@ -82,15 +82,6 @@ request_site <- function(
   txt <- txt[1L]
   session <- session[1L]
 
-  ### Detect localhost and rewrite only the OpenCPU backend
-  resolve_ocpu_host <- function(host) {
-    if (grepl("localhost|127\\.0\\.0\\.1", host)) {
-      return("http://127.0.0.1:8004") # internal OpenCPU daemon
-    }
-    host
-  }
-  ocpu_host <- resolve_ocpu_host(sitehost)
-
   # CASE 1: Neither txt nor session provided – return base site URL
   if (is.empty(txt) && is.empty(session)) {
     return(httr::modify_url(sitehost, path = "site"))
@@ -98,7 +89,8 @@ request_site <- function(
 
   # CASE 2: txt provided, no session, and upload = TRUE → upload data
   if (!is.empty(txt) && is.empty(session) && upload) {
-    session <- get_session(txt, ocpu_host, format = format)
+    session <- get_session(txt, sitehost, format = format)
+
     return(httr::modify_url(
       sitehost,
       path = "site",
@@ -106,11 +98,10 @@ request_site <- function(
     ))
   }
 
-  # CASE 3: Valid session provided (or via loc), return site?session=...
+  # CASE 3: Valid session provided (or via loc)
   if (!is.empty(session)) {
     data <- get_session_object(session)
     if (is.null(data)) {
-      # Invalid session – return base site
       return(httr::modify_url(sitehost, path = "site"))
     } else {
       return(httr::modify_url(
@@ -121,7 +112,7 @@ request_site <- function(
     }
   }
 
-  # CASE 4: txt provided and upload = FALSE – return site?txt=... (not recommended)
+  # CASE 4: txt provided and upload = FALSE – return ?txt=
   if (!is.empty(txt) && !upload && validate(txt)) {
     return(httr::modify_url(
       sitehost,
@@ -130,6 +121,5 @@ request_site <- function(
     ))
   }
 
-  # Default: return base site
   httr::modify_url(sitehost, path = "site")
 }
