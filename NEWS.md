@@ -1,6 +1,7 @@
-# james 1.8.1
+# james 1.8.1 (November 2025)
 
 - Solves a problem with nested uploads on `localhost` with end points `site/request` and `blend/request`.
+- Repairs problems with chart rendering on `james.groeidiagrammen.nl`
 
 # james 1.8.0 (November 2025)
 
