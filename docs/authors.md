@@ -7,7 +7,7 @@
 - **[Arjan Huizing](https://nl.linkedin.com/in/arjanhjhuizing)**.
   Author.
 
-- **Iris Eekhout**. Author.
+- **[Iris Eekhout](https://iriseekhout.com)**. Author.
 
 ## Citation
 

@@ -1,5 +1,15 @@
 # JAMES - Joint Automatic Measurement and Evaluation System
 
+# JAMES - Joint Automatic Measurement and Evaluation System
+
+Code
+
+JAMES 1.8.1 (November 2025)
+
+Author
+
+Stef van Buuren, Arjan Huizing, Iris Eekhout (TNO Child Health)
+
 ## Overview
 
 JAMES is a web service for creating and interpreting charts of child
@@ -33,16 +43,26 @@ at tno.nl\> for further information.
 
 | Verb | API end point | Description | Maps to `james` function |
 |:---|:---|:---|:---|
-| POST | `/data/upload/{dfm}` | Upload child data | [`upload_data()`](https://growthcharts.org/james/reference/upload_data.md) |
-| POST | `/charts/draw/{ffm}` | Draw child data on growth chart | [`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md) |
-| POST | `/charts/list/{dfm}` | List available growth charts | [`list_charts()`](https://growthcharts.org/james/reference/list_charts.md) |
-| POST | `/charts/validate/{dfm}` | Validate a chart code | [`validate_chartcode()`](https://growthcharts.org/james/reference/validate_chartcode.md) |
-| POST | `/screeners/list/{dfm}` | List available growth screeners | [`list_screeners()`](https://growthcharts.org/james/reference/list_screeners.md) |
-| POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data | [`apply_screeners()`](https://growthcharts.org/james/reference/apply_screeners.md) |
-| GET | `/site` | Request empty site | [`request_site()`](https://growthcharts.org/james/reference/request_site.md) |
-| POST | `/site/request/{dfm}` | Request personalised site | [`request_site()`](https://growthcharts.org/james/reference/request_site.md) |
-| POST | `/blend/request/{sfm}` | Obtain a blend from multiple end points | [`request_blend()`](https://growthcharts.org/james/reference/request_blend.md) |
-| POST | `/version/{dfm}` | Obtain version information | [`version()`](https://growthcharts.org/james/reference/version.md) |
+| POST | `/version/{dfm}` | Obtain version information | `version()` |
+| POST | `/data/upload/{dfm}` | Upload child data | `upload_data()` |
+|   |   |   |   |
+| POST | `/charts/draw/{ffm}` | Draw child data on growth chart | `draw_chart()` |
+| POST | `/charts/list/{dfm}` | List available growth charts | `list_charts()` |
+| POST | `/charts/validate/{dfm}` | Validate a chart code | `validate_chartcode()` |
+|   |   |   |   |
+| POST | `/dscore/calculate/{dfm}` | Calculate developmental score (D-score) | `calculate_dscore()` |
+| POST | `/vwc/select/{dfm}` | Select developmental milestones for age | `select_vwc()` |
+| POST | `/vwc/percentiles/{dfm}` | Obtain developmental milestone percentiles | `percentiles_vwc()` |
+| POST | `/dcat/calculate/{dfm}` | Adaptive testing of milestones | `dcat()` |
+|   |   |   |   |
+| POST | `/screeners/list/{dfm}` | List available growth screeners | `list_screeners()` |
+| POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data | `apply_screeners()` |
+|   |   |   |   |
+| GET | `/site` | Request empty site | `request_site()` |
+| POST | `/site/request/{dfm}` | Request personalised site | `request_site()` |
+|   |   |   |   |
+| POST | `/blend/request/{sfm}` | Obtain a blend from multiple end points | `request_blend()` |
+|   |   |   |   |
 | GET | `/{session}/{info}` | Extract session details |  |
 | GET | `/{2}/{1}/man` | Consult R help | `help({1}_{2})` |
 
@@ -109,10 +129,8 @@ simple request to JAMES to see whether it is alive and to return the
 version number of the underlying `james` R package. We illustrate both
 requests in `R` and in `bash`.
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 We first need to install and load packages.
 
@@ -146,30 +164,28 @@ r <- james_post(host = host, path = "version/json")
 ```
 
 We added the `/json` to the pathname to extract the JSON representation
-of the result of the `R` function
-[`james::version()`](https://growthcharts.org/james/reference/version.md).
-The function result is an object of class `james_post` and consists of
-various components.
+of the result of the `R` function `james::version()`. The function
+result is an object of class `james_post` and consists of various
+components.
 
 ``` r
 names(r)
 ```
 
-    ##  [1] "url"          "status_code"  "headers"      "all_headers"  "cookies"     
-    ##  [6] "content"      "date"         "times"        "request"      "handle"      
-    ## [11] "request_path" "parsed"       "warnings"     "messages"     "session"
+     [1] "url"          "status_code"  "headers"      "all_headers"  "cookies"     
+     [6] "content"      "date"         "times"        "request"      "handle"      
+    [11] "request_path" "parsed"       "warnings"     "messages"     "session"     
 
 ``` r
 r$url
 ```
 
-    ## [1] "https://james.groeidiagrammen.nl/version/json"
+    [1] "https://james.groeidiagrammen.nl/version/json"
 
 Most of the element are documented in the `response` object in the
 `httr` package. For example, we could use the call
 `httr::status_code(r)` to obtain the status code. The function
-[`james_post()`](https://rdrr.io/pkg/jamesclient/man/james_post.html)
-adds the last five elements:
+`james_post()` adds the last five elements:
 
 - `r$request_path` echoes the endpoint, here `/version/json`;
 - `r$parsed` is a parsed version of the element `r$content`. Here it is
@@ -178,14 +194,11 @@ adds the last five elements:
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x0039bee5499e14) is a unique session code.
+- `r$session` (like x063e1ebeed4510) is a unique session code.
 
-The
-[`jamesclient::james_post()`](https://rdrr.io/pkg/jamesclient/man/james_post.html)
-function wraps the basis workhorse
-[`httr::POST()`](https://httr.r-lib.org/reference/POST.html) that does
-the actual server request. For illustration, we may obtain equivalent
-content by the POST function directly.
+The `jamesclient::james_post()` function wraps the basis workhorse
+`httr::POST()` that does the actual server request. For illustration, we
+may obtain equivalent content by the POST function directly.
 
 ``` r
 path <- "version/json"
@@ -195,17 +208,17 @@ r <- POST(url)
 fromJSON(content(r, type = "text", encoding = "UTF-8"))
 ```
 
-    ## $package
-    ## [1] "james"
-    ## 
-    ## $packageVersion
-    ## [1] "1.7.3"
-    ## 
-    ## $packageDate
-    ## [1] "2025-08-07"
-    ## 
-    ## $Rversion
-    ## [1] "4.5.0"
+    $package
+    [1] "james"
+
+    $packageVersion
+    [1] "1.8.1"
+
+    $packageDate
+    [1] "2025-11-24"
+
+    $Rversion
+    [1] "4.5.0"
 
 We use the `curl` Linux command. If needed, on Ubuntu install `curl` as
 
@@ -227,7 +240,7 @@ curl -sX 'GET' \
 curl -sX POST $(cat .host)/version > resp
 ```
 
-    ## Redirect to http://james.groeidiagrammen.nl/ocpu/library/james/R/version/print
+    Redirect to http://james.groeidiagrammen.nl/ocpu/library/james/R/version/print
 
 The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.
@@ -236,13 +249,13 @@ server, each of which contains details on the response.
 cat resp
 ```
 
-    ## /ocpu/tmp/x0f19e0fddb8c07/R/.val
-    ## /ocpu/tmp/x0f19e0fddb8c07/R/version
-    ## /ocpu/tmp/x0f19e0fddb8c07/stdout
-    ## /ocpu/tmp/x0f19e0fddb8c07/source
-    ## /ocpu/tmp/x0f19e0fddb8c07/console
-    ## /ocpu/tmp/x0f19e0fddb8c07/info
-    ## /ocpu/tmp/x0f19e0fddb8c07/files/DESCRIPTION
+    /ocpu/tmp/x091ffdd5957e41/R/.val
+    /ocpu/tmp/x091ffdd5957e41/R/version
+    /ocpu/tmp/x091ffdd5957e41/stdout
+    /ocpu/tmp/x091ffdd5957e41/source
+    /ocpu/tmp/x091ffdd5957e41/console
+    /ocpu/tmp/x091ffdd5957e41/info
+    /ocpu/tmp/x091ffdd5957e41/files/DESCRIPTION
 
 The path element following `tmp/` is a unique session key. See
 <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU
@@ -256,12 +269,12 @@ curl -s $(cat .host)$(head -1 resp)/json?auto_unbox=true > value1
 cat value1
 ```
 
-    ## {
-    ##   "package": "james",
-    ##   "packageVersion": "1.7.3",
-    ##   "packageDate": "2025-08-07",
-    ##   "Rversion": "4.5.0"
-    ## }
+    {
+      "package": "james",
+      "packageVersion": "1.8.1",
+      "packageDate": "2025-11-24",
+      "Rversion": "4.5.0"
+    }
 
 The above sequence makes two requests to the server. The following code
 compacts both steps into one.
@@ -271,14 +284,12 @@ curl -sX POST $(cat .host)/version/json?auto_unbox=true > value2
 cat value2
 ```
 
-    ## {
-    ##   "package": "james",
-    ##   "packageVersion": "1.7.3",
-    ##   "packageDate": "2025-08-07",
-    ##   "Rversion": "4.5.0"
-    ## }
-
-#### 
+    {
+      "package": "james",
+      "packageVersion": "1.8.1",
+      "packageDate": "2025-11-24",
+      "Rversion": "4.5.0"
+    }
 
 ### **`/data/upload`**: Upload child data
 
@@ -289,10 +300,8 @@ schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v
 This section explains how we create, validate and upload child data to
 JAMES.
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 Let us assume that we have already have child data in `R` stored as a
 `data.frame` or `tibble`. Here we copy the longitudinal demo data
@@ -437,7 +446,7 @@ r1 <- james_post(host = host, path = "data/upload/json", txt = fn)
 status_code(r1)
 ```
 
-    ## [1] 201
+    [1] 201
 
 ``` r
 # upload as string
@@ -446,7 +455,7 @@ r2 <- james_post(host = host, path = "data/upload/json", txt = js)
 status_code(r2)
 ```
 
-    ## [1] 201
+    [1] 201
 
 ``` r
 # upload as JSON object
@@ -455,7 +464,7 @@ r3 <- james_post(host = host, path = "data/upload/json", txt = jo)
 status_code(r3)
 ```
 
-    ## [1] 201
+    [1] 201
 
 ``` r
 # upload as URL
@@ -464,7 +473,7 @@ r4 <- james_post(host = host, path = "data/upload/json", txt = url)
 status_code(r4)
 ```
 
-    ## [1] 201
+    [1] 201
 
 If the status is 201, the data are uploaded to JAMES and processed. For
 example, the processed data after file upload is available as an R data
@@ -474,27 +483,27 @@ frame under element `r1$parsed`.
 r1$parsed
 ```
 
-    ## $psn
-    ##   id  name        dob       dobm       dobf  src    sex gad ga smo  bw hgtm
-    ## 1 -1 Maria 2018-10-11 1990-12-02 1995-07-04 1234 female 189 27   1 990  167
-    ##   hgtf
-    ## 1  190
-    ## 
-    ## $xyz
-    ##       age xname yname zname                  zref       x       y      z
-    ## 1  0.0849   age   hgt hgt_z nl_2012_hgt_female_27  0.0849 38.0000 -0.158
-    ## 2  0.1670   age   hgt hgt_z nl_2012_hgt_female_27  0.1670 43.5000  0.047
-    ## 3  0.0000   age   wgt wgt_z nl_2012_wgt_female_27  0.0000  0.9900  0.190
-    ## 4  0.0849   age   wgt wgt_z nl_2012_wgt_female_27  0.0849  1.2500 -0.203
-    ## 5  0.1670   age   wgt wgt_z nl_2012_wgt_female_27  0.1670  2.1000  0.015
-    ## 6  0.0849   age   hdc hdc_z nl_2012_hdc_female_27  0.0849 27.0000 -0.709
-    ## 7  0.1670   age   hdc hdc_z nl_2012_hdc_female_27  0.1670 30.5000 -0.913
-    ## 8  0.0000   age   bmi bmi_z nl_1997_bmi_female_nl  0.0000      NA     NA
-    ## 9  0.0849   age   bmi bmi_z nl_1997_bmi_female_nl  0.0849  8.6565 -5.719
-    ## 10 0.1670   age   bmi bmi_z nl_1997_bmi_female_nl  0.1670 11.0979 -3.767
-    ## 11 0.0000   hgt   wfh wfh_z   nl_2012_wfh_female_      NA  0.9900     NA
-    ## 12 0.0849   hgt   wfh wfh_z   nl_2012_wfh_female_ 38.0000  1.2500 -0.001
-    ## 13 0.1670   hgt   wfh wfh_z   nl_2012_wfh_female_ 43.5000  2.1000  0.326
+    $psn
+      id  name        dob       dobm       dobf  src    sex gad ga smo  bw hgtm
+    1 -1 Maria 2018-10-11 1990-12-02 1995-07-04 1234 female 189 27   1 990  167
+      hgtf
+    1  190
+
+    $xyz
+          age xname yname zname                  zref       x       y      z
+    1  0.0849   age   hgt hgt_z nl_2012_hgt_female_27  0.0849 38.0000 -0.158
+    2  0.1670   age   hgt hgt_z nl_2012_hgt_female_27  0.1670 43.5000  0.047
+    3  0.0000   age   wgt wgt_z nl_2012_wgt_female_27  0.0000  0.9900  0.190
+    4  0.0849   age   wgt wgt_z nl_2012_wgt_female_27  0.0849  1.2500 -0.203
+    5  0.1670   age   wgt wgt_z nl_2012_wgt_female_27  0.1670  2.1000  0.015
+    6  0.0849   age   hdc hdc_z nl_2012_hdc_female_27  0.0849 27.0000 -0.709
+    7  0.1670   age   hdc hdc_z nl_2012_hdc_female_27  0.1670 30.5000 -0.913
+    8  0.0000   age   bmi bmi_z nl_1997_bmi_female_nl  0.0000      NA     NA
+    9  0.0849   age   bmi bmi_z nl_1997_bmi_female_nl  0.0849  8.6565 -5.719
+    10 0.1670   age   bmi bmi_z nl_1997_bmi_female_nl  0.1670 11.0979 -3.767
+    11 0.0000   hgt   wfh wfh_z   nl_2012_wfh_female_      NA  0.9900     NA
+    12 0.0849   hgt   wfh wfh_z   nl_2012_wfh_female_ 38.0000  1.2500 -0.001
+    13 0.1670   hgt   wfh wfh_z   nl_2012_wfh_female_ 43.5000  2.1000  0.326
 
 The session details, including the uploaded data, will remain available
 for a limited time. After 30 minutes the session is wiped. The session
@@ -506,66 +515,64 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    ## [1] "x0f515334fe50b7"
+    [1] "x026d2405fe49d9"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
 cat(resp$parsed)
 ```
 
-    ## 
-    ## 
-    ##   * **psn**:
-    ## 
-    ##     -------------------------------------------------------------------------------
-    ##      id   name       dob          dobm         dobf      src    dnr    sex     gad
-    ##     ---- ------- ------------ ------------ ------------ ------ ----- -------- -----
-    ##      -1   Maria   2018-10-11   1990-12-02   1995-07-04   1234   NA    female   189
-    ##     -------------------------------------------------------------------------------
-    ## 
-    ##     Table: Table continues below
-    ## 
-    ## 
-    ##     -----------------------------------------------------------------------------------
-    ##      ga   smo   bw    hgtm   hgtf   agem   etn   pc4   blbf   blbm   eduf   edum   par
-    ##     ---- ----- ----- ------ ------ ------ ----- ----- ------ ------ ------ ------ -----
-    ##      27    1    990   167    190     NA    NA    NA     NA     NA     NA     NA    NA
-    ##     -----------------------------------------------------------------------------------
-    ## 
-    ##   * **xyz**:
-    ## 
-    ##     ----------------------------------------------------------------------------------
-    ##       age     xname   yname   zname           zref              x        y       z
-    ##     -------- ------- ------- ------- ----------------------- -------- ------- --------
-    ##      0.0849    age     hgt    hgt_z   nl_2012_hgt_female_27   0.0849    38     -0.158
-    ## 
-    ##      0.167     age     hgt    hgt_z   nl_2012_hgt_female_27   0.167    43.5    0.047
-    ## 
-    ##        0       age     wgt    wgt_z   nl_2012_wgt_female_27     0      0.99     0.19
-    ## 
-    ##      0.0849    age     wgt    wgt_z   nl_2012_wgt_female_27   0.0849   1.25    -0.203
-    ## 
-    ##      0.167     age     wgt    wgt_z   nl_2012_wgt_female_27   0.167     2.1    0.015
-    ## 
-    ##      0.0849    age     hdc    hdc_z   nl_2012_hdc_female_27   0.0849    27     -0.709
-    ## 
-    ##      0.167     age     hdc    hdc_z   nl_2012_hdc_female_27   0.167    30.5    -0.913
-    ## 
-    ##        0       age     bmi    bmi_z   nl_1997_bmi_female_nl     0       NA       NA
-    ## 
-    ##      0.0849    age     bmi    bmi_z   nl_1997_bmi_female_nl   0.0849   8.657   -5.719
-    ## 
-    ##      0.167     age     bmi    bmi_z   nl_1997_bmi_female_nl   0.167    11.1    -3.767
-    ## 
-    ##        0       hgt     wfh    wfh_z    nl_2012_wfh_female_      NA     0.99      NA
-    ## 
-    ##      0.0849    hgt     wfh    wfh_z    nl_2012_wfh_female_      38     1.25    -0.001
-    ## 
-    ##      0.167     hgt     wfh    wfh_z    nl_2012_wfh_female_     43.5     2.1    0.326
-    ##     ----------------------------------------------------------------------------------
-    ## 
-    ## 
-    ## <!-- end of list -->
+
+      * **psn**:
+
+        -------------------------------------------------------------------------------
+         id   name       dob          dobm         dobf      src    dnr    sex     gad
+        ---- ------- ------------ ------------ ------------ ------ ----- -------- -----
+         -1   Maria   2018-10-11   1990-12-02   1995-07-04   1234   NA    female   189
+        -------------------------------------------------------------------------------
+
+        Table: Table continues below
+
+        -----------------------------------------------------------------------------------
+         ga   smo   bw    hgtm   hgtf   agem   etn   pc4   blbf   blbm   eduf   edum   par
+        ---- ----- ----- ------ ------ ------ ----- ----- ------ ------ ------ ------ -----
+         27    1    990   167    190     NA    NA    NA     NA     NA     NA     NA    NA
+        -----------------------------------------------------------------------------------
+
+      * **xyz**:
+
+        ----------------------------------------------------------------------------------
+          age     xname   yname   zname           zref              x        y       z
+        -------- ------- ------- ------- ----------------------- -------- ------- --------
+         0.0849    age     hgt    hgt_z   nl_2012_hgt_female_27   0.0849    38     -0.158
+
+         0.167     age     hgt    hgt_z   nl_2012_hgt_female_27   0.167    43.5    0.047
+
+           0       age     wgt    wgt_z   nl_2012_wgt_female_27     0      0.99     0.19
+
+         0.0849    age     wgt    wgt_z   nl_2012_wgt_female_27   0.0849   1.25    -0.203
+
+         0.167     age     wgt    wgt_z   nl_2012_wgt_female_27   0.167     2.1    0.015
+
+         0.0849    age     hdc    hdc_z   nl_2012_hdc_female_27   0.0849    27     -0.709
+
+         0.167     age     hdc    hdc_z   nl_2012_hdc_female_27   0.167    30.5    -0.913
+
+           0       age     bmi    bmi_z   nl_1997_bmi_female_nl     0       NA       NA
+
+         0.0849    age     bmi    bmi_z   nl_1997_bmi_female_nl   0.0849   8.657   -5.719
+
+         0.167     age     bmi    bmi_z   nl_1997_bmi_female_nl   0.167    11.1    -3.767
+
+           0       hgt     wfh    wfh_z    nl_2012_wfh_female_      NA     0.99      NA
+
+         0.0849    hgt     wfh    wfh_z    nl_2012_wfh_female_      38     1.25    -0.001
+
+         0.167     hgt     wfh    wfh_z    nl_2012_wfh_female_     43.5     2.1    0.326
+        ----------------------------------------------------------------------------------
+
+
+    <!-- end of list -->
 
 **Troubleshooting data upload**: JAMES executes checks on the conversion
 and ranges of the data. To gain efficiency, it does not automatically
@@ -588,13 +595,13 @@ r5 <- james_post(host = host, path = "data/upload/json", txt = fn)
 r5$parsed
 ```
 
-    ## $psn
-    ##   id                 name   src
-    ## 1 -1 Maria's mangled data 12345
-    ## 
-    ## $xyz
-    ##   xname yname zname            zref  y
-    ## 1   age   hgt hgt_z nl_1997_hgt__nl 38
+    $psn
+      id                 name   src
+    1 -1 Maria's mangled data 12345
+
+    $xyz
+      xname yname zname            zref  y
+    1   age   hgt hgt_z nl_1997_hgt__nl 38
 
 If we upload with the additional `validate = TRUE` flag, JAMES runs the
 validation of the uploaded JSON against the JSON schema:
@@ -623,7 +630,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    ## [1] "https://james.groeidiagrammen.nl/x00206a41a87111/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x0322a6adc37d73/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -654,16 +661,16 @@ curl -sF 'txt=@maria.json' -D headers $(cat .host)/data/upload/json > content
 head content
 ```
 
-    ## {
-    ##   "psn": [
-    ##     {
-    ##       "id": -1,
-    ##       "name": "Maria",
-    ##       "dob": "2018-10-11",
-    ##       "dobm": "1990-12-02",
-    ##       "dobf": "1995-07-04",
-    ##       "src": "1234",
-    ##       "sex": "female",
+    {
+      "psn": [
+        {
+          "id": -1,
+          "name": "Maria",
+          "dob": "2018-10-11",
+          "dobm": "1990-12-02",
+          "dobf": "1995-07-04",
+          "src": "1234",
+          "sex": "female",
 
 Alternatively, we may read the file into a JSON string, and upload as
 follows:
@@ -680,14 +687,10 @@ URL=$(cat .host)/ocpu/library/bdsreader/examples/maria.json
 curl -s $(cat .host)/data/upload/json -d "txt='$URL'" > content
 ```
 
-#### 
-
 ### **`/charts/draw`**: Draw child data on growth chart
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 Maria is a preterm born at 27 weeks of gestational age. We already
 uploaded her data. We may now plot her growth data on the A4 chart for
@@ -702,8 +705,7 @@ r5 <- james_post(host = host,
 writeLines(r5$parsed, con = filename_chart1)
 ```
 
-![Maria's growth plotted on preterm chart, 0-15
-months](reference/figures/chart1.svg)
+![](./getting_started_files/figures/chart1.svg)
 
 Maria’s growth plotted on preterm chart, 0-15 months
 
@@ -725,8 +727,7 @@ above. If you want to change the chart’s size in your HTML, use the
 `out.width` knitr chunk option, e.g. set `out.width="500px"`. This gives
 the following output.
 
-![Laura's growth plotted on chart for Dutch girls, 0-4
-years](reference/figures/chart2.svg)
+![](./getting_started_files/figures/chart2.svg)
 
 Laura’s growth plotted on chart for Dutch girls, 0-4 years
 
@@ -752,8 +753,7 @@ For square charts, use query arguments
 to get the same age units as the previous chart, calculate `out.width`
 as `500/21*18 = "429px"`.
 
-![Predict Laura's future height at the age of
-3y9m.](reference/figures/chart3.svg)
+![](./getting_started_files/figures/chart3.svg)
 
 Predict Laura’s future height at the age of 3y9m.
 
@@ -792,14 +792,10 @@ $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
 "selector" : "chartcode"}' > laura.svg
 ```
 
-#### 
-
 ### **`/charts/list`**: List available growth charts
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 JAMES contains a wide variety of built-in growth charts. Each chart has
 a unique `chartcode`. A typical chart code looks like `NJAA`. We obtain
@@ -817,8 +813,8 @@ following variables:
 names(charts)
 ```
 
-    ## [1] "chartgrp"   "chartcode"  "population" "sex"        "design"    
-    ## [6] "side"       "language"   "week"
+    [1] "chartgrp"   "chartcode"  "population" "sex"        "design"    
+    [6] "side"       "language"   "week"      
 
 JAMES contains charts for various child populations. There are charts
 for Down syndrome (DS), Hindustan (HS), Moroccan (MA), Dutch (NL)),
@@ -835,16 +831,16 @@ The most important index variables are `population` and `side`:
 with(charts, table(population, side))
 ```
 
-    ##           side
-    ## population -hdc back bmi dsc front hdc hgt wfh wgt
-    ##    DS         0    6   2   0     6   6   6   4   2
-    ##    HS         4    2   2   0     6   2   6   4   2
-    ##    MA         0    6   2   0     6   6   6   4   2
-    ##    NL         2    8   2   4     8   8   8   4   4
-    ##    PT         0   24   0  48    48  24  48   0  48
-    ##    TU         0    6   2   0     6   6   6   4   2
-    ##    WHOblue    0    0   0  26     2   1   2   1   1
-    ##    WHOpink    0    0   0  26     2   1   2   1   1
+              side
+    population -hdc back bmi dsc front hdc hgt wfh wgt
+       DS         0    6   2   0     6   6   6   4   2
+       HS         4    2   2   0     6   2   6   4   2
+       MA         0    6   2   0     6   6   6   4   2
+       NL         2    8   2   4     8   8   8   4   4
+       PT         0   24   0  48    48  24  48   0  48
+       TU         0    6   2   0     6   6   6   4   2
+       WHOblue    0    0   0  26     2   1   2   1   1
+       WHOpink    0    0   0  26     2   1   2   1   1
 
 The URL `{host}/site` (see below) displays the currently active chart
 code as a field in the left sidebar.
@@ -861,14 +857,10 @@ $(cat .host)'/charts/list/json' \
 }'
 ```
 
-#### 
-
 ### **`/charts/validate`**: Validate chart codes
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 The `/charts/validate` end point attempt to find one or more
 user-specified chart codes. For example, the following cocde checkc five
@@ -881,7 +873,7 @@ r <- james_post(host = host,
 r$parsed
 ```
 
-    ## [1]  TRUE FALSE FALSE  TRUE FALSE
+    [1]  TRUE FALSE FALSE  TRUE FALSE
 
 Check five chart codes:
 
@@ -901,14 +893,171 @@ $(cat .host)'/charts/validate/json' \
 }'
 ```
 
-    ## [true, true, false, true, false]
+    [true, true, false, true, false]
+
+### **`/dscore/calculate`**: Calculate D-score
+
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
+
+The D-score is a developmental score that is used to assess the
+development of children. The `/dscore/calculate` end point calculates
+the D-score for a child based on the uploaded data. The D-score is a
+continuous measure of child development, and it is calculated based on
+the child’s age and developmental milestones.
+
+``` r
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "dscore/calculate/json", output = "table", txt = fn)
+r
+```
+
+    JAMES request:
+      Path    : dscore/calculate/json
+      Status  : 201
+      Session : x0bd20efc0385ea
+
+    Parsed response:
+    'data.frame':   9 obs. of  9 variables:
+     $ age  : num  0.101 0.159 0.235 0.485 0.753 ...
+     $ xname: chr  "age" "age" "age" "age" ...
+     $ yname: chr  "dsc" "dsc" "dsc" "dsc" ...
+     $ zname: chr  "dsc_z" "dsc_z" "dsc_z" "dsc_z" ...
+     $ zref : chr  "ph_2023_dsc_female_40" "ph_2023_dsc_female_40" "ph_2023_dsc_female_40" "ph_2023_dsc_female_40" ...
+     $ x    : num  0.101 0.159 0.235 0.485 0.753 ...
+     $ y    : num  15.7 18 20.9 25.9 44.6 ...
+     $ z    : num  -0.058 0.022 -0.018 -1.476 0.908 ...
+     $ date : chr  "19890227" "19890320" "19890417" "19890717" ...
+
+``` r
+head(r$parsed)
+```
+
+         age xname yname zname                  zref      x     y      z     date
+    1 0.1013   age   dsc dsc_z ph_2023_dsc_female_40 0.1013 15.68 -0.058 19890227
+    2 0.1588   age   dsc dsc_z ph_2023_dsc_female_40 0.1588 18.01  0.022 19890320
+    3 0.2355   age   dsc dsc_z ph_2023_dsc_female_40 0.2355 20.93 -0.018 19890417
+    4 0.4846   age   dsc dsc_z ph_2023_dsc_female_40 0.4846 25.89 -1.476 19890717
+    5 0.7529   age   dsc dsc_z ph_2023_dsc_female_40 0.7529 44.58  0.908 19891023
+    6 1.0212   age   dsc dsc_z ph_2023_dsc_female_40 1.0212 51.59  0.900 19900129
+
+The D-score is found in column `y` and the DAZ is in column `z`.
+
+### **`/vwc/select`**: Select Van Wiechen development milestones based on D-score and age
+
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
+
+The Van Wiechenonderzoek is a Dutch screening tool used to track a
+child’s development from birth to age 4.5. It includes 75 milestones
+across three areas: fine motor skills, gross motor skills, and
+communication. The `/vwc/select` end point suggest the most fitting
+milestones for a child based on the uploaded data.
+
+``` r
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "vwc/select/json", output = "table", txt = fn, percentiles = TRUE)
+r
+```
+
+    JAMES request:
+      Path    : vwc/select/json
+      Status  : 201
+      Session : x0c61a22fb94925
+
+    Parsed response:
+    [1] "ddifmd027\nddigmm073\nddifmd023\nddicmm050\nddicmm047\nddigmd074"
+
+``` r
+head(r$parsed)
+```
+
+    [1] "ddifmd027\nddigmm073\nddifmd023\nddicmm050\nddicmm047\nddigmd074"
+
+To be added
+
+### **`/vwc/percentiles`**: Select Van Wiechen development milestones with detailed cut-off information
+
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
+
+It is also possible to obtain a table of age and D-score percentiles for
+a selection of milestones. This can be done either directly using the
+`vwc` argument, or indirectly from uploaded child data.
+
+``` r
+r <- james_post(host = host, path = "vwc/percentiles/json", output = "table", vwc = "ddifmd018") 
+head(r$parsed)
+```
+
+           item      D2     D10  D50     D90     D98      A2     A10     A50
+    1 ddifmd018 52.1101 55.6762 60.3 64.9238 68.4899 13.9437 16.4593 20.4204
+          A90     A98
+    1 25.3019 29.7694
+
+To be added
+
+### **`/dcat/calculate`**: Calculate next milestone item
+
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
+
+The DCAT allows users to performa adapative testing using either `ddi`
+or `gs1` items.
+
+The following snippet uploads child data and requests the next item to
+be tested based on the `gs1` instrument, the default.
+
+``` r
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
+r
+```
+
+    JAMES request:
+      Path    : dcat/calculate/json
+      Status  : 201
+      Session : x0a9becb2eeef1c
+
+    Parsed response:
+    [1] "gs1lgc110"
+
+``` r
+head(r$parsed)
+```
+
+    [1] "gs1lgc110"
+
+By specifying the instrument we can specify whether we want to include
+`ddi` or `gs1` (or even both). In the case of only `ddi` items, we must
+additionally specify a key that supports the `ddi` instrument.
+
+``` r
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = "ddi", key = "gsed2406")
+r
+```
+
+    JAMES request:
+      Path    : dcat/calculate/json
+      Status  : 201
+      Session : x001daa21c55646
+
+    Parsed response:
+    [1] "ddifmd020"
+
+``` r
+head(r$parsed)
+```
+
+    [1] "ddifmd020"
+
+To be added
 
 ### **`/screeners/list`**: List available growth screeners
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 JAMES implements several screening algorithms. The `/screeners/list` end
 point provides detailed information on each of these.
@@ -919,19 +1068,19 @@ r <- james_post(host = host, path = "/screeners/list/json",
 names(r$parsed)
 ```
 
-    ## [1] "Versie"                "yname"                 "Categorie"            
-    ## [4] "CategorieOmschrijving" "JGZRichtlijn"          "Code"                 
-    ## [7] "CodeOmschrijving"
+    [1] "Versie"                "yname"                 "Categorie"            
+    [4] "CategorieOmschrijving" "JGZRichtlijn"          "Code"                 
+    [7] "CodeOmschrijving"     
 
 ``` r
 with(r$parsed, table(yname, Categorie))
 ```
 
-    ##      Categorie
-    ## yname 1000 2000 3000
-    ##   hdc    0    0   17
-    ##   hgt   45    0    0
-    ##   wgt    0   26    0
+         Categorie
+    yname 1000 2000 3000
+      hdc    0    0   17
+      hgt   45    0    0
+      wgt    0   26    0
 
 There are currently 88 different codes. Codes ending in `31`, e.g.,
 `1031` or `2031` indicate normal growth, whereas code ending in `41`,
@@ -948,14 +1097,10 @@ $(cat .host)'/screeners/list/json' \
 -d '{"ynames": "hdc"}'
 ```
 
-#### 
-
 ### **`/screeners/apply`**: Apply growth screeners to child data
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 The `/screeners/apply` end point applies standard screeners to the child
 data. Invoke the screeners by
@@ -966,18 +1111,18 @@ r <- james_post(host = host, path = "/screeners/apply/json",
 r$parsed
 ```
 
-    ##   Categorie CategorieOmschrijving Code
-    ## 1      1000                Lengte 1031
-    ## 2      2000               Gewicht 2031
-    ## 3      3000           Hoofdomtrek 3031
-    ##                                                                                                                CodeOmschrijving
-    ## 1 Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
-    ## 2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
-    ## 3                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.
-    ##   Versie Leeftijd
-    ## 1 1.23.0    0.167
-    ## 2 1.23.0    0.167
-    ## 3 1.23.0    0.167
+      Categorie CategorieOmschrijving Code
+    1      1000                Lengte 1031
+    2      2000               Gewicht 2031
+    3      3000           Hoofdomtrek 3031
+                                                                                                                   CodeOmschrijving
+    1 Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
+    2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
+    3                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.
+      Versie Leeftijd
+    1 1.24.0    0.167
+    2 1.24.0    0.167
+    3 1.24.0    0.167
 
 The procedure
 
@@ -1006,41 +1151,37 @@ $(cat .host)'/screeners/apply/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ## [
-    ##   {
-    ##     "Categorie": 1000,
-    ##     "CategorieOmschrijving": "Lengte",
-    ##     "Code": 1031,
-    ##     "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    ##     "Versie": "1.23.0",
-    ##     "Leeftijd": 0.167
-    ##   },
-    ##   {
-    ##     "Categorie": 2000,
-    ##     "CategorieOmschrijving": "Gewicht",
-    ##     "Code": 2031,
-    ##     "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    ##     "Versie": "1.23.0",
-    ##     "Leeftijd": 0.167
-    ##   },
-    ##   {
-    ##     "Categorie": 3000,
-    ##     "CategorieOmschrijving": "Hoofdomtrek",
-    ##     "Code": 3031,
-    ##     "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    ##     "Versie": "1.23.0",
-    ##     "Leeftijd": 0.167
-    ##   }
-    ## ]
-
-#### 
+    [
+      {
+        "Categorie": 1000,
+        "CategorieOmschrijving": "Lengte",
+        "Code": 1031,
+        "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+        "Versie": "1.24.0",
+        "Leeftijd": 0.167
+      },
+      {
+        "Categorie": 2000,
+        "CategorieOmschrijving": "Gewicht",
+        "Code": 2031,
+        "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+        "Versie": "1.24.0",
+        "Leeftijd": 0.167
+      },
+      {
+        "Categorie": 3000,
+        "CategorieOmschrijving": "Hoofdomtrek",
+        "Code": 3031,
+        "CodeOmschrijving": "In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+        "Versie": "1.24.0",
+        "Leeftijd": 0.167
+      }
+    ]
 
 ### **`/site`**: Request an empty site
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 The `/site` end point provides interactive site containing all charts,
 but without child data. This end point is primarily useful to obtain a
@@ -1050,14 +1191,10 @@ quick overview of the available charts.
 browseURL(file.path(host, "site"))
 ```
 
-#### 
-
 ### **`/site/request`**: Request personalised site
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 The `/site/request` end point creates an URL to a personalised,
 interactive site containing all charts.
@@ -1068,21 +1205,21 @@ r <- james_post(host = host, path = "/site/request/json",
 r$parsed
 ```
 
-    ## [1] "https://james.groeidiagrammen.nl/site?session=x090ef5f09e7778"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0a6863a89eac4a"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
 the child.
 
-The above command fails for `localhost:8080`, and gives the error
-`[400] Couldn't connect to server [localhost]`, because `localhost:8080`
-does not allow nested requests to itself.
+On some systems, the above command may fail with the browser error
+`[400] Couldn't connect to server [localhost]`. An alternative is to
+break the request into two steps. First, we create a session by
+uploading the child data, and then we use that session to create the URL
+to the personalised site.
 
-The solution is the break the request into two steps. First, we create a
-session by uploading the child data, and then we use that session to
-create the URL to the personalised site. We start by uploading data to
-JAMES and het `r$session`. After that, we can use either `site\request`
-or manual construction of the URL to the site:
+We start by uploading data to JAMES and het `r$session`. After that, we
+can use either `site\request` or manual construction of the URL to the
+site:
 
 ``` r
 fn <- system.file("examples/maria.json", package = "bdsreader")
@@ -1094,13 +1231,13 @@ site1 <- james_post(host = host, path = "site/request/json",
 site1
 ```
 
-    ## JAMES request:
-    ##   Path    : site/request/json
-    ##   Status  : 201
-    ##   Session : x0a93d211cda1a0
-    ## 
-    ## Parsed response:
-    ## [1] "https://james.groeidiagrammen.nl/site?session=x073b9fcf8b8cf6"
+    JAMES request:
+      Path    : site/request/json
+      Status  : 201
+      Session : x0f5a9c9377de2e
+
+    Parsed response:
+    [1] "https://james.groeidiagrammen.nl/site?session=x018c1504214800"
 
 ``` r
 # Or manual URL construction (faster) 
@@ -1108,7 +1245,7 @@ site2 <- modify_url(url = host, path = "site", query = list(session = r$session)
 site2
 ```
 
-    ## [1] "https://james.groeidiagrammen.nl/site?session=x073b9fcf8b8cf6"
+    [1] "https://james.groeidiagrammen.nl/site?session=x018c1504214800"
 
 ``` r
 # browseURL(site1)
@@ -1128,24 +1265,17 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ## ["https://james.groeidiagrammen.nl/site?session=x00950eb2fadf55"]
-
-#### 
+    ["https://james.groeidiagrammen.nl/site?session=x0a6939a4a82a67"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
-#### 
-
-- **R**
-- **bash**
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
 
 The `/blend/request` end point returns the results of multiple end
 points, and thus functions as a one-stop shop. However, currently it
 does not support graphics output, so use `/{session}/{info}/svglite` or
 `/charts/draw/svglite` for the charts.
-
-As before, the following command only works on remote servers, not on
-`localhost:8080`.
 
 ``` r
 fn <- system.file("extdata", "bds_v3.0", "smocc", "Laura_S.json",
@@ -1155,53 +1285,53 @@ r <- james_post(host = host, path = "/blend/request/json",
 r
 ```
 
-    ## JAMES request:
-    ##   Path    : /blend/request/json
-    ##   Status  : 201
-    ##   Session : x0e27760996d030
-    ## 
-    ## Parsed response:
-    ## List of 6
-    ##  $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-    ##  $ session  : chr "x09fa90bcd34b29"
-    ##  $ site     : chr "https://james.groeidiagrammen.nl/site?session=x09fa90bcd34b29"
-    ##  $ child    :'data.frame':   1 obs. of  12 variables:
-    ##   ..$ id  : int -1
-    ##   ..$ name: chr "Laura S"
-    ##   ..$ dob : chr "1989-01-21"
-    ##   ..$ dobm: chr "1961-07-22"
-    ##   ..$ src : chr "0"
-    ##   ..$ sex : chr "female"
-    ##   ..$ gad : int 276
-    ##   ..$ ga  : int 39
-    ##   ..$ smo : int 0
-    ##   ..$ bw  : int 2950
-    ##   ..$ hgtm: int 164
-    ##   ..$ hgtf: int 179
-    ##  $ time     :'data.frame':   58 obs. of  8 variables:
-    ##   ..$ age  : num [1:58] 0 0.101 0.159 0.235 0.485 ...
-    ##   ..$ xname: chr [1:58] "age" "age" "age" "age" ...
-    ##   ..$ yname: chr [1:58] "hgt" "hgt" "hgt" "hgt" ...
-    ##   ..$ zname: chr [1:58] "hgt_z" "hgt_z" "hgt_z" "hgt_z" ...
-    ##   ..$ zref : chr [1:58] "nl_1997_hgt_female_nl" "nl_1997_hgt_female_nl" "nl_1997_hgt_female_nl" "nl_1997_hgt_female_nl" ...
-    ##   ..$ x    : num [1:58] 0 0.101 0.159 0.235 0.485 ...
-    ##   ..$ y    : num [1:58] 48 53.5 56 59.5 65.5 71.5 75 80 84 90 ...
-    ##   ..$ z    : num [1:58] -1.515 -0.499 -0.261 0.163 -0.259 ...
-    ##  $ screeners:'data.frame':   3 obs. of  6 variables:
-    ##   ..$ Categorie            : int [1:3] 1000 2000 3000
-    ##   ..$ CategorieOmschrijving: chr [1:3] "Lengte" "Gewicht" "Hoofdomtrek"
-    ##   ..$ Code                 : int [1:3] 1031 2075 3021
-    ##   ..$ CodeOmschrijving     : chr [1:3] "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen." "Het advies volgens de JGZ-richtlijn ondergewicht is als volgt: Sterke gewichtsafname (-1 SD), advies: Is er spr"| __truncated__ "De richtlijn hoofdomtrek is bedoeld voor kinderen tot 1 jaar."
-    ##   ..$ Versie               : chr [1:3] "1.23.0" "1.23.0" "1.23.0"
-    ##   ..$ Leeftijd             : num [1:3] 2.04 2.04 2.04
+    JAMES request:
+      Path    : /blend/request/json
+      Status  : 201
+      Session : x0e0100968c0f72
+
+    Parsed response:
+    List of 6
+     $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
+     $ session  : chr "x0207492a25892f"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0207492a25892f"
+     $ child    :'data.frame':  1 obs. of  12 variables:
+      ..$ id  : int -1
+      ..$ name: chr "Laura S"
+      ..$ dob : chr "1989-01-21"
+      ..$ dobm: chr "1961-07-22"
+      ..$ src : chr "0"
+      ..$ sex : chr "female"
+      ..$ gad : int 276
+      ..$ ga  : int 39
+      ..$ smo : int 0
+      ..$ bw  : int 2950
+      ..$ hgtm: int 164
+      ..$ hgtf: int 179
+     $ time     :'data.frame':  58 obs. of  8 variables:
+      ..$ age  : num [1:58] 0 0.101 0.159 0.235 0.485 ...
+      ..$ xname: chr [1:58] "age" "age" "age" "age" ...
+      ..$ yname: chr [1:58] "hgt" "hgt" "hgt" "hgt" ...
+      ..$ zname: chr [1:58] "hgt_z" "hgt_z" "hgt_z" "hgt_z" ...
+      ..$ zref : chr [1:58] "nl_1997_hgt_female_nl" "nl_1997_hgt_female_nl" "nl_1997_hgt_female_nl" "nl_1997_hgt_female_nl" ...
+      ..$ x    : num [1:58] 0 0.101 0.159 0.235 0.485 ...
+      ..$ y    : num [1:58] 48 53.5 56 59.5 65.5 71.5 75 80 84 90 ...
+      ..$ z    : num [1:58] -1.515 -0.499 -0.261 0.163 -0.259 ...
+     $ screeners:'data.frame':  3 obs. of  6 variables:
+      ..$ Categorie            : int [1:3] 1000 2000 3000
+      ..$ CategorieOmschrijving: chr [1:3] "Lengte" "Gewicht" "Hoofdomtrek"
+      ..$ Code                 : int [1:3] 1031 2075 3021
+      ..$ CodeOmschrijving     : chr [1:3] "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen." "Het advies volgens de JGZ-richtlijn ondergewicht is als volgt: Sterke gewichtsafname (-1 SD), advies: Is er spr"| __truncated__ "De richtlijn hoofdomtrek is bedoeld voor kinderen tot 1 jaar."
+      ..$ Versie               : chr [1:3] "1.24.0" "1.24.0" "1.24.0"
+      ..$ Leeftijd             : num [1:3] 2.04 2.04 2.04
 
 ``` r
 names(r$parsed)
 ```
 
-    ## [1] "txt"       "session"   "site"      "child"     "time"      "screeners"
+    [1] "txt"       "session"   "site"      "child"     "time"      "screeners"
 
-Getting this to work on `localhost:8080`, use two steps:
+The two-step approach is:
 
 ``` r
 resp1 <- james_post(host = host, path = "data/upload/json", txt = fn)
@@ -1209,7 +1339,7 @@ resp2 <- james_post(host = host, path = "blend/request/json", session = resp1$se
 names(resp2$parsed)
 ```
 
-    ## [1] "txt"       "session"   "site"      "child"     "time"      "screeners"
+    [1] "txt"       "session"   "site"      "child"     "time"      "screeners"
 
 ``` r
 # browseURL(resp2$parsed$site)
@@ -1227,636 +1357,634 @@ $(cat .host)'/blend/request/json' \
 }'
 ```
 
-    ## {
-    ##   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-    ##   "session": "x070f435c7c8692",
-    ##   "site": "https://james.groeidiagrammen.nl/site?session=x070f435c7c8692",
-    ##   "child": [
-    ##     {
-    ##       "id": -1,
-    ##       "name": "Laura S",
-    ##       "dob": "1989-01-21",
-    ##       "dobm": "1961-07-22",
-    ##       "src": "0",
-    ##       "sex": "female",
-    ##       "gad": 276,
-    ##       "ga": 39,
-    ##       "smo": 0,
-    ##       "bw": 2950,
-    ##       "hgtm": 164,
-    ##       "hgtf": 179
-    ##     }
-    ##   ],
-    ##   "time": [
-    ##     {
-    ##       "age": 0,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 0,
-    ##       "y": 48,
-    ##       "z": -1.515
-    ##     },
-    ##     {
-    ##       "age": 0.1013,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 0.1013,
-    ##       "y": 53.5,
-    ##       "z": -0.499
-    ##     },
-    ##     {
-    ##       "age": 0.1588,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 0.1588,
-    ##       "y": 56,
-    ##       "z": -0.261
-    ##     },
-    ##     {
-    ##       "age": 0.2355,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 0.2355,
-    ##       "y": 59.5,
-    ##       "z": 0.163
-    ##     },
-    ##     {
-    ##       "age": 0.4846,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 0.4846,
-    ##       "y": 65.5,
-    ##       "z": -0.259
-    ##     },
-    ##     {
-    ##       "age": 0.7529,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 0.7529,
-    ##       "y": 71.5,
-    ##       "z": 0.131
-    ##     },
-    ##     {
-    ##       "age": 1.0212,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 1.0212,
-    ##       "y": 75,
-    ##       "z": -0.18
-    ##     },
-    ##     {
-    ##       "age": 1.2512,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 1.2512,
-    ##       "y": 80,
-    ##       "z": 0.421
-    ##     },
-    ##     {
-    ##       "age": 1.5387,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 1.5387,
-    ##       "y": 84,
-    ##       "z": 0.527
-    ##     },
-    ##     {
-    ##       "age": 2.0397,
-    ##       "xname": "age",
-    ##       "yname": "hgt",
-    ##       "zname": "hgt_z",
-    ##       "zref": "nl_1997_hgt_female_nl",
-    ##       "x": 2.0397,
-    ##       "y": 90,
-    ##       "z": 0.67
-    ##     },
-    ##     {
-    ##       "age": 0,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 0,
-    ##       "y": 2.95,
-    ##       "z": -1.055
-    ##     },
-    ##     {
-    ##       "age": 0.1013,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 0.1013,
-    ##       "y": 4.18,
-    ##       "z": -0.162
-    ##     },
-    ##     {
-    ##       "age": 0.1588,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 0.1588,
-    ##       "y": 5,
-    ##       "z": 0.401
-    ##     },
-    ##     {
-    ##       "age": 0.2355,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 0.2355,
-    ##       "y": 5.9,
-    ##       "z": 0.717
-    ##     },
-    ##     {
-    ##       "age": 0.4846,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 0.4846,
-    ##       "y": 8.24,
-    ##       "z": 1.173
-    ##     },
-    ##     {
-    ##       "age": 0.7529,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 0.7529,
-    ##       "y": 9.65,
-    ##       "z": 1.052
-    ##     },
-    ##     {
-    ##       "age": 1.0212,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 1.0212,
-    ##       "y": 10.95,
-    ##       "z": 1.164
-    ##     },
-    ##     {
-    ##       "age": 1.2512,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 1.2512,
-    ##       "y": 11.9,
-    ##       "z": 1.247
-    ##     },
-    ##     {
-    ##       "age": 1.5387,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 1.5387,
-    ##       "y": 12.8,
-    ##       "z": 1.228
-    ##     },
-    ##     {
-    ##       "age": 2.0397,
-    ##       "xname": "age",
-    ##       "yname": "wgt",
-    ##       "zname": "wgt_z",
-    ##       "zref": "nl_1997_wgt_female_nl",
-    ##       "x": 2.0397,
-    ##       "y": 13.9,
-    ##       "z": 0.989
-    ##     },
-    ##     {
-    ##       "age": 0.1013,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 0.1013,
-    ##       "y": 37.6,
-    ##       "z": 0.418
-    ##     },
-    ##     {
-    ##       "age": 0.1588,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 0.1588,
-    ##       "y": 39,
-    ##       "z": 0.605
-    ##     },
-    ##     {
-    ##       "age": 0.2355,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 0.2355,
-    ##       "y": 40.5,
-    ##       "z": 0.696
-    ##     },
-    ##     {
-    ##       "age": 0.4846,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 0.4846,
-    ##       "y": 44.1,
-    ##       "z": 1.021
-    ##     },
-    ##     {
-    ##       "age": 0.7529,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 0.7529,
-    ##       "y": 46.6,
-    ##       "z": 1.418
-    ##     },
-    ##     {
-    ##       "age": 1.0212,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 1.0212,
-    ##       "y": 47.8,
-    ##       "z": 1.307
-    ##     },
-    ##     {
-    ##       "age": 1.2512,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 1.2512,
-    ##       "y": 48.7,
-    ##       "z": 1.373
-    ##     },
-    ##     {
-    ##       "age": 1.5387,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 1.5387,
-    ##       "y": 49.2,
-    ##       "z": 1.246
-    ##     },
-    ##     {
-    ##       "age": 2.0397,
-    ##       "xname": "age",
-    ##       "yname": "hdc",
-    ##       "zname": "hdc_z",
-    ##       "zref": "nl_1997_hdc_female_nl",
-    ##       "x": 2.0397,
-    ##       "y": 50,
-    ##       "z": 1.224
-    ##     },
-    ##     {
-    ##       "age": 0,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 0,
-    ##       "y": 12.8038,
-    ##       "z": 0.259
-    ##     },
-    ##     {
-    ##       "age": 0.1013,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 0.1013,
-    ##       "y": 14.6039,
-    ##       "z": 0.231
-    ##     },
-    ##     {
-    ##       "age": 0.1588,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 0.1588,
-    ##       "y": 15.9439,
-    ##       "z": 0.701
-    ##     },
-    ##     {
-    ##       "age": 0.2355,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 0.2355,
-    ##       "y": 16.6655,
-    ##       "z": 0.734
-    ##     },
-    ##     {
-    ##       "age": 0.4846,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 0.4846,
-    ##       "y": 19.2063,
-    ##       "z": 1.688
-    ##     },
-    ##     {
-    ##       "age": 0.7529,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 0.7529,
-    ##       "y": 18.8762,
-    ##       "z": 1.325
-    ##     },
-    ##     {
-    ##       "age": 1.0212,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 1.0212,
-    ##       "y": 19.4667,
-    ##       "z": 1.78
-    ##     },
-    ##     {
-    ##       "age": 1.2512,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 1.2512,
-    ##       "y": 18.5937,
-    ##       "z": 1.394
-    ##     },
-    ##     {
-    ##       "age": 1.5387,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 1.5387,
-    ##       "y": 18.1406,
-    ##       "z": 1.277
-    ##     },
-    ##     {
-    ##       "age": 2.0397,
-    ##       "xname": "age",
-    ##       "yname": "bmi",
-    ##       "zname": "bmi_z",
-    ##       "zref": "nl_1997_bmi_female_nl",
-    ##       "x": 2.0397,
-    ##       "y": 17.1605,
-    ##       "z": 0.825
-    ##     },
-    ##     {
-    ##       "age": 0.1013,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 0.1013,
-    ##       "y": 15.56,
-    ##       "z": -0.094
-    ##     },
-    ##     {
-    ##       "age": 0.1588,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 0.1588,
-    ##       "y": 17.69,
-    ##       "z": -0.075
-    ##     },
-    ##     {
-    ##       "age": 0.2355,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 0.2355,
-    ##       "y": 20.57,
-    ##       "z": -0.125
-    ##     },
-    ##     {
-    ##       "age": 0.4846,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 0.4846,
-    ##       "y": 25.55,
-    ##       "z": -1.553
-    ##     },
-    ##     {
-    ##       "age": 0.7529,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 0.7529,
-    ##       "y": 43.75,
-    ##       "z": 0.672
-    ##     },
-    ##     {
-    ##       "age": 1.0212,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 1.0212,
-    ##       "y": 50.92,
-    ##       "z": 0.708
-    ##     },
-    ##     {
-    ##       "age": 1.2512,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 1.2512,
-    ##       "y": 54.34,
-    ##       "z": 0.319
-    ##     },
-    ##     {
-    ##       "age": 1.5387,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 1.5387,
-    ##       "y": 56.65,
-    ##       "z": -0.385
-    ##     },
-    ##     {
-    ##       "age": 2.0397,
-    ##       "xname": "age",
-    ##       "yname": "dsc",
-    ##       "zname": "dsc_z",
-    ##       "zref": "ph_2023_dsc_female_40",
-    ##       "x": 2.0397,
-    ##       "y": 70.05,
-    ##       "z": 1.536
-    ##     },
-    ##     {
-    ##       "age": 0,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 48,
-    ##       "y": 2.95
-    ##     },
-    ##     {
-    ##       "age": 0.1013,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 53.5,
-    ##       "y": 4.18,
-    ##       "z": 0.215
-    ##     },
-    ##     {
-    ##       "age": 0.1588,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 56,
-    ##       "y": 5,
-    ##       "z": 0.764
-    ##     },
-    ##     {
-    ##       "age": 0.2355,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 59.5,
-    ##       "y": 5.9,
-    ##       "z": 0.744
-    ##     },
-    ##     {
-    ##       "age": 0.4846,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 65.5,
-    ##       "y": 8.24,
-    ##       "z": 1.728
-    ##     },
-    ##     {
-    ##       "age": 0.7529,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 71.5,
-    ##       "y": 9.65,
-    ##       "z": 1.342
-    ##     },
-    ##     {
-    ##       "age": 1.0212,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 75,
-    ##       "y": 10.95,
-    ##       "z": 1.726
-    ##     },
-    ##     {
-    ##       "age": 1.2512,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 80,
-    ##       "y": 11.9,
-    ##       "z": 1.379
-    ##     },
-    ##     {
-    ##       "age": 1.5387,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 84,
-    ##       "y": 12.8,
-    ##       "z": 1.242
-    ##     },
-    ##     {
-    ##       "age": 2.0397,
-    ##       "xname": "hgt",
-    ##       "yname": "wfh",
-    ##       "zname": "wfh_z",
-    ##       "zref": "nl_1997_wfh_female_nla",
-    ##       "x": 90,
-    ##       "y": 13.9,
-    ##       "z": 0.82
-    ##     }
-    ##   ],
-    ##   "screeners": [
-    ##     {
-    ##       "Categorie": 1000,
-    ##       "CategorieOmschrijving": "Lengte",
-    ##       "Code": 1031,
-    ##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
-    ##       "Versie": "1.23.0",
-    ##       "Leeftijd": 2.0397
-    ##     },
-    ##     {
-    ##       "Categorie": 2000,
-    ##       "CategorieOmschrijving": "Gewicht",
-    ##       "Code": 2075,
-    ##       "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn ondergewicht is als volgt: Sterke gewichtsafname (-1 SD), advies: Is er sprake van een afwijkende voedingstoestand en/of klachten of symptomen die kunnen wijzen op onderliggende ziekte of problemen? Indien ja, Verwijzen naar kinderarts. Indien nee, dan is er in principe geen verwijzing nodig. Naar eigen inzicht handelen.",
-    ##       "Versie": "1.23.0",
-    ##       "Leeftijd": 2.0397
-    ##     },
-    ##     {
-    ##       "Categorie": 3000,
-    ##       "CategorieOmschrijving": "Hoofdomtrek",
-    ##       "Code": 3021,
-    ##       "CodeOmschrijving": "De richtlijn hoofdomtrek is bedoeld voor kinderen tot 1 jaar.",
-    ##       "Versie": "1.23.0",
-    ##       "Leeftijd": 2.0397
-    ##     }
-    ##   ]
-    ## }
-
-#### 
+    {
+      "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
+      "session": "x04bed82b7eed41",
+      "site": "https://james.groeidiagrammen.nl/site?session=x04bed82b7eed41",
+      "child": [
+        {
+          "id": -1,
+          "name": "Laura S",
+          "dob": "1989-01-21",
+          "dobm": "1961-07-22",
+          "src": "0",
+          "sex": "female",
+          "gad": 276,
+          "ga": 39,
+          "smo": 0,
+          "bw": 2950,
+          "hgtm": 164,
+          "hgtf": 179
+        }
+      ],
+      "time": [
+        {
+          "age": 0,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 0,
+          "y": 48,
+          "z": -1.515
+        },
+        {
+          "age": 0.1013,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 0.1013,
+          "y": 53.5,
+          "z": -0.499
+        },
+        {
+          "age": 0.1588,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 0.1588,
+          "y": 56,
+          "z": -0.261
+        },
+        {
+          "age": 0.2355,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 0.2355,
+          "y": 59.5,
+          "z": 0.163
+        },
+        {
+          "age": 0.4846,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 0.4846,
+          "y": 65.5,
+          "z": -0.259
+        },
+        {
+          "age": 0.7529,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 0.7529,
+          "y": 71.5,
+          "z": 0.131
+        },
+        {
+          "age": 1.0212,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 1.0212,
+          "y": 75,
+          "z": -0.18
+        },
+        {
+          "age": 1.2512,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 1.2512,
+          "y": 80,
+          "z": 0.421
+        },
+        {
+          "age": 1.5387,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 1.5387,
+          "y": 84,
+          "z": 0.527
+        },
+        {
+          "age": 2.0397,
+          "xname": "age",
+          "yname": "hgt",
+          "zname": "hgt_z",
+          "zref": "nl_1997_hgt_female_nl",
+          "x": 2.0397,
+          "y": 90,
+          "z": 0.67
+        },
+        {
+          "age": 0,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 0,
+          "y": 2.95,
+          "z": -1.055
+        },
+        {
+          "age": 0.1013,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 0.1013,
+          "y": 4.18,
+          "z": -0.162
+        },
+        {
+          "age": 0.1588,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 0.1588,
+          "y": 5,
+          "z": 0.401
+        },
+        {
+          "age": 0.2355,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 0.2355,
+          "y": 5.9,
+          "z": 0.717
+        },
+        {
+          "age": 0.4846,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 0.4846,
+          "y": 8.24,
+          "z": 1.173
+        },
+        {
+          "age": 0.7529,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 0.7529,
+          "y": 9.65,
+          "z": 1.052
+        },
+        {
+          "age": 1.0212,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 1.0212,
+          "y": 10.95,
+          "z": 1.164
+        },
+        {
+          "age": 1.2512,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 1.2512,
+          "y": 11.9,
+          "z": 1.247
+        },
+        {
+          "age": 1.5387,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 1.5387,
+          "y": 12.8,
+          "z": 1.228
+        },
+        {
+          "age": 2.0397,
+          "xname": "age",
+          "yname": "wgt",
+          "zname": "wgt_z",
+          "zref": "nl_1997_wgt_female_nl",
+          "x": 2.0397,
+          "y": 13.9,
+          "z": 0.989
+        },
+        {
+          "age": 0.1013,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 0.1013,
+          "y": 37.6,
+          "z": 0.418
+        },
+        {
+          "age": 0.1588,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 0.1588,
+          "y": 39,
+          "z": 0.605
+        },
+        {
+          "age": 0.2355,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 0.2355,
+          "y": 40.5,
+          "z": 0.696
+        },
+        {
+          "age": 0.4846,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 0.4846,
+          "y": 44.1,
+          "z": 1.021
+        },
+        {
+          "age": 0.7529,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 0.7529,
+          "y": 46.6,
+          "z": 1.418
+        },
+        {
+          "age": 1.0212,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 1.0212,
+          "y": 47.8,
+          "z": 1.307
+        },
+        {
+          "age": 1.2512,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 1.2512,
+          "y": 48.7,
+          "z": 1.373
+        },
+        {
+          "age": 1.5387,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 1.5387,
+          "y": 49.2,
+          "z": 1.246
+        },
+        {
+          "age": 2.0397,
+          "xname": "age",
+          "yname": "hdc",
+          "zname": "hdc_z",
+          "zref": "nl_1997_hdc_female_nl",
+          "x": 2.0397,
+          "y": 50,
+          "z": 1.224
+        },
+        {
+          "age": 0,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 0,
+          "y": 12.8038,
+          "z": 0.259
+        },
+        {
+          "age": 0.1013,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 0.1013,
+          "y": 14.6039,
+          "z": 0.231
+        },
+        {
+          "age": 0.1588,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 0.1588,
+          "y": 15.9439,
+          "z": 0.701
+        },
+        {
+          "age": 0.2355,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 0.2355,
+          "y": 16.6655,
+          "z": 0.734
+        },
+        {
+          "age": 0.4846,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 0.4846,
+          "y": 19.2063,
+          "z": 1.688
+        },
+        {
+          "age": 0.7529,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 0.7529,
+          "y": 18.8762,
+          "z": 1.325
+        },
+        {
+          "age": 1.0212,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 1.0212,
+          "y": 19.4667,
+          "z": 1.78
+        },
+        {
+          "age": 1.2512,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 1.2512,
+          "y": 18.5937,
+          "z": 1.394
+        },
+        {
+          "age": 1.5387,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 1.5387,
+          "y": 18.1406,
+          "z": 1.277
+        },
+        {
+          "age": 2.0397,
+          "xname": "age",
+          "yname": "bmi",
+          "zname": "bmi_z",
+          "zref": "nl_1997_bmi_female_nl",
+          "x": 2.0397,
+          "y": 17.1605,
+          "z": 0.825
+        },
+        {
+          "age": 0.1013,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 0.1013,
+          "y": 15.68,
+          "z": -0.058
+        },
+        {
+          "age": 0.1588,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 0.1588,
+          "y": 18.01,
+          "z": 0.022
+        },
+        {
+          "age": 0.2355,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 0.2355,
+          "y": 20.93,
+          "z": -0.018
+        },
+        {
+          "age": 0.4846,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 0.4846,
+          "y": 25.89,
+          "z": -1.476
+        },
+        {
+          "age": 0.7529,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 0.7529,
+          "y": 44.58,
+          "z": 0.908
+        },
+        {
+          "age": 1.0212,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 1.0212,
+          "y": 51.59,
+          "z": 0.9
+        },
+        {
+          "age": 1.2512,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 1.2512,
+          "y": 54.82,
+          "z": 0.457
+        },
+        {
+          "age": 1.5387,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 1.5387,
+          "y": 57.08,
+          "z": -0.267
+        },
+        {
+          "age": 2.0397,
+          "xname": "age",
+          "yname": "dsc",
+          "zname": "dsc_z",
+          "zref": "ph_2023_dsc_female_40",
+          "x": 2.0397,
+          "y": 70.72,
+          "z": 1.727
+        },
+        {
+          "age": 0,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 48,
+          "y": 2.95
+        },
+        {
+          "age": 0.1013,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 53.5,
+          "y": 4.18,
+          "z": 0.215
+        },
+        {
+          "age": 0.1588,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 56,
+          "y": 5,
+          "z": 0.764
+        },
+        {
+          "age": 0.2355,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 59.5,
+          "y": 5.9,
+          "z": 0.744
+        },
+        {
+          "age": 0.4846,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 65.5,
+          "y": 8.24,
+          "z": 1.728
+        },
+        {
+          "age": 0.7529,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 71.5,
+          "y": 9.65,
+          "z": 1.342
+        },
+        {
+          "age": 1.0212,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 75,
+          "y": 10.95,
+          "z": 1.726
+        },
+        {
+          "age": 1.2512,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 80,
+          "y": 11.9,
+          "z": 1.379
+        },
+        {
+          "age": 1.5387,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 84,
+          "y": 12.8,
+          "z": 1.242
+        },
+        {
+          "age": 2.0397,
+          "xname": "hgt",
+          "yname": "wfh",
+          "zname": "wfh_z",
+          "zref": "nl_1997_wfh_female_nla",
+          "x": 90,
+          "y": 13.9,
+          "z": 0.82
+        }
+      ],
+      "screeners": [
+        {
+          "Categorie": 1000,
+          "CategorieOmschrijving": "Lengte",
+          "Code": 1031,
+          "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn lengtegroei is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.",
+          "Versie": "1.24.0",
+          "Leeftijd": 2.0397
+        },
+        {
+          "Categorie": 2000,
+          "CategorieOmschrijving": "Gewicht",
+          "Code": 2075,
+          "CodeOmschrijving": "Het advies volgens de JGZ-richtlijn ondergewicht is als volgt: Sterke gewichtsafname (-1 SD), advies: Is er sprake van een afwijkende voedingstoestand en/of klachten of symptomen die kunnen wijzen op onderliggende ziekte of problemen? Indien ja, Verwijzen naar kinderarts. Indien nee, dan is er in principe geen verwijzing nodig. Naar eigen inzicht handelen.",
+          "Versie": "1.24.0",
+          "Leeftijd": 2.0397
+        },
+        {
+          "Categorie": 3000,
+          "CategorieOmschrijving": "Hoofdomtrek",
+          "Code": 3021,
+          "CodeOmschrijving": "De richtlijn hoofdomtrek is bedoeld voor kinderen tot 1 jaar.",
+          "Versie": "1.24.0",
+          "Leeftijd": 2.0397
+        }
+      ]
+    }
 
 ## Resources
 

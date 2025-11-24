@@ -1,5 +1,13 @@
 # Help for old friends
 
+# Help for old friends
+
+JAMES - Old version up to Dec 2021
+
+Author
+
+Stef van Buuren, Arjan Huizing (TNO Child Health)
+
 ``` r
 library(james)
 ```
@@ -40,9 +48,8 @@ April 2022 onwards, use `james.groeidiagrammen.nl`\] The sections below
 use `curl` for illustration, but any `HTTP` client will work.
 
 In order to check whether the JAMES server is running, try generating
-some random numbers by calling
-[`stats::rnorm()`](https://rdrr.io/r/stats/Normal.html), in a terminal
-window as follows,
+some random numbers by calling `stats::rnorm()`, in a terminal window as
+follows,
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/stats/R/rnorm/json --data n=5
@@ -70,19 +77,19 @@ look into these in some more detail.
 
 ### Available growth charts
 
-The site <https://groeidiagrammen.nl/ocpu/lib/james/www/> provides a
-quick round-trip of growth charts. JAMES currently offers 394 different
+The site https://groeidiagrammen.nl/ocpu/lib/james/www/ provides a quick
+round-trip of growth charts. JAMES currently offers 394 different
 charts, divided into three chart groups:
 
 1.  140 charts for children of various etnicities, age groups and
-    outcomes (Talma et al. 2010);
-2.  240 charts specifically designed for preterms (Bocca-Tjeertes et al.
-    2012);
-3.  14 charts based on the WHO Child Growth Standards (WHO 2006);
+    outcomes ([Talma et al. 2010](#ref-talma2010));
+2.  240 charts specifically designed for preterms ([Bocca-Tjeertes et
+    al. 2012](#ref-bocca-tjeertes2012));
+3.  14 charts based on the WHO Child Growth Standards ([WHO
+    2006](#ref-who2006));
 
-The
-[`list_charts()`](https://growthcharts.org/james/reference/list_charts.md)
-function in JAMES function produces a tabular overview of all charts.
+The `list_charts()` function in JAMES function produces a tabular
+overview of all charts.
 
 We may uses any HTTP client to download the list of growth charts. Many
 systems have the `curl` command already installed. We download the list
@@ -113,7 +120,7 @@ The status is 201 (Resources created), and the unique session `{key}` is
 `x07c4471d08dbd3`. Note that this changes with each request, so if you
 are replicating these commands, be sure to change `{key}` accordingly.
 Session keys and their url’s remain valid for 2 hours. See
-<https://www.opencpu.org/api.html> for succinct documentation of the
+https://www.opencpu.org/api.html for succinct documentation of the
 OpenCPU interface.
 
 Not all information that JAMES return is interesting. In this case, we
@@ -140,13 +147,12 @@ code identifying the particular chart. In this example, code `HJAA`
 represents a chart for boys with Indo-Surinamese background (population
 `HS`) and design `A` (chart with head circumference, length and weight
 for boys aged 0-15 months). The codes are compatible and extend those
-used in Talma et al. (2010).
+used in Talma et al. ([2010](#ref-talma2010)).
 
 ### Requesting a growth chart
 
-We may download growth chart `HJAA` with the
-[`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
-function as follows:
+We may download growth chart `HJAA` with the `draw_chart()` function as
+follows:
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/R/draw_chart -d "chartcode='HJAA'&selector='chartcode'"
@@ -302,9 +308,8 @@ works best.
 #### Example of data cache
 
 An example, let’s create a chart in two steps. We first upload the data
-using
-[`upload_data()`](https://growthcharts.org/james/reference/upload_data.md),
-which accepts JSON input and return the location with the uploaded data.
+using `upload_data()`, which accepts JSON input and return the location
+with the uploaded data.
 
 ``` bash
 curl https://groeidiagrammen.nl/ocpu/library/james/R/upload_data -d "txt=$var"
@@ -364,8 +369,7 @@ JAMES chooses the appropriate preterm chart.
 
 The chart site with the default start can be started by combining the
 [uploaded data](https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/)
-and the main site at (<https://groeidiagrammen.nl/ocpu/lib/james/www/>)
-as
+and the main site at (https://groeidiagrammen.nl/ocpu/lib/james/www/) as
 
 ``` bash
 curl "https://groeidiagrammen.nl/ocpu/lib/james/www/?loc=https://groeidiagrammen.nl/ocpu/tmp/x06938035d05dac/"
@@ -508,7 +512,7 @@ the suggested alternative.
 |----|----|----|
 | `convert_bds_ind` | Validate, convert, store input (server) | `upload_data` |
 | `fetch_loc` | Validate, convert, store input (server) | `upload_data` |
-| `upload_txt` | Validate, convert, store input (client) | [`jamesclient::upload_txt`](https://rdrr.io/pkg/jamesclient/man/upload_txt.html) |
+| `upload_txt` | Validate, convert, store input (client) | `jamesclient::upload_txt` |
 | `draw_chart_bds` | Draw chart from uploaded | `draw_chart(txt = ...)` |
 | `draw_chart_ind` | Draw chart from cached data | `draw_chart(loc = ...)` |
 | `screen_curves` | Screen growth along JGZ guidelines | `screen_growth`, `custom_list` |
@@ -537,7 +541,7 @@ Things that were still on the wish list in Sept 2019:
 - add functionality to test for Dutch guidelines for referral \[DONE, 3
   guidelines\]
 - add functionality to predict individual growth curves \[DONE\]
-- extend functionality to include the $`D`$-score charts \[DONE\]
+- extend functionality to include the \\D\\-score charts \[DONE\]
 
 ## Architecture
 
@@ -553,8 +557,8 @@ RESTful webservice.
 - [JAMES Internals](https://stefvanbuuren.name/jamesdocs/)
 - [OpenCPU system](https://www.opencpu.org)
 - [OpenCPU API](https://www.opencpu.org/api.html)
-- <https://www.w3schools.com/js/>
-- <https://www.tno.nl/groei> and <https://www.tno.nl/growth>
+- https://www.w3schools.com/js/
+- https://www.tno.nl/groei and https://www.tno.nl/growth
 
 ## About
 

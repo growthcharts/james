@@ -58,7 +58,7 @@ Auxiliary functions for JAMES
 
 ## Deprecated functions
 
-Superseeded functionality
+Superceded functionality
 
 - [`convert_bds_ind()`](https://growthcharts.org/james/reference/convert_bds_ind-deprecated.md)
   : Convert json BSD data for single individual to class individual

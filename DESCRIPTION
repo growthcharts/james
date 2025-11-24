@@ -37,8 +37,10 @@ Imports:
     vwc
 Suggests: 
     jamesdemodata (>= 0.11.0),
+    knitr,
     openssl,
     rmarkdown,
+    quarto,
     testthat,
     usethis
 Remotes: 
@@ -56,4 +58,5 @@ Remotes:
     D-score/vwc
 BugReports: https://github.com/growthcharts/james/issues
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: quarto
 RoxygenNote: 7.3.3

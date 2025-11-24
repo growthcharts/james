@@ -5,10 +5,12 @@ author: Stef van Buuren, Arjan Huizing, Iris Eekhout (TNO Child Health)
 format:
   html:
     number-sections: false
+    toc: true
+    code-copy: true
+    code-tools: true
     theme: united
     tabset: true
 ---
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup}
 #| include: false

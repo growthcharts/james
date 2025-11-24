@@ -1,55 +1,87 @@
 url: https://growthcharts.org/james
+
 template:
   bootstrap: 5
   params:
     bootswatch: lumen
+
 authors:
   Stef van Buuren:
     href: https://stefvanbuuren.name
   Arjan Huizing:
     href: https://nl.linkedin.com/in/arjanhjhuizing
+  Iris Eekhout:
+    href: https://iriseekhout.com
+
 development:
   mode: auto
+
+navbar:
+  structure:
+    left: [home, reference, articles, news]
+    right: [github]
+  components:
+    home:
+      text: "Overview"
+      href: index.html
+    reference:
+      text: "Reference"
+      href: reference/index.html
+    articles:
+      text: "Articles"
+      menu:
+        - text: "Getting Started"
+          href: articles/getting_started.html
+        - text: "Old Friends"
+          href: articles/oldfriends.html
+    news:
+      text: "News"
+      href: news/index.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/growthcharts/james
 
 reference:
   - title: JAMES end points
     desc: Main commands to communicate with JAMES
     contents:
-    - apply_screeners
-    - dcat
-    - dcat_start
-    - dcat_next
-    - draw_chart
-    - list_charts
-    - list_screeners
-    - percentiles_vwc
-    - request_blend
-    - request_site
-    - select_vwc
-    - upload_data
-    - validate_chartcode
-    - version
+      - apply_screeners
+      - dcat
+      - dcat_start
+      - dcat_next
+      - draw_chart
+      - list_charts
+      - list_screeners
+      - percentiles_vwc
+      - request_blend
+      - request_site
+      - select_vwc
+      - upload_data
+      - validate_chartcode
+      - version
+
   - title: Helper functions
     desc: Auxiliary functions for JAMES
     contents:
-    - authenticate
-    - calculate_dscore
-    - convert_tgt_chartadvice
-    - get_session_object
-    - select_chart
+      - authenticate
+      - calculate_dscore
+      - convert_tgt_chartadvice
+      - get_session_object
+      - select_chart
+
   - title: Deprecated functions
-    desc: Superseeded functionality
+    desc: Superceded functionality
     contents:
-    - convert_bds_ind
-    - custom_list
-    - draw_chart_bds
-    - draw_chart_ind
-    - fetch_loc
-    - screen_curves
-    - screen_growth
+      - convert_bds_ind
+      - custom_list
+      - draw_chart_bds
+      - draw_chart_ind
+      - fetch_loc
+      - screen_curves
+      - screen_growth
+
 articles:
-- title: Main verbs
-  navbar: ~
-  contents:
-  # - articles/getting_started
-  - articles/oldfriends
+  - title: Main verbs
+    contents:
+      - articles/getting_started.html
+      - articles/oldfriends.html

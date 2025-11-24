@@ -126,7 +126,7 @@ Auxiliary functions for JAMES
 
 ## Deprecated functions
 
-Superseeded functionality
+Superceded functionality
 
 - [`convert_bds_ind()`](https://growthcharts.org/james/reference/convert_bds_ind-deprecated.md)
   : Convert json BSD data for single individual to class individual
@@ -144,9 +144,3 @@ Superseeded functionality
 - [`screen_growth()`](https://growthcharts.org/james/reference/screen_growth-deprecated.md)
   : Screen growth curves according to JGZ guidelines
 
-# Articles
-
-### Main verbs
-
-- [Help for old
-  friends](https://growthcharts.org/james/articles/oldfriends.md):
