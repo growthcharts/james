@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,18 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.8.2" id="james-182-november-2025">james 1.8.2 (November 2025)<a class="anchor" aria-label="anchor" href="#james-182-november-2025"></a></h2>
+<ul><li>Makes <code><a href="../reference/calculate_dscore.html">calculate_dscore()</a></code> work for both <code>ddi</code> and <code>gs1</code> items
+<ul><li>Updates the <code>append</code> argument <code>ddi</code> and <code>gs1</code>
+</li>
+<li>Updates calculation to use all items found in <code>yname</code>
+</li>
+<li>Selects <code>key</code> based on observed items in data, not just <code>append</code> argument</li>
+<li>Updates <code>openapi.in.yaml</code> to reflect these changes</li>
+</ul></li>
+<li>Returns value of <code><a href="../reference/select_vwc.html">select_vwc()</a></code> as character vector</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.8.1" id="james-181-november-2025">james 1.8.1 (November 2025)<a class="anchor" aria-label="anchor" href="#james-181-november-2025"></a></h2>
 <ul><li>Solves a problem with nested uploads on <code>localhost</code> with end points <code>site/request</code> and <code>blend/request</code>.</li>

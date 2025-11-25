@@ -1,5 +1,19 @@
 # Changelog
 
+## james 1.8.2 (November 2025)
+
+- Makes
+  [`calculate_dscore()`](https://growthcharts.org/james/reference/calculate_dscore.md)
+  work for both `ddi` and `gs1` items
+  - Updates the `append` argument `ddi` and `gs1`
+  - Updates calculation to use all items found in `yname`
+  - Selects `key` based on observed items in data, not just `append`
+    argument
+  - Updates `openapi.in.yaml` to reflect these changes
+- Returns value of
+  [`select_vwc()`](https://growthcharts.org/james/reference/select_vwc.md)
+  as character vector
+
 ## james 1.8.1 (November 2025)
 
 - Solves a problem with nested uploads on `localhost` with end points

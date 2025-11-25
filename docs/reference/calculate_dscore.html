@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">calculate_dscore</span><span class="op">(</span></span>
 <span>  txt <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  session <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  format <span class="op">=</span> <span class="st">"1.0"</span>,</span>
+<span>  format <span class="op">=</span> <span class="st">"3.1"</span>,</span>
+<span>  append <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ddi"</span>, <span class="st">"gs1"</span><span class="op">)</span>,</span>
 <span>  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"table"</span>, <span class="st">"last_visit"</span>, <span class="st">"last_dscore"</span><span class="op">)</span>,</span>
 <span>  loc <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -70,14 +71,19 @@ should conform to the BDS JGZ 3.2.5 specification.</p></dd>
 <dd><p>JSON schema version, e.g., <code>"3.0"</code>. Used when uploading.</p></dd>
 
 
+<dt id="arg-append">append<a class="anchor" aria-label="anchor" href="#arg-append"></a></dt>
+<dd><p>Optional vector of strings indicating which instrument to base
+D-score calculations on. Currently supports <code>ddi</code> and <code>gs1</code>. Requires JSON
+schema V3.0 or later.</p></dd>
+
+
 <dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
-<dd><p>A string, either <code>"table"</code>, <code>"last_visit"</code> or
-'<code>"last_dscore"</code> specifying the result. The default <code>"table"</code>
-returns with columns: <code>"date"</code> (date), <code>"x"</code> (age), <code>"y"</code> (D-score)
-and <code>"z"</code> (DAZ). The number of rows equals to
-the number of visits. If <code>output</code> equals <code>"last_visit"</code> the
-function returns only the last row. If <code>output</code> equals
-<code>"last_dscore"</code> the function returns only the D-score from the last row.</p></dd>
+<dd><p>A string, either <code>"table"</code>, <code>"last_visit"</code> or '<code>"last_dscore"</code>
+specifying the result. The default <code>"table"</code> returns with columns: <code>"date"</code>
+(date), <code>"x"</code> (age), <code>"y"</code> (D-score) and <code>"z"</code> (DAZ). The number of rows
+equals to the number of visits. If <code>output</code> equals <code>"last_visit"</code> the
+function returns only the last row. If <code>output</code> equals <code>"last_dscore"</code> the
+function returns only the D-score from the last row.</p></dd>
 
 
 <dt id="arg-loc">loc<a class="anchor" aria-label="anchor" href="#arg-loc"></a></dt>
@@ -102,13 +108,8 @@ function returns only the last row. If <code>output</code> equals
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata"</span>, <span class="st">"Laura_S.json"</span>, package <span class="op">=</span> <span class="st">"james"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">calculate_dscore</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     age xname yname zname zref                      x     y      z date    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.101 age   dsc   dsc_z ph_2023_dsc_female_40 0.101  15.7 -<span style="color: #BB0000;">0.058</span> 19890227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0.159 age   dsc   dsc_z ph_2023_dsc_female_40 0.159  18.0  0.022 19890320</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 0.236 age   dsc   dsc_z ph_2023_dsc_female_40 0.236  20.9 -<span style="color: #BB0000;">0.018</span> 19890417</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 0.485 age   dsc   dsc_z ph_2023_dsc_female_40 0.485  25.9 -<span style="color: #BB0000;">1.48</span>  19890717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a   n   p   d   sem daz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;0 rows&gt; (or 0-length row.names)</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
