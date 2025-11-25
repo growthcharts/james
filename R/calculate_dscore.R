@@ -30,7 +30,7 @@ calculate_dscore <- function(
   txt = "",
   session = "",
   format = "3.1",
-  append = c("ddi","gs1"),
+  append = c("ddi", "gs1"),
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -60,18 +60,22 @@ calculate_dscore <- function(
   items <- items[items %in% time$yname]
 
   # check key - set default for gsed
-    key <- "gsed2510"
-    if(all(is.na(get_tau(items, key = key)))){
-      key <- "gsed2406"
-    }
-    # get the defaults for key
-    idx <- which(dscore::builtin_keys$key == key)
-    # get population
-    population = dscore::builtin_keys$base_population[idx]
+  key <- "gsed2510"
+  if (all(is.na(get_tau(items, key = key)))) {
+    key <- "gsed2406"
+  }
+  # get the defaults for key
+  idx <- which(dscore::builtin_keys$key == key)
+  # get population
+  population = dscore::builtin_keys$base_population[idx]
 
   dsc <- time %>%
-    dplyr::select(-zname, -z) |>
-    tidyr::pivot_wider(id_cols = c(age, xname), names_from = yname, values_from = y)|>
+    dplyr::select(-.data$zname, -.data$z) |>
+    tidyr::pivot_wider(
+      id_cols = c(.data$age, .data$xname),
+      names_from = .data$yname,
+      values_from = .data$y
+    ) |>
     dscore::dscore(key = key, population = population)
 
   if (output == "last_visit") {

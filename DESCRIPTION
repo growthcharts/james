@@ -33,6 +33,7 @@ Imports:
     jose,
     jsonlite,
     rlang,
+    tidyr,
     utils,
     vwc
 Suggests: 
