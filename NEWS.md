@@ -1,7 +1,14 @@
+# james 1.8.1 (November 2025)
+
+- Solves a problem with nested uploads on `localhost` with end points `site/request` and `blend/request`.
+- Repairs problems with chart rendering on `james.groeidiagrammen.nl`
+
+# james 1.8.0 (November 2025)
+
 - Added the endpoints `/dcat/calculate`, `/dcat/start` and `/dcat/next`. These allow users to perform adaptive testing.
 - Endpoints under `/dcat` can now handle gs1 milestone data. See API documentation for more detail on how to implement these.
-- Exposes the endpoint `/dscore/calculate`, which directly returns d-score values.
 - Added `select_vwc` function to calculate Van Wiechen milestones based on age and previously completed milestones.
+- Added the endpoint `/dscore/calculate`, which directly returns d-score values.
 
 # james 1.7.3 (August 2025)
 

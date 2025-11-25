@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,16 +15,15 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../index.html">Overview</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting_started.html">JAMES - Joint Automatic Measurement and Evaluation System</a></li>
-    <li><a class="dropdown-item" href="../articles/oldfriends.html">Help for old friends</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting_started.html">Getting Started</a></li>
+    <li><a class="dropdown-item" href="../articles/oldfriends.html">Old Friends</a></li>
   </ul></li>
-<li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
- <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/growthcharts/james/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="active nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/growthcharts/james"><span class="fa fab fa-github"></span></a></li>
       </ul></div>
 
 
@@ -37,6 +36,19 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.8.1" id="james-181-november-2025">james 1.8.1 (November 2025)<a class="anchor" aria-label="anchor" href="#james-181-november-2025"></a></h2>
+<ul><li>Solves a problem with nested uploads on <code>localhost</code> with end points <code>site/request</code> and <code>blend/request</code>.</li>
+<li>Repairs problems with chart rendering on <code>james.groeidiagrammen.nl</code>
+</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.8.0" id="james-180-november-2025">james 1.8.0 (November 2025)<a class="anchor" aria-label="anchor" href="#james-180-november-2025"></a></h2>
+<ul><li>Added the endpoints <code>/dcat/calculate</code>, <code>/dcat/start</code> and <code>/dcat/next</code>. These allow users to perform adaptive testing.</li>
+<li>Endpoints under <code>/dcat</code> can now handle gs1 milestone data. See API documentation for more detail on how to implement these.</li>
+<li>Added <code>select_vwc</code> function to calculate Van Wiechen milestones based on age and previously completed milestones.</li>
+<li>Added the endpoint <code>/dscore/calculate</code>, which directly returns d-score values.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.7.3" id="james-173-august-2025">james 1.7.3 (August 2025)<a class="anchor" aria-label="anchor" href="#james-173-august-2025"></a></h2>
 <p>This is a maintenance release that includes various infrastructure updates, enhancements to the OpenAPI specification, and minor bug fixes.</p>
@@ -721,11 +733,11 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://stefvanbuuren.name" class="external-link">Stef van Buuren</a>, <a href="https://nl.linkedin.com/in/arjanhjhuizing" class="external-link">Arjan Huizing</a>.</p>
+  <p>Developed by <a href="https://stefvanbuuren.name" class="external-link">Stef van Buuren</a>, <a href="https://nl.linkedin.com/in/arjanhjhuizing" class="external-link">Arjan Huizing</a>, <a href="https://iriseekhout.com" class="external-link">Iris Eekhout</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -9,9 +9,12 @@ bibentry(
            role = c("cre", "aut")),
     person("Arjan", "Huizing",
            email = "arjan.huizing@tno.nl",
+           role = "aut"),
+    person("Iris", "Eekhout",
+           email = "iris.eekhout@tno.nl",
            role = "aut")
   ),
-  year = "2024", # Adjust this to the appropriate year
-  note = "R package version 1.6.5",
+  year = "2025", # Adjust this to the appropriate year
+  note = "R package version 1.8.0",
   url = "https://github.com/growthcharts/james"
 )

@@ -4,7 +4,7 @@
 #' @importFrom chartcatalog    create_chartcode get_breakpoints
 #'                             parse_chartcode
 #' @importFrom chartplotter    process_chart
-#' @importFrom curl            curl
+#' @importFrom curl            curl curl_fetch_memory form_data handle_setform new_handle
 #' @importFrom dplyr           %>% all_of filter mutate pull select
 #' @importFrom dscore          get_tau get_itemnames
 #' @importFrom grDevices       dev.off

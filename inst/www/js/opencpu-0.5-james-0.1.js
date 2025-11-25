@@ -17,42 +17,42 @@
  */
 
 //Warning for the newbies
-if(!window.jQuery) {
+if (!window.jQuery) {
   alert("Could not find jQuery! The HTML must include jquery.js before opencpu.js!");
 }
 
-(function ( $ ) {
+(function ($) {
 
   //new Session()
-  function Session(loc, key, txt){
+  function Session(loc, key, txt) {
     this.loc = loc;
     this.key = key;
     this.txt = txt;
     this.output = txt.split(/\r\n|\r|\n/g);
 
-    this.getKey = function(){
+    this.getKey = function () {
       return key;
     };
 
-    this.getLoc = function(){
+    this.getLoc = function () {
       return loc;
     };
 
-    this.getFile = function(path, success){
+    this.getFile = function (path, success) {
       var url = this.getFileURL(path);
       return $.get(url, success);
     };
 
-    this.getFileURL = function(path){
+    this.getFileURL = function (path) {
       return this.loc + "files/" + path;
     };
 
-    this.getObject = function(name, data, success){
+    this.getObject = function (name, data, success) {
       //in case of no arguments
       name = name || ".val";
 
       //first arg is a function
-      if(name instanceof Function){
+      if (name instanceof Function) {
         //pass on to second arg
         success = name;
         name = ".val";
@@ -62,27 +62,27 @@ if(!window.jQuery) {
       return $.get(url, data, success);
     };
 
-    this.getStdout = function(success){
+    this.getStdout = function (success) {
       var url = this.getLoc() + "stdout/text";
       return $.get(url, success);
     };
 
-    this.getSource = function(success){
+    this.getSource = function (success) {
       var url = this.getLoc() + "source/text";
       return $.get(url, success);
     };
 
-    this.getConsole = function(success){
+    this.getConsole = function (success) {
       var url = this.getLoc() + "console/text";
       return $.get(url, success);
     };
 
-    this.getWarnings = function(success){
+    this.getWarnings = function (success) {
       var url = this.getLoc() + "warnings/text";
       return $.get(url, success);
     };
 
-    this.getMessages = function(success){
+    this.getMessages = function (success) {
       var url = this.getLoc() + "messages/text";
       return $.get(url, success);
     };
@@ -90,55 +90,55 @@ if(!window.jQuery) {
 
   //for POSTing raw code snippets
   //new Snippet("rnorm(100)")
-  function Snippet(code){
+  function Snippet(code) {
     this.code = code || "NULL";
 
-    this.getCode = function(){
+    this.getCode = function () {
       return code;
     };
   }
 
   //for POSTing files
   //new Upload($('#file')[0].files)
-  function Upload(file){
-    if(file instanceof File){
+  function Upload(file) {
+    if (file instanceof File) {
       this.file = file;
-    } else if(file instanceof FileList){
+    } else if (file instanceof FileList) {
       this.file = file[0];
-    } else if (file.files instanceof FileList){
+    } else if (file.files instanceof FileList) {
       this.file = file.files[0];
-    } else if (file.length > 0 && file[0].files instanceof FileList){
+    } else if (file.length > 0 && file[0].files instanceof FileList) {
       this.file = file[0].files[0];
     } else {
       throw 'invalid new Upload(file). Argument file must be a HTML <input type="file"></input>';
     }
 
-    this.getFile = function(){
+    this.getFile = function () {
       return file;
     };
   }
 
-  function stringify(x){
-    if(x instanceof Session){
+  function stringify(x) {
+    if (x instanceof Session) {
       return x.getKey();
-    } else if(x instanceof Snippet){
+    } else if (x instanceof Snippet) {
       return x.getCode();
-    } else if(x instanceof Upload){
+    } else if (x instanceof Upload) {
       return x.getFile();
-    } else if(x instanceof File){
+    } else if (x instanceof File) {
       return x;
-    } else if(x instanceof FileList){
+    } else if (x instanceof FileList) {
       return x[0];
-    } else if(x && x.files instanceof FileList){
+    } else if (x && x.files instanceof FileList) {
       return x.files[0];
-    } else if(x && x.length && x[0].files instanceof FileList){
+    } else if (x && x.length && x[0].files instanceof FileList) {
       return x[0].files[0];
     } else {
       return JSON.stringify(x);
     }
   }
 
-  function r_fun_ajax(fun, settings = {}, handler = () => {}) {
+  function r_fun_ajax(fun, settings = {}, handler = () => { }) {
     if (!fun) {
       throw new Error("r_fun_ajax: Missing function name (fun)");
     }
@@ -155,11 +155,13 @@ if(!window.jQuery) {
 
     // Parse ocpu.url to derive host for session URL
     let derivedHost;
-    try {
+
+    if (ocpu.url.startsWith("http://") || ocpu.url.startsWith("https://")) {
+      // absolute URL → safe to parse
       const ocpuUrl = new URL(ocpu.url);
-      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;  // host includes port
-    } catch (err) {
-      console.warn("[r_fun_ajax] Invalid ocpu.url, using window.location as fallback");
+      derivedHost = `${ocpuUrl.protocol}//${ocpuUrl.host}`;
+    } else {
+      // relative URL → use window.location origin
       derivedHost = `${window.location.protocol}//${window.location.host}`;
     }
 
@@ -200,18 +202,18 @@ if(!window.jQuery) {
   }
 
   //call a function using json arguments
-  function r_fun_call_json(fun, args, handler){
+  function r_fun_call_json(fun, args, handler) {
     return r_fun_ajax(fun, {
       data: JSON.stringify(args || {}),
-      contentType : 'application/json'
+      contentType: 'application/json'
     }, handler);
   }
 
   //call function using url encoding
   //needs to wrap arguments in quotes, etc
-  function r_fun_call_urlencoded(fun, args, handler){
+  function r_fun_call_urlencoded(fun, args, handler) {
     var data = {};
-    $.each(args, function(key, val){
+    $.each(args, function (key, val) {
       data[key] = stringify(val);
     });
     return r_fun_ajax(fun, {
@@ -221,10 +223,10 @@ if(!window.jQuery) {
 
   //call a function using multipart/form-data
   //use for file uploads. Requires HTML5
-  function r_fun_call_multipart(fun, args, handler){
+  function r_fun_call_multipart(fun, args, handler) {
     testhtml5();
     var formdata = new FormData();
-    $.each(args, function(key, value) {
+    $.each(args, function (key, value) {
       formdata.append(key, stringify(value));
     });
     return r_fun_ajax(fun, {
@@ -236,24 +238,24 @@ if(!window.jQuery) {
   }
 
   //Automatically determines type based on argument classes.
-  function r_fun_call(fun, args, handler){
+  function r_fun_call(fun, args, handler) {
     args = args || {};
     var hasfiles = false;
     var hascode = false;
 
     //find argument types
-    $.each(args, function(key, value){
-      if(value instanceof File || value instanceof Upload || value instanceof FileList){
+    $.each(args, function (key, value) {
+      if (value instanceof File || value instanceof Upload || value instanceof FileList) {
         hasfiles = true;
-      } else if (value instanceof Snippet || value instanceof Session){
+      } else if (value instanceof Snippet || value instanceof Session) {
         hascode = true;
       }
     });
 
     //determine type
-    if(hasfiles){
+    if (hasfiles) {
       return r_fun_call_multipart(fun, args, handler);
-    } else if(hascode){
+    } else if (hascode) {
       return r_fun_call_urlencoded(fun, args, handler);
     } else {
       return r_fun_call_json(fun, args, handler);
@@ -261,11 +263,11 @@ if(!window.jQuery) {
   }
 
   //call a function and return JSON
-  function rpc(fun, args, handler){
-    return r_fun_call(fun, args, function(session){
-      session.getObject(function(data){
-        if(handler) handler(data);
-      }).fail(function(){
+  function rpc(fun, args, handler) {
+    return r_fun_call(fun, args, function (session) {
+      session.getObject(function (data) {
+        if (handler) handler(data);
+      }).fail(function () {
         console.log("Failed to get JSON response for " + session.getLoc());
       });
     });
@@ -273,7 +275,7 @@ if(!window.jQuery) {
 
   //plotting widget
   //to be called on an (empty) div.
-  $.fn.rplot = function(fun, args, cb) {
+  $.fn.rplot = function (fun, args, cb) {
     var targetdiv = this;
     var myplot = initplot(targetdiv);
 
@@ -282,25 +284,25 @@ if(!window.jQuery) {
     // myplot.spinner.show();
 
     // call the function
-    return r_fun_call(fun, args, function(tmp) {
+    return r_fun_call(fun, args, function (tmp) {
       myplot.setlocation(tmp.getLoc());
 
       //call success handler as well
-      if(cb) cb(tmp);
-    }).always(function(){
-    //  myplot.spinner.hide();
+      if (cb) cb(tmp);
+    }).always(function () {
+      //  myplot.spinner.hide();
     });
   };
 
-  $.fn.graphic = function(session, n){
+  $.fn.graphic = function (session, n) {
     initplot(this).setlocation(session.getLoc(), n || "last");
   };
 
-  function initplot(targetdiv){
-    if(targetdiv.data("ocpuplot")){
+  function initplot(targetdiv) {
+    if (targetdiv.data("ocpuplot")) {
       return targetdiv.data("ocpuplot");
     }
-    var ocpuplot = function(){
+    var ocpuplot = function () {
       //local variables
       var Location;
       var n = "last";
@@ -314,41 +316,41 @@ if(!window.jQuery) {
       }).appendTo(targetdiv).css("background-image", "none");
 
       var spinner = $('<span />').attr({
-        style : "position: absolute; top: 20px; left: 20px; z-index:1000; font-family: monospace;"
+        style: "position: absolute; top: 20px; left: 20px; z-index:1000; font-family: monospace;"
       }).text("loading...").appendTo(plotDiv).hide();
 
 
-/*
-      var pdf = $('<a />').attr({
-        target: "_blank",
-        style: "position: absolute; top: 10px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
-      }).text("pdf").appendTo(plotDiv);
-
-      var svg = $('<a />').attr({
-        target: "_blank",
-        style: "position: absolute; top: 30px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
-      }).text("svg").appendTo(plotDiv);
-
-      var png = $('<a />').attr({
-        target: "_blank",
-        style: "position: absolute; top: 50px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
-      }).text("png").appendTo(plotDiv);
-*/
-/*
-      function updatepng(){
-        if(!Location) return;
-        pngwidth = plotDiv.width();
-        pngheight = plotDiv.height();
-        plotDiv.css("background-image", "url(" + Location + "graphics/" + n + "/png?width=" + pngwidth + "&height=" + pngheight + ")");
-      }
- */
-      function updatesvg(){
-        if(!Location) return;
+      /*
+            var pdf = $('<a />').attr({
+              target: "_blank",
+              style: "position: absolute; top: 10px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
+            }).text("pdf").appendTo(plotDiv);
+      
+            var svg = $('<a />').attr({
+              target: "_blank",
+              style: "position: absolute; top: 30px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
+            }).text("svg").appendTo(plotDiv);
+      
+            var png = $('<a />').attr({
+              target: "_blank",
+              style: "position: absolute; top: 50px; right: 10px; z-index:1000; text-decoration:underline; font-family: monospace;"
+            }).text("png").appendTo(plotDiv);
+      */
+      /*
+            function updatepng(){
+              if(!Location) return;
+              pngwidth = plotDiv.width();
+              pngheight = plotDiv.height();
+              plotDiv.css("background-image", "url(" + Location + "graphics/" + n + "/png?width=" + pngwidth + "&height=" + pngheight + ")");
+            }
+       */
+      function updatesvg() {
+        if (!Location) return;
 
         // reserve screen space for A4 charts or square charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
         if (msr === "front" & active !== "ontwikkeling" ||
-            msr === "back" & active !== "ontwikkeling" ) {
+          msr === "back" & active !== "ontwikkeling") {
           svgwidth = 8.27;
           svgheight = 11.69;
           plotDiv_width = 927;
@@ -364,7 +366,7 @@ if(!window.jQuery) {
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
         var img_tag = new Image(plotDiv_width, plotDiv_height);
         var img_url = Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight;
-        img_tag.onload = function() {
+        img_tag.onload = function () {
           plotDiv.css("background-image", "url(" + Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight + ")");
           // $("#navcontainer").css("height", plotDiv_height + 15);
           // $("#plotcontainer").css("height", plotDiv_height + 15);
@@ -376,7 +378,7 @@ if(!window.jQuery) {
         // update the chartcode field
         var url = Location + "R/.val/print";
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             var text = String(this.responseText);
             text = text.substring(
@@ -385,18 +387,19 @@ if(!window.jQuery) {
             document.getElementById('chartcode').innerHTML = text;
             document.getElementById('chartcode_dsc').innerHTML = text;
             chartcode = text;
-          }};
+          }
+        };
         xhttp.open("GET", url, true);
         xhttp.send();
       }
 
-      function setlocation(newloc, newn){
+      function setlocation(newloc, newn) {
         n = newn || n;
         Location = newloc;
-        if(!Location){
-//          pdf.hide();
-//          svg.hide();
-//          png.hide();
+        if (!Location) {
+          //          pdf.hide();
+          //          svg.hide();
+          //          png.hide();
           plotDiv.css("background-image", "");
         } else {
           // pdf.attr("href", Location + "graphics/" + n + "/pdf?width=8.27&height=11.69&paper=a4").show();
@@ -408,12 +411,12 @@ if(!window.jQuery) {
       }
 
       // function to update the png image
-      var onresize = debounce(function(e) {
-      //  if(pngwidth == plotDiv.width() && pngheight == plotDiv.height()){
-        if(svgwidth == plotDiv.width()/96 && svgheight == plotDiv.height()/96){
+      var onresize = debounce(function (e) {
+        //  if(pngwidth == plotDiv.width() && pngheight == plotDiv.height()){
+        if (svgwidth == plotDiv.width() / 96 && svgheight == plotDiv.height() / 96) {
           return;
         }
-        if(plotDiv.is(":visible")){
+        if (plotDiv.is(":visible")) {
           // updatepng();
           updatesvg();
         }
@@ -426,7 +429,7 @@ if(!window.jQuery) {
       //return objects
       return {
         setlocation: setlocation,
-        spinner : spinner
+        spinner: spinner
       };
     }();
 
@@ -438,9 +441,9 @@ if(!window.jQuery) {
   function debounce(func, wait, immediate) {
     var result;
     var timeout = null;
-    return function() {
+    return function () {
       var context = this, args = arguments;
-      var later = function() {
+      var later = function () {
         timeout = null;
         if (!immediate)
           result = func.apply(context, args);
@@ -454,8 +457,8 @@ if(!window.jQuery) {
     };
   }
 
-  function testhtml5(){
-    if( window.FormData === undefined ) {
+  function testhtml5() {
+    if (window.FormData === undefined) {
       alert("Uploading of files requires HTML5. It looks like you are using an outdated browser that does not support this. Please install Firefox, Chrome or Internet Explorer 10+");
       throw "HTML5 required.";
     }
@@ -465,27 +468,18 @@ if(!window.jQuery) {
   var ocpu = window.ocpu = window.ocpu || {};
 
   // Define seturl function with validation
-  ocpu.seturl = function(path) {
+  ocpu.seturl = function (path) {
     if (typeof path !== "string" || !path.match(/\/R\/?$/)) {
-      console.error("Invalid OpenCPU URL. Must be a string ending in '/R'. Got:", path);
+      console.error("Invalid OpenCPU URL. Must end in '/R'. Got:", path);
       return;
     }
-    // Normalize to a single trailing slash
     ocpu.url = path.replace(/\/+$/, "") + "/";
     console.log("OpenCPU base URL set to:", ocpu.url);
   };
 
-  // Auto-detect and set ocpu.url
+  // Auto-detect and set ocpu.url (always relative — iframe safe)
   (function initOcpuUrl() {
-    const { protocol, hostname, port } = window.location;
-
-    let ocpuBaseURL;
-    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-      ocpuBaseURL = "http://127.0.0.1:8004/ocpu/library/james/R";
-    } else {
-      ocpuBaseURL = `${window.location.protocol}//${window.location.hostname}/ocpu/library/james/R`;
-    }
-    // ocpu.seturl(ocpuBaseURL);
+    ocpu.seturl("/ocpu/library/james/R");
   })();
 
   // Export remaining functions
@@ -496,7 +490,7 @@ if(!window.jQuery) {
 
   // For older browsers
   if (typeof console == "undefined") {
-    this.console = { log: function() {} };
+    this.console = { log: function () { } };
   }
 
 }(jQuery));

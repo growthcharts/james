@@ -90,6 +90,7 @@ request_site <- function(
   # CASE 2: txt provided, no session, and upload = TRUE → upload data
   if (!is.empty(txt) && is.empty(session) && upload) {
     session <- get_session(txt, sitehost, format = format)
+
     return(httr::modify_url(
       sitehost,
       path = "site",
@@ -97,11 +98,10 @@ request_site <- function(
     ))
   }
 
-  # CASE 3: Valid session provided (or via loc), return site?session=...
+  # CASE 3: Valid session provided (or via loc)
   if (!is.empty(session)) {
     data <- get_session_object(session)
     if (is.null(data)) {
-      # Invalid session – return base site
       return(httr::modify_url(sitehost, path = "site"))
     } else {
       return(httr::modify_url(
@@ -112,7 +112,7 @@ request_site <- function(
     }
   }
 
-  # CASE 4: txt provided and upload = FALSE – return site?txt=... (not recommended)
+  # CASE 4: txt provided and upload = FALSE – return ?txt=
   if (!is.empty(txt) && !upload && validate(txt)) {
     return(httr::modify_url(
       sitehost,
@@ -121,6 +121,5 @@ request_site <- function(
     ))
   }
 
-  # Default: return base site
   httr::modify_url(sitehost, path = "site")
 }

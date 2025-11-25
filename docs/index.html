@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,21 +31,19 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="active nav-item"><a class="nav-link" href="index.html">Overview</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/getting_started.html">JAMES - Joint Automatic Measurement and Evaluation System</a></li>
-    <li><a class="dropdown-item" href="articles/oldfriends.html">Help for old friends</a></li>
+<li><a class="dropdown-item" href="articles/getting_started.html">Getting Started</a></li>
+    <li><a class="dropdown-item" href="articles/oldfriends.html">Old Friends</a></li>
   </ul>
 </li>
-<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">News</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><form class="form-inline" role="search">
- <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
-</form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/growthcharts/james/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/growthcharts/james"><span class="fa fab fa-github"></span></a></li>
       </ul>
 </div>
 
@@ -127,6 +125,18 @@
 </tr>
 <tr>
 <td align="left">POST</td>
+<td align="left"><code>/dscore/calculate/{dfm}</code></td>
+<td align="left">Obtain child development score (d-score)</td>
+<td align="left"><code><a href="reference/calculate_dscore.html">calculate_dscore()</a></code></td>
+</tr>
+<tr>
+<td align="left">POST</td>
+<td align="left"><code>/vwc/select/{dfm}</code></td>
+<td align="left">Obtain recommended development milestones</td>
+<td align="left"><code><a href="reference/select_vwc.html">select_vwc()</a></code></td>
+</tr>
+<tr>
+<td align="left">POST</td>
 <td align="left"><code>/blend/request/{sfm}</code></td>
 <td align="left">Obtain a blend from multiple end points</td>
 <td align="left"><code><a href="reference/request_blend.html">request_blend()</a></code></td>
@@ -152,7 +162,7 @@
 </tbody>
 </table>
 <p>The table lists the defined API end points and the mapping to each end point to the corresponding R function.</p>
-<p>The OpenAPI definition of JAMES is at <a href="https://james.groeidiagrammen.nl/docs" class="external-link uri">https://james.groeidiagrammen.nl/docs</a>. [Note: Not yet available]</p>
+<p>The OpenAPI definition of JAMES is at <a href="https://james.groeidiagrammen.nl/docs" class="external-link uri">https://james.groeidiagrammen.nl/docs</a>.</p>
 </div>
 </div>
 <div class="section level2">
@@ -176,16 +186,12 @@
 <td align="left">current</td>
 </tr>
 <tr>
-<td align="left"><a href="https://app.swaggerhub.com/apis-docs/stefvanbuuren/james/1.5.4" class="external-link">OpenAPI specification</a></td>
+<td align="left"><a href="https://james.groeidiagrammen.nl/docs/" class="external-link">OpenAPI specification</a></td>
 <td align="left">current</td>
 </tr>
 <tr>
-<td align="left"><a href="https://james.groeidiagrammen.nl/docs/" class="external-link">OpenAPI specification</a></td>
-<td align="left">not yet available</td>
-</tr>
-<tr>
 <td align="left"><a href="https://james.groeidiagrammen.nl/schemas/bds_v3.0.json" class="external-link">JSON data schema 3.0</a></td>
-<td align="left">not yet available</td>
+<td align="left">current</td>
 </tr>
 <tr>
 <td align="left"><a href="https://github.com/growthcharts/james/issues" class="external-link">JAMES issue tracker</a></td>
@@ -259,6 +265,8 @@
 <a href="https://stefvanbuuren.name" class="external-link">Stef van Buuren</a> <br><small class="roles"> Maintainer, author </small>   </li>
 <li>
 <a href="https://nl.linkedin.com/in/arjanhjhuizing" class="external-link">Arjan Huizing</a> <br><small class="roles"> Author </small>   </li>
+<li>
+<a href="https://iriseekhout.com" class="external-link">Iris Eekhout</a> <br><small class="roles"> Author </small>   </li>
 </ul>
 </div>
 
@@ -269,11 +277,11 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://stefvanbuuren.name" class="external-link">Stef van Buuren</a>, <a href="https://nl.linkedin.com/in/arjanhjhuizing" class="external-link">Arjan Huizing</a>.</p>
+  <p>Developed by <a href="https://stefvanbuuren.name" class="external-link">Stef van Buuren</a>, <a href="https://nl.linkedin.com/in/arjanhjhuizing" class="external-link">Arjan Huizing</a>, <a href="https://iriseekhout.com" class="external-link">Iris Eekhout</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
