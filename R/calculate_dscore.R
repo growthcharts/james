@@ -8,13 +8,15 @@
 #'
 #' The function `draw_chart()` plots individual data on the growth chart.
 #' @inheritParams request_site
-#' @param output A string, either `"table"`, `"last_visit"` or
-#' '`"last_dscore"` specifying the result. The default `"table"`
-#' returns with columns: `"date"` (date), `"x"` (age), `"y"` (D-score)
-#' and `"z"` (DAZ). The number of rows equals to
-#' the number of visits. If `output` equals `"last_visit"` the
-#' function returns only the last row. If `output` equals
-#' `"last_dscore"` the function returns only the D-score from the last row.
+#' @param append Optional vector of strings indicating which instrument to base
+#'   D-score calculations on. Currently supports `ddi` and `gs1`. Requires JSON
+#'   schema V3.0 or later.
+#' @param output A string, either `"table"`, `"last_visit"` or '`"last_dscore"`
+#'   specifying the result. The default `"table"` returns with columns: `"date"`
+#'   (date), `"x"` (age), `"y"` (D-score) and `"z"` (DAZ). The number of rows
+#'   equals to the number of visits. If `output` equals `"last_visit"` the
+#'   function returns only the last row. If `output` equals `"last_dscore"` the
+#'   function returns only the D-score from the last row.
 #' @inheritParams bdsreader::read_bds
 #' @return A table, row or scalar.
 #' @author Stef van Buuren 2020
@@ -27,7 +29,8 @@
 calculate_dscore <- function(
   txt = "",
   session = "",
-  format = "1.0",
+  format = "3.1",
+  append = c("ddi", "gs1"),
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -43,7 +46,7 @@ calculate_dscore <- function(
   }
 
   output <- match.arg(output)
-  tgt <- get_tgt(txt = txt, session = session, format = format)
+  tgt <- get_tgt(txt = txt, session = session, format = format, append = append)
 
   if (!is.list(tgt)) {
     message("Cannot calculate D-score")
@@ -51,16 +54,35 @@ calculate_dscore <- function(
   }
 
   time <- timedata(tgt)
-  child <- persondata(tgt)
-  df <- time %>%
-    filter(.data$yname == "dsc") %>%
-    mutate(date = format(child[["dob"]] + round(.data$age * 365.25), "%Y%m%d"))
+
+  #select the items present in data
+  items <- dscore::get_itemnames(instrument = append)
+  items <- items[items %in% time$yname]
+
+  # check key - set default for gsed
+  key <- "gsed2510"
+  if (all(is.na(get_tau(items, key = key)))) {
+    key <- "gsed2406"
+  }
+  # get the defaults for key
+  idx <- which(dscore::builtin_keys$key == key)
+  # get population
+  population = dscore::builtin_keys$base_population[idx]
+
+  dsc <- time %>%
+    dplyr::select(-.data$zname, -.data$z) |>
+    tidyr::pivot_wider(
+      id_cols = c(.data$age, .data$xname),
+      names_from = .data$yname,
+      values_from = .data$y
+    ) |>
+    dscore::dscore(key = key, population = population)
 
   if (output == "last_visit") {
-    return(df[nrow(df), ])
+    return(dsc[nrow(dsc), ])
   }
   if (output == "last_dscore") {
-    return(pull(df[nrow(df), "y"]))
+    return(dsc[nrow(dsc), "d"])
   }
-  df
+  dsc
 }

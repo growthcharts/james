@@ -18,6 +18,7 @@
 #' @importFrom jose            jwt_decode_sig
 #' @importFrom rlang           .data
 #' @importFrom svglite         svgstring
+#' @importFrom tidyr           pivot_wider
 #' @importFrom utils           hasName install.packages installed.packages
 #'                             packageDate packageVersion
 #' @importFrom vwc             select_vwc
