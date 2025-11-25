@@ -1,3 +1,9 @@
+- Makes `calculate_dscore()` work for both `ddi` and `gs1` items
+  + Updates the `append` argument `ddi` and `gs1`
+  + Updates calculation to use all items found in `yname`
+  + Select `key` based on observed items in data, not just `append` argument 
+  + Updates `openapi.in.yaml` to reflect these changes
+
 # james 1.8.1 (November 2025)
 
 - Solves a problem with nested uploads on `localhost` with end points `site/request` and `blend/request`.
