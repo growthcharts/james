@@ -70,5 +70,5 @@ select_vwc <- function(
     passed_items = time[time$y == 1.00, ]$yname
   )
 
-  return(paste(unique(vwc), collapse = "\n"))
+  return(jsonlite::toJSON(unique(vwc), auto_unbox = TRUE))
 }
