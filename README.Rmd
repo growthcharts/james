@@ -30,25 +30,34 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 
 ### Primary JAMES user functionality
 
-  | Verb  | API Endpoint stem          | Description                                | Maps to `james` function |
-  |:------|:-------------------------- |:------------------------------------------ |:-------------------------|
-  | POST  | `/data/upload/{dfm}`       | Upload child data                          | `upload_data()`          |
-  | POST  | `/charts/draw/{ffm}`       | Draw child data on growth chart            | `draw_chart()`           |
-  | POST  | `/charts/list/{dfm}`       | List available growth charts               | `list_charts()`          |
-  | POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
-  | POST  | `/screeners/apply/{dfm}`   | Apply growth screeners to child data       | `apply_screeners()`      |
-  | POST  | `/screeners/list/{dfm}`    | List available growth screeners            | `list_screeners()`       |
-  | POST  | `/site/request/{dfm}`      | Request personalised site                  | `request_site()`         |
-  | POST  | `/dscore/calculate/{dfm}`  | Obtain child development score (d-score)   | `calculate_dscore()`     |
-  | POST  | `/vwc/select/{dfm}`        | Obtain recommended development milestones  | `select_vwc()`           |
-  | POST  | `/blend/request/{sfm}`     | Obtain a blend from multiple end points    | `request_blend()`        |
-  | POST  | `/version/{dfm}`           | Obtain version information                 | `version()`              |
-  | GET   | `/{session}/{info}`        | Extract session details                    |                          |
-  | GET   | `/{2}/{1}/man`             | Consult R help                             | `help({1}_{2})`          |
-  
+| Verb  | API end point              | Description                                | Maps to `james` function |
+|:------|:-------------------------- |:------------------------------------------ |:-------------------------|
+| POST  | `/version/{dfm}`           | Obtain version information                 | `version()`              |
+| POST  | `/data/upload/{dfm}`       | Upload child data                          | `upload_data()`          |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/charts/draw/{ffm}`       | Draw child data on growth chart            | `draw_chart()`           |
+| POST  | `/charts/list/{dfm}`       | List available growth charts               | `list_charts()`          |
+| POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/dscore/calculate/{dfm}`  | Calculate developmental score (D-score)    | `calculate_dscore()`     |
+| POST  | `/vwc/select/{dfm}`        | Select developmental milestones for age    | `select_vwc()`           |
+| POST  | `/vwc/percentiles/{dfm}`   | Obtain developmental milestone percentiles | `percentiles_vwc()`      |
+| POST  | `/dcat/calculate/{dfm}`    | Adaptive testing of milestones             | `dcat()`                 |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/screeners/list/{dfm}`    | List available growth screeners            | `list_screeners()`       |
+| POST  | `/screeners/apply/{dfm}`   | Apply growth screeners to child data       | `apply_screeners()`      |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| GET   | `/site`                    | Request empty site                         | `request_site()`         |
+| POST  | `/site/request/{dfm}`      | Request personalised site                  | `request_site()`         |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/blend/request/{sfm}`     | Obtain a blend from multiple end points    | `request_blend()`        |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| GET   | `/{session}/{info}`        | Extract session details                    |                          |
+| GET   | `/{2}/{1}/man`             | Consult R help                             | `help({1}_{2})`          |
+
 The table lists the defined API end points and the mapping to each end point to the corresponding R function. 
 
-The OpenAPI definition of JAMES is at <https://james.groeidiagrammen.nl/docs>.
+The definition of the JAMES endpoints can be found at [OpenAPI specification](https://james.groeidiagrammen.nl/docs/).
 
 ## Resources
 

@@ -1,8 +1,11 @@
+# james 1.8.2 (November 2025)
+
 - Makes `calculate_dscore()` work for both `ddi` and `gs1` items
   + Updates the `append` argument `ddi` and `gs1`
   + Updates calculation to use all items found in `yname`
-  + Select `key` based on observed items in data, not just `append` argument 
+  + Selects `key` based on observed items in data, not just `append` argument 
   + Updates `openapi.in.yaml` to reflect these changes
+- Returns value of `select_vwc()` as character vector
 
 # james 1.8.1 (November 2025)
 
