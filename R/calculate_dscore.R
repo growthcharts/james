@@ -80,5 +80,6 @@ calculate_dscore <- function(
   if (output == "last_dscore") {
     return(dsc[nrow(dsc), "d"])
   }
+  dsc <- list(abc = dsc, zeg = dsc)
   dsc
 }
