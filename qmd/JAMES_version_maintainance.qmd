@@ -46,7 +46,9 @@ Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock 
 
 If DESCRIPTION version changes, update two files with new version numbers
 
-```{r}
+-   Rename `getting_started.qmdx` --> `getting_started.qmd`
+
+```{r eval= FALSE}
 james:::update_version_files(
   "inst/www/index.html",
   "vignettes/articles/getting_started.qmd",
@@ -58,7 +60,7 @@ james:::update_version_files(
 
 The source text of the OpenAPI specification is in `inst/spec/openapi.in.yaml`. Before building the package, this file needs updating with the current JAMES version from the `DESCRIPTION` file. This ensures that the two remain in sync.
 
-```{r}
+```{r eval=FALSE}
 james:::update_openapi_spec()
 ```
 
@@ -71,6 +73,12 @@ james:::update_openapi_spec()
 
 ### Next steps
 
--   Update site: `devtools::build_site()`
+
+-   Update `quarto::quarto_render(input = "vignettes/articles/getting_started.qmd"`
+-   Rename `getting_started.qmd` --> `getting_started.qmdx`
+-   Move `vignettes/articles/geting_started.html` to `docs/articles/gatting_started.html`
+-   Move `vignettes/articles/geting_started_files/` to `docs/articles/gatting_started_files/`
+
+-   Update site: `pkgdown::build_site()`
 -   Push changes to GitHub
 -   Go to `jamesdocker` repo for building app

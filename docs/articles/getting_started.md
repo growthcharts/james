@@ -4,11 +4,15 @@
 
 Code
 
-JAMES 1.8.1 (November 2025)
+JAMES 1.8.2 (November 2025)
 
-Author
+Authors
 
-Stef van Buuren, Arjan Huizing, Iris Eekhout (TNO Child Health)
+[Stef van Buuren](https://stefvanbuuren.name)
+
+[Arjan Huizing](https://nl.linkedin.com/in/arjanhjhuizing)
+
+[Iris Eekhout](https://iriseekhout.com)
 
 ## Overview
 
@@ -28,6 +32,9 @@ requests from the Dutch Digital Child Health Record System
 4.0.0](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html)
 protocol. Child data are coded according to the [JSON data schema
 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json).
+
+> > Get to know JAMES. Browse the
+> > [tutorial](http://growthcharts.org/arnhem2025/) (in Dutch).
 
 The following sections illustrate how a client can make requests to
 JAMES using various client languages. In principle, any `HTTP` client
@@ -194,7 +201,7 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x063e1ebeed4510) is a unique session code.
+- `r$session` (like x09a87d329c5eec) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
@@ -212,10 +219,10 @@ fromJSON(content(r, type = "text", encoding = "UTF-8"))
     [1] "james"
 
     $packageVersion
-    [1] "1.8.1"
+    [1] "1.8.2"
 
     $packageDate
-    [1] "2025-11-24"
+    [1] "2025-11-25"
 
     $Rversion
     [1] "4.5.0"
@@ -249,13 +256,13 @@ server, each of which contains details on the response.
 cat resp
 ```
 
-    /ocpu/tmp/x091ffdd5957e41/R/.val
-    /ocpu/tmp/x091ffdd5957e41/R/version
-    /ocpu/tmp/x091ffdd5957e41/stdout
-    /ocpu/tmp/x091ffdd5957e41/source
-    /ocpu/tmp/x091ffdd5957e41/console
-    /ocpu/tmp/x091ffdd5957e41/info
-    /ocpu/tmp/x091ffdd5957e41/files/DESCRIPTION
+    /ocpu/tmp/x092b3dbb7f4a12/R/.val
+    /ocpu/tmp/x092b3dbb7f4a12/R/version
+    /ocpu/tmp/x092b3dbb7f4a12/stdout
+    /ocpu/tmp/x092b3dbb7f4a12/source
+    /ocpu/tmp/x092b3dbb7f4a12/console
+    /ocpu/tmp/x092b3dbb7f4a12/info
+    /ocpu/tmp/x092b3dbb7f4a12/files/DESCRIPTION
 
 The path element following `tmp/` is a unique session key. See
 <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU
@@ -271,8 +278,8 @@ cat value1
 
     {
       "package": "james",
-      "packageVersion": "1.8.1",
-      "packageDate": "2025-11-24",
+      "packageVersion": "1.8.2",
+      "packageDate": "2025-11-25",
       "Rversion": "4.5.0"
     }
 
@@ -286,8 +293,8 @@ cat value2
 
     {
       "package": "james",
-      "packageVersion": "1.8.1",
-      "packageDate": "2025-11-24",
+      "packageVersion": "1.8.2",
+      "packageDate": "2025-11-25",
       "Rversion": "4.5.0"
     }
 
@@ -515,7 +522,7 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x026d2405fe49d9"
+    [1] "x09f18da5bf5ee6"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
@@ -630,7 +637,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x0322a6adc37d73/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x03ed5141bc003d/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -915,31 +922,28 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x0bd20efc0385ea
+      Session : x090ac84cbe4517
 
     Parsed response:
-    'data.frame':   9 obs. of  9 variables:
-     $ age  : num  0.101 0.159 0.235 0.485 0.753 ...
-     $ xname: chr  "age" "age" "age" "age" ...
-     $ yname: chr  "dsc" "dsc" "dsc" "dsc" ...
-     $ zname: chr  "dsc_z" "dsc_z" "dsc_z" "dsc_z" ...
-     $ zref : chr  "ph_2023_dsc_female_40" "ph_2023_dsc_female_40" "ph_2023_dsc_female_40" "ph_2023_dsc_female_40" ...
-     $ x    : num  0.101 0.159 0.235 0.485 0.753 ...
-     $ y    : num  15.7 18 20.9 25.9 44.6 ...
-     $ z    : num  -0.058 0.022 -0.018 -1.476 0.908 ...
-     $ date : chr  "19890227" "19890320" "19890417" "19890717" ...
+    'data.frame':   20 obs. of  6 variables:
+     $ n  : int  0 5 3 5 10 12 11 10 9 10 ...
+     $ a  : num  NA 0.101 0.159 0.235 0.485 ...
+     $ p  : num  NA 0.6 0.667 0.6 0.5 ...
+     $ d  : num  NA 15.7 18 20.9 25.9 ...
+     $ sem: num  NA 3.29 3.83 3.32 2.65 ...
+     $ daz: num  NA -0.11 -0.182 -0.334 -1.919 ...
 
 ``` r
 head(r$parsed)
 ```
 
-         age xname yname zname                  zref      x     y      z     date
-    1 0.1013   age   dsc dsc_z ph_2023_dsc_female_40 0.1013 15.68 -0.058 19890227
-    2 0.1588   age   dsc dsc_z ph_2023_dsc_female_40 0.1588 18.01  0.022 19890320
-    3 0.2355   age   dsc dsc_z ph_2023_dsc_female_40 0.2355 20.93 -0.018 19890417
-    4 0.4846   age   dsc dsc_z ph_2023_dsc_female_40 0.4846 25.89 -1.476 19890717
-    5 0.7529   age   dsc dsc_z ph_2023_dsc_female_40 0.7529 44.58  0.908 19891023
-    6 1.0212   age   dsc dsc_z ph_2023_dsc_female_40 1.0212 51.59  0.900 19900129
+       n      a      p     d    sem    daz
+    1  0     NA     NA    NA     NA     NA
+    2  5 0.1013 0.6000 15.68 3.2945 -0.110
+    3  3 0.1588 0.6667 18.01 3.8258 -0.182
+    4  5 0.2355 0.6000 20.93 3.3205 -0.334
+    5 10 0.4846 0.5000 25.89 2.6506 -1.919
+    6 12 0.7529 0.9167 44.58 3.2903  0.674
 
 The D-score is found in column `y` and the DAZ is in column `z`.
 
@@ -957,22 +961,16 @@ milestones for a child based on the uploaded data.
 ``` r
 fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
 r <- james_post(host = host, path = "vwc/select/json", output = "table", txt = fn, percentiles = TRUE)
-r
+r$url
 ```
 
-    JAMES request:
-      Path    : vwc/select/json
-      Status  : 201
-      Session : x0c61a22fb94925
-
-    Parsed response:
-    [1] "ddifmd027\nddigmm073\nddifmd023\nddicmm050\nddicmm047\nddigmd074"
+    [1] "https://james.groeidiagrammen.nl/vwc/select/json"
 
 ``` r
-head(r$parsed)
+r$parsed
 ```
 
-    [1] "ddifmd027\nddigmm073\nddifmd023\nddicmm050\nddicmm047\nddigmd074"
+    [1] "ddifmd027" "ddigmm073" "ddifmd023" "ddicmm050" "ddicmm047" "ddigmd074"
 
 To be added
 
@@ -987,7 +985,7 @@ a selection of milestones. This can be done either directly using the
 
 ``` r
 r <- james_post(host = host, path = "vwc/percentiles/json", output = "table", vwc = "ddifmd018") 
-head(r$parsed)
+r$parsed
 ```
 
            item      D2     D10  D50     D90     D98      A2     A10     A50
@@ -1011,19 +1009,7 @@ be tested based on the `gs1` instrument, the default.
 ``` r
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
-r
-```
-
-    JAMES request:
-      Path    : dcat/calculate/json
-      Status  : 201
-      Session : x0a9becb2eeef1c
-
-    Parsed response:
-    [1] "gs1lgc110"
-
-``` r
-head(r$parsed)
+r$parsed
 ```
 
     [1] "gs1lgc110"
@@ -1035,19 +1021,7 @@ additionally specify a key that supports the `ddi` instrument.
 ``` r
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = "ddi", key = "gsed2406")
-r
-```
-
-    JAMES request:
-      Path    : dcat/calculate/json
-      Status  : 201
-      Session : x001daa21c55646
-
-    Parsed response:
-    [1] "ddifmd020"
-
-``` r
-head(r$parsed)
+r$parsed
 ```
 
     [1] "ddifmd020"
@@ -1205,7 +1179,7 @@ r <- james_post(host = host, path = "/site/request/json",
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x0a6863a89eac4a"
+    [1] "https://james.groeidiagrammen.nl/site?session=x049604aa081dfb"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1234,10 +1208,10 @@ site1
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x0f5a9c9377de2e
+      Session : x0893aea09f913c
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x018c1504214800"
+    [1] "https://james.groeidiagrammen.nl/site?session=x017e00c981b3ca"
 
 ``` r
 # Or manual URL construction (faster) 
@@ -1245,7 +1219,7 @@ site2 <- modify_url(url = host, path = "site", query = list(session = r$session)
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x018c1504214800"
+    [1] "https://james.groeidiagrammen.nl/site?session=x017e00c981b3ca"
 
 ``` r
 # browseURL(site1)
@@ -1265,7 +1239,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x0a6939a4a82a67"]
+    ["https://james.groeidiagrammen.nl/site?session=x0a6bec291125b2"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1288,13 +1262,13 @@ r
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x0e0100968c0f72
+      Session : x09a5a4a0355a64
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x0207492a25892f"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0207492a25892f"
+     $ session  : chr "x0d3162c15c2481"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0d3162c15c2481"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1359,8 +1333,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x04bed82b7eed41",
-      "site": "https://james.groeidiagrammen.nl/site?session=x04bed82b7eed41",
+      "session": "x0a701897d2684a",
+      "site": "https://james.groeidiagrammen.nl/site?session=x0a701897d2684a",
       "child": [
         {
           "id": -1,
@@ -1992,6 +1966,7 @@ $(cat .host)'/blend/request/json' \
 
 | Description | Status |
 |:---|:---|
+| [Tutorial (Dutch)](http://growthcharts.org/arnhem2025/) | open |
 | [Changelog](https://growthcharts.org/james/news/index.html) | open |
 | [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | open |
 | [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | open |

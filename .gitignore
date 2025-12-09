@@ -6,3 +6,5 @@ data-raw/data
 qmd/JAMES_version_maintainance.html
 qmd/JAMES_version_maintainance_files/
 **/.host
+
+/.quarto/

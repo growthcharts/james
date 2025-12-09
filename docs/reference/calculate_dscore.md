@@ -10,7 +10,8 @@ plots individual data on the growth chart.
 calculate_dscore(
   txt = "",
   session = "",
-  format = "1.0",
+  format = "3.1",
+  append = c("ddi", "gs1"),
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -31,6 +32,12 @@ calculate_dscore(
 - format:
 
   JSON schema version, e.g., `"3.0"`. Used when uploading.
+
+- append:
+
+  Optional vector of strings indicating which instrument to base D-score
+  calculations on. Currently supports `ddi` and `gs1`. Requires JSON
+  schema V3.0 or later.
 
 - output:
 
@@ -64,11 +71,6 @@ Stef van Buuren 2020
 fn <- system.file("testdata", "Laura_S.json", package = "james")
 df <- calculate_dscore(txt = fn)
 head(df, 4)
-#> # A tibble: 4 × 9
-#>     age xname yname zname zref                      x     y      z date    
-#>   <dbl> <chr> <chr> <chr> <chr>                 <dbl> <dbl>  <dbl> <chr>   
-#> 1 0.101 age   dsc   dsc_z ph_2023_dsc_female_40 0.101  15.7 -0.058 19890227
-#> 2 0.159 age   dsc   dsc_z ph_2023_dsc_female_40 0.159  18.0  0.022 19890320
-#> 3 0.236 age   dsc   dsc_z ph_2023_dsc_female_40 0.236  20.9 -0.018 19890417
-#> 4 0.485 age   dsc   dsc_z ph_2023_dsc_female_40 0.485  25.9 -1.48  19890717
+#> [1] a   n   p   d   sem daz
+#> <0 rows> (or 0-length row.names)
 ```

@@ -1,7 +1,13 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.8.1 (November 2025)
-author: Stef van Buuren, Arjan Huizing, Iris Eekhout (TNO Child Health)
+subtitle: JAMES 1.8.2 (November 2025)
+author:
+  - name: Stef van Buuren
+    url: https://stefvanbuuren.name
+  - name: Arjan Huizing
+    url: https://nl.linkedin.com/in/arjanhjhuizing
+  - name: Iris Eekhout
+    url: https://iriseekhout.com
 format:
   html:
     number-sections: false
@@ -40,6 +46,8 @@ JAMES is a web service for creating and interpreting charts of child growth and 
 
 JAMES is a RESTful API that runs on a remote host. The system accepts requests from the Dutch Digital Child Health Record System [DD-JGZ](https://www.ddjgz.nl) and other clients using a 
 the [Basisdataset JGZ 4.0.0](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html) protocol. Child data are coded according to the [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json).
+
+>> Get to know JAMES. Browse the [tutorial](http://growthcharts.org/arnhem2025/) (in Dutch).
 
 The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information.
 
@@ -687,8 +695,8 @@ The Van Wiechenonderzoek is a Dutch screening tool used to track a child’s dev
 ```{r}
 fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
 r <- james_post(host = host, path = "vwc/select/json", output = "table", txt = fn, percentiles = TRUE)
-r
-head(r$parsed)
+r$url
+r$parsed
 ```
 
 ##### **bash**
@@ -708,7 +716,7 @@ It is also possible to obtain a table of age and D-score percentiles for a selec
 
 ```{r}
 r <- james_post(host = host, path = "vwc/percentiles/json", output = "table", vwc = "ddifmd018") 
-head(r$parsed)
+r$parsed
 ```
 
 ##### **bash**
@@ -731,8 +739,7 @@ The following snippet uploads child data and requests the next item to be tested
 ```{r}
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
-r
-head(r$parsed)
+r$parsed
 ```
 
 By specifying the instrument we can specify whether we want to include `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must additionally specify a key that supports the `ddi` instrument.
@@ -740,8 +747,7 @@ By specifying the instrument we can specify whether we want to include `ddi` or 
 ```{r}
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = "ddi", key = "gsed2406")
-r
-head(r$parsed)
+r$parsed
 ```
 
 ##### **bash**
@@ -942,6 +948,7 @@ $(cat .host)'/blend/request/json' \
 
 | Description                                           | Status                                  |
 |:------------------------------------------------------|:----------------------------------------|
+| [Tutorial (Dutch)](http://growthcharts.org/arnhem2025/) | open |
 | [Changelog](https://growthcharts.org/james/news/index.html) | open |
 | [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | open     |
 | [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | open |

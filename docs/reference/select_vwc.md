@@ -64,5 +64,6 @@ Arjan Huizing 2025
 ``` r
 fn <- system.file("testdata", "Laura_S.json", package = "james")
 select_vwc(txt = fn, p = 50, n = 10)
-#> [1] "ddifmd027\nddigmm073\nddifmd023\nddifmd024\nddicmm050\nddifmd026\nddicmm047\nddigmd074\nddigmd075\nddicmm048"
+#>  [1] "ddifmd027" "ddigmm073" "ddifmd023" "ddifmd024" "ddicmm050" "ddifmd026"
+#>  [7] "ddicmm047" "ddigmd074" "ddigmd075" "ddicmm048"
 ```

@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: "1.8.0"
+  version: "1.8.2"
   title: JAMES
   description: >-
     The **Joint Automatic Measurement and Evaluation System (JAMES)** is a web
@@ -1403,6 +1403,12 @@ components:
             - '2.0'
             - '1.1'
             - '1.0'
+        append:
+          type: string
+          description: Which milestones should be included
+          enum:
+            - 'ddi'
+            - 'gs1'
         output:
           type: string
           description: Requested output type
@@ -1414,35 +1420,25 @@ components:
     calculate_dscore_return:
       type: object
       properties:
-        age:
+        a:
           type: number
           description: Age at which measurement was taken in decimal years
           example: 1.15
-        xname:
-          type: string
-          description: X outcome of measurement time
-        yname:
-          type: string
-          description: Y outcome of measurement time
-        zname:
-          type: string
-          description: Z outcome of measurement time
-        zref:
-          type: string
-          description: Reference used to calculate Z-score
-        x:
+        n:
+          type: nunber
+          description: Number of items used to calculate value
+        p:
           type: number
-          description: Value for X measurement
-        y:
+          description: Percentage of passed milestones
+        d:
           type: number
-          description: Value for X measurement
-        z:
+          description: D-score, the mean of the posterior distribution
+        sem:
           type: number
-          description: Value for X measurement
-        date:
-          type: date
-          description: Date of time when measurement was taken in yyyymmdd format
-          example: 20250101
+          description: Standard error of measruement, the standard deviation of the posterior distribution
+        daz:
+          type: number
+          description: D-score corrected for age, calculated in Z-scale.
     select_vwc_arguments:
       type: object
       properties:

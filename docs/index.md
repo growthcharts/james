@@ -24,27 +24,36 @@ at tno.nl\> for further information.
 
 ### Primary JAMES user functionality
 
-| Verb | API Endpoint stem | Description | Maps to `james` function |
+| Verb | API end point | Description | Maps to `james` function |
 |:---|:---|:---|:---|
+| POST | `/version/{dfm}` | Obtain version information | [`version()`](https://growthcharts.org/james/reference/version.md) |
 | POST | `/data/upload/{dfm}` | Upload child data | [`upload_data()`](https://growthcharts.org/james/reference/upload_data.md) |
+|   |   |   |   |
 | POST | `/charts/draw/{ffm}` | Draw child data on growth chart | [`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md) |
 | POST | `/charts/list/{dfm}` | List available growth charts | [`list_charts()`](https://growthcharts.org/james/reference/list_charts.md) |
 | POST | `/charts/validate/{dfm}` | Validate a chart code | [`validate_chartcode()`](https://growthcharts.org/james/reference/validate_chartcode.md) |
-| POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data | [`apply_screeners()`](https://growthcharts.org/james/reference/apply_screeners.md) |
+|   |   |   |   |
+| POST | `/dscore/calculate/{dfm}` | Calculate developmental score (D-score) | [`calculate_dscore()`](https://growthcharts.org/james/reference/calculate_dscore.md) |
+| POST | `/vwc/select/{dfm}` | Select developmental milestones for age | [`select_vwc()`](https://growthcharts.org/james/reference/select_vwc.md) |
+| POST | `/vwc/percentiles/{dfm}` | Obtain developmental milestone percentiles | [`percentiles_vwc()`](https://growthcharts.org/james/reference/percentiles_vwc.md) |
+| POST | `/dcat/calculate/{dfm}` | Adaptive testing of milestones | [`dcat()`](https://growthcharts.org/james/reference/dcat.md) |
+|   |   |   |   |
 | POST | `/screeners/list/{dfm}` | List available growth screeners | [`list_screeners()`](https://growthcharts.org/james/reference/list_screeners.md) |
+| POST | `/screeners/apply/{dfm}` | Apply growth screeners to child data | [`apply_screeners()`](https://growthcharts.org/james/reference/apply_screeners.md) |
+|   |   |   |   |
+| GET | `/site` | Request empty site | [`request_site()`](https://growthcharts.org/james/reference/request_site.md) |
 | POST | `/site/request/{dfm}` | Request personalised site | [`request_site()`](https://growthcharts.org/james/reference/request_site.md) |
-| POST | `/dscore/calculate/{dfm}` | Obtain child development score (d-score) | [`calculate_dscore()`](https://growthcharts.org/james/reference/calculate_dscore.md) |
-| POST | `/vwc/select/{dfm}` | Obtain recommended development milestones | [`select_vwc()`](https://growthcharts.org/james/reference/select_vwc.md) |
+|   |   |   |   |
 | POST | `/blend/request/{sfm}` | Obtain a blend from multiple end points | [`request_blend()`](https://growthcharts.org/james/reference/request_blend.md) |
-| POST | `/version/{dfm}` | Obtain version information | [`version()`](https://growthcharts.org/james/reference/version.md) |
+|   |   |   |   |
 | GET | `/{session}/{info}` | Extract session details |  |
 | GET | `/{2}/{1}/man` | Consult R help | `help({1}_{2})` |
 
 The table lists the defined API end points and the mapping to each end
 point to the corresponding R function.
 
-The OpenAPI definition of JAMES is at
-<https://james.groeidiagrammen.nl/docs>.
+The definition of the JAMES endpoints can be found at [OpenAPI
+specification](https://james.groeidiagrammen.nl/docs/).
 
 ## Resources
 
