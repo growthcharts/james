@@ -67,16 +67,22 @@ calculate_ddomain <- function(
   # get population
   population = dscore::builtin_keys$base_population[idx]
 
-  dsc <- time %>%
+  # transform data
+  time <- time %>%
     dplyr::select(-.data$zname, -.data$z) |>
     tidyr::pivot_wider(
       id_cols = c(.data$age, .data$xname),
       names_from = .data$yname,
       values_from = .data$y
-    ) |>
+    )
+
+  # calculate both D-score and domain scores
+  dsc <- time |>
+    dscore::dscore(key = key, population = population)
+  domains <- time |>
     dscore::ddomain(key = key, population = population,
                     set = set, domain = domain)
+  dsc <- c(list("dscore" = dsc), domains)
 
-
-  dsc
+  return(dsc)
 }
