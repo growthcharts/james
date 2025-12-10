@@ -1,3 +1,5 @@
+- Repair ocpu.url() to work with both production and localhost
+
 # james 1.8.2 (November 2025)
 
 - Makes `calculate_dscore()` work for both `ddi` and `gs1` items
