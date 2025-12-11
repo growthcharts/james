@@ -46,6 +46,8 @@ reference:
     desc: Main commands to communicate with JAMES
     contents:
       - apply_screeners
+      - calculate_dscore
+      - calculate_ddomain
       - dcat
       - dcat_start
       - dcat_next
@@ -64,7 +66,6 @@ reference:
     desc: Auxiliary functions for JAMES
     contents:
       - authenticate
-      - calculate_dscore
       - convert_tgt_chartadvice
       - get_session_object
       - select_chart

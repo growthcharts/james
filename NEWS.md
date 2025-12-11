@@ -1,8 +1,7 @@
+# james 1.9.0 (December 2025)
 
-# james 1.8.3.9000 (December 2025)
-
+- Adds the endpoint `/dscore/domain/{dfm}` to calculate domain-level D-scores. See API documentation for more detail on how to implement these.
 - Update to `dscore 2.0.6`, which adds the `ddomain()` function and `builtin_domains` internal data to facilitate domain-level scoring
-- Repair `ocpu.url()` to work with both production and localhost
 
 # james 1.8.2 (November 2025)
 

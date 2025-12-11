@@ -40,6 +40,7 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 | POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/dscore/calculate/{dfm}`  | Calculate developmental score (D-score)    | `calculate_dscore()`     |
+| POST  | `/ddomain/calculate/{dfm}` | Calculate domain scores                    | `calculate_ddomain()`    |
 | POST  | `/vwc/select/{dfm}`        | Select developmental milestones for age    | `select_vwc()`           |
 | POST  | `/vwc/percentiles/{dfm}`   | Obtain developmental milestone percentiles | `percentiles_vwc()`      |
 | POST  | `/dcat/calculate/{dfm}`    | Adaptive testing of milestones             | `dcat()`                 |

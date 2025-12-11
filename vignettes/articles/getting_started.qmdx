@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.8.2 (November 2025)
+subtitle: JAMES 1.9.0 (December 2025)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -65,6 +65,7 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 | POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/dscore/calculate/{dfm}`  | Calculate developmental score (D-score)    | `calculate_dscore()`     |
+| POST  | `/ddomain/calculate/{dfm}` | Calculate developmental domain scores      | `calculate_ddomain()`    |
 | POST  | `/vwc/select/{dfm}`        | Select developmental milestones for age    | `select_vwc()`           |
 | POST  | `/vwc/percentiles/{dfm}`   | Obtain developmental milestone percentiles | `percentiles_vwc()`      |
 | POST  | `/dcat/calculate/{dfm}`    | Adaptive testing of milestones             | `dcat()`                 |
@@ -673,6 +674,27 @@ The D-score is a developmental score that is used to assess the development of c
 ```{r}
 fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
 r <- james_post(host = host, path = "dscore/calculate/json", output = "table", txt = fn)
+r
+head(r$parsed)
+```
+
+The D-score is found in column `y` and the DAZ is in column `z`.
+
+##### **bash**
+
+:::
+
+### **`/ddomain/calculate`**: Calculate domain scores
+
+::: panel-tabset
+
+##### **R**
+
+The D-score is a one-number summary measure of child development. The `/ddomain/calculate` end point breaks down the D-score into two or more domains. 
+
+```{r}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "ddomain/calculate/json", output = "table", txt = fn)
 r
 head(r$parsed)
 ```
