@@ -1,7 +1,7 @@
 Package: james
 Type: Package
 Title: Joint Automatic Measurement and Evaluation System
-Version: 1.8.3.9000
+Version: 1.9.0
 Authors@R: c(person("Stef", "van Buuren", email = "stef.vanbuuren@tno.nl", role = c("cre", "aut")), 
              person("Arjan", "Huizing", email = "arjan.huizing@tno.nl", role = "aut"),
              person("Iris", "Eekhout", email = "iris.eekhout@tno.nl", role = "aut"))
@@ -23,11 +23,11 @@ Imports:
     chartplotter (>= 0.36.0),
     dcat,
     dplyr,
-    dscore (>= 2.0.0),
+    dscore (>= 2.0.6),
     curl,
     grDevices,
     grid (>= 4.1.0),
-    growthscreener (>= 1.23.0),
+    growthscreener (>= 1.24.0),
     httr,
     jamesclient (>= 0.35.0),
     jose,
@@ -37,7 +37,7 @@ Imports:
     utils,
     vwc
 Suggests: 
-    jamesdemodata (>= 0.11.0),
+    jamesdemodata (>= 0.12.0),
     knitr,
     openssl,
     rmarkdown,
