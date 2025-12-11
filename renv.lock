@@ -1333,8 +1333,11 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "d-score",
       "RemoteRepo": "dscore",
-      "RemoteRef": "master",
-      "RemoteSha": "8cee54779e4987207cc9ed27f74ef91415b1378b"
+      "RemoteUsername": "d-score",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "8cee54779e4987207cc9ed27f74ef91415b1378b",
+      "Author": "Stef van Buuren [cre, aut], Iris Eekhout [aut], Arjan Huizing [aut], Jonathan Seiden [aut]",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
     },
     "dscoreddi": {
       "Package": "dscoreddi",

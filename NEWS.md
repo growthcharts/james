@@ -1,3 +1,9 @@
+
+# james 1.8.3.9000 (December 2025)
+
+- Update to `dscore 2.0.6`, which adds the `ddomain()` function and `builtin_domains` internal data to facilitate domain-level scoring
+- Repair `ocpu.url()` to work with both production and localhost
+
 # james 1.8.2 (November 2025)
 
 - Makes `calculate_dscore()` work for both `ddi` and `gs1` items
