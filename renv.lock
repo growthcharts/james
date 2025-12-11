@@ -1288,7 +1288,7 @@
     },
     "dscore": {
       "Package": "dscore",
-      "Version": "2.0.5",
+      "Version": "2.0.6",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "D-Score for Child Development",
@@ -1330,9 +1330,9 @@
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "dscore",
-      "RemoteUsername": "D-score",
+      "RemoteUsername": "d-score",
       "RemoteRef": "HEAD",
-      "RemoteSha": "da00387ad833f067816b17f546954a970dc2e2aa",
+      "RemoteSha": "8cee54779e4987207cc9ed27f74ef91415b1378b",
       "Author": "Stef van Buuren [cre, aut], Iris Eekhout [aut], Arjan Huizing [aut], Jonathan Seiden [aut]",
       "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
     },
