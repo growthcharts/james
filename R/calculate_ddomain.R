@@ -43,7 +43,6 @@ calculate_ddomain <- function(
     session <- loc2session(loc)
   }
 
-  output <- match.arg(output)
   tgt <- get_tgt(txt = txt, session = session, format = format, append = append)
 
   if (!is.list(tgt)) {
