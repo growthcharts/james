@@ -4,7 +4,7 @@
 
 Code
 
-JAMES 1.8.2 (November 2025)
+JAMES 1.9.0 (December 2025)
 
 Authors
 
@@ -58,6 +58,7 @@ at tno.nl\> for further information.
 | POST | `/charts/validate/{dfm}` | Validate a chart code | `validate_chartcode()` |
 |   |   |   |   |
 | POST | `/dscore/calculate/{dfm}` | Calculate developmental score (D-score) | `calculate_dscore()` |
+| POST | `/ddomain/calculate/{dfm}` | Calculate developmental domain scores | `calculate_ddomain()` |
 | POST | `/vwc/select/{dfm}` | Select developmental milestones for age | `select_vwc()` |
 | POST | `/vwc/percentiles/{dfm}` | Obtain developmental milestone percentiles | `percentiles_vwc()` |
 | POST | `/dcat/calculate/{dfm}` | Adaptive testing of milestones | `dcat()` |
@@ -201,7 +202,7 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x09a87d329c5eec) is a unique session code.
+- `r$session` (like x0b6a4f6909742d) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
@@ -219,10 +220,10 @@ fromJSON(content(r, type = "text", encoding = "UTF-8"))
     [1] "james"
 
     $packageVersion
-    [1] "1.8.2"
+    [1] "1.9.0"
 
     $packageDate
-    [1] "2025-11-25"
+    [1] "2025-12-11"
 
     $Rversion
     [1] "4.5.0"
@@ -256,13 +257,13 @@ server, each of which contains details on the response.
 cat resp
 ```
 
-    /ocpu/tmp/x092b3dbb7f4a12/R/.val
-    /ocpu/tmp/x092b3dbb7f4a12/R/version
-    /ocpu/tmp/x092b3dbb7f4a12/stdout
-    /ocpu/tmp/x092b3dbb7f4a12/source
-    /ocpu/tmp/x092b3dbb7f4a12/console
-    /ocpu/tmp/x092b3dbb7f4a12/info
-    /ocpu/tmp/x092b3dbb7f4a12/files/DESCRIPTION
+    /ocpu/tmp/x009bb0031c90cb/R/.val
+    /ocpu/tmp/x009bb0031c90cb/R/version
+    /ocpu/tmp/x009bb0031c90cb/stdout
+    /ocpu/tmp/x009bb0031c90cb/source
+    /ocpu/tmp/x009bb0031c90cb/console
+    /ocpu/tmp/x009bb0031c90cb/info
+    /ocpu/tmp/x009bb0031c90cb/files/DESCRIPTION
 
 The path element following `tmp/` is a unique session key. See
 <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU
@@ -278,8 +279,8 @@ cat value1
 
     {
       "package": "james",
-      "packageVersion": "1.8.2",
-      "packageDate": "2025-11-25",
+      "packageVersion": "1.9.0",
+      "packageDate": "2025-12-11",
       "Rversion": "4.5.0"
     }
 
@@ -293,8 +294,8 @@ cat value2
 
     {
       "package": "james",
-      "packageVersion": "1.8.2",
-      "packageDate": "2025-11-25",
+      "packageVersion": "1.9.0",
+      "packageDate": "2025-12-11",
       "Rversion": "4.5.0"
     }
 
@@ -522,7 +523,7 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x09f18da5bf5ee6"
+    [1] "x09d5175dc0a777"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
@@ -637,7 +638,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x03ed5141bc003d/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x0907da7acaacca/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -922,7 +923,7 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x090ac84cbe4517
+      Session : x0adfe94507d59b
 
     Parsed response:
     'data.frame':   20 obs. of  6 variables:
@@ -944,6 +945,195 @@ head(r$parsed)
     4  5 0.2355 0.6000 20.93 3.3205 -0.334
     5 10 0.4846 0.5000 25.89 2.6506 -1.919
     6 12 0.7529 0.9167 44.58 3.2903  0.674
+
+The D-score is found in column `y` and the DAZ is in column `z`.
+
+### **`/ddomain/calculate`**: Calculate domain scores
+
+- [**R**](https://growthcharts.org/james/articles/)
+- [**bash**](https://growthcharts.org/james/articles/)
+
+The D-score is a one-number summary measure of child development. The
+`/ddomain/calculate` end point breaks down the D-score into two or more
+domains.
+
+``` r
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "ddomain/calculate/json", output = "table", txt = fn)
+r
+```
+
+    JAMES request:
+      Path    : ddomain/calculate/json
+      Status  : 201
+      Session : x0c1a043cdf86fc
+
+    Parsed response:
+    List of 6
+     $ dscore    :'data.frame': 20 obs. of  6 variables:
+      ..$ n  : int [1:20] 0 5 3 5 10 12 11 10 9 10 ...
+      ..$ a  : num [1:20] NA 0.101 0.159 0.235 0.485 ...
+      ..$ p  : num [1:20] NA 0.6 0.667 0.6 0.5 ...
+      ..$ d  : num [1:20] NA 15.7 18 20.9 25.9 ...
+      ..$ sem: num [1:20] NA 3.29 3.83 3.32 2.65 ...
+      ..$ daz: num [1:20] NA -0.11 -0.182 -0.334 -1.919 ...
+     $ grossmotor:'data.frame': 20 obs. of  2 variables:
+      ..$ a: num [1:20] 0 0.101 0.159 0.235 0.485 ...
+      ..$ n: int [1:20] 0 0 0 0 0 0 0 0 0 0 ...
+     $ finemotor :'data.frame': 20 obs. of  2 variables:
+      ..$ a: num [1:20] 0 0.101 0.159 0.235 0.485 ...
+      ..$ n: int [1:20] 0 0 0 0 0 0 0 0 0 0 ...
+     $ language  :'data.frame': 20 obs. of  2 variables:
+      ..$ a: num [1:20] 0 0.101 0.159 0.235 0.485 ...
+      ..$ n: int [1:20] 0 0 0 0 0 0 0 0 0 0 ...
+     $ cognitive :'data.frame': 20 obs. of  2 variables:
+      ..$ a: num [1:20] 0 0.101 0.159 0.235 0.485 ...
+      ..$ n: int [1:20] 0 0 0 0 0 0 0 0 0 0 ...
+     $ social    :'data.frame': 20 obs. of  2 variables:
+      ..$ a: num [1:20] 0 0.101 0.159 0.235 0.485 ...
+      ..$ n: int [1:20] 0 0 0 0 0 0 0 0 0 0 ...
+
+``` r
+head(r$parsed)
+```
+
+    $dscore
+        n      a      p     d    sem    daz
+    1   0     NA     NA    NA     NA     NA
+    2   5 0.1013 0.6000 15.68 3.2945 -0.110
+    3   3 0.1588 0.6667 18.01 3.8258 -0.182
+    4   5 0.2355 0.6000 20.93 3.3205 -0.334
+    5  10 0.4846 0.5000 25.89 2.6506 -1.919
+    6  12 0.7529 0.9167 44.58 3.2903  0.674
+    7  11 1.0212 0.9091 51.59 3.2715  0.550
+    8  10 1.2512 0.8000 54.82 2.9505  0.013
+    9   9 1.5387 0.6667 57.08 2.9298 -0.691
+    10 10 2.0397 1.0000 70.72 3.6740  1.377
+    11  0     NA     NA    NA     NA     NA
+    12  0     NA     NA    NA     NA     NA
+    13  0     NA     NA    NA     NA     NA
+    14  0     NA     NA    NA     NA     NA
+    15  0     NA     NA    NA     NA     NA
+    16  0     NA     NA    NA     NA     NA
+    17  0     NA     NA    NA     NA     NA
+    18  0     NA     NA    NA     NA     NA
+    19  0     NA     NA    NA     NA     NA
+    20  0     NA     NA    NA     NA     NA
+
+    $grossmotor
+            a n
+    1  0.0000 0
+    2  0.1013 0
+    3  0.1588 0
+    4  0.2355 0
+    5  0.4846 0
+    6  0.7529 0
+    7  1.0212 0
+    8  1.2512 0
+    9  1.5387 0
+    10 2.0397 0
+    11 0.0000 0
+    12 0.1013 0
+    13 0.1588 0
+    14 0.2355 0
+    15 0.4846 0
+    16 0.7529 0
+    17 1.0212 0
+    18 1.2512 0
+    19 1.5387 0
+    20 2.0397 0
+
+    $finemotor
+            a n
+    1  0.0000 0
+    2  0.1013 0
+    3  0.1588 0
+    4  0.2355 0
+    5  0.4846 0
+    6  0.7529 0
+    7  1.0212 0
+    8  1.2512 0
+    9  1.5387 0
+    10 2.0397 0
+    11 0.0000 0
+    12 0.1013 0
+    13 0.1588 0
+    14 0.2355 0
+    15 0.4846 0
+    16 0.7529 0
+    17 1.0212 0
+    18 1.2512 0
+    19 1.5387 0
+    20 2.0397 0
+
+    $language
+            a n
+    1  0.0000 0
+    2  0.1013 0
+    3  0.1588 0
+    4  0.2355 0
+    5  0.4846 0
+    6  0.7529 0
+    7  1.0212 0
+    8  1.2512 0
+    9  1.5387 0
+    10 2.0397 0
+    11 0.0000 0
+    12 0.1013 0
+    13 0.1588 0
+    14 0.2355 0
+    15 0.4846 0
+    16 0.7529 0
+    17 1.0212 0
+    18 1.2512 0
+    19 1.5387 0
+    20 2.0397 0
+
+    $cognitive
+            a n
+    1  0.0000 0
+    2  0.1013 0
+    3  0.1588 0
+    4  0.2355 0
+    5  0.4846 0
+    6  0.7529 0
+    7  1.0212 0
+    8  1.2512 0
+    9  1.5387 0
+    10 2.0397 0
+    11 0.0000 0
+    12 0.1013 0
+    13 0.1588 0
+    14 0.2355 0
+    15 0.4846 0
+    16 0.7529 0
+    17 1.0212 0
+    18 1.2512 0
+    19 1.5387 0
+    20 2.0397 0
+
+    $social
+            a n
+    1  0.0000 0
+    2  0.1013 0
+    3  0.1588 0
+    4  0.2355 0
+    5  0.4846 0
+    6  0.7529 0
+    7  1.0212 0
+    8  1.2512 0
+    9  1.5387 0
+    10 2.0397 0
+    11 0.0000 0
+    12 0.1013 0
+    13 0.1588 0
+    14 0.2355 0
+    15 0.4846 0
+    16 0.7529 0
+    17 1.0212 0
+    18 1.2512 0
+    19 1.5387 0
+    20 2.0397 0
 
 The D-score is found in column `y` and the DAZ is in column `z`.
 
@@ -1179,7 +1369,7 @@ r <- james_post(host = host, path = "/site/request/json",
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x049604aa081dfb"
+    [1] "https://james.groeidiagrammen.nl/site?session=x02f503e02c99ce"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1208,10 +1398,10 @@ site1
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x0893aea09f913c
+      Session : x0093c56db4102f
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x017e00c981b3ca"
+    [1] "https://james.groeidiagrammen.nl/site?session=x05bd4eca602192"
 
 ``` r
 # Or manual URL construction (faster) 
@@ -1219,7 +1409,7 @@ site2 <- modify_url(url = host, path = "site", query = list(session = r$session)
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x017e00c981b3ca"
+    [1] "https://james.groeidiagrammen.nl/site?session=x05bd4eca602192"
 
 ``` r
 # browseURL(site1)
@@ -1239,7 +1429,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x0a6bec291125b2"]
+    ["https://james.groeidiagrammen.nl/site?session=x0d9f1ac59d10de"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1262,13 +1452,13 @@ r
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x09a5a4a0355a64
+      Session : x0b60b15e49301d
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x0d3162c15c2481"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0d3162c15c2481"
+     $ session  : chr "x0522a8bb104129"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0522a8bb104129"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1333,8 +1523,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x0a701897d2684a",
-      "site": "https://james.groeidiagrammen.nl/site?session=x0a701897d2684a",
+      "session": "x070b186705e321",
+      "site": "https://james.groeidiagrammen.nl/site?session=x070b186705e321",
       "child": [
         {
           "id": -1,

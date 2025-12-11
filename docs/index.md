@@ -34,6 +34,7 @@ at tno.nl\> for further information.
 | POST | `/charts/validate/{dfm}` | Validate a chart code | [`validate_chartcode()`](https://growthcharts.org/james/reference/validate_chartcode.md) |
 |   |   |   |   |
 | POST | `/dscore/calculate/{dfm}` | Calculate developmental score (D-score) | [`calculate_dscore()`](https://growthcharts.org/james/reference/calculate_dscore.md) |
+| POST | `/ddomain/calculate/{dfm}` | Calculate domain scores | [`calculate_ddomain()`](https://growthcharts.org/james/reference/calculate_ddomain.md) |
 | POST | `/vwc/select/{dfm}` | Select developmental milestones for age | [`select_vwc()`](https://growthcharts.org/james/reference/select_vwc.md) |
 | POST | `/vwc/percentiles/{dfm}` | Obtain developmental milestone percentiles | [`percentiles_vwc()`](https://growthcharts.org/james/reference/percentiles_vwc.md) |
 | POST | `/dcat/calculate/{dfm}` | Adaptive testing of milestones | [`dcat()`](https://growthcharts.org/james/reference/dcat.md) |

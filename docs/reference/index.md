@@ -6,6 +6,10 @@ Main commands to communicate with JAMES
 
 - [`apply_screeners()`](https://growthcharts.org/james/reference/apply_screeners.md)
   : Apply growth screeners to child data
+- [`calculate_dscore()`](https://growthcharts.org/james/reference/calculate_dscore.md)
+  : Calculates the D-score and DAZ for each visit
+- [`calculate_ddomain()`](https://growthcharts.org/james/reference/calculate_ddomain.md)
+  : Calculates the domain specific D-score and DAZ for each visit
 - [`dcat()`](https://growthcharts.org/james/reference/dcat.md) : Applies
   the adaptive test algorithm to determine the next step: administer the
   next item or stop test and return D-score.
@@ -47,8 +51,6 @@ Auxiliary functions for JAMES
 
 - [`authenticate()`](https://growthcharts.org/james/reference/authenticate.md)
   : Authentication request
-- [`calculate_dscore()`](https://growthcharts.org/james/reference/calculate_dscore.md)
-  : Calculates the D-score and DAZ for each visit
 - [`convert_tgt_chartadvice()`](https://growthcharts.org/james/reference/convert_tgt_chartadvice.md)
   : Derive advice on chart choice from data
 - [`get_session_object()`](https://growthcharts.org/james/reference/get_session_object.md)

@@ -72,9 +72,9 @@ Iris Eekhout 2025
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat_start(txt = fn, p = 50)
 #>                item
-#> gs1cgc128 gs1cgc128
-#>                                                                                                                                                                                                                label
-#> gs1cgc128 SF128 Does your child understand the term 'longest'? For example, if you ask him/her to choose 'which is the longest of 3 objects?' (e.g. 3 spoons or sticks), would he/she be able to choose the longest?
+#> gs1lgc136 gs1lgc136
+#>                                                                                                                                                                                    label
+#> gs1lgc136 SF136 Can your child talk about things that will happen in the future using correct language (e.g., "Tomorrow he will attend school" or "Next week we will go to the market")?
 #>             tau
-#> gs1cgc128 73.47
+#> gs1lgc136 74.65
 ```

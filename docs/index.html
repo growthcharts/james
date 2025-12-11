@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,332 +69,155 @@
 </h3>
 <table style="width:100%;" class="table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 26%">
-<col style="width: 41%">
-<col style="width: 25%">
+<col width="6%">
+<col width="26%">
+<col width="41%">
+<col width="25%">
 </colgroup>
 <thead><tr>
-<th style="text-align: left;">
-Verb
-</th>
-<th style="text-align: left;">
-API end point
-</th>
-<th style="text-align: left;">
-Description
-</th>
-<th style="text-align: left;">
-Maps to <code>james</code> function
-</th>
+<th align="left">Verb</th>
+<th align="left">API end point</th>
+<th align="left">Description</th>
+<th align="left">Maps to <code>james</code> function</th>
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/version/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Obtain version information
-</td>
-<td style="text-align: left;">
-<code><a href="reference/version.html">version()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/version/{dfm}</code></td>
+<td align="left">Obtain version information</td>
+<td align="left"><code><a href="reference/version.html">version()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/data/upload/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Upload child data
-</td>
-<td style="text-align: left;">
-<code><a href="reference/upload_data.html">upload_data()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/data/upload/{dfm}</code></td>
+<td align="left">Upload child data</td>
+<td align="left"><code><a href="reference/upload_data.html">upload_data()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/charts/draw/{ffm}</code>
-</td>
-<td style="text-align: left;">
-Draw child data on growth chart
-</td>
-<td style="text-align: left;">
-<code><a href="reference/draw_chart.html">draw_chart()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/charts/draw/{ffm}</code></td>
+<td align="left">Draw child data on growth chart</td>
+<td align="left"><code><a href="reference/draw_chart.html">draw_chart()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/charts/list/{dfm}</code>
-</td>
-<td style="text-align: left;">
-List available growth charts
-</td>
-<td style="text-align: left;">
-<code><a href="reference/list_charts.html">list_charts()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/charts/list/{dfm}</code></td>
+<td align="left">List available growth charts</td>
+<td align="left"><code><a href="reference/list_charts.html">list_charts()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/charts/validate/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Validate a chart code
-</td>
-<td style="text-align: left;">
-<code><a href="reference/validate_chartcode.html">validate_chartcode()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/charts/validate/{dfm}</code></td>
+<td align="left">Validate a chart code</td>
+<td align="left"><code><a href="reference/validate_chartcode.html">validate_chartcode()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/dscore/calculate/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Calculate developmental score (D-score)
-</td>
-<td style="text-align: left;">
-<code><a href="reference/calculate_dscore.html">calculate_dscore()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/dscore/calculate/{dfm}</code></td>
+<td align="left">Calculate developmental score (D-score)</td>
+<td align="left"><code><a href="reference/calculate_dscore.html">calculate_dscore()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/vwc/select/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Select developmental milestones for age
-</td>
-<td style="text-align: left;">
-<code><a href="reference/select_vwc.html">select_vwc()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/ddomain/calculate/{dfm}</code></td>
+<td align="left">Calculate domain scores</td>
+<td align="left"><code><a href="reference/calculate_ddomain.html">calculate_ddomain()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/vwc/percentiles/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Obtain developmental milestone percentiles
-</td>
-<td style="text-align: left;">
-<code><a href="reference/percentiles_vwc.html">percentiles_vwc()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/vwc/select/{dfm}</code></td>
+<td align="left">Select developmental milestones for age</td>
+<td align="left"><code><a href="reference/select_vwc.html">select_vwc()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/dcat/calculate/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Adaptive testing of milestones
-</td>
-<td style="text-align: left;">
-<code><a href="reference/dcat.html">dcat()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/vwc/percentiles/{dfm}</code></td>
+<td align="left">Obtain developmental milestone percentiles</td>
+<td align="left"><code><a href="reference/percentiles_vwc.html">percentiles_vwc()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/dcat/calculate/{dfm}</code></td>
+<td align="left">Adaptive testing of milestones</td>
+<td align="left"><code><a href="reference/dcat.html">dcat()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/screeners/list/{dfm}</code>
-</td>
-<td style="text-align: left;">
-List available growth screeners
-</td>
-<td style="text-align: left;">
-<code><a href="reference/list_screeners.html">list_screeners()</a></code>
-</td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/screeners/apply/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Apply growth screeners to child data
-</td>
-<td style="text-align: left;">
-<code><a href="reference/apply_screeners.html">apply_screeners()</a></code>
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/screeners/list/{dfm}</code></td>
+<td align="left">List available growth screeners</td>
+<td align="left"><code><a href="reference/list_screeners.html">list_screeners()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/screeners/apply/{dfm}</code></td>
+<td align="left">Apply growth screeners to child data</td>
+<td align="left"><code><a href="reference/apply_screeners.html">apply_screeners()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-GET
-</td>
-<td style="text-align: left;">
-<code>/site</code>
-</td>
-<td style="text-align: left;">
-Request empty site
-</td>
-<td style="text-align: left;">
-<code><a href="reference/request_site.html">request_site()</a></code>
-</td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/site/request/{dfm}</code>
-</td>
-<td style="text-align: left;">
-Request personalised site
-</td>
-<td style="text-align: left;">
-<code><a href="reference/request_site.html">request_site()</a></code>
-</td>
+<td align="left">GET</td>
+<td align="left"><code>/site</code></td>
+<td align="left">Request empty site</td>
+<td align="left"><code><a href="reference/request_site.html">request_site()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/site/request/{dfm}</code></td>
+<td align="left">Request personalised site</td>
+<td align="left"><code><a href="reference/request_site.html">request_site()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-POST
-</td>
-<td style="text-align: left;">
-<code>/blend/request/{sfm}</code>
-</td>
-<td style="text-align: left;">
-Obtain a blend from multiple end points
-</td>
-<td style="text-align: left;">
-<code><a href="reference/request_blend.html">request_blend()</a></code>
-</td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
 </tr>
 <tr>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
-<td style="text-align: left;">
- 
-</td>
+<td align="left">POST</td>
+<td align="left"><code>/blend/request/{sfm}</code></td>
+<td align="left">Obtain a blend from multiple end points</td>
+<td align="left"><code><a href="reference/request_blend.html">request_blend()</a></code></td>
 </tr>
 <tr>
-<td style="text-align: left;">
-GET
-</td>
-<td style="text-align: left;">
-<code>/{session}/{info}</code>
-</td>
-<td style="text-align: left;">
-Extract session details
-</td>
-<td style="text-align: left;">
-</td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
+<td align="left"> </td>
 </tr>
 <tr>
-<td style="text-align: left;">
-GET
-</td>
-<td style="text-align: left;">
-<code>/{2}/{1}/man</code>
-</td>
-<td style="text-align: left;">
-Consult R help
-</td>
-<td style="text-align: left;">
-<code>help({1}_{2})</code>
-</td>
+<td align="left">GET</td>
+<td align="left"><code>/{session}/{info}</code></td>
+<td align="left">Extract session details</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">GET</td>
+<td align="left"><code>/{2}/{1}/man</code></td>
+<td align="left">Consult R help</td>
+<td align="left"><code>help({1}_{2})</code></td>
 </tr>
 </tbody>
 </table>
@@ -410,57 +233,33 @@ Consult R help
 </h3>
 <table class="table">
 <colgroup>
-<col style="width: 57%">
-<col style="width: 42%">
+<col width="57%">
+<col width="42%">
 </colgroup>
 <thead><tr>
-<th style="text-align: left;">
-Description
-</th>
-<th style="text-align: left;">
-Status
-</th>
+<th align="left">Description</th>
+<th align="left">Status</th>
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align: left;">
-<a href="https://james.groeidiagrammen.nl" class="external-link">Example requests</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://james.groeidiagrammen.nl" class="external-link">Example requests</a></td>
+<td align="left">current</td>
 </tr>
 <tr>
-<td style="text-align: left;">
-<a href="https://james.groeidiagrammen.nl/docs/" class="external-link">OpenAPI specification</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://james.groeidiagrammen.nl/docs/" class="external-link">OpenAPI specification</a></td>
+<td align="left">current</td>
 </tr>
 <tr>
-<td style="text-align: left;">
-<a href="https://james.groeidiagrammen.nl/schemas/bds_v3.0.json" class="external-link">JSON data schema 3.0</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://james.groeidiagrammen.nl/schemas/bds_v3.0.json" class="external-link">JSON data schema 3.0</a></td>
+<td align="left">current</td>
 </tr>
 <tr>
-<td style="text-align: left;">
-<a href="https://github.com/growthcharts/james/issues" class="external-link">JAMES issue tracker</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://github.com/growthcharts/james/issues" class="external-link">JAMES issue tracker</a></td>
+<td align="left">current</td>
 </tr>
 <tr>
-<td style="text-align: left;">
-<a href="https://github.com/growthcharts" class="external-link">GitHub Organization</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://github.com/growthcharts" class="external-link">GitHub Organization</a></td>
+<td align="left">current</td>
 </tr>
 </tbody>
 </table>
@@ -470,41 +269,25 @@ current
 </h3>
 <table class="table">
 <colgroup>
-<col style="width: 57%">
-<col style="width: 42%">
+<col width="57%">
+<col width="42%">
 </colgroup>
 <thead><tr>
-<th style="text-align: left;">
-Description
-</th>
-<th style="text-align: left;">
-Status
-</th>
+<th align="left">Description</th>
+<th align="left">Status</th>
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align: left;">
-<a href="https://tnochildhealthstatistics.shinyapps.io/james_tryout/" class="external-link">JAMES demo</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://tnochildhealthstatistics.shinyapps.io/james_tryout/" class="external-link">JAMES demo</a></td>
+<td align="left">current</td>
 </tr>
 <tr>
-<td style="text-align: left;">
-<a href="https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html" class="external-link">Basisdataset JGZ</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html" class="external-link">Basisdataset JGZ</a></td>
+<td align="left">current</td>
 </tr>
 <tr>
-<td style="text-align: left;">
-<a href="https://www.opencpu.org/api.html" class="external-link">OpenCPU API</a>
-</td>
-<td style="text-align: left;">
-current
-</td>
+<td align="left"><a href="https://www.opencpu.org/api.html" class="external-link">OpenCPU API</a></td>
+<td align="left">current</td>
 </tr>
 </tbody>
 </table>
