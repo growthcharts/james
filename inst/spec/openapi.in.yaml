@@ -366,6 +366,53 @@ paths:
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
+  /ddomain/calculate/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Calculate D-score per domain
+      description: Provides D-scores for all timepoints and domains
+      tags:
+        - dscore
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/calculate_ddomain_arguments'
+            examples:
+              screen1:
+                summary: Get all D-score outcomes
+                value:
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calculate_ddomain_return'
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /ddomain/calculate/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::calculate_ddomain()
+      tags:
+        - dscore
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /vwc/select/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -1439,6 +1486,78 @@ components:
         daz:
           type: number
           description: D-score corrected for age, calculated in Z-scale.
+    calculate_ddomain_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '3.1'
+            - '3.0'
+            - '2.0'
+            - '1.1'
+            - '1.0'
+        append:
+          type: string
+          description: Which milestones should be included
+          enum:
+            - 'ddi'
+            - 'gs1'
+        set:
+          type: string
+          description: Domainset to return.
+          default: 'GFCLS'
+          enum:
+            - 'GFCLS'
+        domain:
+          type: string
+          description: Defines which domains within the set should be deployed (default = all)
+          enum:
+            - 'grossmotor'
+            - 'finemotor'
+            - 'language'
+            - 'cognitive'
+            - 'social'
+    calculate_ddomain_return:
+      type: object
+      description: A dictionary where each key represents a domain with its values
+      additionalProperties:
+        type: object
+        description: Domain object values
+        properties:
+          a:
+            type: number
+            description: Age at which measurement was taken in decimal years
+            example: 1.15
+          n:
+            type: nunber
+            description: Number of items used to calculate value
+          p:
+            type: number
+            description: Percentage of passed milestones
+          d:
+            type: number
+            description: D-score, the mean of the posterior distribution
+          sem:
+            type: number
+            description: Standard error of measruement, the standard deviation of the posterior distribution
+          daz:
+            type: number
+            description: D-score corrected for age, calculated in Z-scale.
     select_vwc_arguments:
       type: object
       properties:
