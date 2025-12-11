@@ -477,9 +477,9 @@ if (!window.jQuery) {
     console.log("OpenCPU base URL set to:", ocpu.url);
   };
 
-  // Auto-detect and set ocpu.url (always relative — iframe safe)
+  // Auto-detect and set ocpu.url (safe for both local and production)
   (function initOcpuUrl() {
-    ocpu.seturl("/ocpu/library/james/R");
+    ocpu.seturl(`${window.location.origin}/ocpu/library/james/R`);
   })();
 
   // Export remaining functions
