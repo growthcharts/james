@@ -33,12 +33,20 @@ get_session <- function(txt, sitehost, format = "3.0", ...) {
     txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
   }
 
+  # Normalize sitehost to base URL (protocol + host + optional basepath)
   ocpu_host <- as.character(sitehost)[1]
+  # Remove trailing slashes to prevent double slashes in URL construction
+  ocpu_host <- sub("/*$", "", ocpu_host)
+
   if (grepl("localhost|127\\.0\\.0\\.1", ocpu_host)) {
+    # For localhost, use the local OpenCPU server port
     ocpu_host <- "http://127.0.0.1:8004"
   } else {
+    # For production, ensure HTTPS protocol
+    # This preserves any base path (e.g., /modules/james)
     ocpu_host <- sub("^http://", "https://", ocpu_host)
   }
+  # Construct upload URL - base path is already included in ocpu_host
   upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
 
   h <- curl::new_handle()
