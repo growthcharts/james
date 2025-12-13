@@ -479,7 +479,7 @@ if (!window.jQuery) {
 
   // Auto-detect and set ocpu.url (safe for both local and production)
   (function initOcpuUrl() {
-    ocpu.seturl(`${window.location.origin}/ocpu/library/james/R`);
+    ocpu.seturl("ocpu/library/james/R");
   })();
 
   // Export remaining functions
