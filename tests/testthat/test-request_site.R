@@ -91,3 +91,9 @@ test_that("request_site can be replaced by data/upload to localhost", {
 #     url_prod
 #   ))
 # })
+
+# site <- request_site(
+#   sitehost = paste(host, "somebasepath", sep = "/"),
+#   txt = js,
+#   upload = TRUE
+# )

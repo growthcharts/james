@@ -100,11 +100,15 @@ request_site <- function(
   if (!is.empty(txt) && is.empty(session) && upload) {
     session <- get_session(txt, sitehost, format = format)
 
-    return(httr::modify_url(
-      sitehost,
-      path = append_site_path(sitehost),
-      query = list(session = session)
-    ))
+    if (is.na(session)) {
+      return(httr::modify_url(sitehost, path = append_site_path(sitehost)))
+    } else {
+      return(httr::modify_url(
+        sitehost,
+        path = append_site_path(sitehost),
+        query = list(session = session)
+      ))
+    }
   }
 
   # CASE 3: Valid session provided (or via loc)
