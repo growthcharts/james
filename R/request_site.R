@@ -82,9 +82,18 @@ request_site <- function(
   txt <- txt[1L]
   session <- session[1L]
 
+  # Helper function to append /site to existing path
+  append_site_path <- function(url) {
+    parsed <- httr::parse_url(url)
+    new_path <- file.path(parsed$path, "site")
+    # Remove any double slashes except after protocol
+    new_path <- gsub("//+", "/", new_path)
+    return(new_path)
+  }
+
   # CASE 1: Neither txt nor session provided – return base site URL
   if (is.empty(txt) && is.empty(session)) {
-    return(httr::modify_url(sitehost, path = "site"))
+    return(httr::modify_url(sitehost, path = append_site_path(sitehost)))
   }
 
   # CASE 2: txt provided, no session, and upload = TRUE → upload data
@@ -93,7 +102,7 @@ request_site <- function(
 
     return(httr::modify_url(
       sitehost,
-      path = "site",
+      path = append_site_path(sitehost),
       query = list(session = session)
     ))
   }
@@ -102,11 +111,11 @@ request_site <- function(
   if (!is.empty(session)) {
     data <- get_session_object(session)
     if (is.null(data)) {
-      return(httr::modify_url(sitehost, path = "site"))
+      return(httr::modify_url(sitehost, path = append_site_path(sitehost)))
     } else {
       return(httr::modify_url(
         sitehost,
-        path = "site",
+        path = append_site_path(sitehost),
         query = list(session = session)
       ))
     }
@@ -116,10 +125,10 @@ request_site <- function(
   if (!is.empty(txt) && !upload && validate(txt)) {
     return(httr::modify_url(
       sitehost,
-      path = "site",
+      path = append_site_path(sitehost),
       query = list(txt = minify(txt))
     ))
   }
 
-  httr::modify_url(sitehost, path = "site")
+  httr::modify_url(sitehost, path = append_site_path(sitehost))
 }
