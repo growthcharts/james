@@ -1,3 +1,8 @@
+# james 1.9.1.9000 
+
+- In `request_site()`, append the basepath from `sitehost` to the generated URL. This allows hosting JAMES under a subpath, e.g., `https://myhost/modules/james/`. 
+- Improves handling of missing ages in `dcat()`.
+
 # james 1.9.0 (December 2025)
 
 - Adds the endpoint `/dscore/domain/{dfm}` to calculate domain-level D-scores. See API documentation for more detail on how to implement these.
