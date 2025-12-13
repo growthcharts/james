@@ -4,18 +4,9 @@
 // Part of the JAMES package
 // Licence: AGPL
 
-// Do we run as a single-user server OCPU app. If so, set to true:
-// Not yet implemented
+// Flag for single-user mode; not yet implemented
 const isSingleUser = false;
-var appBase = isSingleUser ? '' : 'app/';
-
-// Constants for OpenCPU server configuration based on environment
-const { protocol, hostname, pathname } = window.location;
-const host = `${protocol}//${hostname}`;
-const basePath = pathname.slice(0, -5); // Assuming removal of ".html"
-
-// Set the OpenCPU server URL
-ocpu.seturl(isSingleUser ? "../R" : `//${hostname}${basePath}/ocpu/library/james/R`);
+const appBase = isSingleUser ? '' : 'app/';
 
 // Extract URL parameters with fallbacks to handle null or undefined
 const urlParams = new URLSearchParams(window.location.search);
