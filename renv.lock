@@ -392,7 +392,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.31.0",
+      "Version": "0.32.0",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Read Data from the Basisdataset Jeugdgezondheidszorg",
@@ -435,7 +435,7 @@
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "083b8f6d6c2cdfea52fd5fcc1f6b29edf38d671c",
+      "RemoteSha": "d294109bb93fe494ad26fa9e392ce6a7b13de6af",
       "NeedsCompilation": "no",
       "Author": "Stef van Buuren [cre, aut], Arjan Huizing [aut]",
       "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
