@@ -76,9 +76,10 @@ james:::update_openapi_spec()
 
 -   Rscript -e 'quarto::quarto_render(input = "vignettes/articles/getting_started.qmd")'
 -   Rename `getting_started.qmd` --> `getting_started.qmdx`
--   Move `vignettes/articles/geting_started.html` to `docs/articles/gatting_started.html`
--   Move `vignettes/articles/geting_started_files/` to `docs/articles/gatting_started_files/`
 
 -   Update site: `pkgdown::build_site()`
+-   Move `vignettes/articles/getting_started.html` to `docs/articles/getting_started.html`
+-   Move `vignettes/articles/geting_started_files/` to `docs/articles/getting_started_files/`
+
 -   Push changes to GitHub
 -   Go to `jamesdocker` repo for building app

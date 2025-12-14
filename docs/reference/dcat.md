@@ -77,5 +77,5 @@ Iris Eekhout 2025
 ``` r
 txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat(txt = txt, p = 50)
-#> [1] "gs1lgc110"
+#> [1] "gs1lgc136"
 ```

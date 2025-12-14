@@ -4,7 +4,7 @@
 
 Code
 
-JAMES 1.9.0 (December 2025)
+JAMES 1.9.1 (December 2025)
 
 Authors
 
@@ -202,7 +202,7 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x0b6a4f6909742d) is a unique session code.
+- `r$session` (like x081eecf1be5419) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
@@ -257,13 +257,13 @@ server, each of which contains details on the response.
 cat resp
 ```
 
-    /ocpu/tmp/x009bb0031c90cb/R/.val
-    /ocpu/tmp/x009bb0031c90cb/R/version
-    /ocpu/tmp/x009bb0031c90cb/stdout
-    /ocpu/tmp/x009bb0031c90cb/source
-    /ocpu/tmp/x009bb0031c90cb/console
-    /ocpu/tmp/x009bb0031c90cb/info
-    /ocpu/tmp/x009bb0031c90cb/files/DESCRIPTION
+    /ocpu/tmp/x0e2b38578923d5/R/.val
+    /ocpu/tmp/x0e2b38578923d5/R/version
+    /ocpu/tmp/x0e2b38578923d5/stdout
+    /ocpu/tmp/x0e2b38578923d5/source
+    /ocpu/tmp/x0e2b38578923d5/console
+    /ocpu/tmp/x0e2b38578923d5/info
+    /ocpu/tmp/x0e2b38578923d5/files/DESCRIPTION
 
 The path element following `tmp/` is a unique session key. See
 <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU
@@ -523,7 +523,7 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x09d5175dc0a777"
+    [1] "x09be81cc0e6d95"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
@@ -638,7 +638,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x0907da7acaacca/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x0ed3979b569ba6/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -923,7 +923,7 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x0adfe94507d59b
+      Session : x01be8920afef63
 
     Parsed response:
     'data.frame':   20 obs. of  6 variables:
@@ -966,7 +966,7 @@ r
     JAMES request:
       Path    : ddomain/calculate/json
       Status  : 201
-      Session : x0c1a043cdf86fc
+      Session : x05a3770643df31
 
     Parsed response:
     List of 6
@@ -1369,7 +1369,7 @@ r <- james_post(host = host, path = "/site/request/json",
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x02f503e02c99ce"
+    [1] "https://james.groeidiagrammen.nl/site?session=x02c5567b4f1edf"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1398,10 +1398,10 @@ site1
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x0093c56db4102f
+      Session : x0e5d75b8277791
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x05bd4eca602192"
+    [1] "https://james.groeidiagrammen.nl/site?session=x009ae95128d67b"
 
 ``` r
 # Or manual URL construction (faster) 
@@ -1409,7 +1409,7 @@ site2 <- modify_url(url = host, path = "site", query = list(session = r$session)
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x05bd4eca602192"
+    [1] "https://james.groeidiagrammen.nl/site?session=x009ae95128d67b"
 
 ``` r
 # browseURL(site1)
@@ -1429,7 +1429,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x0d9f1ac59d10de"]
+    ["https://james.groeidiagrammen.nl/site?session=x0c05a0dcb16f9f"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1452,13 +1452,13 @@ r
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x0b60b15e49301d
+      Session : x018dd93de29cd2
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x0522a8bb104129"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0522a8bb104129"
+     $ session  : chr "x01ab75a9db65bd"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x01ab75a9db65bd"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1523,8 +1523,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x070b186705e321",
-      "site": "https://james.groeidiagrammen.nl/site?session=x070b186705e321",
+      "session": "x0328bb847d2bee",
+      "site": "https://james.groeidiagrammen.nl/site?session=x0328bb847d2bee",
       "child": [
         {
           "id": -1,
