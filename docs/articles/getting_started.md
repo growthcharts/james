@@ -202,7 +202,7 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x081eecf1be5419) is a unique session code.
+- `r$session` (like x0bb7323d146491) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
@@ -220,10 +220,10 @@ fromJSON(content(r, type = "text", encoding = "UTF-8"))
     [1] "james"
 
     $packageVersion
-    [1] "1.9.0"
+    [1] "1.9.1"
 
     $packageDate
-    [1] "2025-12-11"
+    [1] "2025-12-14"
 
     $Rversion
     [1] "4.5.0"
@@ -257,13 +257,13 @@ server, each of which contains details on the response.
 cat resp
 ```
 
-    /ocpu/tmp/x0e2b38578923d5/R/.val
-    /ocpu/tmp/x0e2b38578923d5/R/version
-    /ocpu/tmp/x0e2b38578923d5/stdout
-    /ocpu/tmp/x0e2b38578923d5/source
-    /ocpu/tmp/x0e2b38578923d5/console
-    /ocpu/tmp/x0e2b38578923d5/info
-    /ocpu/tmp/x0e2b38578923d5/files/DESCRIPTION
+    /ocpu/tmp/x0c49375cbdeec2/R/.val
+    /ocpu/tmp/x0c49375cbdeec2/R/version
+    /ocpu/tmp/x0c49375cbdeec2/stdout
+    /ocpu/tmp/x0c49375cbdeec2/source
+    /ocpu/tmp/x0c49375cbdeec2/console
+    /ocpu/tmp/x0c49375cbdeec2/info
+    /ocpu/tmp/x0c49375cbdeec2/files/DESCRIPTION
 
 The path element following `tmp/` is a unique session key. See
 <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU
@@ -279,8 +279,8 @@ cat value1
 
     {
       "package": "james",
-      "packageVersion": "1.9.0",
-      "packageDate": "2025-12-11",
+      "packageVersion": "1.9.1",
+      "packageDate": "2025-12-14",
       "Rversion": "4.5.0"
     }
 
@@ -294,8 +294,8 @@ cat value2
 
     {
       "package": "james",
-      "packageVersion": "1.9.0",
-      "packageDate": "2025-12-11",
+      "packageVersion": "1.9.1",
+      "packageDate": "2025-12-14",
       "Rversion": "4.5.0"
     }
 
@@ -523,7 +523,7 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x09be81cc0e6d95"
+    [1] "x0fe93159732ec6"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
@@ -638,7 +638,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x0ed3979b569ba6/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x0adf33eb60eb2a/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -923,7 +923,7 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x01be8920afef63
+      Session : x0b3caa861f9804
 
     Parsed response:
     'data.frame':   20 obs. of  6 variables:
@@ -966,7 +966,7 @@ r
     JAMES request:
       Path    : ddomain/calculate/json
       Status  : 201
-      Session : x05a3770643df31
+      Session : x08402586995a0e
 
     Parsed response:
     List of 6
@@ -1202,7 +1202,7 @@ r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
 r$parsed
 ```
 
-    [1] "gs1lgc110"
+    [1] "gs1lgc136"
 
 By specifying the instrument we can specify whether we want to include
 `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must
@@ -1369,7 +1369,7 @@ r <- james_post(host = host, path = "/site/request/json",
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x02c5567b4f1edf"
+    [1] "https://james.groeidiagrammen.nl/site?session=x035366c0160731"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1398,10 +1398,10 @@ site1
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x0e5d75b8277791
+      Session : x03e5768e1d62c5
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x009ae95128d67b"
+    [1] "https://james.groeidiagrammen.nl/site?session=x077d7b5a719e1b"
 
 ``` r
 # Or manual URL construction (faster) 
@@ -1409,7 +1409,7 @@ site2 <- modify_url(url = host, path = "site", query = list(session = r$session)
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x009ae95128d67b"
+    [1] "https://james.groeidiagrammen.nl/site?session=x077d7b5a719e1b"
 
 ``` r
 # browseURL(site1)
@@ -1429,7 +1429,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x0c05a0dcb16f9f"]
+    ["https://james.groeidiagrammen.nl/site?session=x09915902b57d58"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1452,13 +1452,13 @@ r
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x018dd93de29cd2
+      Session : x0160bfd051a9c5
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x01ab75a9db65bd"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x01ab75a9db65bd"
+     $ session  : chr "x01265909f3b6fd"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x01265909f3b6fd"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1523,8 +1523,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x0328bb847d2bee",
-      "site": "https://james.groeidiagrammen.nl/site?session=x0328bb847d2bee",
+      "session": "x0789289d6268a3",
+      "site": "https://james.groeidiagrammen.nl/site?session=x0789289d6268a3",
       "child": [
         {
           "id": -1,
