@@ -1,4 +1,4 @@
-# james 1.9.1.9000
+# james 1.9.1 (December 2025)
 
 - In `request_site()`, append the basepath from `sitehost` to the generated URL. This allows hosting JAMES under a subpath, e.g., `https://myhost/modules/james/`.
 - Use relative path for OpenCPU URL in JavaScript to support base paths. Changed `ocpu.seturl()` to use relative path `"ocpu/library/james/R"` instead of absolute URL, enabling the application to work correctly when served from a base path.
