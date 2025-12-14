@@ -468,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>r$parsed</code> is a parsed version of the element <code>r$content</code>. Here it is a list of elements like names of the package, its date, and so on. In case of an error of the server function, we find the error message here;</li>
 <li><code>r$warnings</code> contain any warnings thrown during execution;</li>
 <li><code>r$messages</code> contain any messages, e.g.&nbsp;data reading errors;</li>
-<li><code>r$session</code> (like x081eecf1be5419) is a unique session code.</li>
+<li><code>r$session</code> (like x0bb7323d146491) is a unique session code.</li>
 </ul>
 <p>The <code>jamesclient::james_post()</code> function wraps the basis workhorse <code>httr::POST()</code> that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.</p>
 <div class="cell" data-layout-align="center">
@@ -482,10 +482,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [1] "james"
 
 $packageVersion
-[1] "1.9.0"
+[1] "1.9.1"
 
 $packageDate
-[1] "2025-12-11"
+[1] "2025-12-14"
 
 $Rversion
 [1] "4.5.0"</code></pre>
@@ -514,13 +514,13 @@ $Rversion
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> resp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/ocpu/tmp/x0e2b38578923d5/R/.val
-/ocpu/tmp/x0e2b38578923d5/R/version
-/ocpu/tmp/x0e2b38578923d5/stdout
-/ocpu/tmp/x0e2b38578923d5/source
-/ocpu/tmp/x0e2b38578923d5/console
-/ocpu/tmp/x0e2b38578923d5/info
-/ocpu/tmp/x0e2b38578923d5/files/DESCRIPTION</code></pre>
+<pre><code>/ocpu/tmp/x0c49375cbdeec2/R/.val
+/ocpu/tmp/x0c49375cbdeec2/R/version
+/ocpu/tmp/x0c49375cbdeec2/stdout
+/ocpu/tmp/x0c49375cbdeec2/source
+/ocpu/tmp/x0c49375cbdeec2/console
+/ocpu/tmp/x0c49375cbdeec2/info
+/ocpu/tmp/x0c49375cbdeec2/files/DESCRIPTION</code></pre>
 </div>
 </div>
 <p>The path element following <code>tmp/</code> is a unique session key. See <a href="https://www.opencpu.org/api.html" class="uri">https://www.opencpu.org/api.html</a> for the interpretation of the OpenCPU API.</p>
@@ -531,8 +531,8 @@ $Rversion
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "package": "james",
-  "packageVersion": "1.9.0",
-  "packageDate": "2025-12-11",
+  "packageVersion": "1.9.1",
+  "packageDate": "2025-12-14",
   "Rversion": "4.5.0"
 }</code></pre>
 </div>
@@ -544,8 +544,8 @@ $Rversion
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "package": "james",
-  "packageVersion": "1.9.0",
-  "packageDate": "2025-12-11",
+  "packageVersion": "1.9.1",
+  "packageDate": "2025-12-14",
   "Rversion": "4.5.0"
 }</code></pre>
 </div>
@@ -751,7 +751,7 @@ $xyz
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(session <span class="ot">&lt;-</span> r1<span class="sc">$</span>session)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "x09be81cc0e6d95"</code></pre>
+<pre><code>[1] "x0fe93159732ec6"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="fu">james_get</span>(<span class="at">host =</span> host, <span class="at">path =</span> <span class="fu">file.path</span>(session, <span class="st">"md"</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(resp<span class="sc">$</span>parsed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -842,7 +842,7 @@ $xyz
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="fu">file.path</span>(host, r7<span class="sc">$</span>session, <span class="st">"files/input.json"</span>)</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://james.groeidiagrammen.nl/x0ed3979b569ba6/files/input.json"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/x0adf33eb60eb2a/files/input.json"</code></pre>
 </div>
 </div>
 <p>With <code>browseURL(url)</code> we may view the file contents in the browser. The <code>files</code> directory contains five JSON files:</p>
@@ -1094,7 +1094,7 @@ population -hdc back bmi dsc front hdc hgt wfh wgt
 <pre><code>JAMES request:
   Path    : dscore/calculate/json
   Status  : 201
-  Session : x01be8920afef63
+  Session : x0b3caa861f9804
 
 Parsed response:
 'data.frame':   20 obs. of  6 variables:
@@ -1139,7 +1139,7 @@ Parsed response:
 <pre><code>JAMES request:
   Path    : ddomain/calculate/json
   Status  : 201
-  Session : x05a3770643df31
+  Session : x08402586995a0e
 
 Parsed response:
 List of 6
@@ -1378,7 +1378,7 @@ $social
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">james_post</span>(<span class="at">host =</span> host, <span class="at">path =</span> <span class="st">"dcat/calculate/json"</span>, <span class="at">txt =</span> fn)</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>parsed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "gs1lgc110"</code></pre>
+<pre><code>[1] "gs1lgc136"</code></pre>
 </div>
 </div>
 <p>By specifying the instrument we can specify whether we want to include <code>ddi</code> or <code>gs1</code> (or even both). In the case of only <code>ddi</code> items, we must additionally specify a key that supports the <code>ddi</code> instrument.</p>
@@ -1541,7 +1541,7 @@ yname 1000 2000 3000
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">sitehost =</span> host, <span class="at">txt =</span> js)</span>
 <span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>parsed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x02c5567b4f1edf"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x035366c0160731"</code></pre>
 </div>
 </div>
 <p>Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.</p>
@@ -1559,16 +1559,16 @@ yname 1000 2000 3000
 <pre><code>JAMES request:
   Path    : site/request/json
   Status  : 201
-  Session : x0e5d75b8277791
+  Session : x03e5768e1d62c5
 
 Parsed response:
-[1] "https://james.groeidiagrammen.nl/site?session=x009ae95128d67b"</code></pre>
+[1] "https://james.groeidiagrammen.nl/site?session=x077d7b5a719e1b"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or manual URL construction (faster) </span></span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>site2 <span class="ot">&lt;-</span> <span class="fu">modify_url</span>(<span class="at">url =</span> host, <span class="at">path =</span> <span class="st">"site"</span>, <span class="at">query =</span> <span class="fu">list</span>(<span class="at">session =</span> r<span class="sc">$</span>session))</span>
 <span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>site2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x009ae95128d67b"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x077d7b5a719e1b"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># browseURL(site1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1583,7 +1583,7 @@ Parsed response:
 <span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
 <span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>["https://james.groeidiagrammen.nl/site?session=x0c05a0dcb16f9f"]</code></pre>
+<pre><code>["https://james.groeidiagrammen.nl/site?session=x09915902b57d58"]</code></pre>
 </div>
 </div>
 </div>
@@ -1607,13 +1607,13 @@ Parsed response:
 <pre><code>JAMES request:
   Path    : /blend/request/json
   Status  : 201
-  Session : x018dd93de29cd2
+  Session : x0160bfd051a9c5
 
 Parsed response:
 List of 6
  $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
- $ session  : chr "x01ab75a9db65bd"
- $ site     : chr "https://james.groeidiagrammen.nl/site?session=x01ab75a9db65bd"
+ $ session  : chr "x01265909f3b6fd"
+ $ site     : chr "https://james.groeidiagrammen.nl/site?session=x01265909f3b6fd"
  $ child    :'data.frame':  1 obs. of  12 variables:
   ..$ id  : int -1
   ..$ name: chr "Laura S"
@@ -1674,8 +1674,8 @@ List of 6
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-  "session": "x0328bb847d2bee",
-  "site": "https://james.groeidiagrammen.nl/site?session=x0328bb847d2bee",
+  "session": "x0789289d6268a3",
+  "site": "https://james.groeidiagrammen.nl/site?session=x0789289d6268a3",
   "child": [
     {
       "id": -1,
