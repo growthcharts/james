@@ -64,6 +64,7 @@ dcat <- function(
   # extract most recent administered items
   if (nrow(dat) > 0) {
     colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
+    dat <- dat |> select(item, score)
   }
 
   dcat_result <- dcat::dcat(
