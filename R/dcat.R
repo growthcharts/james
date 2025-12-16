@@ -60,9 +60,9 @@ dcat <- function(
     return(NULL)
   }
 
-  time <- timedata(tgt)
+  dat <- timedata(tgt)
   # extract most recent administered items
-  if (nrow(time) > 0) {
+  if (nrow(dat) > 0) {
     colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
   }
 
