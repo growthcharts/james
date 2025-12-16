@@ -17,6 +17,8 @@
 #' @examples
 #' txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 #' dcat(txt = txt, p = 50)
+#' txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
+#' dcat(txt = txt, p = 50)
 #' @export
 dcat <- function(
   txt = "",
@@ -58,10 +60,9 @@ dcat <- function(
     return(NULL)
   }
 
-  time <- timedata(tgt)
+  dat <- timedata(tgt)
   # extract most recent administered items
-  if (nrow(time) > 0) {
-    dat <- time[which.max(time$age), ]
+  if (nrow(dat) > 0) {
     colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
   }
 
