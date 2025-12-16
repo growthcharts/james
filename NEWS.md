@@ -1,3 +1,7 @@
+# james 1.9.2 (December 2025)
+
+- Removes two bugs in the `dcat()` end point
+
 # james 1.9.1 (December 2025)
 
 - In `request_site()`, append the basepath from `sitehost` to the generated URL. This allows hosting JAMES under a subpath, e.g., `https://myhost/modules/james/`.
