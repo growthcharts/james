@@ -1,5 +1,12 @@
 # Changelog
 
+## james 1.9.3 (December 2025)
+
+- Addresses the base path problem for
+  [`request_site()`](https://growthcharts.org/james/reference/request_site.md)
+  and similar functions
+- Adds authentication to getting_started.Rmd examples
+
 ## james 1.9.2 (December 2025)
 
 - Removes two bugs in the
