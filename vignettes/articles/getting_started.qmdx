@@ -1232,6 +1232,7 @@ The document will automatically:
 - Token may have expired - re-run `./authenticate-acc.sh`
 - Check that `.bearer` file exists and is not empty
 - Verify `JAMES_BEARER_TOKEN` is set: `Sys.getenv("JAMES_BEARER_TOKEN")`
+- The `jamesclient::james_post()` and `jamesclient::james_get()` functions rely on `JAMES_BEARER_TOKEN` for authentication
 
 **Token not found**:
 - Ensure `apikey-acc.txt` exists and contains your API key
