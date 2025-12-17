@@ -21,14 +21,15 @@ format:
 ```{r host}
 #| include: false
 # Define the server that hosts JAMES
-# Set target_host to one of: "dev", "test", "acc"
-target_host <- "test"  # Change this to switch hosts
+# Set target_host to one of: "dev", "test", "acc", "prod"
+target_host <- "acc"  # Change this to switch hosts
 
 # Available hosts
 hosts <- list(
-  dev = "http://localhost:8080",
+  dev =  "http://localhost:8080",
   test = "https://james.groeidiagrammen.nl",
-  acc = "https://srminterlayer-az-acc.eaglescience.nl/modules/james"
+  acc =  "https://srminterlayer-az-acc.eaglescience.nl/modules/james",
+  prod = "https://ijgz.eaglescience.nl/modules/james"
 )
 
 # Set host based on target
@@ -42,11 +43,21 @@ if (target_host == "acc") {
     host <- hosts$test
     warning("ACC server unavailable, using fallback: ", host)
   }
+} else if (target_host == "prod") {
+  # Try PROD with authentication, fall back to test if it fails
+  auth_result <- system("./authenticate-prod.sh", ignore.stdout = TRUE, ignore.stderr = TRUE)
+  if (auth_result == 0) {
+    host <- hosts$acc
+    message("Using PROD server: ", host)
+  } else {
+    host <- hosts$test
+    warning("PROD server unavailable, using fallback: ", host)
+  }
 } else if (target_host %in% names(hosts)) {
   host <- hosts[[target_host]]
   message("Using ", target_host, " server: ", host)
 } else {
-  stop("Invalid target_host. Choose: 'dev', 'test', or 'acc'")
+  stop("Invalid target_host. Choose: 'dev', 'test', 'acc' or 'prod'.")
 }
 
 # Save host for bash chunks

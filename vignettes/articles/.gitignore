@@ -1,5 +1,6 @@
 /.quarto/
 apikey-acc.txt
+apikey-prod.txt
 .host
 .bearer
 headers
