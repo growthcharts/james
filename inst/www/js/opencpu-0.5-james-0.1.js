@@ -178,12 +178,15 @@ if (!window.jQuery) {
 
         // Derive session path from ocpu.url to handle base paths correctly
         // e.g., if ocpu.url is "/modules/james/ocpu/library/james/R/"
-        // then sessionPath should be "/modules/james/ocpu/tmp/{key}/"
+        // then sessionPath should be "/modules/james/{key}/"
+        //
+        // Do not use the full path /ocpu/tmp/${key} because that 
+        // path is non-whitelisted for CORS requests by ES
         let sessionPath;
         if (ocpu.url.includes('/modules/james')) {
-          sessionPath = `/modules/james/ocpu/tmp/${key}/`;
+          sessionPath = `/modules/james/${key}/`;
         } else {
-          sessionPath = `/ocpu/tmp/${key}/`;
+          sessionPath = `/${key}/`;
         }
         const loc = `${derivedHost}${sessionPath}`;
 
