@@ -4,7 +4,7 @@
 
 Code
 
-JAMES 1.9.2 (December 2025)
+JAMES 1.10.0 (December 2025)
 
 Authors
 
@@ -13,6 +13,8 @@ Authors
 [Arjan Huizing](https://nl.linkedin.com/in/arjanhjhuizing)
 
 [Iris Eekhout](https://iriseekhout.com)
+
+    Host:  https://james.groeidiagrammen.nl 
 
 ## Overview
 
@@ -153,16 +155,15 @@ remotes::install_github("growthcharts/bdsreader")
 library(jamesclient)
 library(httr)
 library(jsonlite)
+library(httr2)
 ```
 
-Let’s find out the JAMES version number. In this document, we define the
-server that hosts JAMES as follows.
+The server that hosts JAMES was already defined in the setup block at
+the top of this document. The `host` variable is now available for use
+in all subsequent code chunks.
 
-``` r
-host <- "http://localhost:8080"
-host <- "https://james.groeidiagrammen.nl"
-system(paste0("echo ", host, " > .host"))
-```
+For bash chunks that need authentication, we use an `auth_curl` helper
+function that automatically adds Bearer token when available.
 
 We first illustrate a method that makes two requests to the server. The
 following commands call the `/version/json` end point in the JAMES API.
@@ -202,17 +203,18 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x0512beba502627) is a unique session code.
+- `r$session` (like x03e3035dcc7fbc) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
 may obtain equivalent content by the POST function directly.
 
 ``` r
+auth_token <- Sys.getenv("JAMES_BEARER_TOKEN")
 path <- "version/json"
 url <- parse_url(host)
 url <- modify_url(url, path = file.path(url$path, path), query = "auto_unbox=true")
-r <- POST(url)
+r <- POST(url, add_headers(accept = "application/json", Authorization = auth_token))
 fromJSON(content(r, type = "text", encoding = "UTF-8"))
 ```
 
@@ -220,10 +222,10 @@ fromJSON(content(r, type = "text", encoding = "UTF-8"))
     [1] "james"
 
     $packageVersion
-    [1] "1.9.1"
+    [1] "1.9.3"
 
     $packageDate
-    [1] "2025-12-14"
+    [1] "2025-12-16"
 
     $Rversion
     [1] "4.5.0"
@@ -238,32 +240,28 @@ sudo apt -y install curl
 Let’s find out the JAMES version number. We first illustrate a method
 that makes two requests to the server.
 
+**Note**: When using the ACC server, authentication is handled
+automatically via the `auth_curl` helper function which adds the Bearer
+token from `.bearer` file.
+
 The following `bash` commands call the `/version` API end point
 
 ``` bash
-curl -sX 'GET' \
-   $(cat .host)/version \
-  -H 'accept: text/json'
-  
-curl -sX POST $(cat .host)/version > resp
-```
-
-    Redirect to http://james.groeidiagrammen.nl/ocpu/library/james/R/version/print
-
-The response to the request consists of a set of URLs created on the
-server, each of which contains details on the response.
-
-``` bash
+source auth_curl.sh
+auth_curl -sX POST $(cat .host)/version > resp
 cat resp
 ```
 
-    /ocpu/tmp/x02cd1f2f2daf58/R/.val
-    /ocpu/tmp/x02cd1f2f2daf58/R/version
-    /ocpu/tmp/x02cd1f2f2daf58/stdout
-    /ocpu/tmp/x02cd1f2f2daf58/source
-    /ocpu/tmp/x02cd1f2f2daf58/console
-    /ocpu/tmp/x02cd1f2f2daf58/info
-    /ocpu/tmp/x02cd1f2f2daf58/files/DESCRIPTION
+    /ocpu/tmp/x0d769de688c365/R/.val
+    /ocpu/tmp/x0d769de688c365/R/version
+    /ocpu/tmp/x0d769de688c365/stdout
+    /ocpu/tmp/x0d769de688c365/source
+    /ocpu/tmp/x0d769de688c365/console
+    /ocpu/tmp/x0d769de688c365/info
+    /ocpu/tmp/x0d769de688c365/files/DESCRIPTION
+
+The response to the request consists of a set of URLs created on the
+server, each of which contains details on the response.
 
 The path element following `tmp/` is a unique session key. See
 <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU
@@ -273,14 +271,15 @@ The next snippet constructs the URL of a JSON representation of the
 result and downloads the contents of the URL as a file `value1`.
 
 ``` bash
-curl -s $(cat .host)$(head -1 resp)/json?auto_unbox=true > value1
+source auth_curl.sh
+auth_curl -s $(cat .host)$(head -1 resp)/json?auto_unbox=true > value1
 cat value1
 ```
 
     {
       "package": "james",
-      "packageVersion": "1.9.1",
-      "packageDate": "2025-12-14",
+      "packageVersion": "1.9.3",
+      "packageDate": "2025-12-16",
       "Rversion": "4.5.0"
     }
 
@@ -288,14 +287,15 @@ The above sequence makes two requests to the server. The following code
 compacts both steps into one.
 
 ``` bash
-curl -sX POST $(cat .host)/version/json?auto_unbox=true > value2
+source auth_curl.sh
+auth_curl -sX POST $(cat .host)/version/json?auto_unbox=true > value2
 cat value2
 ```
 
     {
       "package": "james",
-      "packageVersion": "1.9.1",
-      "packageDate": "2025-12-14",
+      "packageVersion": "1.9.3",
+      "packageDate": "2025-12-16",
       "Rversion": "4.5.0"
     }
 
@@ -448,6 +448,16 @@ There are four ways to upload the data to JAMES:
 The `/data/upload` API end point handles these cases as follows:
 
 ``` r
+# Test if Bearer token is still active
+if (file.exists(".bearer")) {
+  bearer_token <- trimws(readLines(".bearer", n = 1))
+  cat("About to test james_post with token length:", nchar(bearer_token), "\n")
+}
+```
+
+    About to test james_post with token length: 551 
+
+``` r
 # upload as file
 fn <- "maria.json"
 r1 <- james_post(host = host, path = "data/upload/json", txt = fn)
@@ -476,7 +486,7 @@ status_code(r3)
 
 ``` r
 # upload as URL
-url <- file.path(host, "ocpu/library/bdsreader/examples/maria.json")
+url <- "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/maria.json"
 r4 <- james_post(host = host, path = "data/upload/json", txt = url)
 status_code(r4)
 ```
@@ -523,11 +533,16 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x06cbe4c274cadb"
+    [1] "x0342519f534f1e"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
-cat(resp$parsed)
+# Handle both text and parsed responses
+if (is.character(resp$parsed)) {
+  cat(resp$parsed)
+} else {
+  print(resp$parsed)
+}
 ```
 
 
@@ -622,7 +637,12 @@ validation of the uploaded JSON against the JSON schema:
 ``` r
 r6 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE)
 mess <- james_get(host = host, path = file.path(r6$session, "messages"))
-cat(mess$parsed)
+# Handle both text and parsed responses
+if (is.character(mess$parsed)) {
+  cat(mess$parsed)
+} else {
+  print(mess$parsed)
+}
 ```
 
 which indicates that the required JSON element `"clientDetails"` is
@@ -648,7 +668,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x068d5f1ee0eb7d/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x061bc72cc2ebc2/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -671,12 +691,14 @@ value (`FALSE`) and monitor any messages written to
 
 We start from child data in the file `maria.json` that we wish to
 process with JAMES. For testing purposes, you may change the values, but
-keep the general structure intact. The following `curl` commands uploads
-the file and processes the data.
+keep the general structure intact. The following commands upload the
+file and process the data.
 
 ``` bash
-curl -sF 'txt=@maria.json' -D headers $(cat .host)/data/upload/json > content
-head content
+curl -sF 'txt=@maria.json' -D headers \
+  -H "accept: text/json" \
+  -H "Authorization: Bearer $(cat .bearer)" \
+  $(cat .host)/data/upload/json | head
 ```
 
     {
@@ -695,15 +717,41 @@ follows:
 
 ``` bash
 JS=$(jq '.' maria.json | jq -sR '.')
-curl -s $(cat .host)/data/upload/json -d "txt=$JS" > content
+curl -s $(cat .host)/data/upload/json \
+  -H "Authorization: Bearer $(cat .bearer)" \
+  -d "txt=$JS" | head
 ```
+
+    {
+      "psn": [
+        {
+          "id": -1,
+          "name": "Maria",
+          "dob": "2018-10-11",
+          "dobm": "1990-12-02",
+          "dobf": "1995-07-04",
+          "src": "1234",
+          "sex": "female",
 
 Finally, if the data are located at a URL, use
 
 ``` bash
-URL=$(cat .host)/ocpu/library/bdsreader/examples/maria.json
-curl -s $(cat .host)/data/upload/json -d "txt='$URL'" > content
+URL=https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/maria.json
+curl -s $(cat .host)/data/upload/json \
+  -H "Authorization: Bearer $(cat .bearer)" \
+  -d "txt='$URL'" | head
 ```
+
+    {
+      "psn": [
+        {
+          "id": -1,
+          "name": "Maria",
+          "dob": "2018-10-11",
+          "dobm": "1990-12-02",
+          "dobf": "1995-07-04",
+          "src": "1234",
+          "sex": "female",
 
 ### **`/charts/draw`**: Draw child data on growth chart
 
@@ -780,7 +828,8 @@ produce an SVG file. Specify the proper `width` and `height` query
 parameters.
 
 ``` bash
-curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=7.09&height=7.09' \
+source auth_curl.sh
+auth_curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=7.09&height=7.09' \
 -H 'accept: image/*' \
 -F 'txt=@maria.json;type=application/json' > maria1.svg
 ```
@@ -789,7 +838,8 @@ We need to set `chartcode` and `selector` parameters to choose a
 different chart.
 
 ``` bash
-curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
+source auth_curl.sh
+auth_curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
 -H 'accept: image/*' \
 -F "chartcode='PMAAN27'" \
 -F "selector='chartcode'" \
@@ -800,13 +850,16 @@ An alternative is to read the data from a URL, and use the
 `application/json` protocol to specify parameters.
 
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+
+BASE_URL=$(cat .host | sed 's|/modules/james$||')
+auth_curl -sX 'POST' \
 $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
 -H 'accept: image/*' \
 -H 'Content-Type: application/json' \
 -d '{
-"txt": "'$(cat .host)'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",
-"chartcode" : "NMBA", 
+"txt": "'$BASE_URL'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",
+"chartcode" : "NMBA",
 "selector" : "chartcode"}' > laura.svg
 ```
 
@@ -866,7 +919,8 @@ code as a field in the left sidebar.
 Restrict the listing to the WHO references:
 
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+auth_curl -sX 'POST' \
 $(cat .host)'/charts/list/json' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
@@ -896,7 +950,8 @@ r$parsed
 Check five chart codes:
 
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+auth_curl -sX 'POST' \
 $(cat .host)'/charts/validate/json' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
@@ -933,7 +988,7 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x079ac88c550e52
+      Session : x0abddca60eeed0
 
     Parsed response:
     'data.frame':   20 obs. of  6 variables:
@@ -976,7 +1031,7 @@ r
     JAMES request:
       Path    : ddomain/calculate/json
       Status  : 201
-      Session : x04fdcd4ad62600
+      Session : x026a750c06891e
 
     Parsed response:
     List of 6
@@ -1184,7 +1239,12 @@ a selection of milestones. This can be done either directly using the
 `vwc` argument, or indirectly from uploaded child data.
 
 ``` r
-r <- james_post(host = host, path = "vwc/percentiles/json", output = "table", vwc = "ddifmd018") 
+r <- james_post(
+  host = host,
+  path = "vwc/percentiles/json",
+  output = "table",
+  vwc = "ddifmd018"
+)
 r$parsed
 ```
 
@@ -1212,7 +1272,7 @@ r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
 r$parsed
 ```
 
-    [1] "gs1lgc136"
+    [1] "gs1lgc112"
 
 By specifying the instrument we can specify whether we want to include
 `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must
@@ -1220,11 +1280,17 @@ additionally specify a key that supports the `ddi` instrument.
 
 ``` r
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
-r <- james_post(host = host, path = "dcat/calculate/json", txt = fn, instrument = "ddi", key = "gsed2406")
+r <- james_post(
+  host = host,
+  path = "dcat/calculate/json",
+  txt = fn,
+  instrument = "ddi",
+  key = "gsed2406"
+)
 r$parsed
 ```
 
-    [1] "ddifmd023"
+    [1] "JAMES API request failed [400]\ndata must contain column\n                                                item and score.\n\nIn call:\ndcat::dcat(data = dat, age = age, key = key, population = population, \n    p = p, instrument = instrument, sem_rule = sem_rule)\n\nBacktrace:\n    ▆\n 1. ├─base::eval(call)\n 2. │ └─base::eval(call)\n 3. ├─base::withCallingHandlers(...)\n 4. ├─base::withVisible(eval(expr, envir))\n 5. └─base::eval(expr, envir)\n 6.   └─base::eval(expr, envir)\n 7.     └─james::dcat(...)\n 8.       └─dcat::dcat(...)\n 9.         └─base::stop(\"data must contain column\\n                                                item and score.\")\n\n<https://james.groeidiagrammen.nl/dcat/calculate/json>"
 
 To be added
 
@@ -1237,34 +1303,25 @@ JAMES implements several screening algorithms. The `/screeners/list` end
 point provides detailed information on each of these.
 
 ``` r
-r <- james_post(host = host, path = "/screeners/list/json", 
-                session = r1$session)
+r <- james_post(
+  host = host,
+  path = "/screeners/list/json",
+  session = r1$session
+)
 names(r$parsed)
-```
-
-    [1] "Versie"                "yname"                 "Categorie"            
-    [4] "CategorieOmschrijving" "JGZRichtlijn"          "Code"                 
-    [7] "CodeOmschrijving"     
-
-``` r
 with(r$parsed, table(yname, Categorie))
 ```
 
-         Categorie
-    yname 1000 2000 3000
-      hdc    0    0   17
-      hgt   45    0    0
-      wgt    0   26    0
-
-There are currently 88 different codes. Codes ending in `31`, e.g.,
-`1031` or `2031` indicate normal growth, whereas code ending in `41`,
-`42` and so on, signal that - according to the guidelines - the child
-should be referred for further investigation.
+There are currently different codes. Codes ending in `31`, e.g., `1031`
+or `2031` indicate normal growth, whereas code ending in `41`, `42` and
+so on, signal that - according to the guidelines - the child should be
+referred for further investigation.
 
 We get the details for the guidelines for head circumference as
 
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+auth_curl -sX 'POST' \
 $(cat .host)'/screeners/list/json' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
@@ -1280,8 +1337,11 @@ The `/screeners/apply` end point applies standard screeners to the child
 data. Invoke the screeners by
 
 ``` r
-r <- james_post(host = host, path = "/screeners/apply/json", 
-                session = r1$session)
+r <- james_post(
+  host = host,
+  path = "/screeners/apply/json",
+  session = r1$session
+)
 r$parsed
 ```
 
@@ -1318,7 +1378,8 @@ outcome, but that table presented a lot of output that was difficult to
 act one. Since May 2023, JAMES reports only one signal per curve.
 
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+auth_curl -sX 'POST' \
 $(cat .host)'/screeners/apply/json' \
 -H 'accept: application/json' \
 -H 'Content-Type: multipart/form-data' \
@@ -1374,12 +1435,16 @@ The `/site/request` end point creates an URL to a personalised,
 interactive site containing all charts.
 
 ``` r
-r <- james_post(host = host, path = "/site/request/json", 
-                sitehost = host, txt = js)
+r <- james_post(
+  host = host,
+  path = "/site/request/json",
+  sitehost = host,
+  txt = js
+)
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x09e06ebca5bd9b"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0e8cdcb6792ebc"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1400,30 +1465,38 @@ fn <- system.file("examples/maria.json", package = "bdsreader")
 r <- james_post(host = host, path = "data/upload/json", txt = fn)
 
 # URL construction by /site/request
-site1 <- james_post(host = host, path = "site/request/json", 
-                sitehost = host, session = r$session, upload = FALSE)
+site1 <- james_post(
+  host = host,
+  path = "site/request/json",
+  sitehost = host,
+  session = r$session,
+  upload = FALSE
+)
 site1
 ```
 
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x0f2136e2f2b7e5
+      Session : x0b66a5cb9e200b
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x01c93f61b2f706"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0366ddd80d7e62"
 
 ``` r
-# Or manual URL construction (faster) 
-site2 <- modify_url(url = host, path = "site", query = list(session = r$session))
+# Or manual URL construction
+parsed_host <- httr::parse_url(host)
+combined_path <- paste(parsed_host$path, "site", sep = "/")
+combined_path <- gsub("//+", "/", combined_path)
+site2 <- httr::modify_url(
+  url = host,
+  path = combined_path,
+  query = list(session = r$session)
+)
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x01c93f61b2f706"
-
-``` r
-# browseURL(site1)
-```
+    [1] "https://james.groeidiagrammen.nl/site?session=x0366ddd80d7e62"
 
 Paste the generated URL in the address field of your browser. The
 initial page shown depends on the child’s age. This two-step approach
@@ -1431,7 +1504,8 @@ also works for remote servers. In practice, use the two-step approach is
 stabler and more reliable.
 
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+auth_curl -sX 'POST' \
 $(cat .host)'/site/request/json' \
 -H 'accept: application/json' \
 -H 'Content-Type: multipart/form-data' \
@@ -1439,7 +1513,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x0d11e3966efcb3"]
+    ["https://james.groeidiagrammen.nl/site?session=x035bdebdbf0a12"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1452,23 +1526,33 @@ does not support graphics output, so use `/{session}/{info}/svglite` or
 `/charts/draw/svglite` for the charts.
 
 ``` r
-fn <- system.file("extdata", "bds_v3.0", "smocc", "Laura_S.json",
-                 package = "jamesdemodata", mustWork = TRUE)
-r <- james_post(host = host, path = "/blend/request/json", 
-                sitehost = host, txt = fn)
+fn <- system.file(
+  "extdata",
+  "bds_v3.0",
+  "smocc",
+  "Laura_S.json",
+  package = "jamesdemodata",
+  mustWork = TRUE
+)
+r <- james_post(
+  host = host,
+  path = "/blend/request/json",
+  sitehost = host,
+  txt = fn
+)
 r
 ```
 
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x0b4cb218cabdcf
+      Session : x029c8f923ca729
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x06114720397136"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x06114720397136"
+     $ session  : chr "x0a97612151cd74"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0a97612151cd74"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1509,7 +1593,11 @@ The two-step approach is:
 
 ``` r
 resp1 <- james_post(host = host, path = "data/upload/json", txt = fn)
-resp2 <- james_post(host = host, path = "blend/request/json", session = resp1$session)
+resp2 <- james_post(
+  host = host,
+  path = "blend/request/json",
+  session = resp1$session
+)
 names(resp2$parsed)
 ```
 
@@ -1519,13 +1607,19 @@ names(resp2$parsed)
 # browseURL(resp2$parsed$site)
 ```
 
+**Note**: This example requires OpenCPU library access and may not work
+on ACC server.
+
 ``` bash
-curl -sX 'POST' \
+source auth_curl.sh
+
+BASE_URL=$(cat .host)
+auth_curl -sX 'POST' \
 $(cat .host)'/blend/request/json' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
 -d '{
-"txt": "'$(cat .host)'/ocpu/library/bdsreader/examples/Laura_S.json",
+"txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
 "sitehost": "'$(cat .host)'",
 "blend": "standard"
 }'
@@ -1533,8 +1627,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x04dbf4f2770f52",
-      "site": "https://james.groeidiagrammen.nl/site?session=x04dbf4f2770f52",
+      "session": "x023ab025d40575",
+      "site": "https://james.groeidiagrammen.nl/site?session=x023ab025d40575",
       "child": [
         {
           "id": -1,
@@ -2159,6 +2253,164 @@ $(cat .host)'/blend/request/json' \
         }
       ]
     }
+
+## Authentication
+
+### Overview
+
+JAMES supports both open and authenticated access depending on the
+deployment environment:
+
+- **Test server** (`https://james.groeidiagrammen.nl`): Open access, no
+  authentication required
+- **ACC server**
+  (`https://srminterlayer-az-acc.eaglescience.nl/modules/james`):
+  Requires Bearer token authentication
+
+This document uses authentication throughout for compatibility with the
+ACC server. The authentication mechanism is handled behind the scenes
+but uses a simple convention that makes it easy to switch between
+different deployment environments.
+
+### Authentication Conventions
+
+The authentication system in this document uses several files and
+environment variables:
+
+| File/Variable | Purpose | Location |
+|:---|:---|:---|
+| `apikey-acc.txt` | Stores your API key for the ACC server | `vignettes/articles/` |
+| `.bearer` | Stores the authentication token obtained from the API | `vignettes/articles/` (generated) |
+| `.host` | Stores the current server URL | `vignettes/articles/` (generated) |
+| `JAMES_BEARER_TOKEN` | Environment variable containing “Bearer {token}” | R session (set automatically) |
+| `authenticate-acc.sh` | Script to obtain Bearer token from API key | `vignettes/articles/` |
+| `auth_curl.sh` | Helper function that adds authentication to curl commands | `vignettes/articles/` |
+
+**Note**: The `.bearer` and `.host` files are temporary and are created
+when rendering this document. Add `apikey-acc.txt`, `.bearer`, and
+`.host` to your `.gitignore` to prevent accidentally committing
+sensitive information.
+
+### How to Set Up Authentication
+
+To use the ACC server (or any authenticated JAMES instance), follow
+these steps:
+
+#### 1. Obtain an API Key
+
+Contact the JAMES administrator to obtain an API key for the ACC
+environment. Save this key in a file named `apikey-acc.txt` in the
+`vignettes/articles/` directory:
+
+``` bash
+echo "your-api-key-here" > vignettes/articles/apikey-acc.txt
+```
+
+#### 2. Authenticate to Get Bearer Token
+
+Run the authentication script to obtain a Bearer token:
+
+``` bash
+cd vignettes/articles
+./authenticate-acc.sh
+```
+
+This script: 1. Reads your API key from `apikey-acc.txt` 2. Sends it to
+the ACC authentication endpoint 3. Saves the returned Bearer token to
+`.bearer` 4. Returns exit code 0 on success, 1 on failure
+
+The Bearer token is typically valid for a limited time (e.g., 24 hours).
+Re-run the script when the token expires.
+
+#### 3. Use Authentication in Your Code
+
+**For R code**: The setup chunk automatically loads the Bearer token
+into the `JAMES_BEARER_TOKEN` environment variable, which is used by
+`jamesclient` functions:
+
+``` r
+# Token is automatically loaded from .bearer file
+# jamesclient functions automatically use JAMES_BEARER_TOKEN
+r <- james_post(host = host, path = "version/json")
+```
+
+**For bash code**: Use the `auth_curl` helper function instead of
+`curl`:
+
+``` bash
+source auth_curl.sh
+
+# Instead of: curl -X POST https://server/endpoint
+# Use:
+auth_curl -sX POST $(cat .host)/endpoint
+```
+
+The `auth_curl` function automatically adds the
+`Authorization: Bearer {token}` header if the `.bearer` file exists.
+
+### Manual Authentication
+
+If you prefer to handle authentication manually without the helper
+scripts:
+
+**In R**:
+
+``` r
+# Read the bearer token
+bearer_token <- trimws(readLines(".bearer", n = 1))
+
+# Add to requests
+library(httr2)
+resp <- request(paste0(host, "/version/json")) |>
+  req_headers(Authorization = paste("Bearer", bearer_token)) |>
+  req_perform()
+```
+
+**In bash**:
+
+``` bash
+# Read the bearer token
+TOKEN=$(cat .bearer)
+
+# Add to curl requests
+curl -sX POST https://server/endpoint \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### Switching Between Servers
+
+To switch between different JAMES servers (test, acc, dev), change the
+`target_host` variable in the `{r host}` setup chunk at the beginning of
+this document:
+
+``` r
+target_host <- "test"  # No authentication needed
+# or
+target_host <- "acc"   # Requires authentication
+```
+
+The document will automatically: 1. Set the appropriate server URL in
+`host` variable 2. Create the `.host` file for bash chunks 3. Load
+authentication tokens if available 4. Use authenticated requests when
+needed
+
+### Troubleshooting Authentication
+
+**401 Unauthorized errors**: - Token may have expired - re-run
+`./authenticate-acc.sh` - Check that `.bearer` file exists and is not
+empty - Verify `JAMES_BEARER_TOKEN` is set:
+`Sys.getenv("JAMES_BEARER_TOKEN")` - The `jamesclient::james_post()` and
+`jamesclient::james_get()` functions rely on `JAMES_BEARER_TOKEN` for
+authentication
+
+**Token not found**: - Ensure `apikey-acc.txt` exists and contains your
+API key - Check that you’re running commands from `vignettes/articles/`
+directory - Verify `authenticate-acc.sh` has execute permissions:
+`chmod +x authenticate-acc.sh`
+
+**Connection timeout**: - Check your network connection - Verify the ACC
+server URL is correct - Check if you’re behind a proxy that requires
+configuration
 
 ## Resources
 

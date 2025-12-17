@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">JAMES - Joint Automatic Measurement and Evaluation System</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">JAMES 1.9.3 (December 2025)</p>
+<p class="subtitle lead">JAMES 1.10.0 (December 2025)</p>
 </div>
 
 
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
-<pre><code>Host:  https://srminterlayer-az-acc.eaglescience.nl/modules/james </code></pre>
+<pre><code>Host:  https://james.groeidiagrammen.nl </code></pre>
 </div>
 </div>
 <section id="overview" class="level2">
@@ -470,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://srminterlayer-az-acc.eaglescience.nl/modules/james/version/json"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/version/json"</code></pre>
 </div>
 </div>
 <p>Most of the element are documented in the <code>response</code> object in the <code>httr</code> package. For example, we could use the call <code>httr::status_code(r)</code> to obtain the status code. The function <code>james_post()</code> adds the last five elements:</p>
@@ -479,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>r$parsed</code> is a parsed version of the element <code>r$content</code>. Here it is a list of elements like names of the package, its date, and so on. In case of an error of the server function, we find the error message here;</li>
 <li><code>r$warnings</code> contain any warnings thrown during execution;</li>
 <li><code>r$messages</code> contain any messages, e.g.&nbsp;data reading errors;</li>
-<li><code>r$session</code> (like x0e47019b59661f) is a unique session code.</li>
+<li><code>r$session</code> (like x03e3035dcc7fbc) is a unique session code.</li>
 </ul>
 <p>The <code>jamesclient::james_post()</code> function wraps the basis workhorse <code>httr::POST()</code> that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.</p>
 <div class="cell" data-layout-align="center">
@@ -494,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [1] "james"
 
 $packageVersion
-[1] "1.9.2"
+[1] "1.9.3"
 
 $packageDate
 [1] "2025-12-16"
@@ -518,13 +518,13 @@ $Rversion
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">auth_curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version <span class="op">&gt;</span> resp</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> resp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/ocpu/tmp/x0409c9a0f911de/R/.val
-/ocpu/tmp/x0409c9a0f911de/R/version
-/ocpu/tmp/x0409c9a0f911de/stdout
-/ocpu/tmp/x0409c9a0f911de/source
-/ocpu/tmp/x0409c9a0f911de/console
-/ocpu/tmp/x0409c9a0f911de/info
-/ocpu/tmp/x0409c9a0f911de/files/DESCRIPTION</code></pre>
+<pre><code>/ocpu/tmp/x0d769de688c365/R/.val
+/ocpu/tmp/x0d769de688c365/R/version
+/ocpu/tmp/x0d769de688c365/stdout
+/ocpu/tmp/x0d769de688c365/source
+/ocpu/tmp/x0d769de688c365/console
+/ocpu/tmp/x0d769de688c365/info
+/ocpu/tmp/x0d769de688c365/files/DESCRIPTION</code></pre>
 </div>
 </div>
 <p>The response to the request consists of a set of URLs created on the server, each of which contains details on the response.</p>
@@ -537,7 +537,7 @@ $Rversion
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "package": "james",
-  "packageVersion": "1.9.2",
+  "packageVersion": "1.9.3",
   "packageDate": "2025-12-16",
   "Rversion": "4.5.0"
 }</code></pre>
@@ -551,7 +551,7 @@ $Rversion
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "package": "james",
-  "packageVersion": "1.9.2",
+  "packageVersion": "1.9.3",
   "packageDate": "2025-12-16",
   "Rversion": "4.5.0"
 }</code></pre>
@@ -766,7 +766,7 @@ $xyz
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(session <span class="ot">&lt;-</span> r1<span class="sc">$</span>session)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "x0dd2955f521ac8"</code></pre>
+<pre><code>[1] "x0342519f534f1e"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="fu">james_get</span>(<span class="at">host =</span> host, <span class="at">path =</span> <span class="fu">file.path</span>(session, <span class="st">"md"</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle both text and parsed responses</span></span>
@@ -873,7 +873,7 @@ $xyz
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="fu">file.path</span>(host, r7<span class="sc">$</span>session, <span class="st">"files/input.json"</span>)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://srminterlayer-az-acc.eaglescience.nl/modules/james/x09ad07deaa9935/files/input.json"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/x061bc72cc2ebc2/files/input.json"</code></pre>
 </div>
 </div>
 <p>With <code>browseURL(url)</code> we may view the file contents in the browser. The <code>files</code> directory contains five JSON files:</p>
@@ -1162,7 +1162,7 @@ population -hdc back bmi dsc front hdc hgt wfh wgt
 <pre><code>JAMES request:
   Path    : dscore/calculate/json
   Status  : 201
-  Session : x0667baefdbe1d4
+  Session : x0abddca60eeed0
 
 Parsed response:
 'data.frame':   20 obs. of  6 variables:
@@ -1207,7 +1207,7 @@ Parsed response:
 <pre><code>JAMES request:
   Path    : ddomain/calculate/json
   Status  : 201
-  Session : x042b4dde80d547
+  Session : x026a750c06891e
 
 Parsed response:
 List of 6
@@ -1395,7 +1395,7 @@ $social
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">james_post</span>(<span class="at">host =</span> host, <span class="at">path =</span> <span class="st">"vwc/select/json"</span>, <span class="at">output =</span> <span class="st">"table"</span>, <span class="at">txt =</span> fn, <span class="at">percentiles =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://srminterlayer-az-acc.eaglescience.nl/modules/james/vwc/select/json"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/vwc/select/json"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>parsed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1466,7 +1466,7 @@ $social
 <span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>parsed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "JAMES API request failed [400]\ndata must contain column\n                                                item and score.\n\nIn call:\ndcat::dcat(data = dat, age = age, key = key, population = population, \n    p = p, instrument = instrument, sem_rule = sem_rule)\n\nBacktrace:\n    ▆\n 1. ├─base::eval(call)\n 2. │ └─base::eval(call)\n 3. ├─base::withCallingHandlers(...)\n 4. ├─base::withVisible(eval(expr, envir))\n 5. └─base::eval(expr, envir)\n 6.   └─base::eval(expr, envir)\n 7.     └─james::dcat(...)\n 8.       └─dcat::dcat(...)\n 9.         └─base::stop(\"data must contain column\\n                                                item and score.\")\n\n&lt;https://srminterlayer-az-acc.eaglescience.nl/modules/james/dcat/calculate/json&gt;"</code></pre>
+<pre><code>[1] "JAMES API request failed [400]\ndata must contain column\n                                                item and score.\n\nIn call:\ndcat::dcat(data = dat, age = age, key = key, population = population, \n    p = p, instrument = instrument, sem_rule = sem_rule)\n\nBacktrace:\n    ▆\n 1. ├─base::eval(call)\n 2. │ └─base::eval(call)\n 3. ├─base::withCallingHandlers(...)\n 4. ├─base::withVisible(eval(expr, envir))\n 5. └─base::eval(expr, envir)\n 6.   └─base::eval(expr, envir)\n 7.     └─james::dcat(...)\n 8.       └─dcat::dcat(...)\n 9.         └─base::stop(\"data must contain column\\n                                                item and score.\")\n\n&lt;https://james.groeidiagrammen.nl/dcat/calculate/json&gt;"</code></pre>
 </div>
 </div>
 </div>
@@ -1620,7 +1620,7 @@ $social
 <span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>parsed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://srminterlayer-az-acc.eaglescience.nl/modules/james/site?session=x0b40ecaff11d36"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x0e8cdcb6792ebc"</code></pre>
 </div>
 </div>
 <p>Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.</p>
@@ -1643,10 +1643,10 @@ $social
 <pre><code>JAMES request:
   Path    : site/request/json
   Status  : 201
-  Session : x035803e845edb9
+  Session : x0b66a5cb9e200b
 
 Parsed response:
-[1] "https://srminterlayer-az-acc.eaglescience.nl/modules/james/site?session=x0c9d45541b8ce0"</code></pre>
+[1] "https://james.groeidiagrammen.nl/site?session=x0366ddd80d7e62"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or manual URL construction</span></span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>parsed_host <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">parse_url</span>(host)</span>
@@ -1659,7 +1659,7 @@ Parsed response:
 <span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a>site2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://srminterlayer-az-acc.eaglescience.nl/modules/james/site?session=x0c9d45541b8ce0"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x0366ddd80d7e62"</code></pre>
 </div>
 </div>
 <p>Paste the generated URL in the address field of your browser. The initial page shown depends on the child’s age. This two-step approach also works for remote servers. In practice, use the two-step approach is stabler and more reliable.</p>
@@ -1674,7 +1674,7 @@ Parsed response:
 <span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
 <span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>["https://srminterlayer-az-acc.eaglescience.nl/modules/james/site?session=x0f97e11ef6edad"]</code></pre>
+<pre><code>["https://james.groeidiagrammen.nl/site?session=x035bdebdbf0a12"]</code></pre>
 </div>
 </div>
 </div>
@@ -1708,13 +1708,13 @@ Parsed response:
 <pre><code>JAMES request:
   Path    : /blend/request/json
   Status  : 201
-  Session : x03792619d2c4a7
+  Session : x029c8f923ca729
 
 Parsed response:
 List of 6
  $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
- $ session  : chr "x00cfc5346d1fe9"
- $ site     : chr "https://srminterlayer-az-acc.eaglescience.nl/modules/james/site?session=x00cfc5346d1fe9"
+ $ session  : chr "x0a97612151cd74"
+ $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0a97612151cd74"
  $ child    :'data.frame':  1 obs. of  12 variables:
   ..$ id  : int -1
   ..$ name: chr "Laura S"
@@ -1783,8 +1783,8 @@ List of 6
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-  "session": "x06c542b624c684",
-  "site": "https://srminterlayer-az-acc.eaglescience.nl/modules/james/site?session=x06c542b624c684",
+  "session": "x023ab025d40575",
+  "site": "https://james.groeidiagrammen.nl/site?session=x023ab025d40575",
   "child": [
     {
       "id": -1,
@@ -2539,7 +2539,7 @@ List of 6
 </section>
 <section id="troubleshooting-authentication" class="level3">
 <h3 class="anchored" data-anchor-id="troubleshooting-authentication">Troubleshooting Authentication</h3>
-<p><strong>401 Unauthorized errors</strong>: - Token may have expired - re-run <code>./authenticate-acc.sh</code> - Check that <code>.bearer</code> file exists and is not empty - Verify <code>JAMES_BEARER_TOKEN</code> is set: <code>Sys.getenv("JAMES_BEARER_TOKEN")</code></p>
+<p><strong>401 Unauthorized errors</strong>: - Token may have expired - re-run <code>./authenticate-acc.sh</code> - Check that <code>.bearer</code> file exists and is not empty - Verify <code>JAMES_BEARER_TOKEN</code> is set: <code>Sys.getenv("JAMES_BEARER_TOKEN")</code> - The <code>jamesclient::james_post()</code> and <code>jamesclient::james_get()</code> functions rely on <code>JAMES_BEARER_TOKEN</code> for authentication</p>
 <p><strong>Token not found</strong>: - Ensure <code>apikey-acc.txt</code> exists and contains your API key - Check that you’re running commands from <code>vignettes/articles/</code> directory - Verify <code>authenticate-acc.sh</code> has execute permissions: <code>chmod +x authenticate-acc.sh</code></p>
 <p><strong>Connection timeout</strong>: - Check your network connection - Verify the ACC server URL is correct - Check if you’re behind a proxy that requires configuration</p>
 </section>
@@ -3084,7 +3084,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb117" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> JAMES - Joint Automatic Measurement and Evaluation System</span></span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> JAMES 1.9.3 (December 2025)</span></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> JAMES 1.10.0 (December 2025)</span></span>
 <span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
 <span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Stef van Buuren</span></span>
 <span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="co">    url: https://stefvanbuuren.name</span></span>
@@ -3106,7 +3106,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-22"><a href="#cb117-22" aria-hidden="true" tabindex="-1"></a><span class="in">#| include: false</span></span>
 <span id="cb117-23"><a href="#cb117-23" aria-hidden="true" tabindex="-1"></a><span class="in"># Define the server that hosts JAMES</span></span>
 <span id="cb117-24"><a href="#cb117-24" aria-hidden="true" tabindex="-1"></a><span class="in"># Set target_host to one of: "dev", "test", "acc"</span></span>
-<span id="cb117-25"><a href="#cb117-25" aria-hidden="true" tabindex="-1"></a><span class="in">target_host &lt;- "acc"  # Change this to switch hosts</span></span>
+<span id="cb117-25"><a href="#cb117-25" aria-hidden="true" tabindex="-1"></a><span class="in">target_host &lt;- "test"  # Change this to switch hosts</span></span>
 <span id="cb117-26"><a href="#cb117-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-27"><a href="#cb117-27" aria-hidden="true" tabindex="-1"></a><span class="in"># Available hosts</span></span>
 <span id="cb117-28"><a href="#cb117-28" aria-hidden="true" tabindex="-1"></a><span class="in">hosts &lt;- list(</span></span>
@@ -4316,37 +4316,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-1278"><a href="#cb117-1278" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Token may have expired - re-run <span class="in">`./authenticate-acc.sh`</span></span>
 <span id="cb117-1279"><a href="#cb117-1279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check that <span class="in">`.bearer`</span> file exists and is not empty</span>
 <span id="cb117-1280"><a href="#cb117-1280" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verify <span class="in">`JAMES_BEARER_TOKEN`</span> is set: <span class="in">`Sys.getenv("JAMES_BEARER_TOKEN")`</span></span>
-<span id="cb117-1281"><a href="#cb117-1281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1282"><a href="#cb117-1282" aria-hidden="true" tabindex="-1"></a>**Token not found**:</span>
-<span id="cb117-1283"><a href="#cb117-1283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensure <span class="in">`apikey-acc.txt`</span> exists and contains your API key</span>
-<span id="cb117-1284"><a href="#cb117-1284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check that you're running commands from <span class="in">`vignettes/articles/`</span> directory</span>
-<span id="cb117-1285"><a href="#cb117-1285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verify <span class="in">`authenticate-acc.sh`</span> has execute permissions: <span class="in">`chmod +x authenticate-acc.sh`</span></span>
-<span id="cb117-1286"><a href="#cb117-1286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1287"><a href="#cb117-1287" aria-hidden="true" tabindex="-1"></a>**Connection timeout**:</span>
-<span id="cb117-1288"><a href="#cb117-1288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check your network connection</span>
-<span id="cb117-1289"><a href="#cb117-1289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verify the ACC server URL is correct</span>
-<span id="cb117-1290"><a href="#cb117-1290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check if you're behind a proxy that requires configuration</span>
-<span id="cb117-1291"><a href="#cb117-1291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1292"><a href="#cb117-1292" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
-<span id="cb117-1293"><a href="#cb117-1293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1294"><a href="#cb117-1294" aria-hidden="true" tabindex="-1"></a><span class="fu">### Internal</span></span>
-<span id="cb117-1295"><a href="#cb117-1295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1296"><a href="#cb117-1296" aria-hidden="true" tabindex="-1"></a>| Description                                           | Status                                  |</span>
-<span id="cb117-1297"><a href="#cb117-1297" aria-hidden="true" tabindex="-1"></a>|:------------------------------------------------------|:----------------------------------------|</span>
-<span id="cb117-1298"><a href="#cb117-1298" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Tutorial (Dutch)</span><span class="co">](http://growthcharts.org/arnhem2025/)</span> | open |</span>
-<span id="cb117-1299"><a href="#cb117-1299" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Changelog</span><span class="co">](https://growthcharts.org/james/news/index.html)</span> | open |</span>
-<span id="cb117-1300"><a href="#cb117-1300" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">OpenAPI specification</span><span class="co">](https://james.groeidiagrammen.nl/docs/)</span> | open     |</span>
-<span id="cb117-1301"><a href="#cb117-1301" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">JSON data schema 3.0</span><span class="co">](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json)</span> | open |</span>
-<span id="cb117-1302"><a href="#cb117-1302" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Source files</span><span class="co">](https://github.com/growthcharts)</span> | open  |</span>
-<span id="cb117-1303"><a href="#cb117-1303" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">JAMES issue tracker</span><span class="co">](https://github.com/growthcharts/james/issues)</span> | open |</span>
-<span id="cb117-1304"><a href="#cb117-1304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1305"><a href="#cb117-1305" aria-hidden="true" tabindex="-1"></a><span class="fu">### External</span></span>
-<span id="cb117-1306"><a href="#cb117-1306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-1307"><a href="#cb117-1307" aria-hidden="true" tabindex="-1"></a>| Description                                           | Status                                  |</span>
-<span id="cb117-1308"><a href="#cb117-1308" aria-hidden="true" tabindex="-1"></a>|:------------------------------------------------------|:----------------------------------------|</span>
-<span id="cb117-1309"><a href="#cb117-1309" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">JAMES demo</span><span class="co">](https://tnochildhealthstatistics.shinyapps.io/james_tryout/)</span> | current |</span>
-<span id="cb117-1310"><a href="#cb117-1310" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Basisdataset JGZ</span><span class="co">](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html)</span> | current |</span>
-<span id="cb117-1311"><a href="#cb117-1311" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">OpenCPU API</span><span class="co">](https://www.opencpu.org/api.html)</span> | current |</span>
+<span id="cb117-1281"><a href="#cb117-1281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The <span class="in">`jamesclient::james_post()`</span> and <span class="in">`jamesclient::james_get()`</span> functions rely on <span class="in">`JAMES_BEARER_TOKEN`</span> for authentication</span>
+<span id="cb117-1282"><a href="#cb117-1282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1283"><a href="#cb117-1283" aria-hidden="true" tabindex="-1"></a>**Token not found**:</span>
+<span id="cb117-1284"><a href="#cb117-1284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensure <span class="in">`apikey-acc.txt`</span> exists and contains your API key</span>
+<span id="cb117-1285"><a href="#cb117-1285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check that you're running commands from <span class="in">`vignettes/articles/`</span> directory</span>
+<span id="cb117-1286"><a href="#cb117-1286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verify <span class="in">`authenticate-acc.sh`</span> has execute permissions: <span class="in">`chmod +x authenticate-acc.sh`</span></span>
+<span id="cb117-1287"><a href="#cb117-1287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1288"><a href="#cb117-1288" aria-hidden="true" tabindex="-1"></a>**Connection timeout**:</span>
+<span id="cb117-1289"><a href="#cb117-1289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check your network connection</span>
+<span id="cb117-1290"><a href="#cb117-1290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verify the ACC server URL is correct</span>
+<span id="cb117-1291"><a href="#cb117-1291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check if you're behind a proxy that requires configuration</span>
+<span id="cb117-1292"><a href="#cb117-1292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1293"><a href="#cb117-1293" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
+<span id="cb117-1294"><a href="#cb117-1294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1295"><a href="#cb117-1295" aria-hidden="true" tabindex="-1"></a><span class="fu">### Internal</span></span>
+<span id="cb117-1296"><a href="#cb117-1296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1297"><a href="#cb117-1297" aria-hidden="true" tabindex="-1"></a>| Description                                           | Status                                  |</span>
+<span id="cb117-1298"><a href="#cb117-1298" aria-hidden="true" tabindex="-1"></a>|:------------------------------------------------------|:----------------------------------------|</span>
+<span id="cb117-1299"><a href="#cb117-1299" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Tutorial (Dutch)</span><span class="co">](http://growthcharts.org/arnhem2025/)</span> | open |</span>
+<span id="cb117-1300"><a href="#cb117-1300" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Changelog</span><span class="co">](https://growthcharts.org/james/news/index.html)</span> | open |</span>
+<span id="cb117-1301"><a href="#cb117-1301" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">OpenAPI specification</span><span class="co">](https://james.groeidiagrammen.nl/docs/)</span> | open     |</span>
+<span id="cb117-1302"><a href="#cb117-1302" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">JSON data schema 3.0</span><span class="co">](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json)</span> | open |</span>
+<span id="cb117-1303"><a href="#cb117-1303" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Source files</span><span class="co">](https://github.com/growthcharts)</span> | open  |</span>
+<span id="cb117-1304"><a href="#cb117-1304" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">JAMES issue tracker</span><span class="co">](https://github.com/growthcharts/james/issues)</span> | open |</span>
+<span id="cb117-1305"><a href="#cb117-1305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1306"><a href="#cb117-1306" aria-hidden="true" tabindex="-1"></a><span class="fu">### External</span></span>
+<span id="cb117-1307"><a href="#cb117-1307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-1308"><a href="#cb117-1308" aria-hidden="true" tabindex="-1"></a>| Description                                           | Status                                  |</span>
+<span id="cb117-1309"><a href="#cb117-1309" aria-hidden="true" tabindex="-1"></a>|:------------------------------------------------------|:----------------------------------------|</span>
+<span id="cb117-1310"><a href="#cb117-1310" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">JAMES demo</span><span class="co">](https://tnochildhealthstatistics.shinyapps.io/james_tryout/)</span> | current |</span>
+<span id="cb117-1311"><a href="#cb117-1311" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">Basisdataset JGZ</span><span class="co">](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html)</span> | current |</span>
+<span id="cb117-1312"><a href="#cb117-1312" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">OpenCPU API</span><span class="co">](https://www.opencpu.org/api.html)</span> | current |</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
