@@ -1,3 +1,7 @@
+# james 1.10.0 (December 2025)
+
+- New version that supports hosting JAMES under a base path, e.g., `https://myhost/modules/james/`.
+
 # james 1.9.3 (December 2025)
 
 - Addresses the base path problem for `request_site()` and similar functions

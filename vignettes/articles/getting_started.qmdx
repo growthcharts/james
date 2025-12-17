@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.9.3 (December 2025)
+subtitle: JAMES 1.10.0 (December 2025)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -22,7 +22,7 @@ format:
 #| include: false
 # Define the server that hosts JAMES
 # Set target_host to one of: "dev", "test", "acc"
-target_host <- "acc"  # Change this to switch hosts
+target_host <- "test"  # Change this to switch hosts
 
 # Available hosts
 hosts <- list(
