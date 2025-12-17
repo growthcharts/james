@@ -13,10 +13,11 @@
   <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="app/js/ion.rangeSlider.min.js"></script>
   <script type="text/javascript" src="app/js/handleUIVisibility.js"></script>
-  <script>
+  <!-- OpenCPU URL is now auto-detected in opencpu-0.5-james-0.1.js -->
+  <!-- <script>
     window.ocpu = window.ocpu || {};
     window.ocpu.url = "http://127.0.0.1:8004/ocpu/library/james/R";
-  </script>
+  </script> -->
   <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
   <script defer type="text/javascript" src="app/js/update.js"></script>
   <script defer type="text/javascript" src="app/js/start.js"></script>
@@ -30,9 +31,9 @@
         <br>
         <div id="accordion">
           <!-- Groei card  -->
-          <div class="card" id = "groeicard">
+          <div class="card" id="groeicard">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#collapseOne" id = "groei">
+              <a class="card-link" data-toggle="collapse" href="#collapseOne" id="groei">
                 <strong>Groei</strong>
               </a>
             </div>
@@ -54,19 +55,20 @@
                   <input type="radio" id="0-15m" value="0-15m" name="agegrp" checked="checked"> 0-15 maanden<br>
                   <input type="radio" id="0-4y" value="0-4y" name="agegrp"> 0-4 jaar<br>
                   <div id="agegrp_1-21y"><input type="radio" id="1-21y" value="1-21y" name="agegrp"> 1-21 jaar<br></div>
-                <br>
+                  <br>
                 </form>
 
                 <form action="" name="msr">
                   <strong>Maat</strong><br>
-                  <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Lengte<br></div>
+                  <div id="msr_hgt"><input type="radio" name="msr" id="hgt" value="hgt" checked="checked"> Lengte<br>
+                  </div>
                   <div id="msr_wgt"><input type="radio" name="msr" id="wgt" value="wgt"> Gewicht - Leeftijd<br></div>
                   <div id="msr_wfh"><input type="radio" name="msr" id="wfh" value="wfh"> Gewicht - Lengte<br></div>
                   <div id="msr_hdc"><input type="radio" name="msr" id="hdc" value="hdc"> Hoofdomtrek<br></div>
                   <div id="msr_bmi"><input type="radio" name="msr" id="bmi" value="bmi"> BMI<br></div>
                   <div id="msr_front"><input type="radio" name="msr" id="front" value="front"> - A -<br></div>
                   <div id="msr_back"><input type="radio" name="msr" id="back" value="back"> - B -<br></div>
-                <br>
+                  <br>
                 </form>
 
                 <div class="form-group" id="weekmenu">
@@ -101,9 +103,9 @@
           </div>
 
           <!-- Ontwikkeling card  -->
-          <div class="card" id = "ontwikkelingcard">
+          <div class="card" id="ontwikkelingcard">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#collapseTwo" id = "ontwikkeling">
+              <a class="card-link" data-toggle="collapse" href="#collapseTwo" id="ontwikkeling">
                 <strong>Ontwikkeling</strong>
               </a>
             </div>
@@ -123,7 +125,7 @@
                   <strong>Leeftijd</strong><br>
                   <input type="radio" id="0-15m" value="0-15m" name="agegrp_dsc" checked="checked"> 0-15 maanden<br>
                   <input type="radio" id="0-4y" value="0-4y" name="agegrp_dsc"> 0-4 jaar<br>
-                <br>
+                  <br>
                 </form>
 
                 <div class="form-group" id="weekmenu_dsc">
@@ -143,9 +145,9 @@
           <!-- Voorspeller card  -->
           <div class="card">
             <div class="card-header">
-              <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" id = "voorspeller">
-              <strong>Voorspeller</strong>
-            </a>
+              <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" id="voorspeller">
+                <strong>Voorspeller</strong>
+              </a>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
               <div class="card-body">
@@ -164,7 +166,7 @@
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input id="exact_sex" type="checkbox" checked="checked"/>
+                      <input id="exact_sex" type="checkbox" checked="checked" />
                       <span>Zelfde geslacht</span>
                     </label>
                   </div>
@@ -175,14 +177,14 @@
                     <label>
                       <input id="exact_ga" type="checkbox">
                       <span>Zelfde zwangerschapsduur</span>
-                      </label>
-                    </div>
+                    </label>
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input id="show_future" type="checkbox"/>
+                      <input id="show_future" type="checkbox" />
                       <span>Kijk in toekomst</span>
                     </label>
                   </div>
@@ -191,7 +193,7 @@
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input id="show_realized" type="checkbox"/>
+                      <input id="show_realized" type="checkbox" />
                       <span>Gerealiseerde groei</span>
                     </label>
                   </div>
@@ -204,28 +206,28 @@
           <!-- Meldingen card  -->
           <div class="card">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#collapseFour" id = "meldingen">
+              <a class="card-link" data-toggle="collapse" href="#collapseFour" id="meldingen">
                 <strong>Meldingen</strong>
               </a>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
               <div class="card-body">
-              <form action="" name="messagegrp">
+                <form action="" name="messagegrp">
                   <strong>Berichtklasse</strong><br>
                   <input type="radio" id="messproc" value="exec" name="messagegrp" checked="checked"> Sessie<br>
-                <br>
+                  <br>
                 </form>
 
               </div>
             </div>
           </div>
-          </div>  <!-- end accordion -->
+        </div> <!-- end accordion -->
 
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">
         <div id="plotDiv"></div>
         <div id="textDiv">
-          <h5 id="version" class="highlight-background">JAMES 1.9.1 (20251214), &copy; TNO 2025</h5>
+          <h5 id="version" class="highlight-background">JAMES 1.9.3 (20251216), &copy; TNO 2025</h5>
           <p id="rq1-session" class="highlight-background"></p>
           <p id="rq1-console" class="preserve-whitespace"></p>
           <p id="rq1-warnings" class="preserve-whitespace"></p>
@@ -234,10 +236,11 @@
           <p id="rq2-console" class="preserve-whitespace"></p>
           <p id="rq2-warnings" class="preserve-whitespace"></p>
           <p id="rq2-messages" class="preserve-whitespace"></p>
-          </div>
+        </div>
       </div>
     </div>
   </div> <!-- end container-fluid -->
 
 </body>
+
 </html>

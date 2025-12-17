@@ -12,3 +12,4 @@ README.Rmd
 ^_pkgdown.yaml$
 ^LICENSE\.md$
 ^qmd$
+^.host$

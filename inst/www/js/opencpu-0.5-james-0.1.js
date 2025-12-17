@@ -176,7 +176,15 @@ if (!window.jQuery) {
           return;
         }
 
-        const sessionPath = `/ocpu/tmp/${key}/`;
+        // Derive session path from ocpu.url to handle base paths correctly
+        // e.g., if ocpu.url is "/modules/james/ocpu/library/james/R/"
+        // then sessionPath should be "/modules/james/ocpu/tmp/{key}/"
+        let sessionPath;
+        if (ocpu.url.includes('/modules/james')) {
+          sessionPath = `/modules/james/ocpu/tmp/${key}/`;
+        } else {
+          sessionPath = `/ocpu/tmp/${key}/`;
+        }
         const loc = `${derivedHost}${sessionPath}`;
 
         console.log("[r_fun_ajax] Session key:", key);
@@ -479,7 +487,29 @@ if (!window.jQuery) {
 
   // Auto-detect and set ocpu.url (safe for both local and production)
   (function initOcpuUrl() {
-    ocpu.seturl("ocpu/library/james/R");
+    // Detect base path from current location
+    var pathname = window.location.pathname;
+    var ocpuPath;
+
+    // If we're on a server with a base path (e.g., /modules/james/site),
+    // extract the base path and construct the full OpenCPU URL
+    if (pathname.includes('/modules/james')) {
+      // Extract base path up to and including /modules/james
+      var baseMatch = pathname.match(/^(.*\/modules\/james)/);
+      if (baseMatch) {
+        // Use absolute path with base
+        ocpuPath = baseMatch[1] + "/ocpu/library/james/R";
+      } else {
+        ocpuPath = "/modules/james/ocpu/library/james/R";
+      }
+    } else {
+      // Default relative path for standard deployment
+      ocpuPath = "ocpu/library/james/R";
+    }
+
+    console.log("Current pathname:", pathname);
+    console.log("Setting OpenCPU path to:", ocpuPath);
+    ocpu.seturl(ocpuPath);
   })();
 
   // Export remaining functions

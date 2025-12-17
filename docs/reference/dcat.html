@@ -9,7 +9,7 @@ the next item or stop test and return D-score."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.9.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,12 @@ from <code>sem_rule()</code>.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"example_v3.1.json"</span>, package <span class="op">=</span> <span class="st">"bdsreader"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">dcat</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">txt</span>, p <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gs1lgc136"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gs1lgc112"</span>
+<span class="r-in"><span><span class="va">txt</span> <span class="op">&lt;-</span> <span class="st">"~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"</span></span></span>
+<span class="r-in"><span><span class="fu">dcat</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">txt</span>, p <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cannot read 'txt': ~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> No date of birth found, cannot calculate next item</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
