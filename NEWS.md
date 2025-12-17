@@ -1,3 +1,7 @@
+# james 1.10.1 (December 2025)
+
+- Leverages JAMES path rewites to provide shorter paths and better protection.
+
 # james 1.10.0 (December 2025)
 
 - New version that supports hosting JAMES under a base path, e.g., `https://myhost/modules/james/`.

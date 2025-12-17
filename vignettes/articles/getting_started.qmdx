@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.10.0 (December 2025)
+subtitle: JAMES 1.10.1 (December 2025)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -22,7 +22,7 @@ format:
 #| include: false
 # Define the server that hosts JAMES
 # Set target_host to one of: "dev", "test", "acc", "prod"
-target_host <- "acc"  # Change this to switch hosts
+target_host <- "test"  # Change this to switch hosts
 
 # Available hosts
 hosts <- list(
@@ -111,11 +111,6 @@ fetch_url_content <- function(url) {
 }
 ```
 
-```{r hostset, echo = FALSE}
-# print the host for verification
-cat("Host: ", host, "\n")
-```
-
 ## Overview
 
 JAMES is a web service for creating and interpreting charts of child growth and development. The current version of JAMES
@@ -201,6 +196,10 @@ In general, the user can specify the desired format by appending the format name
 
 This document provides a quick introduction into the main JAMES features, and how these can be assessed from `R` and from the command line.
 
+```{r hostset, echo = FALSE}
+# print the host for verification
+cat("Target host: ", target_host, "\n")
+```
 
 ## Features 
 
@@ -225,7 +224,6 @@ remotes::install_github("growthcharts/bdsreader")
 library(jamesclient)
 library(httr)
 library(jsonlite)
-library(httr2)
 ```
 
 The server that hosts JAMES was already defined in the setup block at the top of this document. The `host` variable is now available for use in all subsequent code chunks.
@@ -1125,7 +1123,7 @@ $(cat .host)'/blend/request/json' \
 JAMES supports both open and authenticated access depending on the deployment environment:
 
 - **Test server** (`https://james.groeidiagrammen.nl`): Open access, no authentication required
-- **ACC server** (`https://srminterlayer-az-acc.eaglescience.nl/modules/james`): Requires Bearer token authentication
+- **ACC and PROD server** : Requires Bearer token authentication
 
 This document uses authentication throughout for compatibility with the ACC server. The authentication mechanism is handled behind the scenes but uses a simple convention that makes it easy to switch between different deployment environments.
 
@@ -1150,7 +1148,7 @@ To use the ACC server (or any authenticated JAMES instance), follow these steps:
 
 #### 1. Obtain an API Key
 
-Contact the JAMES administrator to obtain an API key for the ACC environment. Save this key in a file named `apikey-acc.txt` in the `vignettes/articles/` directory:
+Contact the JAMES administrator to obtain an API key for the ACC environment. Save this key in a file named `apikey-acc.txt` (or `apikey-prod.txt`) in the `vignettes/articles/` directory:
 
 ```bash
 echo "your-api-key-here" > vignettes/articles/apikey-acc.txt
@@ -1226,12 +1224,14 @@ curl -sX POST https://server/endpoint \
 To switch between different JAMES servers (test, acc, dev), change the `target_host` variable in the `{r host}` setup chunk at the beginning of this document:
 
 ```r
+target_host <- "dev"   # localhost for development
 target_host <- "test"  # No authentication needed
-# or
 target_host <- "acc"   # Requires authentication
+target_host <- "prod"  # Requires authentication
 ```
 
 The document will automatically:
+
 1. Set the appropriate server URL in `host` variable
 2. Create the `.host` file for bash chunks
 3. Load authentication tokens if available
@@ -1240,17 +1240,20 @@ The document will automatically:
 ### Troubleshooting Authentication
 
 **401 Unauthorized errors**:
+
 - Token may have expired - re-run `./authenticate-acc.sh`
 - Check that `.bearer` file exists and is not empty
 - Verify `JAMES_BEARER_TOKEN` is set: `Sys.getenv("JAMES_BEARER_TOKEN")`
 - The `jamesclient::james_post()` and `jamesclient::james_get()` functions rely on `JAMES_BEARER_TOKEN` for authentication
 
 **Token not found**:
+
 - Ensure `apikey-acc.txt` exists and contains your API key
 - Check that you're running commands from `vignettes/articles/` directory
 - Verify `authenticate-acc.sh` has execute permissions: `chmod +x authenticate-acc.sh`
 
 **Connection timeout**:
+
 - Check your network connection
 - Verify the ACC server URL is correct
 - Check if you're behind a proxy that requires configuration
