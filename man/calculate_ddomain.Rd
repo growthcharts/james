@@ -9,6 +9,8 @@ calculate_ddomain(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
+  key = "gsed2510",
+  population = NULL,
   set = "GFCLS",
   domain = NULL,
   loc = "",
@@ -27,10 +29,26 @@ should conform to the BDS JGZ 3.2.5 specification.}
 D-score calculations on. Currently supports \code{ddi} and \code{gs1}. Requires JSON
 schema V3.0 or later.}
 
-\item{set}{String with the name of the domainset}
+\item{key}{String. They key identifies 1) the difficulty estimates
+pertaining to a particular Rasch model, and 2) the prior mean and standard
+deviation of the prior distribution for calculating the D-score.
+The default key \code{NULL} sets \code{key = "gsed2406"}.
+View \code{builtin_keys} for an overview of the available keys.}
 
-\item{domain}{Vector of strings with names of specific domains, by default
-all domains in the set are returned.}
+\item{population}{String. The name of the reference population to calculate
+DAZ.
+Use \code{with(builtin_references, table(key, population))} to see which
+built-in references are available for \code{key - population} combinations.
+If not specified, the function set the default population as
+\code{builtin_keys$base_population[key == builtin_keys$key]}.}
+
+\item{set}{String. The name of the set of domains to use. See
+\code{with(builtin_domaintable, table(set, domain))} for the domain names in each
+set.}
+
+\item{domain}{character vector of the name of the domain(s) for which to
+compute the domain score. Per default all domains in the \code{set} are
+used .}
 
 \item{loc}{Deprecated. Use \code{session} instead.}
 

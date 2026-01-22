@@ -18,8 +18,9 @@
 #'   function returns only the last row. If `output` equals `"last_dscore"` the
 #'   function returns only the D-score from the last row.
 #' @inheritParams bdsreader::read_bds
+#' @inheritParams dscore::dscore
 #' @return A table, row or scalar.
-#' @author Stef van Buuren 2020
+#' @author Stef van Buuren 2020-2026
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "Laura_S.json", package = "james")
@@ -31,6 +32,8 @@ calculate_dscore <- function(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
+  key = "gsed2510",
+  population = NULL,
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -60,14 +63,15 @@ calculate_dscore <- function(
   items <- items[items %in% time$yname]
 
   # check key - set default for gsed
-  key <- "gsed2510"
   if (all(is.na(get_tau(items, key = key)))) {
     key <- "gsed2406"
   }
-  # get the defaults for key
-  idx <- which(dscore::builtin_keys$key == key)
-  # get population
-  population = dscore::builtin_keys$base_population[idx]
+
+  # for a given key, get default population from dscore package
+  if (is.null(population)) {
+    idx <- which(dscore::builtin_keys$key == key)
+    population <- dscore::builtin_keys$base_population[idx]
+  }
 
   dsc <- time %>%
     dplyr::select(-.data$zname, -.data$z) |>

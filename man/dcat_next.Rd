@@ -26,7 +26,8 @@ that should match. The default is \code{instrument = "gs1"} for GSED SF;
 \item{key}{String. They key identifies 1) the difficulty estimates
 pertaining to a particular Rasch model, and 2) the prior mean and standard
 deviation of the prior distribution for calculating the D-score.
-The default key \code{key = "gsed2510"}.}
+The default key \code{NULL} sets \code{key = "gsed2406"}.
+View \code{builtin_keys} for an overview of the available keys.}
 
 \item{p}{percentage to pass the item, difficulty in percentile units.}
 

@@ -9,6 +9,8 @@ calculate_dscore(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
+  key = "gsed2510",
+  population = NULL,
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
   ...
@@ -25,6 +27,19 @@ should conform to the BDS JGZ 3.2.5 specification.}
 \item{append}{Optional vector of strings indicating which instrument to base
 D-score calculations on. Currently supports \code{ddi} and \code{gs1}. Requires JSON
 schema V3.0 or later.}
+
+\item{key}{String. They key identifies 1) the difficulty estimates
+pertaining to a particular Rasch model, and 2) the prior mean and standard
+deviation of the prior distribution for calculating the D-score.
+The default key \code{NULL} sets \code{key = "gsed2406"}.
+View \code{builtin_keys} for an overview of the available keys.}
+
+\item{population}{String. The name of the reference population to calculate
+DAZ.
+Use \code{with(builtin_references, table(key, population))} to see which
+built-in references are available for \code{key - population} combinations.
+If not specified, the function set the default population as
+\code{builtin_keys$base_population[key == builtin_keys$key]}.}
 
 \item{output}{A string, either \code{"table"}, \code{"last_visit"} or '\code{"last_dscore"}
 specifying the result. The default \code{"table"} returns with columns: \code{"date"}
@@ -49,6 +64,6 @@ df <- calculate_dscore(txt = fn)
 head(df, 4)
 }
 \author{
-Stef van Buuren 2020
+Stef van Buuren 2020-2026
 }
 \keyword{server}

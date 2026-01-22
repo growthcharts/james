@@ -10,11 +10,6 @@
 #' @param instrument A character vector with 3-position codes of instruments
 #' that should match. The default is `instrument = "gs1"` for GSED SF;
 #' `instrument = NULL` allows for all instruments.
-#' @param key String. They key identifies 1) the difficulty estimates
-#' pertaining to a particular Rasch model, and 2) the prior mean and standard
-#' deviation of the prior distribution for calculating the D-score.
-#' The default key `key = "gsed2510"`.
-#' @param population String. Name of the reference population.
 #' @param p percentage to pass the item, difficulty in percentile units.
 #' @inheritParams bdsreader::read_bds
 #' @return A string of milestones.
@@ -27,7 +22,7 @@ dcat_start <- function(
   txt = "",
   instrument = "gs1",
   key = "gsed2510",
-  population = "",
+  population = NULL,
   p = 50,
   session = "",
   format = "3.1",
@@ -46,10 +41,6 @@ dcat_start <- function(
   if (!is.list(tgt)) {
     message("Cannot calculate start item")
     return(NULL)
-  }
-
-  if (population == "") {
-    population <- NULL
   }
 
   psn <- persondata(tgt)

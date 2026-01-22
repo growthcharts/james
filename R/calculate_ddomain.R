@@ -8,13 +8,8 @@
 #'
 #' The function `draw_chart()` plots individual data on the growth chart.
 #' @inheritParams request_site
-#' @param append Optional vector of strings indicating which instrument to base
-#'   D-score calculations on. Currently supports `ddi` and `gs1`. Requires JSON
-#'   schema V3.0 or later.
-#' @param set String with the name of the domainset
-#' @param domain Vector of strings with names of specific domains, by default
-#' all domains in the set are returned.
-#' @inheritParams bdsreader::read_bds
+#' @inheritParams calculate_dscore
+#' @inheritParams dscore::ddomain
 #' @return A list of data.frames.
 #' @author Iris Eekhout 2025
 #' @keywords server
@@ -28,6 +23,8 @@ calculate_ddomain <- function(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
+  key = "gsed2510",
+  population = NULL,
   set = "GFCLS",
   domain = NULL,
   loc = "",
@@ -57,14 +54,15 @@ calculate_ddomain <- function(
   items <- items[items %in% time$yname]
 
   # check key - set default for gsed
-  key <- "gsed2510"
   if (all(is.na(get_tau(items, key = key)))) {
     key <- "gsed2406"
   }
-  # get the defaults for key
-  idx <- which(dscore::builtin_keys$key == key)
-  # get population
-  population = dscore::builtin_keys$base_population[idx]
+
+  # for a given key, get default population from dscore package
+  if (is.null(population)) {
+    idx <- which(dscore::builtin_keys$key == key)
+    population <- dscore::builtin_keys$base_population[idx]
+  }
 
   # transform data
   time <- time %>%
@@ -79,8 +77,12 @@ calculate_ddomain <- function(
   dsc <- time |>
     dscore::dscore(key = key, population = population)
   domains <- time |>
-    dscore::ddomain(key = key, population = population,
-                    set = set, domain = domain)
+    dscore::ddomain(
+      key = key,
+      population = population,
+      set = set,
+      domain = domain
+    )
   dsc <- c(list("dscore" = dsc), domains)
 
   return(dsc)
