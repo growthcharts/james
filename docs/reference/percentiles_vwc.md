@@ -24,8 +24,7 @@ percentiles_vwc(
 
 - txt:
 
-  A JSON string, URL, or file with BDS data in JSON format. Data should
-  conform to the BDS JGZ 3.2.5 specification.
+  A JSON string, URL or file
 
 - p:
 
@@ -49,7 +48,10 @@ percentiles_vwc(
 
 - format:
 
-  JSON schema version, e.g., `"3.0"`. Used when uploading.
+  String. JSON data schema version number. There are currently three
+  schemas supported: `"1.0"`, `"1.1"`, `"2.0"`, `"3.0"` and `"3.1"`.
+  Formats `"1.0"` and `"1.1"` are included for backward compatibility
+  only. Use `format = "3.1"` for new applications.
 
 - loc:
 

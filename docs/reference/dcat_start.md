@@ -9,8 +9,8 @@ D-score.
 dcat_start(
   txt = "",
   instrument = "gs1",
-  key = "gsed2510",
-  population = "",
+  key = NULL,
+  population = NULL,
   p = 50,
   session = "",
   format = "3.1",
@@ -22,29 +22,28 @@ dcat_start(
 
 - txt:
 
-  A JSON string, URL, or file with BDS data in JSON format. Data should
-  conform to the BDS JGZ 3.2.5 specification.
+  A JSON string, URL or file
 
 - instrument:
 
-  A character vector with 3-position codes of instruments that should
-  match. The default is `instrument = "gs1"` for GSED SF;
-  `instrument = NULL` allows for all instruments.
+  character vector with instrument names to use to select items
 
 - key:
 
   String. They key identifies 1) the difficulty estimates pertaining to
   a particular Rasch model, and 2) the prior mean and standard deviation
   of the prior distribution for calculating the D-score. The default key
-  `key = "gsed2510"`.
+  `NULL` sets `key = "gsed2510"`. View
+  [`dscore::builtin_keys`](https://d-score.github.io/dscore/reference/builtin_keys.html)
+  for an overview of the available keys.
 
 - population:
 
-  String. Name of the reference population.
+  String. Name of the reference population
 
 - p:
 
-  percentage to pass the item, difficulty in percentile units.
+  percentage to pass the item, difficulty in percentile units
 
 - session:
 
@@ -52,7 +51,10 @@ dcat_start(
 
 - format:
 
-  JSON schema version, e.g., `"3.0"`. Used when uploading.
+  String. JSON data schema version number. There are currently three
+  schemas supported: `"1.0"`, `"1.1"`, `"2.0"`, `"3.0"` and `"3.1"`.
+  Formats `"1.0"` and `"1.1"` are included for backward compatibility
+  only. Use `format = "3.1"` for new applications.
 
 - ...:
 

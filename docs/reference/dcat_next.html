@@ -9,7 +9,7 @@ D-score. Uses the previously administered items and item scores as input."></hea
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ D-score. Uses the previously administered items and item scores as input.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dcat_next</span><span class="op">(</span></span>
 <span>  txt <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  instrument <span class="op">=</span> <span class="st">"gs1"</span>,</span>
-<span>  key <span class="op">=</span> <span class="st">"gsed2510"</span>,</span>
+<span>  key <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  p <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>  session <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"3.1"</span>,</span>
@@ -62,25 +62,24 @@ D-score. Uses the previously administered items and item scores as input.</p>
 
 
 <dl><dt id="arg-txt">txt<a class="anchor" aria-label="anchor" href="#arg-txt"></a></dt>
-<dd><p>A JSON string, URL, or file with BDS data in JSON format. Data
-should conform to the BDS JGZ 3.2.5 specification.</p></dd>
+<dd><p>A JSON string, URL or file</p></dd>
 
 
 <dt id="arg-instrument">instrument<a class="anchor" aria-label="anchor" href="#arg-instrument"></a></dt>
-<dd><p>A character vector with 3-position codes of instruments
-that should match. The default is <code>instrument = "gs1"</code> for GSED SF;
-<code>instrument = NULL</code> allows for all instruments.</p></dd>
+<dd><p>character vector with instrument names to use to select
+items</p></dd>
 
 
 <dt id="arg-key">key<a class="anchor" aria-label="anchor" href="#arg-key"></a></dt>
 <dd><p>String. They key identifies 1) the difficulty estimates
 pertaining to a particular Rasch model, and 2) the prior mean and standard
 deviation of the prior distribution for calculating the D-score.
-The default key <code>key = "gsed2510"</code>.</p></dd>
+The default key <code>NULL</code> sets <code>key = "gsed2510"</code>.
+View <code><a href="https://d-score.github.io/dscore/reference/builtin_keys.html" class="external-link">dscore::builtin_keys</a></code> for an overview of the available keys.</p></dd>
 
 
 <dt id="arg-p">p<a class="anchor" aria-label="anchor" href="#arg-p"></a></dt>
-<dd><p>percentage to pass the item, difficulty in percentile units.</p></dd>
+<dd><p>percentage to pass the item, difficulty in percentile units</p></dd>
 
 
 <dt id="arg-session">session<a class="anchor" aria-label="anchor" href="#arg-session"></a></dt>
@@ -88,7 +87,10 @@ The default key <code>key = "gsed2510"</code>.</p></dd>
 
 
 <dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
-<dd><p>JSON schema version, e.g., <code>"3.0"</code>. Used when uploading.</p></dd>
+<dd><p>String. JSON data schema version number. There are currently
+three schemas supported: <code>"1.0"</code>, <code>"1.1"</code>, <code>"2.0"</code>, <code>"3.0"</code> and <code>"3.1"</code>.
+Formats <code>"1.0"</code> and <code>"1.1"</code> are included for backward compatibility only.
+Use <code>format = "3.1"</code> for new applications.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

@@ -13,7 +13,7 @@ milestones based on age and past milestones."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,8 +69,7 @@ milestones based on age and past milestones.</p>
 
 
 <dl><dt id="arg-txt">txt<a class="anchor" aria-label="anchor" href="#arg-txt"></a></dt>
-<dd><p>A JSON string, URL, or file with BDS data in JSON format. Data
-should conform to the BDS JGZ 3.2.5 specification.</p></dd>
+<dd><p>A JSON string, URL or file</p></dd>
 
 
 <dt id="arg-p">p<a class="anchor" aria-label="anchor" href="#arg-p"></a></dt>
@@ -94,7 +93,10 @@ calculations and directly supply the milestones of interest</p></dd>
 
 
 <dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
-<dd><p>JSON schema version, e.g., <code>"3.0"</code>. Used when uploading.</p></dd>
+<dd><p>String. JSON data schema version number. There are currently
+three schemas supported: <code>"1.0"</code>, <code>"1.1"</code>, <code>"2.0"</code>, <code>"3.0"</code> and <code>"3.1"</code>.
+Formats <code>"1.0"</code> and <code>"1.1"</code> are included for backward compatibility only.
+Use <code>format = "3.1"</code> for new applications.</p></dd>
 
 
 <dt id="arg-loc">loc<a class="anchor" aria-label="anchor" href="#arg-loc"></a></dt>

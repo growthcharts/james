@@ -74,8 +74,11 @@ james:::update_openapi_spec()
 ### Next steps
 
 
--   Rscript -e 'quarto::quarto_render(input = "vignettes/articles/getting_started.qmd")'
--   Rename `getting_started.qmd` --> `getting_started.qmdx`
+-   RUN: Rscript -e 'quarto::quarto_render(input = "vignettes/articles/getting_started.qmd")'
+-   By default, this script runs server "test" (james.groeidiagrammen.nl), which initially contains the previous JAMES version
+-   We first have to build and test our new version on localhost and test
+
+-   Rename `getting_started.qmd` --> `getting_started.qmdx` to exempt getting_started from being build by `pkgdown::build_site()`
 
 -   Update site: `pkgdown::build_site()`
 -   Move `vignettes/articles/getting_started.html` to `docs/articles/getting_started.html`

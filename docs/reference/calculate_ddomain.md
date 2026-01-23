@@ -1,8 +1,8 @@
 # Calculates the domain specific D-score and DAZ for each visit
 
-The function
-[`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
-plots individual data on the growth chart.
+The function `calculate_ddomain()` calculates five domain scores for the
+D-score. Note that the domain scores may be highly variable due to the
+small number of items per domain.
 
 ## Usage
 
@@ -12,6 +12,8 @@ calculate_ddomain(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
+  key = NULL,
+  population = NULL,
   set = "GFCLS",
   domain = NULL,
   loc = "",
@@ -40,14 +42,32 @@ calculate_ddomain(
   calculations on. Currently supports `ddi` and `gs1`. Requires JSON
   schema V3.0 or later.
 
+- key:
+
+  String. They key identifies 1) the difficulty estimates pertaining to
+  a particular Rasch model, and 2) the prior mean and standard deviation
+  of the prior distribution for calculating the D-score. The default key
+  `NULL` sets `key = "gsed2510"`. View `builtin_keys` for an overview of
+  the available keys.
+
+- population:
+
+  String. The name of the reference population to calculate DAZ. Use
+  `with(builtin_references, table(key, population))` to see which
+  built-in references are available for `key - population` combinations.
+  If not specified, the function set the default population as
+  `builtin_keys$base_population[key == builtin_keys$key]`.
+
 - set:
 
-  String with the name of the domainset
+  String. The name of the set of domains to use. See
+  `with(builtin_domaintable, table(set, domain))` for the domain names
+  in each set.
 
 - domain:
 
-  Vector of strings with names of specific domains, by default all
-  domains in the set are returned.
+  character vector of the name of the domain(s) for which to compute the
+  domain score. Per default all domains in the `set` are used .
 
 - loc:
 
