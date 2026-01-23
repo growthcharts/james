@@ -1,3 +1,9 @@
+# james 1.11.0 (January 2026)
+
+- Updates dependency `dscore 2.1.0` to support adaptive testing, country-references, GSED HF and domain scores.
+- Updates and improves consistency of the openAPI specification to with new arguments and functions
+- Implements consistent choice for argument `key = NULL` everyhwere
+
 # james 1.10.1 (December 2025)
 
 - Leverages JAMES path rewites to provide shorter paths and better protection.
