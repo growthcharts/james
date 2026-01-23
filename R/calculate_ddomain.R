@@ -6,10 +6,14 @@
 
 #' Calculates the domain specific D-score and DAZ for each visit
 #'
-#' The function `draw_chart()` plots individual data on the growth chart.
+#' The function `calculate_ddomain()` calculates five domain scores for
+#' the D-score. Note that the domain scores may be highly variable due
+#' to the small number of items per domain.
+#'
+#' @inheritParams dscore::ddomain
 #' @inheritParams request_site
 #' @inheritParams calculate_dscore
-#' @inheritParams dscore::ddomain
+#'
 #' @return A list of data.frames.
 #' @author Iris Eekhout 2025
 #' @keywords server
@@ -23,7 +27,7 @@ calculate_ddomain <- function(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   set = "GFCLS",
   domain = NULL,

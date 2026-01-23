@@ -6,7 +6,11 @@
 
 #' Calculates the D-score and DAZ for each visit
 #'
-#' The function `draw_chart()` plots individual data on the growth chart.
+#' The function `calculate_dscore()` calculate the D-score for early child
+#' development.
+#'
+#' @inheritParams bdsreader::read_bds
+#' @inheritParams dscore::dscore
 #' @inheritParams request_site
 #' @param append Optional vector of strings indicating which instrument to base
 #'   D-score calculations on. Currently supports `ddi` and `gs1`. Requires JSON
@@ -17,8 +21,7 @@
 #'   equals to the number of visits. If `output` equals `"last_visit"` the
 #'   function returns only the last row. If `output` equals `"last_dscore"` the
 #'   function returns only the D-score from the last row.
-#' @inheritParams bdsreader::read_bds
-#' @inheritParams dscore::dscore
+#'
 #' @return A table, row or scalar.
 #' @author Stef van Buuren 2020-2026
 #' @keywords server
@@ -32,7 +35,7 @@ calculate_dscore <- function(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   output = c("table", "last_visit", "last_dscore"),
   loc = "",

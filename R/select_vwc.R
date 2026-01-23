@@ -7,13 +7,14 @@
 #' Calculates the recommended van Wiechen milestones based on age and past
 #' milestones
 #'
+#' @inheritParams bdsreader::read_bds
 #' @inheritParams calculate_dscore
 #' @param p Reference percentile indicating the expected probability of a
 #'   positive van Wiechen outcome given child age. Higher values correspond with
 #'   easier items.
 #' @param n Number of van Wiechen items to suggest. By default returns all items
 #'   within set probability limits.
-#' @inheritParams bdsreader::read_bds
+#'
 #' @return A string of milestones
 #' @author Arjan Huizing 2025
 #' @examples

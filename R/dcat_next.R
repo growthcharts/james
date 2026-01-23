@@ -7,9 +7,10 @@
 #' Calculates the next item to administer in an adaptive test to measure the
 #' D-score. Uses the previously administered items and item scores as input.
 #'
-#' @inheritParams calculate_dscore
-#' @inheritParams dcat_start
+#' @inheritParams dcat::dcat
 #' @inheritParams bdsreader::read_bds
+#' @inheritParams calculate_dscore
+#'
 #' @return A string of milestones
 #' @author Iris Eekhout 2025
 #' @examples
@@ -19,7 +20,7 @@
 dcat_next <- function(
   txt = "",
   instrument = "gs1",
-  key = "gsed2510",
+  key = NULL,
   p = 50,
   session = "",
   format = "3.1",
@@ -51,6 +52,14 @@ dcat_next <- function(
   vars_adm <- time$yname
 
   items_instrument <- dscore::get_itemnames(instrument = instrument)
+  # default is most recent gsed key; if no tau for new key, fall back to previous key
+  if (is.null(key) || key == "gsed") {
+    key <- "gsed2510"
+    if (all(is.na(dscore::get_tau(items_instrument, key = key)))) {
+      key <- "gsed2406"
+    }
+  }
+
   items_assessed <- intersect(vars_adm, items_instrument) #variabele that are part of instrument
   items_candidate <- setdiff(items_instrument, items_assessed)
 

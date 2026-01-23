@@ -9,7 +9,7 @@ calculate_ddomain(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   set = "GFCLS",
   domain = NULL,
@@ -32,7 +32,7 @@ schema V3.0 or later.}
 \item{key}{String. They key identifies 1) the difficulty estimates
 pertaining to a particular Rasch model, and 2) the prior mean and standard
 deviation of the prior distribution for calculating the D-score.
-The default key \code{NULL} sets \code{key = "gsed2406"}.
+The default key \code{NULL} sets \code{key = "gsed2510"}.
 View \code{builtin_keys} for an overview of the available keys.}
 
 \item{population}{String. The name of the reference population to calculate
@@ -58,7 +58,9 @@ used .}
 A list of data.frames.
 }
 \description{
-The function \code{draw_chart()} plots individual data on the growth chart.
+The function \code{calculate_ddomain()} calculates five domain scores for
+the D-score. Note that the domain scores may be highly variable due
+to the small number of items per domain.
 }
 \examples{
 fn <- system.file("testdata", "Laura_S.json", package = "james")

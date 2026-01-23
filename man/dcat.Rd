@@ -8,7 +8,7 @@ the next item or stop test and return D-score.}
 dcat(
   txt = "",
   instrument = "gs1",
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   p = 50,
   sem_rule = 1.726,
@@ -18,34 +18,30 @@ dcat(
 )
 }
 \arguments{
-\item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
-should conform to the BDS JGZ 3.2.5 specification.}
+\item{txt}{A JSON string, URL or file}
 
-\item{instrument}{A character vector with 3-position codes of instruments
-that should match. The default is \code{instrument = "gs1"} for GSED SF;
-\code{instrument = NULL} allows for all instruments.}
+\item{instrument}{character vector with instrument names to use to select
+items}
 
 \item{key}{String. They key identifies 1) the difficulty estimates
 pertaining to a particular Rasch model, and 2) the prior mean and standard
 deviation of the prior distribution for calculating the D-score.
-The default key \code{NULL} sets \code{key = "gsed2406"}.
-View \code{builtin_keys} for an overview of the available keys.}
+The default key \code{NULL} sets \code{key = "gsed2510"}.
+View \code{dscore::builtin_keys} for an overview of the available keys.}
 
-\item{population}{String. The name of the reference population to calculate
-DAZ.
-Use \code{with(builtin_references, table(key, population))} to see which
-built-in references are available for \code{key - population} combinations.
-If not specified, the function set the default population as
-\code{builtin_keys$base_population[key == builtin_keys$key]}.}
+\item{population}{String. Name of the reference population}
 
-\item{p}{percentage to pass the item, difficulty in percentile units.}
+\item{p}{percentage to pass the item, difficulty in percentile units}
 
 \item{sem_rule}{numeric target for sem can be estimated based on Cohen's d
 from \code{sem_rule()}.}
 
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
-\item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"}, \code{"3.0"} and \code{"3.1"}.
+Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
+Use \code{format = "3.1"} for new applications.}
 
 \item{...}{Ignored}
 }

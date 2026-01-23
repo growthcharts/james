@@ -9,7 +9,7 @@ calculate_dscore(
   session = "",
   format = "3.1",
   append = c("ddi", "gs1"),
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   output = c("table", "last_visit", "last_dscore"),
   loc = "",
@@ -17,12 +17,14 @@ calculate_dscore(
 )
 }
 \arguments{
-\item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
-should conform to the BDS JGZ 3.2.5 specification.}
+\item{txt}{A JSON string, URL or file}
 
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
-\item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
+\item{format}{String. JSON data schema version number. There are currently
+three schemas supported: \code{"1.0"}, \code{"1.1"}, \code{"2.0"}, \code{"3.0"} and \code{"3.1"}.
+Formats \code{"1.0"} and \code{"1.1"} are included for backward compatibility only.
+Use \code{format = "3.1"} for new applications.}
 
 \item{append}{Optional vector of strings indicating which instrument to base
 D-score calculations on. Currently supports \code{ddi} and \code{gs1}. Requires JSON
@@ -31,7 +33,7 @@ schema V3.0 or later.}
 \item{key}{String. They key identifies 1) the difficulty estimates
 pertaining to a particular Rasch model, and 2) the prior mean and standard
 deviation of the prior distribution for calculating the D-score.
-The default key \code{NULL} sets \code{key = "gsed2406"}.
+The default key \code{NULL} sets \code{key = "gsed2510"}.
 View \code{builtin_keys} for an overview of the available keys.}
 
 \item{population}{String. The name of the reference population to calculate
@@ -56,7 +58,8 @@ function returns only the D-score from the last row.}
 A table, row or scalar.
 }
 \description{
-The function \code{draw_chart()} plots individual data on the growth chart.
+The function \code{calculate_dscore()} calculate the D-score for early child
+development.
 }
 \examples{
 fn <- system.file("testdata", "Laura_S.json", package = "james")

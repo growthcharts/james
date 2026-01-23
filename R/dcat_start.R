@@ -6,12 +6,10 @@
 
 #' Calculates the start item from age for an adaptive test to measure D-score.
 #'
-#' @inheritParams calculate_dscore
-#' @param instrument A character vector with 3-position codes of instruments
-#' that should match. The default is `instrument = "gs1"` for GSED SF;
-#' `instrument = NULL` allows for all instruments.
-#' @param p percentage to pass the item, difficulty in percentile units.
+#' @inheritParams dcat::dcat
 #' @inheritParams bdsreader::read_bds
+#' @inheritParams calculate_dscore
+#'
 #' @return A string of milestones.
 #' @author Iris Eekhout 2025
 #' @examples
@@ -21,7 +19,7 @@
 dcat_start <- function(
   txt = "",
   instrument = "gs1",
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   p = 50,
   session = "",
@@ -49,6 +47,14 @@ dcat_start <- function(
 
   # get items from instrument
   items_instrument <- dscore::get_itemnames(instrument = instrument)
+
+  # default is most recent gsed key; if no tau for new key, fall back to previous key
+  if (is.null(key) || key == "gsed") {
+    key <- "gsed2510"
+    if (all(is.na(dscore::get_tau(items_instrument, key = key)))) {
+      key <- "gsed2406"
+    }
+  }
 
   starti <- dcat::dcat_start(
     age = age,

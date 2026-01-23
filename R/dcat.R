@@ -7,11 +7,12 @@
 #' Applies the adaptive test algorithm to determine the next step: administer
 #' the next item or stop test and return D-score.
 #'
-#' @inheritParams calculate_dscore
-#' @inheritParams dcat_start
+#' @inheritParams dcat::dcat
 #' @inheritParams bdsreader::read_bds
+#' @inheritParams request_site
 #' @param sem_rule numeric target for sem can be estimated based on Cohen's d
 #' from `sem_rule()`.
+#'
 #' @return A string with an item name or a table.
 #' @author Iris Eekhout 2025
 #' @examples
@@ -23,7 +24,7 @@
 dcat <- function(
   txt = "",
   instrument = "gs1",
-  key = "gsed2510",
+  key = NULL,
   population = NULL,
   p = 50,
   sem_rule = 1.726,
