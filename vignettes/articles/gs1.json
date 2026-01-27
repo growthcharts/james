@@ -1,0 +1,52 @@
+{
+    "Format": "3.1",
+    "clientMeasurements": [
+        {
+            "varName": "gs1lgc084",
+            "values": [
+                {
+                    "date": "20260116",
+                    "value": "0"
+                }
+            ]
+        },
+        {
+            "varName": "gs1lgc087",
+            "values": [
+                {
+                    "date": "20260116",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "varName": "gs1lgc086",
+            "values": [
+                {
+                    "date": "20260116",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "varName": "gs1moc083",
+            "values": [
+                {
+                    "date": "20260116",
+                    "value": "0"
+                }
+            ]
+        }
+    ],
+    "clientDetails": [
+        {
+            "bdsNumber": 20,
+            "value": "20241001"
+        },
+        {
+            "bdsNumber": 19,
+            "value": "3"
+        }
+    ],
+    "nestedDetails": []
+}

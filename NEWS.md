@@ -1,3 +1,7 @@
+# james 1.11.1.9000
+
+- Extends `getting_started` vignette with a bash example for `ddomain/calculate`
+
 # james 1.11.0 (January 2026)
 
 - Updates dependency `dscore 2.1.0` to support adaptive testing, country-references, GSED HF and domain scores.

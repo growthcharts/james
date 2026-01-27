@@ -802,8 +802,28 @@ The D-score is found in column `y` and the DAZ is in column `z`.
 
 ##### **bash**
 
-:::
+Example data
 
+```{bash}
+cat gs1.json
+```
+
+Body version, file to string. Missing data in the results replaced by `null` fields.
+
+```{bash}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+"$(cat .host)/ddomain/calculate/json?na=null" \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+  "population": "GSED-NLD",
+  "txt": '"$(cat gs1.json | jq -Rs .)"'
+}' > result.json
+cat result.json
+```
+
+:::
 
 ### **`/vwc/select`**: Select Van Wiechen development milestones based on D-score and age
 
@@ -1090,7 +1110,7 @@ names(resp2$parsed)
 
 
 ```{r cleanup, include=FALSE}
-files <- c("laura.svg", "maria.json", "maria1.svg", "maria2.svg")
+files <- c("laura.svg", "maria.json", "maria1.svg", "maria2.svg", "result.json")
 file.remove(files)
 ```
 
