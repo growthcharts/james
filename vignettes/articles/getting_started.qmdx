@@ -22,7 +22,7 @@ format:
 #| include: false
 # Define the server that hosts JAMES
 # Set target_host to one of: "dev", "test", "acc", "prod"
-target_host <- "test"  # Change this to switch hosts
+target_host <- "acc"  # Change this to switch hosts
 
 # Available hosts
 hosts <- list(
@@ -901,6 +901,34 @@ r <- james_post(
 )
 r$parsed
 ```
+
+###### TEST START ITEM
+
+```{json}
+{
+    "Format": "3.1",
+    "clientDetails": [
+        {
+            "bdsNumber": 20,
+            "value": "20250818"
+        }
+    ]
+}
+```
+
+```{r dcatstartitem}
+fn <- "start_dcat_example.json"
+cat("host: ", host, "\n")
+r <- james_post(
+  host = host,
+  path = "dcat/calculate/json",
+  txt = fn,
+  population = "GSED-NLD",
+  key = "gsed2510"
+)
+r$parsed
+```
+
 
 ##### **bash**
 
