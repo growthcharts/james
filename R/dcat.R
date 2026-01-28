@@ -39,7 +39,10 @@ dcat <- function(
   if (is.null(key) || key == "gsed") {
     key <- "gsed2510"
     if (
-      all(is.na(dscore::get_tau(dscore::get_itemnames(instrument), key = key)))
+      all(is.na(dscore::get_tau(
+        dscore::get_itemnames(instrument = instrument),
+        key = key
+      )))
     ) {
       key <- "gsed2406"
     }

@@ -1,5 +1,6 @@
 # james 1.11.1.9000
 
+- Repairs a bug in `dcat()` that wrongly selected key `gsed2406`
 - Extends `getting_started` vignette with a bash example for `ddomain/calculate`
 
 # james 1.11.0 (January 2026)
