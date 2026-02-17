@@ -27,6 +27,7 @@ dcat <- function(
   key = NULL,
   population = NULL,
   p = 50,
+  min_length = 0,
   sem_rule = 1.726,
   session = "",
   format = "3.1",
@@ -78,6 +79,7 @@ dcat <- function(
     key = key,
     population = population,
     p = p,
+    min_length = min_length,
     instrument = instrument,
     sem_rule = sem_rule
   )

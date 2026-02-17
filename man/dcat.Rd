@@ -11,6 +11,7 @@ dcat(
   key = NULL,
   population = NULL,
   p = 50,
+  min_length = 0,
   sem_rule = 1.726,
   session = "",
   format = "3.1",
@@ -32,6 +33,9 @@ View \code{dscore::builtin_keys} for an overview of the available keys.}
 \item{population}{String. Name of the reference population}
 
 \item{p}{percentage to pass the item, difficulty in percentile units}
+
+\item{min_length}{numeric value for minimum number of items to administer,
+default is set to \code{min_length = 0}.}
 
 \item{sem_rule}{numeric target for sem can be estimated based on Cohen's d
 from \code{sem_rule()}.}
