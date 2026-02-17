@@ -110,5 +110,8 @@ renv::snapshot(type = "explicit")
 -   Move `vignettes/articles/getting_started.html` to `docs/articles/getting_started.html`
 -   Move `vignettes/articles/geting_started_files/` to `docs/articles/getting_started_files/`
 
--   Push changes to GitHub
+-   Push changes to GitHub in following separate commits
+    - (1) function changes
+    - (2) update package (news description)
+    - (3) documentation
 -   Go to `jamesdocker` repo for building app
