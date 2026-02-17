@@ -12,6 +12,7 @@ dcat(
   key = NULL,
   population = NULL,
   p = 50,
+  min_length = 0,
   sem_rule = 1.726,
   session = "",
   format = "3.1",
@@ -46,6 +47,11 @@ dcat(
 
   percentage to pass the item, difficulty in percentile units
 
+- min_length:
+
+  numeric value for minimum number of items to administer, default is
+  set to `min_length = 0`.
+
 - sem_rule:
 
   numeric target for sem can be estimated based on Cohen's d from
@@ -79,7 +85,7 @@ Iris Eekhout 2025
 ``` r
 txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat(txt = txt, p = 50)
-#> [1] "gs1moc120"
+#> [1] "gs1lgc119"
 txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
 dcat(txt = txt, p = 50)
 #> Cannot read 'txt': ~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json

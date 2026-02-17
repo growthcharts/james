@@ -74,9 +74,9 @@ Iris Eekhout 2025
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat_start(txt = fn, p = 50)
 #>                item
-#> gs1lgc136 gs1lgc136
-#>                                                                                                                                                                                    label
-#> gs1lgc136 SF136 Can your child talk about things that will happen in the future using correct language (e.g., "Tomorrow he will attend school" or "Next week we will go to the market")?
+#> gs1moc134 gs1moc134
+#>                                                                       label
+#> gs1moc134 SF134 If you draw a circle can your child do it, just as you did?
 #>             tau
-#> gs1lgc136 74.65
+#> gs1moc134 75.11
 ```
