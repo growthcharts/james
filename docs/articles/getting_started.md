@@ -202,7 +202,7 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x0d6c45db96ee2e) is a unique session code.
+- `r$session` (like x0b3a7925f732de) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
@@ -221,10 +221,10 @@ fromJSON(content(r, type = "text", encoding = "UTF-8"))
     [1] "james"
 
     $packageVersion
-    [1] "1.10.1"
+    [1] "1.11.0"
 
     $packageDate
-    [1] "2025-12-17"
+    [1] "2026-01-23"
 
     $Rversion
     [1] "4.5.0"
@@ -251,13 +251,13 @@ auth_curl -sX POST $(cat .host)/version > resp
 cat resp
 ```
 
-    /ocpu/tmp/x06e5a0370b6f60/R/.val
-    /ocpu/tmp/x06e5a0370b6f60/R/version
-    /ocpu/tmp/x06e5a0370b6f60/stdout
-    /ocpu/tmp/x06e5a0370b6f60/source
-    /ocpu/tmp/x06e5a0370b6f60/console
-    /ocpu/tmp/x06e5a0370b6f60/info
-    /ocpu/tmp/x06e5a0370b6f60/files/DESCRIPTION
+    /ocpu/tmp/x0ea820ba55c7c3/R/.val
+    /ocpu/tmp/x0ea820ba55c7c3/R/version
+    /ocpu/tmp/x0ea820ba55c7c3/stdout
+    /ocpu/tmp/x0ea820ba55c7c3/source
+    /ocpu/tmp/x0ea820ba55c7c3/console
+    /ocpu/tmp/x0ea820ba55c7c3/info
+    /ocpu/tmp/x0ea820ba55c7c3/files/DESCRIPTION
 
 The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.
@@ -277,8 +277,8 @@ cat value1
 
     {
       "package": "james",
-      "packageVersion": "1.10.1",
-      "packageDate": "2025-12-17",
+      "packageVersion": "1.11.0",
+      "packageDate": "2026-01-23",
       "Rversion": "4.5.0"
     }
 
@@ -293,8 +293,8 @@ cat value2
 
     {
       "package": "james",
-      "packageVersion": "1.10.1",
-      "packageDate": "2025-12-17",
+      "packageVersion": "1.11.0",
+      "packageDate": "2026-01-23",
       "Rversion": "4.5.0"
     }
 
@@ -532,7 +532,7 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x0673acabe8b65e"
+    [1] "x00caf5265fadb6"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
@@ -667,7 +667,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x0968739ccfad5a/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x06a16d282fe7b0/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -987,12 +987,12 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x0030af4c16ff39
+      Session : x04444d02767f10
 
     Parsed response:
     'data.frame':   20 obs. of  6 variables:
+     $ a  : num  0 0.101 0.159 0.235 0.485 ...
      $ n  : int  0 5 3 5 10 12 11 10 9 10 ...
-     $ a  : num  NA 0.101 0.159 0.235 0.485 ...
      $ p  : num  NA 0.6 0.667 0.6 0.5 ...
      $ d  : num  NA 15.7 18 20.9 25.9 ...
      $ sem: num  NA 3.29 3.83 3.32 2.65 ...
@@ -1002,13 +1002,13 @@ r
 head(r$parsed)
 ```
 
-       n      a      p     d    sem    daz
-    1  0     NA     NA    NA     NA     NA
-    2  5 0.1013 0.6000 15.68 3.2945 -0.110
-    3  3 0.1588 0.6667 18.01 3.8258 -0.182
-    4  5 0.2355 0.6000 20.93 3.3205 -0.334
-    5 10 0.4846 0.5000 25.89 2.6506 -1.919
-    6 12 0.7529 0.9167 44.58 3.2903  0.674
+           a  n      p     d    sem    daz
+    1 0.0000  0     NA    NA     NA     NA
+    2 0.1013  5 0.6000 15.68 3.2945 -0.110
+    3 0.1588  3 0.6667 18.01 3.8258 -0.182
+    4 0.2355  5 0.6000 20.93 3.3205 -0.334
+    5 0.4846 10 0.5000 25.89 2.6506 -1.919
+    6 0.7529 12 0.9167 44.58 3.2903  0.674
 
 The D-score is found in column `y` and the DAZ is in column `z`.
 
@@ -1030,13 +1030,13 @@ r
     JAMES request:
       Path    : ddomain/calculate/json
       Status  : 201
-      Session : x06d3dc5804e79e
+      Session : x0717dbaea3267e
 
     Parsed response:
     List of 6
      $ dscore    :'data.frame': 20 obs. of  6 variables:
+      ..$ a  : num [1:20] 0 0.101 0.159 0.235 0.485 ...
       ..$ n  : int [1:20] 0 5 3 5 10 12 11 10 9 10 ...
-      ..$ a  : num [1:20] NA 0.101 0.159 0.235 0.485 ...
       ..$ p  : num [1:20] NA 0.6 0.667 0.6 0.5 ...
       ..$ d  : num [1:20] NA 15.7 18 20.9 25.9 ...
       ..$ sem: num [1:20] NA 3.29 3.83 3.32 2.65 ...
@@ -1062,27 +1062,27 @@ head(r$parsed)
 ```
 
     $dscore
-        n      a      p     d    sem    daz
-    1   0     NA     NA    NA     NA     NA
-    2   5 0.1013 0.6000 15.68 3.2945 -0.110
-    3   3 0.1588 0.6667 18.01 3.8258 -0.182
-    4   5 0.2355 0.6000 20.93 3.3205 -0.334
-    5  10 0.4846 0.5000 25.89 2.6506 -1.919
-    6  12 0.7529 0.9167 44.58 3.2903  0.674
-    7  11 1.0212 0.9091 51.59 3.2715  0.550
-    8  10 1.2512 0.8000 54.82 2.9505  0.013
-    9   9 1.5387 0.6667 57.08 2.9298 -0.691
-    10 10 2.0397 1.0000 70.72 3.6740  1.377
-    11  0     NA     NA    NA     NA     NA
-    12  0     NA     NA    NA     NA     NA
-    13  0     NA     NA    NA     NA     NA
-    14  0     NA     NA    NA     NA     NA
-    15  0     NA     NA    NA     NA     NA
-    16  0     NA     NA    NA     NA     NA
-    17  0     NA     NA    NA     NA     NA
-    18  0     NA     NA    NA     NA     NA
-    19  0     NA     NA    NA     NA     NA
-    20  0     NA     NA    NA     NA     NA
+            a  n      p     d    sem    daz
+    1  0.0000  0     NA    NA     NA     NA
+    2  0.1013  5 0.6000 15.68 3.2945 -0.110
+    3  0.1588  3 0.6667 18.01 3.8258 -0.182
+    4  0.2355  5 0.6000 20.93 3.3205 -0.334
+    5  0.4846 10 0.5000 25.89 2.6506 -1.919
+    6  0.7529 12 0.9167 44.58 3.2903  0.674
+    7  1.0212 11 0.9091 51.59 3.2715  0.550
+    8  1.2512 10 0.8000 54.82 2.9505  0.013
+    9  1.5387  9 0.6667 57.08 2.9298 -0.691
+    10 2.0397 10 1.0000 70.72 3.6740  1.377
+    11 0.0000  0     NA    NA     NA     NA
+    12 0.1013  0     NA    NA     NA     NA
+    13 0.1588  0     NA    NA     NA     NA
+    14 0.2355  0     NA    NA     NA     NA
+    15 0.4846  0     NA    NA     NA     NA
+    16 0.7529  0     NA    NA     NA     NA
+    17 1.0212  0     NA    NA     NA     NA
+    18 1.2512  0     NA    NA     NA     NA
+    19 1.5387  0     NA    NA     NA     NA
+    20 2.0397  0     NA    NA     NA     NA
 
     $grossmotor
             a n
@@ -1271,7 +1271,7 @@ r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
 r$parsed
 ```
 
-    [1] "gs1lgc119"
+    [1] "gs1moc120"
 
 By specifying the instrument we can specify whether we want to include
 `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must
@@ -1443,7 +1443,7 @@ r <- james_post(
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x01f53bd1f70ec8"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0f046a4a2a9cb0"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1477,10 +1477,10 @@ site1
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x0584a71edbc7ce
+      Session : x005c3698953677
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x08624c2e631b08"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0b990dcb8be8a3"
 
 ``` r
 # Or manual URL construction
@@ -1495,7 +1495,7 @@ site2 <- httr::modify_url(
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x08624c2e631b08"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0b990dcb8be8a3"
 
 Paste the generated URL in the address field of your browser. The
 initial page shown depends on the child’s age. This two-step approach
@@ -1512,7 +1512,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x08b1adc534cd6c"]
+    ["https://james.groeidiagrammen.nl/site?session=x09cbc44ff99b40"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1545,13 +1545,13 @@ r
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x06d97a915d5ecf
+      Session : x0cb28df460ffe1
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x0fc74862ee6e5e"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0fc74862ee6e5e"
+     $ session  : chr "x092ff8793ea785"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x092ff8793ea785"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1626,8 +1626,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x01a3cfd62082bb",
-      "site": "https://james.groeidiagrammen.nl/site?session=x01a3cfd62082bb",
+      "session": "x06ca7fa5ecf297",
+      "site": "https://james.groeidiagrammen.nl/site?session=x06ca7fa5ecf297",
       "child": [
         {
           "id": -1,

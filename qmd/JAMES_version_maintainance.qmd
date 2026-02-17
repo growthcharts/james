@@ -19,18 +19,34 @@ knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 
 ### Update and lock packages
 
+
+- Use the function `james::install_dev_packages()` to install the development packages (like roxygen2) when starting fresh
+- If needed, clean out the development packages by `renv::clean(prompt = TRUE)` from the library before using `renv::snapshot()` to update the lock file.
+
+
 Are all R packages up to data and complete?
 
 ```{r}
 renv::status()
 ```
 
-Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock file.
+If packages need updated, use `renv::restore()`.
 
 ### Open, work and close issues in GitHub
 
 -   Solve relevant issues in `james` package
 -   <https://github.com/growthcharts/james/issues>
+-   Do relevant updates in underlying packages and install update `renv::install()`. Use github URL for github packages. Now project is out-of-sync, this is OK.
+-   Update functions in `james` package that use these underlying functions
+    -  (1) update james function
+    -  (2) update documention `devtools::document()`
+
+### Update `openapi.yaml`
+
+The source text of the OpenAPI specification is in `inst/spec/openapi.in.yaml`. Before building the package, this file needs updating with the current JAMES version from the `DESCRIPTION` file. This ensures that the two remain in sync.
+
+To add an argument to dcat, search for dcat_arguments and add the argument that was added to the function. 
+
 
 ### Check the top level package `james`
 
@@ -40,7 +56,14 @@ Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock 
 
 ### Update the package version
 
+-   Update `NEWS.md` with version update and document changes.
 -   Increase version number in DESCRIPTION file
+-   Also update imports version with proper versions for updated packages.
+
+```{r}
+# devtools::check()
+```
+
 
 ### Update version in HTML and Rmd files
 
@@ -56,25 +79,28 @@ james:::update_version_files(
 )
 ```
 
-### Update `openapi.yaml`
-
-The source text of the OpenAPI specification is in `inst/spec/openapi.in.yaml`. Before building the package, this file needs updating with the current JAMES version from the `DESCRIPTION` file. This ensures that the two remain in sync.
+Update version number van openapi.in.yaml file
 
 ```{r eval=FALSE}
 james:::update_openapi_spec()
 ```
 
+
 ### Keep `renv.lock` in shape
 
 - Check `renv::status` and commit changes to `renv.lock`. 
 - Only include packages that are relevant to the JAMES package, not the development packages in the project
-- Use the function `james::install_dev_packages()` to install the development packages (like roxygen2) when starting fresh
-- If needed, clean out the development packages by `renv::clean(prompt = TRUE)` from the library before using `renv::snapshot()` to update the lock file.
+
+Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock file. 
+```{r}
+renv::snapshot(type = "explicit")
+```
+
 
 ### Next steps
 
 
--   RUN in terminal: Rscript -e 'quarto::quarto_render(input = "vignettes/articles/getting_started.qmd")'
+-   RUN in terminal: Rscript -e "quarto::quarto_render(input = 'vignettes/articles/getting_started.qmd')" - does not work in Windows because issues with bash codes
 -   By default, this script runs server "test" (james.groeidiagrammen.nl), which initially contains the previous JAMES version
 -   We first have to build and test our new version on localhost and test
 

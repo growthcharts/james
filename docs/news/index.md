@@ -1,5 +1,15 @@
 # Changelog
 
+## james 1.11.1 (Februari 2026)
+
+- Add new argument `min_length` to
+  [`dcat()`](https://growthcharts.org/james/reference/dcat.md)
+- Repairs a bug in
+  [`dcat()`](https://growthcharts.org/james/reference/dcat.md) that
+  wrongly selected key `gsed2406`
+- Extends `getting_started` vignette with a bash example for
+  `ddomain/calculate`
+
 ## james 1.11.0 (January 2026)
 
 - Updates dependency `dscore 2.1.0` to support adaptive testing,
