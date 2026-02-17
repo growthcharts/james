@@ -1131,7 +1131,7 @@
     },
     "dcat": {
       "Package": "dcat",
-      "Version": "0.1.0",
+      "Version": "0.2.0",
       "Source": "GitHub",
       "Title": "Computer Adaptive Test for the D-score",
       "Authors@R": "person(\"Iris\", \"Eekhout\", , \"iris.eekhout@tno.nl\", role = c(\"aut\", \"cre\"))",
@@ -1149,18 +1149,14 @@
         "testthat (>= 3.0.0)"
       ],
       "Config/testthat/edition": "3",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "dcat",
-      "RemoteUsername": "D-score",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "6a6389bb708975f997e11063c66ae6098007ab3b",
-      "NeedsCompilation": "no",
       "Author": "Iris Eekhout [aut, cre]",
       "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
-      "Depends": [
-        "R (>= 4.1.0)"
-      ]
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "D-score",
+      "RemoteRepo": "dcat",
+      "RemoteRef": "main",
+      "RemoteSha": "5d01aa0ac6bf1da97a7c95e44a229c19adea93d7"
     },
     "digest": {
       "Package": "digest",
@@ -1331,14 +1327,14 @@
       "BugReports": "https://github.com/d-score/dscore/issues",
       "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.3",
+      "Author": "Stef van Buuren [cre, aut], Iris Eekhout [aut], Arjan Huizing [aut], Jonathan Seiden [aut]",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "dscore",
       "RemoteUsername": "D-score",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "c9440549056d00f27f002cc7f0f10d9f8e023af3",
-      "Author": "Stef van Buuren [cre, aut], Iris Eekhout [aut], Arjan Huizing [aut], Jonathan Seiden [aut]",
-      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
+      "RemoteRepo": "dscore",
+      "RemoteRef": "master",
+      "RemoteSha": "c9440549056d00f27f002cc7f0f10d9f8e023af3"
     },
     "dscoreddi": {
       "Package": "dscoreddi",

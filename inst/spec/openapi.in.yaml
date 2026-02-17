@@ -1777,6 +1777,10 @@ components:
           type: integer
           description: percentage to pass the item, difficulty in percentile units.
           default: 50
+        min_length:
+          type: integer
+          description: numeric value for minimum number of items to administer, default is set to min_length = 0.
+          default: 0
         sem_rule:
           type: number
           description: numeric target for sem can be estimated based on Cohen's d
