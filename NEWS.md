@@ -1,5 +1,6 @@
-# james 1.11.1.9000
+# james 1.11.1 (Februari 2026)
 
+- Add new argument `min_length` to `dcat()`
 - Repairs a bug in `dcat()` that wrongly selected key `gsed2406`
 - Extends `getting_started` vignette with a bash example for `ddomain/calculate`
 
