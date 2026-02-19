@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.5.0",
+    "Version": "4.5.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -428,20 +428,21 @@
         "knitr",
         "rmarkdown"
       ],
+      "Remotes": "growthcharts/centile, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://github.com/growthcharts/bdsreader",
       "Config/testthat/edition": "3",
       "RoxygenNote": "7.3.3",
       "VignetteBuilder": "knitr",
-      "Author": "Stef van Buuren [cre, aut], Arjan Huizing [aut]",
-      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
       "RemoteType": "github",
-      "Remotes": "growthcharts/centile, growthcharts/nlreferences, growthcharts/jamesdemodata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bdsreader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "d294109bb93fe494ad26fa9e392ce6a7b13de6af"
+      "RemoteSha": "d294109bb93fe494ad26fa9e392ce6a7b13de6af",
+      "NeedsCompilation": "no",
+      "Author": "Stef van Buuren [cre, aut], Arjan Huizing [aut]",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
     },
     "bit": {
       "Package": "bit",
@@ -700,14 +701,15 @@
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://github.com/growthcharts/centile",
       "RoxygenNote": "7.3.2",
-      "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)",
-      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "centile",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "882a8875aeabc156d37ebfbe6cb202f2ea43c45e"
+      "RemoteSha": "882a8875aeabc156d37ebfbe6cb202f2ea43c45e",
+      "NeedsCompilation": "no",
+      "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
     },
     "chartbox": {
       "Package": "chartbox",
@@ -1083,14 +1085,15 @@
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://github.com/growthcharts/curvematching",
       "RoxygenNote": "7.2.3",
-      "Author": "Stef van Buuren [cre, aut], Arjan Huizing [aut]",
-      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "curvematching",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "b9920d0bdc35b69973799e559f20c17c3b90b357"
+      "RemoteSha": "b9920d0bdc35b69973799e559f20c17c3b90b357",
+      "NeedsCompilation": "no",
+      "Author": "Stef van Buuren [cre, aut], Arjan Huizing [aut]",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>"
     },
     "data.table": {
       "Package": "data.table",
@@ -1128,7 +1131,7 @@
     },
     "dcat": {
       "Package": "dcat",
-      "Version": "0.2.0",
+      "Version": "0.3.0",
       "Source": "GitHub",
       "Title": "Computer Adaptive Test for the D-score",
       "Authors@R": "person(\"Iris\", \"Eekhout\", , \"iris.eekhout@tno.nl\", role = c(\"aut\", \"cre\"))",
@@ -1153,7 +1156,7 @@
       "RemoteUsername": "D-score",
       "RemoteRepo": "dcat",
       "RemoteRef": "main",
-      "RemoteSha": "5d01aa0ac6bf1da97a7c95e44a229c19adea93d7"
+      "RemoteSha": "6c8387aa8e17f3d30b99595f3df8c8575ab87c08"
     },
     "digest": {
       "Package": "digest",
@@ -1207,17 +1210,18 @@
       "Suggests": [
         "donordata (>= 1.72.0)"
       ],
+      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "URL": "https://github.com/growthcharts/donorloader",
       "BugReports": "https://github.com/growthcharts/donorloader/issues",
       "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.2",
       "RemoteType": "github",
-      "Remotes": "growthcharts/bdsreader, stefvanbuuren/donordata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "donorloader",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "b92dae0d4c3d162c198a885a4c1c14f07df6daaf"
+      "RemoteSha": "b92dae0d4c3d162c198a885a4c1c14f07df6daaf",
+      "NeedsCompilation": "no"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -1350,14 +1354,15 @@
       "Imports": [
         "dscore"
       ],
-      "Author": "Iris Eekhout [aut, cre]",
-      "Maintainer": "Iris Eekhout <iriseekhout@gmail.com>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "dscoreddi",
       "RemoteUsername": "D-score",
       "RemoteRef": "HEAD",
-      "RemoteSha": "db8e915e878f894c84e1a9c6de41070217986d10"
+      "RemoteSha": "db8e915e878f894c84e1a9c6de41070217986d10",
+      "NeedsCompilation": "no",
+      "Author": "Iris Eekhout [aut, cre]",
+      "Maintainer": "Iris Eekhout <iriseekhout@gmail.com>"
     },
     "evaluate": {
       "Package": "evaluate",
@@ -1955,19 +1960,19 @@
     },
     "httr": {
       "Package": "httr",
-      "Version": "1.4.7",
+      "Version": "1.4.8",
       "Source": "Repository",
       "Title": "Tools for Working with URLs and HTTP",
-      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
       "Description": "Useful tools for working with HTTP organised by HTTP verbs (GET(), POST(), etc). Configuration functions make it easy to control additional request components (authenticate(), add_headers() and so on).",
       "License": "MIT + file LICENSE",
       "URL": "https://httr.r-lib.org/, https://github.com/r-lib/httr",
       "BugReports": "https://github.com/r-lib/httr/issues",
       "Depends": [
-        "R (>= 3.5)"
+        "R (>= 3.6)"
       ],
       "Imports": [
-        "curl (>= 5.0.2)",
+        "curl (>= 5.1.0)",
         "jsonlite",
         "mime",
         "openssl (>= 0.8)",
@@ -1987,9 +1992,9 @@
       "VignetteBuilder": "knitr",
       "Config/Needs/website": "tidyverse/tidytemplate",
       "Encoding": "UTF-8",
-      "RoxygenNote": "7.2.3",
+      "RoxygenNote": "7.3.3",
       "NeedsCompilation": "no",
-      "Author": "Hadley Wickham [aut, cre], Posit, PBC [cph, fnd]",
+      "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
@@ -2031,7 +2036,7 @@
     },
     "jamesclient": {
       "Package": "jamesclient",
-      "Version": "0.36.2",
+      "Version": "0.36.3",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Client-side R Functions for JAMES",
@@ -2050,18 +2055,19 @@
         "pkgdown",
         "testthat (>= 2.1.0)"
       ],
+      "Remotes": "growthcharts/jamesdemodata",
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://github.com/growthcharts/jamesclient",
       "BugReports": "https://github.com/growthcharts/jamesclient/issues",
       "RoxygenNote": "7.3.3",
-      "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)",
       "RemoteType": "github",
-      "Remotes": "growthcharts/jamesdemodata",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "jamesclient",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "0a43bc8efefd6afbfc98b99ee7cbcda1f02c1d9d"
+      "RemoteSha": "0e65692fbba67c8a8fe2711ce8a0a58af308b7e2",
+      "NeedsCompilation": "no",
+      "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)"
     },
     "jose": {
       "Package": "jose",
@@ -2745,16 +2751,17 @@
         "remotes",
         "testthat (>= 3.0.0)"
       ],
+      "Remotes": "growthcharts/centile",
       "Roxygen": "list(markdown = TRUE)",
       "Config/testthat/edition": "3",
       "RoxygenNote": "7.2.3",
       "RemoteType": "github",
-      "Remotes": "growthcharts/centile",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "nlreferences",
       "RemoteUsername": "growthcharts",
       "RemoteRef": "HEAD",
-      "RemoteSha": "c0cb1df8068e0666daecf183718f7a07b77ec811"
+      "RemoteSha": "c0cb1df8068e0666daecf183718f7a07b77ec811",
+      "NeedsCompilation": "no"
     },
     "openssl": {
       "Package": "openssl",
@@ -4195,7 +4202,7 @@
       "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.3",
       "Depends": [
-        "R (>= 2.10)"
+        "R (>= 4.1.0)"
       ],
       "Imports": [
         "dplyr",
@@ -4208,19 +4215,19 @@
         "gamlss.dist"
       ],
       "suggests": "shiny bdsreader ggplot2 shinyBS",
-      "LazyData": "true",
       "Suggests": [
         "testthat (>= 3.0.0)"
       ],
       "Config/testthat/edition": "3",
-      "Author": "Iris Eekhout [aut, cre]",
-      "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "vwc",
       "RemoteUsername": "D-score",
       "RemoteRef": "HEAD",
-      "RemoteSha": "1eff57aa4c558cbd1629a04bb72ae6210368db67"
+      "RemoteSha": "1eff57aa4c558cbd1629a04bb72ae6210368db67",
+      "NeedsCompilation": "no",
+      "Author": "Iris Eekhout [aut, cre]",
+      "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>"
     },
     "withr": {
       "Package": "withr",
