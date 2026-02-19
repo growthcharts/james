@@ -4,7 +4,7 @@
 
 Code
 
-JAMES 1.11.0 (January 2026)
+JAMES 1.11.1 (February 2026)
 
 Authors
 
@@ -202,7 +202,7 @@ Most of the element are documented in the `response` object in the
   here;
 - `r$warnings` contain any warnings thrown during execution;
 - `r$messages` contain any messages, e.g. data reading errors;
-- `r$session` (like x0b3a7925f732de) is a unique session code.
+- `r$session` (like x039a6ef3cacb90) is a unique session code.
 
 The `jamesclient::james_post()` function wraps the basis workhorse
 `httr::POST()` that does the actual server request. For illustration, we
@@ -251,13 +251,13 @@ auth_curl -sX POST $(cat .host)/version > resp
 cat resp
 ```
 
-    /ocpu/tmp/x0ea820ba55c7c3/R/.val
-    /ocpu/tmp/x0ea820ba55c7c3/R/version
-    /ocpu/tmp/x0ea820ba55c7c3/stdout
-    /ocpu/tmp/x0ea820ba55c7c3/source
-    /ocpu/tmp/x0ea820ba55c7c3/console
-    /ocpu/tmp/x0ea820ba55c7c3/info
-    /ocpu/tmp/x0ea820ba55c7c3/files/DESCRIPTION
+    /ocpu/tmp/x0533004e5174c2/R/.val
+    /ocpu/tmp/x0533004e5174c2/R/version
+    /ocpu/tmp/x0533004e5174c2/stdout
+    /ocpu/tmp/x0533004e5174c2/source
+    /ocpu/tmp/x0533004e5174c2/console
+    /ocpu/tmp/x0533004e5174c2/info
+    /ocpu/tmp/x0533004e5174c2/files/DESCRIPTION
 
 The response to the request consists of a set of URLs created on the
 server, each of which contains details on the response.
@@ -532,7 +532,7 @@ the file upload session in markdown use
 (session <- r1$session)
 ```
 
-    [1] "x00caf5265fadb6"
+    [1] "x08da247200261d"
 
 ``` r
 resp <- james_get(host = host, path = file.path(session, "md"))
@@ -667,7 +667,7 @@ url <- file.path(host, r7$session, "files/input.json")
 url
 ```
 
-    [1] "https://james.groeidiagrammen.nl/x06a16d282fe7b0/files/input.json"
+    [1] "https://james.groeidiagrammen.nl/x048cfd7672df55/files/input.json"
 
 With `browseURL(url)` we may view the file contents in the browser. The
 `files` directory contains five JSON files:
@@ -987,7 +987,7 @@ r
     JAMES request:
       Path    : dscore/calculate/json
       Status  : 201
-      Session : x04444d02767f10
+      Session : x0b7669ac21cdec
 
     Parsed response:
     'data.frame':   20 obs. of  6 variables:
@@ -1030,7 +1030,7 @@ r
     JAMES request:
       Path    : ddomain/calculate/json
       Status  : 201
-      Session : x0717dbaea3267e
+      Session : x0e9a3b20c4dc75
 
     Parsed response:
     List of 6
@@ -1201,6 +1201,144 @@ head(r$parsed)
 
 The D-score is found in column `y` and the DAZ is in column `z`.
 
+Example data
+
+``` bash
+cat gs1.json
+```
+
+    {
+        "Format": "3.1",
+        "clientMeasurements": [
+            {
+                "varName": "gs1lgc084",
+                "values": [
+                    {
+                        "date": "20260116",
+                        "value": "0"
+                    }
+                ]
+            },
+            {
+                "varName": "gs1lgc087",
+                "values": [
+                    {
+                        "date": "20260116",
+                        "value": ""
+                    }
+                ]
+            },
+            {
+                "varName": "gs1lgc086",
+                "values": [
+                    {
+                        "date": "20260116",
+                        "value": "1"
+                    }
+                ]
+            },
+            {
+                "varName": "gs1moc083",
+                "values": [
+                    {
+                        "date": "20260116",
+                        "value": "0"
+                    }
+                ]
+            }
+        ],
+        "clientDetails": [
+            {
+                "bdsNumber": 20,
+                "value": "20241001"
+            },
+            {
+                "bdsNumber": 19,
+                "value": "3"
+            }
+        ],
+        "nestedDetails": []
+    }
+
+Body version, file to string. Missing data in the results replaced by
+`null` fields.
+
+``` bash
+source auth_curl.sh
+auth_curl -sX 'POST' \
+"$(cat .host)/ddomain/calculate/json?na=null" \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+  "population": "GSED-NLD",
+  "txt": '"$(cat gs1.json | jq -Rs .)"'
+}' > result.json
+cat result.json
+```
+
+    {
+      "dscore": [
+        {
+          "a": 1.2923,
+          "n": 3,
+          "p": 0.3333,
+          "d": 53.49,
+          "sem": 3.4222,
+          "daz": -0.621
+        }
+      ],
+      "grossmotor": [
+        {
+          "a": 1.2923,
+          "n": 1,
+          "p": 0,
+          "d": 52.11,
+          "sem": 4.2733,
+          "daz": -1.001
+        }
+      ],
+      "finemotor": [
+        {
+          "a": 1.2923,
+          "n": 0,
+          "p": null,
+          "d": null,
+          "sem": null,
+          "daz": null
+        }
+      ],
+      "language": [
+        {
+          "a": 1.2923,
+          "n": 2,
+          "p": 0.5,
+          "d": 55.51,
+          "sem": 3.7619,
+          "daz": -0.028
+        }
+      ],
+      "cognitive": [
+        {
+          "a": 1.2923,
+          "n": 1,
+          "p": 1,
+          "d": 58.23,
+          "sem": 4.2736,
+          "daz": 0.815
+        }
+      ],
+      "social": [
+        {
+          "a": 1.2923,
+          "n": 1,
+          "p": 1,
+          "d": 58.23,
+          "sem": 4.2736,
+          "daz": 0.815
+        }
+      ]
+    }
+
 ### **`/vwc/select`**: Select Van Wiechen development milestones based on D-score and age
 
 - [**R**](https://growthcharts.org/james/articles/)
@@ -1271,7 +1409,7 @@ r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
 r$parsed
 ```
 
-    [1] "gs1moc120"
+    [1] "gs1lgc121"
 
 By specifying the instrument we can specify whether we want to include
 `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must
@@ -1289,7 +1427,47 @@ r <- james_post(
 r$parsed
 ```
 
-    [1] "ddifmd026"
+    [1] "ddicmm047"
+
+###### TEST START ITEM
+
+``` json
+{
+    "Format": "3.1",
+    "clientDetails": [
+        {
+            "bdsNumber": 20,
+            "value": "20250818"
+        }
+    ]
+}
+```
+
+``` r
+fn <- "start_dcat_example.json"
+cat("host: ", host, "\n")
+```
+
+    host:  https://james.groeidiagrammen.nl 
+
+``` r
+r <- james_post(
+  host = host,
+  path = "dcat/calculate/json",
+  txt = fn,
+  population = "GSED-NLD",
+  key = "gsed2510"
+)
+```
+
+    Warning in readLines(con): incomplete final line found on
+    'start_dcat_example.json'
+
+``` r
+r$parsed
+```
+
+    [1] "gs1moc048"
 
 To be added
 
@@ -1443,7 +1621,7 @@ r <- james_post(
 r$parsed
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x0f046a4a2a9cb0"
+    [1] "https://james.groeidiagrammen.nl/site?session=x0a3444f3a5ae1c"
 
 Run the command and paste the generated URL in the address field of your
 browser. The starting chart is chosen by JAMES and depends on the age of
@@ -1477,10 +1655,10 @@ site1
     JAMES request:
       Path    : site/request/json
       Status  : 201
-      Session : x005c3698953677
+      Session : x04b63bf920c469
 
     Parsed response:
-    [1] "https://james.groeidiagrammen.nl/site?session=x0b990dcb8be8a3"
+    [1] "https://james.groeidiagrammen.nl/site?session=x07a834ee5701bc"
 
 ``` r
 # Or manual URL construction
@@ -1495,7 +1673,7 @@ site2 <- httr::modify_url(
 site2
 ```
 
-    [1] "https://james.groeidiagrammen.nl/site?session=x0b990dcb8be8a3"
+    [1] "https://james.groeidiagrammen.nl/site?session=x07a834ee5701bc"
 
 Paste the generated URL in the address field of your browser. The
 initial page shown depends on the child’s age. This two-step approach
@@ -1512,7 +1690,7 @@ $(cat .host)'/site/request/json' \
 -F 'txt=@maria.json;type=application/json'
 ```
 
-    ["https://james.groeidiagrammen.nl/site?session=x09cbc44ff99b40"]
+    ["https://james.groeidiagrammen.nl/site?session=x0102583e068e2e"]
 
 ### **`/blend/request`**: Obtain a blend from multiple end points
 
@@ -1545,13 +1723,13 @@ r
     JAMES request:
       Path    : /blend/request/json
       Status  : 201
-      Session : x0cb28df460ffe1
+      Session : x0d386eca6b2edd
 
     Parsed response:
     List of 6
      $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
-     $ session  : chr "x092ff8793ea785"
-     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x092ff8793ea785"
+     $ session  : chr "x0d30f7ffcfa09a"
+     $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0d30f7ffcfa09a"
      $ child    :'data.frame':  1 obs. of  12 variables:
       ..$ id  : int -1
       ..$ name: chr "Laura S"
@@ -1626,8 +1804,8 @@ $(cat .host)'/blend/request/json' \
 
     {
       "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-      "session": "x06ca7fa5ecf297",
-      "site": "https://james.groeidiagrammen.nl/site?session=x06ca7fa5ecf297",
+      "session": "x029418c523ef19",
+      "site": "https://james.groeidiagrammen.nl/site?session=x029418c523ef19",
       "child": [
         {
           "id": -1,

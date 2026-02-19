@@ -2,6 +2,8 @@
 
 ## james 1.11.1 (Februari 2026)
 
+- Update to `dcat 3.0.3` to pre-select items within probability
+  0.01-0.99 range under `p = 90`
 - Add new argument `min_length` to
   [`dcat()`](https://growthcharts.org/james/reference/dcat.md)
 - Repairs a bug in
