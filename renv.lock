@@ -2077,6 +2077,34 @@
       "NeedsCompilation": "no",
       "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)"
     },
+    "jamesdemodata": {
+      "Package": "jamesdemodata",
+      "Version": "0.12.0",
+      "Source": "GitHub",
+      "Type": "Package",
+      "Title": "Demo Data for JAMES",
+      "Author": "Stef van Buuren",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
+      "Description": "A collection of data sets to develop, test and demonstrate the  Joint Automatic Measurement and Evaluation System (JAMES).",
+      "Encoding": "UTF-8",
+      "License": "AGPL (>= 3)",
+      "Copyright": "Stef van Buuren 2021",
+      "Depends": [
+        "R (>= 2.10)"
+      ],
+      "Suggests": [
+        "testthat"
+      ],
+      "URL": "https://github.com/growthcharts/jamesdemodata",
+      "Roxygen": "list(markdown = TRUE)",
+      "RoxygenNote": "7.3.2",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "growthcharts",
+      "RemoteRepo": "jamesdemodata",
+      "RemoteRef": "master",
+      "RemoteSha": "bf32caf67326f42d68da1a8c11fe30c873281d19"
+    },
     "jose": {
       "Package": "jose",
       "Version": "1.2.1",
