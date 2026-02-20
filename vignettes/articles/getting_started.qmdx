@@ -238,7 +238,7 @@ r <- james_post(host = host, path = "version/json")
 
 We added the `/json` to the pathname to extract the JSON representation of the result of the `R` function `james::version()`. The function result is an object of class `james_post` and consists of various components.
 
-```{r}
+```{r showurl}
 names(r)
 r$url
 ```
@@ -253,7 +253,7 @@ Most of the element are documented in the `response` object in the `httr` packag
 
 The `jamesclient::james_post()` function wraps the basis workhorse `httr::POST()` that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.
 
-```{r}
+```{r usepost}
 auth_token <- Sys.getenv("JAMES_BEARER_TOKEN")
 path <- "version/json"
 url <- parse_url(host)
@@ -266,7 +266,7 @@ fromJSON(content(r, type = "text", encoding = "UTF-8"))
 
 We use the `curl` Linux command. If needed, on Ubuntu install `curl` as
 
-```{bash, eval=FALSE}
+```{bash update, eval=FALSE}
 sudo apt update
 sudo apt -y install curl
 ```
@@ -304,7 +304,7 @@ cat value2
 ```
 
 ```{bash removevalues, echo=FALSE}
-rm resp value1 value2
+rm -f resp value1 value2
 ```
 
 :::
