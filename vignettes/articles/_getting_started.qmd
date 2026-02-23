@@ -1,0 +1,1337 @@
+---
+title: JAMES - Joint Automatic Measurement and Evaluation System
+subtitle: JAMES 1.11.1 (februari 2026)
+author:
+  - name: Stef van Buuren
+    url: https://stefvanbuuren.name
+  - name: Arjan Huizing
+    url: https://nl.linkedin.com/in/arjanhjhuizing
+  - name: Iris Eekhout
+    url: https://iriseekhout.com
+format:
+  html:
+    number-sections: false
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-tools: true
+    theme: united
+    tabset: true
+---
+
+```{r host}
+#| include: false
+# Define the server that hosts JAMES
+# Set target_host to one of: 
+# "internal" : Run only within the container
+# "dev"      : localhost, development
+# "test"     : james.groeigrammen.nl (default)
+# "acc"      : acceptance server (authenticated)
+# "prod"     : production server (authenticated)
+target_host <- "test"
+
+# Available hosts
+hosts <- list(
+  internal = "http://localhost:80",
+  dev =  "http://localhost:8080",
+  test = "https://james.groeidiagrammen.nl",
+  acc =  "https://srminterlayer-az-acc.eaglescience.nl/modules/james",
+  prod = "https://ijgz.eaglescience.nl/modules/james"
+)
+
+# Set host based on target
+if (target_host == "acc") {
+  # Try ACC with authentication, fall back to test if it fails
+  auth_result <- system("./authenticate-acc.sh", ignore.stdout = TRUE, ignore.stderr = TRUE)
+  if (auth_result == 0) {
+    host <- hosts$acc
+    message("Using ACC server: ", host)
+  } else {
+    host <- hosts$test
+    warning("ACC server unavailable, using fallback: ", host)
+  }
+} else if (target_host == "prod") {
+  # Try PROD with authentication, fall back to test if it fails
+  auth_result <- system("./authenticate-prod.sh", ignore.stdout = TRUE, ignore.stderr = TRUE)
+  if (auth_result == 0) {
+    host <- hosts$acc
+    message("Using PROD server: ", host)
+  } else {
+    host <- hosts$test
+    warning("PROD server unavailable, using fallback: ", host)
+  }
+} else if (target_host %in% names(hosts)) {
+  host <- hosts[[target_host]]
+  message("Using ", target_host, " server: ", host)
+} else {
+  stop("Invalid target_host. Choose: 'dev', 'test', 'acc' or 'prod'.")
+}
+
+# Save host for bash chunks
+system(paste0("echo ", host, " > .host"))
+```
+
+```{r setup}
+#| include: false
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+is_windows <- .Platform$OS.type == "windows"
+
+# Detect the name of the current Quarto source file (e.g. "index.qmd")
+doc <- knitr::current_input(dir = TRUE)  # returns absolute path when available
+if (is.null(doc)) {
+  doc <- normalizePath("index.qmd", mustWork = FALSE)  # fallback for interactive use
+}
+figdir <- file.path(dirname(normalizePath(doc, mustWork = FALSE)),
+                    paste0(tools::file_path_sans_ext(basename(doc)), "_files"),
+                    "figures")
+dir.create(figdir, recursive = TRUE, showWarnings = FALSE)
+
+# Define file names within Quarto's _files/figures/ folder
+filename_chart1 <- file.path(figdir, "chart1.svg")
+filename_chart2 <- file.path(figdir, "chart2.svg")
+filename_chart3 <- file.path(figdir, "chart3.svg")
+
+# Flag to check if we're on ACC server (for conditional chunk execution)
+is_acc <- grepl("srminterlayer-az-acc", host)
+
+# Set up global authentication for ACC server
+if (file.exists(".bearer")) {
+  bearer_token <- trimws(readLines(".bearer", n = 1, warn = FALSE))
+  if (nchar(bearer_token) > 0) {
+    Sys.setenv(JAMES_BEARER_TOKEN = paste("Bearer", bearer_token))
+    message("Bearer token set")
+  }
+}
+
+# Helper to get base URL (without /modules/james for ACC)
+get_base_url <- function(host) {
+  sub("/modules/james$", "", host)
+}
+
+# Helper to fetch URL content with authentication (for OpenCPU library access on ACC)
+fetch_url_content <- function(url) {
+  # Use httr::GET which inherits our Bearer token config
+  resp <- httr::GET(url)
+  if (httr::http_error(resp)) {
+    stop("Failed to fetch URL: ", url, " (status: ", httr::status_code(resp), ")")
+  }
+  httr::content(resp, as = "text", encoding = "UTF-8")
+}
+```
+
+## Overview
+
+JAMES is a web service for creating and interpreting charts of child growth and development. The current version of JAMES
+
+1. provides access to high-quality growth charts used by the Dutch youth health care;
+2. screens for abnormal height, weight and head circumference;
+3. converts developmental data into the D-score;
+4. predicts future growth and development.
+
+JAMES is a RESTful API that runs on a remote host. The system accepts requests from the Dutch Digital Child Health Record System [DD-JGZ](https://www.ddjgz.nl) and other clients using a 
+the [Basisdataset JGZ 4.0.0](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html) protocol. Child data are coded according to the [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json).
+
+>> Get to know JAMES. Browse the [tutorial](http://growthcharts.org/arnhem2025/) (in Dutch).
+
+The following sections illustrate how a client can make requests to JAMES using various client languages. In principle, any `HTTP` client will work with JAMES. The document highlights some applications of the service and provides pointers to relevant background information.
+
+The service aids in monitoring and evaluating childhood growth. JAMES is created and maintained by the Netherlands Organisation for Applied Scientific Research TNO. Please contact Stef van Buuren <stef.vanbuuren at tno.nl> for further information.
+
+### Primary JAMES user functionality
+
+| Verb  | API end point              | Description                                | Maps to `james` function |
+|:------|:-------------------------- |:------------------------------------------ |:-------------------------|
+| POST  | `/version/{dfm}`           | Obtain version information                 | `version()`              |
+| POST  | `/data/upload/{dfm}`       | Upload child data                          | `upload_data()`          |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/charts/draw/{ffm}`       | Draw child data on growth chart            | `draw_chart()`           |
+| POST  | `/charts/list/{dfm}`       | List available growth charts               | `list_charts()`          |
+| POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/dscore/calculate/{dfm}`  | Calculate developmental score (D-score)    | `calculate_dscore()`     |
+| POST  | `/ddomain/calculate/{dfm}` | Calculate developmental domain scores      | `calculate_ddomain()`    |
+| POST  | `/vwc/select/{dfm}`        | Select developmental milestones for age    | `select_vwc()`           |
+| POST  | `/vwc/percentiles/{dfm}`   | Obtain developmental milestone percentiles | `percentiles_vwc()`      |
+| POST  | `/dcat/calculate/{dfm}`    | Adaptive testing of milestones             | `dcat()`                 |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/screeners/list/{dfm}`    | List available growth screeners            | `list_screeners()`       |
+| POST  | `/screeners/apply/{dfm}`   | Apply growth screeners to child data       | `apply_screeners()`      |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| GET   | `/site`                    | Request empty site                         | `request_site()`         |
+| POST  | `/site/request/{dfm}`      | Request personalised site                  | `request_site()`         |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/blend/request/{sfm}`     | Obtain a blend from multiple end points    | `request_blend()`        |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| GET   | `/{session}/{info}`        | Extract session details                    |                          |
+| GET   | `/{2}/{1}/man`             | Consult R help                             | `help({1}_{2})`          |
+
+The table lists the defined API end points and the mapping to each end point to the corresponding R function. 
+
+The definition of the JAMES endpoints can be found at [OpenAPI specification](https://james.groeidiagrammen.nl/docs/).
+
+### Output formats
+
+JAMES is built on top of the [**OpenCPU API**](https://www.opencpu.org/api.html), a powerful and flexible way for online deployment of R functionality. Although it is possible to use JAMES without knowledge of OpenCPU, it is useful to browse the OpenCPU features. 
+
+OpenCPU offers multiple output formats out of the box. JAMES supports a subset of these through the `/{session}/{info}` end point. Here `session` is a special session code generated by OpenCPU that identifies the server location containing the results of a request. The output format `info` is one of the following:
+
+| `{info}`   | Description                                    |
+|:-----------|:-----------------------------------------------|
+| `json`     | Function result as JSON                        |
+| `print`    | Function result as formatted as print          |
+| `csv`      | Function result as comma-separated format      |
+| `tab`      | Function result as tab-delimited format        |
+| `md`       | Function result as markdown format             |
+| `svglite`  | Function result as SVG graph                   |
+| `warnings` | Warnings from the R execution                  |
+| `messages` | Messages, especially data validation info      |
+| `console`  | Console print out, useful for locating errors  |
+| `stdout`   | Standard output                                |
+| `info`     | Overview of JAMES deployment                   |
+| `parent`   | Parent directory of all OpenCPU session output |
+
+In addition, the user can request the function result in a particular form. JAMES distinguishes the following groups of formats.
+
+| Format group | Description                                                |
+|:-------------|:-----------------------------------------------------------|
+| `dfm`        | Data format: `json`, `csv`, `tab`, `md`, `print`, `parent` |
+| `ffm`        | Figure format: `svglite`, `print`, `parent`                |
+| `sfm`        | System format:  `json`, `print`, `parent`                  |
+
+In general, the user can specify the desired format by appending the format name to the URL. See <https://www.opencpu.org/api.html#api-formats> for examples.
+
+### Objective
+
+This document provides a quick introduction into the main JAMES features, and how these can be assessed from `R` and from the command line.
+
+## Features 
+
+### **`/version`**: Obtain version information
+
+Let us first check whether JAMES is running. The following code makes a simple request to JAMES to see whether it is alive and to return the version number of the underlying `james` R package. We illustrate both requests in `R` and in `bash`.
+
+::: panel-tabset
+
+##### **R**
+
+We first need to install and load packages.
+
+```{r httr, eval=FALSE}
+install.packages(c("remotes", "httr", "jsonlite"))
+remotes::install_github("growthcharts/jamesclient")
+remotes::install_github("growthcharts/jamesdemodata")
+remotes::install_github("growthcharts/bdsreader")
+```
+
+```{r load}
+library(jamesclient)
+library(httr)
+library(jsonlite)
+```
+
+The server that hosts JAMES was already defined in the setup block at the top of this document. The `host` variable is now available for use in all subsequent code chunks.
+
+
+```{r hostset, echo = FALSE}
+if (target_host != "internal") {
+  # print the host for verification
+  cat("Target host code: ", target_host, "\n")
+  cat("Actual host URL : ", host, "\n")
+}
+```
+
+
+For bash chunks that need authentication, we use an `auth_curl` helper function that automatically adds Bearer token when available.
+
+We first illustrate a method that makes two requests to the server. The following commands call the `/version/json` end point in the JAMES API.
+
+```{r versiontwostep}
+r <- james_post(host = host, path = "version/json")
+```
+
+We added the `/json` to the pathname to extract the JSON representation of the result of the `R` function `james::version()`. The function result is an object of class `james_post` and consists of various components.
+
+```{r}
+names(r)
+r$url
+```
+
+Most of the element are documented in the `response` object in the `httr` package. For example, we could use the call `httr::status_code(r)` to obtain the status code. The function `james_post()` adds the last five elements:
+
+- `r$request_path` echoes the endpoint, here `/version/json`;
+- `r$parsed` is a parsed version of the element `r$content`. Here it is a list of elements like names of the package, its date, and so on. In case of an error of the server function, we find the error message here;
+- `r$warnings` contain any warnings thrown during execution;
+- `r$messages` contain any messages, e.g. data reading errors;
+- `r$session` (like `r r$session`) is a unique session code.
+
+The `jamesclient::james_post()` function wraps the basis workhorse `httr::POST()` that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.
+
+```{r}
+auth_token <- Sys.getenv("JAMES_BEARER_TOKEN")
+path <- "version/json"
+url <- parse_url(host)
+url <- modify_url(url, path = file.path(url$path, path), query = "auto_unbox=true")
+r <- POST(url, add_headers(accept = "application/json", Authorization = auth_token))
+fromJSON(content(r, type = "text", encoding = "UTF-8"))
+```
+
+##### **bash**
+
+We use the `curl` Linux command. If needed, on Ubuntu install `curl` as
+
+```{bash, eval=FALSE}
+sudo apt update
+sudo apt -y install curl
+```
+
+Let's find out the JAMES version number. We first illustrate a method that makes two requests to the server.
+
+**Note**: When using the ACC server, authentication is handled automatically via the `auth_curl` helper function which adds the Bearer token from `.bearer` file.
+
+The following `bash` commands call the `/version` API end point
+
+```{bash bashversion, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX POST $(cat .host)/version > resp
+cat resp
+```
+
+The response to the request consists of a set of URLs created on the server, each of which contains details on the response. 
+
+The path element following `tmp/` is a unique session key. See <https://www.opencpu.org/api.html> for the interpretation of the OpenCPU API.
+
+The next snippet constructs the URL of a JSON representation of the result and downloads the contents of the URL as a file `value1`.
+
+```{bash bashvalue1, eval=!is_windows}
+source auth_curl.sh
+auth_curl -s $(cat .host)$(head -1 resp)/json?auto_unbox=true > value1
+cat value1
+```
+
+The above sequence makes two requests to the server. The following code compacts both steps into one.
+
+```{bash vashvalue2, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX POST $(cat .host)/version/json?auto_unbox=true > value2
+cat value2
+```
+
+```{bash removevalues, echo=FALSE, eval=!is_windows}
+rm resp value1 value2
+```
+
+:::
+
+### **`/data/upload`**: Upload child data
+
+JAMES understands data that conform to the [Basisdataset JGZ 4.0.1](https://www.ncj.nl/onderwerp/digitaal-dossier-jgz/bds-jgz-versiebeheer/) coded as JSON according to a [JSON schema](https://github.com/growthcharts/bdsreader/blob/master/inst/schemas/bds_v3.0.json). This section explains how we create, validate and upload child data to JAMES.
+
+::: panel-tabset
+
+##### **R**
+
+Let us assume that we have already have child data in `R` stored as a `data.frame` or `tibble`. Here we copy the longitudinal demo data `maria.json` from the `bdsreader` package into the working directory.
+
+```{r}
+success <- file.copy(system.file("examples/maria.json", package = "bdsreader"), 
+                     "maria.json", overwrite = TRUE)
+```
+
+The contents of the file is `json` format, ready for upload:
+
+```{r, eval=FALSE}
+{
+  "OrganisatieCode": 1234,
+  "Referentie": "fa308134-069e-49ce-9847-ccdae380ed6f",
+  "ClientGegevens": {
+    "Elementen": [
+      {
+        "Bdsnummer": 19,
+        "Waarde": "2"
+      },
+      {
+        "Bdsnummer": 20,
+        "Waarde": "20181011"
+      },
+      {
+        "Bdsnummer": 82,
+        "Waarde": "189"
+      },
+      {
+        "Bdsnummer": 91,
+        "Waarde": "2"
+      },
+      {
+        "Bdsnummer": 110,
+        "Waarde": "990"
+      },
+      {
+        "Bdsnummer": 238,
+        "Waarde": "1670"
+      },
+      {
+        "Bdsnummer": 240,
+        "Waarde": "1900"
+      }
+    ],
+    "Groepen": [
+      {
+        "Elementen": [
+          {
+            "Bdsnummer": 63,
+            "Waarde": "19950704"
+          },
+          {
+            "Bdsnummer": 71
+          },
+          {
+            "Bdsnummer": 62,
+            "Waarde": "01"
+          }
+        ]
+      },
+      {
+        "Elementen": [
+          {
+            "Bdsnummer": 63,
+            "Waarde": "19901202"
+          },
+          {
+            "Bdsnummer": 71
+          },
+          {
+            "Bdsnummer": 62,
+            "Waarde": "02"
+          }
+        ]
+      }
+    ]
+  },
+  "Contactmomenten": [
+    {
+      "Tijdstip": "20181011",
+      "Elementen": [
+        {
+          "Bdsnummer": 245,
+          "Waarde": "990"
+        }
+      ]
+    },
+    {
+      "Tijdstip": "20181111",
+      "Elementen": [
+        {
+          "Bdsnummer": 235,
+          "Waarde": "380"
+        },
+        {
+          "Bdsnummer": 245,
+          "Waarde": "1250"
+        },
+        {
+          "Bdsnummer": 252,
+          "Waarde": "270"
+        }
+      ]
+    },
+    {
+      "Tijdstip": "20181211",
+      "Elementen": [
+        {
+          "Bdsnummer": 235,
+          "Waarde": "435"
+        },
+        {
+          "Bdsnummer": 245,
+          "Waarde": "2100"
+        },
+        {
+          "Bdsnummer": 252,
+          "Waarde": "305"
+        }
+      ]
+    }
+  ]
+}
+```
+
+There are four ways to upload the data to JAMES:
+
+1. Upload the file `"maria.json"`;
+2. Convert to a string and upload;
+3. Convert to a JSON object and upload;
+4. Read the JSON file from a URL.
+
+The `/data/upload` API end point handles these cases as follows:
+
+```{r}
+# Test if Bearer token is still active
+if (file.exists(".bearer")) {
+  bearer_token <- trimws(readLines(".bearer", n = 1))
+  cat("About to test james_post with token length:", nchar(bearer_token), "\n")
+}
+
+# upload as file
+fn <- "maria.json"
+r1 <- james_post(host = host, path = "data/upload/json", txt = fn)
+status_code(r1)
+
+# upload as string
+js <- read_json_js(fn)
+r2 <- james_post(host = host, path = "data/upload/json", txt = js)
+status_code(r2)
+
+# upload as JSON object
+jo <- read_json_jo(fn)
+r3 <- james_post(host = host, path = "data/upload/json", txt = jo)
+status_code(r3)
+
+# upload as URL
+url <- "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/maria.json"
+r4 <- james_post(host = host, path = "data/upload/json", txt = url)
+status_code(r4)
+```
+
+If the status is 201, the data are uploaded to JAMES and processed. For example, the processed data after file upload is available as an R data frame under element `r1$parsed`. 
+
+```{r}
+r1$parsed
+```
+
+The session details, including the uploaded data, will remain available for a limited time. After 30 minutes the session is wiped. The session key is your entrance to the resource within the 30-minute window. The key can be retrieved as `r1$session`. For example, to see the result of the file upload session in markdown use
+
+```{r}
+(session <- r1$session)
+resp <- james_get(host = host, path = file.path(session, "md"))
+# Handle both text and parsed responses
+if (is.character(resp$parsed)) {
+  cat(resp$parsed)
+} else {
+  print(resp$parsed)
+}
+```
+
+**Troubleshooting data upload**: JAMES executes checks on the conversion and ranges of the data. To gain efficiency, it does not automatically validate the input data against the specified JSON schema. JAMES writes diagnostic, sometimes cryptic, messages to the directory `{session}/messages` if it finds a problem. The user can rerun the data upload with two additional flags that request extra diagnostic output.
+
+Example: Suppose we compromise the data by removing the required `"clientDetails"` and the optional `"nestedDetails"` sections. The mangled input data look like:
+
+```
+{"Format":"3.0","organisationCode":12345,"reference":"Maria's mangled data","clientMeasurements":[{"bdsNumber":235,"values":[{"date":"20181111","value":380},{"date":"20181211","value":435}]}]}
+```
+
+Everything appears normal if we read this data by the default:
+
+```{r}
+fn <- "maria-mangled.json"
+r5 <- james_post(host = host, path = "data/upload/json", txt = fn)
+r5$parsed
+```
+
+If we upload with the additional `validate = TRUE` flag, JAMES runs the validation of the uploaded JSON against the JSON schema:
+
+```{r eval=FALSE}
+r6 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE)
+mess <- james_get(host = host, path = file.path(r6$session, "messages"))
+# Handle both text and parsed responses
+if (is.character(mess$parsed)) {
+  cat(mess$parsed)
+} else {
+  print(mess$parsed)
+}
+```
+
+which indicates that the required JSON element `"clientDetails"` is missing. We inactivated the code chunk above because it may occasionally give the error "JAMES API request failed [400] child process has died In call: tryCatch()" when `validate = TRUE`. This is a known, not yet resolved issue.
+
+We may drill down further by setting the `intermediate = TRUE` flag. This writes five JSON files that document the data flow into `{session}/files/{*}.json`.
+
+For example, we can ask for the input data as read by JAMES by
+
+```{r}
+r7 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE, intermediate = TRUE)
+url <- file.path(host, r7$session, "files/input.json")
+url
+```
+
+With `browseURL(url)` we may view the file contents in the browser. The `files` directory contains five JSON files:
+
+1. `files/input.json`: the JSON input data;
+2. `files/bds.json`: a data frame with info per BDS number;
+3. `files/ddi.json`: result of recoding BDS into GSED item names;
+4. `files/psn.json`: known fixed child covariates;
+5. `files/xy.json`: time-varying variables.
+
+Inspection of these files may uncover any problems with JAMES's understanding of the data. If needed, study the underlying R source code at <https://raw.githubusercontent.com/growthcharts/bdsreader/master/R/read_bds.R>.
+
+The `validate` and `intermediate` flag are useful for development and debugging. In production, we recommend leaving them at their default value (`FALSE`) and monitor any messages written to `{session}/messages`.
+
+##### **bash**
+
+We start from child data in the file `maria.json` that we wish to process with JAMES. For testing purposes, you may change the values, but keep the general structure intact. The following commands upload the file and process the data.
+
+```{bash, eval=!is_windows}
+curl -sF 'txt=@maria.json' -D headers \
+  -H "accept: text/json" \
+  -H "Authorization: Bearer $(cat .bearer)" \
+  $(cat .host)/data/upload/json | head
+```
+
+Alternatively, we may read the file into a JSON string, and upload as follows:
+
+```{bash, eval=!is_windows}
+JS=$(jq '.' maria.json | jq -sR '.')
+curl -s $(cat .host)/data/upload/json \
+  -H "Authorization: Bearer $(cat .bearer)" \
+  -d "txt=$JS" | head
+```
+
+Finally, if the data are located at a URL, use
+
+```{bash, eval=!is_windows}
+URL=https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/maria.json
+curl -s $(cat .host)/data/upload/json \
+  -H "Authorization: Bearer $(cat .bearer)" \
+  -d "txt='$URL'" | head
+```
+
+:::
+
+### **`/charts/draw`**: Draw child data on growth chart
+
+::: panel-tabset
+
+##### **R**
+
+Maria is a preterm born at 27 weeks of gestational age. We already uploaded her data. We may now plot her growth data on the A4 chart for preterms as follows:
+
+```{r}
+r5 <- james_post(host = host, 
+                 path = "/charts/draw/svglite", 
+                 session = r1$session,
+                 chartcode = "PMAAN27", selector = "chartcode",
+                 query = list(height = 29.7/2.54, width = 21/2.54))
+```
+
+```{r}
+#| echo: false
+htmltools::HTML(r5$parsed)
+```
+
+Alternatively, we may upload data for a new child Laura and plot the data in one step:
+
+```{r}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r6 <- james_post(host = host,
+                 path = "/charts/draw/svglite", txt = fn,
+                 chartcode = "NMBA", selector = "chartcode",
+                 query = list(height = 29.7/2.54, width = 21/2.54))
+```
+
+For A4 sized charts, we recommend to generate the plot with query arguments `list(height = 29.7/2.54, width = 21/2.54)`, as illustrated above. If you want to change the chart's size in your HTML, use CSS on the SVG directly. This gives the following output.
+
+```{r}
+#| echo: false
+htmltools::HTML(r6$parsed)
+```
+
+JAMES features a built-in prediction module based on curve matching. Suppose we want to predict Laura's height at the 3y9m when Laura is 2 years old. The following chart plots 25 matches to Laura as grey curves. The variation between the grey curves at age 3y9m indicates the likely variation in the prediction. The blue line indicates Laura's predicted height at age 3y9m. 
+
+```{r}
+r7 <- james_post(host = host,
+                 path = "/charts/draw/svglite", txt = fn,
+                 chartcode = "NMBH", dnr = "2-4",
+                 lo = 2.0, hi = 3.75, nmatch = 25,
+                 show_future = TRUE, show_realized = TRUE,
+                 query = list(height = 18/2.54, width = 18/2.54))
+```
+
+For square charts, use query arguments `list(height = 18/2.54, width = 18/2.54)` to generate the plot.
+
+```{r}
+#| echo: false
+htmltools::HTML(r7$parsed)
+```
+
+##### **bash**
+
+Upload `maria.json` and draw the height data on the default chart to produce an SVG file. Specify the proper `width` and `height` query parameters.
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=7.09&height=7.09' \
+-H 'accept: image/*' \
+-F 'txt=@maria.json;type=application/json' > maria1.svg
+```
+
+We need to set `chartcode` and `selector` parameters to choose a different chart.
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
+-H 'accept: image/*' \
+-F "chartcode='PMAAN27'" \
+-F "selector='chartcode'" \
+-F 'txt=@maria.json;type=application/json' > maria2.svg
+```
+
+An alternative is to read the data from a URL, and use the `application/json` protocol to specify parameters.
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+
+BASE_URL=$(cat .host | sed 's|/modules/james$||')
+auth_curl -sX 'POST' \
+$(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
+-H 'accept: image/*' \
+-H 'Content-Type: application/json' \
+-d '{
+"txt": "'$BASE_URL'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",
+"chartcode" : "NMBA",
+"selector" : "chartcode"}' > laura.svg
+```
+
+:::
+
+### **`/charts/list`**: List available growth charts
+
+::: panel-tabset
+
+##### **R**
+
+JAMES contains a wide variety of built-in growth charts. Each chart has a unique `chartcode`. A typical chart code looks like `NJAA`. We obtain the full list of chart codes as
+
+```{r}
+r <- james_post(host = host, path = "charts/list/json")
+charts <- r$parsed
+```
+
+The `charts` object is a data frame with `r nrow(charts)` rows (charts) and the following variables:
+
+```{r}
+names(charts)
+```
+
+JAMES contains charts for various child populations. There are charts for Down syndrome (DS), Hindustan (HS), Moroccan (MA), Dutch (NL)), preterm (PT) and Turkish (TU) children living in the Netherlands and the WHO Growth Standards (WHOblue, WHOpink). These charts contain references for height (hgt), weight (wgt), head circumference (hdc), weight-for-height (wfh), body mass index (bmi) and D-score (dsc), as well as combined charts with multiple references on A4 format (front, back, -hdc). 
+
+The most important index variables are `population` and `side`:
+
+```{r eval=TRUE}
+with(charts, table(population, side))
+```
+
+The URL `{host}/site` (see below) displays the currently active chart code as a field in the left sidebar.
+
+##### **bash**
+
+Restrict the listing to the WHO references:
+
+```{bash eval=FALSE}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+$(cat .host)'/charts/list/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+"chartgrp": "who"
+}'
+```
+
+:::
+
+### **`/charts/validate`**: Validate chart codes
+
+::: panel-tabset
+
+##### **R**
+
+The `/charts/validate` end point attempt to find one or more user-specified chart codes. For example, the following cocde checkc five chart codes:
+
+```{r}
+r <- james_post(host = host, 
+                path = "charts/validate/json", 
+                chartcode = c("NMAW", "NJAb", "PJAAN23", "PJAAN25", "dummy"))
+r$parsed
+```
+
+##### **bash**
+
+Check five chart codes:
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+$(cat .host)'/charts/validate/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+"chartcode": [
+"NMAW",
+"NJAB",
+"PJAAN23",
+"PJAAN25", 
+"dummy"
+]
+}'
+```
+
+:::
+
+### **`/dscore/calculate`**: Calculate D-score
+
+::: panel-tabset
+
+##### **R**
+
+The D-score is a developmental score that is used to assess the development of children. The `/dscore/calculate` end point calculates the D-score for a child based on the uploaded data. The D-score is a continuous measure of child development, and it is calculated based on the child's age and developmental milestones.
+
+```{r dscorecalculate}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "dscore/calculate/json", output = "table", txt = fn)
+r
+head(r$parsed)
+```
+
+The D-score is found in column `y` and the DAZ is in column `z`.
+
+##### **bash**
+
+:::
+
+### **`/ddomain/calculate`**: Calculate domain scores
+
+::: panel-tabset
+
+##### **R**
+
+The D-score is a one-number summary measure of child development. The `/ddomain/calculate` end point breaks down the D-score into two or more domains. 
+
+```{r ddomaincalculate}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "ddomain/calculate/json", output = "table", txt = fn)
+r
+head(r$parsed)
+```
+
+The D-score is found in column `y` and the DAZ is in column `z`.
+
+##### **bash**
+
+Example data
+
+```{bash, eval=!is_windows}
+cat gs1.json
+```
+
+Body version, file to string. Missing data in the results replaced by `null` fields.
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+"$(cat .host)/ddomain/calculate/json?na=null" \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+  "population": "GSED-NLD",
+  "txt": '"$(cat gs1.json | jq -Rs .)"'
+}' > result.json
+cat result.json
+```
+
+:::
+
+### **`/vwc/select`**: Select Van Wiechen development milestones based on D-score and age
+
+::: panel-tabset
+
+##### **R**
+
+The Van Wiechenonderzoek is a Dutch screening tool used to track a child’s development from birth to age 4.5. It includes 75 milestones across three areas: fine motor skills, gross motor skills, and communication. The `/vwc/select` end point suggest the most fitting milestones for a child based on the uploaded data.
+
+```{r selectvanwiechen}
+fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
+r <- james_post(host = host, path = "vwc/select/json", output = "table", txt = fn, percentiles = TRUE)
+r$url
+r$parsed
+```
+
+##### **bash**
+
+To be added
+
+:::
+
+
+### **`/vwc/percentiles`**: Select Van Wiechen development milestones with detailed cut-off information
+
+::: panel-tabset
+
+##### **R**
+
+It is also possible to obtain a table of age and D-score percentiles for a selection of milestones. This can be done either directly using the `vwc` argument, or indirectly from uploaded child data.
+
+```{r vwcpercentiles}
+r <- james_post(
+  host = host,
+  path = "vwc/percentiles/json",
+  output = "table",
+  vwc = "ddifmd018"
+)
+r$parsed
+```
+
+##### **bash**
+
+To be added
+
+:::
+
+
+### **`/dcat/calculate`**: Calculate next milestone item
+
+::: panel-tabset
+
+##### **R**
+
+The DCAT allows users to performa adapative testing using either `ddi` or `gs1` items.
+
+The following snippet uploads child data and requests the next item to be tested based on the `gs1` instrument, the default.
+
+```{r dcatcalculate}
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+r <- james_post(host = host, path = "dcat/calculate/json", txt = fn)
+r$parsed
+```
+
+By specifying the instrument we can specify whether we want to include `ddi` or `gs1` (or even both). In the case of only `ddi` items, we must additionally specify a key that supports the `ddi` instrument.
+
+```{r dcatcalculateddi}
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+r <- james_post(
+  host = host,
+  path = "dcat/calculate/json",
+  txt = fn,
+  instrument = "ddi",
+  key = "gsed2406"
+)
+r$parsed
+```
+
+###### TEST START ITEM
+
+```{json}
+{
+    "Format": "3.1",
+    "clientDetails": [
+        {
+            "bdsNumber": 20,
+            "value": "20250818"
+        }
+    ]
+}
+```
+
+```{r dcatstartitem}
+fn <- "start_dcat_example.json"
+cat("host: ", host, "\n")
+r <- james_post(
+  host = host,
+  path = "dcat/calculate/json",
+  txt = fn,
+  population = "GSED-NLD",
+  key = "gsed2510"
+)
+r$parsed
+```
+
+
+##### **bash**
+
+To be added
+
+:::
+
+
+### **`/screeners/list`**: List available growth screeners
+
+::: panel-tabset
+
+##### **R**
+
+JAMES implements several screening algorithms. The `/screeners/list` end point provides detailed information on each of these.
+
+```{r screenerslist, eval=FALSE}
+r <- james_post(
+  host = host,
+  path = "/screeners/list/json",
+  session = r1$session
+)
+names(r$parsed)
+with(r$parsed, table(yname, Categorie))
+```
+
+There are currently `r nrow(r$parsed)` different codes. Codes ending in `31`, e.g., `1031` or `2031` indicate normal growth, whereas code ending in `41`, `42` and so on, signal that - according to the guidelines - the child should be referred for further investigation. 
+
+##### **bash**
+
+We get the details for the guidelines for head circumference as
+
+```{bash bashscreenerslist, eval=FALSE}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+$(cat .host)'/screeners/list/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"ynames": "hdc"}'
+```
+
+:::
+
+
+### **`/screeners/apply`**: Apply growth screeners to child data
+
+::: panel-tabset
+
+##### **R**
+
+The `/screeners/apply` end point applies standard screeners to the child data. Invoke the screeners by
+
+```{r screenersapply, eval=TRUE}
+r <- james_post(
+  host = host,
+  path = "/screeners/apply/json",
+  session = r1$session
+)
+r$parsed
+```
+
+The procedure
+
+1. calculates, per outcome, the intervals between the most recent measurement and all earlier measurements;
+2. tests whether any of those intervals produces a signal according the screening algorithm;
+3. reports the most recent non-standard signal that indicate abnormal growth.
+
+In the example, all returned codes (1031, 2031, 3031) end in "31", which signals normal growth. The full table of return codes and messages can be obtained by the `/screeners/list` end point (see above).
+
+There are several possibilities to visualise and integrate multiple evaluations per curve performed in step 2 into one advice. Before May 2023, JAMES returned an advice for each combination of time point and outcome, but that table presented a lot of output that was difficult to act one. Since May 2023, JAMES reports only one signal per curve.
+
+##### **bash**
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+$(cat .host)'/screeners/apply/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: multipart/form-data' \
+-F 'txt=@maria.json;type=application/json'
+```
+
+:::
+
+### **`/site`**: Request an empty site
+
+::: panel-tabset
+
+##### **R**
+
+The `/site` end point provides interactive site containing all charts, but without child data. This end point is primarily useful to obtain a quick overview of the available charts.
+
+```{r eval=FALSE}
+browseURL(file.path(host, "site"))
+```
+
+##### **bash**
+
+:::
+
+
+### **`/site/request`**: Request personalised site
+
+::: panel-tabset
+
+##### **R**
+
+The `/site/request` end point creates an URL to a personalised, interactive site containing all charts. 
+
+```{r siterequest1}
+r <- james_post(
+  host = host,
+  path = "/site/request/json",
+  sitehost = host,
+  txt = js
+)
+r$parsed
+```
+
+Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.
+
+On some systems, the above command may fail with the browser error  `[400] Couldn't connect to server [localhost]`. An alternative is to break the request into two steps. First, we create a session by uploading the child data, and then we use that session to create the URL to the personalised site.
+
+We start by uploading data to JAMES and het `r$session`. After that, we can use either `site\request` or manual construction of the URL to the site:
+
+```{r siterequest2}
+fn <- system.file("examples/maria.json", package = "bdsreader")
+r <- james_post(host = host, path = "data/upload/json", txt = fn)
+
+# URL construction by /site/request
+site1 <- james_post(
+  host = host,
+  path = "site/request/json",
+  sitehost = host,
+  session = r$session,
+  upload = FALSE
+)
+site1
+
+# Or manual URL construction
+parsed_host <- httr::parse_url(host)
+combined_path <- paste(parsed_host$path, "site", sep = "/")
+combined_path <- gsub("//+", "/", combined_path)
+site2 <- httr::modify_url(
+  url = host,
+  path = combined_path,
+  query = list(session = r$session)
+)
+site2
+```
+
+Paste the generated URL in the address field of your browser. The initial page shown depends on the child's age. This two-step approach also works for remote servers. In practice, use the two-step approach is stabler and more reliable.
+
+##### **bash**
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+$(cat .host)'/site/request/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: multipart/form-data' \
+-F "sitehost='$(cat .host)'" \
+-F 'txt=@maria.json;type=application/json'
+```
+
+:::
+
+### **`/blend/request`**: Obtain a blend from multiple end points 
+
+::: panel-tabset
+
+##### **R**
+
+The `/blend/request` end point returns the results of multiple end points, and thus functions as a one-stop shop. However, currently it does not support graphics output, so use `/{session}/{info}/svglite` or `/charts/draw/svglite` for the charts. 
+
+```{r blendrequest}
+fn <- system.file("examples/Laura_S.json", 
+                  package = "bdsreader",
+                  mustWork = TRUE)
+r <- james_post(
+  host = host,
+  path = "/blend/request/json",
+  sitehost = host,
+  txt = fn
+)
+r
+names(r$parsed)
+```
+
+The two-step approach is: 
+
+```{r}
+resp1 <- james_post(host = host, path = "data/upload/json", txt = fn)
+resp2 <- james_post(
+  host = host,
+  path = "blend/request/json",
+  session = resp1$session
+)
+names(resp2$parsed)
+# browseURL(resp2$parsed$site)
+```
+
+
+```{r cleanup, include=FALSE}
+files <- c("laura.svg", "maria.json", "maria1.svg", "maria2.svg", "result.json")
+file.remove(files)
+```
+
+
+##### **bash**
+
+**Note**: This example requires OpenCPU library access and may not work on ACC server.
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+
+BASE_URL=$(cat .host)
+auth_curl -sX 'POST' \
+$(cat .host)'/blend/request/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+"txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
+"sitehost": "'$(cat .host)'",
+"blend": "standard"
+}'
+```
+
+:::
+
+## Authentication
+
+### Overview
+
+JAMES supports both open and authenticated access depending on the deployment environment:
+
+- **Test server** (`https://james.groeidiagrammen.nl`): Open access, no authentication required
+- **ACC and PROD server** : Requires Bearer token authentication
+
+This document uses authentication throughout for compatibility with the ACC server. The authentication mechanism is handled behind the scenes but uses a simple convention that makes it easy to switch between different deployment environments.
+
+### Authentication Conventions
+
+The authentication system in this document uses several files and environment variables:
+
+| File/Variable | Purpose | Location |
+|:--------------|:--------|:---------|
+| `apikey-acc.txt` | Stores your API key for the ACC server | `vignettes/articles/` |
+| `.bearer` | Stores the authentication token obtained from the API | `vignettes/articles/` (generated) |
+| `.host` | Stores the current server URL | `vignettes/articles/` (generated) |
+| `JAMES_BEARER_TOKEN` | Environment variable containing "Bearer {token}" | R session (set automatically) |
+| `authenticate-acc.sh` | Script to obtain Bearer token from API key | `vignettes/articles/` |
+| `auth_curl.sh` | Helper function that adds authentication to curl commands | `vignettes/articles/` |
+
+**Note**: The `.bearer` and `.host` files are temporary and are created when rendering this document. Add `apikey-acc.txt`, `.bearer`, and `.host` to your `.gitignore` to prevent accidentally committing sensitive information.
+
+### How to Set Up Authentication
+
+To use the ACC server (or any authenticated JAMES instance), follow these steps:
+
+#### 1. Obtain an API Key
+
+Contact the JAMES administrator to obtain an API key for the ACC environment. Save this key in a file named `apikey-acc.txt` (or `apikey-prod.txt`) in the `vignettes/articles/` directory:
+
+```bash
+echo "your-api-key-here" > vignettes/articles/apikey-acc.txt
+```
+
+#### 2. Authenticate to Get Bearer Token
+
+Run the authentication script to obtain a Bearer token:
+
+```bash
+cd vignettes/articles
+./authenticate-acc.sh
+```
+
+This script:
+1. Reads your API key from `apikey-acc.txt`
+2. Sends it to the ACC authentication endpoint
+3. Saves the returned Bearer token to `.bearer`
+4. Returns exit code 0 on success, 1 on failure
+
+The Bearer token is typically valid for a limited time (e.g., 24 hours). Re-run the script when the token expires.
+
+#### 3. Use Authentication in Your Code
+
+**For R code**: The setup chunk automatically loads the Bearer token into the `JAMES_BEARER_TOKEN` environment variable, which is used by `jamesclient` functions:
+
+```r
+# Token is automatically loaded from .bearer file
+# jamesclient functions automatically use JAMES_BEARER_TOKEN
+r <- james_post(host = host, path = "version/json")
+```
+
+**For bash code**: Use the `auth_curl` helper function instead of `curl`:
+
+```bash
+source auth_curl.sh
+
+# Instead of: curl -X POST https://server/endpoint
+# Use:
+auth_curl -sX POST $(cat .host)/endpoint
+```
+
+The `auth_curl` function automatically adds the `Authorization: Bearer {token}` header if the `.bearer` file exists.
+
+### Manual Authentication
+
+If you prefer to handle authentication manually without the helper scripts:
+
+**In R**:
+```r
+# Read the bearer token
+bearer_token <- trimws(readLines(".bearer", n = 1))
+
+# Add to requests
+library(httr2)
+resp <- request(paste0(host, "/version/json")) |>
+  req_headers(Authorization = paste("Bearer", bearer_token)) |>
+  req_perform()
+```
+
+**In bash**:
+```bash
+# Read the bearer token
+TOKEN=$(cat .bearer)
+
+# Add to curl requests
+curl -sX POST https://server/endpoint \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### Switching Between Servers
+
+To switch between different JAMES servers, change the `target_host` variable in the `{r host}` setup chunk at the beginning of this document:
+
+```r
+target_host <- "internal" # localhost:80, run this qmd at the container start
+target_host <- "dev"   # localhost:8080 for development
+target_host <- "test"  # No authentication needed
+target_host <- "acc"   # Requires authentication
+target_host <- "prod"  # Requires authentication
+```
+
+The document will automatically:
+
+1. Set the appropriate server URL in `host` variable
+2. Create the `.host` file for bash chunks
+3. Load authentication tokens if available
+4. Use authenticated requests when needed
+
+### Troubleshooting Authentication
+
+**401 Unauthorized errors**:
+
+- Token may have expired - re-run `./authenticate-acc.sh`
+- Check that `.bearer` file exists and is not empty
+- Verify `JAMES_BEARER_TOKEN` is set: `Sys.getenv("JAMES_BEARER_TOKEN")`
+- The `jamesclient::james_post()` and `jamesclient::james_get()` functions rely on `JAMES_BEARER_TOKEN` for authentication
+
+**Token not found**:
+
+- Ensure `apikey-acc.txt` exists and contains your API key
+- Check that you're running commands from `vignettes/articles/` directory
+- Verify `authenticate-acc.sh` has execute permissions: `chmod +x authenticate-acc.sh`
+
+**Connection timeout**:
+
+- Check your network connection
+- Verify the ACC server URL is correct
+- Check if you're behind a proxy that requires configuration
+
+## Resources
+
+### Internal
+
+| Description                                           | Status                                  |
+|:------------------------------------------------------|:----------------------------------------|
+| [Tutorial (Dutch)](http://growthcharts.org/arnhem2025/) | open |
+| [Changelog](https://growthcharts.org/james/news/index.html) | open |
+| [OpenAPI specification](https://james.groeidiagrammen.nl/docs/) | open     |
+| [JSON data schema 3.0](https://james.groeidiagrammen.nl/schemas/bds_v3.0.json) | open |
+| [Source files](https://github.com/growthcharts) | open  |
+| [JAMES issue tracker](https://github.com/growthcharts/james/issues) | open |
+
+### External
+
+| Description                                           | Status                                  |
+|:------------------------------------------------------|:----------------------------------------|
+| [JAMES demo](https://tnochildhealthstatistics.shinyapps.io/james_tryout/) | current |
+| [Basisdataset JGZ](https://decor.nictiz.nl/pub/jeugdgezondheidszorg/jgz-html-20240426T081156/index.html) | current |
+| [OpenCPU API](https://www.opencpu.org/api.html) | current |
