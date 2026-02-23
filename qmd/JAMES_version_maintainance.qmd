@@ -64,28 +64,6 @@ To add an argument to dcat, search for dcat_arguments and add the argument that 
 # devtools::check()
 ```
 
-
-### Update version in HTML and Rmd files
-
-If DESCRIPTION version changes, update two files with new version numbers
-
--   Rename `getting_started.qmdx` --> `getting_started.qmd`
-
-```{r eval= FALSE}
-james:::update_version_files(
-  "inst/www/index.html",
-  "vignettes/articles/getting_started.qmd",
-  "DESCRIPTION"
-)
-```
-
-Update version number van openapi.in.yaml file
-
-```{r eval=FALSE}
-james:::update_openapi_spec()
-```
-
-
 ### Keep `renv.lock` in shape
 
 - Check `renv::status` and commit changes to `renv.lock`. 
@@ -97,21 +75,64 @@ renv::snapshot(type = "explicit")
 ```
 
 
-### Next steps
+### Update version in HTML and Rmd files
+
+If you change DESCRIPTION version number, update two files with new version numbers:
+  - the HTML demo app at index.html
+  - the `_getting_started.qmd` vignette
+
+```{r eval= FALSE}
+james:::update_version_files(
+  "inst/www/index.html",
+  "vignettes/articles/_getting_started.qmd",
+  "DESCRIPTION"
+)
+```
+
+Update version number van `openapi.in.yaml` file
+
+```{r eval=FALSE}
+james:::update_openapi_spec()
+```
 
 
--   RUN in terminal: Rscript -e "quarto::quarto_render(input = 'vignettes/articles/getting_started.qmd')" - does not work in Windows because issues with bash codes
--   By default, this script runs server "test" (james.groeidiagrammen.nl), which initially contains the previous JAMES version
--   We first have to build and test our new version on localhost and test
+### Update documentation
 
--   Rename `getting_started.qmd` --> `getting_started.qmdx` to exempt getting_started from being build by `pkgdown::build_site()`
+- Build documentation using a combination of ``pkgdown::built_site()` and `quarto::quarto_render()`
+-   `quarto_render()` builds the getting started vignette 
+-    `bash` code does not work Windows, and will be skipped by setting `eval=FALSE` under Windows
+-   By default, the script runs server `target_host = "test"` (james.groeidiagrammen.nl)
+-   Note: The `getting_started.qmd` is also runs within the container, so check any changes also in that environment in the `jamesdocker` package
+- Run the following chunk to update site
 
--   Update site: `pkgdown::build_site()`
--   Move `vignettes/articles/getting_started.html` to `docs/articles/getting_started.html`
--   Move `vignettes/articles/geting_started_files/` to `docs/articles/getting_started_files/`
+```{r}
+quarto::quarto_render(
+  input = 'vignettes/articles/_getting_started.qmd',
+  quarto_args = c('--output-dir', file.path(getwd(), 'docs/articles'))
+)
+file.rename(
+  'docs/articles/_getting_started.html',
+  'docs/articles/getting_started.html'
+)
+file.rename(
+  'docs/articles/_getting_started_files',
+  'docs/articles/getting_started_files'
+)
+html <- readLines('docs/articles/getting_started.html')
+html <- gsub(
+  '_getting_started_files/',
+  'getting_started_files/',
+  html,
+  fixed = TRUE
+)
+writeLines(html, 'docs/articles/getting_started.html')
+pkgdown::build_site()
+```
+
+## Push and go
 
 -   Push changes to GitHub in following separate commits
     - (1) function changes
-    - (2) update package (news description)
-    - (3) documentation
+    - (2) update package version, NEWS and lock file
+    - (3) update site docs
 -   Go to `jamesdocker` repo for building app

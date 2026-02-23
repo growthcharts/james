@@ -8,3 +8,4 @@ qmd/JAMES_version_maintainance_files/
 **/.host
 
 /.quarto/
+docs/articles/*.md
