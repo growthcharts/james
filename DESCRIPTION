@@ -30,7 +30,6 @@ Imports:
     growthscreener (>= 1.24.0),
     httr,
     jamesclient (>= 0.35.0),
-    jamesdemodata (>= 0.12.0),
     jose,
     jsonlite,
     rlang,
@@ -38,6 +37,7 @@ Imports:
     utils,
     vwc
 Suggests: 
+    jamesdemodata (>= 0.12.0),
     knitr,
     openssl,
     rmarkdown,
