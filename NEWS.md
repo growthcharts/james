@@ -1,3 +1,7 @@
+# james 1.11.2 (March 2026)
+
+- add domain balancing options to `dcat()`, new arguments: `domain_set` and `k_domain`.
+
 # james 1.11.1 (Februari 2026)
 
 - Add new argument `min_length` to `dcat()`
