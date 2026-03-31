@@ -13,6 +13,8 @@ dcat(
   p = 50,
   min_length = 0,
   sem_rule = 1.726,
+  domain_set = "GFCLS",
+  k_domain = 0,
   session = "",
   format = "3.1",
   ...
@@ -39,6 +41,11 @@ default is set to \code{min_length = 0}.}
 
 \item{sem_rule}{numeric target for sem can be estimated based on Cohen's d
 from \code{sem_rule()}.}
+
+\item{domain_set}{String. The name of the set of domains to use. See with(builtin_domaintable, table(set, domain)) for the domain names in each set.}
+
+\item{k_domain}{integer. Minimum target for the number of items in each
+domain, default is set to \code{k_domain = 0}.}
 
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
