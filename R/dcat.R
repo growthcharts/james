@@ -12,6 +12,9 @@
 #' @inheritParams request_site
 #' @param sem_rule numeric target for sem can be estimated based on Cohen's d
 #' from `sem_rule()`.
+#' @param domain_set String. The name of the set of domains to use. See with(builtin_domaintable, table(set, domain)) for the domain names in each set.
+#' @param k_domain integer. Minimum target for the number of items in each
+#' domain, default is set to `k_domain = 0`.
 #'
 #' @return A string with an item name or a table.
 #' @author Iris Eekhout 2025
@@ -29,6 +32,8 @@ dcat <- function(
   p = 50,
   min_length = 0,
   sem_rule = 1.726,
+  domain_set = "GFCLS",
+  k_domain = 0,
   session = "",
   format = "3.1",
   ...
@@ -81,7 +86,9 @@ dcat <- function(
     p = p,
     min_length = min_length,
     instrument = instrument,
-    sem_rule = sem_rule
+    sem_rule = sem_rule,
+    domain_set = domain_set,
+    k_domain = k_domain
   )
 
   return(dcat_result)
