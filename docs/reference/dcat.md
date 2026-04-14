@@ -14,6 +14,8 @@ dcat(
   p = 50,
   min_length = 0,
   sem_rule = 1.726,
+  domain_set = "GFCLS",
+  k_domain = 0,
   session = "",
   format = "3.1",
   ...
@@ -57,6 +59,17 @@ dcat(
   numeric target for sem can be estimated based on Cohen's d from
   `sem_rule()`.
 
+- domain_set:
+
+  String. The name of the set of domains to use. See
+  with(builtin_domaintable, table(set, domain)) for the domain names in
+  each set.
+
+- k_domain:
+
+  integer. Minimum target for the number of items in each domain,
+  default is set to `k_domain = 0`.
+
 - session:
 
   Optional session key if data is already uploaded to `sitehost`.
@@ -85,10 +98,8 @@ Iris Eekhout 2025
 ``` r
 txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat(txt = txt, p = 50)
-#> [1] "gs1lgc119"
+#> [1] "gs1lgc117"
 txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
 dcat(txt = txt, p = 50)
-#> Cannot read 'txt': ~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json
-#> No date of birth found, cannot calculate next item
-#> NULL
+#> [1] "gs1cgc128"
 ```

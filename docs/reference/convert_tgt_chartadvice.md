@@ -155,29 +155,27 @@ Stef van Buuren 2020
 ``` r
 test25 <- system.file("extdata/bds_v3.0/test/test25.json", package = "jamesdemodata")
 james:::convert_tgt_chartadvice(txt = test25)
+#> Warning: No data found. chartcode set to NJAH.
 #> $population
-#> [1] "WHOpink"
+#> [1] "NL"
 #> 
 #> $sex
-#> [1] "female"
+#> [1] "male"
 #> 
 #> $design
 #> [1] "A"
 #> 
 #> $side
-#> [1] "dsc"
+#> [1] "hgt"
 #> 
 #> $language
 #> [1] "dutch"
 #> 
-#> $week
-#> [1] 39
-#> 
 #> $chartcode
-#> [1] "WMADN40"
+#> [1] "NJAH"
 #> 
 #> $chartgrp
-#> [1] "who"
+#> [1] "nl2010"
 #> 
 #> $agegrp
 #> [1] "0-15m"
@@ -189,9 +187,9 @@ james:::convert_tgt_chartadvice(txt = test25)
 #> [1] "0_2"
 #> 
 #> $period
-#> [1] "14m" "14m"
+#> [1] "0w"  "14m"
 #> 
 #> $accordion
-#> [1] "ontwikkeling"
+#> [1] "groei"
 #> 
 ```

@@ -74,9 +74,9 @@ Iris Eekhout 2025
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat_start(txt = fn, p = 50)
 #>                item
-#> gs1moc134 gs1moc134
-#>                                                                       label
-#> gs1moc134 SF134 If you draw a circle can your child do it, just as you did?
+#> gs1sec139 gs1sec139
+#>                                                                                                                    label
+#> gs1sec139 SF139 Can your child say what others like or dislike (e.g., "Mama doesn't like fruit," "Papa likes football")?
 #>             tau
-#> gs1moc134 75.11
+#> gs1sec139 76.57
 ```

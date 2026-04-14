@@ -1,5 +1,11 @@
 # Changelog
 
+## james 1.12 (April 2026)
+
+- add domain balancing options to
+  [`dcat()`](https://growthcharts.org/james/reference/dcat.md), new
+  arguments: `domain_set` and `k_domain`.
+
 ## james 1.11.1 (Februari 2026)
 
 - Update to `dcat 3.0.3` to pre-select items within probability
