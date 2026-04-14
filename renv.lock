@@ -1136,7 +1136,7 @@
     },
     "dcat": {
       "Package": "dcat",
-      "Version": "0.3.0",
+      "Version": "0.4.0",
       "Source": "GitHub",
       "Title": "Computer Adaptive Test for the D-score",
       "Authors@R": "person(\"Iris\", \"Eekhout\", , \"iris.eekhout@tno.nl\", role = c(\"aut\", \"cre\"))",
@@ -1158,10 +1158,10 @@
       "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "D-score",
+      "RemoteUsername": "d-score",
       "RemoteRepo": "dcat",
       "RemoteRef": "main",
-      "RemoteSha": "6c8387aa8e17f3d30b99595f3df8c8575ab87c08"
+      "RemoteSha": "470c1472daf84f6b2d6cbddf719ff2411e75eb80"
     },
     "digest": {
       "Package": "digest",
@@ -2076,34 +2076,6 @@
       "RemoteSha": "0e65692fbba67c8a8fe2711ce8a0a58af308b7e2",
       "NeedsCompilation": "no",
       "Author": "Stef van Buuren [aut, cre] (ORCID: <https://orcid.org/0000-0003-1098-2119>)"
-    },
-    "jamesdemodata": {
-      "Package": "jamesdemodata",
-      "Version": "0.12.0",
-      "Source": "GitHub",
-      "Type": "Package",
-      "Title": "Demo Data for JAMES",
-      "Author": "Stef van Buuren",
-      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
-      "Description": "A collection of data sets to develop, test and demonstrate the  Joint Automatic Measurement and Evaluation System (JAMES).",
-      "Encoding": "UTF-8",
-      "License": "AGPL (>= 3)",
-      "Copyright": "Stef van Buuren 2021",
-      "Depends": [
-        "R (>= 2.10)"
-      ],
-      "Suggests": [
-        "testthat"
-      ],
-      "URL": "https://github.com/growthcharts/jamesdemodata",
-      "Roxygen": "list(markdown = TRUE)",
-      "RoxygenNote": "7.3.2",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
-      "RemoteRepo": "jamesdemodata",
-      "RemoteRef": "master",
-      "RemoteSha": "bf32caf67326f42d68da1a8c11fe30c873281d19"
     },
     "jose": {
       "Package": "jose",
@@ -4099,7 +4071,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.7.1",
+      "Version": "0.7.3",
       "Source": "Repository",
       "Title": "Vector Helpers",
       "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\"), person(\"Lionel\", \"Henry\", , \"lionel@posit.co\", role = \"aut\"), person(\"Davis\", \"Vaughan\", , \"davis@posit.co\", role = c(\"aut\", \"cre\")), person(\"data.table team\", role = \"cph\", comment = \"Radix sort based on data.table's forder() and their contribution to R's order()\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
@@ -4139,6 +4111,7 @@
       "Config/testthat/edition": "3",
       "Config/testthat/parallel": "true",
       "Encoding": "UTF-8",
+      "KeepSource": "true",
       "Language": "en-GB",
       "RoxygenNote": "7.3.3",
       "NeedsCompilation": "yes",
