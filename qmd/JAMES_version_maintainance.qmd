@@ -118,6 +118,14 @@ file.rename(
   'docs/articles/_getting_started_files',
   'docs/articles/getting_started_files'
 )
+
+from <- "docs/articles/_getting_started_files"
+to   <- "docs/articles/getting_started_files"
+dir.create(to, recursive = TRUE, showWarnings = FALSE)
+file.copy(from = list.files(from, full.names = TRUE, all.files = TRUE, no.. = TRUE),
+          to   = to,
+          recursive = TRUE)
+
 html <- readLines('docs/articles/getting_started.html')
 html <- gsub(
   '_getting_started_files/',
