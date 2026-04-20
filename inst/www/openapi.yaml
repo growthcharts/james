@@ -1777,7 +1777,7 @@ components:
           type: integer
           description: percentage to pass the item, difficulty in percentile units.
           default: 50
-       min_length:
+        min_length:
           type: integer
           description: numeric value for minimum number of items to administer.
           default: 0
