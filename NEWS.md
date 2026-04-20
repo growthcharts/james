@@ -1,4 +1,4 @@
-# james 1.12 (April 2026)
+# james 1.12.0 (April 2026)
 
 - add domain balancing options to `dcat()`, new arguments: `domain_set` and `k_domain`.
 

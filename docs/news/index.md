@@ -1,6 +1,6 @@
 # Changelog
 
-## james 1.12 (April 2026)
+## james 1.12.0 (April 2026)
 
 - add domain balancing options to
   [`dcat()`](https://growthcharts.org/james/reference/dcat.md), new
