@@ -112,20 +112,17 @@ james:::update_version_files(
 Run the following chunk to update the version in source files, render the vignette, and build the site:
 
 ```{r eval=FALSE}
-# Step 1: render _getting_started.qmd to docs/articles/
-quarto::quarto_render(
-  input = 'vignettes/articles/_getting_started.qmd',
-  quarto_args = c('--output-dir', file.path(getwd(), 'docs/articles'))
-)
+# Step 1: render _getting_started.qmd in place (next to source)
+quarto::quarto_render(input = 'vignettes/articles/_getting_started.qmd')
 
-# Step 2: rename _getting_started.html --> getting_started.html
+# Step 2: move _getting_started.html --> docs/articles/getting_started.html
 file.rename(
-  'docs/articles/_getting_started.html',
+  'vignettes/articles/_getting_started.html',
   'docs/articles/getting_started.html'
 )
 
-# Step 3: rename _getting_started_files/ --> getting_started_files/
-from <- "docs/articles/_getting_started_files"
+# Step 3: move _getting_started_files/ --> docs/articles/getting_started_files/
+from <- "vignettes/articles/_getting_started_files"
 to <- "docs/articles/getting_started_files"
 ok <- file.rename(from, to)
 if (!ok) {
@@ -149,14 +146,27 @@ html <- gsub(
 )
 writeLines(html, 'docs/articles/getting_started.html')
 
-# Step 5: render dcat_calculate_examples.qmd to docs/articles/
-quarto::quarto_render(
-  input = 'vignettes/articles/dcat_calculate_examples.qmd',
-  quarto_args = c('--output-dir', file.path(getwd(), 'docs/articles'))
-)
+# Step 5: render dcat_calculate_examples.qmd in place
+quarto::quarto_render(input = 'vignettes/articles/dcat_calculate_examples.qmd')
 
-# Step 6: build pkgdown site
+# Step 6: build pkgdown site (excludes pre-rendered articles)
 pkgdown::build_site()
+
+# Step 7: copy pre-rendered articles into docs/articles/ (overwrites pkgdown placeholders)
+file.copy('vignettes/articles/getting_started.html',
+          'docs/articles/getting_started.html', overwrite = TRUE)
+file.copy('vignettes/articles/dcat_calculate_examples.html',
+          'docs/articles/dcat_calculate_examples.html', overwrite = TRUE)
+file.copy(
+  from = list.files('vignettes/articles/getting_started_files', full.names = TRUE),
+  to = 'docs/articles/getting_started_files',
+  overwrite = TRUE, recursive = TRUE
+)
+file.copy(
+  from = list.files('vignettes/articles/dcat_calculate_examples_files', full.names = TRUE),
+  to = 'docs/articles/dcat_calculate_examples_files',
+  overwrite = TRUE, recursive = TRUE
+)
 ```
 
 ### COMMIT 3

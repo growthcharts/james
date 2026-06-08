@@ -32,8 +32,8 @@ navbar:
       menu:
         - text: "Getting Started"
           href: articles/getting_started.html
-        - text: "Old Friends"
-          href: articles/oldfriends.html
+        - text: "dcat/calculate examples"
+          href: articles/dcat_calculate_examples.html
     news:
       text: "News"
       href: news/index.html
@@ -81,8 +81,3 @@ reference:
       - screen_curves
       - screen_growth
 
-articles:
-  - title: Main verbs
-    contents:
-      - articles/getting_started.html
-      - articles/oldfriends.html
