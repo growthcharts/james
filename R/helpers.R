@@ -18,7 +18,7 @@ update_version_files <- function(
   current_date_text <- format(Sys.Date(), "%B %Y")
 
   # Pattern to match the existing version and date in HTML
-  html_pattern <- "JAMES [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9]{8}\\)"
+  html_pattern <- "JAMES [0-9]+\\.[0-9]+(\\.[0-9]+)?(\\.[0-9]+)? \\([0-9]{8}\\)"
 
   # Replacement string with new version and current date for HTML
   html_replacement <- sprintf("JAMES %s (%s)", version, current_date_numeric)
@@ -45,7 +45,7 @@ update_version_files <- function(
   )
 
   # Pattern to match the existing version and date in Rmd
-  rmd_pattern <- "subtitle: JAMES [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)? \\([A-Za-z]+ [0-9]{4}\\)"
+  rmd_pattern <- "subtitle: JAMES [0-9]+\\.[0-9]+(\\.[0-9]+)?(\\.[0-9]+)? \\([A-Za-z]+ [0-9]{4}\\)"
 
   # Replacement string with new version and current date for Rmd
   rmd_replacement <- sprintf(
