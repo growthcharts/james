@@ -9,7 +9,7 @@ Optionally uploads the data to the server and returns a session-based URL."></he
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.12.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.13.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@ Optionally uploads the data to the server and returns a session-based URL."></he
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting_started.html">Getting Started</a></li>
-    <li><a class="dropdown-item" href="../articles/oldfriends.html">Old Friends</a></li>
+    <li><a class="dropdown-item" href="../articles/dcat_calculate_examples.html">dcat/calculate examples</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/growthcharts/james"><span class="fa fab fa-github"></span></a></li>
@@ -105,7 +105,7 @@ should conform to the BDS JGZ 3.2.5 specification.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata"</span>, <span class="st">"client3.json"</span>, package <span class="op">=</span> <span class="st">"james"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">js</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span><span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span>, auto_unbox <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"</span></span></span>
+<span class="r-in"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://james.groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"</span></span></span>
 <span class="r-in"><span><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"http://localhost:8080"</span></span></span>
 <span class="r-in"><span><span class="va">host</span> <span class="op">&lt;-</span> <span class="st">"https://james.groeidiagrammen.nl"</span></span></span>
 <span class="r-in"><span></span></span>

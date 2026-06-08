@@ -156,3 +156,9 @@ Superceded functionality
 - [`screen_growth()`](https://growthcharts.org/james/reference/screen_growth-deprecated.md)
   : Screen growth curves according to JGZ guidelines
 
+# Articles
+
+### All vignettes
+
+- [JAMES dcat/calculate
+  endpoint](https://growthcharts.org/james/articles/dcat_calculate_examples.md):

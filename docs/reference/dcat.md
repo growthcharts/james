@@ -98,8 +98,10 @@ Iris Eekhout 2025
 ``` r
 txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat(txt = txt, p = 50)
-#> [1] "gs1lgc117"
+#> [1] "gs1cgc122"
 txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
 dcat(txt = txt, p = 50)
-#> [1] "gs1cgc128"
+#> Cannot read 'txt': ~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json
+#> No date of birth found, cannot calculate next item
+#> NULL
 ```
