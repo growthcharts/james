@@ -1,0 +1,292 @@
+---
+title: "JAMES dcat/calculate endpoint"
+author: "Stef van Buuren"
+date: today
+format:
+  html:
+    number-sections: false
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-tools: true
+    theme: united
+    embed-resources: true
+---
+
+```{r setup}
+#| include: false
+library(httr2)
+library(jsonlite)
+is_windows <- .Platform$OS.type == "windows"
+host <- "https://james.groeidiagrammen.nl"
+knitr::opts_chunk$set(python.reticulate = FALSE) # skip python execution
+```
+
+## Overview
+
+The `/dcat/calculate` endpoint performs adaptive testing of developmental
+milestones. Given child data in BDS format 3.1 it returns the next milestone
+item to administer, together with supporting D-score information.
+
+The minimal input is the child's date of birth (`bdsNumber: 20`). Prior
+milestone responses can be included as `clientMeasurements`.
+
+**Host used in these examples**: `https://james.groeidiagrammen.nl` (open
+access, no authentication required).
+
+**Notes**
+
+- `?auto_unbox=true` unwraps single-element JSON arrays in the response —
+  without it, scalars come back as `[value]`.
+- ACC and PROD servers require a Bearer token added to the request headers.
+- The default instrument is `gs1`; pass `instrument = "ddi"` (plus a
+  compatible `key`) to use DDI items instead.
+- These examples use `population = "GSED-NLD"`, `p = 90` (percentile threshold)
+  and `k_domain = 3` (number of domains).
+
+## Examples
+
+::: panel-tabset
+
+### R
+
+Install and load the required packages once:
+
+```r
+install.packages(c("httr2", "jsonlite"))
+remotes::install_github("growthcharts/bdsreader")
+```
+
+POST child data from a file (default `gs1` instrument):
+
+```{r dcat-r-file}
+fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
+
+resp <- request(paste0(host, "/dcat/calculate/json")) |>
+  req_url_query(auto_unbox = "true") |>
+  req_body_multipart(
+    txt = curl::form_file(fn, type = "application/json"),
+    population = "\"GSED-NLD\"",
+    p = "\"90\"",
+    k_domain = "\"3\""
+  ) |>
+  req_headers(accept = "application/json") |>
+  req_perform()
+
+resp_body_json(resp)
+```
+
+POST a JSON object built inline — written to a tempfile for upload:
+
+```{r dcat-r-inline}
+child_data <- list(
+  Format = "3.1",
+  clientDetails = list(list(bdsNumber = 20L, value = "20260115"))
+)
+
+tmp <- tempfile(fileext = ".json")
+write_json(child_data, tmp, auto_unbox = TRUE)
+
+resp <- request(paste0(host, "/dcat/calculate/json")) |>
+  req_url_query(auto_unbox = "true") |>
+  req_body_multipart(
+    txt = curl::form_file(tmp, type = "application/json"),
+    population = "\"GSED-NLD\"",
+    p = "\"90\"",
+    k_domain = "\"3\""
+  ) |>
+  req_headers(accept = "application/json") |>
+  req_perform()
+
+resp_body_json(resp)
+```
+
+Include a prior `gs1` milestone response — JAMES uses it to select the next adaptive item:
+
+```{r dcat-r-rich}
+child_data <- list(
+  Format = "3.1",
+  clientDetails = list(list(bdsNumber = 20L, value = "20260115")),
+  clientMeasurements = list(
+    list(
+      varName = "gs1moc002",
+      values = list(list(date = "20260504", value = "1"))
+    )
+  ),
+  nestedDetails = list()
+)
+
+tmp <- tempfile(fileext = ".json")
+write_json(child_data, tmp, auto_unbox = TRUE)
+
+resp <- request(paste0(host, "/dcat/calculate/json")) |>
+  req_url_query(auto_unbox = "true") |>
+  req_body_multipart(
+    txt = curl::form_file(tmp, type = "application/json"),
+    population = "\"GSED-NLD\"",
+    p = "\"90\"",
+    k_domain = "\"3\""
+  ) |>
+  req_headers(accept = "application/json") |>
+  req_perform()
+
+resp_body_json(resp)
+```
+
+### bash
+
+POST a local file:
+
+```{bash dcat-bash-file, eval=!is_windows}
+HOST="https://james.groeidiagrammen.nl"
+FN=$(Rscript -e 'cat(system.file("examples", "example_v3.1.json", package = "bdsreader"))')
+
+curl -sX POST "$HOST/dcat/calculate/json?auto_unbox=true" \
+  -H "accept: application/json" \
+  -F "txt=@$FN;type=application/json" \
+  -F "population='GSED-NLD'" \
+  -F "p='90'" \
+  -F "k_domain='3'"
+```
+
+Include a prior `gs1` milestone response:
+
+```{bash dcat-bash-rich, eval=!is_windows}
+HOST="https://james.groeidiagrammen.nl"
+
+cat > /tmp/child_rich.json << 'EOF'
+{
+  "Format": "3.1",
+  "clientDetails": [ { "bdsNumber": 20, "value": "20260115" } ],
+  "clientMeasurements": [
+    { "varName": "gs1moc002", "values": [ { "date": "20260504", "value": "1" } ] }
+  ],
+  "nestedDetails": []
+}
+EOF
+
+curl -sX POST "$HOST/dcat/calculate/json?auto_unbox=true" \
+  -H "accept: application/json" \
+  -F "txt=@/tmp/child_rich.json;type=application/json" \
+  -F "population='GSED-NLD'" \
+  -F "p='90'" \
+  -F "k_domain='3'"
+```
+
+### Python
+
+Install the `requests` package once:
+
+```bash
+pip install requests
+```
+
+POST a local file:
+
+```{python dcat-python-file, eval=FALSE}
+import subprocess, requests
+
+host = "https://james.groeidiagrammen.nl"
+fn = subprocess.check_output(
+    ["Rscript", "-e",
+     'cat(system.file("examples", "example_v3.1.json", package = "bdsreader"))'],
+    text=True
+).strip()
+
+with open(fn, "rb") as f:
+    resp = requests.post(
+        f"{host}/dcat/calculate/json",
+        params={"auto_unbox": "true"},
+        files={
+            "txt":        ("example_v3.1.json", f, "application/json"),
+            "population": (None, "GSED-NLD"),
+            "p":          (None, "90"),
+            "k_domain":   (None, "3"),
+        },
+    )
+resp.raise_for_status()
+print(resp.json())
+```
+
+
+Include a prior `gs1` milestone response:
+
+```{python dcat-python-rich, eval=FALSE}
+import requests, json, tempfile, os
+
+host = "https://james.groeidiagrammen.nl"
+
+child_data = {
+    "Format": "3.1",
+    "clientDetails": [{"bdsNumber": 20, "value": "20260115"}],
+    "clientMeasurements": [
+        {
+            "varName": "gs1moc002",
+            "values": [{"date": "20260504", "value": "1"}],
+        }
+    ],
+    "nestedDetails": [],
+}
+
+with tempfile.NamedTemporaryFile(suffix=".json", mode="w", delete=False) as f:
+    json.dump(child_data, f)
+    tmp = f.name
+
+with open(tmp, "rb") as f:
+    resp = requests.post(
+        f"{host}/dcat/calculate/json",
+        params={"auto_unbox": "true"},
+        files={
+            "txt": (os.path.basename(tmp), f, "application/json"),
+            "population": (None, "GSED-NLD"),
+            "p": (None, "90"),
+            "k_domain": (None, "3"),
+        },
+    )
+os.unlink(tmp)
+resp.raise_for_status()
+print(resp.json())
+```
+
+:::
+
+## Minimal example input
+
+The smallest valid payload contains only the child's date of birth:
+
+```json
+{
+  "Format": "3.1",
+  "clientDetails": [
+    { "bdsNumber": 20, "value": "20260115" }
+  ]
+}
+```
+
+A richer payload with prior milestone responses:
+
+```json
+{
+  "Format": "3.1",
+  "clientDetails": [
+    { "bdsNumber": 20, "value": "20260115" }
+  ],
+  "clientMeasurements": [
+    {
+      "varName": "gs1moc002",
+      "values": [ { "date": "20260504", "value": "1" } ]
+    },
+    {
+      "varName": "gs1lgc010",
+      "values": [ { "date": "20260504", "value": "0" } ]
+    }
+  ],
+  "nestedDetails": []
+}
+```
+
+## Resources
+
+- [OpenAPI specification](https://james.groeidiagrammen.nl/docs/)
+- [JSON data schema 3.1](https://james.groeidiagrammen.nl/schemas/bds_v3.1.json)
+- [Getting started vignette](_getting_started.qmd)
