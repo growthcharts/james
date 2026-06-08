@@ -1,6 +1,11 @@
+# james 1.13.0 (June 2026)
+
+- Streamline JAMES maintainance documentation
+- Add vignette `dcat_calculate_examples.qmd`
+
 # james 1.12.0 (April 2026)
 
-- add domain balancing options to `dcat()`, new arguments: `domain_set` and `k_domain`.
+- Add domain balancing options to `dcat()`, new arguments: `domain_set` and `k_domain`.
 
 # james 1.11.1 (Februari 2026)
 
