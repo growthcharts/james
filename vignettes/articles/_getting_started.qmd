@@ -22,7 +22,7 @@ format:
 ```{r host}
 #| include: false
 # Define the server that hosts JAMES
-# Set target_host to one of: 
+# Set target_host to one of:
 # "internal" : Run only within the container
 # "dev"      : localhost, development
 # "test"     : james.groeigrammen.nl (default)
@@ -33,16 +33,20 @@ target_host <- "test"
 # Available hosts
 hosts <- list(
   internal = "http://localhost:80",
-  dev =  "http://localhost:8080",
+  dev = "http://localhost:8080",
   test = "https://james.groeidiagrammen.nl",
-  acc =  "https://srminterlayer-az-acc.eaglescience.nl/modules/james",
+  acc = "https://srminterlayer-az-acc.eaglescience.nl/modules/james",
   prod = "https://ijgz.eaglescience.nl/modules/james"
 )
 
 # Set host based on target
 if (target_host == "acc") {
   # Try ACC with authentication, fall back to test if it fails
-  auth_result <- system("./authenticate-acc.sh", ignore.stdout = TRUE, ignore.stderr = TRUE)
+  auth_result <- system(
+    "./authenticate-acc.sh",
+    ignore.stdout = TRUE,
+    ignore.stderr = TRUE
+  )
   if (auth_result == 0) {
     host <- hosts$acc
     message("Using ACC server: ", host)
@@ -52,7 +56,11 @@ if (target_host == "acc") {
   }
 } else if (target_host == "prod") {
   # Try PROD with authentication, fall back to test if it fails
-  auth_result <- system("./authenticate-prod.sh", ignore.stdout = TRUE, ignore.stderr = TRUE)
+  auth_result <- system(
+    "./authenticate-prod.sh",
+    ignore.stdout = TRUE,
+    ignore.stderr = TRUE
+  )
   if (auth_result == 0) {
     host <- hosts$acc
     message("Using PROD server: ", host)
@@ -77,13 +85,15 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 is_windows <- .Platform$OS.type == "windows"
 
 # Detect the name of the current Quarto source file (e.g. "index.qmd")
-doc <- knitr::current_input(dir = TRUE)  # returns absolute path when available
+doc <- knitr::current_input(dir = TRUE) # returns absolute path when available
 if (is.null(doc)) {
-  doc <- normalizePath("index.qmd", mustWork = FALSE)  # fallback for interactive use
+  doc <- normalizePath("index.qmd", mustWork = FALSE) # fallback for interactive use
 }
-figdir <- file.path(dirname(normalizePath(doc, mustWork = FALSE)),
-                    paste0(tools::file_path_sans_ext(basename(doc)), "_files"),
-                    "figures")
+figdir <- file.path(
+  dirname(normalizePath(doc, mustWork = FALSE)),
+  paste0(tools::file_path_sans_ext(basename(doc)), "_files"),
+  "figures"
+)
 dir.create(figdir, recursive = TRUE, showWarnings = FALSE)
 
 # Define file names within Quarto's _files/figures/ folder
@@ -113,7 +123,13 @@ fetch_url_content <- function(url) {
   # Use httr::GET which inherits our Bearer token config
   resp <- httr::GET(url)
   if (httr::http_error(resp)) {
-    stop("Failed to fetch URL: ", url, " (status: ", httr::status_code(resp), ")")
+    stop(
+      "Failed to fetch URL: ",
+      url,
+      " (status: ",
+      httr::status_code(resp),
+      ")"
+    )
   }
   httr::content(resp, as = "text", encoding = "UTF-8")
 }
@@ -270,8 +286,15 @@ The `jamesclient::james_post()` function wraps the basis workhorse `httr::POST()
 auth_token <- Sys.getenv("JAMES_BEARER_TOKEN")
 path <- "version/json"
 url <- parse_url(host)
-url <- modify_url(url, path = file.path(url$path, path), query = "auto_unbox=true")
-r <- POST(url, add_headers(accept = "application/json", Authorization = auth_token))
+url <- modify_url(
+  url,
+  path = file.path(url$path, path),
+  query = "auto_unbox=true"
+)
+r <- POST(
+  url,
+  add_headers(accept = "application/json", Authorization = auth_token)
+)
 fromJSON(content(r, type = "text", encoding = "UTF-8"))
 ```
 
@@ -333,8 +356,11 @@ JAMES understands data that conform to the [Basisdataset JGZ 4.0.1](https://www.
 Let us assume that we have already have child data in `R` stored as a `data.frame` or `tibble`. Here we copy the longitudinal demo data `maria.json` from the `bdsreader` package into the working directory.
 
 ```{r}
-success <- file.copy(system.file("examples/maria.json", package = "bdsreader"), 
-                     "maria.json", overwrite = TRUE)
+success <- file.copy(
+  system.file("examples/maria.json", package = "bdsreader"),
+  "maria.json",
+  overwrite = TRUE
+)
 ```
 
 The contents of the file is `json` format, ready for upload:
@@ -530,7 +556,12 @@ r5$parsed
 If we upload with the additional `validate = TRUE` flag, JAMES runs the validation of the uploaded JSON against the JSON schema:
 
 ```{r eval=FALSE}
-r6 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE)
+r6 <- james_post(
+  host = host,
+  path = "data/upload/json",
+  txt = fn,
+  validate = TRUE
+)
 mess <- james_get(host = host, path = file.path(r6$session, "messages"))
 # Handle both text and parsed responses
 if (is.character(mess$parsed)) {
@@ -547,7 +578,13 @@ We may drill down further by setting the `intermediate = TRUE` flag. This writes
 For example, we can ask for the input data as read by JAMES by
 
 ```{r}
-r7 <- james_post(host = host, path = "data/upload/json", txt = fn, validate = TRUE, intermediate = TRUE)
+r7 <- james_post(
+  host = host,
+  path = "data/upload/json",
+  txt = fn,
+  validate = TRUE,
+  intermediate = TRUE
+)
 url <- file.path(host, r7$session, "files/input.json")
 url
 ```
@@ -604,11 +641,14 @@ curl -s $(cat .host)/data/upload/json \
 Maria is a preterm born at 27 weeks of gestational age. We already uploaded her data. We may now plot her growth data on the A4 chart for preterms as follows:
 
 ```{r}
-r5 <- james_post(host = host, 
-                 path = "/charts/draw/svglite", 
-                 session = r1$session,
-                 chartcode = "PMAAN27", selector = "chartcode",
-                 query = list(height = 29.7/2.54, width = 21/2.54))
+r5 <- james_post(
+  host = host,
+  path = "/charts/draw/svglite",
+  session = r1$session,
+  chartcode = "PMAAN27",
+  selector = "chartcode",
+  query = list(height = 29.7 / 2.54, width = 21 / 2.54)
+)
 ```
 
 ```{r}
@@ -619,11 +659,18 @@ htmltools::HTML(r5$parsed)
 Alternatively, we may upload data for a new child Laura and plot the data in one step:
 
 ```{r}
-fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
-r6 <- james_post(host = host,
-                 path = "/charts/draw/svglite", txt = fn,
-                 chartcode = "NMBA", selector = "chartcode",
-                 query = list(height = 29.7/2.54, width = 21/2.54))
+fn <- system.file(
+  "extdata/bds_v3.0/smocc/Laura_S.json",
+  package = "jamesdemodata"
+)
+r6 <- james_post(
+  host = host,
+  path = "/charts/draw/svglite",
+  txt = fn,
+  chartcode = "NMBA",
+  selector = "chartcode",
+  query = list(height = 29.7 / 2.54, width = 21 / 2.54)
+)
 ```
 
 For A4 sized charts, we recommend to generate the plot with query arguments `list(height = 29.7/2.54, width = 21/2.54)`, as illustrated above. If you want to change the chart's size in your HTML, use CSS on the SVG directly. This gives the following output.
@@ -636,12 +683,19 @@ htmltools::HTML(r6$parsed)
 JAMES features a built-in prediction module based on curve matching. Suppose we want to predict Laura's height at the 3y9m when Laura is 2 years old. The following chart plots 25 matches to Laura as grey curves. The variation between the grey curves at age 3y9m indicates the likely variation in the prediction. The blue line indicates Laura's predicted height at age 3y9m. 
 
 ```{r}
-r7 <- james_post(host = host,
-                 path = "/charts/draw/svglite", txt = fn,
-                 chartcode = "NMBH", dnr = "2-4",
-                 lo = 2.0, hi = 3.75, nmatch = 25,
-                 show_future = TRUE, show_realized = TRUE,
-                 query = list(height = 18/2.54, width = 18/2.54))
+r7 <- james_post(
+  host = host,
+  path = "/charts/draw/svglite",
+  txt = fn,
+  chartcode = "NMBH",
+  dnr = "2-4",
+  lo = 2.0,
+  hi = 3.75,
+  nmatch = 25,
+  show_future = TRUE,
+  show_realized = TRUE,
+  query = list(height = 18 / 2.54, width = 18 / 2.54)
+)
 ```
 
 For square charts, use query arguments `list(height = 18/2.54, width = 18/2.54)` to generate the plot.
@@ -746,9 +800,11 @@ $(cat .host)'/charts/list/json' \
 The `/charts/validate` end point attempt to find one or more user-specified chart codes. For example, the following cocde checkc five chart codes:
 
 ```{r}
-r <- james_post(host = host, 
-                path = "charts/validate/json", 
-                chartcode = c("NMAW", "NJAb", "PJAAN23", "PJAAN25", "dummy"))
+r <- james_post(
+  host = host,
+  path = "charts/validate/json",
+  chartcode = c("NMAW", "NJAb", "PJAAN23", "PJAAN25", "dummy")
+)
 r$parsed
 ```
 
@@ -784,8 +840,16 @@ $(cat .host)'/charts/validate/json' \
 The D-score is a developmental score that is used to assess the development of children. The `/dscore/calculate` end point calculates the D-score for a child based on the uploaded data. The D-score is a continuous measure of child development, and it is calculated based on the child's age and developmental milestones.
 
 ```{r dscorecalculate}
-fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
-r <- james_post(host = host, path = "dscore/calculate/json", output = "table", txt = fn)
+fn <- system.file(
+  "extdata/bds_v3.0/smocc/Laura_S.json",
+  package = "jamesdemodata"
+)
+r <- james_post(
+  host = host,
+  path = "dscore/calculate/json",
+  output = "table",
+  txt = fn
+)
 r
 head(r$parsed)
 ```
@@ -805,8 +869,16 @@ The D-score is found in column `y` and the DAZ is in column `z`.
 The D-score is a one-number summary measure of child development. The `/ddomain/calculate` end point breaks down the D-score into two or more domains. 
 
 ```{r ddomaincalculate}
-fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
-r <- james_post(host = host, path = "ddomain/calculate/json", output = "table", txt = fn)
+fn <- system.file(
+  "extdata/bds_v3.0/smocc/Laura_S.json",
+  package = "jamesdemodata"
+)
+r <- james_post(
+  host = host,
+  path = "ddomain/calculate/json",
+  output = "table",
+  txt = fn
+)
 r
 head(r$parsed)
 ```
@@ -847,8 +919,17 @@ cat result.json
 The Van Wiechenonderzoek is a Dutch screening tool used to track a child’s development from birth to age 4.5. It includes 75 milestones across three areas: fine motor skills, gross motor skills, and communication. The `/vwc/select` end point suggest the most fitting milestones for a child based on the uploaded data.
 
 ```{r selectvanwiechen}
-fn <- system.file("extdata/bds_v3.0/smocc/Laura_S.json", package = "jamesdemodata")
-r <- james_post(host = host, path = "vwc/select/json", output = "table", txt = fn, percentiles = TRUE)
+fn <- system.file(
+  "extdata/bds_v3.0/smocc/Laura_S.json",
+  package = "jamesdemodata"
+)
+r <- james_post(
+  host = host,
+  path = "vwc/select/json",
+  output = "table",
+  txt = fn,
+  percentiles = TRUE
+)
 r$url
 r$parsed
 ```
@@ -1118,9 +1199,11 @@ $(cat .host)'/site/request/json' \
 The `/blend/request` end point returns the results of multiple end points, and thus functions as a one-stop shop. However, currently it does not support graphics output, so use `/{session}/{info}/svglite` or `/charts/draw/svglite` for the charts. 
 
 ```{r blendrequest}
-fn <- system.file("examples/Laura_S.json", 
-                  package = "bdsreader",
-                  mustWork = TRUE)
+fn <- system.file(
+  "examples/Laura_S.json",
+  package = "bdsreader",
+  mustWork = TRUE
+)
 r <- james_post(
   host = host,
   path = "/blend/request/json",

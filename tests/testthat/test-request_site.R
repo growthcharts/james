@@ -1,5 +1,5 @@
 # test-request_site.R
-skip("Integration tests skipped — require running server.")
+# skip("Integration tests skipped — require running server.")
 
 laura <- system.file("testdata", "Laura_S.json", package = "james")
 laura_gro <- system.file("testdata", "Laura_S_gro.json", package = "james")

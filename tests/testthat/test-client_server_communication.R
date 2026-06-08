@@ -1,9 +1,7 @@
 library(httr)
 
-# hack to evade ssl verification error: certificate has expired
-# remove hack after server certificate is repaired
-# httr::set_config(config(ssl_verifypeer = 0L))
-host <- "https://groeidiagrammen.nl"
+host <- "https://james.groeidiagrammen.nl"
+hdrs <- add_headers(Accept = "plain/text")
 
 if (jamesclient::valid_url(host)) {
   path <- "ocpu/library/james/R/list_charts"
@@ -23,53 +21,37 @@ if (jamesclient::valid_url(host)) {
   )
   js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/convert_bds_ind"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file client3.json uploads to server",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/request_site"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file client3.json get a site",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/screen_growth"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file client3.json is screened",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/draw_chart"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file client3.json is drawn",
     expect_equal(status_code(resp), 201)
@@ -85,40 +67,28 @@ if (jamesclient::valid_url(host)) {
   )
   js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/convert_bds_ind"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file not_a_vector.json uploads to server",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/screen_growth"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file not_a_vector.json is screened",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/draw_chart"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file not_a_vector.json is drawn",
     expect_equal(status_code(resp), 201)
@@ -134,40 +104,28 @@ if (jamesclient::valid_url(host)) {
   )
   js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/convert_bds_ind"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file http400.json uploads to server",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/screen_growth"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file http400.json is screened",
     expect_equal(status_code(resp), 201)
   )
 
+  Sys.sleep(2)
   path <- "ocpu/library/james/R/draw_chart"
   url <- modify_url(url = host, path = path)
-  resp <- POST(
-    url = url,
-    body = list(txt = js),
-    encode = "json",
-    add_headers(Accept = "plain/text")
-  )
+  resp <- POST(url = url, body = list(txt = js), encode = "json", hdrs)
   test_that(
     "file http400.json is drawn",
     expect_equal(status_code(resp), 201)

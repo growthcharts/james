@@ -42,7 +42,7 @@ Optionally uploads the data to the server and returns a session-based URL.
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
 js <- jsonlite::toJSON(jsonlite::fromJSON(fn), auto_unbox = TRUE)
-url <- "https://groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
+url <- "https://james.groeidiagrammen.nl/ocpu/library/james/testdata/client3.json"
 host <- "http://localhost:8080"
 host <- "https://james.groeidiagrammen.nl"
 
