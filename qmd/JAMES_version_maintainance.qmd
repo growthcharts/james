@@ -12,120 +12,128 @@ knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 
 ## Objective
 
-- This document contains the steps to create a new JAMES version. 
-- You can also `Render` this document to check and update the JAMES version in the package and documentation files.
+- This document contains the recipe to create a new JAMES version.
+- Follow directions sequentially
+- Commit where indicated
+- Manually run the code blocks
+- Inspect the results after each step before progressing
 
 ## Local JAMES development
 
-### Update and lock packages
+## STEP 1 (FUNCTIONALITY)
 
+### Update and lock packages
 
 - Use the function `james::install_dev_packages()` to install the development packages (like roxygen2) when starting fresh
 - If needed, clean out the development packages by `renv::clean(prompt = TRUE)` from the library before using `renv::snapshot()` to update the lock file.
 
+Are all R packages up to date and complete?
 
-Are all R packages up to data and complete?
-
-```{r}
+```{r eval=FALSE}
 renv::status()
 ```
 
-If packages need updated, use `renv::restore()`.
+If packages need updating, use `renv::restore()`. Then snapshot using "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock file.
+
+```{r eval=FALSE}
+renv::snapshot(type = "explicit")
+```
 
 ### Open, work and close issues in GitHub
 
 -   Solve relevant issues in `james` package
 -   <https://github.com/growthcharts/james/issues>
--   Do relevant updates in underlying packages and install update `renv::install()`. Use github URL for github packages. Now project is out-of-sync, this is OK.
+-   Do relevant updates in underlying packages and install with `renv::install()`. Use GitHub URL for GitHub packages. Now project is out-of-sync, this is OK.
 -   Update functions in `james` package that use these underlying functions
     -  (1) update james function
-    -  (2) update documention `devtools::document()`
+    -  (2) update documentation `devtools::document()`
 
-### Update `openapi.yaml`
+### Update james ecosystem version numbers and functionality for deployment
 
-The source text of the OpenAPI specification is in `inst/spec/openapi.in.yaml`. Before building the package, this file needs updating with the current JAMES version from the `DESCRIPTION` file. This ensures that the two remain in sync.
-
-To add an argument to dcat, search for dcat_arguments and add the argument that was added to the function. 
-
+- Update imports version with proper versions for updated packages.
+- Update new/deprecated functions, arguments, examples etc in the OpenAPI specification at `inst/spec/openapi.in.yaml`. For example, to add a new argument to `dcat`, search for `dcat_arguments` and add the argument to the description. Be careful to use proper spacing and syntax. YAML is unforgiving.
 
 ### Check the top level package `james`
 
-```{r}
-# devtools::check()
+Run `devtools::check()` and fix any errors or warnings before proceeding.
+
+```{r eval=FALSE}
+devtools::check()
 ```
 
-### Update the package version
+### COMMIT 1
 
--   Update `NEWS.md` with version update and document changes.
--   Increase version number in DESCRIPTION file
--   Also update imports version with proper versions for updated packages.
+Commit 1: function changes, `devtools::document()` output, `renv.lock`
 
-```{r}
-# devtools::check()
-```
+## STEP 2 VERSIONING
 
-### Keep `renv.lock` in shape
+### Update JAMES version and NEWS
 
-- Check `renv::status` and commit changes to `renv.lock`. 
-- Only include packages that are relevant to the JAMES package, not the development packages in the project
+- Update `NEWS.md` with version update and document changes.
+- Increment the DESCRIPTION version number, e.g.
+  + for a minor release 1.13.x --> 1.13.{x+1}
+  + for a new docker version 1.13.x --> 1.14.0
 
-Use "explicit" mode to evade helpers like `devtools` and `roxygen2` in the lock file. 
-```{r}
-renv::snapshot(type = "explicit")
-```
+### Update `openapi.yaml` version number
 
-
-### Update version in HTML and Rmd files
-
-If you change DESCRIPTION version number, update two files with new version numbers:
-  - the HTML demo app at index.html
-  - the `_getting_started.qmd` vignette
-
-```{r eval= FALSE}
-james:::update_version_files(
-  "inst/www/index.html",
-  "vignettes/articles/_getting_started.qmd",
-  "DESCRIPTION"
-)
-```
-
-Update version number van `openapi.in.yaml` file
+Sync the new version number in `openapi.in.yaml` with DESCRIPTION.
 
 ```{r eval=FALSE}
 james:::update_openapi_spec()
 ```
 
+### COMMIT 2
+
+`NEWS.md`, `DESCRIPTION`, `inst/spec/openapi.in.yaml`, `inst/www/openapi.yaml`, `inst/www/index.html`, `vignettes/articles/_getting_started.qmd`
+
+## STEP 3 DOCUMENTATION
 
 ### Update documentation
 
-- Build documentation using a combination of ``pkgdown::built_site()` and `quarto::quarto_render()`
--   `quarto_render()` builds the getting started vignette 
--    `bash` code does not work Windows, and will be skipped by setting `eval=FALSE` under Windows
--   By default, the script runs server `target_host = "test"` (james.groeidiagrammen.nl)
--   Note: The `getting_started.qmd` is also runs within the container, so check any changes also in that environment in the `jamesdocker` package
-- Run the following chunk to update site
+- Build documentation using a combination of `pkgdown::build_site()` and `quarto::quarto_render()`
+- `quarto_render()` builds the getting started vignette
+- `bash` code does not work on Windows, and will be skipped by setting `eval=FALSE` under Windows
+- By default, the script runs server `target_host = "test"` (james.groeidiagrammen.nl)
+- Note: `getting_started.qmd` also runs within the container, so check any changes in the `jamesdocker` package
 
-```{r}
+Run the following chunk to update the version in source files, render the vignette, and build the site:
+
+```{r eval=FALSE}
+# Step 1: update version number in _getting_started.qmd and index.html (of the JS app)
+james:::update_version_files(
+  "inst/www/index.html",
+  "vignettes/articles/_getting_started.qmd",
+  "DESCRIPTION"
+)
+
+# Step 2: render _getting_started.qmd to docs/articles/
 quarto::quarto_render(
   input = 'vignettes/articles/_getting_started.qmd',
   quarto_args = c('--output-dir', file.path(getwd(), 'docs/articles'))
 )
+
+# Step 3: rename _getting_started.html --> getting_started.html
 file.rename(
   'docs/articles/_getting_started.html',
   'docs/articles/getting_started.html'
 )
+
+# Step 4: rename _getting_started_files/ --> getting_started_files/
 from <- "docs/articles/_getting_started_files"
-to   <- "docs/articles/getting_started_files"
+to <- "docs/articles/getting_started_files"
 ok <- file.rename(from, to)
-if(!ok){
-dir.create(to, recursive = TRUE, showWarnings = FALSE)
-file.copy(from = list.files(from, full.names = TRUE, all.files = TRUE, no.. = TRUE),
-          to   = to,
-          recursive = TRUE,
-          overwrite = TRUE)
-unlink(from, recursive = TRUE)
+if (!ok) {
+  dir.create(to, recursive = TRUE, showWarnings = FALSE)
+  file.copy(
+    from = list.files(from, full.names = TRUE, all.files = TRUE, no.. = TRUE),
+    to = to,
+    recursive = TRUE,
+    overwrite = TRUE
+  )
+  unlink(from, recursive = TRUE)
 }
 
+# Step 5: fix internal references in getting_started.html
 html <- readLines('docs/articles/getting_started.html')
 html <- gsub(
   '_getting_started_files/',
@@ -134,13 +142,23 @@ html <- gsub(
   fixed = TRUE
 )
 writeLines(html, 'docs/articles/getting_started.html')
+
+# Step 6: render dcat_calculate_examples.qmd to docs/articles/
+quarto::quarto_render(
+  input = 'vignettes/articles/dcat_calculate_examples.qmd',
+  quarto_args = c('--output-dir', file.path(getwd(), 'docs/articles'))
+)
+
+# Step 7: build pkgdown site
 pkgdown::build_site()
 ```
 
+### COMMIT 3
+
+`.qmd`, `docs/`
+
+
 ## Push and go
 
--   Push changes to GitHub in following separate commits
-    - (1) function changes
-    - (2) update package version, NEWS and lock file
-    - (3) update site docs
+-   Push the commits to GitHub
 -   Go to `jamesdocker` repo for building app
