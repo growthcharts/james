@@ -7,7 +7,7 @@ README.Rmd
 ^README\.Rmd$
 ^\.github$
 ^data-raw$
-^vignettes/articles$
+^vignettes$
 ^docs$
 ^_pkgdown.yaml$
 ^LICENSE\.md$

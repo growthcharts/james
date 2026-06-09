@@ -25,11 +25,11 @@ info:
     email: stef.vanbuuren@tno.nl
   license:
     name: GNU Affero General Public License
-    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+    url: https://www.gnu.org/licenses/agpl-3.1.en.html
 externalDocs:
-  description: JSON BDS schema V3.0 for data communication
+  description: JSON BDS schema V3.1 for data communication
   url: >-
-    https://james.groeidiagrammen.nl/schemas/bds_v3.0.json
+    https://james.groeidiagrammen.nl/schemas/bds_v3.1.json
 servers:
   - url: https://james.groeidiagrammen.nl
     description: Open JAMES server
@@ -71,7 +71,7 @@ paths:
               txtasstring:
                 value:
                   txt: >-
-                    {"Format": "3.0","organisationCode": 1234,"reference": "Maria","clientDetails": [{"bdsNumber": 19,"value": "2"},{"bdsNumber": 20,"value": "20181011"},{"bdsNumber": 82,"value": 189},{"bdsNumber": 91,"value": "1"},{"bdsNumber": 110,"value": 990},{"bdsNumber": 238,"value": 1670},{"bdsNumber": 240,"value": 1900}],"clientMeasurements": [{"bdsNumber": 235,"values": [{"date": "20181111","value": 380},{"date": "20181211","value": 435}]},{"bdsNumber": 245,"values": [{"date": "20181011","value": 990},{"date": "20181111","value": 1250},{"date": "20181211","value": 2100}]},{"bdsNumber": 252,"values": [{"date": "20181111","value": 270},{"date": "20181211","value": 305}]}],"nestedDetails": [{"nestingBdsNumber": 62,"nestingCode": "01","clientDetails": [{"bdsNumber": 63,"value": "19950704"}]},{"nestingBdsNumber": 62,"nestingCode": "02","clientDetails": [{"bdsNumber": 63,"value": "19901202"}]}]}
+                    {"Format": "3.1","organisationCode": 1234,"reference": "Maria","clientDetails": [{"bdsNumber": 19,"value": "2"},{"bdsNumber": 20,"value": "20181011"},{"bdsNumber": 82,"value": 189},{"bdsNumber": 91,"value": "1"},{"bdsNumber": 110,"value": 990},{"bdsNumber": 238,"value": 1670},{"bdsNumber": 240,"value": 1900}],"clientMeasurements": [{"bdsNumber": 235,"values": [{"date": "20181111","value": 380},{"date": "20181211","value": 435}]},{"bdsNumber": 245,"values": [{"date": "20181011","value": 990},{"date": "20181111","value": 1250},{"date": "20181211","value": 2100}]},{"bdsNumber": 252,"values": [{"date": "20181111","value": 270},{"date": "20181211","value": 305}]}],"nestedDetails": [{"nestingBdsNumber": 62,"nestingCode": "01","clientDetails": [{"bdsNumber": 63,"value": "19950704"}]},{"nestingBdsNumber": 62,"nestingCode": "02","clientDetails": [{"bdsNumber": 63,"value": "19901202"}]}]}
                 summary: txt is a JSON string
           multipart/form-data:
             schema:
@@ -733,7 +733,7 @@ paths:
                 value:
                   sitehost: https://james.groeidiagrammen.nl
                   txt: >-
-                    {"Format": "3.0","organisationCode": 1234,"reference": "Maria","clientDetails": [{"bdsNumber": 19,"value": "2"},{"bdsNumber": 20,"value": "20181011"},{"bdsNumber": 82,"value": 189},{"bdsNumber": 91,"value": "1"},{"bdsNumber": 110,"value": 990},{"bdsNumber": 238,"value": 1670},{"bdsNumber": 240,"value": 1900}],"clientMeasurements": [{"bdsNumber": 235,"values": [{"date": "20181111","value": 380},{"date": "20181211","value": 435}]},{"bdsNumber": 245,"values": [{"date": "20181011","value": 990},{"date": "20181111","value": 1250},{"date": "20181211","value": 2100}]},{"bdsNumber": 252,"values": [{"date": "20181111","value": 270},{"date": "20181211","value": 305}]}],"nestedDetails": [{"nestingBdsNumber": 62,"nestingCode": "01","clientDetails": [{"bdsNumber": 63,"value": "19950704"}]},{"nestingBdsNumber": 62,"nestingCode": "02","clientDetails": [{"bdsNumber": 63,"value": "19901202"}]}]}
+                    {"Format": "3.1","organisationCode": 1234,"reference": "Maria","clientDetails": [{"bdsNumber": 19,"value": "2"},{"bdsNumber": 20,"value": "20181011"},{"bdsNumber": 82,"value": 189},{"bdsNumber": 91,"value": "1"},{"bdsNumber": 110,"value": 990},{"bdsNumber": 238,"value": 1670},{"bdsNumber": 240,"value": 1900}],"clientMeasurements": [{"bdsNumber": 235,"values": [{"date": "20181111","value": 380},{"date": "20181211","value": 435}]},{"bdsNumber": 245,"values": [{"date": "20181011","value": 990},{"date": "20181111","value": 1250},{"date": "20181211","value": 2100}]},{"bdsNumber": 252,"values": [{"date": "20181111","value": 270},{"date": "20181211","value": 305}]}],"nestedDetails": [{"nestingBdsNumber": 62,"nestingCode": "01","clientDetails": [{"bdsNumber": 63,"value": "19950704"}]},{"nestingBdsNumber": 62,"nestingCode": "02","clientDetails": [{"bdsNumber": 63,"value": "19901202"}]}]}
                 summary: Parse child data from a JSON string
               site4:
                 value:
@@ -1067,7 +1067,7 @@ components:
           description: >-
             URL, file name or JSON string with child data coded according to
             schema
-            <https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/schemas/bds_v3.0.json>
+            <https://raw.githubusercontent.com/growthcharts/bdsreader/master/inst/schemas/bds_v3.1.json>
         auto_format:
           type: boolean
           description: Should the format be read from the data? Default is `true`.
@@ -1075,16 +1075,17 @@ components:
           type: string
           description: >-
             Advanced. JSON data schema version number. Currently supported are
-            "1.0", "1.1", "2.0" and "3.0". Formats "1.0", "1.1" and "2.0" are
+            "1.0", "1.1", "2.0", "3.0" and "3.1". Formats "1.0", "1.1" and "2.0" are
             included for backward compatibility only and will be deprecated in
-            the future. Use format "3.0" for new applications.
+            the future. Use format "3.1" for new applications.
             If not specified, the `auto_format` setting takes priority.
           enum:
+            - "3.1"
             - '3.0'
             - '2.0'
             - '1.1'
             - '1.0'
-          example: '3.0'
+          example: '3.1'
         schema:
           type: string
           description: >-
@@ -1290,11 +1291,12 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
             - '1.0'
-          example: '3.0'
+          example: '3.1'
         chartcode:
           type: string
           description: The chart code
@@ -1479,6 +1481,7 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
@@ -1645,6 +1648,7 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
@@ -1690,6 +1694,7 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
@@ -1866,6 +1871,7 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
@@ -1944,6 +1950,7 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
@@ -1990,11 +1997,12 @@ components:
           type: string
           description: JSON data schema version number.
           enum:
+            - '3.1'
             - '3.0'
             - '2.0'
             - '1.1'
             - '1.0'
-          default: '3.0'
+          default: '3.1'
         sitehost:
           type: string
           description: >-
