@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">JAMES - Joint Automatic Measurement and Evaluation System</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">JAMES 1.13.0 (June 2026)</p>
+<p class="subtitle lead">JAMES 1.13.1 (June 2026)</p>
 </div>
 
 
@@ -484,7 +484,7 @@ Actual host URL :  https://james.groeidiagrammen.nl </code></pre>
 <li><code>r$parsed</code> is a parsed version of the element <code>r$content</code>. Here it is a list of elements like names of the package, its date, and so on. In case of an error of the server function, we find the error message here;</li>
 <li><code>r$warnings</code> contain any warnings thrown during execution;</li>
 <li><code>r$messages</code> contain any messages, e.g.&nbsp;data reading errors;</li>
-<li><code>r$session</code> (like x02992464ff3fd6) is a unique session code.</li>
+<li><code>r$session</code> (like x0b6e46e553be22) is a unique session code.</li>
 </ul>
 <p>The <code>jamesclient::james_post()</code> function wraps the basis workhorse <code>httr::POST()</code> that does the actual server request. For illustration, we may obtain equivalent content by the POST function directly.</p>
 <div class="cell" data-layout-align="center">
@@ -506,10 +506,10 @@ Actual host URL :  https://james.groeidiagrammen.nl </code></pre>
 [1] "james"
 
 $packageVersion
-[1] "1.12.0"
+[1] "1.13.0"
 
 $packageDate
-[1] "2026-06-05"
+[1] "2026-06-08"
 
 $Rversion
 [1] "4.5.0"</code></pre>
@@ -530,13 +530,13 @@ $Rversion
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">auth_curl</span> <span class="at">-sX</span> POST <span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span>/version <span class="op">&gt;</span> resp</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> resp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/ocpu/tmp/x0cdaab47544fde/R/.val
-/ocpu/tmp/x0cdaab47544fde/R/version
-/ocpu/tmp/x0cdaab47544fde/stdout
-/ocpu/tmp/x0cdaab47544fde/source
-/ocpu/tmp/x0cdaab47544fde/console
-/ocpu/tmp/x0cdaab47544fde/info
-/ocpu/tmp/x0cdaab47544fde/files/DESCRIPTION</code></pre>
+<pre><code>/ocpu/tmp/x082c7356c2238c/R/.val
+/ocpu/tmp/x082c7356c2238c/R/version
+/ocpu/tmp/x082c7356c2238c/stdout
+/ocpu/tmp/x082c7356c2238c/source
+/ocpu/tmp/x082c7356c2238c/console
+/ocpu/tmp/x082c7356c2238c/info
+/ocpu/tmp/x082c7356c2238c/files/DESCRIPTION</code></pre>
 </div>
 </div>
 <p>The response to the request consists of a set of URLs created on the server, each of which contains details on the response.</p>
@@ -549,8 +549,8 @@ $Rversion
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "package": "james",
-  "packageVersion": "1.12.0",
-  "packageDate": "2026-06-05",
+  "packageVersion": "1.13.0",
+  "packageDate": "2026-06-08",
   "Rversion": "4.5.0"
 }</code></pre>
 </div>
@@ -563,8 +563,8 @@ $Rversion
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "package": "james",
-  "packageVersion": "1.12.0",
-  "packageDate": "2026-06-05",
+  "packageVersion": "1.13.0",
+  "packageDate": "2026-06-08",
   "Rversion": "4.5.0"
 }</code></pre>
 </div>
@@ -781,7 +781,7 @@ $xyz
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(session <span class="ot">&lt;-</span> r1<span class="sc">$</span>session)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "x0090887ff5e2b3"</code></pre>
+<pre><code>[1] "x0118f114558ccd"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="fu">james_get</span>(<span class="at">host =</span> host, <span class="at">path =</span> <span class="fu">file.path</span>(session, <span class="st">"md"</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle both text and parsed responses</span></span>
@@ -899,7 +899,7 @@ $xyz
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="fu">file.path</span>(host, r7<span class="sc">$</span>session, <span class="st">"files/input.json"</span>)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>url</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://james.groeidiagrammen.nl/x081459aaf44f67/files/input.json"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/x01ac20eb86b061/files/input.json"</code></pre>
 </div>
 </div>
 <p>With <code>browseURL(url)</code> we may view the file contents in the browser. The <code>files</code> directory contains five JSON files:</p>
@@ -4351,7 +4351,7 @@ $xyz
 <p>JAMES contains charts for various child populations. There are charts for Down syndrome (DS), Hindustan (HS), Moroccan (MA), Dutch (NL)), preterm (PT) and Turkish (TU) children living in the Netherlands and the WHO Growth Standards (WHOblue, WHOpink). These charts contain references for height (hgt), weight (wgt), head circumference (hdc), weight-for-height (wfh), body mass index (bmi) and D-score (dsc), as well as combined charts with multiple references on A4 format (front, back, -hdc).</p>
 <p>The most important index variables are <code>population</code> and <code>side</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(charts, <span class="fu">table</span>(population, side))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.data.frame</span>(charts)) <span class="fu">with</span>(charts, <span class="fu">table</span>(population, side))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          side
 population -hdc back bmi dsc front hdc hgt wfh wgt
@@ -4450,7 +4450,7 @@ population -hdc back bmi dsc front hdc hgt wfh wgt
 <pre><code>JAMES request:
   Path    : dscore/calculate/json
   Status  : 201
-  Session : x0f2f8a40d4ed4c
+  Session : x043a27880a3188
 
 Parsed response:
 'data.frame':   20 obs. of  6 variables:
@@ -4503,7 +4503,7 @@ Parsed response:
 <pre><code>JAMES request:
   Path    : ddomain/calculate/json
   Status  : 201
-  Session : x0f9b06344fcf65
+  Session : x048b066a38c179
 
 Parsed response:
 List of 6
@@ -5095,7 +5095,7 @@ $social
 <span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>parsed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x07f1ab4a5786c2"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x030c683bc0e6eb"</code></pre>
 </div>
 </div>
 <p>Run the command and paste the generated URL in the address field of your browser. The starting chart is chosen by JAMES and depends on the age of the child.</p>
@@ -5118,10 +5118,10 @@ $social
 <pre><code>JAMES request:
   Path    : site/request/json
   Status  : 201
-  Session : x0d8bea6e0f8008
+  Session : x02b2a834ade843
 
 Parsed response:
-[1] "https://james.groeidiagrammen.nl/site?session=x0fa906e03b57ab"</code></pre>
+[1] "https://james.groeidiagrammen.nl/site?session=x0bffc1fbbf9f61"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or manual URL construction</span></span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>parsed_host <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">parse_url</span>(host)</span>
@@ -5134,7 +5134,7 @@ Parsed response:
 <span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a>site2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x0fa906e03b57ab"</code></pre>
+<pre><code>[1] "https://james.groeidiagrammen.nl/site?session=x0bffc1fbbf9f61"</code></pre>
 </div>
 </div>
 <p>Paste the generated URL in the address field of your browser. The initial page shown depends on the child’s age. This two-step approach also works for remote servers. In practice, use the two-step approach is stabler and more reliable.</p>
@@ -5149,7 +5149,7 @@ Parsed response:
 <span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>-F <span class="st">"sitehost='</span><span class="va">$(</span><span class="fu">cat</span> .host<span class="va">)</span><span class="st">'"</span> <span class="dt">\</span></span>
 <span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a>-F <span class="st">'txt=@maria.json;type=application/json'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>["https://james.groeidiagrammen.nl/site?session=x0cbf03c5c796de"]</code></pre>
+<pre><code>["https://james.groeidiagrammen.nl/site?session=x0dfd806007c1b9"]</code></pre>
 </div>
 </div>
 </div>
@@ -5180,13 +5180,13 @@ Parsed response:
 <pre><code>JAMES request:
   Path    : /blend/request/json
   Status  : 201
-  Session : x0b264d2533f8ff
+  Session : x0bb9ea95a8b4a7
 
 Parsed response:
 List of 6
  $ txt      : chr "{\"Format\": \"3.0\",\"organisationCode\": 0,\"reference\": \"Laura S\",\"clientDetails\": [{\"bdsNumber\": 19,"| __truncated__
- $ session  : chr "x0787e208e3fc89"
- $ site     : chr "https://james.groeidiagrammen.nl/site?session=x0787e208e3fc89"
+ $ session  : chr "x064c106b46425d"
+ $ site     : chr "https://james.groeidiagrammen.nl/site?session=x064c106b46425d"
  $ child    :'data.frame':  1 obs. of  12 variables:
   ..$ id  : int -1
   ..$ name: chr "Laura S"
@@ -5255,8 +5255,8 @@ List of 6
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "txt": "https://james.groeidiagrammen.nl/ocpu/library/bdsreader/examples/Laura_S.json",
-  "session": "x07d09eb944e7a7",
-  "site": "https://james.groeidiagrammen.nl/site?session=x07d09eb944e7a7",
+  "session": "x061db3319c5689",
+  "site": "https://james.groeidiagrammen.nl/site?session=x061db3319c5689",
   "child": [
     {
       "id": -1,
@@ -6563,7 +6563,7 @@ List of 6
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb128" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> JAMES - Joint Automatic Measurement and Evaluation System</span></span>
-<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> JAMES 1.13.0 (June 2026)</span></span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> JAMES 1.13.1 (June 2026)</span></span>
 <span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
 <span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Stef van Buuren</span></span>
 <span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a><span class="co">    url: https://stefvanbuuren.name</span></span>
@@ -7332,7 +7332,7 @@ List of 6
 <span id="cb128-801"><a href="#cb128-801" aria-hidden="true" tabindex="-1"></a>The most important index variables are <span class="in">`population`</span> and <span class="in">`side`</span>:</span>
 <span id="cb128-802"><a href="#cb128-802" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb128-803"><a href="#cb128-803" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=TRUE}</span></span>
-<span id="cb128-804"><a href="#cb128-804" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(charts, <span class="fu">table</span>(population, side))</span>
+<span id="cb128-804"><a href="#cb128-804" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.data.frame</span>(charts)) <span class="fu">with</span>(charts, <span class="fu">table</span>(population, side))</span>
 <span id="cb128-805"><a href="#cb128-805" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-806"><a href="#cb128-806" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb128-807"><a href="#cb128-807" aria-hidden="true" tabindex="-1"></a>The URL <span class="in">`{host}/site`</span> (see below) displays the currently active chart code as a field in the left sidebar.</span>

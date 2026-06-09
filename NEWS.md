@@ -1,5 +1,6 @@
 # james 1.13.1 (June 2026)
 
+- Set data schema default to 3.1 (was 3.0)
 - Administrative version bump to keep in sync with jamesdocker
 
 # james 1.13.0 (June 2026)

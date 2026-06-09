@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.13.0 (June 2026)
+subtitle: JAMES 1.13.1 (June 2026)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -769,7 +769,7 @@ JAMES contains charts for various child populations. There are charts for Down s
 The most important index variables are `population` and `side`:
 
 ```{r eval=TRUE}
-with(charts, table(population, side))
+if (is.data.frame(charts)) with(charts, table(population, side))
 ```
 
 The URL `{host}/site` (see below) displays the currently active chart code as a field in the left sidebar.
