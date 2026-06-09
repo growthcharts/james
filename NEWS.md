@@ -1,3 +1,7 @@
+# james 1.13.1 (June 2026)
+
+- Administrative version bump to keep in sync with jamesdocker
+
 # james 1.13.0 (June 2026)
 
 - Streamline JAMES maintainance documentation
