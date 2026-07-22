@@ -52,6 +52,7 @@ reference:
       - dcat_start
       - dcat_next
       - draw_chart
+      - embed_chart
       - list_charts
       - list_screeners
       - percentiles_vwc

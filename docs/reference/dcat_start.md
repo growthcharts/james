@@ -74,9 +74,9 @@ Iris Eekhout 2025
 fn <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat_start(txt = fn, p = 50)
 #>                item
-#> gs1sec139 gs1sec139
-#>                                                                                                                    label
-#> gs1sec139 SF139 Can your child say what others like or dislike (e.g., "Mama doesn't like fruit," "Papa likes football")?
-#>             tau
-#> gs1sec139 76.57
+#> gs1lic138 gs1lic138
+#>                                                                                                    label
+#> gs1lic138 SF138 Can your child dress him/herself completely (except for shoelaces, buttons and zippers)?
+#>            tau
+#> gs1lic138 76.8
 ```

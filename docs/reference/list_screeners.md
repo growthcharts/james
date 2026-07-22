@@ -25,8 +25,8 @@ list_screeners(ynames = c("hgt", "wgt", "hdc"), ...)
 ``` r
 head(list_screeners(ynames = "hgt"), 2)
 #>   Versie yname Categorie CategorieOmschrijving                   JGZRichtlijn
-#> 1 1.24.0   hgt      1000  Lengte naar leeftijd JGZ-Richtlijn Lengtegroei 2019
-#> 2 1.24.0   hgt      1000  Lengte naar leeftijd JGZ-Richtlijn Lengtegroei 2019
+#> 1 1.25.0   hgt      1000  Lengte naar leeftijd JGZ-Richtlijn Lengtegroei 2019
+#> 2 1.25.0   hgt      1000  Lengte naar leeftijd JGZ-Richtlijn Lengtegroei 2019
 #>   Code                                                    CodeOmschrijving
 #> 1 1010   Het advies kan niet worden bepaald. Voer de zwangerschapsduur in.
 #> 2 1011 Het advies kan niet worden bepaald. Voer de vorige lengtemeting in.

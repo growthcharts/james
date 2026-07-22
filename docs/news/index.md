@@ -1,5 +1,15 @@
 # Changelog
 
+## james 1.14.0 (July 2026)
+
+- Add `charts/embed` endpoint and
+  [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md):
+  returns an interactive `plotly` htmlwidget (donor matches, prediction,
+  target height) for embedding in an `<iframe>`, as the interactive
+  counterpart to
+  `charts/draw`/[`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
+- Add dependency on `multikaart (>= 0.2.1)`
+
 ## james 1.13.1 (June 2026)
 
 - Set data schema default to 3.1 (was 3.0)
@@ -124,7 +134,7 @@ updates, enhancements to the OpenAPI specification, and minor bug fixes.
   the current JAMES version and saves it as `inst/spec/openapi.yaml`.
   This enables:
 
-  1.  Easy maintenance of the OpenAPI specification.  
+  1.  Easy maintenance of the OpenAPI specification.\
   2.  Serving API documentation directly from the JAMES server at
       `https://<host>/docs`, removing the dependency on SwaggerHub.
 
@@ -162,7 +172,7 @@ updates, enhancements to the OpenAPI specification, and minor bug fixes.
 
   - How
     [`request_site()`](https://growthcharts.org/james/reference/request_site.md)
-    fails on nested data uploads when using `localhost`.  
+    fails on nested data uploads when using `localhost`.\
   - A working alternative solution.
 
   This change ensures that the `jamesdemo` Shiny app can now also

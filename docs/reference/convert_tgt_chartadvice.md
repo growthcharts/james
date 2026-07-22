@@ -48,19 +48,19 @@ convert_tgt_chartadvice(
 
   `"data"`
 
-  :   Calculate chart code from the individual data. This setting
-      chooses the "optimal" chart for a given individual set of data.
+  : Calculate chart code from the individual data. This setting chooses
+    the "optimal" chart for a given individual set of data.
 
   `"derive"`
 
-  :   Calculate chart code from a combination of user data: `chartgrp`,
-      `agegrp`, `side`, `sex`, `etn`, `ga`. The method does not use
-      individual data. Use this setting when chart choice needs to be
-      reactive on user input.
+  : Calculate chart code from a combination of user data: `chartgrp`,
+    `agegrp`, `side`, `sex`, `etn`, `ga`. The method does not use
+    individual data. Use this setting when chart choice needs to be
+    reactive on user input.
 
   `"chartcode"`
 
-  :   Take string specified in `chartcode`
+  : Take string specified in `chartcode`
 
   If there is a valid `tgt` object, then the function simply obeys the
   `selector` setting. If no valid `tgt` object is found, the
