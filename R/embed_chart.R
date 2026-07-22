@@ -133,5 +133,5 @@ embed_chart <- function(
     target_height = list(show = show_targetheight, alpha = 0.95)
   )
 
-  return(fig)
+  return(multikaart::unwrap_widget(fig))
 }
