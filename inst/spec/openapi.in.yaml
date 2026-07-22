@@ -1708,10 +1708,10 @@ components:
     embed_chart_return:
       type: string
       description: >-
-        A self-contained interactive HTML document (a `plotly` htmlwidget)
-        returned as plain text in the response body. Embed with
-        `<iframe srcdoc="...">`, not an `<img>` -- it is not an image and
-        will not render as one.
+        A self-contained interactive HTML document (a `plotly` htmlwidget).
+        Append `/widget` to the returned session URL to fetch it directly
+        as `text/html`, embeddable with a plain `<iframe src="...">` --
+        not an `<img>`, it is not an image and will not render as one.
     validate_chartcode_arguments:
       type: object
       properties:
