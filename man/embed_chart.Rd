@@ -128,18 +128,23 @@ growth of the target child should be drawn}
 \item{...}{Ignored}
 }
 \value{
-A \code{plotly} htmlwidget.
+Invisibly, the path to the written \code{widget.html} file. Called
+for its side effect of writing the file into the session directory.
 }
 \description{
 \code{embed_chart()} is the interactive counterpart to \code{\link[=draw_chart]{draw_chart()}}:
 instead of drawing a static chart to a graphics device (served by
-OpenCPU as SVG/PNG/PDF), it returns a \code{plotly} htmlwidget, served by
-OpenCPU's htmlwidget mechanism as a self-contained HTML document meant
-for embedding in an \verb{<iframe>} (not an \verb{<img>}).
+OpenCPU as SVG/PNG/PDF), it writes a self-contained HTML document (a
+\code{plotly} widget) into the OpenCPU session's working directory, so it
+can be fetched at the session's \code{files/widget.html} path and embedded
+in an \verb{<iframe>} (not an \verb{<img>} -- OpenCPU has no dedicated htmlwidget
+mechanism, so this relies on its generic \verb{files/} static-file serving).
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
+old <- setwd(tempdir())
 fig <- embed_chart(txt = fn)
+setwd(old)
 }
 \seealso{
 \code{\link[=draw_chart]{draw_chart()}}, \code{\link[=select_chart]{select_chart()}}

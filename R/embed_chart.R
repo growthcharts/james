@@ -8,9 +8,11 @@
 #'
 #' `embed_chart()` is the interactive counterpart to [draw_chart()]:
 #' instead of drawing a static chart to a graphics device (served by
-#' OpenCPU as SVG/PNG/PDF), it returns a `plotly` htmlwidget, served by
-#' OpenCPU's htmlwidget mechanism as a self-contained HTML document meant
-#' for embedding in an `<iframe>` (not an `<img>`).
+#' OpenCPU as SVG/PNG/PDF), it writes a self-contained HTML document (a
+#' `plotly` widget) into the OpenCPU session's working directory, so it
+#' can be fetched at the session's `files/widget.html` path and embedded
+#' in an `<iframe>` (not an `<img>` -- OpenCPU has no dedicated htmlwidget
+#' mechanism, so this relies on its generic `files/` static-file serving).
 #'
 #' @inheritParams draw_chart
 #' @param ytype Vertical axis metric: `"y"` (original units), `"z"`
@@ -20,13 +22,16 @@
 #' @param show_targetheight Logical. Show the target height range/estimate
 #'   (design "C"/"D" charts only, requires parental height data). Default
 #'   `TRUE`.
-#' @return A `plotly` htmlwidget.
+#' @return Invisibly, the path to the written `widget.html` file. Called
+#'   for its side effect of writing the file into the session directory.
 #' @author Stef van Buuren 2026
 #' @seealso [draw_chart()], [select_chart()]
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
+#' old <- setwd(tempdir())
 #' fig <- embed_chart(txt = fn)
+#' setwd(old)
 #' @export
 embed_chart <- function(
   txt = "",
@@ -133,5 +138,7 @@ embed_chart <- function(
     target_height = list(show = show_targetheight, alpha = 0.95)
   )
 
-  return(multikaart::unwrap_widget(fig))
+  widget <- multikaart::unwrap_widget(fig)
+  htmlwidgets::saveWidget(widget, "widget.html", selfcontained = TRUE)
+  invisible("widget.html")
 }

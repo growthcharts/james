@@ -1709,8 +1709,10 @@ components:
       type: string
       description: >-
         A self-contained interactive HTML document (a `plotly` htmlwidget),
-        served via OpenCPU's htmlwidget mechanism. Embed with an `<iframe>`,
-        not an `<img>` -- it is not an image and will not render as one.
+        written into the session and fetched from its `widget.html` file
+        (append `/widget` to the returned session URL). Embed with an
+        `<iframe>`, not an `<img>` -- it is not an image and will not
+        render as one.
     validate_chartcode_arguments:
       type: object
       properties:

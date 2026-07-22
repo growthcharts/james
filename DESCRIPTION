@@ -28,6 +28,7 @@ Imports:
     grDevices,
     grid (>= 4.1.0),
     growthscreener (>= 1.25.0),
+    htmlwidgets,
     httr,
     jamesclient (>= 0.35.0),
     jose,
