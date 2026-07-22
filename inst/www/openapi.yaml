@@ -197,6 +197,58 @@ paths:
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
+  /charts/embed/{hwm}:
+    summary: Draw an interactive, embeddable chart
+    parameters:
+      - $ref: '#/components/parameters/hwm'
+    post:
+      summary: Draw child data on an interactive growth chart
+      description: >-
+        Produces an interactive, self-contained HTML document (a `plotly`
+        chart) for embedding in an `<iframe>` -- unlike **/charts/draw**,
+        this is not an image and cannot be used in an `<img>` tag.
+      operationId: set_location_embed
+      tags:
+        - charts
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/embed_chart_arguments'
+            examples:
+              embed1:
+                summary: Create empty chart NMAW
+                value:
+                  chartcode: NMAW
+                  selector: chartcode
+              embed2:
+                value:
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+                summary: Draw child data on automatic chart
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/embed_chart_return'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /charts/list/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -278,6 +330,19 @@ paths:
     get:
       summary: Consult R help
       description: Consult R function documentation of james::draw_chart()
+      tags:
+        - charts
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /charts/embed/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::embed_chart()
       tags:
         - charts
       responses:
@@ -1450,6 +1515,202 @@ components:
         render. For optimal size, use **/{session}/svglite** (with session
         produced by **charts/draw**) with the suggested width and height
         settings.
+    embed_chart_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+          example: {session}
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '3.1'
+            - '3.0'
+            - '2.0'
+            - '1.1'
+            - '1.0'
+          example: '3.1'
+        chartcode:
+          type: string
+          description: The chart code
+          default: ''
+        selector:
+          type: string
+          description: >-
+            Method to select growth chart for given data. If no child data is
+            available, the *chartcode* argument is taken. If *chartcode* is
+            missing, then the function selects method *derive*. If you specify a
+            *chartcode*, then also set *selector* to "chartcode". Values "data"
+            (Calculate chart code from the individual data. This setting chooses
+            an optimal chart for a given individual set of data.), "derive"
+            (Calculate chart code from a combination of user data like
+            *chartgrp*, *agegrp*, *side*, *sex*, *etn* and *ga*. The method does
+            not use individual data. Use this setting when chart choice needs to
+            be reactive on user input.), "chartcode" (Take chart specified in
+            the *chartcode* parameter.)
+          enum:
+            - data
+            - derive
+            - chartcode
+          default: data
+        chartgrp:
+          type: string
+          description: The chart group
+          nullable: true
+          enum:
+            - null
+            - nl2010
+            - preterm
+            - who
+          default: null
+        agegrp:
+          type: string
+          description: Age group, chart setting parameter
+          nullable: true
+          enum:
+            - null
+            - 0-15m
+            - 0-4y
+            - 1-21y
+            - 0-21y
+            - 0-4ya
+          default: null
+        sex:
+          type: string
+          description: Sex, chart setting parameter
+          nullable: true
+          enum:
+            - null
+            - male
+            - female
+          default: null
+        etn:
+          type: string
+          description: Etnicity, chart setting parameter
+          nullable: true
+          enum:
+            - null
+            - netherlands
+            - turkish
+            - moroccan
+            - hindustani
+            - down
+          default: null
+        ga:
+          type: string
+          description: Gestational age (in completed weeks), chart setting parameter
+          default: null
+        side:
+          type: string
+          description: Side, chart setting parameter
+          enum:
+            - front
+            - back
+            - '-hdc'
+            - both
+        ytype:
+          type: string
+          description: Vertical axis metric
+          enum:
+            - y
+            - z
+            - p
+          default: y
+        curve_interpolation:
+          type: boolean
+          description: A logical indicating whether curve interpolation shoud be applied.
+          default: true
+        quiet:
+          type: boolean
+          description: >-
+            Logical indicating whether chart code should be written to standard
+            output.
+          default: true
+        dnr:
+          type: string
+          description: Donor data, Prediction horizon
+          enum:
+            - 0-2
+            - 2-4
+            - 4-18
+            - smocc
+            - lollypop
+            - terneuzen
+            - pops
+        nmatch:
+          type: integer
+          description: Number of matches needed. No matches are sought for nmatch == 0
+          default: 0
+        exact_sex:
+          type: boolean
+          description: A logical indicating whether sex should be matched exactly
+          default: true
+        exact_ga:
+          type: boolean
+          description: >-
+            A logical indicating whether gestational age should be matched
+            exactly.
+          default: false
+        break_ties:
+          type: boolean
+          description: A logical indicating whether ties should broken randomly
+          default: false
+        show_realized:
+          type: boolean
+          description: >-
+            A logical indicating whether the realized growth of the target child
+            should be drawn
+          default: false
+        show_future:
+          type: boolean
+          description: >-
+            A logical indicating whether the predicted growth of the target
+            child should be drawn
+          default: false
+        show_matches:
+          type: boolean
+          description: A logical indicating whether donor curve matches should be drawn
+          default: false
+        show_prediction:
+          type: boolean
+          description: >-
+            A logical indicating whether the predicted future growth curve
+            should be drawn
+          default: false
+        show_targetheight:
+          type: boolean
+          description: >-
+            A logical indicating whether the target height range/estimate
+            should be drawn (design "C"/"D" charts only, requires parental
+            height data)
+          default: true
+        lo:
+          type: string
+          description: >-
+            Value of the left visit coded as string, e.g. "4w" or "7.5m".
+            Used for prediction.
+          default: null
+        hi:
+          type: string
+          description: >-
+            Value of the right visit coded as string, e.g. "4w" or "7.5m".
+            Used for prediction.
+          default: null
+    embed_chart_return:
+      type: string
+      description: >-
+        A self-contained interactive HTML document (a `plotly` htmlwidget),
+        served via OpenCPU's htmlwidget mechanism. Embed with an `<iframe>`,
+        not an `<img>` -- it is not an image and will not render as one.
     validate_chartcode_arguments:
       type: object
       properties:
@@ -2114,6 +2375,21 @@ components:
           - print
           - parent
         example: json
+    hwm:
+      in: path
+      name: hwm
+      description: >-
+        Htmlwidget output format. Returns a self-contained interactive HTML
+        document (`plotly` chart) meant for embedding in an `<iframe>` --
+        unlike figure formats (`svglite`/`png`/`pdf`), this is not an image
+        and must not be used in an `<img>` tag.
+      required: true
+      schema:
+        type: string
+        enum:
+          - widget
+          - parent
+        example: widget
     width:
       in: query
       name: width

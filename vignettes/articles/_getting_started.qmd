@@ -28,7 +28,7 @@ format:
 # "test"     : james.groeigrammen.nl (default)
 # "acc"      : acceptance server (authenticated)
 # "prod"     : production server (authenticated)
-target_host <- "test"
+target_host <- "acc"
 
 # Available hosts
 hosts <- list(
@@ -769,7 +769,9 @@ JAMES contains charts for various child populations. There are charts for Down s
 The most important index variables are `population` and `side`:
 
 ```{r eval=TRUE}
-if (is.data.frame(charts)) with(charts, table(population, side))
+if (is.data.frame(charts)) {
+  with(charts, table(population, side))
+}
 ```
 
 The URL `{host}/site` (see below) displays the currently active chart code as a field in the left sidebar.

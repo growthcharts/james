@@ -27,11 +27,12 @@ Imports:
     curl,
     grDevices,
     grid (>= 4.1.0),
-    growthscreener (>= 1.24.0),
+    growthscreener (>= 1.25.0),
     httr,
     jamesclient (>= 0.35.0),
     jose,
     jsonlite,
+    multikaart (>= 0.2.1),
     rlang,
     tidyr,
     utils,
@@ -43,7 +44,7 @@ Suggests:
     rmarkdown,
     testthat,
     usethis
-Remotes: 
+Remotes:
     r-lib/svglite,
     growthcharts/bdsreader,
     growthcharts/chartbox,
@@ -52,6 +53,7 @@ Remotes:
     growthcharts/growthscreener,
     growthcharts/jamesclient,
     growthcharts/jamesdemodata,
+    growthcharts/multikaart,
     D-score/dcat,
     D-score/dscore,
     D-score/dscoreddi,
