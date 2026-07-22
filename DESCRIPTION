@@ -34,6 +34,7 @@ Imports:
     jose,
     jsonlite,
     multikaart (>= 0.2.2),
+    plotly,
     rlang,
     tidyr,
     utils,

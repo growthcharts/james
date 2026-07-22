@@ -128,23 +128,21 @@ growth of the target child should be drawn}
 \item{...}{Ignored}
 }
 \value{
-Invisibly, the path to the written \code{widget.html} file. Called
-for its side effect of writing the file into the session directory.
+A length-1 character string: the self-contained HTML document.
 }
 \description{
 \code{embed_chart()} is the interactive counterpart to \code{\link[=draw_chart]{draw_chart()}}:
 instead of drawing a static chart to a graphics device (served by
-OpenCPU as SVG/PNG/PDF), it writes a self-contained HTML document (a
-\code{plotly} widget) into the OpenCPU session's working directory, so it
-can be fetched at the session's \code{files/widget.html} path and embedded
-in an \verb{<iframe>} (not an \verb{<img>} -- OpenCPU has no dedicated htmlwidget
-mechanism, so this relies on its generic \verb{files/} static-file serving).
+OpenCPU as SVG/PNG/PDF), it returns a self-contained HTML document (a
+\code{plotly} widget) as a character string, retrievable at the session's
+\code{R/.val/text} path and meant for embedding via \verb{<iframe srcdoc="...">}
+(not an \verb{<img>} -- it is not an image, and not a plain file either:
+OpenCPU does not persist files written by session code, so the HTML is
+returned as the call's value instead).
 }
 \examples{
 fn <- system.file("testdata", "client3.json", package = "james")
-old <- setwd(tempdir())
-fig <- embed_chart(txt = fn)
-setwd(old)
+html <- embed_chart(txt = fn)
 }
 \seealso{
 \code{\link[=draw_chart]{draw_chart()}}, \code{\link[=select_chart]{select_chart()}}
