@@ -1,3 +1,8 @@
+# james 1.14.0 (July 2026)
+
+- Add `charts/embed` endpoint and `embed_chart()`: returns an interactive `plotly` htmlwidget (donor matches, prediction, target height) for embedding in an `<iframe>`, as the interactive counterpart to `charts/draw`/`draw_chart()`
+- Add dependency on `multikaart (>= 0.2.1)`
+
 # james 1.13.1 (June 2026)
 
 - Set data schema default to 3.1 (was 3.0)
