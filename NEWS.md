@@ -1,7 +1,9 @@
 # james 1.14.0 (July 2026)
 
-- Add `charts/embed` endpoint and `embed_chart()`: returns an interactive `plotly` htmlwidget (donor matches, prediction, target height) for embedding in an `<iframe>`, as the interactive counterpart to `charts/draw`/`draw_chart()`
-- Add dependency on `multikaart (>= 0.2.1)`
+- Add `charts/embed` endpoint and `embed_chart()`: the interactive counterpart to `charts/draw`/`draw_chart()`, returning an interactive chart (donor matches, prediction, target height) as a self-contained HTML document for embedding in an `<iframe>`, instead of a static image
+- Unlike `charts/draw`, `charts/embed` always returns an OpenCPU session; fetch the rendered chart with a separate `GET` request on `/{session}/widget`
+- The returned HTML loads plotly.js and jQuery from a public CDN rather than inlining them, keeping the response well under 250KB (vs. over 1MB fully self-contained)
+- Document the new endpoint in the getting-started guide: the two-request flow in R and bash, embedding at full size and scaled to a smaller fixed size, and verifying the result in a browser
 
 # james 1.13.1 (June 2026)
 
