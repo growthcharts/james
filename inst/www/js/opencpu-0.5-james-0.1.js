@@ -86,6 +86,11 @@ if (!window.jQuery) {
       var url = this.getLoc() + "messages/text";
       return $.get(url, success);
     };
+
+    this.getWidget = function (success) {
+      var url = this.getLoc() + "R/.val/text";
+      return $.get(url, success);
+    };
   }
 
   //for POSTing raw code snippets

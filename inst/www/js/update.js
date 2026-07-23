@@ -4,6 +4,17 @@
 // Part of the JAMES package
 // Licence: AGPL
 
+// Tracks which rendering engine last drew into #plotDiv, so switching
+// engines can tear down the other engine's DOM/state first.
+let currentEngine = "fixed";
+
+function ensureEngineDiv(newEngine) {
+  if (newEngine !== currentEngine) {
+    clearPlotDiv(); // from embed.js; safe no-op if nothing to clean up
+    currentEngine = newEngine;
+  }
+}
+
 function update() {
   // Use let for variables that may change within the function
   let msr, chartgrp, agegrp, population, ga;
@@ -42,9 +53,14 @@ function update() {
 
   // Show/hide elements based on `chartgrp` and `agegrp` and `population`
   handleUIVisibility(chartgrp, agegrp, population);
+  handleEngineVisibility(active, msr);
 
-  // Trigger chart drawing, simplified error handling
-  drawChart({
+  // Read the rendering engine from whichever card is active, same pattern
+  // as chartgrp/chartgrp_dsc.
+  const engineGroupName = (active === "ontwikkeling") ? "engine_dsc" : "engine";
+  const engine = document.querySelector(`input[name="${engineGroupName}"]:checked`).value;
+
+  const chartParams = {
     txt: userText,
     session: userSession,
     chartcode: userChartcode,
@@ -65,7 +81,23 @@ function update() {
     exact_ga: exact_ga,
     show_future: show_future,
     show_realized: show_realized
-  });
+  };
+
+  ensureEngineDiv(engine);
+
+  // Trigger chart drawing, simplified error handling
+  if (engine === "interactive") {
+    // embed_chart() has no server-side inference for these (unlike
+    // draw_chart()/process_chart(), which infers from nmatch/dnr/period) --
+    // derive them explicitly here to match grid-mode behavior.
+    const embedParams = Object.assign({}, chartParams, {
+      show_matches: nmatch > 0,
+      show_prediction: show_future
+    });
+    drawEmbedChart(embedParams, session => updateNoticePanel(2, session));
+  } else {
+    drawChart(chartParams);
+  }
 }
 
 /**

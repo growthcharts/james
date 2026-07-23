@@ -44,7 +44,7 @@ addChangeListenerThrottledUpdate('show_future');
 addChangeListenerThrottledUpdate('show_realized');
 
 // Event attachment for UI controls: radio buttons
-["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
+["agegrp", "msr", "etnicity", "sex", "agegrp_dsc", "engine", "engine_dsc"].forEach(formName => {
   const radios = document.forms[formName].elements[formName];
   for (let radio of radios) {
     radio.onclick = throttledUpdate;

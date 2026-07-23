@@ -20,6 +20,7 @@
   </script> -->
   <script type="text/javascript" src="app/js/opencpu-0.5-james-0.1.js"></script>
   <script defer type="text/javascript" src="app/js/update.js"></script>
+  <script defer type="text/javascript" src="app/js/embed.js"></script>
   <script defer type="text/javascript" src="app/js/start.js"></script>
 </head>
 
@@ -98,6 +99,13 @@
 
                 <input type="checkbox" id="interpolation" checked='true'>
                 Curve interpolation<br>
+
+                <form action="" id="engine">
+                  <strong>Weergave</strong><br>
+                  <input type="radio" name="engine" id="engine_fixed" value="fixed" checked="checked"> Vast (grid)<br>
+                  <input type="radio" name="engine" id="engine_interactive" value="interactive"> Interactief (plotly)<br>
+                  <br>
+                </form>
               </div>
             </div>
           </div>
@@ -139,6 +147,12 @@
                 <input type="checkbox" id="interpolation_dsc" checked='true'>
                 Curve interpolation<br>
 
+                <form action="" id="engine_dsc">
+                  <strong>Weergave</strong><br>
+                  <input type="radio" name="engine_dsc" id="engine_dsc_fixed" value="fixed" checked="checked"> Vast (grid)<br>
+                  <input type="radio" name="engine_dsc" id="engine_dsc_interactive" value="interactive"> Interactief (plotly)<br>
+                  <br>
+                </form>
               </div>
             </div>
           </div>

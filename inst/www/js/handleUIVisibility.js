@@ -141,3 +141,16 @@ function handleUIVisibility(chartgrp, agegrp, population) {
 function sr(id, display) {
   document.getElementById(id).style.display = display;
 }
+
+// Hides the interactive (plotly) engine option for A4 chart layouts
+// (front/back), which have no interactive rendering -- forces grid mode
+// instead. Only the "groei" card's msr can be front/back; "ontwikkeling"'s
+// engine_dsc toggle is never affected.
+function handleEngineVisibility(active, msr) {
+  if (active !== "groei") return;
+  const isA4 = (msr === "front" || msr === "back");
+  sr("engine", isA4 ? "none" : "block");
+  if (isA4) {
+    document.getElementById("engine_fixed").checked = true;
+  }
+}
