@@ -9,11 +9,9 @@ OpenCPU as SVG/PNG/PDF), it returns a self-contained HTML document (a
 (not an `<img>` – it is not an image, and not a plain file either:
 OpenCPU does not persist files written by session code, so the HTML is
 returned as the call's value instead). The document references plotly.js
-and jQuery from a public CDN (see
-[`multikaart::save_widget_cdn()`](https://rdrr.io/pkg/multikaart/man/save_widget_cdn.html))
-rather than inlining them, so it requires a live internet connection to
-render, but is far smaller (well under 250KB, vs. ~1.2MB fully
-self-contained).
+and jQuery from a public CDN rather than inlining them, so it requires a
+live internet connection to render, but is far smaller (well under
+250KB, vs. ~1.2MB fully self-contained).
 
 ## Usage
 

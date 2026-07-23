@@ -32,7 +32,7 @@ Imports:
     jamesclient (>= 0.35.0),
     jose,
     jsonlite,
-    multikaart (>= 0.2.5),
+    multikaart (>= 0.2.6),
     rlang,
     tidyr,
     utils,

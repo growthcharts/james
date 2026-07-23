@@ -790,12 +790,47 @@ widget_url <- paste0(host, "/", r8$session, "/widget")
 r8_widget <- httr::content(httr::GET(widget_url), "text", encoding = "UTF-8")
 ```
 
-The response is the interactive HTML document itself, ready to be written to a file or embedded directly:
+The response is the interactive HTML document itself, ready to be written to a file (`writeLines(r8_widget, "laura.html")`) or embedded directly. It references plotly.js and jQuery from a public CDN rather than inlining them:
+
+```{r}
+nchar(r8_widget) # bytes, with plotly.js/jQuery loaded from a CDN
+```
+
+For comparison, a fully self-contained version of the same chart (everything inlined, no CDN needed) is much larger: about 1.2MB with unused plotly.js modules stripped out, or close to 4MB with the full plotly.js bundle.
+
+The chart is rendered at a fixed 900x900px design resolution. Embedded directly (e.g. `<iframe src="laura.html">`), it fills the available width and scrolls if the container is narrower than 900px:
 
 ```{r}
 #| echo: false
-htmltools::HTML(r8_widget)
+htmltools::tags$iframe(
+  srcdoc = r8_widget,
+  style = "width: 100%; height: 900px; border: 1px solid #ddd;"
+)
 ```
+
+To scale it down to a specific size instead of scrolling -- say 600x600px -- wrap the `<iframe>` in an outer div sized to the target, with the iframe itself kept at the full 900x900px design resolution and shrunk uniformly with CSS `transform: scale()`. This keeps text, markers and the logo in their correct proportions, unlike letting the browser reflow a resized `<iframe>`'s contents (which it can't do anyway, since an `<iframe>`'s contents are laid out independently of its own size):
+
+```{r}
+design_side <- 900
+display_side <- 600
+scale <- display_side / design_side
+
+htmltools::div(
+  style = sprintf(
+    "width: %1$dpx; height: %1$dpx; overflow: hidden; position: relative;",
+    display_side
+  ),
+  htmltools::tags$iframe(
+    srcdoc = r8_widget,
+    style = sprintf(
+      "width: %1$dpx; height: %1$dpx; border: 1px solid #ddd; transform: scale(%2$f); transform-origin: top left;",
+      design_side, scale
+    )
+  )
+)
+```
+
+To verify a saved file works standalone, open it directly in a browser (e.g. `browseURL("laura.html")`) -- the chart should render at its full 900x900px size and respond to hovering over data points with tooltips.
 
 ##### **bash**
 
@@ -819,13 +854,16 @@ SESSION=$(auth_curl -sX 'POST' $(cat .host)'/charts/embed' \
 -F 'txt=@maria.json;type=application/json' \
 | head -1 | sed -E 's|.*/(x0[a-z0-9]+)/.*|\1|')
 auth_curl -sX 'GET' $(cat .host)'/'$SESSION'/widget' > maria.html
+wc -c maria.html
 ```
 
-The resulting `maria.html` is a self-contained document (plotly.js and jQuery are loaded from a public CDN, so viewing it requires an internet connection) and can be embedded in another page with:
+The resulting `maria.html` is a self-contained document (plotly.js and jQuery are loaded from a public CDN, so viewing it requires an internet connection, but keeps the file well under 250KB -- see the **R** tab for a size comparison against a fully self-contained version, over 1MB) and can be embedded in another page with:
 
 ```html
 <iframe src="maria.html"></iframe>
 ```
+
+To check the round trip worked, open `maria.html` directly in a browser (e.g. `open maria.html` on macOS, `xdg-open maria.html` on Linux, or double-click it in a file browser) -- the chart should render and respond to hovering over data points with tooltips. Loading plotly.js and jQuery from a CDN keeps the file small (typically well under 250KB, vs. over 1MB fully self-contained), so it's practical to send as a normal HTTP response body rather than writing it to disk first. Since the interactivity is all client-side JavaScript operating on data already embedded in the file, the chart works the same way when hosted as a static file (e.g. on GitHub Pages) as it does opened locally -- only the two CDN scripts need a live internet connection, not the hosting server itself.
 
 :::
 
