@@ -48,7 +48,8 @@ function injectWidget(html, params) {
   $plotDiv.css({ width: displaySize, height: displaySize, "background-image": "none" });
 
   const $wrapper = $("<div>").css({
-    width: displaySize, height: displaySize, overflow: "hidden", position: "relative"
+    width: displaySize, height: displaySize, overflow: "hidden",
+    position: "relative", top: "-15px", left: "-15px"
   });
   const $iframe = $("<iframe>").attr({
     srcdoc: html, scrolling: "no", frameborder: "0"
