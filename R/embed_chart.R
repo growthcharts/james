@@ -13,7 +13,11 @@
 #' `R/.val/text` path and meant for embedding via `<iframe srcdoc="...">`
 #' (not an `<img>` -- it is not an image, and not a plain file either:
 #' OpenCPU does not persist files written by session code, so the HTML is
-#' returned as the call's value instead).
+#' returned as the call's value instead). The document references
+#' plotly.js and jQuery from a public CDN (see
+#' [multikaart::save_widget_cdn()]) rather than inlining them, so it
+#' requires a live internet connection to render, but is far smaller
+#' (well under 250KB, vs. ~1.2MB fully self-contained).
 #'
 #' @inheritParams draw_chart
 #' @param ytype Vertical axis metric: `"y"` (original units), `"z"`
@@ -136,9 +140,9 @@ embed_chart <- function(
     target_height = list(show = show_targetheight, alpha = 0.95)
   )
 
-  widget <- plotly::partial_bundle(multikaart::unwrap_widget(fig))
+  widget <- multikaart::unwrap_widget(fig)
   tmp <- tempfile(fileext = ".html")
   on.exit(unlink(tmp))
-  htmlwidgets::saveWidget(widget, tmp, selfcontained = TRUE)
+  multikaart::save_widget_cdn(widget, tmp)
   paste(readLines(tmp, warn = FALSE), collapse = "\n")
 }
