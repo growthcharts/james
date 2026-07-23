@@ -161,6 +161,7 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 | POST  | `/data/upload/{dfm}`       | Upload child data                          | `upload_data()`          |
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/charts/draw/{ffm}`       | Draw child data on growth chart            | `draw_chart()`           |
+| POST  | `/charts/embed/{hwm}`      | Draw child data on an interactive chart    | `embed_chart()`          |
 | POST  | `/charts/list/{dfm}`       | List available growth charts               | `list_charts()`          |
 | POST  | `/charts/validate/{dfm}`   | Validate a chart code                      | `validate_chartcode()`   |
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
@@ -199,6 +200,7 @@ OpenCPU offers multiple output formats out of the box. JAMES supports a subset o
 | `tab`      | Function result as tab-delimited format        |
 | `md`       | Function result as markdown format             |
 | `svglite`  | Function result as SVG graph                   |
+| `widget`   | Function result as interactive HTML document   |
 | `warnings` | Warnings from the R execution                  |
 | `messages` | Messages, especially data validation info      |
 | `console`  | Console print out, useful for locating errors  |
@@ -212,6 +214,7 @@ In addition, the user can request the function result in a particular form. JAME
 |:-------------|:-----------------------------------------------------------|
 | `dfm`        | Data format: `json`, `csv`, `tab`, `md`, `print`, `parent` |
 | `ffm`        | Figure format: `svglite`, `print`, `parent`                |
+| `hwm`        | Htmlwidget format: `widget`, `parent`                      |
 | `sfm`        | System format:  `json`, `print`, `parent`                  |
 
 In general, the user can specify the desired format by appending the format name to the URL. See <https://www.opencpu.org/api.html#api-formats> for examples.
@@ -741,6 +744,52 @@ $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
 "txt": "'$BASE_URL'/ocpu/library/jamesdemodata/extdata/bds_v3.0/smocc/Laura_S.json",
 "chartcode" : "NMBA",
 "selector" : "chartcode"}' > laura.svg
+```
+
+:::
+
+### **`/charts/embed`**: Draw child data on an interactive growth chart
+
+`/charts/embed` is the interactive counterpart to `/charts/draw`: instead of an SVG image, it returns a self-contained, interactive HTML document (a `plotly` chart) meant for embedding in an `<iframe>` -- not an `<img>`, since it is not an image. It supports the same donor-matching, prediction and target-height features as `/charts/draw`.
+
+::: panel-tabset
+
+##### **R**
+
+We can draw Laura's data on an interactive chart in one step:
+
+```{r}
+r8 <- james_post(
+  host = host,
+  path = "/charts/embed/widget",
+  txt = fn,
+  chartcode = "NMBA",
+  selector = "chartcode"
+)
+```
+
+The response is the interactive HTML document itself, ready to be written to a file or embedded directly:
+
+```{r}
+#| echo: false
+htmltools::HTML(r8$parsed)
+```
+
+##### **bash**
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' $(cat .host)'/charts/embed/widget' \
+-H 'accept: text/html' \
+-F "chartcode='NMBA'" \
+-F "selector='chartcode'" \
+-F 'txt=@maria.json;type=application/json' > maria.html
+```
+
+The resulting `maria.html` is a self-contained document (plotly.js and jQuery are loaded from a public CDN, so viewing it requires an internet connection) and can be embedded in another page with:
+
+```html
+<iframe src="maria.html"></iframe>
 ```
 
 :::
