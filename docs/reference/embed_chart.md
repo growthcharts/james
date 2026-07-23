@@ -3,9 +3,17 @@
 `embed_chart()` is the interactive counterpart to
 [`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md):
 instead of drawing a static chart to a graphics device (served by
-OpenCPU as SVG/PNG/PDF), it returns a `plotly` htmlwidget, served by
-OpenCPU's htmlwidget mechanism as a self-contained HTML document meant
-for embedding in an `<iframe>` (not an `<img>`).
+OpenCPU as SVG/PNG/PDF), it returns a self-contained HTML document (a
+`plotly` widget) as a character string, retrievable at the session's
+`R/.val/text` path and meant for embedding via `<iframe srcdoc="...">`
+(not an `<img>` – it is not an image, and not a plain file either:
+OpenCPU does not persist files written by session code, so the HTML is
+returned as the call's value instead). The document references plotly.js
+and jQuery from a public CDN (see
+[`multikaart::save_widget_cdn()`](https://rdrr.io/pkg/multikaart/man/save_widget_cdn.html))
+rather than inlining them, so it requires a live internet connection to
+render, but is far smaller (well under 250KB, vs. ~1.2MB fully
+self-contained).
 
 ## Usage
 
@@ -189,7 +197,7 @@ embed_chart(
 
 ## Value
 
-A `plotly` htmlwidget.
+A length-1 character string: the self-contained HTML document.
 
 ## See also
 
@@ -204,5 +212,5 @@ Stef van Buuren 2026
 
 ``` r
 fn <- system.file("testdata", "client3.json", package = "james")
-fig <- embed_chart(txt = fn)
+html <- embed_chart(txt = fn)
 ```

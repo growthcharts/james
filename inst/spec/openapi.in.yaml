@@ -197,16 +197,18 @@ paths:
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
-  /charts/embed/{hwm}:
+  /charts/embed:
     summary: Draw an interactive, embeddable chart
-    parameters:
-      - $ref: '#/components/parameters/hwm'
     post:
       summary: Draw child data on an interactive growth chart
       description: >-
-        Produces an interactive, self-contained HTML document (a `plotly`
-        chart) for embedding in an `<iframe>` -- unlike **/charts/draw**,
-        this is not an image and cannot be used in an `<img>` tag.
+        Unlike **/charts/draw**, this always returns an OpenCPU session
+        (a listing of URLs), not the chart itself -- append `/widget` to
+        the session key (in the `x-ocpu-session` header, or the first
+        path segment of the returned URLs) and issue a separate `GET`
+        request to retrieve the interactive, self-contained HTML
+        document (a `plotly` chart) for embedding in an `<iframe>`; it
+        is not an image and cannot be used in an `<img>` tag.
       operationId: set_location_embed
       tags:
         - charts
@@ -242,13 +244,43 @@ paths:
             x-ocpu-session:
               $ref: '#/components/headers/x-ocpu-session'
           content:
-            text/html:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/embed_chart_return'
+                type: string
+                description: A listing of session URLs. Not the chart itself.
         '400':
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
+  /{session}/widget:
+    summary: Fetch the interactive chart from an embed_chart() session
+    parameters:
+      - in: path
+        name: session
+        description: >-
+          Session key returned by **/charts/embed** (the `x-ocpu-session`
+          header, or the first path segment of the returned URLs).
+        required: true
+        schema:
+          type: string
+          example: x0ad0c0287a0185
+    get:
+      summary: Retrieve the interactive chart
+      description: >-
+        Returns the self-contained HTML document (a `plotly` chart)
+        produced by a prior **/charts/embed** call.
+      operationId: get_embed_widget
+      tags:
+        - charts
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/embed_chart_return'
+        '404':
+          description: Session not found (expired or invalid session key)
   /charts/list/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -1708,10 +1740,9 @@ components:
     embed_chart_return:
       type: string
       description: >-
-        A self-contained interactive HTML document (a `plotly` htmlwidget).
-        Append `/widget` to the returned session URL to fetch it directly
-        as `text/html`, embeddable with a plain `<iframe src="...">` --
-        not an `<img>`, it is not an image and will not render as one.
+        A self-contained interactive HTML document (a `plotly` htmlwidget),
+        embeddable with a plain `<iframe src="...">` -- not an `<img>`,
+        it is not an image and will not render as one.
     validate_chartcode_arguments:
       type: object
       properties:
@@ -2376,21 +2407,6 @@ components:
           - print
           - parent
         example: json
-    hwm:
-      in: path
-      name: hwm
-      description: >-
-        Htmlwidget output format. Returns a self-contained interactive HTML
-        document (`plotly` chart) meant for embedding in an `<iframe>` --
-        unlike figure formats (`svglite`/`png`/`pdf`), this is not an image
-        and must not be used in an `<img>` tag.
-      required: true
-      schema:
-        type: string
-        enum:
-          - widget
-          - parent
-        example: widget
     width:
       in: query
       name: width

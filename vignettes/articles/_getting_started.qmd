@@ -752,38 +752,73 @@ $(cat .host)'/charts/draw/svglite?width=8.27&height=11.69' \
 
 `/charts/embed` is the interactive counterpart to `/charts/draw`: instead of an SVG image, it returns a self-contained, interactive HTML document (a `plotly` chart) meant for embedding in an `<iframe>` -- not an `<img>`, since it is not an image. It supports the same donor-matching, prediction and target-height features as `/charts/draw`.
 
+Unlike `/charts/draw`, `/charts/embed` cannot return the chart directly from the `POST` request: the response is always an OpenCPU session -- a listing of URLs, such as:
+
+```
+/ocpu/tmp/x0ad0c0287a0185/R/.val
+/ocpu/tmp/x0ad0c0287a0185/R/embed_chart
+/ocpu/tmp/x0ad0c0287a0185/warnings
+/ocpu/tmp/x0ad0c0287a0185/source
+/ocpu/tmp/x0ad0c0287a0185/console
+/ocpu/tmp/x0ad0c0287a0185/info
+/ocpu/tmp/x0ad0c0287a0185/files/DESCRIPTION
+```
+
+Fetching the chart itself is a second, separate `GET` request: append `/widget` to the session key (the first path segment, `x0ad0c0287a0185` above).
+
 ::: panel-tabset
 
 ##### **R**
 
-We can draw Laura's data on an interactive chart in one step:
+We can draw Laura's data on an interactive chart. `james_post()`'s return value carries the session key in `$session`:
 
 ```{r}
 r8 <- james_post(
   host = host,
-  path = "/charts/embed/widget",
+  path = "/charts/embed",
   txt = fn,
-  chartcode = "NMBA",
+  chartcode = "NMBH",
   selector = "chartcode"
 )
+r8$session
+```
+
+Fetching a sub-resource of an existing session is a `GET` request, not a `POST`, so use `httr::GET()` directly to retrieve the rendered chart:
+
+```{r}
+widget_url <- paste0(host, "/", r8$session, "/widget")
+r8_widget <- httr::content(httr::GET(widget_url), "text", encoding = "UTF-8")
 ```
 
 The response is the interactive HTML document itself, ready to be written to a file or embedded directly:
 
 ```{r}
 #| echo: false
-htmltools::HTML(r8$parsed)
+htmltools::HTML(r8_widget)
 ```
 
 ##### **bash**
 
 ```{bash, eval=!is_windows}
 source auth_curl.sh
-auth_curl -sX 'POST' $(cat .host)'/charts/embed/widget' \
--H 'accept: text/html' \
--F "chartcode='NMBA'" \
+auth_curl -sX 'POST' $(cat .host)'/charts/embed' \
+-H 'accept: text/plain' \
+-F "chartcode='NMBH'" \
 -F "selector='chartcode'" \
--F 'txt=@maria.json;type=application/json' > maria.html
+-F 'txt=@maria.json;type=application/json'
+```
+
+Extract the session key from the first line of the response and fetch `/widget` from it:
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+SESSION=$(auth_curl -sX 'POST' $(cat .host)'/charts/embed' \
+-H 'accept: text/plain' \
+-F "chartcode='NMBH'" \
+-F "selector='chartcode'" \
+-F 'txt=@maria.json;type=application/json' \
+| head -1 | sed -E 's|.*/(x0[a-z0-9]+)/.*|\1|')
+auth_curl -sX 'GET' $(cat .host)'/'$SESSION'/widget' > maria.html
 ```
 
 The resulting `maria.html` is a self-contained document (plotly.js and jQuery are loaded from a public CDN, so viewing it requires an internet connection) and can be embedded in another page with:
