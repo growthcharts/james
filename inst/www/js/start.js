@@ -232,10 +232,20 @@ function updateNoticePanel(rq, session) {
 
   $(rqKey).text(session.getKey());
 
-  // Helper function to set session info
+  // Helper function to set session info, capped to a fixed character length.
+  // getConsole() in particular echoes the full R console transcript,
+  // including the function's auto-printed return value -- for
+  // embed_chart(), that's the entire HTML widget document, printed as R's
+  // quoted-string representation (escaped \n, not real newlines), so it
+  // shows up as a single ~100+KB "line" that a line-based truncation
+  // wouldn't shrink at all.
+  const MAX_NOTICE_CHARS = 300;
   const setSessionInfo = (selector, method) => {
     session[method](outtxt => {
-      $(selector).text(outtxt);
+      const truncated = outtxt.length > MAX_NOTICE_CHARS
+        ? outtxt.slice(0, MAX_NOTICE_CHARS) + "..."
+        : outtxt;
+      $(selector).text(truncated);
     });
   };
 
