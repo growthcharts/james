@@ -58,7 +58,15 @@ function update() {
   // Read the rendering engine from whichever card is active, same pattern
   // as chartgrp/chartgrp_dsc.
   const engineGroupName = (active === "ontwikkeling") ? "engine_dsc" : "engine";
-  const engine = document.querySelector(`input[name="${engineGroupName}"]:checked`).value;
+  const isA4 = active === "groei" && (msr === "front" || msr === "back");
+  // A4 charts have no interactive rendering (see handleEngineVisibility(),
+  // which hides the radio for this case). Force grid mode for rendering
+  // purposes only -- leave the radio's own checked state untouched, so the
+  // user's interactive preference is restored automatically when they
+  // switch back to a supported msr.
+  const engine = isA4
+    ? "fixed"
+    : document.querySelector(`input[name="${engineGroupName}"]:checked`).value;
 
   const chartParams = {
     txt: userText,

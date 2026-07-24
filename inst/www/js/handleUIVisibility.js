@@ -143,14 +143,15 @@ function sr(id, display) {
 }
 
 // Hides the interactive (plotly) engine option for A4 chart layouts
-// (front/back), which have no interactive rendering -- forces grid mode
-// instead. Only the "groei" card's msr can be front/back; "ontwikkeling"'s
-// engine_dsc toggle is never affected.
+// (front/back), which have no interactive rendering. Only the "groei"
+// card's msr can be front/back; "ontwikkeling"'s engine_dsc toggle is never
+// affected. Rendering itself is forced to grid mode for A4 in update()
+// (based on msr, not on the radio's checked state) -- the radio's checked
+// state is intentionally left untouched here, so the user's interactive
+// preference is preserved and reapplied when they switch back to a
+// supported msr, instead of silently resetting to fixed every time.
 function handleEngineVisibility(active, msr) {
   if (active !== "groei") return;
   const isA4 = (msr === "front" || msr === "back");
   sr("engine", isA4 ? "none" : "block");
-  if (isA4) {
-    document.getElementById("engine_fixed").checked = true;
-  }
 }
