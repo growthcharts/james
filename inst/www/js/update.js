@@ -25,8 +25,9 @@ function update() {
     agegrp = document.querySelector('input[name="agegrp"]:checked').value;
     population = document.querySelector('input[name="etnicity"]:checked').value;
     ga = Number($("#weekslider").data().from);
-    // Synchronize interpolation checkboxes
+    // Synchronize interpolation and engine_interactive checkboxes
     document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
+    document.getElementById("engine_interactive_dsc").checked = document.getElementById("engine_interactive").checked;
   } else if (active === "ontwikkeling") {
     msr = "dsc";
     chartgrp = document.getElementById("chartgrp_dsc").value;
@@ -34,6 +35,7 @@ function update() {
     population = "nl"; // Assume default population
     ga = (chartgrp === 'gsed1') ? 40 : Number($("#weekslider_dsc").data().from);
     document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
+    document.getElementById("engine_interactive").checked = document.getElementById("engine_interactive_dsc").checked;
   }
 
   const sex = document.querySelector('input[name="sex"]:checked').value;
@@ -55,13 +57,16 @@ function update() {
   handleUIVisibility(chartgrp, agegrp, population);
   handleEngineVisibility(active, msr);
 
-  // Shared "Interactief" checkbox, used regardless of which card is active.
-  // handleEngineVisibility() (just above) already disabled it for A4
-  // charts, which have no interactive rendering -- read that same disabled
-  // state here rather than re-deriving the A4 condition, so the two stay in
-  // sync by construction. The checkbox's checked state is left untouched
-  // while disabled, so the user's interactive preference is restored
-  // automatically when they switch back to a supported msr.
+  // "Interactief" checkbox. engine_interactive (groei) and
+  // engine_interactive_dsc (ontwikkeling) are kept in sync above, same as
+  // interpolation/interpolation_dsc, so reading engine_interactive here is
+  // always correct regardless of which card is active.
+  // handleEngineVisibility() (just above) already greyed it out (disabled)
+  // for A4 charts, which have no interactive rendering -- read that same
+  // disabled state here rather than re-deriving the A4 condition, so the
+  // two stay in sync by construction. The checkbox's checked state is left
+  // untouched while disabled, so the user's interactive preference is
+  // restored automatically when they switch back to a supported msr.
   const engineCheckbox = document.getElementById("engine_interactive");
   const engine = (!engineCheckbox.disabled && engineCheckbox.checked)
     ? "interactive"

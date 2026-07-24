@@ -43,6 +43,7 @@ addChangeListenerThrottledUpdate('exact_ga');
 addChangeListenerThrottledUpdate('show_future');
 addChangeListenerThrottledUpdate('show_realized');
 addChangeListenerThrottledUpdate('engine_interactive');
+addChangeListenerThrottledUpdate('engine_interactive_dsc');
 
 // Event attachment for UI controls: radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {

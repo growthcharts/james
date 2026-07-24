@@ -142,18 +142,19 @@ function sr(id, display) {
   document.getElementById(id).style.display = display;
 }
 
-// Greys out (disables, does not hide) the shared "Interactief"
-// engine_interactive checkbox for A4 chart layouts (front/back), which have
-// no interactive rendering. Only the "groei" card's msr can be front/back --
-// "ontwikkeling"'s msr is always "dsc", so switching to that card always
-// re-enables the checkbox (explicitly, not via an early return, so a
-// disabled state picked up while on an A4 chart in "groei" doesn't leak
-// into "ontwikkeling"). The checkbox's own checked state is intentionally
-// left untouched while disabled, so the user's interactive preference is
-// preserved and reapplied automatically when they switch back to a
-// supported msr, instead of silently resetting to fixed every time.
-// Rendering itself is forced to grid mode for A4 in update() based on msr,
-// not on this checked state.
+// Greys out (disables, does not hide) the "Interactief" checkbox for A4
+// chart layouts (front/back) on the "groei" card, which have no interactive
+// rendering. "ontwikkeling"'s msr is always "dsc" (never A4), so its own
+// engine_interactive_dsc checkbox is never disabled by this function.
+// Computed unconditionally (not behind an "active === groei" early return)
+// so switching to "ontwikkeling" always leaves engine_interactive
+// re-enabled rather than stuck disabled from a prior A4 selection.
+// The checkbox's own checked state is intentionally left untouched while
+// disabled, so the user's interactive preference is preserved and
+// reapplied automatically when they switch back to a supported msr,
+// instead of silently resetting to fixed every time. Rendering itself is
+// forced to grid mode for A4 in update() based on msr, not on this checked
+// state.
 function handleEngineVisibility(active, msr) {
   const isA4 = active === "groei" && (msr === "front" || msr === "back");
   document.getElementById("engine_interactive").disabled = isA4;
