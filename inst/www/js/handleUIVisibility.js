@@ -142,14 +142,13 @@ function sr(id, display) {
   document.getElementById(id).style.display = display;
 }
 
-// Greys out (disables, does not hide) the "Interactief" checkbox for A4
-// chart layouts (front/back) on the "groei" card, which have no interactive
-// rendering. "ontwikkeling"'s msr is always "dsc" (never A4), so its own
-// engine_interactive_dsc checkbox is never disabled by this function.
-// Computed unconditionally (not behind an "active === groei" early return)
-// so switching to "ontwikkeling" always leaves engine_interactive
-// re-enabled rather than stuck disabled from a prior A4 selection.
-// The checkbox's own checked state is intentionally left untouched while
+// Greys out (disables, does not hide) the single "Interactief" checkbox
+// for A4 chart layouts (front/back), which have no interactive rendering.
+// Only the "groei" card's msr can be front/back; "ontwikkeling"'s is always
+// "dsc". Computed unconditionally (not behind an "active === groei" early
+// return) so switching to "ontwikkeling" always re-enables the checkbox
+// rather than leaving it stuck disabled from a prior A4 selection. The
+// checkbox's own checked state is intentionally left untouched while
 // disabled, so the user's interactive preference is preserved and
 // reapplied automatically when they switch back to a supported msr,
 // instead of silently resetting to fixed every time. Rendering itself is
