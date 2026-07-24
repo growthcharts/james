@@ -44,12 +44,18 @@ function injectWidget(html, params) {
   const displaySize = 785;
   const scale = displaySize / EMBED_DESIGN_SIZE;
 
-  $plotDiv.empty();
   $plotDiv.css({ width: displaySize, height: displaySize, "background-image": "none" });
 
-  const $wrapper = $("<div>").css({
+  // Build the new iframe off-screen (absolutely positioned, on top but
+  // invisible) so the previous render stays visible until the replacement
+  // has actually finished loading -- srcdoc iframes paint blank first, then
+  // fetch+run plotly.js/jQuery from the CDN, so swapping in-place on every
+  // render (including the very first) produced a visible blank flash.
+  const $oldWrapper = $plotDiv.children(".mk-embed-wrapper");
+
+  const $wrapper = $("<div>").addClass("mk-embed-wrapper").css({
     width: displaySize, height: displaySize, overflow: "hidden",
-    position: "relative", top: "-15px", left: "-15px"
+    position: "absolute", top: "-15px", left: "-15px", visibility: "hidden"
   });
   const $iframe = $("<iframe>").attr({
     srcdoc: html, scrolling: "no", frameborder: "0"
@@ -58,8 +64,13 @@ function injectWidget(html, params) {
     border: "none", transform: `scale(${scale})`, "transform-origin": "top left"
   });
 
+  $iframe.on("load", function () {
+    $wrapper.css("visibility", "visible");
+    $oldWrapper.remove();
+  });
+
   $wrapper.append($iframe);
-  $plotDiv.append($wrapper);
+  $plotDiv.css("position", "relative").append($wrapper);
 }
 
 // Tears down any .rplot()-managed state (cached ocpuplot controller,
