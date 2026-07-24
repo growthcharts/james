@@ -33,8 +33,24 @@ function drawEmbedChart(params, cb) {
   return rq;
 }
 
+// The widget HTML has no separate, directly retrievable chartcode (unlike
+// draw_chart(), whose returned grob happens to print as "rect[NMBH]",
+// parsed by updatesvg() below) -- multikaart::generate_copyright() embeds
+// it in the bottom-right annotation's text ("... Served by JAMES · NMBH")
+// specifically so it can be recovered here.
+function extractChartcode(html) {
+  const m = html.match(/Served by JAMES · (\w+)/);
+  return m ? m[1] : null;
+}
+
 function injectWidget(html, params) {
   const $plotDiv = $("#plotDiv");
+
+  const chartcode = extractChartcode(html);
+  if (chartcode) {
+    document.getElementById("chartcode").innerHTML = chartcode;
+    document.getElementById("chartcode_dsc").innerHTML = chartcode;
+  }
 
   // Target on-screen size: reuse the same square footprint draw_chart()
   // uses for non-A4 charts (785x785) for visual continuity when toggling
