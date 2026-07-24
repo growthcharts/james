@@ -55,7 +55,7 @@ function injectWidget(html, params) {
 
   const $wrapper = $("<div>").addClass("mk-embed-wrapper").css({
     width: displaySize, height: displaySize, overflow: "hidden",
-    position: "absolute", top: "-15px", left: "-15px", visibility: "hidden"
+    position: "absolute", top: 0, left: 0, visibility: "hidden"
   });
   const $iframe = $("<iframe>").attr({
     srcdoc: html, scrolling: "no", frameborder: "0"
