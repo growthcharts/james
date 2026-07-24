@@ -47,11 +47,9 @@ function injectWidget(html, params) {
   const $plotDiv = $("#plotDiv");
 
   const chartcode = extractChartcode(html);
-  console.log("[DEBUG] injectWidget extractChartcode ->", chartcode, "html length:", html.length);
   if (chartcode) {
     document.getElementById("chartcode").innerHTML = chartcode;
     document.getElementById("chartcode_dsc").innerHTML = chartcode;
-    console.log("[DEBUG] #chartcode now:", document.getElementById("chartcode").innerHTML);
   }
 
   // Target on-screen size: reuse the same square footprint draw_chart()
