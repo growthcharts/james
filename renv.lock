@@ -2692,7 +2692,7 @@
     },
     "multikaart": {
       "Package": "multikaart",
-      "Version": "0.2.7",
+      "Version": "0.2.8",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Interactieve Diagrammen voor Groei en Ontwikkeling van Kinderen",
@@ -2736,7 +2736,7 @@
       "RemoteUsername": "growthcharts",
       "RemoteRepo": "multikaart",
       "RemoteRef": "main",
-      "RemoteSha": "b44f67accbb5a244232fa6210c4e756820186d66",
+      "RemoteSha": "118f35dded18305c62a242b054fa5f3333ec7ec3",
       "Remotes": "growthcharts/bdsreader, growthcharts/brokenstick, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/chartplotter, growthcharts/donorloader, growthcharts/growthscreener, growthcharts/jamesdemodata, growthcharts/nlreferences"
     },
     "nlme": {
