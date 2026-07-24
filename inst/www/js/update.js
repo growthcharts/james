@@ -55,18 +55,17 @@ function update() {
   handleUIVisibility(chartgrp, agegrp, population);
   handleEngineVisibility(active, msr);
 
-  // Read the rendering engine from whichever card is active, same pattern
-  // as chartgrp/chartgrp_dsc.
-  const engineGroupName = (active === "ontwikkeling") ? "engine_dsc" : "engine";
-  const isA4 = active === "groei" && (msr === "front" || msr === "back");
-  // A4 charts have no interactive rendering (see handleEngineVisibility(),
-  // which hides the radio for this case). Force grid mode for rendering
-  // purposes only -- leave the radio's own checked state untouched, so the
-  // user's interactive preference is restored automatically when they
-  // switch back to a supported msr.
-  const engine = isA4
-    ? "fixed"
-    : document.querySelector(`input[name="${engineGroupName}"]:checked`).value;
+  // Shared "Interactief" checkbox, used regardless of which card is active.
+  // handleEngineVisibility() (just above) already disabled it for A4
+  // charts, which have no interactive rendering -- read that same disabled
+  // state here rather than re-deriving the A4 condition, so the two stay in
+  // sync by construction. The checkbox's checked state is left untouched
+  // while disabled, so the user's interactive preference is restored
+  // automatically when they switch back to a supported msr.
+  const engineCheckbox = document.getElementById("engine_interactive");
+  const engine = (!engineCheckbox.disabled && engineCheckbox.checked)
+    ? "interactive"
+    : "fixed";
 
   const chartParams = {
     txt: userText,

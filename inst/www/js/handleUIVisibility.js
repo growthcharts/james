@@ -142,16 +142,19 @@ function sr(id, display) {
   document.getElementById(id).style.display = display;
 }
 
-// Hides the interactive (plotly) engine option for A4 chart layouts
-// (front/back), which have no interactive rendering. Only the "groei"
-// card's msr can be front/back; "ontwikkeling"'s engine_dsc toggle is never
-// affected. Rendering itself is forced to grid mode for A4 in update()
-// (based on msr, not on the radio's checked state) -- the radio's checked
-// state is intentionally left untouched here, so the user's interactive
-// preference is preserved and reapplied when they switch back to a
+// Greys out (disables, does not hide) the shared "Interactief"
+// engine_interactive checkbox for A4 chart layouts (front/back), which have
+// no interactive rendering. Only the "groei" card's msr can be front/back --
+// "ontwikkeling"'s msr is always "dsc", so switching to that card always
+// re-enables the checkbox (explicitly, not via an early return, so a
+// disabled state picked up while on an A4 chart in "groei" doesn't leak
+// into "ontwikkeling"). The checkbox's own checked state is intentionally
+// left untouched while disabled, so the user's interactive preference is
+// preserved and reapplied automatically when they switch back to a
 // supported msr, instead of silently resetting to fixed every time.
+// Rendering itself is forced to grid mode for A4 in update() based on msr,
+// not on this checked state.
 function handleEngineVisibility(active, msr) {
-  if (active !== "groei") return;
-  const isA4 = (msr === "front" || msr === "back");
-  sr("engine", isA4 ? "none" : "block");
+  const isA4 = active === "groei" && (msr === "front" || msr === "back");
+  document.getElementById("engine_interactive").disabled = isA4;
 }
