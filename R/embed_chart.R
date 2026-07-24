@@ -136,7 +136,8 @@ embed_chart <- function(
     show_realized = show_realized,
     period = period,
     child = child,
-    target_height = list(show = show_targetheight, alpha = 0.95)
+    target_height = list(show = show_targetheight, alpha = 0.95),
+    curve_interpolation = curve_interpolation
   )
 
   widget <- multikaart::unwrap_widget(fig)
