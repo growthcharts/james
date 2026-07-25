@@ -12,6 +12,17 @@
 #' @param upload Logical. If `TRUE`, uploads `txt` and returns URL with
 #' `?session=`. If `FALSE`, appends `?txt=` directly (not recommended).
 #' @param loc Deprecated. Use `session` instead.
+#' @param display A named list of display defaults, appended as extra query
+#' parameters so an API consumer can set them without the end user having to
+#' click through the site's "Instellingen" panel. Recognised names:
+#' \describe{
+#'   \item{`interactive`}{Logical. Show the interactive (plotly) chart
+#'   instead of the default fixed (grid) one.}
+#'   \item{`interpolation`}{Logical. Show the child's curve interpolated
+#'   between observations. Defaults to `TRUE` in the site itself.}
+#'   \item{`size`}{Integer. Chart display size in pixels (400-1000).}
+#' }
+#' Unset elements are omitted, leaving the site's own defaults in place.
 #' @inheritParams draw_chart
 #' @return A character string URL pointing to the personalised JAMES site.
 #' @seealso [jamesclient::james_post()], [jamesclient::get_url()]
@@ -50,6 +61,15 @@
 #' # this method does not create a cache on the server
 #' site <- request_site(sitehost = host, txt = js, upload = FALSE)
 #' # browseURL(site)
+#'
+#' # set display defaults (interactive chart, no interpolation, 600px)
+#' # without the user having to click through Instellingen
+#' site <- request_site(
+#'   sitehost = host, txt = fn,
+#'   display = list(interactive = TRUE, interpolation = FALSE, size = 600)
+#' )
+#' site
+#' # browseURL(site)
 #' }
 #' @export
 request_site <- function(
@@ -59,6 +79,7 @@ request_site <- function(
   format = "3.0",
   upload = TRUE,
   loc = "",
+  display = list(),
   ...
 ) {
   authenticate(...)
@@ -91,9 +112,25 @@ request_site <- function(
     return(new_path)
   }
 
+  # Turns display = list(interactive = TRUE, interpolation = FALSE, size =
+  # 600) into query params matching what inst/www/js/start.js reads
+  # (?interactive=, ?interpolation=, ?size=) to seed the site's
+  # "Instellingen" panel before the first render. Unrecognised names are
+  # dropped rather than erroring, so a typo doesn't break the whole URL.
+  display_query <- function(display) {
+    recognised <- intersect(names(display), c("interactive", "interpolation", "size"))
+    if (!length(recognised)) {
+      return(list())
+    }
+    lapply(display[recognised], function(x) {
+      if (is.logical(x)) tolower(as.character(x)) else as.character(x)
+    })
+  }
+  extra_query <- display_query(display)
+
   # CASE 1: Neither txt nor session provided – return base site URL
   if (is.empty(txt) && is.empty(session)) {
-    return(httr::modify_url(sitehost, path = append_site_path(sitehost)))
+    return(httr::modify_url(sitehost, path = append_site_path(sitehost), query = extra_query))
   }
 
   # CASE 2: txt provided, no session, and upload = TRUE → upload data
@@ -101,12 +138,12 @@ request_site <- function(
     session <- get_session(txt, sitehost, format = format)
 
     if (is.na(session)) {
-      return(httr::modify_url(sitehost, path = append_site_path(sitehost)))
+      return(httr::modify_url(sitehost, path = append_site_path(sitehost), query = extra_query))
     } else {
       return(httr::modify_url(
         sitehost,
         path = append_site_path(sitehost),
-        query = list(session = session)
+        query = c(list(session = session), extra_query)
       ))
     }
   }
@@ -115,12 +152,12 @@ request_site <- function(
   if (!is.empty(session)) {
     data <- get_session_object(session)
     if (is.null(data)) {
-      return(httr::modify_url(sitehost, path = append_site_path(sitehost)))
+      return(httr::modify_url(sitehost, path = append_site_path(sitehost), query = extra_query))
     } else {
       return(httr::modify_url(
         sitehost,
         path = append_site_path(sitehost),
-        query = list(session = session)
+        query = c(list(session = session), extra_query)
       ))
     }
   }
@@ -130,9 +167,9 @@ request_site <- function(
     return(httr::modify_url(
       sitehost,
       path = append_site_path(sitehost),
-      query = list(txt = minify(txt))
+      query = c(list(txt = minify(txt)), extra_query)
     ))
   }
 
-  httr::modify_url(sitehost, path = append_site_path(sitehost))
+  httr::modify_url(sitehost, path = append_site_path(sitehost), query = extra_query)
 }
