@@ -29,19 +29,19 @@ function update() {
     agegrp = document.querySelector('input[name="agegrp"]:checked').value;
     population = document.querySelector('input[name="etnicity"]:checked').value;
     ga = Number($("#weekslider").data().from);
-    // Synchronize interpolation checkboxes
-    document.getElementById("interpolation_dsc").checked = document.getElementById("interpolation").checked;
   } else if (active === "ontwikkeling") {
     msr = "dsc";
     chartgrp = document.getElementById("chartgrp_dsc").value;
     agegrp = document.querySelector('input[name="agegrp_dsc"]:checked').value;
     population = "nl"; // Assume default population
     ga = (chartgrp === 'gsed1') ? 40 : Number($("#weekslider_dsc").data().from);
-    document.getElementById("interpolation").checked = document.getElementById("interpolation_dsc").checked;
   }
 
   const sex = document.querySelector('input[name="sex"]:checked').value;
+  // Shared across both cards (Instellingen) -- no per-card syncing needed,
+  // unlike the removed interpolation/interpolation_dsc duplication.
   const cm = document.getElementById("interpolation").checked;
+  const plotSize = Number($("#sizeslider").data().from);
   const lo = $("#visitslider").data().from;
   const hi = $("#visitslider").data().to;
   const match = Number($("#matchslider").data().from);
@@ -107,8 +107,12 @@ function update() {
       show_matches: nmatch > 0,
       show_prediction: show_future
     });
-    drawEmbedChart(embedParams, session => updateNoticePanel(2, session));
+    drawEmbedChart(embedParams, plotSize, session => updateNoticePanel(2, session));
   } else {
+    // plotSize is a purely client-side display concern, not an R param --
+    // read by updatesvg() (opencpu-0.5-james-0.1.js) rather than threaded
+    // through draw_chart()'s own params.
+    window.plotSizePx = plotSize;
     drawChart(chartParams);
   }
 }

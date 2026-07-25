@@ -12,10 +12,10 @@
 // R side.
 const EMBED_DESIGN_SIZE = 900;
 
-function drawEmbedChart(params, cb) {
+function drawEmbedChart(params, plotSize, cb) {
   const rq = ocpu.call("embed_chart", params, function (session) {
     session.getWidget(function (html) {
-      injectWidget(html, params);
+      injectWidget(html, params, plotSize);
       if (cb) cb(session);
     });
   });
@@ -43,7 +43,7 @@ function extractChartcode(html) {
   return m ? m[1] : null;
 }
 
-function injectWidget(html, params) {
+function injectWidget(html, params, plotSize) {
   const $plotDiv = $("#plotDiv");
 
   const chartcode = extractChartcode(html);
@@ -52,12 +52,13 @@ function injectWidget(html, params) {
     document.getElementById("chartcode_dsc").innerHTML = chartcode;
   }
 
-  // Target on-screen size: reuse the same square footprint draw_chart()
-  // uses for non-A4 charts (785x785) for visual continuity when toggling
-  // engines. A4 front/back never reaches this function -- the interactive
-  // radio is hidden for those (see handleEngineVisibility()) -- so this can
-  // safely assume square regardless of msr.
-  const displaySize = 785;
+  // Target on-screen size: the shared Instellingen ruler (defaults to 785,
+  // the pre-ruler fixed size). A4 front/back never reaches this function --
+  // the interactive checkbox is disabled for those (see
+  // handleEngineVisibility()) -- so this can safely assume square
+  // regardless of msr. Pure CSS scale of the fixed 900x900 design canvas --
+  // no server round-trip needed when only the ruler changes.
+  const displaySize = plotSize || 785;
   const scale = displaySize / EMBED_DESIGN_SIZE;
 
   $plotDiv.css({ width: displaySize, height: displaySize });

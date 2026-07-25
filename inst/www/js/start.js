@@ -14,6 +14,14 @@ const userText = urlParams.get('txt') || '';
 const userSession = urlParams.get('session') || '';
 const userChartcode = urlParams.get('chartcode') || '';
 
+// Display defaults (independent of which child's data is shown) -- e.g.
+// request_site(..., display = list(interactive = TRUE, interpolation =
+// FALSE, size = 600)) appends these as query params, read once here to
+// seed the Instellingen controls before the first render.
+const userInteractive = urlParams.get('interactive');
+const userInterpolation = urlParams.get('interpolation');
+const userSize = Number(urlParams.get('size')) || 785;
+
 // Slider values
 const sliderValues = {
   "0-18": ["0w", "4w", "8w", "3m", "4m", "6m", "7.5m", "9m", "11m", "14m", "18m", "24m", "36m", "45m", "10y", "18y"],
@@ -37,7 +45,6 @@ addChangeListenerUpdate('chartgrp_dsc');
 
 // Event attachment for UI controls: check boxes
 addChangeListenerThrottledUpdate('interpolation');
-addChangeListenerThrottledUpdate('interpolation_dsc');
 addChangeListenerThrottledUpdate('exact_sex');
 addChangeListenerThrottledUpdate('exact_ga');
 addChangeListenerThrottledUpdate('show_future');
@@ -96,6 +103,20 @@ initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
 initializeSlider("#matchslider", { from: 0, values: sliderValues["matches"] });
 initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues["0-18"] });
 initializeSlider("#weekslider_dsc", { min: 25, max: 36, from: 36, step: 1 });
+// Shared plot size (px), used by both engines -- default (785) matches the
+// pre-ruler fixed size, so nothing changes on page load until dragged.
+initializeSlider("#sizeslider", { min: 400, max: 1000, from: userSize, step: 5 });
+
+// Apply display-default URL params to the Instellingen checkboxes before the
+// first render. userInteractive/userInterpolation are left at their HTML
+// defaults (interpolation checked, interactive unchecked) when the param is
+// absent -- only an explicit "1"/"true" or "0"/"false" overrides.
+if (userInteractive !== null) {
+  document.getElementById("engine_interactive").checked = ["1", "true"].includes(userInteractive.toLowerCase());
+}
+if (userInterpolation !== null) {
+  document.getElementById("interpolation").checked = ["1", "true"].includes(userInterpolation.toLowerCase());
+}
 
 // Set active accordion page
 let active = "groei";

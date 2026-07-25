@@ -96,9 +96,6 @@
 
                 <p id="chartcode"></p>
                 <br>
-
-                <input type="checkbox" id="interpolation" checked='true'>
-                Curve interpolation<br>
               </div>
             </div>
           </div>
@@ -136,9 +133,6 @@
 
                 <p id="chartcode_dsc"></p>
                 <br>
-
-                <input type="checkbox" id="interpolation_dsc" checked='true'>
-                Curve interpolation<br>
               </div>
             </div>
           </div>
@@ -203,6 +197,33 @@
             </div>
           </div>
 
+          <!-- Instellingen card  -->
+          <div class="card">
+            <div class="card-header">
+              <a class="collapsed card-link" data-toggle="collapse" href="#collapseSettings" id="instellingen">
+                <strong>Instellingen</strong>
+              </a>
+            </div>
+            <div id="collapseSettings" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+
+                <input type="checkbox" id="interpolation" checked="checked">
+                Curve interpolation<br>
+                <br>
+
+                <input type="checkbox" id="engine_interactive">
+                Interactief<br>
+                <br>
+
+                <div class="form-group" id="sizegroup">
+                  <label class="control-label" for="sizeslider"><strong>Grootte (px)</strong></label>
+                  <input type="text" name="" value="" id="sizeslider" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+
           <!-- Meldingen card  -->
           <div class="card">
             <div class="card-header">
@@ -222,11 +243,6 @@
             </div>
           </div>
         </div> <!-- end accordion -->
-
-        <br>
-        <!-- TODO: move into a dedicated "Opties" panel once one exists -->
-        <input type="checkbox" id="engine_interactive">
-        Interactief<br>
 
       </div>
       <div class="col-sm-9 graph" id="plotcontainer">

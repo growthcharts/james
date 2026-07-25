@@ -363,19 +363,27 @@ if (!window.jQuery) {
       function updatesvg() {
         if (!Location) return;
 
+        // Shared display-size ruler (Instellingen), in px, applied
+        // proportionally to both shapes -- window.plotSizePx defaults to
+        // 785 (the pre-ruler fixed size) whenever update.js hasn't set it.
+        // The original fixed sizes (785 square; 927x1311 A4, both ~112px
+        // per inch of svgwidth/svgheight) define the reference scale.
+        var sizePx = window.plotSizePx || 785;
+        var scale = sizePx / 785;
+
         // reserve screen space for A4 charts or square charts
         var msr = document.querySelector('input[name="msr"]:checked').value;
         if (msr === "front" & active !== "ontwikkeling" ||
           msr === "back" & active !== "ontwikkeling") {
-          svgwidth = 8.27;
-          svgheight = 11.69;
-          plotDiv_width = 927;
-          plotDiv_height = 1311;
+          svgwidth = 8.27 * scale;
+          svgheight = 11.69 * scale;
+          plotDiv_width = Math.round(927 * scale);
+          plotDiv_height = Math.round(1311 * scale);
         } else {
-          svgwidth = 7.09;
-          svgheight = 7.09;
-          plotDiv_width = 785;
-          plotDiv_height = 785;
+          svgwidth = 7.09 * scale;
+          svgheight = 7.09 * scale;
+          plotDiv_width = sizePx;
+          plotDiv_height = sizePx;
         }
 
         // now plot it, prevent flicker
