@@ -1,14 +1,72 @@
 # Changelog
 
+## james 1.14.1 (July 2026)
+
+- Add a fixed/interactive engine toggle to the `/site` demo app: a
+  single “Interactief” checkbox switches the sidebar’s chart between the
+  existing grid (SVG) rendering and the new interactive (plotly)
+  rendering via
+  [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md),
+  for both the Groei and Ontwikkeling cards. A4 chart layouts (`msr`
+  front/back) grey out the checkbox and always fall back to grid, since
+  no interactive version of those layouts exists
+- Add an “Instellingen” panel to `/site`’s sidebar, consolidating three
+  settings that were previously scattered or duplicated per card: curve
+  interpolation (now a single shared checkbox), the new interactive
+  engine toggle, and a new interactive-chart display-size ruler
+  (400-1000px; the fixed/grid chart keeps its own fixed sizes, since its
+  server-rendered SVG text doesn’t scale with the requested
+  width/height)
+- [`request_site()`](https://growthcharts.org/james/reference/request_site.md)
+  gains a `display` argument
+  (`list(interactive =, interpolation =, size =)`) so an API consumer
+  can set these three defaults externally, via extra query parameters on
+  the generated site URL, without the end user having to click through
+  the Instellingen panel
+- Fix `curve_interpolation` being silently ignored by
+  [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md)’s
+  interactive rendering (it was passed to the data-preparation step but
+  never to the plotting step)
+- Fix a data-truncation bug in the interactive chart: the donor-matching
+  `period` was incorrectly used to split the child’s own curve into
+  solid/dashed segments even when no matches were requested, visibly
+  truncating the plotted curve to a single point whenever the
+  visit-range slider’s default happened to fall early
+- Fix D-score chart colors in interactive mode: they inherited WHO’s
+  sex-coded blue/pink palette instead of the Dutch green/blue
+  anthropometry palette used everywhere else
+- The interactive chart’s own curve is now always red (matching the grid
+  engine’s target-curve color) regardless of measurement type, and drawn
+  slightly thicker
+- Truncate the “Meldingen” notice panel’s console/warnings/messages
+  output to a fixed length, so a request whose R return value happens to
+  be a large HTML document (as with
+  [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md))
+  doesn’t dump the entire document into the panel
+- Assorted rendering fixes for the interactive engine: correct CSP
+  whitelisting for the CDN-loaded plotly.js/jQuery scripts, correct body
+  margin (was clipping the chart), correct iframe positioning, and
+  reduced flicker when switching between the fixed and interactive
+  engines
+
 ## james 1.14.0 (July 2026)
 
 - Add `charts/embed` endpoint and
   [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md):
-  returns an interactive `plotly` htmlwidget (donor matches, prediction,
-  target height) for embedding in an `<iframe>`, as the interactive
-  counterpart to
-  `charts/draw`/[`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
-- Add dependency on `multikaart (>= 0.2.1)`
+  the interactive counterpart to
+  `charts/draw`/[`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md),
+  returning an interactive chart (donor matches, prediction, target
+  height) as a self-contained HTML document for embedding in an
+  `<iframe>`, instead of a static image
+- Unlike `charts/draw`, `charts/embed` always returns an OpenCPU
+  session; fetch the rendered chart with a separate `GET` request on
+  `/{session}/widget`
+- The returned HTML loads plotly.js and jQuery from a public CDN rather
+  than inlining them, keeping the response well under 250KB (vs. over
+  1MB fully self-contained)
+- Document the new endpoint in the getting-started guide: the
+  two-request flow in R and bash, embedding at full size and scaled to a
+  smaller fixed size, and verifying the result in a browser
 
 ## james 1.13.1 (June 2026)
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,11 +37,25 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.14.1" id="james-1141-july-2026">james 1.14.1 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1141-july-2026"></a></h2>
+<ul><li>Add a fixed/interactive engine toggle to the <code>/site</code> demo app: a single “Interactief” checkbox switches the sidebar’s chart between the existing grid (SVG) rendering and the new interactive (plotly) rendering via <code><a href="../reference/embed_chart.html">embed_chart()</a></code>, for both the Groei and Ontwikkeling cards. A4 chart layouts (<code>msr</code> front/back) grey out the checkbox and always fall back to grid, since no interactive version of those layouts exists</li>
+<li>Add an “Instellingen” panel to <code>/site</code>’s sidebar, consolidating three settings that were previously scattered or duplicated per card: curve interpolation (now a single shared checkbox), the new interactive engine toggle, and a new interactive-chart display-size ruler (400-1000px; the fixed/grid chart keeps its own fixed sizes, since its server-rendered SVG text doesn’t scale with the requested width/height)</li>
+<li>
+<code><a href="../reference/request_site.html">request_site()</a></code> gains a <code>display</code> argument (<code>list(interactive =, interpolation =, size =)</code>) so an API consumer can set these three defaults externally, via extra query parameters on the generated site URL, without the end user having to click through the Instellingen panel</li>
+<li>Fix <code>curve_interpolation</code> being silently ignored by <code><a href="../reference/embed_chart.html">embed_chart()</a></code>’s interactive rendering (it was passed to the data-preparation step but never to the plotting step)</li>
+<li>Fix a data-truncation bug in the interactive chart: the donor-matching <code>period</code> was incorrectly used to split the child’s own curve into solid/dashed segments even when no matches were requested, visibly truncating the plotted curve to a single point whenever the visit-range slider’s default happened to fall early</li>
+<li>Fix D-score chart colors in interactive mode: they inherited WHO’s sex-coded blue/pink palette instead of the Dutch green/blue anthropometry palette used everywhere else</li>
+<li>The interactive chart’s own curve is now always red (matching the grid engine’s target-curve color) regardless of measurement type, and drawn slightly thicker</li>
+<li>Truncate the “Meldingen” notice panel’s console/warnings/messages output to a fixed length, so a request whose R return value happens to be a large HTML document (as with <code><a href="../reference/embed_chart.html">embed_chart()</a></code>) doesn’t dump the entire document into the panel</li>
+<li>Assorted rendering fixes for the interactive engine: correct CSP whitelisting for the CDN-loaded plotly.js/jQuery scripts, correct body margin (was clipping the chart), correct iframe positioning, and reduced flicker when switching between the fixed and interactive engines</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.14.0" id="james-1140-july-2026">james 1.14.0 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1140-july-2026"></a></h2>
-<ul><li>Add <code>charts/embed</code> endpoint and <code><a href="../reference/embed_chart.html">embed_chart()</a></code>: returns an interactive <code>plotly</code> htmlwidget (donor matches, prediction, target height) for embedding in an <code>&lt;iframe&gt;</code>, as the interactive counterpart to <code>charts/draw</code>/<code><a href="../reference/draw_chart.html">draw_chart()</a></code>
+<ul><li>Add <code>charts/embed</code> endpoint and <code><a href="../reference/embed_chart.html">embed_chart()</a></code>: the interactive counterpart to <code>charts/draw</code>/<code><a href="../reference/draw_chart.html">draw_chart()</a></code>, returning an interactive chart (donor matches, prediction, target height) as a self-contained HTML document for embedding in an <code>&lt;iframe&gt;</code>, instead of a static image</li>
+<li>Unlike <code>charts/draw</code>, <code>charts/embed</code> always returns an OpenCPU session; fetch the rendered chart with a separate <code>GET</code> request on <code>/{session}/widget</code>
 </li>
-<li>Add dependency on <code>multikaart (&gt;= 0.2.1)</code>
-</li>
+<li>The returned HTML loads plotly.js and jQuery from a public CDN rather than inlining them, keeping the response well under 250KB (vs. over 1MB fully self-contained)</li>
+<li>Document the new endpoint in the getting-started guide: the two-request flow in R and bash, embedding at full size and scaled to a smaller fixed size, and verifying the result in a browser</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.13.1" id="james-1131-june-2026">james 1.13.1 (June 2026)<a class="anchor" aria-label="anchor" href="#james-1131-june-2026"></a></h2>
