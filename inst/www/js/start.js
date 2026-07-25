@@ -103,8 +103,10 @@ initializeSlider("#weekslider", { min: 25, max: 36, from: 36, step: 1 });
 initializeSlider("#matchslider", { from: 0, values: sliderValues["matches"] });
 initializeSlider("#visitslider", { type: "double", min_interval: 0, drag_interval: true, values: sliderValues["0-18"] });
 initializeSlider("#weekslider_dsc", { min: 25, max: 36, from: 36, step: 1 });
-// Shared plot size (px), used by both engines -- default (785) matches the
-// pre-ruler fixed size, so nothing changes on page load until dragged.
+// Interactive-engine display size (px) -- grid keeps its own fixed sizes
+// (see update.js/opencpu-0.5-james-0.1.js). Default (785) matches the
+// interactive engine's pre-ruler fixed size, so nothing changes on page
+// load until dragged.
 initializeSlider("#sizeslider", { min: 400, max: 1000, from: userSize, step: 5 });
 
 // Apply display-default URL params to the Instellingen checkboxes before the

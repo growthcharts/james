@@ -2286,7 +2286,10 @@ components:
                 Defaults to `true` in the site itself.
             size:
               type: integer
-              description: Chart display size in pixels (400-1000).
+              description: >-
+                Display size in pixels (400-1000) of the interactive
+                (plotly) chart only -- the fixed (grid) chart keeps its own
+                fixed sizes.
               minimum: 400
               maximum: 1000
     request_site_return:

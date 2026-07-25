@@ -107,12 +107,15 @@ function update() {
       show_matches: nmatch > 0,
       show_prediction: show_future
     });
+    // plotSize (the Instellingen ruler) only affects the interactive
+    // engine's display -- a pure CSS transform:scale() of its fixed
+    // 900x900 design canvas. The grid engine's own server-rendered SVG
+    // uses absolute px font sizes that don't scale with the requested
+    // width/height (a chartplotter/svglite limitation), so applying the
+    // ruler there only distorted the chart; grid keeps its normal fixed
+    // size (785 square / 927x1311 A4) regardless of the ruler.
     drawEmbedChart(embedParams, plotSize, session => updateNoticePanel(2, session));
   } else {
-    // plotSize is a purely client-side display concern, not an R param --
-    // read by updatesvg() (opencpu-0.5-james-0.1.js) rather than threaded
-    // through draw_chart()'s own params.
-    window.plotSizePx = plotSize;
     drawChart(chartParams);
   }
 }

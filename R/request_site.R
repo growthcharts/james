@@ -20,7 +20,10 @@
 #'   instead of the default fixed (grid) one.}
 #'   \item{`interpolation`}{Logical. Show the child's curve interpolated
 #'   between observations. Defaults to `TRUE` in the site itself.}
-#'   \item{`size`}{Integer. Chart display size in pixels (400-1000).}
+#'   \item{`size`}{Integer. Display size in pixels (400-1000) of the
+#'   interactive (plotly) chart only -- the fixed (grid) chart keeps its own
+#'   fixed sizes, since its server-rendered SVG text doesn't scale with the
+#'   requested width/height.}
 #' }
 #' Unset elements are omitted, leaving the site's own defaults in place.
 #' @inheritParams draw_chart
