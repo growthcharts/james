@@ -4,15 +4,19 @@
 // Part of the JAMES package
 // Licence: AGPL
 
-// Tracks which rendering engine last drew into #plotDiv, so switching
-// engines can tear down the other engine's DOM/state first.
+// Tracks which rendering engine last drew into #plotDiv. On a genuine
+// engine switch, the OLD engine's DOM/state is torn down only once the NEW
+// engine's first frame is actually ready (see clearEmbedWrapper()/
+// clearOcpuplotState() in embed.js, called from drawChart() below and from
+// injectWidget()'s iframe load handler) -- clearing #plotDiv eagerly here,
+// before the new content exists, left a visible blank gap for the whole
+// request/render round-trip on every fixed<->interactive switch.
 let currentEngine = "fixed";
 
 function ensureEngineDiv(newEngine) {
-  if (newEngine !== currentEngine) {
-    clearPlotDiv(); // from embed.js; safe no-op if nothing to clean up
-    currentEngine = newEngine;
-  }
+  const switching = newEngine !== currentEngine;
+  currentEngine = newEngine;
+  return switching;
 }
 
 function update() {
@@ -147,6 +151,12 @@ function throttle(func, wait) {
 
 function drawChart(params) {
   const rq = $("#plotDiv").rplot("draw_chart", params, session => {
+    // Remove any leftover interactive-engine content now that the grid
+    // engine has a session to render (setlocation() below triggers
+    // updatesvg(), which preloads its own image before swapping
+    // background-image -- see opencpu-0.5-james-0.1.js -- so the previous
+    // interactive iframe removed here won't be followed by a blank flash).
+    clearEmbedWrapper();
     updateNoticePanel(2, session);
   });
 

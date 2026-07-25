@@ -60,13 +60,14 @@ function injectWidget(html, params) {
   const displaySize = 785;
   const scale = displaySize / EMBED_DESIGN_SIZE;
 
-  $plotDiv.css({ width: displaySize, height: displaySize, "background-image": "none" });
+  $plotDiv.css({ width: displaySize, height: displaySize });
 
   // Build the new iframe off-screen (absolutely positioned, on top but
-  // invisible) so the previous render stays visible until the replacement
-  // has actually finished loading -- srcdoc iframes paint blank first, then
-  // fetch+run plotly.js/jQuery from the CDN, so swapping in-place on every
-  // render (including the very first) produced a visible blank flash.
+  // invisible) so the previous render -- whichever engine produced it --
+  // stays visible until the replacement has actually finished loading.
+  // srcdoc iframes paint blank first, then fetch+run plotly.js/jQuery from
+  // the CDN, so swapping in-place on every render (including the very
+  // first, and including switching engines) produced a visible blank flash.
   const $oldWrapper = $plotDiv.children(".mk-embed-wrapper");
 
   const $wrapper = $("<div>").addClass("mk-embed-wrapper").css({
@@ -83,20 +84,35 @@ function injectWidget(html, params) {
   $iframe.on("load", function () {
     $wrapper.css("visibility", "visible");
     $oldWrapper.remove();
+    // Only now (new content visibly ready) tear down any leftover grid
+    // engine state, so a grid->interactive switch never shows a blank gap
+    // either. Safe no-op if the previous render was already interactive.
+    clearOcpuplotState();
+    $plotDiv.css("background-image", "none");
   });
 
   $wrapper.append($iframe);
   $plotDiv.css("position", "relative").append($wrapper);
 }
 
-// Tears down any .rplot()-managed state (cached ocpuplot controller,
-// background-image div, spinner, resize handler) so switching back to the
-// grid engine on the same #plotDiv starts clean.
-function clearPlotDiv() {
+// Removes .rplot()-managed state (cached ocpuplot controller, its inner
+// div/spinner, resize handler) without touching an interactive-engine
+// .mk-embed-wrapper that may still be present -- called once the *other*
+// engine's new content is confirmed ready (see drawChart()/injectWidget()),
+// never eagerly, so the previous engine's content stays visible for the
+// full duration of the new engine's request/render round-trip.
+function clearOcpuplotState() {
   const $plotDiv = $("#plotDiv");
   if ($plotDiv.data("ocpuplot")) {
     $(window).off("resize");
     $plotDiv.removeData("ocpuplot");
   }
-  $plotDiv.empty();
+  $plotDiv.children().not(".mk-embed-wrapper").remove();
+}
+
+// Removes a leftover interactive-engine .mk-embed-wrapper without touching
+// .rplot()'s own DOM/state -- called once the grid engine's new content is
+// confirmed ready (see drawChart() in update.js).
+function clearEmbedWrapper() {
+  $("#plotDiv").children(".mk-embed-wrapper").remove();
 }
