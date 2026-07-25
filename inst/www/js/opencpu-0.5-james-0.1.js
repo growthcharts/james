@@ -326,6 +326,12 @@ if (!window.jQuery) {
       // var pngheight;
       var svgwidth;
       var svgheight;
+      // Monotonically increasing token, bumped on every updatesvg() call.
+      // Guards against out-of-order network completion: if the size ruler
+      // fires multiple resize requests in quick succession, an older
+      // request's image can finish loading AFTER a newer one's, and would
+      // otherwise overwrite it with a stale (wrong-size) background-image.
+      var svgRequestToken = 0;
 
       var plotDiv = $('<div />').attr({
         style: "width: 100%; height:100%; min-width: 100px; min-height: 100px; position:relative; background-repeat:no-repeat; background-size: 100% 100%;"
@@ -388,9 +394,15 @@ if (!window.jQuery) {
 
         // now plot it, prevent flicker
         // https://stackoverflow.com/questions/22269759/how-to-prevent-a-background-image-flickering-on-change
+        svgRequestToken += 1;
+        var thisRequestToken = svgRequestToken;
         var img_tag = new Image(plotDiv_width, plotDiv_height);
         var img_url = Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight;
         img_tag.onload = function () {
+          // Discard if a later updatesvg() call has already started a
+          // newer request -- this one is stale even though it happened to
+          // finish loading last.
+          if (thisRequestToken !== svgRequestToken) return;
           plotDiv.css("background-image", "url(" + Location + "graphics/" + n + "/svglite?width=" + svgwidth + "&height=" + svgheight + ")");
           // $("#navcontainer").css("height", plotDiv_height + 15);
           // $("#plotcontainer").css("height", plotDiv_height + 15);
