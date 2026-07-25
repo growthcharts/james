@@ -2264,6 +2264,31 @@ components:
             Remove the `"sitehost" : "https://james.groeidiagrammen.nl"` parameter
             from the examples if your server is set to `"http://localhost:8080"`.
           default: http://localhost:8080
+        display:
+          type: object
+          description: >-
+            Display defaults for the site's "Instellingen" panel, appended
+            as extra query parameters (?interactive=, ?interpolation=,
+            ?size=) so an API consumer can set them without the end user
+            having to click through the panel themselves. Unset elements
+            are omitted, leaving the site's own defaults (fixed engine,
+            interpolation on, 785px) unchanged.
+          properties:
+            interactive:
+              type: boolean
+              description: >-
+                Show the interactive (plotly) chart instead of the default
+                fixed (grid) one.
+            interpolation:
+              type: boolean
+              description: >-
+                Show the child's curve interpolated between observations.
+                Defaults to `true` in the site itself.
+            size:
+              type: integer
+              description: Chart display size in pixels (400-1000).
+              minimum: 400
+              maximum: 1000
     request_site_return:
       type: string
       format: uri

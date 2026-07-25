@@ -1300,6 +1300,22 @@ site2
 
 Paste the generated URL in the address field of your browser. The initial page shown depends on the child's age. This two-step approach also works for remote servers. In practice, use the two-step approach is stabler and more reliable.
 
+The site has an "Instellingen" panel where a user can pick the rendering engine (fixed/grid or interactive/plotly), toggle curve interpolation, and set the chart's display size. The `display` argument sets these before the user ever opens the panel, by appending extra query parameters (`?interactive=`, `?interpolation=`, `?size=`) to the site URL:
+
+```{r siterequest3}
+site3 <- james_post(
+  host = host,
+  path = "site/request/json",
+  sitehost = host,
+  session = r$session,
+  upload = FALSE,
+  display = list(interactive = TRUE, interpolation = FALSE, size = 600)
+)
+site3
+```
+
+Paste the generated URL in your browser: the site opens with the interactive chart already selected, interpolation off, and the chart displayed at 600px. Any `display` element left unset keeps the site's own default (fixed engine, interpolation on, 785px).
+
 ##### **bash**
 
 ```{bash, eval=!is_windows}
