@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: "1.14.1"
+  version: "1.14.2"
   title: JAMES
   description: >-
     The **Joint Automatic Measurement and Evaluation System (JAMES)** is a web
@@ -1539,6 +1539,19 @@ components:
           type: boolean
           description: Advanced. Should chart be plotted on current device?
           default: true
+        include_advice:
+          type: boolean
+          description: >-
+            If true, return the chart advice list (chartgrp, agegrp, side,
+            population, sex, week, accordion, dnr, period, slider_list --
+            the same fields produced internally by
+            james::convert_tgt_chartadvice()) instead of the drawn grob.
+            The chart is still drawn and served from the session's
+            **graphics/** path as usual; this only changes the value
+            retrievable at **R/.val**, letting a client obtain the
+            rendered chart and its derived UI settings from a single call
+            instead of two.
+          default: false
     draw_chart_return:
       type: string
       description: >-
@@ -1546,7 +1559,8 @@ components:
         preview in Swagger. Download .xml file and view in your browser to
         render. For optimal size, use **/{session}/svglite** (with session
         produced by **charts/draw**) with the suggested width and height
-        settings.
+        settings. If **include_advice** is true, a JSON object with the
+        chart advice fields instead.
     embed_chart_arguments:
       type: object
       properties:
