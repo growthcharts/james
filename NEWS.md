@@ -2,7 +2,7 @@
 
 Big news this round: JAMES charts can now be interactive! The new `charts/embed` endpoint gives charts a whole new architecture, moving from a static image to a living, embeddable HTML widget — and that opens the door to a much richer chart experience. The first feature to land: hover tooltips, so users can point at any part of a curve and see the exact values behind it, instead of having to eyeball the axes. More interactive features are expected to build on this same foundation going forward.
 
-In the [demo app](https://james.groeidiagrammen.nl/site?interactive=true), this new feature is already on display:
+In the [demo app](https://james.groeidiagrammen.nl/site?interactive=true), you can view the design of interactive growth charts:
 
 - A new "Instellingen" (Settings) panel gathers display options — curve smoothing, the interactive toggle, and a size slider for interactive charts — in one place instead of scattering them across cards.
 - A new "Interactief" checkbox lets users switch a chart between the classic static image and the new interactive version — hover for tooltips and explore the data directly — for both growth and development charts. (Some print-style layouts don't support this yet and stay static.)
