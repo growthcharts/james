@@ -143,13 +143,33 @@ let selector = userChartcode ? "chartcode" : (userText || userSession) ? "data" 
 (userText || userSession || userChartcode) ? initializeChartControls() : update();
 
 function initializeChartControls() {
-  // Executes at initialization to get settings from uploaded data
-  const request = ocpu.call("convert_tgt_chartadvice", {
+  // Executes at initialization to get settings from uploaded data.
+  //
+  // This used to call convert_tgt_chartadvice() and then, once the controls
+  // had been populated, call update() -- which reads those same controls
+  // back out of the DOM to build its draw_chart() parameters. That
+  // read-back made the two calls strictly sequential: two forked R
+  // requests (~0.2s each in fixed OpenCPU overhead) before the first chart
+  // appeared.
+  //
+  // draw_chart(selector = "data") already derives the chart from the child
+  // data internally, so it can return the very same advice list
+  // (include_advice = TRUE) alongside the chart it draws. One call now
+  // yields both, and the chart starts rendering immediately rather than
+  // waiting for a DOM round trip.
+  const request = ocpu.call("draw_chart", {
     txt: userText,
     session: userSession,
     chartcode: userChartcode,
-    selector: selector
+    selector: selector,
+    include_advice: true
   }, session => {
+    // Show the chart this same call already drew, without waiting for the
+    // advice payload below. .graphic() points the plot widget at an
+    // existing session's graphics output, which is exactly what .rplot()
+    // does internally after its own r_fun_call().
+    $("#plotDiv").graphic(session);
+
     // Retrieve the returned object asynchronously
     session.getObject(output => {
       // Handle invalid chartcode
@@ -161,14 +181,27 @@ function initializeChartControls() {
       // Set UI elements based on returned data
       showCards(String(output.accordion));
 
+      // This session's .val is the advice list, not the grob, so
+      // updatesvg()'s "gTree[CHARTCODE]" parsing deliberately skipped it.
+      // Take the chartcode straight from the payload instead.
+      chartcode = String(output.chartcode);
+      document.getElementById("chartcode").innerHTML = chartcode;
+      document.getElementById("chartcode_dsc").innerHTML = chartcode;
+
       // Conditional UI adjustments
       const chartGroupElementId = output.side[0] === "dsc" ? "chartgrp_dsc" : "chartgrp";
       document.getElementById(chartGroupElementId).value = output.chartgrp.toString();
       if (output.side[0] === "dsc") {
         // Signal to update() to use D-score UI controls
         active = "ontwikkeling";
-        if (output.ga <= 36) document.getElementById(chartGroupElementId).value = "gsed1pt";
-        else document.getElementById(chartGroupElementId).value = "gsed1";
+        // Preterm D-score children get the gsed1pt chart. Mirrors
+        // select_chartgrp(): ga <= 36 is preterm, an unknown ga counts as
+        // term. Note this reads output.week, not output.ga -- initializer()
+        // returns the gestational age as "week" and has no "ga" element at
+        // all, so the previous output.ga test was always undefined <= 36,
+        // i.e. false, and every D-score child silently got gsed1.
+        document.getElementById(chartGroupElementId).value =
+          isPretermWeek(output.week) ? "gsed1pt" : "gsed1";
       }
       if (output.side[0] !== "dsc") {
         document.forms.msr[output.side[0]].checked = true;
@@ -187,10 +220,27 @@ function initializeChartControls() {
 
       // Final UI updates
       updateNoticePanel(1, session);
-      update();
 
       // Prep for subsequent calls
       selector = "derive";
+
+      // No update() here: the chart for these settings was already drawn
+      // by the include_advice call above and shown via .graphic(). Calling
+      // update() would issue a second, identical draw_chart() request.
+      //
+      // The D-score card is the exception. draw_chart() drew a growth
+      // chart, but the data are developmental, so the UI just switched to
+      // the "ontwikkeling" card and its own chartgrp (gsed1/gsed1pt) --
+      // settings the drawn chart does not reflect. Redraw for those.
+      //
+      // The interactive engine is likewise not covered by the grid-drawn
+      // chart, so it needs its own render pass too.
+      const wantsInteractive =
+        !document.getElementById("engine_interactive").disabled &&
+        document.getElementById("engine_interactive").checked;
+      if (output.side[0] === "dsc" || wantsInteractive) {
+        update();
+      }
     });
   });
 
@@ -207,11 +257,44 @@ function initializeChartControls() {
   });
 }
 
+// Gestational age in completed weeks from an initializer() payload, or
+// null when it is unavailable.
+//
+// week is target$psn$ga, which bdsreader derives as trunc(gad / 7) from
+// BDS 82 (gestational age in days) -- so it is always whole weeks, and
+// needs no rounding by the caller.
+//
+// It can be unavailable in two ways, neither of which is a JSON null:
+//   - no ga element at all -> toJSON() emits "week":{}, so output.week is
+//     an object, and output.week[0] is undefined;
+//   - ga is NA (e.g. no BDS 82 in the data) -> toJSON() emits
+//     "week":["NA"], i.e. the *string* "NA", which Number() turns into NaN
+//     rather than anything falsy.
+// Number.isFinite() is what actually catches the second case; the explicit
+// undefined/null test just avoids Number(undefined) and keeps the intent
+// readable.
+function getWeek(week) {
+  const raw = week ? week[0] : undefined;
+  if (raw === undefined || raw === null) return null;
+  const num = Number(raw);
+  return Number.isFinite(num) ? num : null;
+}
+
+// Preterm iff a known gestational age of 36 weeks or less, matching
+// select_chartgrp(): an unknown ga counts as term there too.
+function isPretermWeek(week) {
+  const num = getWeek(week);
+  return num !== null && num <= 36;
+}
+
 function updateSliders(output) {
-  const weekNum = Math.trunc(Number(output.week[0]));
+  // Leave the week sliders at their defaults when ga is unavailable,
+  // rather than driving them to NaN.
+  const weekNum = getWeek(output.week);
+  if (weekNum === null) return;
   if (weekNum >= 25 && weekNum <= 36) {
-    updateWeekSlider("#weekslider", String(output.week[0]));
-    updateWeekSlider("#weekslider_dsc", String(output.week[0]));
+    updateWeekSlider("#weekslider", String(weekNum));
+    updateWeekSlider("#weekslider_dsc", String(weekNum));
   }
 }
 

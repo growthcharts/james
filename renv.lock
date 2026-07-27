@@ -2692,7 +2692,7 @@
     },
     "multikaart": {
       "Package": "multikaart",
-      "Version": "0.2.12",
+      "Version": "0.2.13",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Interactieve Diagrammen voor Groei en Ontwikkeling van Kinderen",
@@ -2705,7 +2705,7 @@
       "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.3",
       "Depends": [
-        "R (>= 2.10)"
+        "R (>= 4.1.0)"
       ],
       "Imports": [
         "brokenstick (>= 2.4.0)",
@@ -2718,10 +2718,8 @@
         "nlreferences",
         "plotly",
         "rlang",
-        "rmarkdown",
         "tidyr",
-        "utils",
-        "yaml"
+        "utils"
       ],
       "Suggests": [
         "bdsreader (>= 0.16.1)",
@@ -2730,14 +2728,15 @@
         "jamesdemodata (>= 0.11.0)",
         "testthat (>= 3.0.0)"
       ],
+      "Remotes": "growthcharts/bdsreader, growthcharts/brokenstick, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/chartplotter, growthcharts/donorloader, growthcharts/growthscreener, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "Config/testthat/edition": "3",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "multikaart",
-      "RemoteRef": "main",
-      "RemoteSha": "133d95fa4b6f1c4b87a6ba1add041e315b7aedc7",
-      "Remotes": "growthcharts/bdsreader, growthcharts/brokenstick, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/chartplotter, growthcharts/donorloader, growthcharts/growthscreener, growthcharts/jamesdemodata, growthcharts/nlreferences"
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "24183523291a46d08a96d6fc36d6088418beb0ab",
+      "NeedsCompilation": "no"
     },
     "nlme": {
       "Package": "nlme",

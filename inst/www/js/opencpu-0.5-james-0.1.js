@@ -412,17 +412,24 @@ if (!window.jQuery) {
         img_tag.src = img_url;
 
         // update the chartcode field
+        //
+        // draw_chart() normally returns the grob, which prints as
+        // "gTree[CHARTCODE]" -- hence the bracket slicing. With
+        // include_advice = TRUE it returns the advice list instead, whose
+        // print output also contains brackets ("[1] \"PT\"" ...), so match
+        // the grob form explicitly rather than taking the last [...] on
+        // the page: a mismatch means this session carries an advice list,
+        // and start.js sets the chartcode from that payload instead.
         var url = Location + "R/.val/print";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             var text = String(this.responseText);
-            text = text.substring(
-              text.lastIndexOf("[") + 1,
-              text.lastIndexOf("]"));
-            document.getElementById('chartcode').innerHTML = text;
-            document.getElementById('chartcode_dsc').innerHTML = text;
-            chartcode = text;
+            var m = text.match(/^\s*\w*[Gg]?[Tt]ree\[([A-Za-z0-9]+)\]/m);
+            if (!m) return;
+            document.getElementById('chartcode').innerHTML = m[1];
+            document.getElementById('chartcode_dsc').innerHTML = m[1];
+            chartcode = m[1];
           }
         };
         xhttp.open("GET", url, true);

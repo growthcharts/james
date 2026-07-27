@@ -40,11 +40,20 @@
 #'   or `"7.5m"`
 #' @param draw_grob Logical. Should chart be plotted on current device?
 #' Default is `TRUE`. For internal use only.
+#' @param include_advice Logical. If `TRUE`, return the chart advice list
+#' (as [convert_tgt_chartadvice()] would) instead of the `gTree`. The chart
+#' is still drawn, so the caller obtains both the rendered chart (from the
+#' session's `graphics/` path) and the UI settings (from `R/.val`) in a
+#' single call, saving a server round trip on the app's first render.
+#' Default is `FALSE`, which preserves the `gTree` return value that
+#' existing callers -- including the app's `rect[CHARTCODE]` chartcode
+#' parsing -- depend on.
 #' @param bds_data Legacy. Will disappear in Nov 2022. Use `txt` instead.
 #' @param ind_loc Legacy. Will disappear in Nov 2022. Use `loc` instead.
-#' @return A `gTree` object.
+#' @return A `gTree` object, or, if `include_advice = TRUE`, the chart
+#' advice list described in [convert_tgt_chartadvice()].
 #' @author Stef van Buuren 2021
-#' @seealso [select_chart()]
+#' @seealso [select_chart()], [convert_tgt_chartadvice()]
 #' @keywords server
 #' @examples
 #' fn <- system.file("testdata", "client3.json", package = "james")
@@ -74,6 +83,7 @@ draw_chart <- function(
   show_realized = FALSE,
   show_future = FALSE,
   draw_grob = TRUE,
+  include_advice = FALSE,
   loc = "",
   bds_data = "",
   ind_loc = "",
@@ -160,5 +170,24 @@ draw_chart <- function(
   if (draw_grob) {
     grid.draw(g)
   }
+
+  if (include_advice) {
+    # Return the UI settings instead of the grob, so the caller gets chart
+    # + settings from one call. The chart itself is unaffected: it has
+    # already been drawn onto the device above, and OpenCPU serves it from
+    # the session's graphics/ path independently of the return value.
+    #
+    # initializer() distinguishes only "data" (derive everything from the
+    # child) from "chartcode" (obey the given code). draw_chart()'s third
+    # mode, "derive", builds the chartcode from user-supplied UI arguments
+    # rather than the data, so from initializer()'s perspective the code is
+    # already fixed -- map it to "chartcode".
+    return(initializer(
+      selector = if (selector == "data") "data" else "chartcode",
+      target = tgt,
+      chartcode = chartcode
+    ))
+  }
+
   invisible(g)
 }

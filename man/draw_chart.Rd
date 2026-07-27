@@ -28,6 +28,7 @@ draw_chart(
   show_realized = FALSE,
   show_future = FALSE,
   draw_grob = TRUE,
+  include_advice = FALSE,
   loc = "",
   bds_data = "",
   ind_loc = "",
@@ -117,6 +118,15 @@ growth of the target child should be drawn}
 \item{draw_grob}{Logical. Should chart be plotted on current device?
 Default is \code{TRUE}. For internal use only.}
 
+\item{include_advice}{Logical. If \code{TRUE}, return the chart advice list
+(as \code{\link[=convert_tgt_chartadvice]{convert_tgt_chartadvice()}} would) instead of the \code{gTree}. The chart
+is still drawn, so the caller obtains both the rendered chart (from the
+session's \verb{graphics/} path) and the UI settings (from \code{R/.val}) in a
+single call, saving a server round trip on the app's first render.
+Default is \code{FALSE}, which preserves the \code{gTree} return value that
+existing callers -- including the app's \code{rect[CHARTCODE]} chartcode
+parsing -- depend on.}
+
 \item{loc}{Deprecated. Use \code{session} instead.}
 
 \item{bds_data}{Legacy. Will disappear in Nov 2022. Use \code{txt} instead.}
@@ -126,7 +136,8 @@ Default is \code{TRUE}. For internal use only.}
 \item{...}{Ignored}
 }
 \value{
-A \code{gTree} object.
+A \code{gTree} object, or, if \code{include_advice = TRUE}, the chart
+advice list described in \code{\link[=convert_tgt_chartadvice]{convert_tgt_chartadvice()}}.
 }
 \description{
 The function \code{draw_chart()} plots individual data on the growth chart.
@@ -136,7 +147,7 @@ fn <- system.file("testdata", "client3.json", package = "james")
 g <- draw_chart(txt = fn)
 }
 \seealso{
-\code{\link[=select_chart]{select_chart()}}
+\code{\link[=select_chart]{select_chart()}}, \code{\link[=convert_tgt_chartadvice]{convert_tgt_chartadvice()}}
 }
 \author{
 Stef van Buuren 2021
