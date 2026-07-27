@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,7 @@
 <span>  show_realized <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_future <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  draw_grob <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  include_advice <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  loc <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  bds_data <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  ind_loc <span class="op">=</span> <span class="st">""</span>,</span>
@@ -210,6 +211,17 @@ growth of the target child should be drawn</p></dd>
 Default is <code>TRUE</code>. For internal use only.</p></dd>
 
 
+<dt id="arg-include-advice">include_advice<a class="anchor" aria-label="anchor" href="#arg-include-advice"></a></dt>
+<dd><p>Logical. If <code>TRUE</code>, return the chart advice list
+(as <code><a href="convert_tgt_chartadvice.html">convert_tgt_chartadvice()</a></code> would) instead of the <code>gTree</code>. The chart
+is still drawn, so the caller obtains both the rendered chart (from the
+session's <code>graphics/</code> path) and the UI settings (from <code>R/.val</code>) in a
+single call, saving a server round trip on the app's first render.
+Default is <code>FALSE</code>, which preserves the <code>gTree</code> return value that
+existing callers – including the app's <code>rect[CHARTCODE]</code> chartcode
+parsing – depend on.</p></dd>
+
+
 <dt id="arg-loc">loc<a class="anchor" aria-label="anchor" href="#arg-loc"></a></dt>
 <dd><p>Deprecated. Use <code>session</code> instead.</p></dd>
 
@@ -228,11 +240,12 @@ Default is <code>TRUE</code>. For internal use only.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>gTree</code> object.</p>
+    <p>A <code>gTree</code> object, or, if <code>include_advice = TRUE</code>, the chart
+advice list described in <code><a href="convert_tgt_chartadvice.html">convert_tgt_chartadvice()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="select_chart.html">select_chart()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="select_chart.html">select_chart()</a></code>, <code><a href="convert_tgt_chartadvice.html">convert_tgt_chartadvice()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

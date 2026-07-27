@@ -1,5 +1,30 @@
 # Changelog
 
+## james 1.14.2 (July 2026)
+
+- [`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
+  gains an `include_advice` argument: when set, the chart is still drawn
+  as usual, but the call returns the chart advice list (`chartgrp`,
+  `agegrp`, `side`, `population`, `sex`, `week`, `accordion`, `dnr`,
+  `period`, `slider_list`) instead of the grob. Default `FALSE`, so
+  existing callers are unaffected
+- The `/site` demo app’s first render now uses `include_advice` to
+  obtain the initial chart and its derived UI settings from a single
+  request, instead of a
+  [`convert_tgt_chartadvice()`](https://growthcharts.org/james/reference/convert_tgt_chartadvice.md)
+  call followed by a
+  [`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
+  call whose parameters were read back off the just-populated controls
+- Fix the D-score card’s chart-group choice always resolving to term
+  (`gsed1`), never preterm (`gsed1pt`): it compared against a field the
+  app’s initializer payload never provides, so the preterm check
+  silently always failed
+- Bump the `multikaart` import floor to 0.2.13, which removes a `pandoc`
+  subprocess call from
+  [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md)’s
+  HTML assembly (roughly 1.3s down to 0.05s on a cold call), with
+  byte-for-byte identical rendered output
+
 ## james 1.14.1 (July 2026)
 
 - Add a fixed/interactive engine toggle to the `/site` demo app: a

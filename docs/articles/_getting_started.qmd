@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.14.1 (July 2026)
+subtitle: JAMES 1.14.2 (July 2026)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -28,7 +28,7 @@ format:
 # "test"     : james.groeigrammen.nl (default)
 # "acc"      : acceptance server (authenticated)
 # "prod"     : production server (authenticated)
-target_host <- "dev"
+target_host <- "acc"
 
 # Available hosts
 hosts <- list(

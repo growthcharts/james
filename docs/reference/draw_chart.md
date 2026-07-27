@@ -29,6 +29,7 @@ draw_chart(
   show_realized = FALSE,
   show_future = FALSE,
   draw_grob = TRUE,
+  include_advice = FALSE,
   loc = "",
   bds_data = "",
   ind_loc = "",
@@ -165,6 +166,17 @@ draw_chart(
   Logical. Should chart be plotted on current device? Default is `TRUE`.
   For internal use only.
 
+- include_advice:
+
+  Logical. If `TRUE`, return the chart advice list (as
+  [`convert_tgt_chartadvice()`](https://growthcharts.org/james/reference/convert_tgt_chartadvice.md)
+  would) instead of the `gTree`. The chart is still drawn, so the caller
+  obtains both the rendered chart (from the session's `graphics/` path)
+  and the UI settings (from `R/.val`) in a single call, saving a server
+  round trip on the app's first render. Default is `FALSE`, which
+  preserves the `gTree` return value that existing callers – including
+  the app's `rect[CHARTCODE]` chartcode parsing – depend on.
+
 - loc:
 
   Deprecated. Use `session` instead.
@@ -183,11 +195,14 @@ draw_chart(
 
 ## Value
 
-A `gTree` object.
+A `gTree` object, or, if `include_advice = TRUE`, the chart advice list
+described in
+[`convert_tgt_chartadvice()`](https://growthcharts.org/james/reference/convert_tgt_chartadvice.md).
 
 ## See also
 
-[`select_chart()`](https://growthcharts.org/james/reference/select_chart.md)
+[`select_chart()`](https://growthcharts.org/james/reference/select_chart.md),
+[`convert_tgt_chartadvice()`](https://growthcharts.org/james/reference/convert_tgt_chartadvice.md)
 
 ## Author
 

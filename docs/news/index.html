@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,14 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.14.2" id="james-1142-july-2026">james 1.14.2 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1142-july-2026"></a></h2>
+<ul><li>
+<code><a href="../reference/draw_chart.html">draw_chart()</a></code> gains an <code>include_advice</code> argument: when set, the chart is still drawn as usual, but the call returns the chart advice list (<code>chartgrp</code>, <code>agegrp</code>, <code>side</code>, <code>population</code>, <code>sex</code>, <code>week</code>, <code>accordion</code>, <code>dnr</code>, <code>period</code>, <code>slider_list</code>) instead of the grob. Default <code>FALSE</code>, so existing callers are unaffected</li>
+<li>The <code>/site</code> demo app’s first render now uses <code>include_advice</code> to obtain the initial chart and its derived UI settings from a single request, instead of a <code><a href="../reference/convert_tgt_chartadvice.html">convert_tgt_chartadvice()</a></code> call followed by a <code><a href="../reference/draw_chart.html">draw_chart()</a></code> call whose parameters were read back off the just-populated controls</li>
+<li>Fix the D-score card’s chart-group choice always resolving to term (<code>gsed1</code>), never preterm (<code>gsed1pt</code>): it compared against a field the app’s initializer payload never provides, so the preterm check silently always failed</li>
+<li>Bump the <code>multikaart</code> import floor to 0.2.13, which removes a <code>pandoc</code> subprocess call from <code><a href="../reference/embed_chart.html">embed_chart()</a></code>’s HTML assembly (roughly 1.3s down to 0.05s on a cold call), with byte-for-byte identical rendered output</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.14.1" id="james-1141-july-2026">james 1.14.1 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1141-july-2026"></a></h2>
 <ul><li>Add a fixed/interactive engine toggle to the <code>/site</code> demo app: a single “Interactief” checkbox switches the sidebar’s chart between the existing grid (SVG) rendering and the new interactive (plotly) rendering via <code><a href="../reference/embed_chart.html">embed_chart()</a></code>, for both the Groei and Ontwikkeling cards. A4 chart layouts (<code>msr</code> front/back) grey out the checkbox and always fall back to grid, since no interactive version of those layouts exists</li>
