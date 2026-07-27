@@ -1,3 +1,14 @@
+# Summary: what's new in 1.14.0-1.14.2 (July 2026)
+
+Big news this round: JAMES charts can now be interactive! The new `charts/embed` endpoint gives charts a whole new architecture, moving from a static image to a living, embeddable HTML widget — and that opens the door to a much richer chart experience. The first feature to land: hover tooltips, so users can point at any part of a curve and see the exact values behind it, instead of having to eyeball the axes. More interactive features are expected to build on this same foundation going forward.
+
+In the [demo app](https://james.groeidiagrammen.nl/site?interactive=true), this new feature is already on display:
+
+- A new "Instellingen" (Settings) panel gathers display options — curve smoothing, the interactive toggle, and a size slider for interactive charts — in one place instead of scattering them across cards.
+- A new "Interactief" checkbox lets users switch a chart between the classic static image and the new interactive version — hover for tooltips and explore the data directly — for both growth and development charts. (Some print-style layouts don't support this yet and stay static.)
+- Charts load noticeably faster now: the app's very first chart used to need two round trips to the server before it appeared (one to work out chart settings from the uploaded data, one to draw the chart); it now needs only one. Separately, generating an interactive chart's HTML no longer runs through a slow external document-conversion step.
+- Along the way, several bugs were fixed: curve smoothing now actually applies to interactive charts, an interactive chart no longer gets cut short when only part of a curve was requested, D-score charts use the correct color scheme in interactive mode, and a chart-group selection bug that could silently pick the wrong (term vs. preterm) growth standard is resolved.
+
 # james 1.14.2 (July 2026)
 
 - `draw_chart()` gains an `include_advice` argument: when set, the chart is still drawn as usual, but the call returns the chart advice list (`chartgrp`, `agegrp`, `side`, `population`, `sex`, `week`, `accordion`, `dnr`, `period`, `slider_list`) instead of the grob. Default `FALSE`, so existing callers are unaffected
