@@ -67,25 +67,25 @@ document.getElementById('show_proeftuin').addEventListener('change', function() 
 
 // Event attachment for UI controls: accordion
 document.addEventListener('DOMContentLoaded', function() {
-  // Create a mapping of element IDs to the function arguments they correspond to.
-  // This assumes toggleDisplay accepts two arguments for divs to show/hide.
-  const linksToToggle = {
-    'groei': ['plotDiv', 'textDiv'],
-    'ontwikkeling': ['plotDiv', 'textDiv'],
-    'voorspeller': ['plotDiv', 'textDiv'],
-    'meldingen': ['textDiv', 'plotDiv']
+  // Which single panel each accordion link shows -- showPanel() (in
+  // update.js) hides the other two, so panels never overlap regardless
+  // of which one was showing before.
+  const linksToPanel = {
+    'groei': 'plotDiv',
+    'ontwikkeling': 'plotDiv',
+    'voorspeller': 'plotDiv',
+    'meldingen': 'textDiv'
   };
 
   // Iterate over the entries in the mapping object.
-  Object.entries(linksToToggle).forEach(([id, divs]) => {
+  Object.entries(linksToPanel).forEach(([id, panel]) => {
     const link = document.getElementById(id);
     if (link) { // Check if the element exists to avoid null reference errors
       link.addEventListener('click', function(event) {
         // Prevent the default action if it's a link or a button inside a form
         event.preventDefault();
 
-        // Call toggleDisplay with the div IDs specific to this link
-        toggleDisplay(...divs);
+        showPanel(panel);
       });
     }
   });
@@ -315,10 +315,6 @@ function setEthnicity(population) {
   }
 }
 
-function toggleDisplay(divToShow, divToHide) {
-  $(`#${divToHide}`).hide(500);
-  $(`#${divToShow}`).show(500);
-}
 
 function showCards(show = "all") {
   if (show == "all") {

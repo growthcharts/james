@@ -33,18 +33,6 @@ function loadProeftuinPreview() {
   ocpu.rpc("preview_screeners", args, data => renderDataTable("#screenersTable", data));
 }
 
-// Swap the chart panel for the preview panel (or back), matching the
-// pattern in update.js's ensureEngineDiv()/clearEmbedWrapper() of hiding
-// rather than removing DOM so re-showing needs no re-render.
-function showProeftuinPanel() {
-  $("#plotDiv").hide();
-  $("#proeftuinPanel").show();
-}
-function hideProeftuinPanel() {
-  $("#proeftuinPanel").hide();
-  $("#plotDiv").show();
-}
-
 // Load once, the first time the Proeftuin card is actually expanded --
 // not on checkbox-toggle (that only shows/hides the card) and not eagerly
 // on page load, to avoid 3 extra requests for users who never open it.
@@ -53,20 +41,31 @@ function hideProeftuinPanel() {
 // bound with jQuery's .on() -- addEventListener never sees them.
 let proeftuinLoaded = false;
 $("#collapseProeftuin").on("show.bs.collapse", function() {
-  showProeftuinPanel();
+  showPanel("proeftuinPanel");
   if (proeftuinLoaded) return;
   proeftuinLoaded = true;
   loadProeftuinPreview();
 });
-$("#collapseProeftuin").on("hide.bs.collapse", hideProeftuinPanel);
+
+// The three Proeftuin sub-sections, each showing exactly one of the
+// three data previews inside #proeftuinPanel.
+const PROEFTUIN_SECTIONS = ["persondataSection", "timedataSection", "screenersSection"];
+
+function showProeftuinSection(sectionId) {
+  PROEFTUIN_SECTIONS.forEach(id => {
+    $(`#${id}`).toggle(id === sectionId);
+  });
+}
 
 $("#showKinddata").on("click", function(e) {
   e.preventDefault();
-  $("#screenersSection").hide();
-  $("#kinddataSection").show();
+  showProeftuinSection("persondataSection");
+});
+$("#showMeetdata").on("click", function(e) {
+  e.preventDefault();
+  showProeftuinSection("timedataSection");
 });
 $("#showScreeners").on("click", function(e) {
   e.preventDefault();
-  $("#kinddataSection").hide();
-  $("#screenersSection").show();
+  showProeftuinSection("screenersSection");
 });

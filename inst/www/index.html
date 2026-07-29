@@ -246,8 +246,9 @@
                 <!-- Tables render in the wide plotcontainer panel (too many
                      columns for this narrow sidebar) -- these just pick
                      which preview shows there. See proeftuin.js. -->
-                <a href="#" id="showKinddata" class="proeftuin-link">Kinddata (bdsreader)</a><br>
-                <a href="#" id="showScreeners" class="proeftuin-link">Screeningsresultaten (growthscreener)</a><br>
+                <a href="#" id="showKinddata" class="proeftuin-link">Kinddata</a><br>
+                <a href="#" id="showMeetdata" class="proeftuin-link">Meetdata</a><br>
+                <a href="#" id="showScreeners" class="proeftuin-link">Screening</a><br>
               </div>
             </div>
           </div>
@@ -280,14 +281,16 @@
              that don't fit the narrow sidebar. Hidden until the Proeftuin
              card is opened (see proeftuin.js). -->
         <div id="proeftuinPanel" style="display: none;">
-          <div id="kinddataSection">
-            <h6>Persoonsgegevens</h6>
+          <div id="persondataSection">
+            <h6>Kinddata</h6>
             <table id="persondataTable" class="display" style="width:100%"></table>
-            <h6>Meetreeks</h6>
+          </div>
+          <div id="timedataSection" style="display: none;">
+            <h6>Meetdata</h6>
             <table id="timedataTable" class="display" style="width:100%"></table>
           </div>
           <div id="screenersSection" style="display: none;">
-            <h6>Screeningsresultaten</h6>
+            <h6>Screening</h6>
             <table id="screenersTable" class="display" style="width:100%"></table>
           </div>
         </div>
