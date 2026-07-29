@@ -12,7 +12,7 @@
 // narrow sidebar -- these data frames have 6-16 columns, too many for the
 // col-sm-3 sidenav.
 
-function renderDataTable(selector, rows) {
+function renderDataTable(selector, rows, pageLength = 20) {
   if ($.fn.DataTable.isDataTable(selector)) {
     $(selector).DataTable().destroy();
     $(selector).empty();
@@ -22,7 +22,7 @@ function renderDataTable(selector, rows) {
   $(selector).DataTable({
     data: rows,
     columns: columns,
-    pageLength: 5
+    pageLength: pageLength
   });
 }
 
