@@ -51,6 +51,12 @@ addChangeListenerThrottledUpdate('show_future');
 addChangeListenerThrottledUpdate('show_realized');
 addChangeListenerThrottledUpdate('engine_interactive');
 
+// "Proeftuin" is an experimental accordion card, hidden by default; the
+// Instellingen checkbox only toggles its visibility, no chart re-render
+document.getElementById('show_proeftuin').addEventListener('change', function() {
+  sr('proeftuincard', this.checked ? 'block' : 'none');
+}, false);
+
 // Event attachment for UI controls: radio buttons
 ["agegrp", "msr", "etnicity", "sex", "agegrp_dsc"].forEach(formName => {
   const radios = document.forms[formName].elements[formName];
