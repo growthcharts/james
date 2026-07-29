@@ -32,6 +32,7 @@ data exactly as \code{bdsreader} parses it, for inspection in the app.
 fn <- system.file("testdata", "client3.json", package = "james")
 preview_persondata(fn)
 preview_timedata(fn)
+preview_persondata()
 }
 \seealso{
 \code{\link[bdsreader:persondata]{bdsreader::persondata()}}, \code{\link[bdsreader:timedata]{bdsreader::timedata()}}

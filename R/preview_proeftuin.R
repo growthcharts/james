@@ -17,11 +17,15 @@
 #' fn <- system.file("testdata", "client3.json", package = "james")
 #' preview_persondata(fn)
 #' preview_timedata(fn)
+#' preview_persondata()
 #' @keywords server
 #' @export
 preview_persondata <- function(txt = "", session = "", format = "1.0", ...) {
   authenticate(...)
   tgt <- get_tgt(txt = txt, session = session, format = format)
+  if (is.null(tgt)) {
+    return(data.frame())
+  }
   bdsreader::persondata(tgt)
 }
 
@@ -30,6 +34,9 @@ preview_persondata <- function(txt = "", session = "", format = "1.0", ...) {
 preview_timedata <- function(txt = "", session = "", format = "1.0", ...) {
   authenticate(...)
   tgt <- get_tgt(txt = txt, session = session, format = format)
+  if (is.null(tgt)) {
+    return(data.frame())
+  }
   bdsreader::timedata(tgt)
 }
 
