@@ -101,3 +101,12 @@ h3 {
 .hidden {
   display: none;
 }
+
+/* Proeftuin: DataTables (Bootstrap4 integration) generates its own
+   .row wrappers for the length/search controls, table, and pagination.
+   The global ".row { height: 1400px; }" rule above -- sized for the
+   outer container-fluid row so .sidenav can be 100% tall -- otherwise
+   cascades into these and blows up the table to 3x1400px of blank space. */
+.dataTables_wrapper .row {
+  height: auto;
+}
