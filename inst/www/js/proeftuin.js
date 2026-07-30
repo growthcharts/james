@@ -12,8 +12,22 @@
 // narrow sidebar -- these data frames have 6-16 columns, too many for the
 // col-sm-3 sidenav.
 
+// Screener advice codes end in a two-digit sub-code that groups their
+// severity (see growthscreener's messages table): 10-30 = can't be
+// determined, 31-39 = normal, 41-69 = refer, 71-89 = look wider. Colors
+// follow the dataviz skill's fixed status palette (good/warning/serious),
+// with "can't be determined" left neutral since it's not a judgement
+// about the child, just a data/technical gap.
+function screeningSeverityColor(code) {
+  const sub = Number(code) % 100;
+  if (sub >= 31 && sub <= 39) return "#0ca30c"; // normaal -- good
+  if (sub >= 41 && sub <= 69) return "#ec835a"; // verwijzen -- serious
+  if (sub >= 71 && sub <= 89) return "#fab219"; // kijk breder -- warning
+  return "#c3c2b7"; // kan niet bepalen (10-30) -- neutral
+}
+
 function renderDataTable(selector, rows, options = {}) {
-  const { pageLength = 20, columnOrder = null, hideColumns = [], labels = {} } = options;
+  const { pageLength = 20, columnOrder = null, hideColumns = [], labels = {}, severityColumn = null } = options;
 
   if ($.fn.DataTable.isDataTable(selector)) {
     $(selector).DataTable().destroy();
@@ -53,7 +67,17 @@ function renderDataTable(selector, rows, options = {}) {
     // the most recent occasion is on top; DataTables' own default of
     // sorting by the first column ascending would otherwise override that
     // the moment a "Leeftijd" column happens to come first.
-    order: []
+    order: [],
+    // Subtle severity cue: a colored left border on the row's first cell,
+    // not a filled background or colored text -- identity/urgency is
+    // carried by an accent, so the advice text itself stays fully legible.
+    // Set on the <td> rather than the <tr>: border-collapse on the table
+    // element means a border on the row itself does not reliably paint.
+    rowCallback: severityColumn
+      ? (row, data) => {
+          row.cells[0].style.borderLeft = `4px solid ${screeningSeverityColor(data[severityColumn])}`;
+        }
+      : undefined
   });
 }
 
@@ -67,7 +91,8 @@ function loadProeftuinPreview() {
     labels: {
       CategorieOmschrijving: "Groei",
       CodeOmschrijving: "Advies"
-    }
+    },
+    severityColumn: "Code"
   }));
 }
 
