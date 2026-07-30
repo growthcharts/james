@@ -71,10 +71,12 @@ function renderDataTable(selector, rows, options = {}) {
     columns: columns,
     pageLength: pageLength,
     // R already sorts these rows (yname/category, then descending age) so
-    // the most recent occasion is on top; DataTables' own default of
-    // sorting by the first column ascending would otherwise override that
-    // the moment a "Leeftijd" column happens to come first.
-    order: [],
+    // the most recent occasion is on top. Disable interactive sorting
+    // entirely (not just the initial order): a user click-sorting a
+    // column would still reorder the rows themselves, silently breaking
+    // both that meaning and the groupColumn spacing above, which assumes
+    // rows arrive in the server's grouped order.
+    ordering: false,
     rowCallback: (row, data, displayIndex, displayIndexFull) => {
       // Subtle severity cue: a colored left border on the row's first
       // cell, not a filled background or colored text -- identity/urgency
