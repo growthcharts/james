@@ -27,7 +27,14 @@ function screeningSeverityColor(code) {
 }
 
 function renderDataTable(selector, rows, options = {}) {
-  const { pageLength = 20, columnOrder = null, hideColumns = [], labels = {}, severityColumn = null } = options;
+  const {
+    pageLength = 20,
+    columnOrder = null,
+    hideColumns = [],
+    labels = {},
+    severityColumn = null,
+    groupColumn = null
+  } = options;
 
   if ($.fn.DataTable.isDataTable(selector)) {
     $(selector).DataTable().destroy();
@@ -68,23 +75,39 @@ function renderDataTable(selector, rows, options = {}) {
     // sorting by the first column ascending would otherwise override that
     // the moment a "Leeftijd" column happens to come first.
     order: [],
-    // Subtle severity cue: a colored left border on the row's first cell,
-    // not a filled background or colored text -- identity/urgency is
-    // carried by an accent, so the advice text itself stays fully legible.
-    // Set on the <td> rather than the <tr>: border-collapse on the table
-    // element means a border on the row itself does not reliably paint.
-    rowCallback: severityColumn
-      ? (row, data) => {
-          row.cells[0].style.borderLeft = `4px solid ${screeningSeverityColor(data[severityColumn])}`;
+    rowCallback: (row, data, index) => {
+      // Subtle severity cue: a colored left border on the row's first
+      // cell, not a filled background or colored text -- identity/urgency
+      // is carried by an accent, so the advice text itself stays fully
+      // legible. Set on the <td> rather than the <tr>: border-collapse
+      // on the table element means a border on the row itself does not
+      // reliably paint.
+      if (severityColumn) {
+        row.cells[0].style.borderLeft = `4px solid ${screeningSeverityColor(data[severityColumn])}`;
+      }
+      // Extra breathing room above the first row of each new group (e.g.
+      // a new "yname" in Metingen, a new "Groei" category in
+      // Richtlijnen), so scanning the table reads as sections rather
+      // than one undifferentiated list. Compares against the previous
+      // row in the currently *displayed* order (DataTables' internal
+      // data array, via index), which already matches order: [] above.
+      if (groupColumn) {
+        const table = $(selector).DataTable();
+        const prev = index > 0 ? table.row(index - 1).data() : null;
+        if (!prev || prev[groupColumn] !== data[groupColumn]) {
+          row.style.borderTop = "16px solid transparent";
         }
-      : undefined
+      }
+    }
   });
 }
 
 function loadProeftuinPreview() {
   const args = { txt: userText, session: userSession };
   ocpu.rpc("preview_persondata", args, data => renderDataTable("#persondataTable", data));
-  ocpu.rpc("preview_timedata", args, data => renderDataTable("#timedataTable", data));
+  ocpu.rpc("preview_timedata", args, data => renderDataTable("#timedataTable", data, {
+    groupColumn: "yname"
+  }));
   ocpu.rpc("preview_screeners", args, data => renderDataTable("#screenersTable", data, {
     columnOrder: ["Leeftijd"],
     hideColumns: ["Categorie", "Versie"],
@@ -92,7 +115,8 @@ function loadProeftuinPreview() {
       CategorieOmschrijving: "Groei",
       CodeOmschrijving: "Advies"
     },
-    severityColumn: "Code"
+    severityColumn: "Code",
+    groupColumn: "CategorieOmschrijving"
   }));
 }
 
