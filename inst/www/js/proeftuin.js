@@ -77,6 +77,14 @@ function renderDataTable(selector, rows, options = {}) {
     // both that meaning and the groupColumn spacing above, which assumes
     // rows arrive in the server's grouped order.
     ordering: false,
+    // Same reasoning for search: filtering changes which rows are
+    // present in the displayed set, so displayIndexFull no longer lines
+    // up with an unbroken previous row the way groupColumn's rowCallback
+    // assumes -- it read table.row(displayIndexFull - 1) as undefined
+    // the moment a filter excluded that row, crashing on data[groupColumn].
+    // These tables max out around 60 rows; paging covers browsing them
+    // fine without a search box.
+    searching: false,
     rowCallback: (row, data, displayIndex, displayIndexFull) => {
       // Subtle severity cue: a colored left border on the row's first
       // cell, not a filled background or colored text -- identity/urgency
