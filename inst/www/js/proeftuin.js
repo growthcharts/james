@@ -34,7 +34,8 @@ function renderDataTable(selector, rows, options = {}) {
     labels = {},
     severityColumn = null,
     groupColumn = null,
-    groupOrder = null
+    groupOrder = null,
+    decimalOverrides = {}
   } = options;
 
   if ($.fn.DataTable.isDataTable(selector)) {
@@ -81,15 +82,17 @@ function renderDataTable(selector, rows, options = {}) {
     keys = [...columnOrder.filter(key => allKeys.has(key)), ...rest];
   }
   keys = keys.filter(key => !hideColumns.includes(key));
-  // Right-align + pad every value in a numeric column to that column's
-  // own max decimal count (e.g. a column holding 0, 0.1013 and 2.0397
-  // renders as 0.0000, 0.1013, 2.0397), so the decimal point lands on
-  // the same character position every row -- true decimal-point
-  // alignment, not just a matching right edge (which tabular-nums alone
-  // gives you, but "0" and "2.0397" still don't line up on the point).
-  // Columns of whole numbers (e.g. "Code") get 0 decimals and are left
-  // untouched, rather than padded into "2075.0000".
+  // Right-align + pad every value in a numeric column to a fixed decimal
+  // count, so the decimal point lands on the same character position
+  // every row -- true decimal-point alignment, not just a matching right
+  // edge (which tabular-nums alone gives you, but "0" and "2.0397" still
+  // don't line up on the point). decimalOverrides sets a specific count
+  // per column (e.g. age/x = 3, y = 2); anything not listed there falls
+  // back to that column's own max decimal count across all rows. Columns
+  // of whole numbers (e.g. "Code") get 0 decimals and are left untouched,
+  // rather than padded into "2075.0000".
   const numericDecimals = key => {
+    if (key in decimalOverrides) return decimalOverrides[key];
     const values = rows.map(row => row[key]).filter(v => v !== null && v !== undefined && v !== "");
     if (!values.length || !values.every(v => !isNaN(Number(v)))) return null;
     return Math.max(0, ...values.map(v => {
@@ -186,7 +189,8 @@ function loadProeftuinPreview() {
   ocpu.rpc("preview_persondata", args, data => renderDataTable("#persondataTable", data));
   ocpu.rpc("preview_timedata", args, data => renderDataTable("#timedataTable", data, {
     groupColumn: "yname",
-    groupOrder: METINGEN_GROUP_ORDER
+    groupOrder: METINGEN_GROUP_ORDER,
+    decimalOverrides: { age: 3, x: 3, y: 2 }
   }));
   ocpu.rpc("preview_screeners", args, data => renderDataTable("#screenersTable", data, {
     columnOrder: ["Leeftijd"],
