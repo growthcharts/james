@@ -81,7 +81,36 @@ function renderDataTable(selector, rows, options = {}) {
     keys = [...columnOrder.filter(key => allKeys.has(key)), ...rest];
   }
   keys = keys.filter(key => !hideColumns.includes(key));
-  const columns = keys.map(key => ({ title: labels[key] || key, data: key, defaultContent: "" }));
+  // Right-align + pad every value in a numeric column to that column's
+  // own max decimal count (e.g. a column holding 0, 0.1013 and 2.0397
+  // renders as 0.0000, 0.1013, 2.0397), so the decimal point lands on
+  // the same character position every row -- true decimal-point
+  // alignment, not just a matching right edge (which tabular-nums alone
+  // gives you, but "0" and "2.0397" still don't line up on the point).
+  // Columns of whole numbers (e.g. "Code") get 0 decimals and are left
+  // untouched, rather than padded into "2075.0000".
+  const numericDecimals = key => {
+    const values = rows.map(row => row[key]).filter(v => v !== null && v !== undefined && v !== "");
+    if (!values.length || !values.every(v => !isNaN(Number(v)))) return null;
+    return Math.max(0, ...values.map(v => {
+      const s = String(v);
+      const i = s.indexOf(".");
+      return i === -1 ? 0 : s.length - i - 1;
+    }));
+  };
+  const columns = keys.map(key => {
+    const decimals = numericDecimals(key);
+    if (decimals === null) return { title: labels[key] || key, data: key, defaultContent: "" };
+    return {
+      title: labels[key] || key,
+      data: key,
+      defaultContent: "",
+      className: "text-right proeftuin-numeric",
+      render: (value) => (value === null || value === undefined || value === "")
+        ? ""
+        : Number(value).toFixed(decimals)
+    };
+  });
   $(selector).DataTable({
     data: rows,
     columns: columns,

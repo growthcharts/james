@@ -120,3 +120,11 @@ h3 {
   padding-left: 12px;
   padding-right: 12px;
 }
+
+/* Numeric Proeftuin columns (age, x, y, z, Leeftijd, ...): fixed-width
+   digits so decimal points land in the same horizontal position row to
+   row instead of drifting with digit count. Right-aligned via the
+   .text-right class applied alongside this in JS. */
+.proeftuin-numeric {
+  font-variant-numeric: tabular-nums;
+}
