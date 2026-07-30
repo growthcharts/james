@@ -17,7 +17,15 @@ function renderDataTable(selector, rows, pageLength = 20) {
     $(selector).DataTable().destroy();
     $(selector).empty();
   }
-  if (!rows || rows.length === 0) return;
+  // No data.frame() has no columns to build a table around -- show an
+  // explicit message instead of silently leaving an empty <table>, which
+  // otherwise looks like a rendering bug rather than "nothing to preview".
+  if (!rows || rows.length === 0) {
+    $(selector).html(
+      '<tbody><tr><td class="text-muted">Geen data beschikbaar (nog geen kind geüpload).</td></tr></tbody>'
+    );
+    return;
+  }
   const columns = Object.keys(rows[0]).map(key => ({ title: key, data: key }));
   $(selector).DataTable({
     data: rows,
