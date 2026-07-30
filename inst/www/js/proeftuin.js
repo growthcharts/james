@@ -135,7 +135,7 @@ $("#showScreeners").on("click", function(e) {
 
 // Feedback survey (Formbricks link survey): "onderdeel" is a recall hidden
 // field in the survey, so the question text itself becomes e.g. "Uw mening
-// over de bruikbaarheid van Kinddata" -- no per-section survey needed.
+// over de bruikbaarheid van Kindgegevens" -- no per-section survey needed.
 const PROEFTUIN_FEEDBACK_URL = "https://app.formbricks.com/s/cms77vlps13zs01q8vh4sb704";
 
 $(".proeftuin-feedback-btn").on("click", function() {
