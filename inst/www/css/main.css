@@ -112,8 +112,11 @@ h3 {
 }
 
 /* Proeftuin tables: cells otherwise inherit ~1px of padding from
-   elsewhere in the app's CSS, crowding adjacent data values together. */
+   elsewhere in the app's CSS, crowding adjacent data values together.
+   Horizontal only -- the original 1px vertical padding stays, so rows
+   don't grow taller than before. */
 .dataTables_wrapper table.dataTable th,
 .dataTables_wrapper table.dataTable td {
-  padding: 6px 12px;
+  padding-left: 12px;
+  padding-right: 12px;
 }

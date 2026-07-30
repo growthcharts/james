@@ -33,7 +33,8 @@ function renderDataTable(selector, rows, options = {}) {
     hideColumns = [],
     labels = {},
     severityColumn = null,
-    groupColumn = null
+    groupColumn = null,
+    groupOrder = null
   } = options;
 
   if ($.fn.DataTable.isDataTable(selector)) {
@@ -48,6 +49,21 @@ function renderDataTable(selector, rows, options = {}) {
       '<tbody><tr><td class="text-muted">Geen data beschikbaar (nog geen kind geüpload).</td></tr></tbody>'
     );
     return;
+  }
+  // groupOrder re-sorts rows by a fixed, clinically meaningful group
+  // order (e.g. Lengte, Gewicht, Hoofdomtrek) instead of R's alphabetical
+  // default, while preserving each group's existing internal order
+  // (descending age) via a stable sort. Groups not listed in groupOrder
+  // keep their relative position after the listed ones.
+  if (groupColumn && groupOrder) {
+    const rank = value => {
+      const i = groupOrder.indexOf(value);
+      return i === -1 ? groupOrder.length : i;
+    };
+    rows = rows
+      .map((row, i) => ({ row, i }))
+      .sort((a, b) => rank(a.row[groupColumn]) - rank(b.row[groupColumn]) || a.i - b.i)
+      .map(entry => entry.row);
   }
   // Union of keys across all rows, not just rows[0]: jsonlite drops NA
   // values from a row's JSON object entirely rather than serializing them
@@ -126,11 +142,22 @@ function renderDataTable(selector, rows, options = {}) {
   });
 }
 
+// Fixed, clinically meaningful group orders, replacing R's alphabetical
+// default (which put e.g. "Gewicht" before "Lengte", and "bmi"/"dsc"
+// before "hgt"). "Taal" (a language-development screener) isn't
+// screened by preview_screeners() yet -- calculate_advice_devlang()
+// needs different source data (vw41-vw46 items) that preview_screeners
+// doesn't extract from tgt today -- so it's omitted here for now rather
+// than added as a category with no rows.
+const RICHTLIJNEN_GROUP_ORDER = ["Lengte", "Gewicht", "Hoofdomtrek"];
+const METINGEN_GROUP_ORDER = ["hgt", "wgt", "wfh", "hdc", "dsc"];
+
 function loadProeftuinPreview() {
   const args = { txt: userText, session: userSession };
   ocpu.rpc("preview_persondata", args, data => renderDataTable("#persondataTable", data));
   ocpu.rpc("preview_timedata", args, data => renderDataTable("#timedataTable", data, {
-    groupColumn: "yname"
+    groupColumn: "yname",
+    groupOrder: METINGEN_GROUP_ORDER
   }));
   ocpu.rpc("preview_screeners", args, data => renderDataTable("#screenersTable", data, {
     columnOrder: ["Leeftijd"],
@@ -140,7 +167,8 @@ function loadProeftuinPreview() {
       CodeOmschrijving: "Advies"
     },
     severityColumn: "Code",
-    groupColumn: "CategorieOmschrijving"
+    groupColumn: "CategorieOmschrijving",
+    groupOrder: RICHTLIJNEN_GROUP_ORDER
   }));
 }
 
@@ -158,9 +186,12 @@ $("#collapseProeftuin").on("show.bs.collapse", function() {
   loadProeftuinPreview();
 });
 
-// The three Proeftuin sub-sections, each showing exactly one of the
-// three data previews inside #proeftuinPanel.
-const PROEFTUIN_SECTIONS = ["persondataSection", "timedataSection", "screenersSection"];
+// The two Proeftuin sub-sections, each showing exactly one preview
+// inside #proeftuinPanel. Kindgegevens combines the fixed characteristics
+// (persondata, always one row) and the measurement history (timedata) as
+// two stacked tables under one heading, since browsing a child's fixed
+// facts and their measurements are usually the same task, not two.
+const PROEFTUIN_SECTIONS = ["screenersSection", "persondataSection"];
 
 function showProeftuinSection(sectionId) {
   PROEFTUIN_SECTIONS.forEach(id => {
@@ -171,10 +202,6 @@ function showProeftuinSection(sectionId) {
 $("#showKinddata").on("click", function(e) {
   e.preventDefault();
   showProeftuinSection("persondataSection");
-});
-$("#showMeetdata").on("click", function(e) {
-  e.preventDefault();
-  showProeftuinSection("timedataSection");
 });
 $("#showScreeners").on("click", function(e) {
   e.preventDefault();
