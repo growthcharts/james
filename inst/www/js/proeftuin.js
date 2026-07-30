@@ -75,7 +75,7 @@ function renderDataTable(selector, rows, options = {}) {
     // sorting by the first column ascending would otherwise override that
     // the moment a "Leeftijd" column happens to come first.
     order: [],
-    rowCallback: (row, data, index) => {
+    rowCallback: (row, data, displayIndex, displayIndexFull) => {
       // Subtle severity cue: a colored left border on the row's first
       // cell, not a filled background or colored text -- identity/urgency
       // is carried by an accent, so the advice text itself stays fully
@@ -89,8 +89,14 @@ function renderDataTable(selector, rows, options = {}) {
       // a new "yname" in Metingen, a new "Groei" category in
       // Richtlijnen), so scanning the table reads as sections rather
       // than one undifferentiated list. Compares against the previous
-      // row in the currently *displayed* order (DataTables' internal
-      // data array, via index), which already matches order: [] above.
+      // row in the currently *displayed* (filtered/sorted) order.
+      // rowCallback's 3rd argument (displayIndex) resets to 0 on every
+      // page -- comparing against table.row(displayIndex - 1) then reads
+      // the wrong row on any page after the first, e.g. row 0 of the
+      // whole table instead of the actual previous row on screen. The
+      // 4th argument (displayIndexFull) is the position within the full
+      // filtered/sorted result set, stable across pages, matching what
+      // order: [] above already fixes as the row order.
       // Uses padding-top on every cell, not border/margin on the <tr>:
       // with box-sizing: border-box (Bootstrap's default), a border on
       // a row whose height is already content-driven just eats into
@@ -99,9 +105,9 @@ function renderDataTable(selector, rows, options = {}) {
       // row reliably grows for. All cells need it, not just the first:
       // padding on a single cell only pushes that cell's own content
       // down, leaving the row's other columns misaligned against it.
-      if (groupColumn && index > 0) {
+      if (groupColumn && displayIndexFull > 0) {
         const table = $(selector).DataTable();
-        const prev = table.row(index - 1).data();
+        const prev = table.row(displayIndexFull - 1, { order: "current", search: "applied" }).data();
         if (prev[groupColumn] !== data[groupColumn]) {
           Array.from(row.cells).forEach(cell => { cell.style.paddingTop = "20px"; });
         }
