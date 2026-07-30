@@ -1742,44 +1742,43 @@
     },
     "growthscreener": {
       "Package": "growthscreener",
-      "Version": "1.25.0",
+      "Version": "1.28.0",
       "Source": "GitHub",
       "Title": "Finding Children with Unusual Growth Patterns",
       "Authors@R": "c(person(given = \"Paula\", family = \"van Dommelen\", role = c(\"aut\", \"cre\"), email = \"paula.vandommelen@tno.nl\"), person(given = \"Stef\", family = \"van Buuren\", role = c(\"aut\"), email = \"stef.vanbuuren@tno.nl\"), person(given = \"Arjan\",  family = \"Huizing\",  role = c(\"aut\"), email = \"arjan.huizing@tno.nl\"))",
       "Description": "Unusual child growth and development may be a sign of an underlying  disease or condition. This package implements functions that evaluate  growth and developmental patterns of a target child relative to Dutch  guidelines. Contains tools to detect unusual growth in height, weight and  head circumference, and unusual language development.",
       "Depends": [
-        "R (>= 3.5.0)",
+        "R (>= 4.1.0)",
         "nlreferences (>= 0.12.1)"
       ],
       "Imports": [
-        "bdsreader (>= 0.16.1)",
         "centile (>= 0.12.1)",
         "dplyr",
-        "methods",
-        "rlang",
         "tidyr",
         "tidyselect"
       ],
       "Suggests": [
+        "bdsreader (>= 0.16.1)",
         "jamesdemodata (>= 0.7.0)",
         "jsonlite",
         "testthat (>= 2.1.0)"
       ],
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "License": "AGPL-3 + file LICENSE",
       "Encoding": "UTF-8",
       "LazyData": "true",
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://growthcharts.org/growthscreener/",
       "RoxygenNote": "7.3.3",
-      "Author": "Paula van Dommelen [aut, cre], Stef van Buuren [aut], Arjan Huizing [aut]",
-      "Maintainer": "Paula van Dommelen <paula.vandommelen@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "growthcharts",
       "RemoteRepo": "growthscreener",
-      "RemoteRef": "master",
-      "RemoteSha": "1b5ba7252e2b00bb75e09fc2999baeb3fc6926cb",
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences"
+      "RemoteUsername": "growthcharts",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "3a0327dec2d395c070a0f1d631b66639e6703fbc",
+      "NeedsCompilation": "no",
+      "Author": "Paula van Dommelen [aut, cre], Stef van Buuren [aut], Arjan Huizing [aut]",
+      "Maintainer": "Paula van Dommelen <paula.vandommelen@tno.nl>"
     },
     "gtable": {
       "Package": "gtable",

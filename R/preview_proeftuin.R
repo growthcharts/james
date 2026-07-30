@@ -94,5 +94,11 @@ preview_screeners <- function(
     return(data.frame())
   }
   out <- do.call(rbind, results)
+  # screen_curves_ind() calls growthscreener:::msg() internally with its
+  # default prefix = TRUE, prepending "Het advies volgens de JGZ-richtlijn
+  # ... is als volgt: " to every advice message. That's redundant here:
+  # the Proeftuin table already shows the measure in its own "Groei"
+  # column, so re-derive CodeOmschrijving with prefix = FALSE instead.
+  out$CodeOmschrijving <- growthscreener::msg(out$Code, prefix = FALSE)
   out[order(out$CategorieOmschrijving, -out$Leeftijd), ]
 }
