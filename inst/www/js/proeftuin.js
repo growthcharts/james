@@ -91,11 +91,19 @@ function renderDataTable(selector, rows, options = {}) {
       // than one undifferentiated list. Compares against the previous
       // row in the currently *displayed* order (DataTables' internal
       // data array, via index), which already matches order: [] above.
-      if (groupColumn) {
+      // Uses padding-top on every cell, not border/margin on the <tr>:
+      // with box-sizing: border-box (Bootstrap's default), a border on
+      // a row whose height is already content-driven just eats into
+      // that space instead of adding to it, and <tr> ignores margin
+      // entirely -- padding on a cell is the one box property a table
+      // row reliably grows for. All cells need it, not just the first:
+      // padding on a single cell only pushes that cell's own content
+      // down, leaving the row's other columns misaligned against it.
+      if (groupColumn && index > 0) {
         const table = $(selector).DataTable();
-        const prev = index > 0 ? table.row(index - 1).data() : null;
-        if (!prev || prev[groupColumn] !== data[groupColumn]) {
-          row.style.borderTop = "16px solid transparent";
+        const prev = table.row(index - 1).data();
+        if (prev[groupColumn] !== data[groupColumn]) {
+          Array.from(row.cells).forEach(cell => { cell.style.paddingTop = "20px"; });
         }
       }
     }
