@@ -182,7 +182,7 @@ function renderDataTable(selector, rows, options = {}) {
 // doesn't extract from tgt today -- so it's omitted here for now rather
 // than added as a category with no rows.
 const RICHTLIJNEN_GROUP_ORDER = ["Lengte", "Gewicht", "Hoofdomtrek"];
-const METINGEN_GROUP_ORDER = ["hgt", "wgt", "wfh", "hdc", "dsc"];
+const METINGEN_GROUP_ORDER = ["hgt", "wgt", "wfh", "bmi", "hdc", "dsc"];
 
 function loadProeftuinPreview() {
   const args = { txt: userText, session: userSession };
