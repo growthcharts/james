@@ -12,7 +12,9 @@
 // narrow sidebar -- these data frames have 6-16 columns, too many for the
 // col-sm-3 sidenav.
 
-function renderDataTable(selector, rows, pageLength = 20) {
+function renderDataTable(selector, rows, options = {}) {
+  const { pageLength = 20, columnOrder = null, hideColumns = [], labels = {} } = options;
+
   if ($.fn.DataTable.isDataTable(selector)) {
     $(selector).DataTable().destroy();
     $(selector).empty();
@@ -34,11 +36,24 @@ function renderDataTable(selector, rows, pageLength = 20) {
   // throwing "Requested unknown parameter" for the missing key.
   const allKeys = new Set();
   rows.forEach(row => Object.keys(row).forEach(key => allKeys.add(key)));
-  const columns = Array.from(allKeys).map(key => ({ title: key, data: key, defaultContent: "" }));
+  // columnOrder pins specific keys to the front (e.g. "Leeftijd" first);
+  // any remaining keys keep their natural (insertion) order after that.
+  let keys = Array.from(allKeys);
+  if (columnOrder) {
+    const rest = keys.filter(key => !columnOrder.includes(key));
+    keys = [...columnOrder.filter(key => allKeys.has(key)), ...rest];
+  }
+  keys = keys.filter(key => !hideColumns.includes(key));
+  const columns = keys.map(key => ({ title: labels[key] || key, data: key, defaultContent: "" }));
   $(selector).DataTable({
     data: rows,
     columns: columns,
-    pageLength: pageLength
+    pageLength: pageLength,
+    // R already sorts these rows (yname/category, then descending age) so
+    // the most recent occasion is on top; DataTables' own default of
+    // sorting by the first column ascending would otherwise override that
+    // the moment a "Leeftijd" column happens to come first.
+    order: []
   });
 }
 
@@ -46,7 +61,14 @@ function loadProeftuinPreview() {
   const args = { txt: userText, session: userSession };
   ocpu.rpc("preview_persondata", args, data => renderDataTable("#persondataTable", data));
   ocpu.rpc("preview_timedata", args, data => renderDataTable("#timedataTable", data));
-  ocpu.rpc("preview_screeners", args, data => renderDataTable("#screenersTable", data));
+  ocpu.rpc("preview_screeners", args, data => renderDataTable("#screenersTable", data, {
+    columnOrder: ["Leeftijd"],
+    hideColumns: ["Categorie", "Versie"],
+    labels: {
+      CategorieOmschrijving: "Groei",
+      CodeOmschrijving: "Advies"
+    }
+  }));
 }
 
 // Load once, the first time the Proeftuin card is actually expanded --
