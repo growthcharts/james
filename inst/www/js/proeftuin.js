@@ -26,7 +26,15 @@ function renderDataTable(selector, rows, pageLength = 20) {
     );
     return;
   }
-  const columns = Object.keys(rows[0]).map(key => ({ title: key, data: key }));
+  // Union of keys across all rows, not just rows[0]: jsonlite drops NA
+  // values from a row's JSON object entirely rather than serializing them
+  // as null (e.g. a missing z-score for an out-of-range reference curve),
+  // so a column present in most rows can be absent from any given one.
+  // defaultContent renders those as an empty cell instead of DataTables
+  // throwing "Requested unknown parameter" for the missing key.
+  const allKeys = new Set();
+  rows.forEach(row => Object.keys(row).forEach(key => allKeys.add(key)));
+  const columns = Array.from(allKeys).map(key => ({ title: key, data: key, defaultContent: "" }));
   $(selector).DataTable({
     data: rows,
     columns: columns,
