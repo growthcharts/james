@@ -19,6 +19,20 @@ function ensureEngineDiv(newEngine) {
   return switching;
 }
 
+// The three mutually exclusive output panels in #plotcontainer: the chart
+// (plotDiv), the Meldingen notice panel (textDiv), and the Proeftuin
+// preview tables (proeftuinPanel). Switching to any one of them hides the
+// other two explicitly, so leftover content never shows through --
+// unlike a plain two-way show/hide toggle, which only knows about
+// whichever pair of panels the caller happened to pass in.
+const OUTPUT_PANELS = ["plotDiv", "textDiv", "proeftuinPanel"];
+
+function showPanel(panelId) {
+  OUTPUT_PANELS.forEach(id => {
+    $(`#${id}`).toggle(id === panelId);
+  });
+}
+
 function update() {
   // Use let for variables that may change within the function
   let msr, chartgrp, agegrp, population, ga;

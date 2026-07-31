@@ -27,7 +27,7 @@ Imports:
     curl,
     grDevices,
     grid (>= 4.1.0),
-    growthscreener (>= 1.25.0),
+    growthscreener (>= 1.28.0),
     httr,
     jamesclient (>= 0.35.0),
     jose,

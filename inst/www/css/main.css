@@ -101,3 +101,30 @@ h3 {
 .hidden {
   display: none;
 }
+
+/* Proeftuin: DataTables (Bootstrap4 integration) generates its own
+   .row wrappers for the length/search controls, table, and pagination.
+   The global ".row { height: 1400px; }" rule above -- sized for the
+   outer container-fluid row so .sidenav can be 100% tall -- otherwise
+   cascades into these and blows up the table to 3x1400px of blank space. */
+.dataTables_wrapper .row {
+  height: auto;
+}
+
+/* Proeftuin tables: cells otherwise inherit ~1px of padding from
+   elsewhere in the app's CSS, crowding adjacent data values together.
+   Horizontal only -- the original 1px vertical padding stays, so rows
+   don't grow taller than before. */
+.dataTables_wrapper table.dataTable th,
+.dataTables_wrapper table.dataTable td {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* Numeric Proeftuin columns (age, x, y, z, Leeftijd, ...): fixed-width
+   digits so decimal points land in the same horizontal position row to
+   row instead of drifting with digit count. Right-aligned via the
+   .text-right class applied alongside this in JS. */
+.proeftuin-numeric {
+  font-variant-numeric: tabular-nums;
+}

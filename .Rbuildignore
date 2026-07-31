@@ -13,3 +13,4 @@ README.Rmd
 ^LICENSE\.md$
 ^qmd$
 ^.host$
+^\.claude$

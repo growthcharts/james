@@ -1,3 +1,8 @@
+# james (development version)
+
+- New "Proeftuin" (experimental) card in the `/site` demo app, hidden behind a "Proeftuin" checkbox in Instellingen: it previews data JAMES computes internally but doesn't otherwise show, starting with the child's raw `bdsreader` data (person and time-level) and the `growthscreener` screening results, each in a searchable, sortable table
+- New exported functions `preview_persondata()`, `preview_timedata()`, and `preview_screeners()` back the Proeftuin card's tables; each accepts the same `txt`/`session` arguments as `apply_screeners()` and `upload_data()`
+
 # Summary: what's new in 1.14.0-1.14.2 (July 2026)
 
 Big news this round: JAMES charts can now be interactive! The new `charts/embed` endpoint gives charts a whole new architecture, moving from a static image to a living, embeddable HTML widget — and that opens the door to a much richer chart experience. The first feature to land: hover tooltips, so users can point at any part of a curve and see the exact values behind it, instead of having to eyeball the axes. More interactive features are expected to build on this same foundation going forward.
