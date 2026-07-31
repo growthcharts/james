@@ -1,4 +1,4 @@
-# james (development version)
+# james 1.15.0 (July 2026)
 
 - New "Proeftuin" (experimental) card in the `/site` demo app, hidden behind a "Proeftuin" checkbox in Instellingen: it previews data JAMES computes internally but doesn't otherwise show, starting with the child's raw `bdsreader` data (person and time-level) and the `growthscreener` screening results, each in a searchable, sortable table
 - New exported functions `preview_persondata()`, `preview_timedata()`, and `preview_screeners()` back the Proeftuin card's tables; each accepts the same `txt`/`session` arguments as `apply_screeners()` and `upload_data()`
