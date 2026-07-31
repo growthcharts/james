@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.15.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.15.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,11 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.15.1" id="james-1151-july-2026">james 1.15.1 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1151-july-2026"></a></h2>
+<ul><li>
+<code><a href="../reference/request_site.html">request_site()</a></code> gains an optional <code>endpointhost</code> argument: when set to a host different from <code>sitehost</code>, the returned URL carries an extra <code>?ocpuhost=</code> query parameter, so a site served from one host (e.g. a standalone <code>jamesapp</code> deployment) can point its <code>ocpu.rpc()</code> calls at a JAMES endpoints server on a different host. Defaults to <code>sitehost</code>, so existing callers are unaffected.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.15.0" id="james-1150-july-2026">james 1.15.0 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1150-july-2026"></a></h2>
 <ul><li>New “Proeftuin” (experimental) card in the <code>/site</code> demo app, hidden behind a “Proeftuin” checkbox in Instellingen: it previews data JAMES computes internally but doesn’t otherwise show, starting with the child’s raw <code>bdsreader</code> data (person and time-level) and the <code>growthscreener</code> screening results, each in a searchable, sortable table</li>

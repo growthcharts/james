@@ -10,6 +10,7 @@ URL.
 request_site(
   txt = "",
   sitehost = "",
+  endpointhost = sitehost,
   session = "",
   format = "3.0",
   upload = TRUE,
@@ -30,6 +31,17 @@ request_site(
 
   The server that renders the site. Defaults to
   `"http://localhost:8080"` if not specified.
+
+- endpointhost:
+
+  The server the site's `ocpu.rpc()` calls should target. Defaults to
+  `sitehost`, i.e. the same server renders the site and serves its JAMES
+  endpoints (today's setup). Set this when `sitehost` serves a
+  standalone `jamesapp` deployment that talks to a JAMES endpoints
+  server on a different host: the returned URL then carries an extra
+  `?ocpuhost=` query parameter that `jamesapp`'s
+  `opencpu-0.5-james-0.1.js` reads to point its RPC calls at
+  `endpointhost` instead of assuming same-origin.
 
 - session:
 

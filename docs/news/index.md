@@ -1,5 +1,15 @@
 # Changelog
 
+## james 1.15.1 (July 2026)
+
+- [`request_site()`](https://growthcharts.org/james/reference/request_site.md)
+  gains an optional `endpointhost` argument: when set to a host
+  different from `sitehost`, the returned URL carries an extra
+  `?ocpuhost=` query parameter, so a site served from one host (e.g. a
+  standalone `jamesapp` deployment) can point its `ocpu.rpc()` calls at
+  a JAMES endpoints server on a different host. Defaults to `sitehost`,
+  so existing callers are unaffected.
+
 ## james 1.15.0 (July 2026)
 
 - New “Proeftuin” (experimental) card in the `/site` demo app, hidden
