@@ -7,6 +7,14 @@
 #' should conform to the BDS JGZ 3.2.5 specification.
 #' @param sitehost The server that renders the site. Defaults to
 #' `"http://localhost:8080"` if not specified.
+#' @param endpointhost The server the site's `ocpu.rpc()` calls should
+#' target. Defaults to `sitehost`, i.e. the same server renders the site
+#' and serves its JAMES endpoints (today's setup). Set this when `sitehost`
+#' serves a standalone `jamesapp` deployment that talks to a JAMES
+#' endpoints server on a different host: the returned URL then carries an
+#' extra `?ocpuhost=` query parameter that `jamesapp`'s
+#' `opencpu-0.5-james-0.1.js` reads to point its RPC calls at
+#' `endpointhost` instead of assuming same-origin.
 #' @param session Optional session key if data is already uploaded to `sitehost`.
 #' @param format JSON schema version, e.g., `"3.0"`. Used when uploading.
 #' @param upload Logical. If `TRUE`, uploads `txt` and returns URL with
@@ -78,6 +86,7 @@
 request_site <- function(
   txt = "",
   sitehost = "",
+  endpointhost = sitehost,
   session = "",
   format = "3.0",
   upload = TRUE,
@@ -129,7 +138,10 @@ request_site <- function(
       if (is.logical(x)) tolower(as.character(x)) else as.character(x)
     })
   }
-  extra_query <- display_query(display)
+  extra_query <- c(
+    display_query(display),
+    if (!identical(endpointhost, sitehost)) list(ocpuhost = endpointhost)
+  )
 
   # CASE 1: Neither txt nor session provided – return base site URL
   if (is.empty(txt) && is.empty(session)) {

@@ -7,6 +7,7 @@
 request_site(
   txt = "",
   sitehost = "",
+  endpointhost = sitehost,
   session = "",
   format = "3.0",
   upload = TRUE,
@@ -21,6 +22,15 @@ should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{sitehost}{The server that renders the site. Defaults to
 \code{"http://localhost:8080"} if not specified.}
+
+\item{endpointhost}{The server the site's \code{ocpu.rpc()} calls should
+target. Defaults to \code{sitehost}, i.e. the same server renders the site
+and serves its JAMES endpoints (today's setup). Set this when \code{sitehost}
+serves a standalone \code{jamesapp} deployment that talks to a JAMES
+endpoints server on a different host: the returned URL then carries an
+extra \verb{?ocpuhost=} query parameter that \code{jamesapp}'s
+\verb{opencpu-0.5-james-0.1.js} reads to point its RPC calls at
+\code{endpointhost} instead of assuming same-origin.}
 
 \item{session}{Optional session key if data is already uploaded to \code{sitehost}.}
 
