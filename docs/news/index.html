@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.14.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.15.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,12 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.15.0" id="james-1150-july-2026">james 1.15.0 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1150-july-2026"></a></h2>
+<ul><li>New “Proeftuin” (experimental) card in the <code>/site</code> demo app, hidden behind a “Proeftuin” checkbox in Instellingen: it previews data JAMES computes internally but doesn’t otherwise show, starting with the child’s raw <code>bdsreader</code> data (person and time-level) and the <code>growthscreener</code> screening results, each in a searchable, sortable table</li>
+<li>New exported functions <code><a href="../reference/preview_persondata.html">preview_persondata()</a></code>, <code><a href="../reference/preview_persondata.html">preview_timedata()</a></code>, and <code><a href="../reference/preview_screeners.html">preview_screeners()</a></code> back the Proeftuin card’s tables; each accepts the same <code>txt</code>/<code>session</code> arguments as <code><a href="../reference/apply_screeners.html">apply_screeners()</a></code> and <code><a href="../reference/upload_data.html">upload_data()</a></code>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.14.2" id="james-1142-july-2026">james 1.14.2 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1142-july-2026"></a></h2>
 <ul><li>

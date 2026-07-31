@@ -72,9 +72,9 @@ apply_screeners(fn)
 #> 2 Het advies volgens de JGZ-richtlijn overgewicht is als volgt: In principe geen verwijzing nodig, naar eigen inzicht handelen.
 #> 3                                                               In principe geen verwijzing nodig, naar eigen inzicht handelen.
 #>   Versie Leeftijd
-#> 1 1.25.0    0.167
-#> 2 1.25.0    0.167
-#> 3 1.25.0    0.167
+#> 1 1.28.0    0.167
+#> 2 1.28.0    0.167
+#> 3 1.28.0    0.167
 if (FALSE) { # \dontrun{
 # first upload, then screen
 library(jamesclient)

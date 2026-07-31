@@ -125,6 +125,17 @@ Main commands to communicate with JAMES
 - [`version()`](https://growthcharts.org/james/reference/version.md) :
   Reports JAMES version
 
+## Proeftuin previews
+
+Preview data JAMES computes internally, used by the experimental
+Proeftuin demo card
+
+- [`preview_persondata()`](https://growthcharts.org/james/reference/preview_persondata.md)
+  [`preview_timedata()`](https://growthcharts.org/james/reference/preview_persondata.md)
+  : Preview the child data JAMES uses internally
+- [`preview_screeners()`](https://growthcharts.org/james/reference/preview_screeners.md)
+  : Preview growth screener results at every measurement occasion
+
 ## Helper functions
 
 Auxiliary functions for JAMES

@@ -28,7 +28,7 @@ format:
 # "test"     : james.groeigrammen.nl (default)
 # "acc"      : acceptance server (authenticated)
 # "prod"     : production server (authenticated)
-target_host <- "acc"
+target_host <- "test"
 
 # Available hosts
 hosts <- list(

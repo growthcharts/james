@@ -63,6 +63,12 @@ reference:
       - validate_chartcode
       - version
 
+  - title: Proeftuin previews
+    desc: Preview data JAMES computes internally, used by the experimental Proeftuin demo card
+    contents:
+      - preview_persondata
+      - preview_screeners
+
   - title: Helper functions
     desc: Auxiliary functions for JAMES
     contents:

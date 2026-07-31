@@ -1,5 +1,24 @@
 # Changelog
 
+## james 1.15.0 (July 2026)
+
+- New “Proeftuin” (experimental) card in the `/site` demo app, hidden
+  behind a “Proeftuin” checkbox in Instellingen: it previews data JAMES
+  computes internally but doesn’t otherwise show, starting with the
+  child’s raw `bdsreader` data (person and time-level) and the
+  `growthscreener` screening results, each in a searchable, sortable
+  table
+- New exported functions
+  [`preview_persondata()`](https://growthcharts.org/james/reference/preview_persondata.md),
+  [`preview_timedata()`](https://growthcharts.org/james/reference/preview_persondata.md),
+  and
+  [`preview_screeners()`](https://growthcharts.org/james/reference/preview_screeners.md)
+  back the Proeftuin card’s tables; each accepts the same
+  `txt`/`session` arguments as
+  [`apply_screeners()`](https://growthcharts.org/james/reference/apply_screeners.md)
+  and
+  [`upload_data()`](https://growthcharts.org/james/reference/upload_data.md)
+
 ## james 1.14.2 (July 2026)
 
 - [`draw_chart()`](https://growthcharts.org/james/reference/draw_chart.md)
