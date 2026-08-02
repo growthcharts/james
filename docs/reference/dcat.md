@@ -98,7 +98,17 @@ Iris Eekhout 2025
 ``` r
 txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat(txt = txt, p = 50)
-#> [1] "gs1cgc122"
+#> Warning: Values from `score` are not uniquely identified; output will contain list-cols.
+#> • Use `values_fn = list` to suppress this warning.
+#> • Use `values_fn = {summary_fun}` to summarise duplicates.
+#> • Use the following dplyr code to identify duplicates.
+#>   {data} |>
+#>   dplyr::summarise(n = dplyr::n(), .by = c(age, item)) |>
+#>   dplyr::filter(n > 1L)
+#> Error in summarise(group_by(data2, .data$.rownum, .data$a), n = n(), p = round(mean(.data$score),     digits = 4L), x = list(qp), w = list(calculate_posterior(scores = .data$score,     tau = .data$tau, qp = qp, scale = scale[1L], mu = (.data$mu)[1L],     sd = (.data$sd)[1L], relhi = relevance[2L], rello = relevance[1L])$posterior)): ℹ In argument: `w = list(...)`.
+#> ℹ In group 1: `.rownum = 1`, `a = 3.5455`.
+#> Caused by error:
+#> ! Not compatible with requested type: [type=list; target=double].
 txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
 dcat(txt = txt, p = 50)
 #> Cannot read 'txt': ~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json

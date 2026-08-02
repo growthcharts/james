@@ -102,6 +102,8 @@ Main commands to communicate with JAMES
   : Draw growth chart
 - [`embed_chart()`](https://growthcharts.org/james/reference/embed_chart.md)
   : Draw an interactive, embeddable growth chart
+- [`embed_tanner()`](https://growthcharts.org/james/reference/embed_tanner.md)
+  : Draw an interactive, embeddable Tanner pubertal-stage chart
 - [`list_charts()`](https://growthcharts.org/james/reference/list_charts.md)
   : List available growth charts
 - [`list_screeners()`](https://growthcharts.org/james/reference/list_screeners.md)

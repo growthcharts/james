@@ -53,6 +53,7 @@ reference:
       - dcat_next
       - draw_chart
       - embed_chart
+      - embed_tanner
       - list_charts
       - list_screeners
       - percentiles_vwc

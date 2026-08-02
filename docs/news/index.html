@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.15.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,14 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.16.0" id="james-1160-august-2026">james 1.16.0 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1160-august-2026"></a></h2>
+<ul><li>New <code><a href="../reference/embed_tanner.html">embed_tanner()</a></code> endpoint: an interactive Tanner pubertal-stage chart, following the same session/widget pattern as <code><a href="../reference/embed_chart.html">embed_chart()</a></code> (<code>/tanner/embed</code> to create a session, then <code>/{session}/widget</code> to retrieve the self-contained HTML). Unlike <code><a href="../reference/embed_chart.html">embed_chart()</a></code>, there is exactly one chart, so no <code>chartcode</code>/selector. Renders genital/pubic hair/testicular volume for male patients, breast/pubic hair/menarche for female patients, against the Dutch 1997 references; when there is no child data, or no pubertal measurements, the chart still renders – just the reference frame, with no patient trace</li>
+<li>New internal <code>build_tanner_patient()</code> helper pivots a target’s pubertal <code>xyz</code> rows into the wide, one-row-per-visit-age shape <code><a href="https://rdrr.io/pkg/tannerly/man/plot_stadia_ly.html" class="external-link">tannerly::plot_stadia_ly()</a></code> expects, computing SDS via <code><a href="https://growthcharts.org/tanner/reference/calculate_sds.html" class="external-link">tanner::calculate_sds()</a></code>
+</li>
+<li>The <code>/site</code> demo app’s Proeftuin card gains a third “Tanner” sub-section alongside Richtlijnen/Kindgegevens, rendering the interactive Tanner chart for the current child. Loaded lazily, the first time that tab is actually shown</li>
+<li>Depends on <code>bdsreader</code> &gt;= 0.33.0 (adds official BDS numbers and a <code>varName</code> sideload path for pubertal/Tanner measurements) and <code>tannerly</code> &gt;= 0.2.2 (adds female support to the previously male-only chart, plus a sized default chart and a couple of rendering fixes)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.15.1" id="james-1151-july-2026">james 1.15.1 (July 2026)<a class="anchor" aria-label="anchor" href="#james-1151-july-2026"></a></h2>
 <ul><li>
