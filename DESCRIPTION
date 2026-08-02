@@ -16,8 +16,8 @@ Encoding: UTF-8
 Depends: 
     R (>= 4.1.0),
     svglite (>= 2.1.3.9000)
-Imports: 
-    bdsreader (>= 0.32.0),
+Imports:
+    bdsreader (>= 0.33.0),
     chartbox (>= 1.17.0),
     chartcatalog (>= 1.18.2),
     chartplotter (>= 0.36.0),
@@ -32,8 +32,10 @@ Imports:
     jamesclient (>= 0.35.0),
     jose,
     jsonlite,
-    multikaart (>= 0.2.13),
+    multikaart (>= 0.2.15),
     rlang,
+    tanner,
+    tannerly (>= 0.2.2),
     tidyr,
     utils,
     vwc
@@ -54,6 +56,8 @@ Remotes:
     growthcharts/jamesclient,
     growthcharts/jamesdemodata,
     growthcharts/multikaart,
+    growthcharts/tanner,
+    growthcharts/tannerly,
     D-score/dcat,
     D-score/dscore,
     D-score/dscoreddi,

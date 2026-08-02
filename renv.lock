@@ -398,7 +398,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.32.0",
+      "Version": "0.33.0",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Read Data from the Basisdataset Jeugdgezondheidszorg",
@@ -441,8 +441,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "growthcharts",
       "RemoteRepo": "bdsreader",
-      "RemoteRef": "master",
-      "RemoteSha": "d294109bb93fe494ad26fa9e392ce6a7b13de6af",
+      "RemoteRef": "v0.33.0",
+      "RemoteSha": "e8c1d29e6782c366777eb261255f7d02e5e190e3",
       "Remotes": "growthcharts/centile, growthcharts/nlreferences, growthcharts/jamesdemodata"
     },
     "bit": {
@@ -1748,7 +1748,7 @@
       "Authors@R": "c(person(given = \"Paula\", family = \"van Dommelen\", role = c(\"aut\", \"cre\"), email = \"paula.vandommelen@tno.nl\"), person(given = \"Stef\", family = \"van Buuren\", role = c(\"aut\"), email = \"stef.vanbuuren@tno.nl\"), person(given = \"Arjan\",  family = \"Huizing\",  role = c(\"aut\"), email = \"arjan.huizing@tno.nl\"))",
       "Description": "Unusual child growth and development may be a sign of an underlying  disease or condition. This package implements functions that evaluate  growth and developmental patterns of a target child relative to Dutch  guidelines. Contains tools to detect unusual growth in height, weight and  head circumference, and unusual language development.",
       "Depends": [
-        "R (>= 4.1.0)",
+        "R (>= 3.5.0)",
         "nlreferences (>= 0.12.1)"
       ],
       "Imports": [
@@ -1763,22 +1763,21 @@
         "jsonlite",
         "testthat (>= 2.1.0)"
       ],
-      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "License": "AGPL-3 + file LICENSE",
       "Encoding": "UTF-8",
       "LazyData": "true",
       "Roxygen": "list(markdown = TRUE)",
       "URL": "https://growthcharts.org/growthscreener/",
       "RoxygenNote": "7.3.3",
+      "Author": "Paula van Dommelen [aut, cre], Stef van Buuren [aut], Arjan Huizing [aut]",
+      "Maintainer": "Paula van Dommelen <paula.vandommelen@tno.nl>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "growthscreener",
       "RemoteUsername": "growthcharts",
-      "RemoteRef": "HEAD",
+      "RemoteRepo": "growthscreener",
+      "RemoteRef": "master",
       "RemoteSha": "3a0327dec2d395c070a0f1d631b66639e6703fbc",
-      "NeedsCompilation": "no",
-      "Author": "Paula van Dommelen [aut, cre], Stef van Buuren [aut], Arjan Huizing [aut]",
-      "Maintainer": "Paula van Dommelen <paula.vandommelen@tno.nl>"
+      "Remotes": "growthcharts/bdsreader, growthcharts/centile, growthcharts/jamesdemodata, growthcharts/nlreferences"
     },
     "gtable": {
       "Package": "gtable",
@@ -1818,6 +1817,55 @@
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut], Thomas Lin Pedersen [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
+      "Repository": "CRAN"
+    },
+    "haven": {
+      "Package": "haven",
+      "Version": "2.5.5",
+      "Source": "Repository",
+      "Title": "Import and Export 'SPSS', 'Stata' and 'SAS' Files",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Evan\", \"Miller\", role = c(\"aut\", \"cph\"), comment = \"Author of included ReadStat code\"), person(\"Danny\", \"Smith\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "Import foreign statistical formats into R via the embedded 'ReadStat' C library, <https://github.com/WizardMac/ReadStat>.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://haven.tidyverse.org, https://github.com/tidyverse/haven, https://github.com/WizardMac/ReadStat",
+      "BugReports": "https://github.com/tidyverse/haven/issues",
+      "Depends": [
+        "R (>= 3.6)"
+      ],
+      "Imports": [
+        "cli (>= 3.0.0)",
+        "forcats (>= 0.2.0)",
+        "hms",
+        "lifecycle",
+        "methods",
+        "readr (>= 0.1.0)",
+        "rlang (>= 0.4.0)",
+        "tibble",
+        "tidyselect",
+        "vctrs (>= 0.3.0)"
+      ],
+      "Suggests": [
+        "covr",
+        "crayon",
+        "fs",
+        "knitr",
+        "pillar (>= 1.4.0)",
+        "rmarkdown",
+        "testthat (>= 3.0.0)",
+        "utf8"
+      ],
+      "LinkingTo": [
+        "cpp11"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "SystemRequirements": "GNU make, zlib: zlib1g-dev (deb), zlib-devel (rpm)",
+      "NeedsCompilation": "yes",
+      "Author": "Hadley Wickham [aut, cre], Evan Miller [aut, cph] (Author of included ReadStat code), Danny Smith [aut], Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
     "highr": {
@@ -2691,7 +2739,7 @@
     },
     "multikaart": {
       "Package": "multikaart",
-      "Version": "0.2.13",
+      "Version": "0.2.15",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Interactieve Diagrammen voor Groei en Ontwikkeling van Kinderen",
@@ -2704,7 +2752,7 @@
       "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.3",
       "Depends": [
-        "R (>= 4.1.0)"
+        "R (>= 2.10)"
       ],
       "Imports": [
         "brokenstick (>= 2.4.0)",
@@ -2727,15 +2775,14 @@
         "jamesdemodata (>= 0.11.0)",
         "testthat (>= 3.0.0)"
       ],
-      "Remotes": "growthcharts/bdsreader, growthcharts/brokenstick, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/chartplotter, growthcharts/donorloader, growthcharts/growthscreener, growthcharts/jamesdemodata, growthcharts/nlreferences",
       "Config/testthat/edition": "3",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "multikaart",
       "RemoteUsername": "growthcharts",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "24183523291a46d08a96d6fc36d6088418beb0ab",
-      "NeedsCompilation": "no"
+      "RemoteRepo": "multikaart",
+      "RemoteRef": "v0.2.15",
+      "RemoteSha": "a27db5ee232834dee936e1201e082bf905e97066",
+      "Remotes": "growthcharts/bdsreader, growthcharts/brokenstick, growthcharts/centile, growthcharts/chartbox, growthcharts/chartcatalog, growthcharts/chartplotter, growthcharts/donorloader, growthcharts/growthscreener, growthcharts/jamesdemodata, growthcharts/nlreferences"
     },
     "nlme": {
       "Package": "nlme",
@@ -3802,6 +3849,77 @@
       "Author": "Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>), Jeroen Ooms [aut] (ORCID: <https://orcid.org/0000-0002-4035-0289>), Devon Govett [aut] (Author of font-manager), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
       "Repository": "CRAN"
+    },
+    "tanner": {
+      "Package": "tanner",
+      "Version": "1.8.0",
+      "Source": "GitHub",
+      "Type": "Package",
+      "Title": "Puberty Stage Line Diagrams and SDS for Tanner Pubertal Stages",
+      "Date": "2026-07-18",
+      "Authors@R": "c( person(\"Stef\", \"van Buuren\", , \"stef.vanbuuren@tno.nl\", role = c(\"aut\", \"cre\")), person(\"Jeroen\", \"Ooms\", role = \"aut\"))",
+      "Description": "Plots Tanner pubertal stage measurements (genital, pubic hair, testicular volume, breast, menarche) against Dutch 1997 growth-study references as stage line diagrams, and converts observed stages to age-conditional standard deviation scores (SDS). Testicular volume can be entered as a raw orchidometer reading in ml. Implements the method of van Buuren and Ooms (2009) <doi:10.1002/sim.3567>.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://github.com/growthcharts/tanner, https://growthcharts.org/tanner/",
+      "BugReports": "https://github.com/growthcharts/tanner/issues",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 3.5.0)"
+      ],
+      "Imports": [
+        "haven"
+      ],
+      "LazyData": "true",
+      "RoxygenNote": "7.3.3",
+      "Suggests": [
+        "testthat (>= 3.0.0)",
+        "knitr",
+        "rmarkdown"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/testthat/edition": "3",
+      "Author": "Stef van Buuren [aut, cre], Jeroen Ooms [aut]",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "growthcharts",
+      "RemoteRepo": "tanner",
+      "RemoteRef": "master",
+      "RemoteSha": "88a5f181f1b1e92c03131ee1482eb2723b673a6c"
+    },
+    "tannerly": {
+      "Package": "tannerly",
+      "Version": "0.2.2",
+      "Source": "GitHub",
+      "Type": "Package",
+      "Title": "Interactive Puberty Stage Line Diagrams",
+      "Author": "Stef van Buuren",
+      "Maintainer": "Stef van Buuren <stef.vanbuuren@tno.nl>",
+      "Description": "Interactive, plotly-based version of the Tanner pubertal stage line diagram from the tanner package. Plots a patient's pubertal stage trajectories (genital, pubic hair, testicular volume for males; breast, pubic hair, menarche for females) against the Dutch 1997 growth-study references, with hover tooltips and independently toggleable patient data / reference-line display per stage type. Intended for embedding in interactive applications such as JAMES.",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "Imports": [
+        "plotly",
+        "htmlwidgets",
+        "stats",
+        "tanner"
+      ],
+      "Suggests": [
+        "testthat (>= 3.0.0)"
+      ],
+      "Roxygen": "list(markdown = TRUE)",
+      "RoxygenNote": "7.3.3",
+      "Config/testthat/edition": "3",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "growthcharts",
+      "RemoteRepo": "tannerly",
+      "RemoteRef": "v0.2.2",
+      "RemoteSha": "ec94f5f9c01b76b78a4b76d4f977fdcdbb9d43ec",
+      "Remotes": "growthcharts/tanner"
     },
     "textshaping": {
       "Package": "textshaping",

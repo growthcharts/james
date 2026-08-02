@@ -1,0 +1,31 @@
+{
+  "Format": "3.1",
+  "clientDetails": [
+    { "bdsNumber": 19, "value": "2" },
+    { "bdsNumber": 20, "value": "20100115" }
+  ],
+  "clientMeasurements": [
+    { "bdsNumber": 317, "values": [
+      { "date": "20190515", "value": "01" },
+      { "date": "20191115", "value": "02" },
+      { "date": "20200515", "value": "02" },
+      { "date": "20201115", "value": "03" },
+      { "date": "20210515", "value": "04" }
+    ] },
+    { "bdsNumber": 825, "values": [
+      { "date": "20190515", "value": "01" },
+      { "date": "20191115", "value": "01" },
+      { "date": "20200515", "value": "02" },
+      { "date": "20201115", "value": "03" },
+      { "date": "20210515", "value": "04" }
+    ] },
+    { "bdsNumber": 312, "values": [
+      { "date": "20210515", "value": "20210301" }
+    ] },
+    { "varName": "men", "values": [
+      { "date": "20200515", "value": "1" },
+      { "date": "20201115", "value": "1" },
+      { "date": "20210515", "value": "2" }
+    ] }
+  ]
+}

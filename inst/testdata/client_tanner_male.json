@@ -1,0 +1,66 @@
+{
+  "Format": "3.1",
+  "clientDetails": [
+    {
+      "bdsNumber": 19,
+      "value": "1"
+    },
+    {
+      "bdsNumber": 20,
+      "value": "20090601"
+    }
+  ],
+  "clientMeasurements": [
+    {
+      "bdsNumber": 313,
+      "values": [
+        {
+          "date": "20190601",
+          "value": "01"
+        },
+        {
+          "date": "20200601",
+          "value": "02"
+        },
+        {
+          "date": "20210601",
+          "value": "03"
+        }
+      ]
+    },
+    {
+      "bdsNumber": 315,
+      "values": [
+        {
+          "date": "20190601",
+          "value": "01"
+        },
+        {
+          "date": "20200601",
+          "value": "02"
+        },
+        {
+          "date": "20210601",
+          "value": "03"
+        }
+      ]
+    },
+    {
+      "varName": "tv",
+      "values": [
+        {
+          "date": "20190601",
+          "value": "4"
+        },
+        {
+          "date": "20200601",
+          "value": "8"
+        },
+        {
+          "date": "20210601",
+          "value": "12"
+        }
+      ]
+    }
+  ]
+}
