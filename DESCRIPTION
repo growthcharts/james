@@ -35,7 +35,7 @@ Imports:
     multikaart (>= 0.2.15),
     rlang,
     tanner,
-    tannerly (>= 0.2.2),
+    tannerly (>= 0.2.3),
     tidyr,
     utils,
     vwc

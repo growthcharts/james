@@ -3889,7 +3889,7 @@
     },
     "tannerly": {
       "Package": "tannerly",
-      "Version": "0.2.2",
+      "Version": "0.2.3",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Interactive Puberty Stage Line Diagrams",
@@ -3917,8 +3917,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "growthcharts",
       "RemoteRepo": "tannerly",
-      "RemoteRef": "v0.2.2",
-      "RemoteSha": "ec94f5f9c01b76b78a4b76d4f977fdcdbb9d43ec",
+      "RemoteRef": "v0.2.3",
+      "RemoteSha": "3d49294e4926fe4e0ae36e085e9dd027d48b8484",
       "Remotes": "growthcharts/tanner"
     },
     "textshaping": {

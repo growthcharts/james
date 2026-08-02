@@ -35,7 +35,10 @@ embed_tanner <- function(txt = "", session = "", format = "1.0", ...) {
   sex_code <- if (!is.null(tgt)) bdsreader::persondata(tgt)$sex[1] else "male"
   sex <- if (identical(sex_code, "female")) "F" else "M"
 
-  fig <- tannerly::plot_stadia_ly(patient, sex = sex)
+  # #F7F7F7 matches jamesapp's own .graph/#plotDiv panel background (see
+  # inst/www/css/main.css), so the chart's outer margin blends into the
+  # panel instead of showing a white edge around the rounded frame.
+  fig <- tannerly::plot_stadia_ly(patient, sex = sex, bgcolor = "#F7F7F7")
 
   # Colored to match plot_stadia_ly()'s own percentile bands ("10% late"
   # foreground / "1% late" background), and vertically centered in the
