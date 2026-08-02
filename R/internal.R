@@ -124,7 +124,13 @@ get_session_object = function(session, object = ".val") {
 }
 
 
-is.empty <- function(x) nchar(x[1L]) == 0L || is.null(x)
+# is.null()/is.na() short-circuit before nchar(): nchar(NA) is NA, not 0,
+# so an unguarded nchar(x[1L]) == 0L on a missing value returns NA rather
+# than TRUE, breaking every `if (is.empty(...))` call site with "missing
+# value where TRUE/FALSE needed". OpenCPU parses an empty POST field as
+# NA, not "", so this is the real shape of "no txt/session supplied" seen
+# over HTTP -- not just a defensive edge case.
+is.empty <- function(x) is.null(x) || is.na(x[1L]) || nchar(x[1L]) == 0L
 
 get_max_age <- function(target) {
   max_age <- NA_real_
