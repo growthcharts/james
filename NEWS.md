@@ -1,3 +1,10 @@
+# james 1.16.0 (August 2026)
+
+- New `embed_tanner()` endpoint: an interactive Tanner pubertal-stage chart, following the same session/widget pattern as `embed_chart()` (`/tanner/embed` to create a session, then `/{session}/widget` to retrieve the self-contained HTML). Unlike `embed_chart()`, there is exactly one chart, so no `chartcode`/selector. Renders genital/pubic hair/testicular volume for male patients, breast/pubic hair/menarche for female patients, against the Dutch 1997 references; when there is no child data, or no pubertal measurements, the chart still renders -- just the reference frame, with no patient trace
+- New internal `build_tanner_patient()` helper pivots a target's pubertal `xyz` rows into the wide, one-row-per-visit-age shape `tannerly::plot_stadia_ly()` expects, computing SDS via `tanner::calculate_sds()`
+- The `/site` demo app's Proeftuin card gains a third "Tanner" sub-section alongside Richtlijnen/Kindgegevens, rendering the interactive Tanner chart for the current child. Loaded lazily, the first time that tab is actually shown
+- Depends on `bdsreader` >= 0.33.0 (adds official BDS numbers and a `varName` sideload path for pubertal/Tanner measurements) and `tannerly` >= 0.2.2 (adds female support to the previously male-only chart, plus a sized default chart and a couple of rendering fixes)
+
 # james 1.15.1 (July 2026)
 
 - `request_site()` gains an optional `endpointhost` argument: when set to a host different from `sitehost`, the returned URL carries an extra `?ocpuhost=` query parameter, so a site served from one host (e.g. a standalone `jamesapp` deployment) can point its `ocpu.rpc()` calls at a JAMES endpoints server on a different host. Defaults to `sitehost`, so existing callers are unaffected.
