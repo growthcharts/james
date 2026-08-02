@@ -253,13 +253,16 @@ paths:
         '503':
           description: Server error
   /{session}/widget:
-    summary: Fetch the interactive chart from an embed_chart() session
+    summary: >-
+      Fetch the interactive chart from an embed_chart() or embed_tanner()
+      session
     parameters:
       - in: path
         name: session
         description: >-
-          Session key returned by **/charts/embed** (the `x-ocpu-session`
-          header, or the first path segment of the returned URLs).
+          Session key returned by **/charts/embed** or **/tanner/embed**
+          (the `x-ocpu-session` header, or the first path segment of the
+          returned URLs).
         required: true
         schema:
           type: string
@@ -268,7 +271,7 @@ paths:
       summary: Retrieve the interactive chart
       description: >-
         Returns the self-contained HTML document (a `plotly` chart)
-        produced by a prior **/charts/embed** call.
+        produced by a prior **/charts/embed** or **/tanner/embed** call.
       operationId: get_embed_widget
       tags:
         - charts
@@ -281,6 +284,57 @@ paths:
                 $ref: '#/components/schemas/embed_chart_return'
         '404':
           description: Session not found (expired or invalid session key)
+  /tanner/embed:
+    summary: Draw an interactive, embeddable Tanner pubertal-stage chart
+    post:
+      summary: Draw child data on an interactive Tanner chart
+      description: >-
+        The Tanner-chart counterpart to **/charts/embed**: unlike that
+        endpoint, there is exactly one chart, so no chartcode/selector.
+        Also returns an OpenCPU session, not the chart itself -- fetch
+        the self-contained HTML document (a `plotly` chart) from
+        **/{session}/widget**, same as **/charts/embed**.
+      operationId: set_location_embed_tanner
+      tags:
+        - charts
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/embed_tanner_arguments'
+            examples:
+              embed1:
+                summary: Draw Tanner chart for uploaded child data
+                value:
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+              embed2:
+                summary: Draw an empty, reference-only Tanner chart
+                value: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          headers:
+            x-ocpu-session:
+              $ref: '#/components/headers/x-ocpu-session'
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: A listing of session URLs. Not the chart itself.
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /charts/list/{dfm}:
     parameters:
       - $ref: '#/components/parameters/dfm'
@@ -1757,6 +1811,40 @@ components:
         A self-contained interactive HTML document (a `plotly` htmlwidget),
         embeddable with a plain `<iframe src="...">` -- not an `<img>`,
         it is not an image and will not render as one.
+    embed_tanner_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data. Faster alternative to
+            txt parameter. Parameter txt takes priority over session.
+            Use {session} produced by **/data/upload**.
+          default: ''
+          example: {session}
+        format:
+          type: string
+          description: JSON data schema version number.
+          enum:
+            - '3.1'
+            - '3.0'
+            - '2.0'
+            - '1.1'
+            - '1.0'
+          example: '3.1'
+    embed_tanner_return:
+      type: string
+      description: >-
+        A self-contained interactive HTML document (a `plotly` htmlwidget)
+        showing the child's pubertal-stage (Tanner) trajectories against
+        the Dutch 1997 references. When there is no child data, or the
+        child has no pubertal measurements, the chart still renders --
+        just the reference frame, with no patient trace. Embeddable with
+        a plain `<iframe src="...">` -- not an `<img>`, it is not an
+        image and will not render as one.
     validate_chartcode_arguments:
       type: object
       properties:
