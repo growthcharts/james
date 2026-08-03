@@ -16,6 +16,27 @@ this.
   endpoint's arguments change, edit `inst/spec/openapi.in.yaml` here, then sync
   jamesdocker afterward (see jamesdocker's own CLAUDE.md).
 
+## When you fix/bump a dependency (e.g. `bdsreader`, `tannerly`) in its own repo
+
+`DESCRIPTION`'s version constraint (e.g. `bdsreader (>= 0.33.1)`) is not
+enough on its own — `james` is `renv`-managed, and `renv.lock` pins an exact
+commit sha per GitHub dependency, independent of what `DESCRIPTION` merely
+requires as a minimum. Bumping only `DESCRIPTION` leaves `renv.lock` (and
+therefore `renv::restore()`, and therefore the next `jamesdocker` build)
+pointing at the old, unfixed commit. After committing and pushing the fix in
+the dependency's own repo:
+
+```r
+renv::install("growthcharts/<pkg>@<branch-or-tag>")  # e.g. "growthcharts/bdsreader@master"
+renv::status()     # confirm it reports the version/sha as out-of-sync
+renv::snapshot(type = "explicit")  # writes the new version+sha into renv.lock
+```
+
+Then re-run `devtools::check()` — this is also the point to confirm a
+previously-known dependency bug is actually fixed, not just check that
+nothing new broke. Commit `DESCRIPTION` + `renv.lock` together with the
+version bump in the same commit; don't split them.
+
 ## When you change an R function's arguments/behavior
 
 1. Edit the function in `R/`.
@@ -23,11 +44,16 @@ this.
 3. Add/update tests in `tests/testthat/`.
 4. Update `inst/spec/openapi.in.yaml` (search for `<fn>_arguments`) if the
    function is exposed as an API endpoint.
-5. Run `devtools::check()`. **Known pre-existing failure**: the `dcat`
-   example (`?dcat`) fails with a `dplyr::summarise()`/`dscore` type error —
-   this is a dependency version mismatch unrelated to your change; confirmed
-   via `git stash` that it fails identically on a clean checkout. Don't try
-   to fix it as a side effect of unrelated work; don't let it block your commit.
+5. Run `devtools::check()`. If the `dcat` example (`?dcat`) fails with a
+   `dplyr::summarise()`/`dscore` "type=list; target=double" error: this was
+   traced to a real bug in `bdsreader::read_bds()` (fixed in `bdsreader`
+   0.33.1) — a `varName`-keyed item picked up independently by both the
+   generic sideload path and the ddi/D-score sideload path, with no
+   deduplication between them, producing a duplicate `(age, yname)` row that
+   made `pivot_wider()` emit a list-column. If you hit this again with a
+   current `bdsreader`, it's a new regression, not the same known issue —
+   investigate rather than assuming it's unrelated to your change (that
+   assumption was wrong once already).
 6. **New endpoint gotcha**: adding a new R function is not enough to make it
    reachable via a short path (e.g. `/tanner/embed`) — that requires a
    `RewriteRule` in `jamesdocker`'s `config/james_rewrites.conf`. Check the
