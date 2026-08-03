@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,11 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.16.2" id="james-1162-august-2026">james 1.16.2 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1162-august-2026"></a></h2>
+<ul><li>Depends on <code>tannerly</code> &gt;= 0.2.4, which fixes <code><a href="../reference/embed_tanner.html">embed_tanner()</a></code>’s chart rendering entirely blank in the browser: the rounded axes frame required an <code><a href="https://rdrr.io/pkg/htmlwidgets/man/onRender.html" class="external-link">htmlwidgets::onRender()</a></code> JS callback that <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval()</a></code>s its code, which violates a Content-Security-Policy without <code>'unsafe-eval'</code> (as <code>james</code>’s own CSP is) – the chart’s <code>&lt;iframe&gt;</code> would silently fail partway through rendering. <code>plot_stadia_ly()</code>’s frame is now a plain rectangle, computed statically in R</li>
+<li>Depends on <code>bdsreader</code> &gt;= 0.33.1, fixing a duplicate-row bug in <code>read_bds()</code>’s <code>xy</code> output that broke <code><a href="../reference/dcat.html">dcat()</a></code>/<code>dscore()</code> (a <code>varName</code>-keyed item picked up by both the generic sideload path and the ddi/D-score sideload path, with no deduplication between them – this was the actual cause of the <code>dcat</code> example failure noted as a “pre-existing, unrelated” issue in recent releases; it was in fact introduced by the pubertal/Tanner sideload wiring in <code>bdsreader</code> 0.33.0)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.16.1" id="james-1161-august-2026">james 1.16.1 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1161-august-2026"></a></h2>
 <ul><li>
@@ -702,7 +707,7 @@
 <div class="section level3">
 <h3 id="major-changes-0-25-0">Major changes:<a class="anchor" aria-label="anchor" href="#major-changes-0-25-0"></a></h3>
 <ul><li>Splits the site output into “Groei”, “Ontwikkeling” and “Voorspeller”</li>
-<li>Add function <code><a href="../reference/fetch_loc-deprecated.html">fetch_loc()</a></code> as a replacement for <code>upload_txt()</code> and <code><a href="../reference/convert_bds_ind-deprecated.html">convert_bds_ind()</a></code>
+<li>Add function <code><a href="../reference/fetch_loc-deprecated.html">fetch_loc()</a></code> as a replacement for <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt()</a></code> and <code><a href="../reference/convert_bds_ind-deprecated.html">convert_bds_ind()</a></code>
 </li>
 <li>Add function <code><a href="../reference/screen_growth-deprecated.html">screen_growth()</a></code> as a replacement for <code><a href="../reference/screen_curves-deprecated.html">screen_curves()</a></code>
 </li>
@@ -711,7 +716,7 @@
 <li>Add table of primary user functions to README</li>
 <li>Add table of legacy functions indicating preferred alternatives</li>
 <li>Run styler on all R sources</li>
-<li>Move out <code>upload_txt()</code> to <code>jamesclient</code> package</li>
+<li>Move out <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt()</a></code> to <code>jamesclient</code> package</li>
 <li>Transfer toJSON() call in <code><a href="../reference/custom_list.html">custom_list()</a></code> to its caller screen_curves(), so <code><a href="../reference/custom_list.html">custom_list()</a></code> doesn’t anymore JSONify the function result</li>
 </ul></div>
 <div class="section level3">
@@ -802,7 +807,7 @@
 <h2 class="pkg-version" data-toc-text="0.17.0" id="james-0170">james 0.17.0<a class="anchor" aria-label="anchor" href="#james-0170"></a></h2>
 <ul><li>Removes some hard paths in <code><a href="../reference/screen_curves-deprecated.html">screen_curves()</a></code>
 </li>
-<li>Add server-sided <code>upload_txt()</code> for uploading data</li>
+<li>Add server-sided <code><a href="https://rdrr.io/pkg/jamesclient/man/upload_txt.html" class="external-link">upload_txt()</a></code> for uploading data</li>
 <li>Add server-sided <code><a href="../reference/request_site.html">request_site()</a></code> for uploading data and url construction</li>
 </ul></div>
     <div class="section level2">

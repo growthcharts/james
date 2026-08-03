@@ -135,22 +135,24 @@ quarto::quarto_render(input = "vignettes/articles/dcat_calculate_examples.qmd")
 pkgdown::build_site()
 ```
 
-**Known issue**: `dcat_calculate_examples.qmd` currently fails to render
-against production (HTTP 400 — the same pre-existing `dscore`/`dcat` bug
-noted above). Since `pkgdown::build_site()` calls `build_articles()`
-internally and aborts entirely if any vignette fails to render, this means
-`build_site()` will fail too. Workaround: build the pieces that don't depend
-on the broken vignette instead —
+If `dcat_calculate_examples.qmd` fails to render against production (HTTP
+400): this was the `bdsreader` duplicate-row bug, fixed in `bdsreader`
+0.33.1 (see above) — confirmed fixed as of `james` 1.16.2. If you hit this
+again with a current `bdsreader`, it's a new regression, not a known
+pre-existing issue; don't reach for the `build_reference()`/`build_home()`/
+`build_news()` workaround (splitting out of `build_articles()`) without
+first confirming the underlying bug is back, since `pkgdown::build_site()`
+aborts entirely if any vignette fails to render.
+
+**`pkgdown::build_home()` (called by `build_site()`) copies every other
+top-level `.md` file into `docs/` and renders it to HTML** — including
+`CLAUDE.md` (`docs/CLAUDE.md`/`docs/CLAUDE.html`), which is meant for
+Claude/maintainers, not the public pkgdown site. Delete both after every
+`build_site()`/`build_home()` run, before committing:
 
 ```r
-pkgdown::build_reference()
-pkgdown::build_home()
-pkgdown::build_news()
+unlink(c("docs/CLAUDE.md", "docs/CLAUDE.html"))
 ```
-
-— and leave `docs/articles/dcat_calculate_examples.html` untouched (don't
-try to regenerate it). Mention this in the commit message so it's clear it
-wasn't forgotten.
 
 Finally, copy pre-rendered articles back over pkgdown's placeholders (usually
 a no-op if the earlier `file.rename` steps already put them in place —
