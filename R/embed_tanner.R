@@ -18,7 +18,16 @@
 #' reference frame, with no patient trace -- rather than the panel being
 #' hidden or the call failing.
 #'
+#' `sex` defaults to `NULL`, which derives sex from the target's own
+#' persondata (falling back to `"male"` when there is no target at all).
+#' Pass `"male"`/`"female"` explicitly to override that -- e.g. jamesapp's
+#' Tanner panel follows the UI's geslacht radio button rather than
+#' whatever sex happens to be in the uploaded data, so a user can preview
+#' the reference frame for either sex regardless of the patient record.
+#'
 #' @inheritParams draw_chart
+#' @param sex Optional. `"male"` or `"female"`. Overrides the sex derived
+#' from the target's persondata when supplied; see Details.
 #' @return A length-1 character string: the self-contained HTML document.
 #' @author Stef van Buuren 2026
 #' @seealso [embed_chart()]
@@ -26,13 +35,20 @@
 #' @examples
 #' fn <- system.file("testdata", "client_tanner.json", package = "james")
 #' html <- embed_tanner(txt = fn)
+#' html <- embed_tanner(txt = fn, sex = "female")
 #' @export
-embed_tanner <- function(txt = "", session = "", format = "1.0", ...) {
+embed_tanner <- function(txt = "", session = "", format = "1.0", sex = NULL, ...) {
   authenticate(...)
 
   tgt <- get_tgt(txt = txt, session = session, format = format)
   patient <- build_tanner_patient(tgt)
-  sex_code <- if (!is.null(tgt)) bdsreader::persondata(tgt)$sex[1] else "male"
+  sex_code <- if (!is.null(sex)) {
+    sex[1L]
+  } else if (!is.null(tgt)) {
+    bdsreader::persondata(tgt)$sex[1]
+  } else {
+    "male"
+  }
   sex <- if (identical(sex_code, "female")) "F" else "M"
 
   # #F7F7F7 matches jamesapp's own .graph/#plotDiv panel background (see

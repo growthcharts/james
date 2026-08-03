@@ -1,3 +1,7 @@
+# james 1.16.1 (August 2026)
+
+- `embed_tanner()` gains an optional `sex` argument (`"male"`/`"female"`) that overrides the sex derived from the target's own persondata. Defaults to `NULL`, so existing callers are unaffected. Lets a UI (e.g. jamesapp's Tanner panel) preview either sex's reference frame independently of whatever sex happens to be in the uploaded data
+
 # james 1.16.0 (August 2026)
 
 - New `embed_tanner()` endpoint: an interactive Tanner pubertal-stage chart, following the same session/widget pattern as `embed_chart()` (`/tanner/embed` to create a session, then `/{session}/widget` to retrieve the self-contained HTML). Unlike `embed_chart()`, there is exactly one chart, so no `chartcode`/selector. Renders genital/pubic hair/testicular volume for male patients, breast/pubic hair/menarche for female patients, against the Dutch 1997 references; when there is no child data, or no pubertal measurements, the chart still renders -- just the reference frame, with no patient trace

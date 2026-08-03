@@ -57,3 +57,19 @@ test_that("embed_tanner() picks the sex-appropriate stage types", {
   expect_true(grepl("Breast", html, fixed = TRUE))
   expect_false(grepl("Genital", html, fixed = TRUE))
 })
+
+test_that("embed_tanner()'s sex argument overrides the target's own persondata", {
+  tgt <- bdsreader::read_bds(fn, format = "3.1")
+  expect_equal(bdsreader::persondata(tgt)$sex[1], "female")
+
+  html <- embed_tanner(txt = fn, sex = "male")
+  expect_true(grepl("Genital", html, fixed = TRUE))
+  expect_true(grepl("Testis", html, fixed = TRUE))
+  expect_false(grepl("Breast", html, fixed = TRUE))
+})
+
+test_that("embed_tanner()'s sex argument works with no target data", {
+  html <- embed_tanner(txt = "", sex = "female")
+  expect_true(grepl("Breast", html, fixed = TRUE))
+  expect_false(grepl("Genital", html, fixed = TRUE))
+})

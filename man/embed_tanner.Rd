@@ -4,7 +4,7 @@
 \alias{embed_tanner}
 \title{Draw an interactive, embeddable Tanner pubertal-stage chart}
 \usage{
-embed_tanner(txt = "", session = "", format = "1.0", ...)
+embed_tanner(txt = "", session = "", format = "1.0", sex = NULL, ...)
 }
 \arguments{
 \item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
@@ -13,6 +13,9 @@ should conform to the BDS JGZ 3.2.5 specification.}
 \item{session}{OpenCPU session key with the uploaded data}
 
 \item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
+
+\item{sex}{Optional. \code{"male"} or \code{"female"}. Overrides the sex derived
+from the target's persondata when supplied; see Details.}
 
 \item{...}{Ignored}
 }
@@ -32,10 +35,18 @@ When \code{txt}/\code{session} yield no target data, or the target has no
 pubertal measurements at all, the chart still renders -- just the
 reference frame, with no patient trace -- rather than the panel being
 hidden or the call failing.
+
+\code{sex} defaults to \code{NULL}, which derives sex from the target's own
+persondata (falling back to \code{"male"} when there is no target at all).
+Pass \code{"male"}/\code{"female"} explicitly to override that -- e.g. jamesapp's
+Tanner panel follows the UI's geslacht radio button rather than
+whatever sex happens to be in the uploaded data, so a user can preview
+the reference frame for either sex regardless of the patient record.
 }
 \examples{
 fn <- system.file("testdata", "client_tanner.json", package = "james")
 html <- embed_tanner(txt = fn)
+html <- embed_tanner(txt = fn, sex = "female")
 }
 \seealso{
 \code{\link[=embed_chart]{embed_chart()}}
