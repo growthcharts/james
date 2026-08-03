@@ -106,7 +106,7 @@ dcat(txt = txt, p = 50)
 #>   dplyr::summarise(n = dplyr::n(), .by = c(age, item)) |>
 #>   dplyr::filter(n > 1L)
 #> Error in summarise(group_by(data2, .data$.rownum, .data$a), n = n(), p = round(mean(.data$score),     digits = 4L), x = list(qp), w = list(calculate_posterior(scores = .data$score,     tau = .data$tau, qp = qp, scale = scale[1L], mu = (.data$mu)[1L],     sd = (.data$sd)[1L], relhi = relevance[2L], rello = relevance[1L])$posterior)): ℹ In argument: `w = list(...)`.
-#> ℹ In group 1: `.rownum = 1`, `a = 3.5455`.
+#> ℹ In group 1: `.rownum = 1`, `a = 3.5483`.
 #> Caused by error:
 #> ! Not compatible with requested type: [type=list; target=double].
 txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"

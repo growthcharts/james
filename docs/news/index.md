@@ -1,5 +1,14 @@
 # Changelog
 
+## james 1.16.1 (August 2026)
+
+- [`embed_tanner()`](https://growthcharts.org/james/reference/embed_tanner.md)
+  gains an optional `sex` argument (`"male"`/`"female"`) that overrides
+  the sex derived from the target’s own persondata. Defaults to `NULL`,
+  so existing callers are unaffected. Lets a UI (e.g. jamesapp’s Tanner
+  panel) preview either sex’s reference frame independently of whatever
+  sex happens to be in the uploaded data
+
 ## james 1.16.0 (August 2026)
 
 - New
