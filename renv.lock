@@ -398,7 +398,7 @@
     },
     "bdsreader": {
       "Package": "bdsreader",
-      "Version": "0.33.0",
+      "Version": "0.33.1",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Read Data from the Basisdataset Jeugdgezondheidszorg",
@@ -441,8 +441,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "growthcharts",
       "RemoteRepo": "bdsreader",
-      "RemoteRef": "v0.33.0",
-      "RemoteSha": "e8c1d29e6782c366777eb261255f7d02e5e190e3",
+      "RemoteRef": "master",
+      "RemoteSha": "33aa1459e26e6141b5c6f847b43d79225be9428f",
       "Remotes": "growthcharts/centile, growthcharts/nlreferences, growthcharts/jamesdemodata"
     },
     "bit": {
@@ -3889,7 +3889,7 @@
     },
     "tannerly": {
       "Package": "tannerly",
-      "Version": "0.2.3",
+      "Version": "0.2.4",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Interactive Puberty Stage Line Diagrams",
@@ -3903,7 +3903,6 @@
       ],
       "Imports": [
         "plotly",
-        "htmlwidgets",
         "stats",
         "tanner"
       ],
@@ -3917,8 +3916,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "growthcharts",
       "RemoteRepo": "tannerly",
-      "RemoteRef": "v0.2.3",
-      "RemoteSha": "3d49294e4926fe4e0ae36e085e9dd027d48b8484",
+      "RemoteRef": "main",
+      "RemoteSha": "c48c7c5ea24ffc9420b379148da290a00a31aa13",
       "Remotes": "growthcharts/tanner"
     },
     "textshaping": {
