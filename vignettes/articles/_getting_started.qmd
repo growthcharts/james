@@ -867,6 +867,89 @@ To check the round trip worked, open `maria.html` directly in a browser (e.g. `o
 
 :::
 
+### **`/tanner/embed`**: Draw an interactive Tanner pubertal-stage chart
+
+`/tanner/embed` is the Tanner-chart counterpart to `/charts/embed`: it returns a self-contained, interactive HTML document (a `plotly` chart) meant for embedding in an `<iframe>`. Unlike `/charts/embed`, there is exactly one chart -- no `chartcode`/multi-chart dispatch -- rendering genital/pubic hair/testicular volume for male patients, or breast/pubic hair/menarche for female patients, against the Dutch 1997 references (van Buuren, 2009, [PDF](https://stefvanbuuren.name/pdf/vanbuuren-2009-1.pdf)).
+
+When the uploaded data yields no target, or the target has no pubertal measurements at all, the chart still renders -- just the reference frame, with no patient trace -- rather than the call failing. `sex` (`"male"`/`"female"`) is optional and overrides the sex derived from the data's own persondata; omit it to let the data decide.
+
+`maria.json` (used elsewhere in this article) carries no pubertal measurements, so here we copy a BDS 3.1 example with menarche and breast/pubic-hair staging (BDS numbers 312/317/825, and the `men` `varName` shortcut) from the `james` package's own test data:
+
+```{r}
+success <- file.copy(
+  system.file("testdata", "client_tanner.json", package = "james"),
+  "client_tanner.json",
+  overwrite = TRUE
+)
+```
+
+Like `/charts/embed`, the response is always an OpenCPU session -- fetch the widget itself with a second, separate `GET` request on `/{session}/widget`.
+
+::: panel-tabset
+
+##### **R**
+
+```{r}
+r9 <- james_post(
+  host = host,
+  path = "/tanner/embed",
+  txt = "client_tanner.json"
+)
+r9$session
+```
+
+```{r}
+widget_url <- paste0(host, "/", r9$session, "/widget")
+r9_widget <- httr::content(httr::GET(widget_url), "text", encoding = "UTF-8")
+```
+
+The chart is rendered at a fixed 900x560px design resolution:
+
+```{r}
+#| echo: false
+htmltools::tags$iframe(
+  srcdoc = r9_widget,
+  style = "width: 100%; height: 560px; border: 1px solid #ddd;"
+)
+```
+
+To draw the reference frame for a specific sex regardless of what the uploaded data says, pass `sex` explicitly:
+
+```{r}
+r9_male <- james_post(
+  host = host,
+  path = "/tanner/embed",
+  txt = "client_tanner.json",
+  sex = "male"
+)
+widget_url_male <- paste0(host, "/", r9_male$session, "/widget")
+r9_male_widget <- httr::content(httr::GET(widget_url_male), "text", encoding = "UTF-8")
+```
+
+```{r}
+#| echo: false
+htmltools::tags$iframe(
+  srcdoc = r9_male_widget,
+  style = "width: 100%; height: 560px; border: 1px solid #ddd;"
+)
+```
+
+##### **bash**
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+SESSION=$(auth_curl -sX 'POST' $(cat .host)'/tanner/embed' \
+-H 'accept: text/plain' \
+-F 'txt=@client_tanner.json;type=application/json' \
+| head -1 | sed -E 's|.*/(x0[a-z0-9]+)/.*|\1|')
+auth_curl -sX 'GET' $(cat .host)'/'$SESSION'/widget' > tanner.html
+wc -c tanner.html
+```
+
+As with `maria.html` earlier, `tanner.html` is self-contained (plotly.js/jQuery load from a public CDN) and can be embedded with `<iframe src="tanner.html"></iframe>`, or opened directly in a browser to verify the round trip worked.
+
+:::
+
 ### **`/charts/list`**: List available growth charts
 
 ::: panel-tabset
