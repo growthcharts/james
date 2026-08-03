@@ -1835,6 +1835,15 @@ components:
             - '1.1'
             - '1.0'
           example: '3.1'
+        sex:
+          type: string
+          description: >-
+            Overrides the sex derived from the target's own persondata
+            (or the "male" default when there is no target at all).
+          nullable: true
+          enum:
+            - male
+            - female
     embed_tanner_return:
       type: string
       description: >-
