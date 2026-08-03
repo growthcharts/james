@@ -1,3 +1,8 @@
+# james 1.16.2 (August 2026)
+
+- Depends on `tannerly` >= 0.2.4, which fixes `embed_tanner()`'s chart rendering entirely blank in the browser: the rounded axes frame required an `htmlwidgets::onRender()` JS callback that `eval()`s its code, which violates a Content-Security-Policy without `'unsafe-eval'` (as `james`'s own CSP is) -- the chart's `<iframe>` would silently fail partway through rendering. `plot_stadia_ly()`'s frame is now a plain rectangle, computed statically in R
+- Depends on `bdsreader` >= 0.33.1, fixing a duplicate-row bug in `read_bds()`'s `xy` output that broke `dcat()`/`dscore()` (a `varName`-keyed item picked up by both the generic sideload path and the ddi/D-score sideload path, with no deduplication between them -- this was the actual cause of the `dcat` example failure noted as a "pre-existing, unrelated" issue in recent releases; it was in fact introduced by the pubertal/Tanner sideload wiring in `bdsreader` 0.33.0)
+
 # james 1.16.1 (August 2026)
 
 - `embed_tanner()` gains an optional `sex` argument (`"male"`/`"female"`) that overrides the sex derived from the target's own persondata. Defaults to `NULL`, so existing callers are unaffected. Lets a UI (e.g. jamesapp's Tanner panel) preview either sex's reference frame independently of whatever sex happens to be in the uploaded data
