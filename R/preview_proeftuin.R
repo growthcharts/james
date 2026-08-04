@@ -81,7 +81,7 @@ preview_screeners <- function(
     ages <- sort(unique(tgt$xyz$age[tgt$xyz$yname == yname]))
     for (age in ages) {
       tgt_cut <- tgt
-      tgt_cut$xyz <- tgt$xyz[tgt$xyz$age <= age, ]
+      tgt_cut$xyz <- tgt$xyz[!is.na(tgt$xyz$age) & tgt$xyz$age <= age, ]
       results[[length(results) + 1]] <- growthscreener::screen_curves_ind(
         ind = tgt_cut,
         ynames = yname,
