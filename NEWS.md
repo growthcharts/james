@@ -1,3 +1,8 @@
+# james 1.16.5 (August 2026)
+
+- `embed_tanner()` gains `traces`/`stage_lines` arguments: comma-separated raw Tanner `varName`s (`gen`/`phb`/`tv` for male patients, `bre`/`phg`/`men` for female) controlling which stage types' patient-data traces and reference lines, respectively, are visible when the chart first renders. Both default to `""`, matching prior behavior (all traces visible, no reference lines); any type can still be toggled from the legend regardless of its initial state. Depends on `tannerly` >= 0.2.5, which adds the underlying `traces`/`stage_lines` arguments to `plot_stadia_ly()`
+- Depends on `jamesdemodata` >= 0.13.0
+
 # james 1.16.4 (August 2026)
 
 - Fix `preview_screeners()` crashing with "missing value where TRUE/FALSE needed" on a target with a dateless measurement (e.g. a `wgt` record with no `date`). The per-occasion truncation cut (`tgt$xyz$age <= age`) let such a row's `NA` age slip through as an all-`NA` record regardless of `yname`, which then broke `growthscreener`'s downstream repeated-measurement check
