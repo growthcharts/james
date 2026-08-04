@@ -871,84 +871,103 @@ To check the round trip worked, open `maria.html` directly in a browser (e.g. `o
 
 `/tanner/embed` is the Tanner-chart counterpart to `/charts/embed`: it returns a self-contained, interactive HTML document (a `plotly` chart) meant for embedding in an `<iframe>`. Unlike `/charts/embed`, there is exactly one chart -- no `chartcode`/multi-chart dispatch -- rendering genital/pubic hair/testicular volume for male patients, or breast/pubic hair/menarche for female patients, against the Dutch 1997 references (van Buuren, 2009, [PDF](https://stefvanbuuren.name/pdf/vanbuuren-2009-1.pdf)).
 
-When the uploaded data yields no target, or the target has no pubertal measurements at all, the chart still renders -- just the reference frame, with no patient trace -- rather than the call failing. `sex` (`"male"`/`"female"`) is optional and overrides the sex derived from the data's own persondata; omit it to let the data decide.
+When the uploaded data yields no target, or the target has no pubertal measurements at all, the chart still renders -- just the reference frame, with no patient trace -- rather than the call failing. `sex` (`"male"`/`"female"`) is optional and overrides the sex derived from the data's own persondata; omit it to let the data decide. Like `/charts/embed`, the response is always an OpenCPU session -- fetch the widget itself with a second, separate `GET` request on `/{session}/widget`.
 
-`maria.json` (used elsewhere in this article) carries no pubertal measurements, so here we copy a BDS 3.1 example with menarche and breast/pubic-hair staging (BDS numbers 312/317/825, and the `men` `varName` shortcut) from the `james` package's own test data:
+#### Reproducing van Buuren (2014), Figures 3 and 4
+
+`/tanner/embed`'s `traces` and `stage_lines` parameters (comma-separated raw Tanner `varName`s: `gen`/`phb`/`tv` for male patients, `bre`/`phg`/`men` for female) control which stage types' patient-data traces and reference lines, respectively, are visible when the chart first renders -- without losing the ability to toggle any of them from the legend afterwards. The three figures below use them to reproduce van Buuren (2014)'s Figures 3 and 4. The chart itself is always rendered at `/tanner/embed`'s fixed 900x560 design resolution; to fit the article's column width, all three are scaled down 15% with a CSS `transform` on the iframe (the wrapping `<div>` reserves the post-scale footprint so surrounding content doesn't overlap it).
 
 ```{r}
-success <- file.copy(
-  system.file("testdata", "client_tanner.json", package = "james"),
-  "client_tanner.json",
-  overwrite = TRUE
+scale_factor <- 0.85
+fig_width <- round(900 * scale_factor)
+fig_height <- round(560 * scale_factor)
+scaled_tanner_iframe <- function(srcdoc) {
+  htmltools::tags$div(
+    style = paste0("width: ", fig_width, "px; height: ", fig_height, "px;"),
+    htmltools::tags$iframe(
+      srcdoc = srcdoc,
+      style = paste0(
+        "width: 900px; height: 560px; border: 1px solid #ddd; ",
+        "transform: scale(", scale_factor, "); transform-origin: top left;"
+      )
+    )
+  )
+}
+```
+
+`Kevin_P.json` (from `jamesdemodata`, male; genital, pubic hair, testicular volume) is used for Figures 1 and 2:
+
+```{r pubertydemo}
+fn_kevin <- system.file(
+  "extdata/bds_v3.1/puberty/Kevin_P.json",
+  package = "jamesdemodata"
 )
 ```
 
-Like `/charts/embed`, the response is always an OpenCPU session -- fetch the widget itself with a second, separate `GET` request on `/{session}/widget`.
+##### Figure 1: Kevin_P, genital only, with stage lines (cf. Figure 3)
 
-::: panel-tabset
+Only the genital trace is shown, with its reference/stage lines visible; pubic hair and testis are left at `/tanner/embed`'s own default (visible, no lines) since `traces` here only lists `gen`.
 
-##### **R**
-
-```{r}
-r9 <- james_post(
+```{r pubertyfig1}
+r10 <- james_post(
   host = host,
   path = "/tanner/embed",
-  txt = "client_tanner.json"
+  txt = fn_kevin,
+  traces = "gen",
+  stage_lines = "gen"
 )
-r9$session
-```
-
-```{r}
-widget_url <- paste0(host, "/", r9$session, "/widget")
-r9_widget <- httr::content(httr::GET(widget_url), "text", encoding = "UTF-8")
-```
-
-The chart is rendered at a fixed 900x560px design resolution:
-
-```{r}
-#| echo: false
-htmltools::tags$iframe(
-  srcdoc = r9_widget,
-  style = "width: 100%; height: 560px; border: 1px solid #ddd;"
-)
-```
-
-To draw the reference frame for a specific sex regardless of what the uploaded data says, pass `sex` explicitly:
-
-```{r}
-r9_male <- james_post(
-  host = host,
-  path = "/tanner/embed",
-  txt = "client_tanner.json",
-  sex = "male"
-)
-widget_url_male <- paste0(host, "/", r9_male$session, "/widget")
-r9_male_widget <- httr::content(httr::GET(widget_url_male), "text", encoding = "UTF-8")
+widget_url10 <- paste0(host, "/", r10$session, "/widget")
+r10_widget <- httr::content(httr::GET(widget_url10), "text", encoding = "UTF-8")
 ```
 
 ```{r}
 #| echo: false
-htmltools::tags$iframe(
-  srcdoc = r9_male_widget,
-  style = "width: 100%; height: 560px; border: 1px solid #ddd;"
+scaled_tanner_iframe(r10_widget)
+```
+
+##### Figure 2: Kevin_P, all three traces, no stage lines (cf. Figure 4)
+
+All three stage types' patient data shown; no reference lines -- `/tanner/embed`'s own default when `traces`/`stage_lines` are omitted, made explicit here for clarity.
+
+```{r pubertyfig2}
+r11 <- james_post(
+  host = host,
+  path = "/tanner/embed",
+  txt = fn_kevin,
+  traces = "gen,phb,tv"
 )
+widget_url11 <- paste0(host, "/", r11$session, "/widget")
+r11_widget <- httr::content(httr::GET(widget_url11), "text", encoding = "UTF-8")
 ```
 
-##### **bash**
-
-```{bash, eval=!is_windows}
-source auth_curl.sh
-SESSION=$(auth_curl -sX 'POST' $(cat .host)'/tanner/embed' \
--H 'accept: text/plain' \
--F 'txt=@client_tanner.json;type=application/json' \
-| head -1 | sed -E 's|.*/(x0[a-z0-9]+)/.*|\1|')
-auth_curl -sX 'GET' $(cat .host)'/'$SESSION'/widget' > tanner.html
-wc -c tanner.html
+```{r}
+#| echo: false
+scaled_tanner_iframe(r11_widget)
 ```
 
-As with `maria.html` earlier, `tanner.html` is self-contained (plotly.js/jQuery load from a public CDN) and can be embedded with `<iframe src="tanner.html"></iframe>`, or opened directly in a browser to verify the round trip worked.
+##### Figure 3: Iris_P, all three traces, no stage lines
 
-:::
+Same layout as Figure 2, for a female patient: `Iris_P.json` (also from `jamesdemodata`) carries breast, pubic-hair, and menarche staging -- no reference lines.
+
+```{r pubertyfig3}
+fn_iris <- system.file(
+  "extdata/bds_v3.1/puberty/Iris_P.json",
+  package = "jamesdemodata"
+)
+r12 <- james_post(
+  host = host,
+  path = "/tanner/embed",
+  txt = fn_iris,
+  traces = "bre,phg,men"
+)
+widget_url12 <- paste0(host, "/", r12$session, "/widget")
+r12_widget <- httr::content(httr::GET(widget_url12), "text", encoding = "UTF-8")
+```
+
+```{r}
+#| echo: false
+scaled_tanner_iframe(r12_widget)
+```
 
 ### **`/charts/list`**: List available growth charts
 
