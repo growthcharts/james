@@ -1,5 +1,16 @@
 # Changelog
 
+## james 1.16.4 (August 2026)
+
+- Fix
+  [`preview_screeners()`](https://growthcharts.org/james/reference/preview_screeners.md)
+  crashing with “missing value where TRUE/FALSE needed” on a target with
+  a dateless measurement (e.g. a `wgt` record with no `date`). The
+  per-occasion truncation cut (`tgt$xyz$age <= age`) let such a row’s
+  `NA` age slip through as an all-`NA` record regardless of `yname`,
+  which then broke `growthscreener`’s downstream repeated-measurement
+  check
+
 ## james 1.16.2 (August 2026)
 
 - Depends on `tannerly` \>= 0.2.4, which fixes

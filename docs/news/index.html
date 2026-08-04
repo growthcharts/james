@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,10 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.16.4" id="james-1164-august-2026">james 1.16.4 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1164-august-2026"></a></h2>
+<ul><li>Fix <code><a href="../reference/preview_screeners.html">preview_screeners()</a></code> crashing with “missing value where TRUE/FALSE needed” on a target with a dateless measurement (e.g. a <code>wgt</code> record with no <code>date</code>). The per-occasion truncation cut (<code>tgt$xyz$age &lt;= age</code>) let such a row’s <code>NA</code> age slip through as an all-<code>NA</code> record regardless of <code>yname</code>, which then broke <code>growthscreener</code>’s downstream repeated-measurement check</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.16.2" id="james-1162-august-2026">james 1.16.2 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1162-august-2026"></a></h2>
 <ul><li>Depends on <code>tannerly</code> &gt;= 0.2.4, which fixes <code><a href="../reference/embed_tanner.html">embed_tanner()</a></code>’s chart rendering entirely blank in the browser: the rounded axes frame required an <code><a href="https://rdrr.io/pkg/htmlwidgets/man/onRender.html" class="external-link">htmlwidgets::onRender()</a></code> JS callback that <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval()</a></code>s its code, which violates a Content-Security-Policy without <code>'unsafe-eval'</code> (as <code>james</code>’s own CSP is) – the chart’s <code>&lt;iframe&gt;</code> would silently fail partway through rendering. <code>plot_stadia_ly()</code>’s frame is now a plain rectangle, computed statically in R</li>
