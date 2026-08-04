@@ -1,3 +1,7 @@
+# james 1.16.4 (August 2026)
+
+- Fix `preview_screeners()` crashing with "missing value where TRUE/FALSE needed" on a target with a dateless measurement (e.g. a `wgt` record with no `date`). The per-occasion truncation cut (`tgt$xyz$age <= age`) let such a row's `NA` age slip through as an all-`NA` record regardless of `yname`, which then broke `growthscreener`'s downstream repeated-measurement check
+
 # james 1.16.2 (August 2026)
 
 - Depends on `tannerly` >= 0.2.4, which fixes `embed_tanner()`'s chart rendering entirely blank in the browser: the rounded axes frame required an `htmlwidgets::onRender()` JS callback that `eval()`s its code, which violates a Content-Security-Policy without `'unsafe-eval'` (as `james`'s own CSP is) -- the chart's `<iframe>` would silently fail partway through rendering. `plot_stadia_ly()`'s frame is now a plain rectangle, computed statically in R

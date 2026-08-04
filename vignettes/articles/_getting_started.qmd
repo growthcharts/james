@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.16.2 (August 2026)
+subtitle: JAMES 1.16.4 (August 2026)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
