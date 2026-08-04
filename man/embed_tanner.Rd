@@ -4,7 +4,15 @@
 \alias{embed_tanner}
 \title{Draw an interactive, embeddable Tanner pubertal-stage chart}
 \usage{
-embed_tanner(txt = "", session = "", format = "1.0", sex = NULL, ...)
+embed_tanner(
+  txt = "",
+  session = "",
+  format = "1.0",
+  sex = NULL,
+  traces = "",
+  stage_lines = "",
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
@@ -16,6 +24,12 @@ should conform to the BDS JGZ 3.2.5 specification.}
 
 \item{sex}{Optional. \code{"male"} or \code{"female"}. Overrides the sex derived
 from the target's persondata when supplied; see Details.}
+
+\item{traces}{Optional. Comma-separated raw Tanner \code{varName}s (see
+Details) whose patient-data trace starts visible.}
+
+\item{stage_lines}{Optional. Comma-separated raw Tanner \code{varName}s
+(see Details) whose reference lines start visible.}
 
 \item{...}{Ignored}
 }
@@ -42,11 +56,22 @@ Pass \code{"male"}/\code{"female"} explicitly to override that -- e.g. jamesapp'
 Tanner panel follows the UI's geslacht radio button rather than
 whatever sex happens to be in the uploaded data, so a user can preview
 the reference frame for either sex regardless of the patient record.
+
+\code{traces}/\code{stage_lines} control which stage types' patient-data traces
+and reference lines, respectively, are visible when the chart first
+renders -- see \code{tannerly::plot_stadia_ly()}. Both are comma-separated
+strings of raw Tanner \code{varName}s (\code{"gen"}, \code{"phb"}, \code{"tv"} for male
+patients; \code{"bre"}, \code{"phg"}, \code{"men"} for female), since this endpoint
+takes multipart/form-data rather than R vectors. Leaving either \code{""}
+(the default) keeps \code{plot_stadia_ly()}'s own defaults: all three
+traces visible, no reference lines. A type not listed still gets a
+legend entry -- viewers can always toggle it on/off by hand.
 }
 \examples{
 fn <- system.file("testdata", "client_tanner.json", package = "james")
 html <- embed_tanner(txt = fn)
 html <- embed_tanner(txt = fn, sex = "female")
+html <- embed_tanner(txt = fn, traces = "gen", stage_lines = "gen")
 }
 \seealso{
 \code{\link[=embed_chart]{embed_chart()}}

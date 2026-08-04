@@ -1844,6 +1844,21 @@ components:
           enum:
             - male
             - female
+        traces:
+          type: string
+          description: >-
+            Comma-separated raw Tanner varNames (gen, phb, tv for male;
+            bre, phg, men for female) whose patient-data trace starts
+            visible. Empty (default) shows all three; a type left out
+            still gets a legend entry and can be toggled on by hand.
+          default: ''
+        stage_lines:
+          type: string
+          description: >-
+            Comma-separated raw Tanner varNames (see traces) whose
+            reference lines start visible. Empty (default) hides all
+            of them; any type can still be toggled on from the legend.
+          default: ''
     embed_tanner_return:
       type: string
       description: >-

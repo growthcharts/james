@@ -25,9 +25,23 @@
 #' whatever sex happens to be in the uploaded data, so a user can preview
 #' the reference frame for either sex regardless of the patient record.
 #'
+#' `traces`/`stage_lines` control which stage types' patient-data traces
+#' and reference lines, respectively, are visible when the chart first
+#' renders -- see `tannerly::plot_stadia_ly()`. Both are comma-separated
+#' strings of raw Tanner `varName`s (`"gen"`, `"phb"`, `"tv"` for male
+#' patients; `"bre"`, `"phg"`, `"men"` for female), since this endpoint
+#' takes multipart/form-data rather than R vectors. Leaving either `""`
+#' (the default) keeps `plot_stadia_ly()`'s own defaults: all three
+#' traces visible, no reference lines. A type not listed still gets a
+#' legend entry -- viewers can always toggle it on/off by hand.
+#'
 #' @inheritParams draw_chart
 #' @param sex Optional. `"male"` or `"female"`. Overrides the sex derived
 #' from the target's persondata when supplied; see Details.
+#' @param traces Optional. Comma-separated raw Tanner `varName`s (see
+#' Details) whose patient-data trace starts visible.
+#' @param stage_lines Optional. Comma-separated raw Tanner `varName`s
+#' (see Details) whose reference lines start visible.
 #' @return A length-1 character string: the self-contained HTML document.
 #' @author Stef van Buuren 2026
 #' @seealso [embed_chart()]
@@ -36,8 +50,10 @@
 #' fn <- system.file("testdata", "client_tanner.json", package = "james")
 #' html <- embed_tanner(txt = fn)
 #' html <- embed_tanner(txt = fn, sex = "female")
+#' html <- embed_tanner(txt = fn, traces = "gen", stage_lines = "gen")
 #' @export
-embed_tanner <- function(txt = "", session = "", format = "1.0", sex = NULL, ...) {
+embed_tanner <- function(txt = "", session = "", format = "1.0", sex = NULL,
+                          traces = "", stage_lines = "", ...) {
   authenticate(...)
 
   tgt <- get_tgt(txt = txt, session = session, format = format)
@@ -51,10 +67,25 @@ embed_tanner <- function(txt = "", session = "", format = "1.0", sex = NULL, ...
   }
   sex <- if (identical(sex_code, "female")) "F" else "M"
 
+  # "" (the default) must become NULL, not character(0) -- plot_stadia_ly()
+  # treats NULL as "use my own default" (all traces / no stage lines) but
+  # character(0) as "show nothing", which is not the same thing for traces.
+  split_varnames <- function(x) {
+    x <- trimws(strsplit(x, ",", fixed = TRUE)[[1L]])
+    x <- x[nzchar(x)]
+    if (length(x) == 0L) NULL else x
+  }
+
   # #F7F7F7 matches jamesapp's own .graph/#plotDiv panel background (see
   # inst/www/css/main.css), so the chart's outer margin blends into the
   # panel instead of showing a white edge around the rounded frame.
-  fig <- tannerly::plot_stadia_ly(patient, sex = sex, bgcolor = "#F7F7F7")
+  fig <- tannerly::plot_stadia_ly(
+    patient,
+    sex = sex,
+    bgcolor = "#F7F7F7",
+    traces = split_varnames(traces),
+    stage_lines = split_varnames(stage_lines)
+  )
 
   # Colored to match plot_stadia_ly()'s own percentile bands ("10% late"
   # foreground / "1% late" background), and vertically centered in the

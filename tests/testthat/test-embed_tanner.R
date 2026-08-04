@@ -73,3 +73,50 @@ test_that("embed_tanner()'s sex argument works with no target data", {
   expect_true(grepl("Breast", html, fixed = TRUE))
   expect_false(grepl("Genital", html, fixed = TRUE))
 })
+
+# Each stage type contributes two legend-row dummy traces to the widget's
+# embedded JSON: a symbol row (`"name":"<Type>","visible":<bool>`) and a
+# line row (`"legendgroup":"<Type>-lines","showlegend":true,"name":" ",
+# "visible":<bool>`, the space-only name distinguishing it from the many
+# other same-legendgroup traces that carry `"showlegend":false`). Both are
+# checked directly off the rendered HTML string, keyed by the *display*
+# name plot_stadia_ly() uses ("Genital" etc.) -- traces/stage_lines take
+# the canonical varName (gen, phb, ...) as input, but that name itself
+# isn't reproduced anywhere in the output.
+symbol_row_visible <- function(html, type) {
+  m <- regmatches(html, regexpr(sprintf('"name":"%s","visible":(true|false)', type), html))
+  identical(sub(".*:(true|false)$", "\\1", m), "true")
+}
+
+lines_row_visible <- function(html, type) {
+  pattern <- sprintf('"legendgroup":"%s-lines","showlegend":true,"name":" ","visible":(true|false)', type)
+  m <- regmatches(html, regexpr(pattern, html))
+  identical(sub(".*:(true|false)$", "\\1", m), "true")
+}
+
+test_that("embed_tanner() defaults to all traces visible and no stage lines", {
+  fn_male <- system.file("testdata", "client_tanner_male.json", package = "james")
+  html <- embed_tanner(txt = fn_male)
+  expect_true(symbol_row_visible(html, "Genital"))
+  expect_true(symbol_row_visible(html, "Pubic hair"))
+  expect_true(symbol_row_visible(html, "Testis"))
+  expect_false(lines_row_visible(html, "Genital"))
+  expect_false(lines_row_visible(html, "Pubic hair"))
+  expect_false(lines_row_visible(html, "Testis"))
+})
+
+test_that("embed_tanner()'s traces argument restricts which stage types start visible", {
+  fn_male <- system.file("testdata", "client_tanner_male.json", package = "james")
+  html <- embed_tanner(txt = fn_male, traces = "gen")
+  expect_true(symbol_row_visible(html, "Genital"))
+  expect_false(symbol_row_visible(html, "Pubic hair"))
+  expect_false(symbol_row_visible(html, "Testis"))
+})
+
+test_that("embed_tanner()'s stage_lines argument accepts a comma-separated list", {
+  fn_male <- system.file("testdata", "client_tanner_male.json", package = "james")
+  html <- embed_tanner(txt = fn_male, traces = "gen,phb", stage_lines = "gen, phb")
+  expect_true(lines_row_visible(html, "Genital"))
+  expect_true(lines_row_visible(html, "Pubic hair"))
+  expect_false(lines_row_visible(html, "Testis"))
+})

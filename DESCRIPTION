@@ -35,12 +35,12 @@ Imports:
     multikaart (>= 0.2.15),
     rlang,
     tanner,
-    tannerly (>= 0.2.4),
+    tannerly (>= 0.2.5),
     tidyr,
     utils,
     vwc
 Suggests: 
-    jamesdemodata (>= 0.12.0),
+    jamesdemodata (>= 0.13.0),
     knitr,
     openssl,
     rmarkdown,
