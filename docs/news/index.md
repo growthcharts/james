@@ -1,5 +1,36 @@
 # Changelog
 
+## james 1.16.6 (August 2026)
+
+- [`embed_tanner()`](https://growthcharts.org/james/reference/embed_tanner.md)
+  gains an optional `patient_id` argument that overrides the id shown in
+  the chart title (“Tanner pubertal stages - Patient ”), independent of
+  the id in the uploaded data; pass `NA` to force the title back to its
+  no-id form
+- Fix
+  [`embed_tanner()`](https://growthcharts.org/james/reference/embed_tanner.md)’s
+  chart title showing “- Patient -1” verbatim when the uploaded data has
+  no real client id. `bdsreader` codes an unset id as the sentinel `-1`,
+  not `NA`, so
+  [`tannerly::plot_stadia_ly()`](https://rdrr.io/pkg/tannerly/man/plot_stadia_ly.html)’s
+  existing `NA`-based suppression didn’t catch it;
+  `build_tanner_patient()` now normalizes the sentinel to `NA` before
+  building the chart’s patient data
+
+## james 1.16.5 (August 2026)
+
+- [`embed_tanner()`](https://growthcharts.org/james/reference/embed_tanner.md)
+  gains `traces`/`stage_lines` arguments: comma-separated raw Tanner
+  `varName`s (`gen`/`phb`/`tv` for male patients, `bre`/`phg`/`men` for
+  female) controlling which stage types’ patient-data traces and
+  reference lines, respectively, are visible when the chart first
+  renders. Both default to `""`, matching prior behavior (all traces
+  visible, no reference lines); any type can still be toggled from the
+  legend regardless of its initial state. Depends on `tannerly` \>=
+  0.2.5, which adds the underlying `traces`/`stage_lines` arguments to
+  `plot_stadia_ly()`
+- Depends on `jamesdemodata` \>= 0.13.0
+
 ## james 1.16.4 (August 2026)
 
 - Fix

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,19 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.16.6" id="james-1166-august-2026">james 1.16.6 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1166-august-2026"></a></h2>
+<ul><li>
+<code><a href="../reference/embed_tanner.html">embed_tanner()</a></code> gains an optional <code>patient_id</code> argument that overrides the id shown in the chart title (“Tanner pubertal stages - Patient <id>”), independent of the id in the uploaded data; pass <code>NA</code> to force the title back to its no-id form</id></li>
+<li>Fix <code><a href="../reference/embed_tanner.html">embed_tanner()</a></code>’s chart title showing “- Patient -1” verbatim when the uploaded data has no real client id. <code>bdsreader</code> codes an unset id as the sentinel <code>-1</code>, not <code>NA</code>, so <code><a href="https://rdrr.io/pkg/tannerly/man/plot_stadia_ly.html" class="external-link">tannerly::plot_stadia_ly()</a></code>’s existing <code>NA</code>-based suppression didn’t catch it; <code>build_tanner_patient()</code> now normalizes the sentinel to <code>NA</code> before building the chart’s patient data</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.16.5" id="james-1165-august-2026">james 1.16.5 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1165-august-2026"></a></h2>
+<ul><li>
+<code><a href="../reference/embed_tanner.html">embed_tanner()</a></code> gains <code>traces</code>/<code>stage_lines</code> arguments: comma-separated raw Tanner <code>varName</code>s (<code>gen</code>/<code>phb</code>/<code>tv</code> for male patients, <code>bre</code>/<code>phg</code>/<code>men</code> for female) controlling which stage types’ patient-data traces and reference lines, respectively, are visible when the chart first renders. Both default to <code>""</code>, matching prior behavior (all traces visible, no reference lines); any type can still be toggled from the legend regardless of its initial state. Depends on <code>tannerly</code> &gt;= 0.2.5, which adds the underlying <code>traces</code>/<code>stage_lines</code> arguments to <code>plot_stadia_ly()</code>
+</li>
+<li>Depends on <code>jamesdemodata</code> &gt;= 0.13.0</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.16.4" id="james-1164-august-2026">james 1.16.4 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1164-august-2026"></a></h2>
 <ul><li>Fix <code><a href="../reference/preview_screeners.html">preview_screeners()</a></code> crashing with “missing value where TRUE/FALSE needed” on a target with a dateless measurement (e.g. a <code>wgt</code> record with no <code>date</code>). The per-occasion truncation cut (<code>tgt$xyz$age &lt;= age</code>) let such a row’s <code>NA</code> age slip through as an all-<code>NA</code> record regardless of <code>yname</code>, which then broke <code>growthscreener</code>’s downstream repeated-measurement check</li>

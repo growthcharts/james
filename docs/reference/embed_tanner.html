@@ -17,7 +17,7 @@ dispatch."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,16 @@ dispatch.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">embed_tanner</span><span class="op">(</span>txt <span class="op">=</span> <span class="st">""</span>, session <span class="op">=</span> <span class="st">""</span>, format <span class="op">=</span> <span class="st">"1.0"</span>, sex <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">embed_tanner</span><span class="op">(</span></span>
+<span>  txt <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  session <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  format <span class="op">=</span> <span class="st">"1.0"</span>,</span>
+<span>  sex <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  traces <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  stage_lines <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  patient_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -83,6 +92,24 @@ should conform to the BDS JGZ 3.2.5 specification.</p></dd>
 from the target's persondata when supplied; see Details.</p></dd>
 
 
+<dt id="arg-traces">traces<a class="anchor" aria-label="anchor" href="#arg-traces"></a></dt>
+<dd><p>Optional. Comma-separated raw Tanner <code>varName</code>s (see
+Details) whose patient-data trace starts visible.</p></dd>
+
+
+<dt id="arg-stage-lines">stage_lines<a class="anchor" aria-label="anchor" href="#arg-stage-lines"></a></dt>
+<dd><p>Optional. Comma-separated raw Tanner <code>varName</code>s
+(see Details) whose reference lines start visible.</p></dd>
+
+
+<dt id="arg-patient-id">patient_id<a class="anchor" aria-label="anchor" href="#arg-patient-id"></a></dt>
+<dd><p>Optional. Overrides the patient id shown in the
+chart title ("Tanner pubertal stages - Patient <id>") – both the id
+derived from the uploaded data's persondata and bdsreader's -1
+"no id" sentinel (which is otherwise suppressed, see Details). Pass
+<code>NA</code> to force the title back to its no-id form.</id></p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Ignored</p></dd>
 
@@ -97,12 +124,27 @@ from the target's persondata when supplied; see Details.</p></dd>
 pubertal measurements at all, the chart still renders – just the
 reference frame, with no patient trace – rather than the panel being
 hidden or the call failing.</p>
+<p>The chart title includes the patient id (e.g. "... - Patient 1234")
+whenever one is available. bdsreader codes an unset client id as -1,
+not <code>NA</code>; that sentinel is detected and treated as no-id, so the
+title correctly omits the suffix rather than showing "- Patient -1".
+Use <code>patient_id</code> to override the id shown regardless of what the
+uploaded data carries.</p>
 <p><code>sex</code> defaults to <code>NULL</code>, which derives sex from the target's own
 persondata (falling back to <code>"male"</code> when there is no target at all).
 Pass <code>"male"</code>/<code>"female"</code> explicitly to override that – e.g. jamesapp's
 Tanner panel follows the UI's geslacht radio button rather than
 whatever sex happens to be in the uploaded data, so a user can preview
 the reference frame for either sex regardless of the patient record.</p>
+<p><code>traces</code>/<code>stage_lines</code> control which stage types' patient-data traces
+and reference lines, respectively, are visible when the chart first
+renders – see <code><a href="https://rdrr.io/pkg/tannerly/man/plot_stadia_ly.html" class="external-link">tannerly::plot_stadia_ly()</a></code>. Both are comma-separated
+strings of raw Tanner <code>varName</code>s (<code>"gen"</code>, <code>"phb"</code>, <code>"tv"</code> for male
+patients; <code>"bre"</code>, <code>"phg"</code>, <code>"men"</code> for female), since this endpoint
+takes multipart/form-data rather than R vectors. Leaving either <code>""</code>
+(the default) keeps <code>plot_stadia_ly()</code>'s own defaults: all three
+traces visible, no reference lines. A type not listed still gets a
+legend entry – viewers can always toggle it on/off by hand.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -118,6 +160,8 @@ the reference frame for either sex regardless of the patient record.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata"</span>, <span class="st">"client_tanner.json"</span>, package <span class="op">=</span> <span class="st">"james"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">embed_tanner</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">fn</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">embed_tanner</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">fn</span>, sex <span class="op">=</span> <span class="st">"female"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">embed_tanner</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">fn</span>, traces <span class="op">=</span> <span class="st">"gen"</span>, stage_lines <span class="op">=</span> <span class="st">"gen"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">embed_tanner</span><span class="op">(</span>txt <span class="op">=</span> <span class="va">fn</span>, patient_id <span class="op">=</span> <span class="st">"1234"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
