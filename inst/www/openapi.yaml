@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: "1.16.5"
+  version: "1.16.6"
   title: JAMES
   description: >-
     The **Joint Automatic Measurement and Evaluation System (JAMES)** is a web
@@ -1859,6 +1859,14 @@ components:
             reference lines start visible. Empty (default) hides all
             of them; any type can still be toggled on from the legend.
           default: ''
+        patient_id:
+          type: string
+          description: >-
+            Overrides the patient id shown in the chart title ("Tanner
+            pubertal stages - Patient <id>"), including bdsreader's -1
+            "no id" sentinel, which is otherwise suppressed. Omit to use
+            the id derived from the uploaded data.
+          nullable: true
     embed_tanner_return:
       type: string
       description: >-

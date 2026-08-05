@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.16.5 (August 2026)
+subtitle: JAMES 1.16.6 (August 2026)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -824,7 +824,8 @@ htmltools::div(
     srcdoc = r8_widget,
     style = sprintf(
       "width: %1$dpx; height: %1$dpx; border: 1px solid #ddd; transform: scale(%2$f); transform-origin: top left;",
-      design_side, scale
+      design_side,
+      scale
     )
   )
 )
@@ -869,13 +870,13 @@ To check the round trip worked, open `maria.html` directly in a browser (e.g. `o
 
 ### **`/tanner/embed`**: Draw an interactive Tanner pubertal-stage chart
 
-`/tanner/embed` is the Tanner-chart counterpart to `/charts/embed`: it returns a self-contained, interactive HTML document (a `plotly` chart) meant for embedding in an `<iframe>`. Unlike `/charts/embed`, there is exactly one chart -- no `chartcode`/multi-chart dispatch -- rendering genital/pubic hair/testicular volume for male patients, or breast/pubic hair/menarche for female patients, against the Dutch 1997 references (van Buuren, 2009, [PDF](https://stefvanbuuren.name/pdf/vanbuuren-2009-1.pdf)).
+The Tanner stages of puberty are measured differently by sex: for boys, genital development (`gen`, G1-G5, 5 stages), pubic hair development (`phb`, P1-P5, 5 stages) and testicular volume (`tv`, continuous in ml); for girls, breast development (`bre`, B1-B5, 5 stages), pubic hair development (`phg`, P1-P5, 5 stages) and menarche (yes/no, 2 stages). These stages are typically referenced as age centiles -- the age at which the reference population has passed a given stage. The stage-line chart (van Buuren and Ooms, 2009, [PDF](https://stefvanbuuren.name/pdf/vanbuuren-2009-1.pdf)) reverses that direction of inference, presenting centiles of stage at a given age instead, much like the usual evaluation of height and weight.
+
+`/tanner/embed` is the Tanner-chart counterpart to `/charts/embed`: it returns a self-contained, interactive HTML document (a `plotly` chart) meant for embedding in an `<iframe>`. Unlike `/charts/embed`, there is exactly one chart -- no `chartcode`/multi-chart dispatch -- rendering genital/pubic hair/testicular volume for male patients, or breast/pubic hair/menarche for female patients, against the Dutch 1997 references.
 
 When the uploaded data yields no target, or the target has no pubertal measurements at all, the chart still renders -- just the reference frame, with no patient trace -- rather than the call failing. `sex` (`"male"`/`"female"`) is optional and overrides the sex derived from the data's own persondata; omit it to let the data decide. Like `/charts/embed`, the response is always an OpenCPU session -- fetch the widget itself with a second, separate `GET` request on `/{session}/widget`.
 
-#### Reproducing van Buuren (2014), Figures 3 and 4
-
-`/tanner/embed`'s `traces` and `stage_lines` parameters (comma-separated raw Tanner `varName`s: `gen`/`phb`/`tv` for male patients, `bre`/`phg`/`men` for female) control which stage types' patient-data traces and reference lines, respectively, are visible when the chart first renders -- without losing the ability to toggle any of them from the legend afterwards. The three figures below use them to reproduce van Buuren (2014)'s Figures 3 and 4. The chart itself is always rendered at `/tanner/embed`'s fixed 900x560 design resolution; to fit the article's column width, all three are scaled down 15% with a CSS `transform` on the iframe (the wrapping `<div>` reserves the post-scale footprint so surrounding content doesn't overlap it).
+`/tanner/embed`'s `traces` and `stage_lines` parameters (comma-separated raw Tanner `varName`s: `gen`/`phb`/`tv` for male patients, `bre`/`phg`/`men` for female) control which stage types' patient-data traces and reference lines, respectively, are visible when the chart first renders -- without losing the ability to toggle any of them from the legend afterwards. The chart itself is always rendered at `/tanner/embed`'s fixed 900x560 design resolution; to fit the article's column width, all three are scaled down 15% with a CSS `transform` on the iframe (the wrapping `<div>` reserves the post-scale footprint so surrounding content doesn't overlap it).
 
 ```{r}
 scale_factor <- 0.85
@@ -883,12 +884,21 @@ fig_width <- round(900 * scale_factor)
 fig_height <- round(560 * scale_factor)
 scaled_tanner_iframe <- function(srcdoc) {
   htmltools::tags$div(
-    style = paste0("width: ", fig_width, "px; height: ", fig_height, "px;"),
+    style = paste0(
+      "width: ",
+      fig_width,
+      "px; height: ",
+      fig_height,
+      "px; ",
+      "overflow: hidden; line-height: 0;"
+    ),
     htmltools::tags$iframe(
       srcdoc = srcdoc,
       style = paste0(
-        "width: 900px; height: 560px; border: 1px solid #ddd; ",
-        "transform: scale(", scale_factor, "); transform-origin: top left;"
+        "display: block; width: 900px; height: 560px; border: 1px solid #ddd; ",
+        "transform: scale(",
+        scale_factor,
+        "); transform-origin: top left;"
       )
     )
   )
@@ -904,7 +914,7 @@ fn_kevin <- system.file(
 )
 ```
 
-##### Figure 1: Kevin_P, genital only, with stage lines (cf. Figure 3)
+#### Example 1: Genital only, with stage lines
 
 Only the genital trace is shown, with its reference/stage lines visible; pubic hair and testis are left at `/tanner/embed`'s own default (visible, no lines) since `traces` here only lists `gen`.
 
@@ -925,7 +935,9 @@ r10_widget <- httr::content(httr::GET(widget_url10), "text", encoding = "UTF-8")
 scaled_tanner_iframe(r10_widget)
 ```
 
-##### Figure 2: Kevin_P, all three traces, no stage lines (cf. Figure 4)
+Interpretation: Genital development is normal for this boy. Between ages 12.13 and 12.36 years, a transition from G1 to G2 occurs,  followed by a transition to G3 at age 13.13. No transition to the last category G5 was registered.
+
+#### Example 2: Boy, all three traces, no stage lines
 
 All three stage types' patient data shown; no reference lines -- `/tanner/embed`'s own default when `traces`/`stage_lines` are omitted, made explicit here for clarity.
 
@@ -945,9 +957,11 @@ r11_widget <- httr::content(httr::GET(widget_url11), "text", encoding = "UTF-8")
 scaled_tanner_iframe(r11_widget)
 ```
 
-##### Figure 3: Iris_P, all three traces, no stage lines
+Interpretation: The same boy had very early public hair development, even reaching into the 1% early group for P3 at age 9.86 years. In contrast, the development of testical volume was quite normal.
 
-Same layout as Figure 2, for a female patient: `Iris_P.json` (also from `jamesdemodata`) carries breast, pubic-hair, and menarche staging -- no reference lines.
+#### Example 3: Girl, all three traces, no stage lines
+
+Same layout as example 2, for a female patient: `Iris_P.json` (also from `jamesdemodata`) carries breast, pubic-hair, and menarche staging -- no reference lines.
 
 ```{r pubertyfig3}
 fn_iris <- system.file(
@@ -968,6 +982,8 @@ r12_widget <- httr::content(httr::GET(widget_url12), "text", encoding = "UTF-8")
 #| echo: false
 scaled_tanner_iframe(r12_widget)
 ```
+
+Interpretation: This girls is late-maturing on all aspects. Menarche occurs between ages 15.25 and 15.76 years. Breast and pubic hair development was also delayed.
 
 ### **`/charts/list`**: List available growth charts
 
