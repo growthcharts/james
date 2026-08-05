@@ -120,3 +120,30 @@ test_that("embed_tanner()'s stage_lines argument accepts a comma-separated list"
   expect_true(lines_row_visible(html, "Pubic hair"))
   expect_false(lines_row_visible(html, "Testis"))
 })
+
+title_text <- function(html) {
+  regmatches(html, regexpr("Tanner pubertal stages[^\"]*", html))
+}
+
+test_that("embed_tanner() suppresses the title suffix for bdsreader's -1 no-id sentinel", {
+  tgt <- bdsreader::read_bds(fn, format = "3.1")
+  expect_equal(bdsreader::persondata(tgt)$id[1], -1L)
+
+  html <- embed_tanner(txt = fn)
+  expect_equal(title_text(html), "Tanner pubertal stages")
+})
+
+test_that("embed_tanner()'s patient_id argument overrides the id shown in the title", {
+  html <- embed_tanner(txt = fn, patient_id = "1234")
+  expect_equal(title_text(html), "Tanner pubertal stages - Patient 1234")
+})
+
+test_that("embed_tanner()'s patient_id argument works with no target data", {
+  html <- embed_tanner(txt = "", patient_id = "5678")
+  expect_equal(title_text(html), "Tanner pubertal stages - Patient 5678")
+})
+
+test_that("embed_tanner()'s patient_id = NA forces the no-id title even with a real id", {
+  html <- embed_tanner(txt = fn, patient_id = NA)
+  expect_equal(title_text(html), "Tanner pubertal stages")
+})
