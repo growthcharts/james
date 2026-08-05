@@ -7,6 +7,11 @@ that file too if you need the full rationale, but this is the checklist to
 actually follow. Don't ask the user to point you at the qmd file; just do
 this.
 
+## Commit messages
+
+Do not add a `Co-Authored-By: Claude` trailer (or similar) to commit
+messages in this repo.
+
 ## Source of truth: OpenAPI spec
 
 - **Canonical source**: `inst/spec/openapi.in.yaml` (has `@@Version@@` placeholders).
