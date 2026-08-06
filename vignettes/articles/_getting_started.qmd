@@ -1,6 +1,6 @@
 ---
 title: JAMES - Joint Automatic Measurement and Evaluation System
-subtitle: JAMES 1.16.6 (August 2026)
+subtitle: JAMES 1.17.0 (August 2026)
 author:
   - name: Stef van Buuren
     url: https://stefvanbuuren.name
@@ -176,6 +176,8 @@ The service aids in monitoring and evaluating childhood growth. JAMES is created
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | GET   | `/site`                    | Request empty site                         | `request_site()`         |
 | POST  | `/site/request/{dfm}`      | Request personalised site                  | `request_site()`         |
+| &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
+| POST  | `/tab10/request/{dfm}`     | Request tab10 risk-communication session   | `request_tab10()`        |
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
 | POST  | `/blend/request/{sfm}`     | Obtain a blend from multiple end points    | `request_blend()`        |
 | &nbsp;| &nbsp;                     | &nbsp;                                     | &nbsp;                   |
@@ -1448,7 +1450,56 @@ $(cat .host)'/site/request/json' \
 
 :::
 
-### **`/blend/request`**: Obtain a blend from multiple end points 
+### **`/tab10/request`**: Request tab10 session
+
+::: panel-tabset
+
+##### **R**
+
+The `/tab10/request` end point uploads child data and creates a URL to a standalone `tab10` Shiny app for personalised risk communication ("Tafel van Tien"). Like `/site/request`, it accepts either a raw `txt` (uploads the data itself) or an existing `session` (reuses data already uploaded, e.g. by a prior `/site/request` or `/data/upload` call, without a redundant re-upload):
+
+```{r tab10request1}
+r <- james_post(
+  host = host,
+  path = "/tab10/request/json",
+  sitehost = host,
+  txt = js
+)
+r$parsed
+```
+
+Paste the generated URL in the address field of your browser to open tab10 with the uploaded data already loaded.
+
+Reusing a session from a prior upload avoids uploading the same data twice -- useful when a caller (e.g. `jamesapp`) already holds a session from its own `/site/request` call:
+
+```{r tab10request2}
+fn <- system.file("examples/maria.json", package = "bdsreader")
+r <- james_post(host = host, path = "data/upload/json", txt = fn)
+
+tab10_1 <- james_post(
+  host = host,
+  path = "tab10/request/json",
+  sitehost = host,
+  session = r$session
+)
+tab10_1
+```
+
+##### **bash**
+
+```{bash, eval=!is_windows}
+source auth_curl.sh
+auth_curl -sX 'POST' \
+$(cat .host)'/tab10/request/json' \
+-H 'accept: application/json' \
+-H 'Content-Type: multipart/form-data' \
+-F "sitehost='$(cat .host)'" \
+-F 'txt=@maria.json;type=application/json'
+```
+
+:::
+
+### **`/blend/request`**: Obtain a blend from multiple end points
 
 ::: panel-tabset
 

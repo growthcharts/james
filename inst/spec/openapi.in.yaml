@@ -925,6 +925,69 @@ paths:
           $ref: '#/components/responses/400ScriptError'
         '503':
           description: Server error
+  /tab10/request/{dfm}:
+    parameters:
+      - $ref: '#/components/parameters/dfm'
+    post:
+      summary: Request tab10 session
+      description: >-
+        Uploads child data and constructs a URL to a standalone tab10 Shiny
+        app (personalised risk communication) with the resulting session
+        key attached
+      tags:
+        - tab10
+      requestBody:
+        description: Body parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/request_tab10_arguments'
+            examples:
+              tab101:
+                value:
+                  sitehost: https://james.groeidiagrammen.nl
+                  txt: >-
+                    http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+                summary: Upload child data and create tab10 session URL
+              tab102:
+                value:
+                  sitehost: https://james.groeidiagrammen.nl
+                  session: x0123456789abcd
+                summary: >-
+                  Reuse an existing session (e.g. produced by
+                  **/site/request** or **/data/upload**) -- no re-upload
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                txt:
+                  type: string
+                  description: Name of file with child data
+                  format: base64
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/request_tab10_return'
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
+  /tab10/request/man:
+    get:
+      summary: Consult R help
+      description: Consult R function documentation of james::request_tab10()
+      tags:
+        - tab10
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/400ScriptError'
+        '503':
+          description: Server error
   /blend/request/{sfm}:
     parameters:
       - $ref: '#/components/parameters/sfm'
@@ -2432,6 +2495,54 @@ components:
       description: URL of personalised site
       example: >-
         http://localhost:8080/ocpu/lib/james/www/?session=x0e395f91a339c2
+    request_tab10_arguments:
+      type: object
+      properties:
+        txt:
+          type: string
+          description: URL or file or string
+          default: ''
+          example: >-
+            http://localhost:8080/ocpu/library/bdsreader/examples/Laura_S.json
+        sitehost:
+          type: string
+          description: >-
+            The JAMES server that receives the upload (the same host
+            serving this very endpoint). If not specified, the function
+            throws a warning and uses the default `"http://localhost:8080"`.
+          default: http://localhost:8080
+        tab10host:
+          type: string
+          description: >-
+            The server hosting the standalone tab10 Shiny app, e.g.
+            `"https://james.groeidiagrammen.nl/tab10"`. Defaults to
+            `sitehost` with a `/tab10` path appended.
+        session:
+          type: string
+          description: >-
+            Session with uploaded child data (e.g. produced by
+            **/site/request** or **/data/upload**). When given, `txt` is
+            ignored and no new upload happens -- tab10 retrieves the data
+            itself via the existing session, so the same session already
+            used for `/site` can be handed to tab10 as-is.
+          default: ''
+        format:
+          type: string
+          description: JSON data schema version number. Used when uploading via `txt`.
+          enum:
+            - '3.1'
+            - '3.0'
+            - '2.0'
+            - '1.1'
+            - '1.0'
+    request_tab10_return:
+      type: string
+      format: uri
+      description: >-
+        URL of the tab10 app with a ?session= query parameter, or, if no
+        session could be obtained, the bare tab10host URL
+      example: >-
+        http://localhost:8080/tab10?session=x0e395f91a339c2
     request_blend_arguments:
       type: object
       properties:

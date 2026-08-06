@@ -1,3 +1,7 @@
+# james 1.17.0 (August 2026)
+
+- New `request_tab10()` endpoint (`/tab10/request`), analogous to `request_site()`: uploads child data (or reuses an existing session) and returns a URL to a standalone `tab10` Shiny app for personalised risk communication ("Tafel van Tien")
+
 # james 1.16.6 (August 2026)
 
 - `embed_tanner()` gains an optional `patient_id` argument that overrides the id shown in the chart title ("Tanner pubertal stages - Patient <id>"), independent of the id in the uploaded data; pass `NA` to force the title back to its no-id form

@@ -4,7 +4,14 @@
 \alias{request_tab10}
 \title{Request a tab10 session URL for personalised risk communication}
 \usage{
-request_tab10(txt = "", sitehost = "", tab10host = "", format = "3.0", ...)
+request_tab10(
+  txt = "",
+  sitehost = "",
+  tab10host = "",
+  session = "",
+  format = "3.0",
+  ...
+)
 }
 \arguments{
 \item{txt}{A JSON string, URL, or file with BDS data in JSON format. Data
@@ -18,11 +25,17 @@ specified.}
 \code{"https://james.groeidiagrammen.nl/tab10"}. Defaults to \code{sitehost} with a
 \verb{/tab10} path appended.}
 
+\item{session}{Optional session key if data is already uploaded to
+\code{sitehost} (e.g. by a prior \code{\link[=request_site]{request_site()}} call). When given, \code{txt} is
+ignored and no new upload happens -- \code{tab10} retrieves the data itself via
+the existing session's \verb{/rda} path, so the same session key already used
+for \verb{/site} can be handed to \code{tab10} as-is.}
+
 \item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
 }
 \value{
 A character string URL pointing to the \code{tab10} app with a
-\verb{?session=} query parameter, or, if the upload failed, the bare
+\verb{?session=} query parameter, or, if no session could be obtained, the bare
 \code{tab10host} URL.
 }
 \description{
