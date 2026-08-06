@@ -59,6 +59,7 @@ reference:
       - percentiles_vwc
       - request_blend
       - request_site
+      - request_tab10
       - select_vwc
       - upload_data
       - validate_chartcode

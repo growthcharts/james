@@ -1,5 +1,15 @@
 # Changelog
 
+## james 1.17.0 (August 2026)
+
+- New
+  [`request_tab10()`](https://growthcharts.org/james/reference/request_tab10.md)
+  endpoint (`/tab10/request`), analogous to
+  [`request_site()`](https://growthcharts.org/james/reference/request_site.md):
+  uploads child data (or reuses an existing session) and returns a URL
+  to a standalone `tab10` Shiny app for personalised risk communication
+  (“Tafel van Tien”)
+
 ## james 1.16.6 (August 2026)
 
 - [`embed_tanner()`](https://growthcharts.org/james/reference/embed_tanner.md)

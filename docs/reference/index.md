@@ -39,6 +39,8 @@ Main commands to communicate with JAMES
   : Provides multiple outputs in one request
 - [`request_site()`](https://growthcharts.org/james/reference/request_site.md)
   : Request site containing personalised charts
+- [`request_tab10()`](https://growthcharts.org/james/reference/request_tab10.md)
+  : Request a tab10 session URL for personalised risk communication
 - [`select_vwc()`](https://growthcharts.org/james/reference/select_vwc.md)
   : Calculates the recommended van Wiechen milestones based on age and
   past milestones
