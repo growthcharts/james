@@ -19,9 +19,14 @@
 #' @param tab10host The server hosting the `tab10` Shiny app, e.g.
 #' `"https://james.groeidiagrammen.nl/tab10"`. Defaults to `sitehost` with a
 #' `/tab10` path appended.
+#' @param session Optional session key if data is already uploaded to
+#' `sitehost` (e.g. by a prior [request_site()] call). When given, `txt` is
+#' ignored and no new upload happens -- `tab10` retrieves the data itself via
+#' the existing session's `/rda` path, so the same session key already used
+#' for `/site` can be handed to `tab10` as-is.
 #' @param format JSON schema version, e.g., `"3.0"`. Used when uploading.
 #' @return A character string URL pointing to the `tab10` app with a
-#' `?session=` query parameter, or, if the upload failed, the bare
+#' `?session=` query parameter, or, if no session could be obtained, the bare
 #' `tab10host` URL.
 #' @seealso [request_site()], [upload_data()]
 #' @examples
@@ -37,6 +42,7 @@ request_tab10 <- function(
   txt = "",
   sitehost = "",
   tab10host = "",
+  session = "",
   format = "3.0",
   ...
 ) {
@@ -59,6 +65,15 @@ request_tab10 <- function(
   }
 
   txt <- txt[1L]
+  session <- session[1L]
+
+  # Session already provided (e.g. reused from a prior request_site() call):
+  # hand it straight to tab10, no re-upload. tab10 fetches the data itself
+  # via /{session}/rda, which works cross-container over HTTP -- unlike
+  # get_session_object(), it doesn't depend on sitehost's filesystem.
+  if (!is.empty(session)) {
+    return(httr::modify_url(tab10host, query = list(session = session)))
+  }
 
   # No data: return the bare tab10 URL
   if (is.empty(txt)) {
