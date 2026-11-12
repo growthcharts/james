@@ -21,7 +21,7 @@
 #' @examples
 #' txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 #' dcat(txt = txt, p = 50)
-#' txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
+#' txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data2.json"
 #' dcat(txt = txt, p = 50)
 #' @export
 dcat <- function(
@@ -62,7 +62,7 @@ dcat <- function(
   )
 
   psn <- persondata(tgt)
-  # extract the current age from the data
+  # extract the current age from the data - note assessment date is ignored assumed to be today
   age <- as.numeric(Sys.Date() - psn$dob) / 365.25
 
   if (is.na(age)) {
@@ -75,7 +75,7 @@ dcat <- function(
   if (nrow(time) > 0) {
     dat <- time
     colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
-    dat <- dat |> select(all_of(c("item", "score")))
+    dat <- dat |> select(all_of(c("item", "score"))) |> filter(item != "dsc")
   }
 
   dcat_result <- dcat::dcat(
