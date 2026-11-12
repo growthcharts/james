@@ -1,0 +1,22 @@
+{
+  "Format": "3.1",
+  "clientDetails": [
+    {
+      "bdsNumber": 20,
+      "value": "20230115"
+    }
+  ],
+  "clientMeasurements": [
+    {
+      "varName": "gs1lic138",
+      "values": [
+        {
+          "date": "20251212",
+          "value": "0"
+        }
+      ]
+    }
+  ],
+  "nestedDetails": []
+}
+
