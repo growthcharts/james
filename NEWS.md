@@ -1,3 +1,14 @@
+# james 1.17.2 (November 2026)
+
+- Update GitHub dependencies to their latest commits: `dcat` 0.4.1, `vwc` 0.2.4 (which now depends on `dscoreddi` 0.4.1). `DESCRIPTION` now requires `dcat (>= 0.4.1)` and `vwc (>= 0.2.4)`
+- Fix R CMD check findings: `dcat()` no longer triggers a "no visible binding for global variable 'item'" NOTE, and `request_tab10()` documents its `...` argument
+- Re-document with roxygen2 8.1.1 (`Config/roxygen2/version` field, regrouped `NAMESPACE` imports; no functional change)
+- `renv.lock` now records R 4.6.2. No locked package requires R newer than 4.4, so the OpenCPU base image (R 4.5.0) still restores; `opencpu/base:v2.2.15` (R 4.6.0) was verified as a drop-in alternative
+
+# james 1.17.1 (November 2026)
+
+- Fix `dcat()` for multi-day assessments: D-score (`dsc`) rows are now removed from the assessment data before it is passed to `dcat::dcat()`
+
 # james 1.17.0 (August 2026)
 
 - New `request_tab10()` endpoint (`/tab10/request`), analogous to `request_site()`: uploads child data (or reuses an existing session) and returns a URL to a standalone `tab10` Shiny app for personalised risk communication ("Tafel van Tien")
