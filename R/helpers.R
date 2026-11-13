@@ -97,7 +97,9 @@ install_dev_packages <- function(
     "desc",
     "evaluate",
     "jamesdemodata",
-    "pkgload"
+    "pkgload",
+    "quarto",
+    "pkgdown"
   )
 ) {
   missing <- pkgs[!pkgs %in% rownames(installed.packages())]
