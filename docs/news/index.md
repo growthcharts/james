@@ -1,5 +1,28 @@
 # Changelog
 
+## james 1.17.2 (November 2026)
+
+- Update GitHub dependencies to their latest commits: `dcat` 0.4.1,
+  `vwc` 0.2.4 (which now depends on `dscoreddi` 0.4.1). `DESCRIPTION`
+  now requires `dcat (>= 0.4.1)` and `vwc (>= 0.2.4)`
+- Fix R CMD check findings:
+  [`dcat()`](https://growthcharts.org/james/reference/dcat.md) no longer
+  triggers a “no visible binding for global variable ‘item’” NOTE, and
+  [`request_tab10()`](https://growthcharts.org/james/reference/request_tab10.md)
+  documents its `...` argument
+- Re-document with roxygen2 8.1.1 (`Config/roxygen2/version` field,
+  regrouped `NAMESPACE` imports; no functional change)
+- `renv.lock` now records R 4.6.2. No locked package requires R newer
+  than 4.4, so the OpenCPU base image (R 4.5.0) still restores;
+  `opencpu/base:v2.2.15` (R 4.6.0) was verified as a drop-in alternative
+
+## james 1.17.1 (November 2026)
+
+- Fix [`dcat()`](https://growthcharts.org/james/reference/dcat.md) for
+  multi-day assessments: D-score (`dsc`) rows are now removed from the
+  assessment data before it is passed to
+  [`dcat::dcat()`](https://rdrr.io/pkg/dcat/man/dcat.html)
+
 ## james 1.17.0 (August 2026)
 
 - New

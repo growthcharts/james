@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,20 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.17.2" id="james-1172-november-2026">james 1.17.2 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1172-november-2026"></a></h2>
+<ul><li>Update GitHub dependencies to their latest commits: <code>dcat</code> 0.4.1, <code>vwc</code> 0.2.4 (which now depends on <code>dscoreddi</code> 0.4.1). <code>DESCRIPTION</code> now requires <code>dcat (&gt;= 0.4.1)</code> and <code>vwc (&gt;= 0.2.4)</code>
+</li>
+<li>Fix R CMD check findings: <code><a href="../reference/dcat.html">dcat()</a></code> no longer triggers a “no visible binding for global variable ‘item’” NOTE, and <code><a href="../reference/request_tab10.html">request_tab10()</a></code> documents its <code>...</code> argument</li>
+<li>Re-document with roxygen2 8.1.1 (<code>Config/roxygen2/version</code> field, regrouped <code>NAMESPACE</code> imports; no functional change)</li>
+<li>
+<code>renv.lock</code> now records R 4.6.2. No locked package requires R newer than 4.4, so the OpenCPU base image (R 4.5.0) still restores; <code>opencpu/base:v2.2.15</code> (R 4.6.0) was verified as a drop-in alternative</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.17.1" id="james-1171-november-2026">james 1.17.1 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1171-november-2026"></a></h2>
+<ul><li>Fix <code><a href="../reference/dcat.html">dcat()</a></code> for multi-day assessments: D-score (<code>dsc</code>) rows are now removed from the assessment data before it is passed to <code><a href="https://rdrr.io/pkg/dcat/man/dcat.html" class="external-link">dcat::dcat()</a></code>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.17.0" id="james-1170-august-2026">james 1.17.0 (August 2026)<a class="anchor" aria-label="anchor" href="#james-1170-august-2026"></a></h2>
 <ul><li>New <code><a href="../reference/request_tab10.html">request_tab10()</a></code> endpoint (<code>/tab10/request</code>), analogous to <code><a href="../reference/request_site.html">request_site()</a></code>: uploads child data (or reuses an existing session) and returns a URL to a standalone <code>tab10</code> Shiny app for personalised risk communication (“Tafel van Tien”)</li>
@@ -889,7 +903,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

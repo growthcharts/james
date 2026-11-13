@@ -53,6 +53,11 @@ request_tab10(
 
   JSON schema version, e.g., `"3.0"`. Used when uploading.
 
+- ...:
+
+  Optional authentication arguments (e.g. `authToken`), passed on to the
+  internal authenticator. Otherwise ignored.
+
 ## Value
 
 A character string URL pointing to the `tab10` app with a `?session=`
