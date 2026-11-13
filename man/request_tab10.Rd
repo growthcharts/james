@@ -32,6 +32,9 @@ the existing session's \verb{/rda} path, so the same session key already used
 for \verb{/site} can be handed to \code{tab10} as-is.}
 
 \item{format}{JSON schema version, e.g., \code{"3.0"}. Used when uploading.}
+
+\item{\dots}{Optional authentication arguments (e.g. \code{authToken}), passed on
+to the internal authenticator. Otherwise ignored.}
 }
 \value{
 A character string URL pointing to the \code{tab10} app with a

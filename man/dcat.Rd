@@ -66,7 +66,7 @@ the next item or stop test and return D-score.
 \examples{
 txt <- system.file("examples", "example_v3.1.json", package = "bdsreader")
 dcat(txt = txt, p = 50)
-txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data.json"
+txt <- "~/OneDrive - TNO/Documents/GitHub/james/data-raw/test_data2.json"
 dcat(txt = txt, p = 50)
 }
 \author{

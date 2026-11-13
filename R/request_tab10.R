@@ -25,6 +25,8 @@
 #' the existing session's `/rda` path, so the same session key already used
 #' for `/site` can be handed to `tab10` as-is.
 #' @param format JSON schema version, e.g., `"3.0"`. Used when uploading.
+#' @param \dots Optional authentication arguments (e.g. `authToken`), passed on
+#' to the internal authenticator. Otherwise ignored.
 #' @return A character string URL pointing to the `tab10` app with a
 #' `?session=` query parameter, or, if no session could be obtained, the bare
 #' `tab10host` URL.

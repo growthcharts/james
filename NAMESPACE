@@ -32,56 +32,76 @@ export(upload_data)
 export(validate_chartcode)
 export(version)
 import(svglite)
-importFrom(bdsreader,persondata)
-importFrom(bdsreader,read_bds)
-importFrom(bdsreader,timedata)
+importFrom(bdsreader,
+  persondata,
+  read_bds,
+  timedata
+)
 importFrom(chartbox,list_charts)
-importFrom(chartcatalog,create_chartcode)
-importFrom(chartcatalog,get_breakpoints)
-importFrom(chartcatalog,parse_chartcode)
+importFrom(chartcatalog,
+  create_chartcode,
+  get_breakpoints,
+  parse_chartcode
+)
 importFrom(chartplotter,process_chart)
-importFrom(curl,curl)
-importFrom(curl,curl_fetch_memory)
-importFrom(curl,form_data)
-importFrom(curl,handle_setform)
-importFrom(curl,new_handle)
-importFrom(dplyr,"%>%")
-importFrom(dplyr,all_of)
-importFrom(dplyr,filter)
-importFrom(dplyr,mutate)
-importFrom(dplyr,pull)
-importFrom(dplyr,select)
-importFrom(dscore,get_itemnames)
-importFrom(dscore,get_tau)
+importFrom(curl,
+  curl,
+  curl_fetch_memory,
+  form_data,
+  handle_setform,
+  new_handle
+)
+importFrom(dplyr,
+  "%>%",
+  all_of,
+  filter,
+  mutate,
+  pull,
+  select
+)
+importFrom(dscore,
+  get_itemnames,
+  get_tau
+)
 importFrom(grDevices,dev.off)
 importFrom(grid,grid.draw)
-importFrom(growthscreener,list_screeners)
-importFrom(growthscreener,screen_curves_ind)
-importFrom(httr,GET)
-importFrom(httr,POST)
-importFrom(httr,add_headers)
-importFrom(httr,build_url)
-importFrom(httr,content)
-importFrom(httr,headers)
-importFrom(httr,message_for_status)
-importFrom(httr,modify_url)
-importFrom(httr,parse_url)
-importFrom(httr,status_code)
-importFrom(httr,upload_file)
-importFrom(jamesclient,get_url)
-importFrom(jamesclient,james_post)
+importFrom(growthscreener,
+  list_screeners,
+  screen_curves_ind
+)
+importFrom(httr,
+  GET,
+  POST,
+  add_headers,
+  build_url,
+  content,
+  headers,
+  message_for_status,
+  modify_url,
+  parse_url,
+  status_code,
+  upload_file
+)
+importFrom(jamesclient,
+  get_url,
+  james_post
+)
 importFrom(jose,jwt_decode_sig)
-importFrom(jsonlite,fromJSON)
-importFrom(jsonlite,minify)
-importFrom(jsonlite,toJSON)
-importFrom(jsonlite,unbox)
-importFrom(jsonlite,validate)
+importFrom(jsonlite,
+  fromJSON,
+  minify,
+  toJSON,
+  unbox,
+  validate
+)
 importFrom(rlang,.data)
 importFrom(svglite,svgstring)
 importFrom(tidyr,pivot_wider)
-importFrom(utils,hasName)
-importFrom(utils,install.packages)
-importFrom(utils,installed.packages)
-importFrom(utils,packageDate)
-importFrom(utils,packageVersion)
+importFrom(utils,
+  hasName,
+  install.packages,
+  installed.packages,
+  packageDate,
+  packageVersion
+)
 importFrom(vwc,select_vwc)

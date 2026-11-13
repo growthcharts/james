@@ -75,7 +75,7 @@ dcat <- function(
   if (nrow(time) > 0) {
     dat <- time
     colnames(dat)[colnames(dat) %in% c("yname", "y")] <- c("item", "score")
-    dat <- dat |> select(all_of(c("item", "score"))) |> filter(item != "dsc")
+    dat <- dat |> select(all_of(c("item", "score"))) |> filter(.data$item != "dsc")
   }
 
   dcat_result <- dcat::dcat(
