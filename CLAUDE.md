@@ -98,9 +98,15 @@ missing/empty data without erroring. Confirm with:
 system.file("testdata", "client_tanner.json", package = "james")  # must not be ""
 ```
 
-If empty: `devtools::install(dependencies = FALSE, upgrade = "never")` from
+If empty: `devtools::install(dependencies = FALSE, upgrade = FALSE)` from
 this directory (renv-aware — running from elsewhere may install into the
 wrong library).
+
+The `renv.lock` is snapshotted with `type = "explicit"`, so documentation
+helpers are not in the library after a fresh `renv::restore()`. Before
+rendering, make sure the `quarto` and `pkgdown` R packages are installed
+(`renv::install(c("quarto", "pkgdown"))`); `james::install_dev_packages()`
+does not cover them. The `quarto` CLI must also be on `PATH`.
 
 Render against **production** (`target_host <- "test"` in
 `_getting_started.qmd`'s host chunk, the default) whenever possible — a
