@@ -1160,7 +1160,7 @@
     },
     "dcat": {
       "Package": "dcat",
-      "Version": "0.4.2",
+      "Version": "0.4.3",
       "Source": "GitHub",
       "Title": "Computer Adaptive Test for the D-score",
       "Authors@R": "person(\"Iris\", \"Eekhout\", , \"iris.eekhout@tno.nl\", role = c(\"aut\", \"cre\"))",
@@ -1183,7 +1183,7 @@
       "RemoteRepo": "dcat",
       "RemoteUsername": "d-score",
       "RemoteRef": "HEAD",
-      "RemoteSha": "a3e888aa4e5c8df5d6b77936d3c88066eb2bc3db",
+      "RemoteSha": "94633180d123492d16e071d4d4b85e68fca6d97d",
       "NeedsCompilation": "no",
       "Author": "Iris Eekhout [aut, cre]",
       "Maintainer": "Iris Eekhout <iris.eekhout@tno.nl>",

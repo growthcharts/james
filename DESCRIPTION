@@ -21,7 +21,7 @@ Imports:
     chartbox (>= 1.17.0),
     chartcatalog (>= 1.18.2),
     chartplotter (>= 0.36.0),
-    dcat (>= 0.4.2),
+    dcat (>= 0.4.3),
     dplyr,
     dscore (>= 2.1.0),
     curl,
