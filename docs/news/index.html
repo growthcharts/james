@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,11 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.17.3" id="james-1173-november-2026">james 1.17.3 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1173-november-2026"></a></h2>
+<ul><li>Update <code>dcat</code> to 0.4.2, which fixes <code><a href="../reference/dcat.html">dcat()</a></code> when the first item of an assessment has a missing score (items are now deduplicated per assessment, keeping the first non-missing score). <code>DESCRIPTION</code> now requires <code>dcat (&gt;= 0.4.2)</code>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.17.2" id="james-1172-november-2026">james 1.17.2 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1172-november-2026"></a></h2>
 <ul><li>Update GitHub dependencies to their latest commits: <code>dcat</code> 0.4.1, <code>vwc</code> 0.2.4 (which now depends on <code>dscoreddi</code> 0.4.1). <code>DESCRIPTION</code> now requires <code>dcat (&gt;= 0.4.1)</code> and <code>vwc (&gt;= 0.2.4)</code>

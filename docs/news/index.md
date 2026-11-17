@@ -1,5 +1,13 @@
 # Changelog
 
+## james 1.17.3 (November 2026)
+
+- Update `dcat` to 0.4.2, which fixes
+  [`dcat()`](https://growthcharts.org/james/reference/dcat.md) when the
+  first item of an assessment has a missing score (items are now
+  deduplicated per assessment, keeping the first non-missing score).
+  `DESCRIPTION` now requires `dcat (>= 0.4.2)`
+
 ## james 1.17.2 (November 2026)
 
 - Update GitHub dependencies to their latest commits: `dcat` 0.4.1,

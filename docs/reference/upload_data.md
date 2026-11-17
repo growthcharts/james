@@ -84,7 +84,7 @@ A list with elements `psn` (persondata) and `xyz` (timedata).
 ## See also
 
 [`bdsreader::read_bds()`](https://rdrr.io/pkg/bdsreader/man/read_bds.html)
-[`jsonlite::fromJSON()`](https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html)
+[`jsonlite::fromJSON()`](https://rdrr.io/pkg/jsonlite/man/fromJSON.html)
 
 ## Author
 
