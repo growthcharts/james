@@ -1,3 +1,7 @@
+# james 1.17.4 (November 2026)
+
+- Update `dcat` to 0.4.3, which converts the `p` argument of `dcat()` to numeric, so a `p` supplied as a string (e.g. through the API) is handled correctly. `DESCRIPTION` now requires `dcat (>= 0.4.3)`
+
 # james 1.17.3 (November 2026)
 
 - Update `dcat` to 0.4.2, which fixes `dcat()` when the first item of an assessment has a missing score (items are now deduplicated per assessment, keeping the first non-missing score). `DESCRIPTION` now requires `dcat (>= 0.4.2)`
