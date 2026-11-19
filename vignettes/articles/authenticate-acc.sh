@@ -13,8 +13,8 @@ fi
 APIKEY=$(cat apikey-acc.txt)
 
 # Authenticate and get bearer token with timeout
-TOKEN=$(curl -s --connect-timeout 10 --max-time 30 --location \
-  'https://srminterlayer-az-acc.eaglescience.nl/api/v1/api-login' \
+TOKEN=$(curl -s --fail --connect-timeout 10 --max-time 30 --location \
+  'https://ijgz-gatewaycore-acc.eaglescience.nl/api/v1/api-login' \
   --header 'Content-Type: text/plain' \
   --data-raw "$APIKEY" 2>&1)
 

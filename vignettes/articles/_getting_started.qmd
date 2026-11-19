@@ -35,7 +35,7 @@ hosts <- list(
   internal = "http://localhost:80",
   dev = "http://localhost:8080",
   test = "https://james.groeidiagrammen.nl",
-  acc = "https://srminterlayer-az-acc.eaglescience.nl/modules/james",
+  acc = "https://ijgz-gatewaycore-acc.eaglescience.nl/modules/james",
   prod = "https://ijgz.eaglescience.nl/modules/james"
 )
 
@@ -102,7 +102,7 @@ filename_chart2 <- file.path(figdir, "chart2.svg")
 filename_chart3 <- file.path(figdir, "chart3.svg")
 
 # Flag to check if we're on ACC server (for conditional chunk execution)
-is_acc <- grepl("srminterlayer-az-acc", host)
+is_acc <- identical(host, hosts$acc)
 
 # Set up global authentication for ACC server
 if (file.exists(".bearer")) {
@@ -110,6 +110,12 @@ if (file.exists(".bearer")) {
   if (nchar(bearer_token) > 0) {
     Sys.setenv(JAMES_BEARER_TOKEN = paste("Bearer", bearer_token))
     message("Bearer token set")
+    # Plain httr::GET() calls (e.g. fetching widgets) need the token too
+    if (is_acc) {
+      httr::set_config(httr::add_headers(
+        Authorization = paste("Bearer", bearer_token)
+      ))
+    }
   }
 }
 
