@@ -62,7 +62,7 @@ if (target_host == "acc") {
     ignore.stderr = TRUE
   )
   if (auth_result == 0) {
-    host <- hosts$acc
+    host <- hosts$prod
     message("Using PROD server: ", host)
   } else {
     host <- hosts$test
@@ -104,18 +104,22 @@ filename_chart3 <- file.path(figdir, "chart3.svg")
 # Flag to check if we're on ACC server (for conditional chunk execution)
 is_acc <- identical(host, hosts$acc)
 
-# Set up global authentication for ACC server
-if (file.exists(".bearer")) {
+# Only authenticated hosts (ACC, PROD) get the Bearer token. On any other
+# host, empty .bearer so the token is not sent to a server it is not meant
+# for (auth_curl and the bash chunks read .bearer directly).
+is_auth <- host %in% c(hosts$acc, hosts$prod)
+if (!is_auth) {
+  file.create(".bearer")
+  Sys.unsetenv("JAMES_BEARER_TOKEN")
+} else if (file.exists(".bearer")) {
   bearer_token <- trimws(readLines(".bearer", n = 1, warn = FALSE))
   if (nchar(bearer_token) > 0) {
     Sys.setenv(JAMES_BEARER_TOKEN = paste("Bearer", bearer_token))
     message("Bearer token set")
     # Plain httr::GET() calls (e.g. fetching widgets) need the token too
-    if (is_acc) {
-      httr::set_config(httr::add_headers(
-        Authorization = paste("Bearer", bearer_token)
-      ))
-    }
+    httr::set_config(httr::add_headers(
+      Authorization = paste("Bearer", bearer_token)
+    ))
   }
 }
 
@@ -1645,7 +1649,7 @@ source auth_curl.sh
 auth_curl -sX POST $(cat .host)/endpoint
 ```
 
-The `auth_curl` function automatically adds the `Authorization: Bearer {token}` header if the `.bearer` file exists.
+The `auth_curl` function automatically adds the `Authorization: Bearer {token}` header if the `.bearer` file exists and is not empty. When rendering against a host that needs no authentication (`test`, `dev`), the setup chunk empties `.bearer`, so the token is only ever sent to ACC or PROD.
 
 ### Manual Authentication
 

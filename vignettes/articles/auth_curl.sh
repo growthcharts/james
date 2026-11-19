@@ -3,7 +3,7 @@
 # Source this file in bash chunks: source auth_curl.sh
 
 auth_curl() {
-  if [ -f .bearer ]; then
+  if [ -s .bearer ]; then
     TOKEN=$(cat .bearer)
     curl -H "Authorization: Bearer $TOKEN" "$@"
   else
