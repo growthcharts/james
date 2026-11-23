@@ -125,7 +125,7 @@ request_site <- function(
   }
 
   # Turns display = list(interactive = TRUE, interpolation = FALSE, size =
-  # 600) into query params matching what inst/www/js/start.js reads
+  # 600) into query params matching what jamesapp's js/start.js reads
   # (?interactive=, ?interpolation=, ?size=) to seed the site's
   # "Instellingen" panel before the first render. Unrecognised names are
   # dropped rather than erroring, so a typo doesn't break the whole URL.

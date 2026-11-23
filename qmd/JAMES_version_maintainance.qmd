@@ -82,13 +82,12 @@ Sync the version number in `inst/www/openapi.in.yaml` from `DESCRIPTION` using
 james:::update_openapi_spec()
 ```
 
-### Sync `index.html`, `_getting_started.qmd`
+### Sync `_getting_started.qmd`
 
 Sync version numbers from `DESCRIPTION` using
 
 ```{r eval=FALSE}
 james:::update_version_files(
-  "inst/www/index.html",
   "vignettes/articles/_getting_started.qmd",
   "DESCRIPTION"
 )
@@ -96,7 +95,7 @@ james:::update_version_files(
 
 ### COMMIT 2
 
-`NEWS.md`, `DESCRIPTION`, `inst/www/openapi.yaml`, `vignettes/articles/_getting_started.qmd`, `inst/www/index.html`
+`NEWS.md`, `DESCRIPTION`, `inst/www/openapi.yaml`, `vignettes/articles/_getting_started.qmd`
 
 
 ## STEP 3 - DOCUMENTATION

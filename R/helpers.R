@@ -1,7 +1,6 @@
 # helpers
 
 update_version_files <- function(
-  html_filepath,
   rmd_filepath,
   description_filepath
 ) {
@@ -13,36 +12,8 @@ update_version_files <- function(
   }
   version <- sub("Version: ", "", version_line)
 
-  # Define the current date in the required format (YYYYMMDD) and a human-readable format
-  current_date_numeric <- format(Sys.Date(), "%Y%m%d")
+  # Human-readable date for the Rmd subtitle
   current_date_text <- format(Sys.Date(), "%B %Y")
-
-  # Pattern to match the existing version and date in HTML
-  html_pattern <- "JAMES [0-9]+\\.[0-9]+(\\.[0-9]+)?(\\.[0-9]+)? \\([0-9]{8}\\)"
-
-  # Replacement string with new version and current date for HTML
-  html_replacement <- sprintf("JAMES %s (%s)", version, current_date_numeric)
-
-  # Read the HTML file content
-  html_content <- readLines(html_filepath, warn = FALSE)
-
-  # Replace version + date inside the HTML content line-by-line
-  html_content <- gsub(
-    pattern = html_pattern,
-    replacement = html_replacement,
-    x = html_content,
-    perl = TRUE
-  )
-
-  # Write the updated content back to the HTML file
-  writeLines(html_content, html_filepath)
-  cat(
-    "Updated the version in HTML:",
-    html_filepath,
-    "to",
-    html_replacement,
-    "\n"
-  )
 
   # Pattern to match the existing version and date in Rmd
   rmd_pattern <- "subtitle: JAMES [0-9]+\\.[0-9]+(\\.[0-9]+)?(\\.[0-9]+)? \\([A-Za-z]+ [0-9]{4}\\)"

@@ -90,7 +90,7 @@ embed_tanner <- function(txt = "", session = "", format = "1.0", sex = NULL,
   }
 
   # #F7F7F7 matches jamesapp's own .graph/#plotDiv panel background (see
-  # inst/www/css/main.css), so the chart's outer margin blends into the
+  # css/main.css in the jamesapp repo), so the chart's outer margin blends into the
   # panel instead of showing a white edge around the rounded frame.
   fig <- tannerly::plot_stadia_ly(
     patient,

@@ -21,6 +21,12 @@ messages in this repo.
   endpoint's arguments change, edit `inst/spec/openapi.in.yaml` here, then sync
   jamesdocker afterward (see jamesdocker's own CLAUDE.md).
 
+## No frontend here
+
+The `/site` web frontend lives in the separate `jamesapp` repo (served by
+its own container; `jamesdocker` proxies `/site/` to it). `inst/www/` here
+only holds the generated `openapi.yaml` — don't add HTML/JS/CSS back.
+
 ## When you fix/bump a dependency (e.g. `bdsreader`, `tannerly`) in its own repo
 
 `DESCRIPTION`'s version constraint (e.g. `bdsreader (>= 0.33.1)`) is not
@@ -75,7 +81,6 @@ for a fix/small addition (`1.x.y`). Then:
 devtools::document()  # if not already done
 james:::update_openapi_spec()  # regenerates inst/www/openapi.yaml with the new version + spec
 james:::update_version_files(
-  "inst/www/index.html",
   "vignettes/articles/_getting_started.qmd",
   "DESCRIPTION"
 )
