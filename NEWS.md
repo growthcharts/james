@@ -1,3 +1,7 @@
+# james 1.17.5 (November 2026)
+
+- `request_site()` and `request_blend()` (endpoints `/site/request` and `/blend/request`) now upload the child data to the OpenCPU server inside the same container (`http://127.0.0.1:8004`) instead of to `sitehost`'s public URL, bypassing any proxy settings. Behind an authenticating gateway (e.g. IJGZ under `/modules/james`) the public, token-less call was rejected with a 401, so `/site/request` silently returned a URL without `?session=` and `/blend/request` failed. When nothing listens on port 8004 (a client-side R session), the upload falls back to `sitehost` as before
+
 # james 1.17.4 (November 2026)
 
 - Update `dcat` to 0.4.3, which converts the `p` argument of `dcat()` to numeric, so a `p` supplied as a string (e.g. through the API) is handled correctly. `DESCRIPTION` now requires `dcat (>= 0.4.3)`
