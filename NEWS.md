@@ -1,3 +1,8 @@
+# james 1.18.0 (November 2026)
+
+- Remove the obsolete web frontend (`index.html`, `css/`, `js/`, `favicon.ico`) from `inst/www`. The `/site` frontend now lives in the separate `jamesapp` package and container. `inst/www` keeps only the generated `openapi.yaml`. As a result, `/ocpu/library/james/www/` no longer serves the old site
+- `update_version_files()` (internal) no longer takes an `html_filepath` argument
+
 # james 1.17.5 (November 2026)
 
 - `request_site()` and `request_blend()` (endpoints `/site/request` and `/blend/request`) now upload the child data to the OpenCPU server inside the same container (`http://127.0.0.1:8004`) instead of to `sitehost`'s public URL, bypassing any proxy settings. Behind an authenticating gateway (e.g. IJGZ under `/modules/james`) the public, token-less call was rejected with a 401, so `/site/request` silently returned a URL without `?session=` and `/blend/request` failed. When nothing listens on port 8004 (a client-side R session), the upload falls back to `sitehost` as before
