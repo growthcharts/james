@@ -33,30 +33,41 @@ get_session <- function(txt, sitehost, format = "3.0", ...) {
     txt <- jsonlite::toJSON(txt, auto_unbox = TRUE)
   }
 
-  # Normalize sitehost to base URL (protocol + host + optional basepath)
-  ocpu_host <- as.character(sitehost)[1]
-  # Remove trailing slashes to prevent double slashes in URL construction
-  ocpu_host <- sub("/*$", "", ocpu_host)
-
-  if (grepl("localhost|127\\.0\\.0\\.1", ocpu_host)) {
-    # For localhost, use the local OpenCPU server port
-    ocpu_host <- "http://127.0.0.1:8004"
-  } else {
-    # For production, ensure HTTPS protocol
-    # This preserves any base path (e.g., /modules/james)
-    ocpu_host <- sub("^http://", "https://", ocpu_host)
+  post_upload <- function(base) {
+    h <- curl::new_handle()
+    # Bypass any http(s)_proxy set in the environment: a proxy cannot
+    # reach this machine's loopback interface.
+    if (grepl("^http://127\\.0\\.0\\.1", base)) {
+      curl::handle_setopt(h, noproxy = "*")
+    }
+    curl::handle_setform(
+      h,
+      txt = curl::form_data(txt, type = "text/plain; charset=utf-8"),
+      format = curl::form_data(format, type = "text/plain")
+    )
+    curl::curl_fetch_memory(paste0(base, "/ocpu/library/james/R/upload_data"), handle = h)
   }
-  # Construct upload URL - base path is already included in ocpu_host
-  upload_url <- paste0(ocpu_host, "/ocpu/library/james/R/upload_data")
 
-  h <- curl::new_handle()
-  curl::handle_setform(
-    h,
-    txt = curl::form_data(txt, type = "text/plain; charset=utf-8"),
-    format = curl::form_data(format, type = "text/plain")
-  )
+  # First try the OpenCPU server inside this same container (opencpu.conf's
+  # own `Listen 8004`). When JAMES runs as a server -- the normal case --
+  # this always succeeds, and the request never leaves the container. Going
+  # through `sitehost`'s public URL instead fails behind an authenticating
+  # gateway (e.g. the IJGZ gateway under /modules/james), which rejects this
+  # token-less internal call with a 401. The session lives in the same
+  # container that serves `sitehost`, so the returned key is valid there.
+  res <- tryCatch(post_upload("http://127.0.0.1:8004"), error = function(e) NULL)
 
-  res <- curl::curl_fetch_memory(upload_url, handle = h)
+  # Fallback: nothing listens on 127.0.0.1:8004, i.e. request_site() is
+  # called from a client R session (e.g. a laptop) rather than inside the
+  # server. Upload to `sitehost` itself, as before.
+  if (is.null(res)) {
+    ocpu_host <- sub("/*$", "", as.character(sitehost)[1])
+    if (!grepl("localhost|127\\.0\\.0\\.1", ocpu_host)) {
+      # This preserves any base path (e.g., /modules/james)
+      ocpu_host <- sub("^http://", "https://", ocpu_host)
+    }
+    res <- post_upload(ocpu_host)
+  }
 
   header_text <- rawToChar(res$headers)
   lines <- strsplit(header_text, "\r\n|\n|\r")[[1]]
