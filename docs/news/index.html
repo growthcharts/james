@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">james</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.18.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,17 @@
       <small>Source: <a href="https://github.com/growthcharts/james/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.18.0" id="james-1180-november-2026">james 1.18.0 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1180-november-2026"></a></h2>
+<ul><li>Remove the obsolete web frontend (<code>index.html</code>, <code>css/</code>, <code>js/</code>, <code>favicon.ico</code>) from <code>inst/www</code>. The <code>/site</code> frontend now lives in the separate <code>jamesapp</code> package and container. <code>inst/www</code> keeps only the generated <code>openapi.yaml</code>. As a result, <code>/ocpu/library/james/www/</code> no longer serves the old site</li>
+<li>
+<code>update_version_files()</code> (internal) no longer takes an <code>html_filepath</code> argument</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.17.5" id="james-1175-november-2026">james 1.17.5 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1175-november-2026"></a></h2>
+<ul><li>
+<code><a href="../reference/request_site.html">request_site()</a></code> and <code><a href="../reference/request_blend.html">request_blend()</a></code> (endpoints <code>/site/request</code> and <code>/blend/request</code>) now upload the child data to the OpenCPU server inside the same container (<code>http://127.0.0.1:8004</code>) instead of to <code>sitehost</code>’s public URL, bypassing any proxy settings. Behind an authenticating gateway (e.g. IJGZ under <code>/modules/james</code>) the public, token-less call was rejected with a 401, so <code>/site/request</code> silently returned a URL without <code>?session=</code> and <code>/blend/request</code> failed. When nothing listens on port 8004 (a client-side R session), the upload falls back to <code>sitehost</code> as before</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.17.4" id="james-1174-november-2026">james 1.17.4 (November 2026)<a class="anchor" aria-label="anchor" href="#james-1174-november-2026"></a></h2>
 <ul><li>Update <code>dcat</code> to 0.4.3, which converts the <code>p</code> argument of <code><a href="../reference/dcat.html">dcat()</a></code> to numeric, so a <code>p</code> supplied as a string (e.g. through the API) is handled correctly. <code>DESCRIPTION</code> now requires <code>dcat (&gt;= 0.4.3)</code>
